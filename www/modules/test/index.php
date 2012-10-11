@@ -3,16 +3,17 @@ class Index extends Controller
   {
   function view_list()
     {
-    $this->errors->setError("Index not Exist!!!");
+    //$this->errors->setError("Index not Exist!!!");
+    $this->getAccess(ACCESS_READ);
     $this->type = 'user';
     $this->view();
     }
 
   function view_list1()
     {
-    $_SESSION['user_gid'] = 1;
+    //$_SESSION['user_gid'] = -1;
     $this->smarty->caching = true;
-    $this->type = 'admin';
+    $this->type = 'user';
     //$this->getAccess(ACCESS_ADMIN);
     $this->a = 'Hello World';
     $this->b = 'Hello World2';

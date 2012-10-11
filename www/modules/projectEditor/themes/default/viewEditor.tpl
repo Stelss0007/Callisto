@@ -4,10 +4,11 @@
 	<head>
 		<title>PHP File Tree Demo</title>
 		<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
-		<link href="/modules/projectEditor/css/default.css" rel="stylesheet" type="text/css" media="screen" />
+		
     
     <link rel="stylesheet" href="/modules/projectEditor/css/codemirror.css">
     <link rel="stylesheet" href="/modules/projectEditor/css/simple-hint.css">
+    <link rel="stylesheet" href="/modules/projectEditor/css/jquery-ui.css">
       
     <script src="/modules/projectEditor/js/codemirror.js"></script>
     <script src="/modules/projectEditor/js/mode/xml.js"></script>
@@ -23,8 +24,11 @@
 <!--    <link rel="stylesheet" href="/modules/projectEditor/css/docs.css">-->
     
     <script src="/modules/projectEditor/js/jquery.js" type="text/javascript"></script>
+    <script src="/modules/projectEditor/js/jquery-ui.js" type="text/javascript"></script>
 		<script src="/modules/projectEditor/js/php_file_tree.js" type="text/javascript"></script>
     <script src="/modules/projectEditor/js/default.js" type="text/javascript"></script>
+    
+    <link href="/modules/projectEditor/css/default.css" rel="stylesheet" type="text/css" media="screen" />
 	</head>
 
 	<body>
@@ -42,9 +46,12 @@
             {$phpTree}
           </div>
         </td>
-        <td height="500px" width="*" style="border: 1px solid #000;">
-          <textarea id='codeEdit' name='codeEdit'>
-          </textarea>
+        <td height="500px" width="*" style="border: 1px solid #000;" valign="top">
+                    
+           
+                    <textarea id='codeEdit' name='codeEdit'>
+                    </textarea>
+               
         </td>
 
       </tr>

@@ -2,7 +2,6 @@
 
  function getAccess($obj_name, $level)
    {
-   
    $ses_info=UserSession::getInstance();
    $gid = $ses_info->userGid();
    $perms_list = groupPermsGetList($gid);
@@ -32,7 +31,7 @@
   function groupPermsGetList($gid=null)
     {
     $db=DBConnector::getInstance();
-    $db->query("SELECT * FROM user_group_permissions WHERE gid='%d' ORDER BY weight", $gid);
+    $db->query("SELECT * FROM sys_user_group_permission WHERE gid='%d' ORDER BY weight", $gid);
     $perms_list = $db->fetch_array();
 
     return $perms_list;

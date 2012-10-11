@@ -81,7 +81,7 @@ abstract class Controller
     return true;
     }
     
-  function action($action_name)
+  final public function action($action_name)
     {
     $this->action = $action_name;
     call_user_method_array($action_name, $this, $this->input_vars);
@@ -95,7 +95,7 @@ abstract class Controller
     echo $this->smarty->fetch($tpl_dir, $ObjectName);
     }
 
-  function viewPage()
+  final public function viewPage()
     {
     $tpl_dir = $this->tplFileName();
     $this->allVarToTpl();
@@ -108,7 +108,7 @@ abstract class Controller
     echo $this->smarty->fetch($pageTplFile);
     }
 
-  function tplFileName()
+  final public function tplFileName()
     {
     $view_file_name = $this->action;
     if(file_exists($this->root_dir.'themes/'.$this->theme.'/'.$this->module_dir.$view_file_name.'.tpl'))
@@ -126,7 +126,7 @@ abstract class Controller
       }
     }
     
-  function allVarToTpl()
+  final public function allVarToTpl()
     {
     foreach ($this->vars as $name => $value)
       {
@@ -134,25 +134,47 @@ abstract class Controller
       }
     }
 
-  function getObjectName()
+  final public function getObjectName()
     {
-    return $this->modname.'::'.$this->type.'::'.$this->GetCallingMethodName();
+    $url_result = $this->GetCallingMethodName(3, true);
+    $action = $url_result['function'];
+    $args = '';
+    foreach($url_result['args'] as $value)
+      {
+      $args .= '::'.$value;
+      }
+      
+    return $this->modname.'::'.$this->type.'::'.$action.$args;
     }
-  function getTplObjectName()
+    
+  final public function getTplObjectName()
     {
-    return $this->modname.'|'.$this->type.'|'.$this->GetCallingMethodName();
+    $url_result = $this->GetCallingMethodName(3, true);
+    $action = $url_result['function'];
+    $args = '';
+    foreach($url_result['args'] as $value)
+      {
+      $args .= '|'.$value;
+      }
+      
+    return $this->modname.'|'.$this->type.'|'.$action.$args;
     }
 
-  function getAccess($access_type)
+  final public function getAccess($access_type=ACCESS_READ)
     {
     $object = $this->getObjectName();
     if(getAccess($object, $access_type)==true)
       return true;
-    die('No access');
+    
+    $this->notAccess();
     return false;
     }
+  final public function notAccess($access_type=ACCESS_READ)
+    {
+    $this->errors->setError("Access to the page is forbidden. You are not allowed!");
+    }
 
-  function print_vars()
+  final public function print_vars()
     {
     echo 'Debuging:<br><pre>';
     print_r($this);
@@ -161,12 +183,15 @@ abstract class Controller
     }
     
     
-  function GetCallingMethodName($position = null)
+  final public function GetCallingMethodName($position = null, $with_args = false)
     {
     $e = new Exception();
     $trace = $e->getTrace();
     $position = ($position) ? $position : (sizeof($trace)-1);
-    return $trace[$position]['function'];
+    if(empty($with_args))
+      return $trace[$position]['function'];
+    
+    return array('function'=>$trace[$position]['function'], 'args' => $trace[$position]['args']);
     print_r($trace);
     }
     
@@ -174,7 +199,7 @@ abstract class Controller
   //////////////////////////////////////////////////////////////////////////////
   ////////////////////////////   MODELS     ////////////////////////////////////
   //////////////////////////////////////////////////////////////////////////////
-  function modelInit($modulename=null)
+  final public function modelInit($modulename=null)
     {
     //echo $this->modname;exit;
     $modelname = (!empty($modulename)) ? $modulename : $this->modname; 
@@ -191,7 +216,7 @@ abstract class Controller
   //////////////////////////////////////////////////////////////////////////////
   ////////////////////////////   Sessions   ////////////////////////////////////
   //////////////////////////////////////////////////////////////////////////////
-  function sessinInit()
+  final public function sessinInit()
     {
 
     $this->session = & new UserSession;
@@ -203,12 +228,12 @@ abstract class Controller
   //////////////////////////////////////////////////////////////////////////////
   
   //Create default block array
-  function blockAdd($block='center', $blockContent)
+  final public function blockAdd($block='center', $blockContent)
     {
     array_push($this->block[$block], $blockContent);
     }
   //Add all blocks to tpl
-  function blockToTpl()
+  final public function blockToTpl()
     {
     $this->smarty->assign('blocks', $this->block, false);
     }
