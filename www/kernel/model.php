@@ -235,7 +235,7 @@ class Model extends DBConnector
                           );
 
       }
-    return true;
+    return $guid;
     }
     
   //////////////////////////////////////////////////////////////////////////////  
@@ -267,7 +267,7 @@ class Model extends DBConnector
       }
     $this->query("COMMIT");
     
-    return true;
+    return $guid;
     }
   //////////////////////////////////////////////////////////////////////////////
   function deleteObject($id)
@@ -295,14 +295,14 @@ class Model extends DBConnector
     {
     if(empty($guid) && empty($this->vars['guid']))
       {
-      $this->createObject();
+      return $this->createObject();
       }
     else
       {
       $id = (isset($this->vars['guid'])) ? $this->vars['guid'] : 0;
       if(!empty($guid))
         $id = $guid;
-      $this->updateObject($id);
+      return $this->updateObject($id);
       }
     }
   

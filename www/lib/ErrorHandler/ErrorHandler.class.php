@@ -74,7 +74,6 @@ class ErrorHandler
       if ($error['type'] == E_ERROR || $error['type'] == E_PARSE || $error['type'] == E_COMPILE_ERROR || $error['type'] == E_CORE_ERROR)
         {
         $this->error_array[] = $error;
-
         ob_end_clean(); // сбросить буфер, завершить работу буфера
         $this->__destruct();
         // контроль критических ошибок:
@@ -105,9 +104,10 @@ class ErrorHandler
       $this->showErrors();
       exit;
       }
+      
     if (isset($this->user_error_array) && !empty($this->user_error_array))
      {
-      ob_end_clean();
+      ob_end_clean();  
       $this->showErrors();
       exit;
       }
@@ -117,7 +117,21 @@ class ErrorHandler
       $this->showWarnings();
       }
     }
-    
+  function is_serial($s) 
+    {
+    if( stristr($s, '{' ) != false &&
+        stristr($s, '}' ) != false &&
+        stristr($s, ';' ) != false &&
+        stristr($s, ':' ) != false
+        )
+      {
+      return true;
+      }
+    else
+      {
+      return false;
+      }
+    }  
   function setError($error_message = 'User Error')
     {
     $callee = debug_backtrace();
@@ -179,7 +193,9 @@ class ErrorHandler
         <?endforeach;?>
       
         <?foreach($this->user_error_array as $verror):
-        $verror = unserialize($verror['message']);
+          
+          if(!empty($verror['message']) && $this->is_serial($verror['message']))
+            $verror = unserialize($verror['message']);
         ?>
         <tr class="tr_error">
           <td>
