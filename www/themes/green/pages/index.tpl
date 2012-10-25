@@ -8,7 +8,7 @@
     <meta name="description" content="{$module_meta_description}"/>
     <meta name="keywords" lang="ru" content="{$module_meta_keywords}"/>
 
-    <link rel="stylesheet" href="themes/green/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="/themes/green/css/style.css" type="text/css" />
 
     <link rel="stylesheet" href="/scripts/js/jsValidate/jsValidate.css" type="text/css" />
     <script type="text/javascript" src="/scripts/js/jQuery/jQuery.js"></script>

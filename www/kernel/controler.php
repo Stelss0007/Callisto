@@ -13,7 +13,7 @@ abstract class Controller
   protected $object_name;
   protected $type;
   protected $action;
-  protected $input_vars = array();
+  public $input_vars = array();
   protected $input_vars_clear = array();
   
   public $URL;
@@ -368,7 +368,7 @@ abstract class Controller
     if (preg_match('!^http!', $url))
       {
       Header($http[$code]);
-      Header("Location: $url, $code");
+      Header("Location: $url");
       die();
       }
     else
