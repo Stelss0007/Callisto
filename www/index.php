@@ -74,27 +74,16 @@
 include_once 'lib/ErrorHandler/ErrorHandler.class.php';
 $errors = ErrorHandler::getInstance();
 
-
 include_once 'kernel/config.php';
 include_once 'kernel/core.php';
+include_once 'kernel/router.php';
 include_once 'kernel/controler.php';
 include_once 'kernel/model.php';
 
-$mod = $_GET['module'];
-$function = $_GET['action'];
+$router = new Router();
+$router->run();
 
-if(!file_exists("modules/$mod/index.php"))
-  trigger_error ("Module '".$mod."' or module controler not exist", E_USER_ERROR);
 
-include_once "modules/$mod/index.php";
-//$module = new $mod();
-$module = new Index($mod);
-if(empty($_REQUEST['type']))
-  $module->type = 'user';
-else  
-  $module->type = ($_REQUEST['type'] == 'user' || $_REQUEST['type'] == 'admin'  || $_REQUEST['type'] == 'ajax') ? $_REQUEST['type'] : 'user';
-
-$module->action($function);
 //$module->$function();
 
 

@@ -33,10 +33,6 @@ class Index extends Controller
   //ѕример приема параметров через аргументы метода
   function view_arg($a='1', $b=2, $c=4, $n='0')
     {
-    $this->test->arg1 = 1;
-    $this->test->arg2 = 2;
-    $this->test->save();
-       
     echo $a.$b.$c.$n;
     }
     
@@ -131,6 +127,7 @@ class Index extends Controller
   //ѕример работы формы пример отображени€ формы 
   function validForm()
     {
+    echo stripslashes("KIOSQUE 31 L\'ESCALE BLEUE - Constitution de soci?t? : EURL");
     $this->view();
     }
 
