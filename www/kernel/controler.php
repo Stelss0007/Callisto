@@ -281,7 +281,7 @@ abstract class Controller
     return $path;
     }  
     
-  function getBaseURL()
+  function getBaseURL($with_path=true)
     {
     if (empty($_SERVER['HTTP_HOST']))
       {
@@ -299,8 +299,9 @@ abstract class Controller
       {
       $proto = 'http://';
       }
-
-    $path = $this->getBaseURI();
+    
+    if($with_path)
+     $path = $this->getBaseURI();
 
        
     return "$proto$server$path";
@@ -373,11 +374,17 @@ abstract class Controller
       }
     else
       {
-      // Removing leading slashes from redirect url
-      $url = preg_replace('!^/*!', '', $url);
+      $with_path = true;
+      if($url[0] == '/')
+        $with_path = false;
 
+       // Removing leading slashes from redirect url
+      $url = preg_replace('!^/*!', '', $url);
       // Get base URL
-      $baseurl = $this->getBaseURL();
+      $baseurl = $this->getBaseURL($with_path);
+   
+//      echo $baseurl/$url;
+//      die();
       
       Header($http[$code]);
       Header("Location: $baseurl/$url");
@@ -534,7 +541,7 @@ abstract class Controller
     }
 
   //////////////////////////////////////////////////////////////////////////////
-  ////////////////////////////   Sessions   ////////////////////////////////////
+  ////////////////////////////   SESSIONS    ///////////////////////////////////
   //////////////////////////////////////////////////////////////////////////////
   final public function sessinInit()
     {
@@ -557,6 +564,43 @@ abstract class Controller
     {
     $this->smarty->assign('blocks', $this->block, false);
     }
+  
+    
+  //////////////////////////////////////////////////////////////////////////////
+  ////////////////////////////   IMAGES     ////////////////////////////////////
+  //////////////////////////////////////////////////////////////////////////////
+  final public function getFiles($name = false, $type=false)
+    {
+    $result = $_FILES;
+ 
+    if(!empty($type))
+      {
+      $temp = array();
+      foreach($result as $value)
+        {
+        if($value['type'] == $type)
+          {
+          $temp[] = $value;
+          }
+        }
+      $result = $temp;
+      }
+      
+    if(!empty($name))
+      $result = $_FILES[$name];
+    
+    print_r($result);
+    exit;
+    }
+    
+  public function saveInputImage($id=null)
+    {
+    if(empty($id))
+      $this->errors->setError('OBJECT ID CAN NOT BE NULL');
+    
+    echo "OK";exit;
+    }
+  
   
   //////////////////////////////////////////////////////////////////////////////
   ////////////////////////////   DEBUG      ////////////////////////////////////

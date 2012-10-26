@@ -5,7 +5,7 @@ class Router
 
   // Хранит конфигурацию маршрутов.
   private $routes;
-  private $fileExt = '.html';
+  private $fileExt = '';
   
   function __construct($routesPath)
     {

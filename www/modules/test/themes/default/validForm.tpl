@@ -63,3 +63,79 @@
   <p><input type="submit" value="Send" /></p>
 
 </form>
+      
+
+{literal}
+
+
+<div id="fb-root"></div>
+<script>
+
+var location_lang = 'fr_FR'
+  
+// /////////////  Twiter  /////////////////////////
+!function(d,s,id)
+  {
+  var js,fjs=d.getElementsByTagName(s)[0];
+  if(!d.getElementById(id))
+    {
+    js=d.createElement(s);
+    js.id=id;
+    js.src="//platform.twitter.com/widgets.js?lang=ru";
+    fjs.parentNode.insertBefore(js,fjs);
+    }
+  }
+(document,"script","twitter-wjs");
+  
+// /////////////    FB   //////////////////////////
+(function(d, s, id) 
+  {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/"+location_lang+"/all.js#xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+  }
+(document, 'script', 'facebook-jssdk'));
+  
+// ////////////  Google  ////////////////////////// 
+  window.___gcfg = {lang: location_lang};
+    
+(function() 
+  {
+    var po = document.createElement('script'); 
+    po.type = 'text/javascript'; po.async = true;
+    po.src = 'https://apis.google.com/js/plusone.js';
+    var s = document.getElementsByTagName('script')[0]; 
+    s.parentNode.insertBefore(po, s); 
+  })();
+    
+    
+// //////// LinkedIn ////////////////////////////////////
+(function(d, s, id) 
+  {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//platform.linkedin.com/in.js";
+  fjs.parentNode.insertBefore(js, fjs);
+  }
+(document, 'script', 'linkedin'));
+  
+ 
+</script>
+
+<style>.twitter-share-button{width: 96px !important;}#plusone{width: 95px;}.fb_edge_widget_with_comment{top: -5px !important;}</style>
+ 
+
+
+<div style="width: 550px; height: 20px;">
+  <span class="fb-like"  data-send="false" data-layout="button_count" data-width="450" data-show-faces="false"></span>
+  <span class="fb-send"  data-send="false" data-layout="button_count" data-width="450" data-show-faces="false"></span>
+  <a href="https://twitter.com/share?a=1&lang=fr" class="twitter-share-button" style="width: 96px;" data-lang='fr' lang='fr'></a>
+  <script type="IN/Share" data-counter="right" data-lang='fr'></script>
+  <g:plusone size="medium"></g:plusone>
+  
+</div>
+
+{/literal}

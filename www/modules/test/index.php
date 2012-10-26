@@ -80,6 +80,26 @@ class Index extends Controller
     $this->modelInit('test2');
     //echo $this->test2->getName($a);
     }
+    
+  function add_object()
+    {
+    $this->view();
+    }
+    
+  function create_object()
+    {
+    $post = $this->getPostData(array('lastname'=>'required min(2) max(6)', 'firstname'=>'required min(2) max(6)'));
+    $this->arrayToModel($this->test, $post);
+    
+    $id = $this->test->save();
+    
+    //img
+    $this->getFiles('photo', 'image/png');
+    $this->saveInputImage($id);
+    
+    $this->redirect("/test/view_object/".$id);
+    }
+    
   function test_bug($a)
     {
     $this->a = $a;
