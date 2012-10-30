@@ -94,8 +94,8 @@ class Index extends Controller
     $id = $this->test->save();
     
     //img
-    $this->getFiles('photo', 'image/png');
-    $this->saveInputImage($id);
+    $this->getImage('photo1', 'image/png');
+    $this->saveImage($id, $name);
     
     $this->redirect("/test/view_object/".$id);
     }

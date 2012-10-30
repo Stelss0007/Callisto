@@ -28,7 +28,7 @@ class Image
       }
     }
 
-  function save($filename, $image_type=IMAGETYPE_JPEG, $compression=75, $permissions=null)
+  function save($filename, $image_type=IMAGETYPE_JPEG, $compression=98, $permissions=null)
     {
     if ($image_type == IMAGETYPE_JPEG)
       {
@@ -46,6 +46,7 @@ class Image
       {
       chmod($filename, $permissions);
       }
+    imagedestroy($this->image);
     }
 
   function output($image_type=IMAGETYPE_JPEG)
@@ -78,16 +79,32 @@ class Image
     {
     $ratio = $height / $this->getHeight();
     $width = $this->getWidth() * $ratio;
-    $this->resize($width, $height);
+    $this->resize_strong($width, $height);
     }
 
   function resizeToWidth($width)
     {
     $ratio = $width / $this->getWidth();
     $height = $this->getheight() * $ratio;
-    $this->resize($width, $height);
+    $this->resize_strong($width, $height);
     }
 
+  function resize($w, $h)
+    {
+    $ratio = $w/$h; 
+    $src_ratio=$this->getWidth()/$this->getheight();
+    
+    if ($ratio<$src_ratio) 
+      { 
+      $h = $w/$src_ratio; 
+      } 
+    else 
+      { 
+      $w = $h*$src_ratio; 
+      } 
+    $this->resize_strong($w, $h);
+    }
+    
   function scale($scale)
     {
     $width = $this->getWidth() * $scale / 100;
@@ -95,7 +112,7 @@ class Image
     $this->resize($width, $height);
     }
 
-  function resize($width, $height)
+  function resize_strong($width, $height)
     {
     $new_image = imagecreatetruecolor($width, $height);
     imagecopyresampled($new_image, $this->image, 0, 0, 0, 0, $width, $height, $this->getWidth(), $this->getHeight());

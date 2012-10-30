@@ -24,7 +24,8 @@
         Photo
       </td>
       <td>
-        <input type="file" value="" name="photo">
+        <input type="file" value="" name="photo1">
+        <input type="file" value="" name="photo2">
       </td>
     </tr>
   </table>

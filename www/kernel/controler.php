@@ -29,13 +29,26 @@ abstract class Controller
                           'right' =>array(),
                           'bottom'=>array()
                           );
-
+  
+  // FILES 
+  public $input_files; 
+  public $input_images;
+  
+  public $image_size = array(
+                            array('width'=>'640', 'height'=>'480'),
+                            array('width'=>'320', 'height'=>'150'),
+                            array('width'=>'100', 'height'=>'100')
+                            );
+  
+  
   function __construct($mod)
     {
     //Init Errors
     $this->errors =& ErrorHandler::getInstance();
     
     $this->root_dir = $_SERVER['DOCUMENT_ROOT'].'/';
+    
+    define('LIB_DIR',$_SERVER['DOCUMENT_ROOT'].'/lib/');
     //????????? ???? DBConnector
     define('DB_DIR',$_SERVER['DOCUMENT_ROOT'].'/lib/DBConnector/');
     require_once(DB_DIR.'DBConnector.class.php');
@@ -567,9 +580,9 @@ abstract class Controller
   
     
   //////////////////////////////////////////////////////////////////////////////
-  ////////////////////////////   IMAGES     ////////////////////////////////////
+  ////////////////////////////   FILES      ////////////////////////////////////
   //////////////////////////////////////////////////////////////////////////////
-  final public function getFiles($name = false, $type=false)
+  final public function getFile($name = false, $type=false)
     {
     $result = $_FILES;
  
@@ -588,19 +601,114 @@ abstract class Controller
       
     if(!empty($name))
       $result = $_FILES[$name];
-    
-    print_r($result);
-    exit;
+
+    $this->input_files = $result;
+    return $result;
     }
     
-  public function saveInputImage($id=null)
+  final public function saveFile($id = null, $name = null)
     {
     if(empty($id))
-      $this->errors->setError('OBJECT ID CAN NOT BE NULL');
+      $this->errors->setError('OBJECT ID CAN NOT BE NULL!');
+    if(!is_numeric($id))
+      $this->errors->setError('OBJECT ID CAN BE INTEGER!');
     
-    echo "OK";exit;
+    $type = $this->input_files['type'];
+    
+    $temp = explode('/', $type);
+    $path_files_type = $temp[0].'s';
+    
+    $id8 = sprintf('%08d',$id);
+    
+    $path = "files/$path_files_type/{$id8[7]}/{$id8[6]}/$id8/";
+
+    if (!mkdir($path, 0777, true)) 
+      {
+      $this->errors->setError('Failed to create folders...');
+      }
+      
+    $ext = substr(strrchr($this->input_files['name'], '.'), 1);
+    
+    $name = (empty($name)) ? $id8 : $name;
+    
+    $dst = $path.$name.'.'.$ext;
+    
+    move_uploaded_file($this->input_files['tmp_name'], $dst);
+    return $dst;
+    }
+ 
+  //////////////////////////////////////////////////////////////////////////////
+  ////////////////////////////   IMAGES     ////////////////////////////////////
+  //////////////////////////////////////////////////////////////////////////////
+  final public function getImage($name = false)
+    {
+    if(empty($name))
+      $this->errors->setError('FILE NAME CAN NOT BE NULL!');
+    
+    $result = $_FILES;
+ 
+    $img_type = array("image/gif", "image/jpeg", "image/png", "image/pjpeg");
+
+    $result = $_FILES[$name];
+    
+    if(!in_array($result['type'], $img_type))
+       $this->errors->setError('FILE "'.$name.'" IS NOT!'); 
+ 
+    $this->input_images = $result;
+    return $result;
+    }
+    
+  final public function saveImage($id = null, $name = null)
+    {
+    if(empty($id))
+      $this->errors->setError('OBJECT ID CAN NOT BE NULL!');
+    if(!is_numeric($id))
+      $this->errors->setError('OBJECT ID CAN BE INTEGER!');
+    
+    $type = $this->input_images['type'];
+    
+    $temp = explode('/', $type);
+    $path_files_type = $temp[0].'s';
+    
+    $id8 = sprintf('%08d',$id);
+    
+    $path = "images/{$this->modname}/{$id8[7]}/{$id8[6]}/$id8/";
+
+    if (!mkdir($path, 0777, true)) 
+      {
+      $this->errors->setError('Failed to create folders...');
+      }
+      
+    $ext = substr(strrchr($this->input_images['name'], '.'), 1);
+    
+    $name = (empty($name)) ? $id8 : $name;
+    
+    $dst = $path.$name.'.'.$ext;
+    
+    move_uploaded_file($this->input_images['tmp_name'], $dst);
+    
+    require_once LIB_DIR.'Image/Image.class.php';
+    
+    $img = new Image();
+    
+    foreach($this->image_size as $value)
+      {
+      $img->load($dst);
+      //$img->resize($value['width'], $value['height']);
+      $img->resizeToWidth($value['width']);
+      $img->save($path.$name.'_w'.$value['width'].'.'.$ext);
+      }
+    
+    return $dst;
     }
   
+  final public function getImageSrc($id=null, $w=null, $name=null)
+    {
+    $id8 = sprintf('%08d', $id);
+    $path = "images/".$this->modname."/".$id8[7]."/".$id8[6]."/".$id8."/";
+    
+    
+    } 
   
   //////////////////////////////////////////////////////////////////////////////
   ////////////////////////////   DEBUG      ////////////////////////////////////
