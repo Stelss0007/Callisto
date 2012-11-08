@@ -10,6 +10,8 @@ class DBConnector
   var $Error = "";
   var $Link_ID = null;
   var $QueryResult = null;
+  
+  var $debug_array = array();
 
   static $instance;
 
@@ -66,7 +68,14 @@ class DBConnector
     $result = mysql_query($valid_sql);
     
     if(!empty($coreConfig['debug.enabled']))
-      $debug_start_time = time();
+      {
+      $debug_time = $debug_start_time - time();
+     
+      $debug = Debuger::getInstance();
+      
+      $debug->mysql[] = array('query'=> $valid_sql, 'exec_time'=>$debug_time);
+      //print_r($debug->mysql);
+      }
     
     if(mysql_error())
       {

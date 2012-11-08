@@ -10,7 +10,7 @@ class Model extends DBConnector
     global $coreConfig;
     
     //echo "host=".$coreConfig['DB.Host'];
-
+    
     $this->Host = $coreConfig['DB.Host'];
     $this->User = $coreConfig['DB.UserName'];
     $this->Password = $coreConfig['DB.Password'];

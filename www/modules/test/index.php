@@ -15,7 +15,7 @@ class Index extends Controller
     //$_SESSION['user_gid'] = -1;
     $this->debuger->debug("Очень простое сообщение на консоль");
     $this->debuger->debug("object", $this);
-    
+    $this->test->getObjectsList(array('arg1'=>'1'), array('arg2'=>'asc'), $offset);
     $this->smarty->caching = true;
     $this->type = 'user';
     //$this->getAccess(ACCESS_ADMIN);

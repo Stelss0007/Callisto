@@ -71,7 +71,7 @@ abstract class Controller
     $this->module_dir = 'modules/'.$this->modname.'/';
     
     require_once(KERNEL_DIR.'debuger.php');
-    $this->debuger = & new Debuger();
+    $this->debuger = & Debuger::getInstance();
     
     //Session init
     $this->sessinInit();
@@ -95,7 +95,18 @@ abstract class Controller
     
     $this->displayMessage();
     }
-  
+  function __destruct()
+    {
+    $debuger = Debuger::getInstance();
+    //$mysql = DBConnector::getInstance();
+//print_r($debuger->mysql);exit;
+    $mysql_querys = array();
+    foreach($debuger->mysql as $key=>$value)
+      {
+      $mysql_querys['query_'.$key] = $value;
+      }
+    $debuger->debug("MySQL", $mysql_querys);
+    }
   function __set($name, $value)
     {
     if(property_exists($this, $name))
@@ -542,6 +553,7 @@ abstract class Controller
     $modulename = (!empty($modulename)) ? $modulename : $this->modname; 
     require_once 'modules/'.$modulename.'/class.php';
     $className = $modulename;
+    //$this->$modelname = & new $className($className);
     $this->$modelname = & new $className($className);
     $this->$modelname->type = $modulename;
     //echo $modelname;

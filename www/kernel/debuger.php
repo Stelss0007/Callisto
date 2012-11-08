@@ -2,7 +2,19 @@
 
 class Debuger
   {
+  public $mysql = array();
+  
+  static $instance;
 
+  public static function getInstance()
+   {
+     if (empty(self::$instance))
+      {
+      self::$instance = new self;
+      }
+     return self::$instance;
+   }
+   
   function __construct()
     {
     if (!defined("LOG")) define("LOG", 1);
