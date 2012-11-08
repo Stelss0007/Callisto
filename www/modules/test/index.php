@@ -13,6 +13,9 @@ class Index extends Controller
   function view_page()
     {
     //$_SESSION['user_gid'] = -1;
+    $this->debuger->debug("Очень простое сообщение на консоль");
+    $this->debuger->debug("object", $this);
+    
     $this->smarty->caching = true;
     $this->type = 'user';
     //$this->getAccess(ACCESS_ADMIN);
@@ -55,6 +58,7 @@ class Index extends Controller
   function view_object($guid=0)
     {
     print_r($this->test->getObject($guid));
+    $this->debuger->debug('Привет');
     }
   
   //Пример получения списка объектов  

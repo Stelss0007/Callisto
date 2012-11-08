@@ -1,7 +1,7 @@
 <?php
 
 //Настройки отладки
-$coreConfig['debug.enabled'] = false;
+$coreConfig['debug.enabled'] = true;
 
 //Настройки локали
 $coreConfig['locale.lc_all'] = 'ru_RU.CP1251';

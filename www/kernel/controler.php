@@ -43,6 +43,8 @@ abstract class Controller
   
   function __construct($mod)
     {
+    global $coreConfig;
+    
     //Init Errors
     $this->errors =& ErrorHandler::getInstance();
     
@@ -67,6 +69,9 @@ abstract class Controller
     $this->modname = $mod;//strtolower(get_class($this));
 
     $this->module_dir = 'modules/'.$this->modname.'/';
+    
+    require_once(KERNEL_DIR.'debuger.php');
+    $this->debuger = & new Debuger();
     
     //Session init
     $this->sessinInit();

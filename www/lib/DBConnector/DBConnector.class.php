@@ -47,6 +47,8 @@ class DBConnector
 
   function query()
     {
+    global $coreConfig;
+
     $args = func_get_args();
     $template = array_shift($args);
     foreach ($args as $key => $value)
@@ -58,7 +60,13 @@ class DBConnector
       }
     $valid_sql = vsprintf($template, array_values($args));
     
+    if(!empty($coreConfig['debug.enabled']))
+      $debug_start_time = time();
+    
     $result = mysql_query($valid_sql);
+    
+    if(!empty($coreConfig['debug.enabled']))
+      $debug_start_time = time();
     
     if(mysql_error())
       {
