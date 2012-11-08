@@ -63,17 +63,30 @@ class DBConnector
     $valid_sql = vsprintf($template, array_values($args));
     
     if(!empty($coreConfig['debug.enabled']))
-      $debug_start_time = time();
+      {
+      // Считываем текущее время
+      $current_time = microtime();
+      // Отделяем секунды от миллисекунд
+      $current_time = explode(" ",$current_time);
+      // Складываем секунды и миллисекунды
+      $start_time = $current_time[1] + $current_time[0];
+      }
     
     $result = mysql_query($valid_sql);
     
     if(!empty($coreConfig['debug.enabled']))
       {
-      $debug_time = $debug_start_time - time();
+      // То же, что и в 1 части
+      $current_time = microtime();
+      $current_time = explode(" ",$current_time);
+      $current_time = $current_time[1] + $current_time[0];
+
+      // Вычисляем время выполнения скрипта
+      $result_time = ($current_time - $start_time);
      
       $debug = Debuger::getInstance();
       
-      $debug->mysql[] = array('query'=> $valid_sql, 'exec_time'=>$debug_time);
+      $debug->mysql[] = array('query'=>  trim(preg_replace('!\s+!', ' ', $valid_sql)), 'exec_time'=>$result_time);
       //print_r($debug->mysql);
       }
     
