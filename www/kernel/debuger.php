@@ -43,6 +43,7 @@ class Debuger
       return;
 
     echo '<script type="text/javascript">'.NL;
+    $name = addslashes($name);
     switch ($type) 
       {
       case LOG:
@@ -58,7 +59,8 @@ class Debuger
         echo 'console.error("'.$name.'");'.NL;
         break;
       }
-
+    
+    
     if (!empty($var))
       {
       if (is_object($var) || is_array($var))
@@ -84,6 +86,8 @@ class Debuger
         }
       else
         {
+        $var = trim(preg_replace('!\s+!', ' ', str_replace('\\','\\\\',$var)));
+        
         switch ($type) 
           {
           case LOG:

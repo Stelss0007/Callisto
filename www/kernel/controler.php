@@ -219,11 +219,14 @@ abstract class Controller
     $this->notAccess();
     return false;
     }
+    
   final public function notAccess($access_type=ACCESS_READ)
     {
     $this->errors->setError("Access to the page is forbidden. You are not allowed!");
     }
 
+    
+  //////////////////////////////////////////////////////////////////////////////
   final public function print_vars()
     {
     echo 'Debuging:<br><pre>';

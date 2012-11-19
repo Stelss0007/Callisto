@@ -99,10 +99,11 @@ class Model extends DBConnector
     $left_join ='';
     $right_join ='';
     $order_by ='';
+    $where = '';
     
     $left_join_shablon = "LEFT JOIN `object_value` v%d ON (v%d.guid = o.`guid` and v%d.`field_id` = '%d')";
-    $right_join_shablon = "RIGHT JOIN `object_value` w%d ON (w%d.guid = o.`guid` and w%d.`field_id` = '%d' and w%d.value = '%d')";
-    
+    $right_join_shablon = "RIGHT JOIN `object_value` w%d ON (w%d.guid = o.`guid`)";
+    $where_shablon = " and w%d.`field_id` = '%d' and w%d.value IN (%s)";
     ////////////////////////////////////////////////////////////////////////////
     //Сортировка, соберем переменные для сортировки
     if(empty($order))
@@ -145,6 +146,8 @@ class Model extends DBConnector
         {
         $fid_w = $this->getFieldId($key);
         $right_join .= " ".sprintf($right_join_shablon, $num_where, $num_where, $num_where,  $fid_w, $num_where, $value);
+        
+        $where .= ' '.sprintf($where_shablon, $num_where,  $fid_w, $num_where, $value); 
         }
       $num_where++;
       }
@@ -153,10 +156,16 @@ class Model extends DBConnector
       
     //Получим объекты
     $type_id = $this->getTypeId($this->type);
+    
+    $where = ltrim($where, 'and ');
+    if(!empty($where_shablon))
+      $where = 'WHERE '.$where;
+
     $sql = "SELECT SQL_NO_CACHE o.guid 
             FROM object o
             $right_join
             $left_join
+            $where
             $order_by
             LIMIT %d, %d";
     
@@ -336,6 +345,44 @@ class Model extends DBConnector
       return $result[0]['id'];
     
     return $this->insert('object_field', array('field'=>$field));
+    }
+    
+  //////////////////////////////////////////////////////////////////////////////
+  function __call($name, $arguments) 
+    {
+    if(preg_match('/^get(.*)/simu', $name, $matches))
+      {
+      $limit = 1000;
+      $offset = 0;
+      
+      if(preg_match('/^get_(\d+)_(\d+)_(.*)/simu', $name, $matches))
+        {
+        $offset = $matches[1];
+        $limit = $matches[2];
+        $name = 'get'.$matches[3];
+        }
+      elseif(preg_match('/^get_(\d+)_(.*)/simu', $name, $matches))
+        {
+        $limit = $matches[1];
+        $name = 'get'.$matches[2];
+        }
+      preg_match('/^getBy(.*)OrderBy(.*)/simu', $name, $matches);
+      if($matches)
+        {
+        $field = strtolower($matches[1]);
+        $value = $arguments[0];
+        $order = $matches[2];
+        return $this->getObjectsList(array($field => $value), array($order => 'asc'), $offset, $limit);
+        }
+      preg_match('/^getBy(.*)/simu', $name, $matches);
+      if($matches)
+        {
+        $field = strtolower($matches[1]);
+        $value = $arguments[0];
+        return $this->getObjectsList(array($field => $value), '', $offset, $limit);
+        }
+      }
+    
     }
   }
 ?>

@@ -47,6 +47,7 @@ class DBConnector
     //mysql_close();
     }
 
+ 
   function query()
     {
     global $coreConfig;

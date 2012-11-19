@@ -221,17 +221,15 @@ class ErrorHandler
     
   function showWarnings()
     {
+    $debug = Debuger::getInstance();
     ?>
-    <script>
-      <?foreach($this->warning_array as $verror):?>
-        console.warn("PHP WARNING: <?=$verror['message'].' ('.str_replace('\\',"/", $verror['file']).' in line '.$verror['line'].')';?>");
-      <?endforeach;?>
+      <?foreach($this->warning_array as $verror){
+        $debug->debug("PHP WARNING:".$verror['message'].' ('.str_replace('\\',"/", $verror['file']).' in line '.$verror['line'].')', null,WARN);
+      }
         
-      <?foreach($this->notice_array as $verror):?>
-        console.warn("PHP NOTICE: <?=$verror['message'].' ('.str_replace('\\',"/", $verror['file']).' in line '.$verror['line'].')';?>");
-      <?endforeach;?>
-    </script>
-    <?
+      foreach($this->notice_array as $verror){
+        $debug->debug("PHP NOTICE:".$verror['message'].' ('.str_replace('\\',"/", $verror['file']).' in line '.$verror['line'].')', null, INFO);
+      }
     }
 
   }
