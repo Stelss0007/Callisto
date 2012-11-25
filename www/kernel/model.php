@@ -3,6 +3,7 @@ class Model extends DBConnector
   {
   var $type = '';
   var $vars = array();
+  var $table = 'object';
   
   //////////////////////////////////////////////////////////////////////////////
   function __construct($guid=0)
@@ -383,6 +384,89 @@ class Model extends DBConnector
         }
       }
     
+    }
+  function weightMax()
+    {
+    if($this->table != 'object')
+      {
+      $this->query("SELECT MAX(weight) as max FROM {$this->table}");
+      $result = $this->fetch_array();
+      $maxweight = $result[0]['max'];
+      return $maxweight;
+      }
+    }
+  function weightDelete($weight, $where)
+    {
+    if($this->table != 'object')
+      {
+      $where = str_replace('WHERE', '', $where);
+  
+      if ($where!='')
+        {
+        $where=" AND $where";
+        };
+
+      $this->query("UPDATE {$this->table} SET weight = weight-1 WHERE weight >'$weight' $where");
+
+      return true;
+      }
+    }
+    
+  function weightUp($weight=0, $where='')
+    {
+    if($weight<2)
+      return true;
+    
+    if($this->table != 'object')
+      {
+      $where = str_replace('WHERE', '', $where);
+      if ($where!='')
+        {
+        $where=" AND $where";
+        }
+      
+      $next_weight = $weight--;
+      $this->query("SELECT * FROM {$this->table} WHERE weight IN ('$weight', '$next_weight') $where ORDER BY weight LIMIT 2");
+      $dbresult = $this->fetch_array();
+
+      //????????????
+      $dbresult[0][weight]++;
+      $dbresult[1][weight]--;
+
+      foreach ($dbresult as $newresult)
+        $this->query("UPDATE {$this->table} SET weight = '$newresult[weight]' WHERE id = '$newresult[id]'");
+
+      return true;
+      }
+    }
+    
+  function weightDown($weight=0, $where='')
+    {
+    $MaxWeight = $this->weightMax();
+    if ($weight == $MaxWeight || $weight == 0)
+      return true;
+    
+    if($this->table != 'object')
+      {
+      $where = str_replace('WHERE', '', $where);
+      if ($where!='')
+        {
+        $where=" AND $where";
+        }
+      
+      $next_weight = $weight++;
+      $this->query("SELECT * FROM {$this->table} WHERE weight IN ('$weight', '$next_weight') $where ORDER BY weight LIMIT 2");
+      $dbresult = $this->fetch_array();
+
+      //????????????
+      $dbresult[0][weight]++;
+      $dbresult[1][weight]--;
+
+      foreach ($dbresult as $newresult)
+        $this->query("UPDATE {$this->table} SET weight = '$newresult[weight]' WHERE id = '$newresult[id]'");
+
+      return true;
+      }
     }
   }
 ?>

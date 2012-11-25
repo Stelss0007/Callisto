@@ -225,7 +225,7 @@
       <div id="wrap">
         <div class="copyrate">
           Сайт под умправлением CMS "Calisto"<br />
-          Beta v0.0.1
+          Beta v0.0.12
         </div>
         
         <div class="footermenu">

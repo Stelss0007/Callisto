@@ -186,7 +186,7 @@ class DBConnector
       {
       if (!$value)
         continue;
-      if(!in_array($key, $columns))
+      if(!in_array($key, $columns, true))
         continue;
 
       $keys .= $key." = ";
