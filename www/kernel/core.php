@@ -678,5 +678,151 @@ function weightDelete($table, $weight, $where='')
 
   return true;
   }
+ 
+  //////////////////////////////////////////////////////////////////////////////
+  /////////  CACHE VARS                                               //////////
+  //////////////////////////////////////////////////////////////////////////////
+  
+  /**
+ * @desc Кеширует переменную
+ * @return bool
+ * @param component string Модуль к которому относится переменная
+ * @param cacheKey string Ключь
+ * @param value misc Значение
+ */
+function sysVarSetCached($component, $cacheKey, $value=null, $ttl=null)
+  {
+  global $coreConfig;
+
+  //Empty приводим к false
+  if (!isset ($value)) $value = false;
+
+	//Удлиняем $cacheKey
+	$cacheKey = $component.'_'.$cacheKey;
+
+  //Складываем ключь в память
+  $coreConfig[$cacheKey] = $value;
+
+  //В зависимости от типа сохраняем кеш в внешнее хранилище
+  if ($coreConfig['Var.caching'] == 'disk')
+    {
+    $cacheKey_crc = (string)abs (crc32 ($cacheKey));
+    $dir_way = './cache/vars/'.$cacheKey_crc[0].'/'.$cacheKey_crc[1].'/';
+    if (!file_exists($dir_way)) 
+      mkdir($dir_way, $coreConfig['default.dir.perms'], true);
+    
+    return (file_put_contents($dir_way.$cacheKey, serialize($value)));
+    }
+  elseif ($coreConfig['Var.caching'] == 'xcache')
+    {
+		if (!$ttl) $ttl = $coreConfig['Var.cache_lifetime'];
+    return (xcache_set('sysVar_'.$cacheKey, $value, $ttl));
+    }
+  elseif ($coreConfig['Var.caching'] == 'eaccelerator')
+    {
+		if (!$ttl) $ttl = $coreConfig['Var.cache_lifetime'];
+    return (eaccelerator_put('sysVar_'.$cacheKey, $value, $ttl));
+    }
+  elseif ($coreConfig['Var.caching'] == 'apc')
+    {
+		if (!$ttl) $ttl = $coreConfig['Var.cache_lifetime'];
+    return (apc_store('sysVar_'.$cacheKey, $value, $ttl));
+    }
+
+  return true;
+  }
+
+/**
+ * @desc Извликает переменную из кеша
+ * @return misc Значение переменной
+ * @param component string Модуль к которому относится переменная
+ * @param cacheKey string Ключь
+ */
+function sysVarGetCached($component, $cacheKey)
+  {
+  global $coreConfig;
+	//Удлиняем $cacheKey
+	$cacheKey = $component.'_'.$cacheKey;
+
+  //Если есть ключь в памяти - возвращаем из памяти
+  if (isset($coreConfig[$cacheKey])) return $coreConfig['sysVar_cache'][$cacheKey];
+
+  //В зависимости от типа загружаем кеш из внешнего хранилища
+  if ($coreConfig['Var.caching'] == 'disk')
+    {
+    $cacheKey_crc = (string)abs(crc32($cacheKey));
+    $file_way = './cache/vars/' . $cacheKey_crc[0] . '/' . $cacheKey_crc[1] . '/' . $cacheKey;
+    if (file_exists($file_way))
+      $coreConfig['sysVar_cache'][$cacheKey] = unserialize(file_get_contents($file_way));
+		    else return;
+    }
+  elseif ($coreConfig['Var.caching'] == 'xcache')
+    {
+    $coreConfig['sysVar_cache'][$cacheKey] = xcache_get('sysVar_' . $cacheKey);
+    }
+  elseif ($coreConfig['sysConfig']['Var.caching'] == 'eaccelerator')
+    {
+    $coreConfig['sysVar_cache'][$cacheKey] = eaccelerator_get('sysVar_' . $cacheKey);
+    }
+  elseif ($coreConfig['Var.caching'] == 'apc')
+    {
+		$apc_value = apc_fetch('sysVar_' . $cacheKey, $success);
+		if ($success) $coreConfig['sysVar_cache'][$cacheKey] = $apc_value;
+    }
+
+  if (isset($coreConfig['sysVar_cache'][$cacheKey])) return $coreConfig['sysVar_cache'][$cacheKey];
+    else return;
+  }
+
+/**
+ * @desc Проверяет наличие переменной в кеше
+ * @return bool
+ * @param component string Модуль к которому относится переменная
+ * @param cacheKey string Ключь
+ */
+function sysVarIsCached($component, $cacheKey)
+  {
+  $cache_content = sysVarGetCached($component, $cacheKey);
+  if (isset($cache_content)) return true;
+  return false;
+  }
+
+/**
+ * @desc Удаляет переменную из кеша
+ * @return bool
+ * @param component string Модуль к которому относится переменная
+ * @param cacheKey string Ключь
+ */
+function sysVarDelCached($component, $cacheKey)
+  {
+  global $coreConfig;
+  
+  if (!sysVarIsCached($component, $cacheKey)) return true;
+
+	//Удлиняем $cacheKey
+	$cacheKey = $component.'_'.$cacheKey;
+
+  unset($coreConfig['sysVar_cache'][$cacheKey]);
+  //В зависимости от типа уничтожаем информацию в кеше
+  if ($coreConfig['Var.caching'] == 'disk')
+    {
+    $cacheKey_crc = (string)abs(crc32($cacheKey));
+    $file_way = './cache/vars/' . $cacheKey_crc[0] . '/' . $cacheKey_crc[1] . '/' . $cacheKey;
+    @unlink($file_way);
+    }
+  elseif ($coreConfig['Var.caching'] == 'xcache')
+    {
+    xcache_unset('sysVar_' . $cacheKey);
+    }
+  elseif ($coreConfig['Var.caching'] == 'eaccelerator')
+    {
+    eaccelerator_rm('sysVar_' . $cacheKey);
+    }
+  elseif ($coreConfig['Var.caching'] == 'apc')
+    {
+    apc_delete('sysVar_' . $cacheKey);
+    }
+  return true;
+  }
 
 ?>

@@ -353,38 +353,113 @@ class Model extends DBConnector
     {
     if(preg_match('/^get(.*)/simu', $name, $matches))
       {
-      $limit = 1000;
-      $offset = 0;
-      
-      if(preg_match('/^get_(\d+)_(\d+)_(.*)/simu', $name, $matches))
+      if($this->table == 'object')
         {
-        $offset = $matches[1];
-        $limit = $matches[2];
-        $name = 'get'.$matches[3];
+        return $this->objectTypeORM($name, $arguments);
         }
-      elseif(preg_match('/^get_(\d+)_(.*)/simu', $name, $matches))
+      else
         {
-        $limit = $matches[1];
-        $name = 'get'.$matches[2];
-        }
-      preg_match('/^getBy(.*)OrderBy(.*)/simu', $name, $matches);
-      if($matches)
-        {
-        $field = strtolower($matches[1]);
-        $value = $arguments[0];
-        $order = $matches[2];
-        return $this->getObjectsList(array($field => $value), array($order => 'asc'), $offset, $limit);
-        }
-      preg_match('/^getBy(.*)/simu', $name, $matches);
-      if($matches)
-        {
-        $field = strtolower($matches[1]);
-        $value = $arguments[0];
-        return $this->getObjectsList(array($field => $value), '', $offset, $limit);
+        return $this->modelTypeORM($name, $arguments);
         }
       }
     
     }
+  
+  function objectTypeORM($name, $arguments)
+    {
+    $limit = 1000;
+    $offset = 0;
+
+    if(preg_match('/^get_(\d+)_(\d+)_(.*)/simu', $name, $matches))
+      {
+      $offset = $matches[1];
+      $limit = $matches[2];
+      $name = 'get'.$matches[3];
+      }
+    elseif(preg_match('/^get_(\d+)_(.*)/simu', $name, $matches))
+      {
+      $limit = $matches[1];
+      $name = 'get'.$matches[2];
+      }
+    preg_match('/^getBy(.*)OrderBy(.*)/simu', $name, $matches);
+    if($matches)
+      {
+      $field = strtolower($matches[1]);
+      $value = $arguments[0];
+      $order = $matches[2];
+      return $this->getObjectsList(array($field => $value), array($order => 'asc'), $offset, $limit);
+      }
+    preg_match('/^getBy(.*)/simu', $name, $matches);
+    if($matches)
+      {
+      $field = strtolower($matches[1]);
+      $value = $arguments[0];
+      return $this->getObjectsList(array($field => $value), '', $offset, $limit);
+      }
+    }
+    
+  function modelTypeORM($name, $arguments)
+    {
+    
+    $columns = $this->tableFieldList();
+   
+    $limit = 1000;
+    $offset = 0;
+
+    if(preg_match('/^get_(\d+)_(\d+)_(.*)/simu', $name, $matches))
+      {
+      $offset = $matches[1];
+      $limit = $matches[2];
+      $name = 'get'.$matches[3];
+      }
+    elseif(preg_match('/^get_(\d+)_(.*)/simu', $name, $matches))
+      {
+      $limit = $matches[1];
+      $name = 'get'.$matches[2];
+      }
+      
+    preg_match('/^getBy(.*)OrderBy(.*)/simu', $name, $matches);
+    if($matches)
+      {
+      $field = strtolower($matches[1]);
+      $value = $arguments[0];
+      $order = $matches[2];
+      return $this->select($this->table, '*', "WHERE $field IN($value) ORDER BY $order ASC LIMIT $offset, $limit", true);
+      //return $this->getObjectsList(array($field => $value), array($order => 'asc'), $offset, $limit);
+      }
+      
+    preg_match('/^getBy(.*)/simu', $name, $matches);
+    if($matches)
+      {
+      $field = strtolower($matches[1]);
+      $value = $arguments[0];
+      return $this->select($this->table, '*', "WHERE $field IN($value) LIMIT $offset, $limit", true);
+      //return $this->getObjectsList(array($field => $value), '', $offset, $limit);
+      }
+    }
+    
+  function tableFieldList($table = null)
+    {
+    if(empty($table))
+      $table = $this->table;
+    //Проверяем если есть в кеше возвращаем из кеша
+    $cached_columns = sysVarGetCached('core', 'columns');
+    if ($cached_columns[$table]) 
+      return $cached_columns[$table];
+    
+    $this->query('SHOW COLUMNS FROM '.$table);
+    $columns = $this->fetch_array();
+    
+    $result = array();
+    foreach($columns as $value)
+      $result[$table][] = $value['Field'];
+    
+    //Кладем в кеш
+    sysVarSetCached('core', 'columns', $result);
+    
+    return $result[$table];
+    }
+    
   function weightMax()
     {
     if($this->table != 'object')

@@ -75,6 +75,7 @@ class DBConnector
     
     $result = mysql_query($valid_sql);
     
+    
     if(!empty($coreConfig['debug.enabled']))
       {
       // То же, что и в 1 части
@@ -94,16 +95,53 @@ class DBConnector
     if(mysql_error())
       {
       echo 'Ошибка запроса:<br><pre>';
+      echo '<b>'.$valid_sql.'</b>'.'<br><br>';
+      echo '<font color="red">';
       print_r(mysql_error());
+      echo '</font>';
       echo '</pre>';
       exit;
       }
-    return $this->QueryResult = $result;
+    $this->QueryResult = $result;
+    unset($result);
     }
 
+    
+  final function select($table, $column, $where='', $multi = false)
+    {
+    $columns_string = implode(', ', $column);
+    if (empty ($columns_string)) 
+      $columns_string = '*';
+
+    //Производим выборку
+    $sql = "SELECT $columns_string
+              FROM $table
+              $where";
+    
+    if (!$multi) $sql.= ' LIMIT 1';
+
+    $this->query($sql);
+
+    //RESULT
+    if (!$multi)
+      {
+      return $this->fetch_row();
+      }
+    else //Много записей возвращаем как массив масивов
+      {
+      return $this->fetch_array();
+      }
+    }
+  
+  
   function fetch_object()
     {
     return mysql_fetch_object($this->QueryResult);
+    }
+    
+  function fetch_row()
+    {
+    return mysql_fetch_array($this->QueryResult);
     }
 
   function fetch_array($type=1)
@@ -204,6 +242,11 @@ class DBConnector
       $sql = "UPDATE $table SET $keys $where";
 
       $this->query($sql);
+    }
+    
+  function __destruct() 
+    {
+    mysql_free_result($this->QueryResult);
     }
 
   }

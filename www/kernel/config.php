@@ -22,7 +22,7 @@ $coreConfig['DB.Name'] = 'test';
 $coreConfig['DB.TablePrefix'] = '';
 
 // Кэшировать переменные ("none", "disk", "xcache", "apc", "eaccelerator")
-$coreConfig['Var.caching'] = '';
+$coreConfig['Var.caching'] = 'disk';
 
 //Время кэширования переменных (секунды)
 $coreConfig['Var.cache_lifetime'] = 10800;

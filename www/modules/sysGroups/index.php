@@ -45,6 +45,10 @@ class Index extends Controller
     $this->sysGroups->group_delete($id);
     $this->redirect();
     }
-  
+  function test()
+    {
+    $element = $this->sysGroups->getByIdOrderByGroup_Displayname("'1', '3'");
+    print_r($element);
+    }
   }
 ?>

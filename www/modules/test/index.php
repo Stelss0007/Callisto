@@ -17,7 +17,7 @@ class Index extends Controller
     $this->debuger->debug("object", $this);
     $obj1 = $this->test->getObjectsList(array('arg1'=>'1'), array('arg2'=>'asc'), $offset);
     
-    $obj2 = $this->test->get_20_ByYearOrderByYear('49, 50, 48');
+    $obj2 = $this->test->get_5_ByYearOrderByYear('49, 50, 48');
     
     print_r($obj2);
     
