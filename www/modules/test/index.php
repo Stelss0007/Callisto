@@ -86,7 +86,7 @@ class Index extends Controller
     $this->test->arg2 = 55;
     $this->test->save(7);
     
-    $this->modelInit('test2');
+    $this->usesModel('test2');
     //echo $this->test2->getName($a);
     }
     

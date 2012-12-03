@@ -76,7 +76,7 @@ abstract class Controller
     //Session init
     $this->sessinInit();
     //?????????????? ?????? ???????? ??????
-    $this->modelInit();
+    $this->usesModel();
 
     //?????? ????????? ????? ?????????????
     $this->smarty = new viewTpl();
@@ -549,7 +549,7 @@ abstract class Controller
   //////////////////////////////////////////////////////////////////////////////
   ////////////////////////////   MODELS     ////////////////////////////////////
   //////////////////////////////////////////////////////////////////////////////
-  final public function modelInit($modulename=null)
+  final public function usesModel($modulename=null)
     {
     //echo $this->modname;exit;
     $modelname = (!empty($modulename)) ? $modulename : $this->modname; 

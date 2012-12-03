@@ -4,7 +4,7 @@ class Index extends Controller
  
   function permissions_list()
     {
-    $this->modelInit('sysGroups');
+    $this->usesModel('sysGroups');
     
     $this->group_permission = $this->sysPermissions->group_permissions_list();
     $this->levels = $this->sysPermissions->permission_level();
@@ -31,7 +31,7 @@ class Index extends Controller
       }
     ////////////////////////////////////////////////////////////////////////////
     
-    $this->modelInit('sysGroups');
+    $this->usesModel('sysGroups');
     $this->groups = $this->sysGroups->group_list();
     
     
