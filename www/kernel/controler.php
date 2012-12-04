@@ -19,6 +19,7 @@ abstract class Controller
   public $URL;
   public $prevURL;
 
+  protected $lib;
 
   protected $page = 'index';
   
@@ -561,6 +562,7 @@ abstract class Controller
     $this->$modelname->type = $modulename;
     //echo $modelname;
     //print_r(get_class_methods($this->$modelname));
+    return $this->$modelname;
     }
   
   final public function arrayToModel(&$model, $array)
@@ -573,6 +575,19 @@ abstract class Controller
       }
     }
 
+  //////////////////////////////////////////////////////////////////////////////
+  ////////////////////////////   LIB        ////////////////////////////////////
+  //////////////////////////////////////////////////////////////////////////////
+  final public function usesLib($libname=null)
+    {
+    require_once 'lib/'.$libname.'/'.$libname.'.class.php';
+    $className = $libname;
+    $obj = & new $className();
+    $this->lib->$libname = $obj;
+    
+    return $obj;
+    }  
+    
   //////////////////////////////////////////////////////////////////////////////
   ////////////////////////////   SESSIONS    ///////////////////////////////////
   //////////////////////////////////////////////////////////////////////////////

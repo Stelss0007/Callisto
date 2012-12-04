@@ -200,6 +200,11 @@ class Index extends Controller
     
     $this->debugGetViewVars();
     }
-      
+  function lib()
+    {
+    $a = $this->usesLib('Image');
+    $this->lib->Image->test1();
+    $a->test();
+    }
   }
 ?>

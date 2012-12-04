@@ -9,7 +9,16 @@ class Image
 
   var $image;
   var $image_type;
+  var $test1 = 1;
 
+  function test1()
+    {
+    $this->test1 = 'hello';
+    }
+  function test()
+    {
+    echo $this->test1;
+    }
   function load($filename)
     {
     $image_info = getimagesize($filename);
