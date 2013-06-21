@@ -5,6 +5,8 @@ class Model extends DBConnector
   var $vars = array();
   var $table = 'object';
   
+  var $session = null;
+  
   //////////////////////////////////////////////////////////////////////////////
   function __construct($guid=0)
     {
@@ -18,7 +20,8 @@ class Model extends DBConnector
     $this->Database = $coreConfig['DB.Name'];
     
     $this->connect();
-          
+      
+    
 //    $this->query('SELECT * FROM test');
 //    print_r($this->fetch_array());exit;
     }
@@ -303,16 +306,49 @@ class Model extends DBConnector
   //////////////////////////////////////////////////////////////////////////////  
   function save($guid=0)
     {
-    if(empty($guid) && empty($this->vars['guid']))
+    if($this->table == 'object')
       {
-      return $this->createObject();
+      if(empty($guid) && empty($this->vars['guid']))
+        {
+        return $this->createObject();
+        }
+      else
+        {
+        $id = (isset($this->vars['guid'])) ? $this->vars['guid'] : 0;
+        if(!empty($guid))
+          $id = $guid;
+
+        return $this->updateObject($id);
+        }
       }
     else
       {
-      $id = (isset($this->vars['guid'])) ? $this->vars['guid'] : 0;
-      if(!empty($guid))
-        $id = $guid;
-      return $this->updateObject($id);
+      if(empty($guid) && empty($this->vars['id']))
+        {
+        return $this->insert($this->table, $this->vars);
+        }
+      else
+        {
+        $id = (isset($this->vars['id'])) ? $this->vars['id'] : 0;
+        if(!empty($guid))
+          $id = $guid;
+        
+        $this->update($this->table, $this->vars, "id = '{$id}'");
+        return $id;
+        }
+     
+      }
+    }
+    
+  function delete($id)
+    {
+    if($this->table == 'object')
+      {
+      $this->deleteObject($id);
+      }
+    else
+      {
+      $this->query("DELETE FROM {$this->table} WHERE id = '%d'", $id);
       }
     }
   
@@ -443,7 +479,7 @@ class Model extends DBConnector
     if(empty($table))
       $table = $this->table;
     //Проверяем если есть в кеше возвращаем из кеша
-    $cached_columns = sysVarGetCached('core', 'columns');
+    $cached_columns = appVarGetCached('core', 'columns');
     if ($cached_columns[$table]) 
       return $cached_columns[$table];
     
@@ -455,22 +491,25 @@ class Model extends DBConnector
       $result[$table][] = $value['Field'];
     
     //Кладем в кеш
-    sysVarSetCached('core', 'columns', $result);
+    appVarSetCached('core', 'columns', $result);
     
     return $result[$table];
     }
     
-  function weightMax()
+  function weightMax($where='')
     {
     if($this->table != 'object')
       {
-      $this->query("SELECT MAX(weight) as max FROM {$this->table}");
+      $where = str_replace('WHERE', '', $where);
+      if(!empty($where))
+        $where = ' WHERE '.$where;
+      $this->query("SELECT MAX(weight) as max FROM {$this->table}".$where);
       $result = $this->fetch_array();
       $maxweight = $result[0]['max'];
       return $maxweight;
       }
     }
-  function weightDelete($weight, $where)
+  function weightDelete($weight, $where='')
     {
     if($this->table != 'object')
       {

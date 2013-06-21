@@ -213,6 +213,14 @@ function coreStripslashes (&$value)
     else
       array_walk($value,'coreStripslashes');
   }
+  
+function core_cp1251_utf8 (&$value)
+  {
+  if(!is_array($value))
+    $value = iconv('cp1251', 'utf-8', $value);
+    else
+      array_walk($value,'core_cp1251_utf8');
+  }
 
 
 
@@ -690,7 +698,7 @@ function weightDelete($table, $weight, $where='')
  * @param cacheKey string Ключь
  * @param value misc Значение
  */
-function sysVarSetCached($component, $cacheKey, $value=null, $ttl=null)
+function appVarSetCached($component, $cacheKey, $value=null, $ttl=null)
   {
   global $coreConfig;
 
@@ -738,7 +746,7 @@ function sysVarSetCached($component, $cacheKey, $value=null, $ttl=null)
  * @param component string Модуль к которому относится переменная
  * @param cacheKey string Ключь
  */
-function sysVarGetCached($component, $cacheKey)
+function appVarGetCached($component, $cacheKey)
   {
   global $coreConfig;
 	//Удлиняем $cacheKey
@@ -780,9 +788,9 @@ function sysVarGetCached($component, $cacheKey)
  * @param component string Модуль к которому относится переменная
  * @param cacheKey string Ключь
  */
-function sysVarIsCached($component, $cacheKey)
+function appVarIsCached($component, $cacheKey)
   {
-  $cache_content = sysVarGetCached($component, $cacheKey);
+  $cache_content = appVarGetCached($component, $cacheKey);
   if (isset($cache_content)) return true;
   return false;
   }
@@ -793,11 +801,11 @@ function sysVarIsCached($component, $cacheKey)
  * @param component string Модуль к которому относится переменная
  * @param cacheKey string Ключь
  */
-function sysVarDelCached($component, $cacheKey)
+function appVarDelCached($component, $cacheKey)
   {
   global $coreConfig;
   
-  if (!sysVarIsCached($component, $cacheKey)) return true;
+  if (!appVarIsCached($component, $cacheKey)) return true;
 
 	//Удлиняем $cacheKey
 	$cacheKey = $component.'_'.$cacheKey;
@@ -824,5 +832,77 @@ function sysVarDelCached($component, $cacheKey)
     }
   return true;
   }
+  
+function appTreeBuild($inArray, $start)
+  {
+  $result = array();
+  $child_menu_list = array();
+  foreach($inArray as $key=>$menu)
+      {
+      $child_menu_list[$menu['id']] = $menu;
+      }
+ 
+  createTree($child_menu_list, $start, 0, -1, &$result); 
+  
+  return $result;
+  //exit;
+  }
 
+function createTree($array, $curParent, $currLevel = 0, $prevLevel = -1, $result) 
+  {
+  foreach ($array as $categoryId => $category) 
+    {
+    if ($curParent == $category['parent_id']) 
+      {
+      $category['level'] = $currLevel;
+      $result[$categoryId] = $category;
+      if ($currLevel > $prevLevel) 
+        { 
+        $prevLevel = $currLevel;
+        }
+
+      $currLevel++;
+
+      createTree ($array, $categoryId, $currLevel, $prevLevel, &$result);
+
+      $currLevel--;
+      }
+
+    }
+
+}
+
+function createTreeHTML($array, $curParent, $currLevel = 0, $prevLevel = -1) 
+  {
+  foreach ($array as $categoryId => $category) 
+    {
+    if ($curParent == $category['parent_id']) 
+      {
+      if($category['parent_id']==0) 
+        $class = "dropdown";
+      else $class = "sub_menu";
+      
+      if ($currLevel > $prevLevel) 
+        echo " <ul class='$class'> ";
+
+      if ($currLevel == $prevLevel) 
+        echo " </li> ";
+  
+      echo '<li id="'.$categoryId.'" >&lt;a href="'.$category['url'].'"&gt;'.$category['title'].'&lt;/a&gt;';
+
+      if ($currLevel > $prevLevel) 
+        { 
+        $prevLevel = $currLevel;
+        }
+
+      $currLevel++;
+
+      createTree ($array, $categoryId, $currLevel, $prevLevel);
+
+      $currLevel--;
+      }
+
+    }
+if ($currLevel == $prevLevel) echo " </li> </ul> ";
+}
 ?>

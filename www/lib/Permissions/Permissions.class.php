@@ -80,7 +80,7 @@
 
     sysDbInsert ($groups_perms_table, $args);
     //Очищаем кеш прав доступа
-    sysVarDelCached('kernel', 'sec_levels');
+    appVarDelCached('kernel', 'sec_levels');
     return (mysql_insert_id());
     }
 
@@ -95,7 +95,7 @@
     unset ($args ['weight']);//Подстраховка
     sysDbUpdate ($groups_perms_table, $args, "WHERE $groups_perms_column[id]='$args[id]'");
     //Очищаем кеш прав доступа группы
-    sysVarDelCached('kernel', 'sec_levels');
+    appVarDelCached('kernel', 'sec_levels');
     return true;
     }
 
@@ -112,7 +112,7 @@
     sysDbDelete ($groups_perms_table, "WHERE $groups_perms_column[id]='$id'");
     sysDbWeightDelete ($groups_perms_table, $dbdata['weight'],'');
     //Очищаем кеш прав доступа группы
-    sysVarDelCached('kernel', 'sec_levels');
+    appVarDelCached('kernel', 'sec_levels');
     return true;
     }
 
@@ -128,7 +128,7 @@
 
     sysDbWeightMoveUp ($groups_perms_table, $dbdata['weight']);
 
-    sysVarDelCached('kernel', 'sec_levels');
+    appVarDelCached('kernel', 'sec_levels');
     return true;
     }
 
@@ -144,7 +144,7 @@
 
     sysDbWeightMoveDown ($groups_perms_table, $dbdata['weight']);
 
-    sysVarDelCached('kernel', 'sec_levels');
+    appVarDelCached('kernel', 'sec_levels');
     return true;
     }
 

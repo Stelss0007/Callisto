@@ -221,14 +221,23 @@ class ErrorHandler
     
   function showWarnings()
     {
+    global $coreConfig;
+  
+    if(empty($coreConfig['debug.enabled']))
+      return true;
+    
     $debug = Debuger::getInstance();
-    ?>
-      <?foreach($this->warning_array as $verror){
-        $debug->debug("PHP WARNING:".$verror['message'].' ('.str_replace('\\',"/", $verror['file']).' in line '.$verror['line'].')', null,WARN);
+    
+    foreach($this->warning_array as $verror)
+      {
+      $debug->warnings[] = "PHP WARNING:".$verror['message'].' ('.str_replace('\\',"/", $verror['file']).' in line '.$verror['line'].')';
+      //$debug->debug("PHP WARNING:".$verror['message'].' ('.str_replace('\\',"/", $verror['file']).' in line '.$verror['line'].')', null,WARN);
       }
         
-      foreach($this->notice_array as $verror){
-        $debug->debug("PHP NOTICE:".$verror['message'].' ('.str_replace('\\',"/", $verror['file']).' in line '.$verror['line'].')', null, INFO);
+    foreach($this->notice_array as $verror)
+      {
+      $debug->notices[] = "PHP NOTICE:".$verror['message'].' ('.str_replace('\\',"/", $verror['file']).' in line '.$verror['line'].')';
+      //$debug->debug("PHP NOTICE:".$verror['message'].' ('.str_replace('\\',"/", $verror['file']).' in line '.$verror['line'].')', null, INFO);
       }
     }
 

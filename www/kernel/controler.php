@@ -2,6 +2,8 @@
 
 abstract class Controller
   {
+  private   $start_debug_time = 0;
+  public    $defaultAction = '';
   protected $errors;
   protected $registry;
   protected $smarty;
@@ -30,6 +32,9 @@ abstract class Controller
                           'right' =>array(),
                           'bottom'=>array()
                           );
+  protected $models= array();
+  protected $libs = array();
+  protected $tpls = array();
   
   // FILES 
   public $input_files; 
@@ -44,8 +49,15 @@ abstract class Controller
   
   function __construct($mod)
     {
-    global $coreConfig;
+    //$this->start_debug_time = time();
+    $current_time = microtime();
+    // Отделяем секунды от миллисекунд
+    $current_time = explode(" ",$current_time);
+    // Складываем секунды и миллисекунды
+    $this->start_debug_time =$current_time[1] + $current_time[0];
     
+    global $coreConfig;
+    //$coreConfig['debug.enabled']-Статус дебагера;  
     //Init Errors
     $this->errors =& ErrorHandler::getInstance();
     
@@ -63,6 +75,7 @@ abstract class Controller
     require_once(SESSION_DIR.'UserSession.class.php');
     
     define('KERNEL_DIR',$_SERVER['DOCUMENT_ROOT'].'/kernel/');
+    require_once(KERNEL_DIR.'block.php');
     require_once(KERNEL_DIR.'view.php');
 
     $this->type = 'user';
@@ -71,8 +84,12 @@ abstract class Controller
 
     $this->module_dir = 'modules/'.$this->modname.'/';
     
-    require_once(KERNEL_DIR.'debuger.php');
-    $this->debuger = & Debuger::getInstance();
+    if($coreConfig['debug.enabled'])
+      {
+      require_once(KERNEL_DIR.'debuger.php');
+      $this->debuger = & Debuger::getInstance();
+      $this->debuger->startRenderPage();
+      }
     
     //Session init
     $this->sessinInit();
@@ -83,6 +100,8 @@ abstract class Controller
     $this->smarty = new viewTpl();
     //??????? ???? ???????????
     $this->theme = 'green';
+    
+    //$this->object_name = $this->getObjectName();
 
     //??????? ??? ????????? ? ??????? ?????????? ? ???????? input_vars
     $this->input_vars = $_REQUEST;
@@ -98,16 +117,97 @@ abstract class Controller
     }
   function __destruct()
     {
-    $debuger = Debuger::getInstance();
-    //$mysql = DBConnector::getInstance();
-//print_r($debuger->mysql);exit;
-    $mysql_querys = array();
-    foreach($debuger->mysql as $key=>$value)
+    global $coreConfig;
+    
+    if($coreConfig['debug.enabled'])
       {
-      $mysql_querys['query_'.$key] = $value;
+        
+      $current_time = microtime();
+      $current_time = explode(" ",$current_time);
+      $end_debug_time = $current_time[1] + $current_time[0];
+      
+      $debug_time = $end_debug_time - $this->start_debug_time;
+      
+      $debuger = Debuger::getInstance();
+      
+      $debuger->endRenderPage();
+      
+      $mysql_querys = array();
+      $mysql_query_count = 0;
+      $mysql_query_time = 0;
+      foreach($debuger->mysql as $key=>$value)
+        {
+        $key_sufix = $key +1;
+        $mysql_querys['query_'.$key_sufix] = $value;
+        $mysql_query_count++;
+        $mysql_query_time += $value['exec_time'];
+        }
+        
+      $debuger->debugAdd("PHP Execute Time (".$debug_time." sec)", '');
+      
+      $debuger->debugAddCreateGroup("Callisto Debug Detail");
+        $debuger->debugAdd('Controler: '.$this->modname, null, INFO);
+        $debuger->debugAdd('Action: '.$this->action, null, INFO);
+        $debuger->debugAdd('Object Name: '.$this->object_name, null, INFO);
+        $debuger->debugAdd('Theme: '.$this->theme, null, INFO);
+        //
+        $debuger->debugAddCreateGroup("Uses Tpls (".sizeof($this->tpls).")");
+        if($this->tpls)
+          foreach($this->tpls as $value)
+            $debuger->debugAdd($value, null, INFO);
+        $debuger->debugAddEndGroup();
+        //
+        $debuger->debugAddCreateGroup("Uses Models (".sizeof($this->models).")");
+        if($this->models)
+          foreach($this->models as $value)
+            $debuger->debugAdd($value, null, INFO);
+        $debuger->debugAddEndGroup();
+        //
+        $debuger->debugAddCreateGroup("Uses Libs (".sizeof($this->libs).")");
+        if($this->libs)
+          foreach($this->libs as $value)
+            $debuger->debugAdd($value, null, WARN);
+        else
+           $debuger->debugAdd('Libraries Are Not Used', null, INFO);
+        $debuger->debugAddEndGroup();
+       // 
+      $debuger->debugAddEndGroup();
+      
+      $debuger->debugAddCreateGroup("MySQL ($mysql_query_count) $mysql_query_time sec");
+        $debuger->debugAddDir($mysql_querys);
+      $debuger->debugAddEndGroup();
+      
+      $debuger->debugAddCreateGroup("Input Vars (".sizeof($this->input_vars).")");
+        $debuger->debugAddDir($this->input_vars);
+      $debuger->debugAddEndGroup();
+      
+      $debuger->debugAddCreateGroup("Template Vars (".sizeof($this->vars).")");
+        $debuger->debugAddDir($this->vars);
+      $debuger->debugAddEndGroup();
+     
+      $debuger->debugAddCreateGroup("Session (".sizeof($_SESSION).")");
+        $debuger->debugAddDir($_SESSION);
+      $debuger->debugAddEndGroup();
+      
+      //
+      $debuger->debugAddCreateGroup("PHP WARNINGS (".sizeof($debuger->warnings).")");
+      foreach($debuger->warnings as $key=>$value)
+        {
+        $debuger->debugAdd($value, null,WARN);;
+        }
+      $debuger->debugAddEndGroup();
+      
+      $debuger->debugAddCreateGroup("PHP NOTICES (".sizeof($debuger->notices).")");
+      foreach($debuger->notices as $key=>$value)
+        {
+        $debuger->debugAdd($value, null, INFO);        
+        }
+      $debuger->debugAddEndGroup();
+      
+      $debuger->render();  
       }
-    $debuger->debug("MySQL", $mysql_querys);
     }
+    
   function __set($name, $value)
     {
     if(property_exists($this, $name))
@@ -121,10 +221,18 @@ abstract class Controller
     
   final public function action($action_name)
     {
+    if(empty($action_name) || $action_name == 'default')
+      {
+      if(!empty($this->defaultAction))
+        {
+        $action_name = $this->defaultAction;
+        }
+      }
     if(!method_exists($this, $action_name))
       $this->errors->setError('Action is not exist in this module');
     
     $this->action = $action_name;
+    $this->object_name = $this->getObjectName();
     call_user_method_array($action_name, $this, $this->input_vars);
     }
   
@@ -138,6 +246,13 @@ abstract class Controller
     $ObjectName = $this->getTplObjectName();
     echo $this->smarty->fetch($tpl_dir, $ObjectName);
     }
+    
+  final public function viewJSON()
+    {
+    $obj =  $this->vars;
+    core_cp1251_utf8($obj);
+    echo json_encode($obj);
+    }
 
   final public function viewPage()
     {
@@ -148,6 +263,7 @@ abstract class Controller
     $modresult['content'] = $this->smarty->fetch($tpl_dir, $ObjectName);
     
     $pageTplFile = $this->root_dir."themes/".$this->theme.'/pages/'.$this->page.'.tpl';
+    $this->tpls[] = '(Main Template)'."themes/".$this->theme.'/pages/'.$this->page.'.tpl';
     $this->smarty->assign('module_content', $modresult['content']);
     echo $this->smarty->fetch($pageTplFile);
     }
@@ -156,15 +272,23 @@ abstract class Controller
     {
     $view_file_name = $this->action;
     if(file_exists($this->root_dir.'themes/'.$this->theme.'/'.$this->module_dir.$view_file_name.'.tpl'))
+      {
+      $this->tpls[] = '(Overridden by Theme) '.'themes/'.$this->theme.'/'.$this->module_dir.$view_file_name.'.tpl';
       return $this->root_dir.'themes/'.$this->theme.'/'.$this->module_dir.$view_file_name.'.tpl';
+      }
     elseif(file_exists($this->root_dir.$this->module_dir.'themes/default/'.$view_file_name.'.tpl'))
+      {
+      $this->tpls[] = '(Original Module TPL) '.$this->module_dir.'themes/default/'.$view_file_name.'.tpl';
       return $this->root_dir.$this->module_dir.'themes/default/'.$view_file_name.'.tpl';
+      }
     elseif(!empty($debug))
       {
+      $this->tpls[] = '(TPL file is not exist!) '.$this->module_dir.'themes/default/'.$view_file_name.'.tpl';
       return 'TPL file is not exist! '.$this->root_dir.$this->module_dir.'themes/default/'.$view_file_name.'.tpl <br> You most created tpl file <b>"'.$view_file_name.'.tpl"</b> for module <b>'.$this->modname.'</b><br>';
       }
     else
       {
+      $this->tpls[] = '(TPL file is not exist!) '.$this->module_dir.'themes/default/'.$view_file_name.'.tpl';
       echo 'TPL file is not exist! '.$this->root_dir.$this->module_dir.'themes/default/'.$view_file_name.'.tpl <br> You most created tpl file <b>"'.$view_file_name.'.tpl"</b> for module <b>'.$this->modname.'</b><br>';
       echo "Values for TPL:<br>";
       echo "<pre>";
@@ -184,10 +308,10 @@ abstract class Controller
 
   final public function getObjectName()
     {
-    $url_result = $this->GetCallingMethodName(3, true);
-    $action = $url_result['function'];
+    //$url_result = $this->GetCallingMethodName(3, true);
+    $action = $this->action;//$url_result['function'];
     $args = '';
-    foreach($url_result['args'] as $value)
+    foreach($this->input_vars as $value)
       {
       $args .= '::'.$value;
       }
@@ -204,7 +328,6 @@ abstract class Controller
       {
       $args .= '|'.$value;
       }
-      
     return $this->modname.'|'.$this->type.'|'.$action.$args;
     }
 
@@ -214,6 +337,7 @@ abstract class Controller
   final public function getAccess($access_type=ACCESS_READ)
     {
     $object = $this->getObjectName();
+    
     if(getAccess($object, $access_type)==true)
       return true;
     
@@ -223,6 +347,12 @@ abstract class Controller
     
   final public function notAccess($access_type=ACCESS_READ)
     {
+    $logedin = $this->session->isLogin();
+    if(empty($logedin))
+      {
+      $this->showMessage("Access to the page is forbidden. You are not allowed!", '/sysUsers/login');
+      }
+      
     $this->errors->setError("Access to the page is forbidden. You are not allowed!");
     }
 
@@ -241,6 +371,7 @@ abstract class Controller
     {
     $e = new Exception();
     $trace = $e->getTrace();
+    
     $position = ($position) ? $position : (sizeof($trace)-1);
     if(empty($with_args))
       return $trace[$position]['function'];
@@ -560,8 +691,12 @@ abstract class Controller
     //$this->$modelname = & new $className($className);
     $this->$modelname = & new $className($className);
     $this->$modelname->type = $modulename;
+    
+    $this->$modelname->session = & $this->session;
+    
     //echo $modelname;
     //print_r(get_class_methods($this->$modelname));
+    $this->models[] = $modulename.' (modules/'.$modulename.'/class.php)';
     return $this->$modelname;
     }
   
@@ -584,7 +719,7 @@ abstract class Controller
     $className = $libname;
     $obj = & new $className();
     $this->lib->$libname = $obj;
-    
+    $this->libs[] = $className.' (lib/'.$libname.'/'.$libname.'.class.php)';
     return $obj;
     }  
     
@@ -610,7 +745,8 @@ abstract class Controller
   //Add all blocks to tpl
   final public function blockToTpl()
     {
-    $this->smarty->assign('blocks', $this->block, false);
+    Block::blockShowAll($this->smarty, $this->object_name, $this->theme);
+    //$this->smarty->assign('blocks', $this->block, false);
     }
   
     

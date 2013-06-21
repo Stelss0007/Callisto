@@ -1,7 +1,8 @@
 <?php
 class Index extends Controller
   {
- 
+  var $defaultAction = 'permissions_list';
+  
   function permissions_list()
     {
     $this->usesModel('sysGroups');

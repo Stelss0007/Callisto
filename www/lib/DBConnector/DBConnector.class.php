@@ -88,7 +88,7 @@ class DBConnector
      
       $debug = Debuger::getInstance();
       
-      $debug->mysql[] = array('query'=>  trim(preg_replace('!\s+!', ' ', $valid_sql)), 'exec_time'=>$result_time);
+      $debug->mysql[] = array('query'=>  trim(preg_replace('!\s+!', ' ', $valid_sql)), 'exec_time'=>$result_time, 'result_count'=>mysql_num_rows($result));
       //print_r($debug->mysql);
       }
     
@@ -222,7 +222,7 @@ class DBConnector
 
     foreach($array as $key=>$value)
       {
-      if (!$value)
+      if ($value==='')
         continue;
       if(!in_array($key, $columns, true))
         continue;

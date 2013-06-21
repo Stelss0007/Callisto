@@ -1,4 +1,3 @@
-{debug}
 {strip}
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -13,7 +12,6 @@
     <link rel="stylesheet" href="/scripts/js/jsValidate/jsValidate.css" type="text/css" />
     <script type="text/javascript" src="/scripts/js/jQuery/jQuery.js"></script>
     <script type="text/javascript" src="/scripts/js/jsValidate/jsValidate.js"></script>
-    <script type="text/javascript" src="/scripts/js/jQuery/testTask.js"></script>
   </head>
   <body>
     <div id="main">
@@ -98,29 +96,6 @@
                 <a class='usermnuline' href="index.php?module=groups&type=admin">Группы пользователей</a>
                 <a class='usermnuline' href="index.php?module=user&type=admin&func=user_list">Пользователи</a>
                 <a class='usermnuline-act' href="index.php?module=blocks&type=admin">Блоки</a>
-                <span class='usermnudelim'></span>
-              </div>
-
-              
-
-              <span id='mnu_title3' class='usermnutitle-b'>Личный кабинет</span>
-              <div id='mnu_tblock3' class='usermnublock'>
-                <span class='usermnudelim'></span>
-                <a class='usermnuline' href='/advmanager.php'>Управление рекламой
-                  <span class='usermnuline-none'></span></a>
-                <a class='usermnuline' href='/mails.php'>
-                  Моя почта<span class='usermnuline-mail'>0</span>
-                </a>
-                <a class='usermnuline' href='/refs.php'>Мои рефералы
-                  <span class='usermnuline-ref'>0</span>
-                </a>
-                <a class='usermnuline' href='/promo.php'>Пригласить рефералов</a>
-                <a class='usermnuline' href='/refwelcome.php'>Приветствие и авторефбек</a>
-                <a class='usermnuline' href='/stat.php'>Моя статистика</a>
-                <a class='usermnuline' href='/history.php'>История операций</a>
-                <a class='usermnuline' href='/profile.php'>Мои личные данные</a>
-                <a class='usermnuline' href='/withdraw.php'>
-                  <b>Получить деньги</b></a>
                 <span class='usermnudelim'></span>
               </div>
 

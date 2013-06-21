@@ -7,7 +7,7 @@ class Router
   private $routes;
   private $fileExt = '';
   
-  function __construct($routesPath)
+  function __construct($routesPath = 'config-router.php')
     {
     // Получаем конфигурацию из файла.
     $this->routes = include($routesPath);

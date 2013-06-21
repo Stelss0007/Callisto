@@ -1,7 +1,8 @@
 <?php
 class Index extends Controller
   {
- 
+  public $defaultAction = 'groups_list';
+  
   function groups_list()
     {
     $this->groups = $this->sysGroups->group_list(true);

@@ -521,7 +521,7 @@ input.button-green, input.button-blue{
 .soc-twitter { background: url(../images/twitter0.png) no-repeat; }
 .soc-fbook { background: url(../images/facebook.png) no-repeat; }
 .soc-vk { background: url(../images/vkontakt.png) no-repeat; }
-.soc-tube { background: url(../images/youtube0.png) no-repeat; }
+.soc-tube {  }
 
 .mainmenu li a.active,
 .mainmenu li a.active:hover,
