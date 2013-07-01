@@ -30,7 +30,7 @@
       <tr>
         <td class="head">Находиться в</td>
         <td class="even">
-          {* Формируем плоский масив для вункции html_options *}
+          {* Формируем плоский масив для функции html_options *}
           {array name='flat_itemslist'}
           {array_append name='flat_itemslist' key='0' value='Корень'}
 

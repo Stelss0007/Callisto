@@ -30,7 +30,8 @@ class Index extends Controller
     ////////////////////////////////////////////////////////////////////////////
  
     $menu = $this->menu->menu_info($id);
-    $this->items_list = $this->menu->tree_items(33);
+    $this->items_list = $this->menu->tree_items(0);
+
     if($menu)
       {
       $this->id = $menu['id'];
@@ -52,6 +53,12 @@ class Index extends Controller
   function test()
     {
     $element = $this->menu->getByIdOrderByGroup_Displayname("'1', '3'");
+    print_r($element);
+    }
+    
+  function tree()
+    {
+    $element = $this->menu->tree_items();
     print_r($element);
     }
   }
