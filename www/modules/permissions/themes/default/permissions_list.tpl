@@ -36,17 +36,17 @@
         {$levels[$permission.level]}
       </td>
       <td>
-        <a href='/sysPermissions/permission_weight_up/{$permission.weight}'>UP</a>
+        <a href='/permissions/permission_weight_up/{$permission.weight}'>UP</a>
         &nbsp;
-        <a href='/sysPermissions/permission_weight_down/{$permission.weight}'>DOWN</a>
+        <a href='/permissions/permission_weight_down/{$permission.weight}'>DOWN</a>
       </td>
       <td>
-        <a href='/sysPermissions/manage/{$permission.id}'>Edit</a>
-        <a href='/sysPermissions/delete/{$permission.id}' onclick="return confirm('Удалить элемент?')">Delete</a>
+        <a href='/permissions/manage/{$permission.id}'>Edit</a>
+        <a href='/permissions/delete/{$permission.id}' onclick="return confirm('Удалить элемент?')">Delete</a>
       </td>
     </tr>
    {/foreach}
 </table>
 <div style="text-align: center;">
-  [ <a href='/sysPermissions/manage'>Добавить</a> ]
+  [ <a href='/permissions/manage'>Добавить</a> ]
 </div>

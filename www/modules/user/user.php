@@ -11,7 +11,7 @@ function user_user_main()
   $smarty = new coreTpl();
   $smarty->caching = false;
 
-  coreModClassLoad('user');
+  appModClassLoad('user');
   $user = new user();
 
   $prof_list = $user->professionList();
@@ -49,7 +49,7 @@ function user_user_login()
   $smarty->caching = false;
 
   //Построили дерево разделов
-  coreModClassLoad ('user');
+  appModClassLoad ('user');
   $user = new user;
  
   if($ses_info->isLogin())
@@ -74,7 +74,7 @@ function user_user_create_user()
   $tpl = tplInfo(__FUNCTION__, __FILE__);
   //Проверка на доступ
   //if (!getAccess($tpl['object'], ACCESS_READ)) return;
-  $input_data = cCleanInputArray($_POST);
+  $input_data = appCleanInputArray($_POST);
   //print_r($input_data);exit;
 
   /*****************************************************************************
@@ -84,41 +84,41 @@ function user_user_create_user()
   if ($input_data['login'] == '')
     {
     // Поле логин должно быть заполнено
-    showMessage($_SERVER['HTTP_REFERER'], 'Поле \'Логин\' не заполнено');
+    appShowMessage($_SERVER['HTTP_REFERER'], 'Поле \'Логин\' не заполнено');
     }
   elseif (!preg_match("/^\w{3,}$/", $input_data['login']))
     {
     // Логин может состоять из букв, цифр и подчеркивания
-    showMessage($_SERVER['HTTP_REFERER'], 'В поле \'Логин\' введены недопустимые символы');
+    appShowMessage($_SERVER['HTTP_REFERER'], 'В поле \'Логин\' введены недопустимые символы');
     }
 
   //Проверим поле почты
   if ($input_data['mail'] == '')
     {
     // Проверяем e-mail на заполнение
-    showMessage($_SERVER['HTTP_REFERER'], 'Поле \'E-mail\' не заполнено');
+    appShowMessage($_SERVER['HTTP_REFERER'], 'Поле \'E-mail\' не заполнено');
     }
   elseif (!preg_match("/^[a-zA-Z0-9_\.\-]+@([a-zA-Z0-9\-]+\.)+[a-zA-Z]{2,6}$/", $input_data['mail']))
     {
     // Проверяем e-mail на корректность
-    showMessage($_SERVER['HTTP_REFERER'], 'Указанный \'E-mail\' имеет недопустимый формат');
+    appShowMessage($_SERVER['HTTP_REFERER'], 'Указанный \'E-mail\' имеет недопустимый формат');
     }
 
   //Проверим поле пароль
   if ($input_data['pass'] == '' || $input_data['pass2'] == '')
     {
     // Поле пароль и повтор пароля должны быть заполнеными
-    showMessage($_SERVER['HTTP_REFERER'], 'Поле \'Пароль\' не заполнено');
+    appShowMessage($_SERVER['HTTP_REFERER'], 'Поле \'Пароль\' не заполнено');
     }
   elseif ($input_data['pass'] !== $input_data['pass2'])
     {
     // Поле пароль и повтор пароля должны быть одинаковыми
-    showMessage($_SERVER['HTTP_REFERER'], 'Поля \'Пароль\' и \'Повтор пароля\' не совпадают');
+    appShowMessage($_SERVER['HTTP_REFERER'], 'Поля \'Пароль\' и \'Повтор пароля\' не совпадают');
     }
   elseif (!preg_match("/^\w{3,}$/", $input_data['pass']))
     {
     // Пароль может состоять из букв, цифр и подчеркивания
-    showMessage($_SERVER['HTTP_REFERER'], 'В поле \'Пароль\' введены недопустимые символы');
+    appShowMessage($_SERVER['HTTP_REFERER'], 'В поле \'Пароль\' введены недопустимые символы');
     }
 /***********************  КОНЕЦ ВАЛИДАЦИИ  *************************************/
 
@@ -137,7 +137,7 @@ function user_user_create_user()
 
   if($_FILES['file'])
     {
-    coreModClassLoad('user');
+    appModClassLoad('user');
     $user = new user();
     $img_info = $user->createImage($_FILES['file'], $insert_id);
     if($img_info)
@@ -151,7 +151,7 @@ function user_user_create_user()
   $user_info['id'] = $insert_id;
   $ses_info->userLogin($user_info);
 
-  showMessage('index.php?module=user&type=user&func=user_view&id='.$insert_id, 'Регистрация успешно завершина');
+  appShowMessage('index.php?module=user&type=user&func=user_view&id='.$insert_id, 'Регистрация успешно завершина');
   //showMessage($_SERVER['HTTP_REFERER'], 'Регистрация успешно завершина');
   }
 
@@ -167,24 +167,24 @@ function user_user_user_login()
   $db=DBConnector::getInstance();
   $ses_info=UserSession::getInstance();
   
-  list($login, $pass) = coreCleanFromInput('login', 'pass');
+  list($login, $pass) = appCleanFromInput('login', 'pass');
 
   if ($login == '')
     {
-    showMessage($_SERVER['HTTP_REFERER'], 'Поле \'Логин\' не заполнено');
+    appShowMessage($_SERVER['HTTP_REFERER'], 'Поле \'Логин\' не заполнено');
     //die("Поле 'Логин' не заполнено<br />\n");
     // Логин может состоять из букв, цифр и подчеркивания
     }
   elseif (!preg_match("/^\w{3,}$/", $login))
     {
-    showMessage($_SERVER['HTTP_REFERER'], 'В поле \'Логин\' введены недопустимые символы');
+    appShowMessage($_SERVER['HTTP_REFERER'], 'В поле \'Логин\' введены недопустимые символы');
     //die("В поле 'Логин' введены недопустимые символы<br />\n");
     }
 
   if (!preg_match("/^\w{3,}$/", $pass))
     {
     //die("В поле 'Пароль' введены недопустимые символы<br />\n");
-    showMessage($_SERVER['HTTP_REFERER'], 'В поле \'Пароль\' введены недопустимые символы');
+    appShowMessage($_SERVER['HTTP_REFERER'], 'В поле \'Пароль\' введены недопустимые символы');
     }
 
   $pass = md5($pass);
@@ -199,12 +199,12 @@ function user_user_user_login()
     }
   else
     {
-    showMessage($_SERVER['HTTP_REFERER'], 'Не правильный логин или пароль');
+    appShowMessage($_SERVER['HTTP_REFERER'], 'Не правильный логин или пароль');
     }
 
-  coreModClassLoad('user');
+  appModClassLoad('user');
   $user = new user;
-  showMessage('index.php?module=user&type=user&func=user_view&id='.$ses_info->userId(), 'Вход выполнен');
+  appShowMessage('index.php?module=user&type=user&func=user_view&id='.$ses_info->userId(), 'Вход выполнен');
   //showMessage($_SERVER['HTTP_REFERER'], 'Вход выполнен');
   }
 
@@ -219,17 +219,17 @@ function user_user_user_logout()
   $ses_info=UserSession::getInstance();
   
   $ses_info->userLogOut();
-  showMessage($_SERVER['HTTP_REFERER'], 'Выход из системы');
+  appShowMessage($_SERVER['HTTP_REFERER'], 'Выход из системы');
   }
 
 function user_user_user_view()
   {
   $tpl = tplInfo(__FUNCTION__, __FILE__);
 
-  $id = coreCleanFromInput('id');
+  $id = appCleanFromInput('id');
 
   if(!is_numeric($id))
-    showMessage($_SERVER['HTTP_REFERER'], 'Не верно указан ид пользователя!');
+    appShowMessage($_SERVER['HTTP_REFERER'], 'Не верно указан ид пользователя!');
   //Проверка на доступ
   //if (!getAccess($tpl['object'], ACCESS_READ)) return;
 
@@ -240,12 +240,12 @@ function user_user_user_view()
   $user_info = $db->fetch_array();
 
   if(!$user_info[0])
-    showMessage($_SERVER['HTTP_REFERER'], 'Страница пользователя не создана или не активна');
+    appShowMessage($_SERVER['HTTP_REFERER'], 'Страница пользователя не создана или не активна');
 
   $smarty = new coreTpl();
   $smarty->caching = false;
 
-  coreModClassLoad('user');
+  appModClassLoad('user');
   $user = new user();
 
   $prof_list = $user->professionList();

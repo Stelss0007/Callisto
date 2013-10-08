@@ -2,7 +2,7 @@
 {if $isLogin}
   <h1>Добро пожаловать на наш сайт! </h1>
   Сейчас Вы находитесь на странице выхода из системы. Для того чтобы выйти нажмите кнопку выйти
-   <form method="post" action="/sysUsers/logout" class="login" name="loginform">
+   <form method="post" action="/users/logout" class="login" name="loginform">
     <center>
       <b>Выход из системы</b>
       <br><br><br>
@@ -31,7 +31,7 @@
       <br>
       <font size="1">
         Если Вы еще не зарегистрированы, &nbsp;
-        <a href='/sysUsers/register'>зарегистрируйтесь в системе</a>.
+        <a href='/users/register'>зарегистрируйтесь в системе</a>.
       </font>
     </center>
   </form>

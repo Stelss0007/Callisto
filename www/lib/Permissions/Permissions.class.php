@@ -31,7 +31,7 @@
   function groupPermsGetList($gid=null)
     {
     $db=DBConnector::getInstance();
-    $db->query("SELECT * FROM sys_user_group_permission WHERE gid='%d' ORDER BY weight", $gid);
+    $db->query("SELECT * FROM user_group_permission WHERE gid='%d' ORDER BY weight", $gid);
     $perms_list = $db->fetch_array();
 
     return $perms_list;

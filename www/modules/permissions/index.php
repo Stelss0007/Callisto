@@ -5,12 +5,12 @@ class Index extends Controller
   
   function permissions_list()
     {
-    $this->usesModel('sysGroups');
+    $this->usesModel('groups');
     
-    $this->group_permission = $this->sysPermissions->group_permissions_list();
-    $this->levels = $this->sysPermissions->permission_level();
+    $this->group_permission = $this->permissions->group_permissions_list();
+    $this->levels = $this->permissions->permission_level();
     
-    $this->group = $this->sysGroups->group_list();
+    $this->group = $this->groups->group_list();
     $this->viewPage();
     }
     
@@ -22,23 +22,23 @@ class Index extends Controller
       {
       if($id)
         {
-        $this->sysPermissions->group_permissions_update($data, $id);
+        $this->permissions->group_permissions_update($data, $id);
         }
       else
         {
-        $this->sysPermissions->group_permissions_create($data);
+        $this->permissions->group_permissions_create($data);
         }
-      $this->redirect('/sysPermissions/permissions_list');
+      $this->redirect('/permissions/permissions_list');
       }
     ////////////////////////////////////////////////////////////////////////////
     
-    $this->usesModel('sysGroups');
-    $this->groups = $this->sysGroups->group_list();
+    $this->usesModel('groups');
+    $this->groups = $this->groups->group_list();
     
     
   
-    $this->levels = $this->sysPermissions->permission_level();
-    $permission = $this->sysPermissions->group_permission($id);
+    $this->levels = $this->permissions->permission_level();
+    $permission = $this->permissions->group_permission($id);
     if($permission)
       {
       $this->id = $permission['id'];
@@ -56,19 +56,19 @@ class Index extends Controller
     if(empty($id))
       $this->errors->setError("ID of Permission is missing!");
     
-    $this->sysPermissions->group_permission_delete($id);
+    $this->permissions->group_permission_delete($id);
     $this->redirect();
     }
     
   function permission_weight_up($weight)
     {  
-    $this->sysPermissions->weightUp($weight);
+    $this->permissions->weightUp($weight);
     $this->redirect();
     }
     
   function permission_weight_down($weight)
     {  
-    $this->sysPermissions->weightDown($weight);
+    $this->permissions->weightDown($weight);
     $this->redirect();
     }
   }

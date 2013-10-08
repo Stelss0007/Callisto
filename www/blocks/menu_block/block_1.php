@@ -21,7 +21,7 @@ function menu_block_display($info)
   $menu_type=1;
   if (!$items_list)
 		{
-		coreModClassLoad ('menu');
+		appModClassLoad ('menu');
 		$menu = new menu;
 		$items_list = $menu->menuTree($parent_id, -1, true);
 		//sysVarSetCached('menu', 'menu_tree_'.$parent.'_id_-1_'.true, $items_list);
@@ -90,7 +90,7 @@ function menu_block_modify($info)
   $smarty = new coreTpl();
   $smarty->caching = false;
 
-  coreModClassLoad ('menu');
+  appModClassLoad ('menu');
   $menu = new menu;
 
   $menu_config = unserialize($info['block_content']);
@@ -107,7 +107,7 @@ function menu_block_modify($info)
 
 function menu_block_update($info)
   {
-  $menu_config['parent_id'] = coreCleanFromInput('parent_id');
+  $menu_config['parent_id'] = appCleanFromInput('parent_id');
   $menu_config = serialize($menu_config);
 
   $db=DBConnector::getInstance();

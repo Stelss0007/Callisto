@@ -250,7 +250,7 @@ abstract class Controller
   final public function viewJSON()
     {
     $obj =  $this->vars;
-    core_cp1251_utf8($obj);
+    app_cp1251_utf8($obj);
     echo json_encode($obj);
     }
 

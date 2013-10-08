@@ -3,9 +3,9 @@ define('DS', DIRECTORY_SEPARATOR );
 /**
  * ?????? ??????
  */
-define('SYSTEM_VERSION_NUM',       '0.0.1');
-define('SYSTEM_VERSION_ID',        'Callisto');
-define('SYSTEM_VERSION_SUB',       'Paradise');
+define('APPLICATION_VERSION_NUM',       '0.0.1');
+define('APPLICATION_VERSION_ID',        'Callisto');
+define('APPLICATION_VERSION_SUB',       'Paradise');
 
 /**
  * ????????? ???????
@@ -67,8 +67,8 @@ if (ini_get('register_globals') != 1)
     extract($_GLOBALS, EXTR_OVERWRITE);
   }
 
-coreLibLoad('Permissions');
-coreLibLoad('DBConnector');
+appLibLoad('Permissions');
+appLibLoad('DBConnector');
 
 
 $db = new DBConnector();
@@ -79,13 +79,13 @@ $db = new DBConnector();
 //$db->query('SELECT * FROM user where id=%s',2);
 //print_r($db->fetch_array());
 //exit;
-coreLibLoad('UserSession');
+appLibLoad('UserSession');
 $ses_info = new UserSession();
 /**
  * @desc ?????????????? ???????
  * @return bool
  */
-function coreInit()
+function appInit()
   {
   //?????? ???????? ????????? ????
   //include_once 'lang/rus/kernel.php';
@@ -124,7 +124,7 @@ function coreInit()
  * @desc ??????? ?????????? ?? ???????? ?????
  * @return misc
  */
-function coreCleanFromInput()
+function appCleanFromInput()
   {
   $search = array('|</?\s*SCRIPT.*?>|si',
                   '|</?\s*FRAME.*?>|si',
@@ -156,7 +156,7 @@ function coreCleanFromInput()
       }
 
 		// ??????? ??????????
-		if (get_magic_quotes_gpc()) coreStripslashes($vars);
+		if (get_magic_quotes_gpc()) appStripslashes($vars);
 		$vars = preg_replace($search, $replace, $vars);
 
 		array_push($resarray, $vars);
@@ -173,7 +173,7 @@ function coreCleanFromInput()
  * @desc ??????? ?????????? ?? ???????? ?????
  * @return misc
  */
-function cCleanInputArray()
+function appCleanInputArray()
   {
   $search = array('|</?\s*SCRIPT.*?>|si',
                   '|</?\s*FRAME.*?>|si',
@@ -195,7 +195,7 @@ function cCleanInputArray()
   foreach ($input_array as $key=>$value)
     {
 		// ??????? ??????????
-		if (get_magic_quotes_gpc()) coreStripslashes($value);
+		if (get_magic_quotes_gpc()) appStripslashes($value);
 		$value = preg_replace($search, $replace, $value);
 		$input_array[$key] = $value;
 		}
@@ -206,7 +206,7 @@ function cCleanInputArray()
  * @desc Strip slashes ????????????? ? coreVarCleanFromInput
  * @return misc
  */
-function coreStripslashes (&$value)
+function appStripslashes (&$value)
   {
   if(!is_array($value))
     $value = stripslashes($value);
@@ -214,7 +214,7 @@ function coreStripslashes (&$value)
       array_walk($value,'coreStripslashes');
   }
   
-function core_cp1251_utf8 (&$value)
+function app_cp1251_utf8 (&$value)
   {
   if(!is_array($value))
     $value = iconv('cp1251', 'utf-8', $value);
@@ -225,19 +225,19 @@ function core_cp1251_utf8 (&$value)
 
 
 /********************?????????, ?????????, ?????? *******************/
-function showMessage($url, $message='', $time=1)
+function appShowMessage($url, $message='', $time=1)
   {
   global $ses_info;
-  $ses_info->setVar('sysMsgUrl', $url);
-  $ses_info->setVar('sysMsgMessage', $message);
-  $ses_info->setVar('sysMsgTime', $time);
-  coreRedirect ($url);
+  $ses_info->setVar('appMsgUrl', $url);
+  $ses_info->setVar('appMsgMessage', $message);
+  $ses_info->setVar('appMsgTime', $time);
+  appRedirect ($url);
 
   exit;
   };
 
 
-function coreRedirect($redirecturl)
+function appRedirect($redirecturl)
   {
   $redirecturl = str_replace('&amp;', '&', $redirecturl);
   if (preg_match('!^http!', $redirecturl))
@@ -248,14 +248,14 @@ function coreRedirect($redirecturl)
     else
       {
       $redirecturl = preg_replace('!^/*!', '', $redirecturl);
-      $baseurl = "http://".coreGetBaseURI();
+      $baseurl = "http://".appGetBaseURI();
       Header("Location: $baseurl$redirecturl");
       }
   exit;
   }
 
 
-function coreGetBaseURI()
+function appGetBaseURI()
   {
   global $_SERVER;
 
@@ -301,11 +301,11 @@ function coreGetBaseURI()
 
 
 
-function sysCaptureMessage()
+function appCaptureMessage()
   {
   global $ses_info;
 
-  $url = $ses_info->getVar('sysMsgUrl');
+  $url = $ses_info->getVar('appMsgUrl');
   if (!isset ($url))
     {
     return false;//??????? ???? ??? ???????
@@ -314,31 +314,31 @@ function sysCaptureMessage()
   $url = str_replace('&amp;', '&', $url);
 
   global $module;
-  if(!empty($module) && strstr($url, 'index.php?') && !strstr($url, $module) && !strstr($url, str_replace ('SYS_', '', $module))) //?????
+  if(!empty($module) && strstr($url, 'index.php?') && !strstr($url, $module) && !strstr($url, str_replace ('app_', '', $module))) //?????
     {
     return false;//??????? ???? ??????? ?? ??? ?????? ??????
     };
 
   //???? ????? ?? ???? ?????????? ???????
-  $message = $ses_info->getVar('sysMsgMessage');
-  $time = $ses_info->getVar('sysMsgTime');
+  $message = $ses_info->getVar('appMsgMessage');
+  $time = $ses_info->getVar('appMsgTime');
   //??????? ?? ?????? ??????????
-  $ses_info->delVar('sysMsgUrl');
-  $ses_info->delVar('sysMsgMessage');
-  $ses_info->delVar('sysMsgTime');
+  $ses_info->delVar('appMsgUrl');
+  $ses_info->delVar('appMsgMessage');
+  $ses_info->delVar('appMsgTime');
   //??????????? ????????
   header("Refresh: $time;url=$url");
   //????????
-  $sysTpl = new coreTpl();
-  $sysTpl->caching = false;
-  $sysTpl->assign('url', $url);
-  $sysTpl->assign('message', $message);
-  $sysTpl->assign('time', $time);
+  $appTpl = new coreTpl();
+  $appTpl->caching = false;
+  $appTpl->assign('url', $url);
+  $appTpl->assign('message', $message);
+  $appTpl->assign('time', $time);
   //??????? ?? ? ??? ? ????? (????? ????)
-  //$themename = sysUserTheme ();
-  //$sysTpl->display("themes/test/messages/normal.tpl");
-  $sysTpl->display("themes/green_test/messages/normal.tpl");
-//  $msgcontent = $sysTpl->fetch("themes/test/messages/normal.tpl");
+  //$themename = appUserTheme ();
+  //$appTpl->display("themes/test/messages/normal.tpl");
+  $appTpl->display("themes/green_test/messages/normal.tpl");
+//  $msgcontent = $appTpl->fetch("themes/test/messages/normal.tpl");
 //  echo ($msgcontent);
   //????????????? ???????
   exit;
@@ -348,7 +348,7 @@ function sysCaptureMessage()
 /**
  * ???????? ?????????? ??????
  */
-function coreLibLoad($lib_name = 'extlib')
+function appLibLoad($lib_name = 'extlib')
   {
   //???????? ????? ??? ????????? ?
   static $loaded = array();
@@ -371,13 +371,13 @@ function coreLibLoad($lib_name = 'extlib')
  * $modname - ???????????? ? ??????? ??? ??????
  * $type - ??? ??????? ??????
  */
-function coreModLoad($modname, $type='user')
+function appModLoad($modname, $type='user')
   {
   static $loaded = array();
 
   //???????? ?? ???????? ?????
   if (!$modname)
-    coreException ('coreModLoad', BAD_PARAM, "\$modname - $modname");
+    appException ('coreModLoad', BAD_PARAM, "\$modname - $modname");
 
   //???????? ????? ??? ????????? ?
   if ($loaded["$modname$type"])
@@ -404,13 +404,13 @@ function coreModLoad($modname, $type='user')
  * @return bool
  * $modname - ???????????? ? ??????? ??? ??????
  */
-function coreModClassLoad($modname)
+function appModClassLoad($modname)
   {
   static $loaded = array();
 
   //???????? ?? ???????? ?????
   if (!$modname)
-    coreException ('coreModClassLoad', BAD_PARAM, "\$modname - $modname");
+    appException ('coreModClassLoad', BAD_PARAM, "\$modname - $modname");
 
   //???????? ????? ??? ????????? ?
   if ($loaded["$modname"])
@@ -428,7 +428,7 @@ function coreModClassLoad($modname)
   $osfile = "modules/$osmodname/class.php";
 
   if (!file_exists($osfile))
-    coreException ('coreModClassLoad', MODULE_FILE_NOT_EXIST, 'File does not exist');
+    appException ('coreModClassLoad', MODULE_FILE_NOT_EXIST, 'File does not exist');
 
   //????????? ????
   include_once $osfile;
@@ -445,12 +445,12 @@ function coreModClassLoad($modname)
  * $func string - ??? ??????? ??????
  * $args array - ????????? ??????? ??????
  */
-function coreModFunc($modname, $type='user', $func='main', $args=array())
+function appModFunc($modname, $type='user', $func='main', $args=array())
   {
   //????????
   if (empty($modname))
     {
-    coreException ('coreModFunc', BAD_PARAM, "\$modname - $modname");
+    appException ('coreModFunc', BAD_PARAM, "\$modname - $modname");
     }
 
   if (empty($type))
@@ -470,7 +470,7 @@ function coreModFunc($modname, $type='user', $func='main', $args=array())
     return $modfunc($args);
     }
   return $modfunc($args);
-  coreException ('coreModFunc', MODULE_FUNCTION_NOT_EXIST, '?????? ?????????? ??????? ?????? '. $modfunc);
+  appException ('coreModFunc', MODULE_FUNCTION_NOT_EXIST, '?????? ?????????? ??????? ?????? '. $modfunc);
   } 
 
 /*************************  ????????? ****************************\
@@ -482,7 +482,7 @@ function coreModFunc($modname, $type='user', $func='main', $args=array())
  * @param message string
  * @param vars array
  */
-function coreException ($sender, $excType=BAD_PARAM, $message='', $vars = null)
+function appException ($sender, $excType=BAD_PARAM, $message='', $vars = null)
   {
   global $module;
   global $type;
@@ -514,7 +514,7 @@ function coreException ($sender, $excType=BAD_PARAM, $message='', $vars = null)
 /************************** ?????  *******************************/
 //??????? ??? ????? ? ?????????? ? ??????????? ?? ????? ??????
 
-function blockShowAll(&$myTpl, &$object)
+function appBlockShowAll(&$myTpl, &$object)
   {
   $db=DBConnector::getInstance();
   $ses_info=UserSession::getInstance();
@@ -542,7 +542,7 @@ function blockShowAll(&$myTpl, &$object)
     $item['module_object'] = $object;
 
     //???????? ??? ????? ? ?????? ?????????
-    $block_content = blockRun($item);
+    $block_content = appBlockRun($item);
 
     //? ??????????? ?? ?????????
     switch ($item['block_position'])
@@ -570,7 +570,7 @@ function blockShowAll(&$myTpl, &$object)
   return true;
   }
 
-function blockRun($block)
+function appBlockRun($block)
   {
   $result = array ();
   //????????? ???? ?????, ???? ?? ????, ???? ??? ?????? ??????
@@ -608,7 +608,7 @@ function blockRun($block)
   }
 
 /************************* ???? **********************************/
-function weightMax($table, $where='')
+function appWeightMax($table, $where='')
   {
   $db=DBConnector::getInstance();
   $db->query("SELECT MAX(weight) as max FROM $table $where");
@@ -617,7 +617,7 @@ function weightMax($table, $where='')
   return $maxweight;
   }
 
-function weightUp($table, $weight, $where='')
+function appWeightUp($table, $weight, $where='')
   {
  
   if ($weight==1)
@@ -644,9 +644,9 @@ function weightUp($table, $weight, $where='')
   return true;
   }
 
-function weightDown($table, $weight, $where='')
+function appWeightDown($table, $weight, $where='')
   {
-  $MaxWeight=weightMax($table);
+  $MaxWeight=appWeightMax($table);
   if ($weight==$MaxWeight)
     return true;
   
@@ -672,7 +672,7 @@ function weightDown($table, $weight, $where='')
   return true;
   }
 
-function weightDelete($table, $weight, $where='')
+function appWeightDelete($table, $weight, $where='')
   {
   $where = str_replace('WHERE', '', $where);
   
@@ -724,17 +724,17 @@ function appVarSetCached($component, $cacheKey, $value=null, $ttl=null)
   elseif ($coreConfig['Var.caching'] == 'xcache')
     {
 		if (!$ttl) $ttl = $coreConfig['Var.cache_lifetime'];
-    return (xcache_set('sysVar_'.$cacheKey, $value, $ttl));
+    return (xcache_set('appVar_'.$cacheKey, $value, $ttl));
     }
   elseif ($coreConfig['Var.caching'] == 'eaccelerator')
     {
 		if (!$ttl) $ttl = $coreConfig['Var.cache_lifetime'];
-    return (eaccelerator_put('sysVar_'.$cacheKey, $value, $ttl));
+    return (eaccelerator_put('appVar_'.$cacheKey, $value, $ttl));
     }
   elseif ($coreConfig['Var.caching'] == 'apc')
     {
 		if (!$ttl) $ttl = $coreConfig['Var.cache_lifetime'];
-    return (apc_store('sysVar_'.$cacheKey, $value, $ttl));
+    return (apc_store('appVar_'.$cacheKey, $value, $ttl));
     }
 
   return true;
@@ -753,7 +753,7 @@ function appVarGetCached($component, $cacheKey)
 	$cacheKey = $component.'_'.$cacheKey;
 
   //Если есть ключь в памяти - возвращаем из памяти
-  if (isset($coreConfig[$cacheKey])) return $coreConfig['sysVar_cache'][$cacheKey];
+  if (isset($coreConfig[$cacheKey])) return $coreConfig['appVar_cache'][$cacheKey];
 
   //В зависимости от типа загружаем кеш из внешнего хранилища
   if ($coreConfig['Var.caching'] == 'disk')
@@ -761,24 +761,24 @@ function appVarGetCached($component, $cacheKey)
     $cacheKey_crc = (string)abs(crc32($cacheKey));
     $file_way = './cache/vars/' . $cacheKey_crc[0] . '/' . $cacheKey_crc[1] . '/' . $cacheKey;
     if (file_exists($file_way))
-      $coreConfig['sysVar_cache'][$cacheKey] = unserialize(file_get_contents($file_way));
+      $coreConfig['appVar_cache'][$cacheKey] = unserialize(file_get_contents($file_way));
 		    else return;
     }
   elseif ($coreConfig['Var.caching'] == 'xcache')
     {
-    $coreConfig['sysVar_cache'][$cacheKey] = xcache_get('sysVar_' . $cacheKey);
+    $coreConfig['appVar_cache'][$cacheKey] = xcache_get('appVar_' . $cacheKey);
     }
-  elseif ($coreConfig['sysConfig']['Var.caching'] == 'eaccelerator')
+  elseif ($coreConfig['appConfig']['Var.caching'] == 'eaccelerator')
     {
-    $coreConfig['sysVar_cache'][$cacheKey] = eaccelerator_get('sysVar_' . $cacheKey);
+    $coreConfig['appVar_cache'][$cacheKey] = eaccelerator_get('appVar_' . $cacheKey);
     }
   elseif ($coreConfig['Var.caching'] == 'apc')
     {
-		$apc_value = apc_fetch('sysVar_' . $cacheKey, $success);
-		if ($success) $coreConfig['sysVar_cache'][$cacheKey] = $apc_value;
+		$apc_value = apc_fetch('appVar_' . $cacheKey, $success);
+		if ($success) $coreConfig['appVar_cache'][$cacheKey] = $apc_value;
     }
 
-  if (isset($coreConfig['sysVar_cache'][$cacheKey])) return $coreConfig['sysVar_cache'][$cacheKey];
+  if (isset($coreConfig['appVar_cache'][$cacheKey])) return $coreConfig['appVar_cache'][$cacheKey];
     else return;
   }
 
@@ -810,7 +810,7 @@ function appVarDelCached($component, $cacheKey)
 	//Удлиняем $cacheKey
 	$cacheKey = $component.'_'.$cacheKey;
 
-  unset($coreConfig['sysVar_cache'][$cacheKey]);
+  unset($coreConfig['appVar_cache'][$cacheKey]);
   //В зависимости от типа уничтожаем информацию в кеше
   if ($coreConfig['Var.caching'] == 'disk')
     {
@@ -820,15 +820,15 @@ function appVarDelCached($component, $cacheKey)
     }
   elseif ($coreConfig['Var.caching'] == 'xcache')
     {
-    xcache_unset('sysVar_' . $cacheKey);
+    xcache_unset('appVar_' . $cacheKey);
     }
   elseif ($coreConfig['Var.caching'] == 'eaccelerator')
     {
-    eaccelerator_rm('sysVar_' . $cacheKey);
+    eaccelerator_rm('appVar_' . $cacheKey);
     }
   elseif ($coreConfig['Var.caching'] == 'apc')
     {
-    apc_delete('sysVar_' . $cacheKey);
+    apc_delete('appVar_' . $cacheKey);
     }
   return true;
   }
@@ -842,13 +842,13 @@ function appTreeBuild($inArray, $start)
       $child_menu_list[$menu['id']] = $menu;
       }
  
-  createTree($child_menu_list, $start, 0, -1, &$result); 
+  appCreateTree($child_menu_list, $start, 0, -1, &$result); 
   
   return $result;
   //exit;
   }
 
-function createTree($array, $curParent, $currLevel = 0, $prevLevel = -1, $result) 
+function appCreateTree($array, $curParent, $currLevel = 0, $prevLevel = -1, $result) 
   {
   foreach ($array as $categoryId => $category) 
     {
@@ -863,7 +863,7 @@ function createTree($array, $curParent, $currLevel = 0, $prevLevel = -1, $result
 
       $currLevel++;
 
-      createTree ($array, $categoryId, $currLevel, $prevLevel, &$result);
+      appCreateTree ($array, $categoryId, $currLevel, $prevLevel, &$result);
 
       $currLevel--;
       }
@@ -872,7 +872,7 @@ function createTree($array, $curParent, $currLevel = 0, $prevLevel = -1, $result
 
 }
 
-function createTreeHTML($array, $curParent, $currLevel = 0, $prevLevel = -1) 
+function appCreateTreeHTML($array, $curParent, $currLevel = 0, $prevLevel = -1) 
   {
   foreach ($array as $categoryId => $category) 
     {
@@ -897,7 +897,7 @@ function createTreeHTML($array, $curParent, $currLevel = 0, $prevLevel = -1)
 
       $currLevel++;
 
-      createTree ($array, $categoryId, $currLevel, $prevLevel);
+      appCreateTree ($array, $categoryId, $currLevel, $prevLevel);
 
       $currLevel--;
       }

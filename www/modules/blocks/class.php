@@ -3,13 +3,13 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-class SysBlocks extends Model
+class Blocks extends Model
   {
-  var $table = 'sys_blocks';
+  var $table = 'blocks';
   
   function block_list()
     {
-    $this->query("SELECT * FROM sys_blocks ORDER BY block_position, weight");
+    $this->query("SELECT * FROM blocks ORDER BY block_position, weight");
     $blocks= $this->fetch_array();
 
     $blocks_list = array();
@@ -43,7 +43,7 @@ class SysBlocks extends Model
     if(!is_numeric($id))
       return false;
     
-    $this->query("SELECT * FROM sys_block WHERE id='$id'");
+    $this->query("SELECT * FROM block WHERE id='$id'");
     $block =  $this->fetch_array();
     return $block[0];
     }
@@ -71,7 +71,7 @@ class SysBlocks extends Model
     if(!is_numeric($id))
       return false;
 
-    $this->query("DELETE FROM sys_block WHERE id='$id'");
+    $this->query("DELETE FROM block WHERE id='$id'");
     }
     
   function block_activation($id)
@@ -79,13 +79,13 @@ class SysBlocks extends Model
     if(!is_numeric($id))
       return false;
 
-    $this->query("UPDATE sys_block SET active = IF(active ='1','0','1') WHERE id='$id'");
+    $this->query("UPDATE block SET active = IF(active ='1','0','1') WHERE id='$id'");
     }
     
   function logIn($login, $pass)
     {
     $pass = md5($pass);
-    $this->query("SELECT * FROM sys_block WHERE login='%s' AND pass='%s' AND active = '1'", $login, $pass);
+    $this->query("SELECT * FROM block WHERE login='%s' AND pass='%s' AND active = '1'", $login, $pass);
     $block =  $this->fetch_array();
     
     if(empty($block))

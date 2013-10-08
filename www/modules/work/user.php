@@ -43,7 +43,7 @@ function work_user_task_create()
   $input_array = array();
 
   list($input_array['displayname'], $input_array['description'], $input_array['currency'], $input_array['category_id'], $input_array['addinfo']) =
-          coreCleanFromInput('displayname','description', 'currency','category_id', 'addinfo');
+          appCleanFromInput('displayname','description', 'currency','category_id', 'addinfo');
 
   $db=DBConnector::getInstance();
   $ses_info=UserSession::getInstance();
@@ -53,7 +53,7 @@ function work_user_task_create()
 
   $db->insert('work_task', $input_array);
 
-  showMessage($ref, 'Ёлемент добавлен');
+  appShowMessage($ref, 'Ёлемент добавлен');
   }
 
 function work_user_task_list()
@@ -95,7 +95,7 @@ function work_user_task_view()
   //ѕроверка на доступ
   if (!getAccess($tpl['object'], ACCESS_READ)) return;
 
-  $id = coreCleanFromInput('id');
+  $id = appCleanFromInput('id');
   
   if(!is_numeric($id)) die('ID NOT NUMERIC');
 
@@ -133,7 +133,7 @@ function work_user_task_view()
   //ѕроверка на доступ
   if (!getAccess($tpl['object'], ACCESS_READ)) return;
 
-  $id = coreCleanFromInput('id');
+  $id = appCleanFromInput('id');
 
   if(!is_numeric($id)) die('ID NOT NUMERIC');
 
@@ -178,7 +178,7 @@ function work_user_task_update()
   $input_array = array();
 
   list($id, $input_array['displayname'], $input_array['description'], $input_array['currency'], $input_array['category_id'], $input_array['addinfo']) =
-          coreCleanFromInput('id', 'displayname','description', 'currency','category_id', 'addinfo');
+          appCleanFromInput('id', 'displayname','description', 'currency','category_id', 'addinfo');
 
   if(!is_numeric($id))
     die("ID NOT NUMERIC");
@@ -191,7 +191,7 @@ function work_user_task_update()
 
   $db->update('work_task', $input_array, "Where id = '$id'");
 
-  showMessage($ref, 'Ёлемент добавлен');
+  appShowMessage($ref, 'Ёлемент добавлен');
   }
 
 ?>

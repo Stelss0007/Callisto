@@ -23,12 +23,12 @@
       </td>
       
       <td>
-        <a href='/sysGroups/manage/{$group.id}'>Edit</a>
-        <a href='/sysGroups/delete/{$group.id}' onclick="return confirm('Удалить элемент?')">Delete</a>
+        <a href='/groups/manage/{$group.id}'>Edit</a>
+        <a href='/groups/delete/{$group.id}' onclick="return confirm('Удалить элемент?')">Delete</a>
       </td>
     </tr>
    {/foreach}
 </table>
 <div style="text-align: center;">
-  [ <a href='/sysGroups/manage'>Добавить</a> ]
+  [ <a href='/groups/manage'>Добавить</a> ]
 </div>

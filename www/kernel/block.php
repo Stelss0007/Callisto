@@ -68,7 +68,7 @@ class Block
     {
     $db=DBConnector::getInstance();
     $ses_info=UserSession::getInstance();
-    $db->query("SELECT * FROM sys_blocks WHERE block_active = '1' ORDER BY block_position, weight");
+    $db->query("SELECT * FROM blocks WHERE block_active = '1' ORDER BY block_position, weight");
     $db_block_list = $db->fetch_array();
   //  echo 'Результат значений:<br><pre>';
   //  print_r($object);
@@ -245,9 +245,9 @@ class Block
     {
 //    print_r($this->vars);
 //    echo serialize($this->vars);exit;
-    $this->usesModel('sysBlocks');
-    $this->sysBlocks->block_content = serialize($this->vars);
-    $this->sysBlocks->save($id);
+    $this->usesModel('blocks');
+    $this->blocks->block_content = serialize($this->vars);
+    $this->blocks->save($id);
     }
     
   //////////////////////////////////////////////////////////////////////////////

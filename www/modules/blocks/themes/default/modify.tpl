@@ -1,5 +1,5 @@
 {strip}
-<form action="/sysBlocks/update" method="post">
+<form action="/blocks/update" method="post">
 <input type="hidden" name="id" value="{$id}">
 <input type="hidden" name="ref" value="{$ref}">
 

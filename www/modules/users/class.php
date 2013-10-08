@@ -3,14 +3,14 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-class SysUsers extends Model
+class users extends Model
   {
-  var $table = 'sys_user';
+  var $table = 'user';
   
   function user_list($full=false)
     {
     $result = array();
-    $this->query("SELECT * FROM sys_user ORDER BY login");
+    $this->query("SELECT * FROM user ORDER BY login");
     $users = $this->fetch_array();
     if($full)
       return $users;
@@ -27,7 +27,7 @@ class SysUsers extends Model
     if(!is_numeric($id))
       return false;
     
-    $this->query("SELECT * FROM sys_user WHERE id='$id'");
+    $this->query("SELECT * FROM user WHERE id='$id'");
     $user =  $this->fetch_array();
     return $user[0];
     }
@@ -55,7 +55,7 @@ class SysUsers extends Model
     if(!is_numeric($id))
       return false;
 
-    $this->query("DELETE FROM sys_user WHERE id='$id'");
+    $this->query("DELETE FROM user WHERE id='$id'");
     }
     
   function user_activation($id)
@@ -63,13 +63,13 @@ class SysUsers extends Model
     if(!is_numeric($id))
       return false;
 
-    $this->query("UPDATE sys_user SET active = IF(active ='1','0','1') WHERE id='$id'");
+    $this->query("UPDATE user SET active = IF(active ='1','0','1') WHERE id='$id'");
     }
     
   function logIn($login, $pass)
     {
     $pass = md5($pass);
-    $this->query("SELECT * FROM sys_user WHERE login='%s' AND pass='%s' AND active = '1'", $login, $pass);
+    $this->query("SELECT * FROM user WHERE login='%s' AND pass='%s' AND active = '1'", $login, $pass);
     $user =  $this->fetch_array();
     
     if(empty($user))

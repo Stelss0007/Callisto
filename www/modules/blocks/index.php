@@ -7,7 +7,7 @@ class Index extends Controller
     {
     $this->getAccess(ACCESS_ADMIN);
     
-    $blocks = $this->sysBlocks->block_list();
+    $blocks = $this->blocks->block_list();
    
     $this->blocks_list_l = $blocks['blocks_list_l'];
     $this->blocks_list_r = $blocks['blocks_list_r'];
@@ -59,9 +59,9 @@ class Index extends Controller
     $this->position = $input_position;
     
     $browsein = array();
-    $browsein[] = array ('url'=>'/sysBlocks',
+    $browsein[] = array ('url'=>'/blocks',
                         'displayname'=>'Блоки');
-    $browsein[] = array ('url'=>'/sysBlocks/install',
+    $browsein[] = array ('url'=>'/blocks/install',
                         'displayname'=>'Добавление блока "'.$position.'"');
     
     $this->module_browsein = $browsein;
@@ -94,7 +94,7 @@ class Index extends Controller
     include("blocks/$block_name/info.php");
     $info['name'] = $block_name;
     
-    $weight = $this->sysBlocks->weightMax("block_position = '{$input_position}'");
+    $weight = $this->blocks->weightMax("block_position = '{$input_position}'");
     $weight++;
 
     $info['weight'] = $weight;
@@ -102,50 +102,50 @@ class Index extends Controller
     $info['block_position'] = $input_position;
     $info['block_pattern'] = '.*';
    
-    $this->arrayToModel($this->sysBlocks, $info);
+    $this->arrayToModel($this->blocks, $info);
     
     //$this->debugGetModelVars();
     
-    $id = $this->sysBlocks->save();
+    $id = $this->blocks->save();
     
-    $this->showMessage('Элемент добавлен', '/sysBlocks');
+    $this->showMessage('Элемент добавлен', '/blocks');
     }
     
   function weight_up($weight,$block_position)
     {
     $this->getAccess(ACCESS_ADMIN);
-    $this->sysBlocks->weightUp($weight, "block_position = '$block_position'");
+    $this->blocks->weightUp($weight, "block_position = '$block_position'");
     $this->redirect();
     }
     
   function weight_down($weight,$block_position)
     {
     $this->getAccess(ACCESS_ADMIN);
-    $this->sysBlocks->weightDown($weight ,"block_position = '$block_position'");
+    $this->blocks->weightDown($weight ,"block_position = '$block_position'");
     $this->redirect();
     }
     
   function active($id)
     {
     $this->getAccess(ACCESS_ADMIN);
-    $this->sysBlocks->block_active = '1';
-    $this->sysBlocks->save($id);
+    $this->blocks->block_active = '1';
+    $this->blocks->save($id);
     $this->redirect();
     }
     
   function deactive($id)
     {
     $this->getAccess(ACCESS_ADMIN);
-    $this->sysBlocks->block_active = '0';
-    $this->sysBlocks->save($id);
+    $this->blocks->block_active = '0';
+    $this->blocks->save($id);
     $this->redirect();
     }
     
   function delete($id, $weight, $block_position)
     {
     $this->getAccess(ACCESS_ADMIN);
-    $this->sysBlocks->weightDelete($weight ,"block_position = '$block_position'");
-    $this->sysBlocks->delete($id);
+    $this->blocks->weightDelete($weight ,"block_position = '$block_position'");
+    $this->blocks->delete($id);
     $this->redirect();
     }
     
@@ -160,7 +160,7 @@ class Index extends Controller
     $position[c]='Поцентру';
 
 
-    $blocks_list = $this->sysBlocks->getById($id);
+    $blocks_list = $this->blocks->getById($id);
 
     foreach($blocks_list[0] as $key=>$value)
       $this->$key = $value;
@@ -188,9 +188,9 @@ class Index extends Controller
 
     //BrowseIn
     $browsein = array();
-    $browsein[] = array ('url'=>'/sysBlocks/',
+    $browsein[] = array ('url'=>'/blocks/',
                         'displayname'=>'Блоки');
-    $browsein[] = array ('url'=>'/sysBlocks/',
+    $browsein[] = array ('url'=>'/blocks/',
                         'displayname'=>'Редактирование блока "'.$blocks_list[0]['block_name'].'"');
 
     $this->module_browsein = $browsein;
@@ -211,10 +211,10 @@ class Index extends Controller
     if(empty ($position)) 
       die ('Неизвестная позиция!');
     
-    $this->arrayToModel($this->sysBlocks, $this->input_vars);
-    $id = $this->sysBlocks->save();
+    $this->arrayToModel($this->blocks, $this->input_vars);
+    $id = $this->blocks->save();
 
-    $blocks_list = $this->sysBlocks->getById($id);
+    $blocks_list = $this->blocks->getById($id);
 
     //Обновим доп настройки блока, передав ему управление
     $block_file='blocks/'.$blocks_list[0]['block_name'].'/block.php';

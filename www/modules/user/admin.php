@@ -25,9 +25,9 @@ function user_admin_user_list()
   $db=DBConnector::getInstance();
   $ses_info=UserSession::getInstance();
 
-  $gid = coreCleanFromInput('gid');
+  $gid = appCleanFromInput('gid');
 
-  coreModClassLoad('groups');
+  appModClassLoad('groups');
   $groups = new groups();
   $group_list = $groups->get_list();
 
@@ -74,9 +74,9 @@ function user_admin_user_new()
   $db=DBConnector::getInstance();
   $ses_info=UserSession::getInstance();
 
-  $gid = coreCleanFromInput('gid');
+  $gid = appCleanFromInput('gid');
 
-  coreModClassLoad('groups');
+  appModClassLoad('groups');
   $groups = new groups();
   $group_list = $groups->get_list();
 
@@ -102,7 +102,7 @@ function user_admin_user_create()
   //Проверка на доступ
   if (!getAccess($tpl['object'], ACCESS_ADMIN)) return;
   
-  list($login, $pass, $mail, $active, $gid) = coreCleanFromInput('login', 'pass', 'mail', 'active', 'gid');
+  list($login, $pass, $mail, $active, $gid) = appCleanFromInput('login', 'pass', 'mail', 'active', 'gid');
 
   if ($login == '')
     {
@@ -137,7 +137,7 @@ function user_admin_user_create()
   global $db;
   $db->query("INSERT INTO user (login, pass, mail, addtime, gid, active) VALUES ('%s', '%s','%s', '%s', '%d', '%d')", $login, $pass, $mail, $addtime, $gid, $active);
 
-  coreModClassLoad('user');
+  appModClassLoad('user');
   $user = new user;
 
   $user->sendRegMail($login, $pass, $mail);
@@ -151,9 +151,9 @@ function user_admin_user_modify()
   if (!getAccess($tpl['object'], ACCESS_ADMIN)) return;
   
 
-  $id = coreCleanFromInput('id');
+  $id = appCleanFromInput('id');
   if(!is_numeric($id))
-    showMessage($_SERVER['HTTP_REFERER'], 'Id not numeric');
+    appShowMessage($_SERVER['HTTP_REFERER'], 'Id not numeric');
   //Проверка на доступ
   //if (!sysSecAuthAction($sysObject, ACCESS_ADMIN)) return;
 
@@ -163,9 +163,9 @@ function user_admin_user_modify()
   $db=DBConnector::getInstance();
   $ses_info=UserSession::getInstance();
 
-  $gid = coreCleanFromInput('gid');
+  $gid = appCleanFromInput('gid');
 
-  coreModClassLoad('groups');
+  appModClassLoad('groups');
   $groups = new groups();
   $group_list = $groups->get_list();
 
@@ -197,17 +197,17 @@ function user_admin_user_delete()
   //Проверка на доступ
   if (!getAccess($tpl['object'], ACCESS_ADMIN)) return;
   
-  $id = coreCleanFromInput('id');
+  $id = appCleanFromInput('id');
 
   $db=DBConnector::getInstance();
   $ses_info=UserSession::getInstance();
 
   if(!is_numeric($id))
-    showMessage($_SERVER['HTTP_REFERER'], 'Id not numeric');
+    appShowMessage($_SERVER['HTTP_REFERER'], 'Id not numeric');
   $db->query("DELETE FROM user WHERE id = '%d'", $id);
 
   //$user->sendRegMail($login, $pass, $mail);
-   showMessage($_SERVER['HTTP_REFERER'], 'Пользователь удален');
+   appShowMessage($_SERVER['HTTP_REFERER'], 'Пользователь удален');
   }
 
 
@@ -217,7 +217,7 @@ function user_admin_user_update()
   //Проверка на доступ
   if (!getAccess($tpl['object'], ACCESS_ADMIN)) return;
   
-  list($login, $pass, $mail, $active, $gid) = coreCleanFromInput('login', 'pass', 'mail', 'active', 'gid');
+  list($login, $pass, $mail, $active, $gid) = appCleanFromInput('login', 'pass', 'mail', 'active', 'gid');
 
   if ($login == '')
     {
@@ -252,7 +252,7 @@ function user_admin_user_update()
   global $db;
   $db->query("INSERT INTO user (login, pass, mail, addtime, gid, active) VALUES ('%s', '%s','%s', '%s', '%d', '%d')", $login, $pass, $mail, $addtime, $gid, $active);
 
-  coreModClassLoad('user');
+  appModClassLoad('user');
   $user = new user;
 
   $user->sendRegMail($login, $pass, $mail);

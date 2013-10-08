@@ -54,7 +54,7 @@ class user
     if(!in_array($imginfo[2], $type_array))
       return false;
 
-    coreLibLoad('Image');
+    appLibLoad('Image');
     $im = new Image;
 
     //Ревизия

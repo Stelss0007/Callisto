@@ -62,17 +62,17 @@
       
       <td>
         {if $user.active}
-          <a href='/sysUsers/activation/{$user.id}' onclick="return confirm('Деактивировать?')">Disabled</a>&nbsp;|&nbsp;
+          <a href='/users/activation/{$user.id}' onclick="return confirm('Деактивировать?')">Disabled</a>&nbsp;|&nbsp;
         {else}
-          <a href='/sysUsers/activation/{$user.id}' onclick="return confirm('Активировать?')">Enabled</a>&nbsp;|&nbsp;
+          <a href='/users/activation/{$user.id}' onclick="return confirm('Активировать?')">Enabled</a>&nbsp;|&nbsp;
         {/if}
-        <a href='/sysUsers/manage/{$user.id}'>Edit</a>&nbsp;|&nbsp;
-        <a href='/sysUsers/delete/{$user.id}' onclick="return confirm('Удалить элемент?')">Delete</a>
+        <a href='/users/manage/{$user.id}'>Edit</a>&nbsp;|&nbsp;
+        <a href='/users/delete/{$user.id}' onclick="return confirm('Удалить элемент?')">Delete</a>
       </td>
     </tr>
    {/foreach}
   </tbody>
 </table>
 <div style="text-align: center;">
-  [ <a href='/sysUsers/manage'>Добавить</a> ]
+  [ <a href='/users/manage'>Добавить</a> ]
 </div>

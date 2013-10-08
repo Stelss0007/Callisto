@@ -38,10 +38,10 @@ $coreConfig['etag.enabled'] = false;
 //Настройки Last-Modified для поисковиков
 $coreConfig['lastmodified.enabled'] = false;
 
-//Права по умолчанию на файлы создаваемые WE:
+//Права по умолчанию на файлы
 $coreConfig['default.file.perms'] = 0755;
 
-//Права по умолчанию на директории создаваемые WE
+//Права по умолчанию на директории
 $coreConfig['default.dir.perms'] = 0755;
 
 //Создавать поддиректории при организации кэшей.

@@ -3,13 +3,13 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-class SysPermissions extends Model
+class Permissions extends Model
   {
-  var $table = 'sys_user_group_permission';
+  var $table = 'user_group_permission';
   
   function group_permissions_list()
     {
-    $this->query("SELECT * FROM sys_user_group_permission ORDER BY weight");
+    $this->query("SELECT * FROM user_group_permission ORDER BY weight");
     return $this->fetch_array();
     }
     
@@ -18,7 +18,7 @@ class SysPermissions extends Model
     if(!is_numeric($id))
       return false;
     
-    $this->query("SELECT * FROM sys_user_group_permission WHERE id='$id'");
+    $this->query("SELECT * FROM user_group_permission WHERE id='$id'");
     $permission =  $this->fetch_array();
     return $permission[0];
     }
@@ -61,7 +61,7 @@ class SysPermissions extends Model
       return false;
     $group_permision = $this->group_permission($id);
     $this->weightDelete($group_permision['weight'], $where);
-    $this->query("DELETE FROM sys_user_group_permission WHERE id='$id'");
+    $this->query("DELETE FROM user_group_permission WHERE id='$id'");
     }
   }
 ?>

@@ -40,24 +40,24 @@ function work_admin_create()
   if (!getAccess($sysObject, ACCESS_ADMIN)) return;
 
   //Забираем переменные со входа
-  list($group_displayname, $group_description) = coreCleanFromInput('group_displayname', 'group_description');
+  list($group_displayname, $group_description) = appCleanFromInput('group_displayname', 'group_description');
   //Проверки
   if (empty($group_displayname))
-    showMessage($_SERVER['HTTP_REFERER'], 'Неуказанно имя группы');
+    appShowMessage($_SERVER['HTTP_REFERER'], 'Неуказанно имя группы');
 
   $db=DBConnector::getInstance();
   $ses_info=UserSession::getInstance();
 
   $db->query("INSERT INTO work (group_displayname, group_description) VALUES ('%s', '%s')", $group_displayname, $group_description);
 
-  showMessage($_SERVER['HTTP_REFERER'], 'Группа создана');
+  appShowMessage($_SERVER['HTTP_REFERER'], 'Группа создана');
   }
 
 function work_admin_modify()
   {
   //Забираем переменные
-  $id = coreCleanFromInput('id');
-  if (!is_numeric ($id)) showMessage($_SERVER['HTTP_REFERER'], 'Id not numeric');
+  $id = appCleanFromInput('id');
+  if (!is_numeric ($id)) appShowMessage($_SERVER['HTTP_REFERER'], 'Id not numeric');
 
   //Прелюдие как у всех модулей
   $sysObject = 'work>admin>modify>'.$id;
@@ -101,12 +101,12 @@ function work_admin_modify()
 
 function work_admin_update()
   {
-  list($group_displayname, $group_description, $id, $ref) = coreCleanFromInput('group_displayname', 'group_description', 'id', 'ref');
+  list($group_displayname, $group_description, $id, $ref) = appCleanFromInput('group_displayname', 'group_description', 'id', 'ref');
 
   if(empty($ref))
     $ref = $_SERVER['HTTP_REFERER'];
 
-  if (!is_numeric ($id)) showMessage($_SERVER['HTTP_REFERER'], 'Id not numeric');
+  if (!is_numeric ($id)) appShowMessage($_SERVER['HTTP_REFERER'], 'Id not numeric');
 
   $sysObject = 'work>admin>update>'.$id;
   //Проверка на доступ
@@ -117,14 +117,14 @@ function work_admin_update()
 
   $db->query("UPDATE work SET group_displayname = '%s', group_description = '%s' WHERE id = '%d'",$group_displayname, $group_description, $id);
 
-  showMessage($ref, 'Изменения сохранены');
+  appShowMessage($ref, 'Изменения сохранены');
   }
 
 
 function work_admin_delete()
   {
-  $id = coreCleanFromInput('id');
-  if (!is_numeric ($id)) showMessage($_SERVER['HTTP_REFERER'], 'Id not numeric');
+  $id = appCleanFromInput('id');
+  if (!is_numeric ($id)) appShowMessage($_SERVER['HTTP_REFERER'], 'Id not numeric');
 
   $sysObject = 'work>admin>delete>'.$id;
   //Проверка на доступ
@@ -136,7 +136,7 @@ function work_admin_delete()
   $db->query("DELETE FROM work WHERE id = '%d'", $id);
 
   //Удаление
-  showMessage($_SERVER['HTTP_REFERER'], 'Группа удалена');
+  appShowMessage($_SERVER['HTTP_REFERER'], 'Группа удалена');
   return true;
   }
 
@@ -145,8 +145,8 @@ function work_admin_delete()
 function work_admin_perms_new()
   {
   //Забираем переменные
-  $id = coreCleanFromInput('id');
-  if (!is_numeric ($id)) showMessage($_SERVER['HTTP_REFERER'], 'Id not numeric');
+  $id = appCleanFromInput('id');
+  if (!is_numeric ($id)) appShowMessage($_SERVER['HTTP_REFERER'], 'Id not numeric');
 
   //Прелюдие как у всех модулей
   $sysObject = 'work>admin>perms_new>'.$id;
@@ -199,29 +199,29 @@ function work_admin_perms_new()
   if (!getAccess($sysObject, ACCESS_ADMIN)) return;
   
   //Забираем переменные со входа
-  list($gid, $level, $pattern, $description, $ref) = coreCleanFromInput('gid', 'level', 'pattern', 'description', 'ref');
+  list($gid, $level, $pattern, $description, $ref) = appCleanFromInput('gid', 'level', 'pattern', 'description', 'ref');
   //Проверки
   if(empty($ref))
     $ref = $_SERVER['HTTP_REFERER'];
   if (!is_numeric($gid))
-    showMessage($ref, 'GID NOT NUMERIC');
+    appShowMessage($ref, 'GID NOT NUMERIC');
   if (empty($pattern))
-    showMessage($ref, 'Поле объект не может быть пустым!');
+    appShowMessage($ref, 'Поле объект не может быть пустым!');
 
   $db=DBConnector::getInstance();
   $ses_info=UserSession::getInstance();
 
   $db->query("INSERT INTO user_group_permissions (gid, level, pattern, description) VALUES ('%d', '%d', '%s', '%s')", $gid, $level, $pattern, $description);
 
-  showMessage($ref, 'Права группы созданы');
+  appShowMessage($ref, 'Права группы созданы');
   }
 
 
 function work_admin_perms_modify()
   {
   //Забираем переменные
-  $id = coreCleanFromInput('id');
-  if (!is_numeric ($id)) showMessage($_SERVER['HTTP_REFERER'], 'Id not numeric');
+  $id = appCleanFromInput('id');
+  if (!is_numeric ($id)) appShowMessage($_SERVER['HTTP_REFERER'], 'Id not numeric');
 
   //Прелюдие как у всех модулей
   $sysObject = 'work>admin>perms_modify>'.$id;
@@ -277,7 +277,7 @@ function work_admin_perms_modify()
 function work_admin_perms_update()
   {
   //Забираем переменные со входа
-  list($gid, $level, $pattern, $description, $id, $ref) = coreCleanFromInput('gid', 'level', 'pattern', 'description', 'id', 'ref');
+  list($gid, $level, $pattern, $description, $id, $ref) = appCleanFromInput('gid', 'level', 'pattern', 'description', 'id', 'ref');
 
   //Проверка на доступ
   $sysObject = 'work>admin>perms_update>'.$id;
@@ -288,23 +288,23 @@ function work_admin_perms_update()
     $ref = $_SERVER['HTTP_REFERER'];
 
   if (!is_numeric($gid) || !is_numeric($id))
-    showMessage($ref, 'GID OR ID NOT NUMERIC');
+    appShowMessage($ref, 'GID OR ID NOT NUMERIC');
   if (empty($pattern))
-    showMessage($ref, 'Поле объект не может быть пустым!');
+    appShowMessage($ref, 'Поле объект не может быть пустым!');
 
   $db=DBConnector::getInstance();
   $ses_info=UserSession::getInstance();
 
   $db->query("UPDATE user_group_permissions SET gid='%d', level='%d', pattern='%s', description='%s' WHERE id='%d'", $gid, $level, $pattern, $description, $id);
 
-  showMessage($ref, 'Права группы сохранены');
+  appShowMessage($ref, 'Права группы сохранены');
   }
 
 
 function work_admin_perms_delete()
   {
-  $id = coreCleanFromInput('id');
-  if (!is_numeric ($id)) showMessage($_SERVER['HTTP_REFERER'], 'Id not numeric');
+  $id = appCleanFromInput('id');
+  if (!is_numeric ($id)) appShowMessage($_SERVER['HTTP_REFERER'], 'Id not numeric');
 
   $sysObject = 'work>admin>perms_delete>'.$id;
   //Проверка на доступ
@@ -316,7 +316,7 @@ function work_admin_perms_delete()
   $db->query("DELETE FROM user_group_permissions WHERE id = '%d'", $id);
 
   //Удаление
-  showMessage($_SERVER['HTTP_REFERER'], 'Права удалены');
+  appShowMessage($_SERVER['HTTP_REFERER'], 'Права удалены');
   return true;
   }
 ?>

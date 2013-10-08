@@ -6,10 +6,10 @@ class Index extends Controller
   function users_list()
     {
     $this->getAccess(ACCESS_ADD);
-    $this->usesModel('sysGroups');
+    $this->usesModel('groups');
     
-    $this->groups = $this->sysGroups->group_list(false);
-    $this->users = $this->sysUsers->user_list(true);
+    $this->groups = $this->groups->group_list(false);
+    $this->users = $this->users->user_list(true);
     $this->viewPage();
     //$this->viewJSON();
     }
@@ -25,24 +25,24 @@ class Index extends Controller
         if(empty($data['pass']))
           unset($data['pass']);
 
-        $this->sysUsers->user_update($data, $id);
+        $this->users->user_update($data, $id);
         }
       else
         {
-        $this->sysUsers->user_create($data);
+        $this->users->user_create($data);
         }
       $this->redirect('/sysUsers/users_list');
       }
     ////////////////////////////////////////////////////////////////////////////
      
-    $user = $this->sysUsers->user($id);
+    $user = $this->users->user($id);
     if($user)
       {
       $this->vars = $user;
       }
       
-    $this->usesModel('sysGroups');
-    $this->groups = $this->sysGroups->group_list();
+    $this->usesModel('groups');
+    $this->groups = $this->groups->group_list();
     
     $this->viewPage();
     }
@@ -52,7 +52,7 @@ class Index extends Controller
     if(empty($id))
       $this->errors->setError("ID of user is missing!");
     
-    $this->sysUsers->user_delete($id);
+    $this->users->user_delete($id);
     $this->redirect();
     }
     
@@ -61,7 +61,7 @@ class Index extends Controller
     if(empty($id))
       $this->errors->setError("ID of user is missing!");
     
-    $this->sysUsers->user_activation($id);
+    $this->users->user_activation($id);
     $this->redirect();
     }
     
@@ -73,7 +73,7 @@ class Index extends Controller
 
     if($data['submit'])
       {
-      $login = $this->sysUsers->logIn($data['login'], $data['pass']);
+      $login = $this->users->logIn($data['login'], $data['pass']);
       if(empty($login))
         {
         $this->showMessage('No Login');
@@ -83,7 +83,7 @@ class Index extends Controller
       $this->redirect();
       }
       
-    if($this->sysUsers->isLogin())
+    if($this->users->isLogin())
       {
       $this->isLogin = true;
       }
@@ -96,13 +96,13 @@ class Index extends Controller
     
   function logout()
     {
-    $this->sysUsers->logOut();
+    $this->users->logOut();
     $this->redirect();
     }
     
   function test()
     {
-    $element = $this->sysUsers->getByIdOrderByuser_Displayname("'1', '3'");
+    $element = $this->users->getByIdOrderByuser_Displayname("'1', '3'");
     print_r($element);
     }
   }

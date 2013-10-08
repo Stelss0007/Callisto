@@ -2,7 +2,7 @@
 /*
  * Отправка письма
 */
-function sysMail($to, $subject, $body, $is_html=false)
+function appMail($to, $subject, $body, $is_html=false)
   {
   //Значит создали обьект
   require_once('kernel/phpmailer/class.phpmailer.php');
@@ -13,8 +13,8 @@ function sysMail($to, $subject, $body, $is_html=false)
   $body = convert_cyr_string($body,"w","k");
 
   //Конфигурируем базовые настройки
-  $mail->From = sysModGetVar('SYS_config','mail_from');
-  $mail->FromName = convert_cyr_string(sysModGetVar('SYS_config','mail_fromname'),"w","k");
+  $mail->From = appModGetVar('app_config','mail_from');
+  $mail->FromName = convert_cyr_string(appModGetVar('app_config','mail_fromname'),"w","k");
   $mail->CharSet = 'koi8-r';
   //$mail->WordWrap = $wordwrap;
   //$mail->Priority = $priority;
@@ -38,13 +38,13 @@ function sysMail($to, $subject, $body, $is_html=false)
       };
 
   //Конфигурируем метод отправки
-  $mail_method = sysModGetVar('SYS_config','mail_method');
+  $mail_method = appModGetVar('app_config','mail_method');
 
   //СМТП
   if ($mail_method == 'smtp')
     {
     $mail->IsSMTP();
-    $mail->Host = sysModGetVar('SYS_config','mail_smtphost');
+    $mail->Host = appModGetVar('app_config','mail_smtphost');
     $mail->SMTPAuth = false;
     }
 
@@ -52,17 +52,17 @@ function sysMail($to, $subject, $body, $is_html=false)
   if ($mail_method == 'smtpauth')
     {
     $mail->IsSMTP();
-    $mail->Host = sysModGetVar('SYS_config','mail_smtphost');
+    $mail->Host = appModGetVar('app_config','mail_smtphost');
     $mail->SMTPAuth = true; // turn on SMTP authentication
-    $mail->Username = sysModGetVar('SYS_config','mail_smtpuser');
-    $mail->Password = sysModGetVar('SYS_config','mail_smtppass');
+    $mail->Username = appModGetVar('app_config','mail_smtpuser');
+    $mail->Password = appModGetVar('app_config','mail_smtppass');
     }
 
   //sendmail
   if ($mail_method == 'sendmail')
     {
     $mail->IsSendmail();
-    $mail->Sendmail = sysModGetVar('SYS_config','mail_sendmailpath');
+    $mail->Sendmail = appModGetVar('app_config','mail_sendmailpath');
     }
 
   //qmail
@@ -88,12 +88,12 @@ function sysMail($to, $subject, $body, $is_html=false)
 /* Увеличиваем вес элимента в базе
  * Пераетса массив в формате key=>value
  */
-function sysDBWeightMoveUp ($systable, $weight, $where='')
+function appDBWeightMoveUp ($apptable, $weight, $where='')
   {
   //Если самый первый некуда уже двигать
   if ($weight==1){return true;};
 
-  $column = sysDBGetColumns($systable);
+  $column = appDBGetColumns($apptable);
   //Подготавливаем $where
   $where=str_replace('WHERE ','',$where);
 
@@ -102,29 +102,29 @@ function sysDBWeightMoveUp ($systable, $weight, $where='')
     $where="AND $where";
     };
   //Передвигаемый элимент
-  $UpedEliment=sysDbSelect ($systable, $column, "WHERE $column[weight]='$weight' $where");
+  $UpedEliment=appDbSelect ($apptable, $column, "WHERE $column[weight]='$weight' $where");
   //Предвидущий элимент
-  $PreviusEliment=sysDbSelect ($systable, $column, "WHERE $column[weight]='".($weight-1)."' $where");
+  $PreviusEliment=appDbSelect ($apptable, $column, "WHERE $column[weight]='".($weight-1)."' $where");
   //
   //Собственно сама растусовка
   $PreviusEliment[weight]=$PreviusEliment[weight]+1;
   $UpedEliment[weight]=$UpedEliment[weight]-1;
 
-  sysDbUpdate ($systable, $PreviusEliment, "WHERE $column[id]='".$PreviusEliment[id]."'");
-  sysDbUpdate ($systable, $UpedEliment, "WHERE $column[id]='".$UpedEliment[id]."'");
+  appDbUpdate ($apptable, $PreviusEliment, "WHERE $column[id]='".$PreviusEliment[id]."'");
+  appDbUpdate ($apptable, $UpedEliment, "WHERE $column[id]='".$UpedEliment[id]."'");
   return true;
   };
 
 /* Увеличиваем вес элимента в базе
  * Пераетса массив в формате key=>value
  */
-function sysDBWeightMoveDown ($systable, $weight, $where='')
+function appDBWeightMoveDown ($apptable, $weight, $where='')
   {
   //Если самый нижний некуда уже двигать
-  $MaxWeight=sysDbMaxWeight ($systable, $where);
+  $MaxWeight=appDbMaxWeight ($apptable, $where);
   if ($weight==$MaxWeight){return true;};
 
-  $column =  sysDBGetColumns($systable);
+  $column =  appDBGetColumns($apptable);
   //Подготавливаем $where
   $where=str_replace('WHERE ','',$where);
   if ($where!='')
@@ -133,26 +133,26 @@ function sysDBWeightMoveDown ($systable, $weight, $where='')
     };
 
   //Передвигаемый элимент
-  $UpedEliment=sysDbSelect ($systable, $column, "WHERE $column[weight]='$weight' $where");
+  $UpedEliment=appDbSelect ($apptable, $column, "WHERE $column[weight]='$weight' $where");
   //Следующий элимент
-  $NextEliment=sysDbSelect ($systable, $column, "WHERE $column[weight]='".($weight+1)."' $where");
+  $NextEliment=appDbSelect ($apptable, $column, "WHERE $column[weight]='".($weight+1)."' $where");
   //
   //Собственно сама растусовка
   $NextEliment[weight]=$NextEliment[weight]-1;
   $UpedEliment[weight]=$UpedEliment[weight]+1;
 
-  sysDbUpdate ($systable, $NextEliment, "WHERE $column[id]='".$NextEliment[id]."'");
-  sysDbUpdate ($systable, $UpedEliment, "WHERE $column[id]='".$UpedEliment[id]."'");
+  appDbUpdate ($apptable, $NextEliment, "WHERE $column[id]='".$NextEliment[id]."'");
+  appDbUpdate ($apptable, $UpedEliment, "WHERE $column[id]='".$UpedEliment[id]."'");
   return true;
   };
 
 /*
  * Удаления веса из таблицы
 */
-function sysDBWeightDelete ($systable, $weight, $where='')
+function appDBWeightDelete ($apptable, $weight, $where='')
   {
   //Получили столбцы
-  $column = sysDBGetColumns($systable);
+  $column = appDBGetColumns($apptable);
   //Подготавливаем $where
   $where=str_replace('WHERE ','',$where);
   if ($where!='')
@@ -160,14 +160,14 @@ function sysDBWeightDelete ($systable, $weight, $where='')
     $where="AND $where";
     };
 
-  $sql = "UPDATE $systable SET $column[weight]=$column[weight]-1
+  $sql = "UPDATE $apptable SET $column[weight]=$column[weight]-1
           WHERE $column[weight]>'$weight' $where";
 
-  sysDBQuery($sql);
+  appDBQuery($sql);
 
   if (mysql_errno()!=0)
     {
-    sysException ('sysDBWeightDelete', DATABASE_ERROR, mysql_error()."<br> $sql");
+    appException ('appDBWeightDelete', DATABASE_ERROR, mysql_error()."<br> $sql");
     };
   return true;
   };
@@ -175,7 +175,7 @@ function sysDBWeightDelete ($systable, $weight, $where='')
 /*
  * Возвращает спиисок временных зон
 */
-function sysGetTzList ()
+function appGetTzList ()
   {
   /*
    * Timezone information
@@ -216,7 +216,7 @@ function sysGetTzList ()
 /*
  * Возвращает спиисок языков в системе
 */
-function sysGetLangList()
+function appGetLangList()
   {
   $LangList=array();
   //Доступные языки

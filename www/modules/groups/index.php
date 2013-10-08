@@ -5,7 +5,7 @@ class Index extends Controller
   
   function groups_list()
     {
-    $this->groups = $this->sysGroups->group_list(true);
+    $this->groups = $this->groups->group_list(true);
     $this->viewPage();
     }
     
@@ -17,17 +17,17 @@ class Index extends Controller
       {
       if($id)
         {
-        $this->sysGroups->group_update($data, $id);
+        $this->groups->group_update($data, $id);
         }
       else
         {
-        $this->sysGroups->group_create($data);
+        $this->groups->group_create($data);
         }
-      $this->redirect('/sysGroups/groups_list');
+      $this->redirect('/groups/groups_list');
       }
     ////////////////////////////////////////////////////////////////////////////
  
-    $group = $this->sysGroups->group($id);
+    $group = $this->groups->group($id);
     if($group)
       {
       $this->id = $group['id'];
@@ -43,12 +43,12 @@ class Index extends Controller
     if(empty($id))
       $this->errors->setError("ID of Group is missing!");
     
-    $this->sysGroups->group_delete($id);
+    $this->groups->group_delete($id);
     $this->redirect();
     }
   function test()
     {
-    $element = $this->sysGroups->getByIdOrderByGroup_Displayname("'1', '3'");
+    $element = $this->groups->getByIdOrderByGroup_Displayname("'1', '3'");
     print_r($element);
     }
   }
