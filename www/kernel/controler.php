@@ -350,7 +350,7 @@ abstract class Controller
     $logedin = $this->session->isLogin();
     if(empty($logedin))
       {
-      $this->showMessage("Access to the page is forbidden. You are not allowed!", '/sysUsers/login');
+      $this->showMessage("Access to the page is forbidden. You are not allowed!", '/users/login');
       }
       
     $this->errors->setError("Access to the page is forbidden. You are not allowed!");

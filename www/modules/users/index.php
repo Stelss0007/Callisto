@@ -5,6 +5,10 @@ class Index extends Controller
   
   function users_list()
     {
+    $params = array(
+                    'fields' => array('id', 'login')
+                    );
+    print_r($this->users->getList($params));exit;
     $this->getAccess(ACCESS_ADD);
     $this->usesModel('groups');
     
@@ -31,7 +35,7 @@ class Index extends Controller
         {
         $this->users->user_create($data);
         }
-      $this->redirect('/sysUsers/users_list');
+      $this->redirect('/users/users_list');
       }
     ////////////////////////////////////////////////////////////////////////////
      

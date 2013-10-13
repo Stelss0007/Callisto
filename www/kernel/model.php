@@ -582,5 +582,31 @@ class Model extends DBConnector
       return true;
       }
     }
+  
+  ///////////////////////////// FINDING ///////////////////////////////////////
+    
+  final function getList($params)
+    {
+    if(isset($params['fields']) && !empty($params['fields']) && is_array($params['fields']))
+      {
+      $columns = $params['fields'];
+      }
+    else
+      {
+      $columns =array();
+      }
+      
+      
+    return $this->select($this->table, $columns, $where, true);   
+    }
+      
+  final function getFirst($params)
+    {
+     
+    }
+  final function getLast($params)
+    {
+    
+    }
   }
 ?>

@@ -107,7 +107,7 @@ class DBConnector
     }
 
     
-  final function select($table, $column, $where='', $multi = false)
+  final function select($table, $column=array(), $where='', $multi = false)
     {
     $columns_string = implode(', ', $column);
     if (empty ($columns_string)) 
