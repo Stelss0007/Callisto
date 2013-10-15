@@ -1,3 +1,4 @@
+{debug}
 <h2>Групы пользователей</h2>
 <table border='1' width='100%' cellspacing=0 cellpadding=4>
   <tr>
@@ -11,7 +12,7 @@
       Действия
     </th>
    </tr>
-   {foreach from=$groups item=group}
+   {foreach from=$groups_list item=group}
     {cycle name="groups" values="even,odd" assign="class" print=false}
     <tr class='{$class}'>
       <td>

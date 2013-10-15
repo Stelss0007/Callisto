@@ -80,6 +80,15 @@ $db = new DBConnector();
 //print_r($db->fetch_array());
 //exit;
 appLibLoad('UserSession');
+
+
+function appDebug($value)
+  {
+  echo "<pre>";
+  print_r($value);
+  echo "</pre>";
+  }
+
 $ses_info = new UserSession();
 /**
  * @desc ?????????????? ???????

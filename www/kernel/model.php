@@ -584,29 +584,197 @@ class Model extends DBConnector
     }
   
   ///////////////////////////// FINDING ///////////////////////////////////////
-    
-  final function getList($params)
+   
+  final private function prepareCondition($conditions = array(), $params = array())
     {
-    if(isset($params['fields']) && !empty($params['fields']) && is_array($params['fields']))
+    $offset = 0;
+    $limit = 1000;
+    $where = '';
+    
+    $result = array();
+    $result['where'] = '';
+    $result['group'] = '';
+    $result['order'] = '';
+    $result['fields'] = '';
+    $result['limit'] = '';
+    $result['join'] = '';
+    
+    
+    if(isset($conditions['fields']) && !empty($conditions['fields']))
       {
-      $columns = $params['fields'];
+      $result['fields'] = $conditions['fields'];
       }
     else
       {
-      $columns =array();
+      $result['fields'] =array();
       }
       
+    if($conditions['condition']&& !empty($conditions['condition']))
+      {
+      //If array of condition
+      if(is_array($conditions['condition']))
+        {
+        $where_ = '';
+        foreach($conditions['condition'] as $key=>$value)
+          {
+          if(is_array($value))
+            {
+            $value = implode("' , '", $value);
+            if($value)
+              {
+              $value = "('$value')";
+              $where_ .= " AND $key IN $value ";
+              }
+            }
+          else
+            {
+            preg_match_all("/^([<>=!]+|like).*$/is", $value, $operator);
+              if($operator)
+                {
+                $value = trim(preg_replace("/^(<>|<|>|!=|like)(.*)$/is", "$2", $value));
+                //print_r($operator);exit;
+                $curret_operator = $operator[1][0];
+
+                if(strtoupper($curret_operator) != 'LIKE')
+                  {
+                  $value = $this->prepareValue($value);
+                  }
+
+                $where_ .= " AND $key $curret_operator $value ";
+                }
+              else
+                {
+                $value = $this->prepareValue($value);
+                $where_ .= " AND $key = '$value' ";
+                }              
+              }
+          }
+
+        if(!empty($where_))
+          {
+          $where = " WHERE ". ltrim($where_, ' AND ');
+          }
+        }
+      elseif(is_string($conditions['condition'])) 
+        {
+        $where = str_ireplace('WHERE', '', trim($conditions['condition']));
+        $where = " WHERE ".$where;
+        }
+        
+      if($conditions['params'] && !empty($conditions['params']))
+        {
+        $search = array_keys($conditions['params']);
+        $replace = $this->prepareValue(array_values($conditions['params']));
+        
+        $where = str_replace($search, $replace, $where);
+        }
+      }
+    
+    //Set join tables
+    if($conditions['join'])
+      {
+      $join = $conditions['join'];
+      }
+    else
+      {
+      $join = '';
+      }
       
-    return $this->select($this->table, $columns, $where, true);   
+    //Set where hight priority  
+    if(isset($conditions['where']) && !empty($conditions['where']))
+      {
+      $where = str_ireplace('WHERE', '', trim($conditions['where']));
+      $where = " WHERE ".$where;
+      }
+    
+    //Set offset
+    if(isset($conditions['offset']) && !empty($conditions['offset']))
+      {
+      $offset = $conditions['offset'];
+      }
+      
+    //Set limit  
+    if(isset($conditions['limit']) && !empty($conditions['limit']))
+      {
+      $limit = $conditions['limit'];
+      }
+      
+    //Set order by  
+    if(isset($conditions['order']) && !empty($conditions['order']))
+      {
+      $result['order'] = " ORDER BY {$conditions['order']}";
+      }
+      
+    //Set group by  
+    if(isset($conditions['group']) && !empty($conditions['group']))
+      {
+      $result['group'] = " GROUP BY {$conditions['group']}";
+      }
+
+      
+    $result['join'] = $join; 
+    $result['where'] = $where; 
+    $result['limit'] = " LIMIT $offset, $limit"; 
+   
+    return $result;
     }
-      
+
+
+  /**
+   * 
+   * @param array $conditions
+   * @param array $params
+   * @return array
+   * 
+   *     $params = array(
+   *                 'fields' => array('id', 'login'),
+   *                 'limit' => 4,
+   *                 'offset' => 0,
+   *                 'order' => 'id',
+   *                 'condition' => "id > :id1 and id < :id2", 
+   *                 'condition' => array('id'=>array('4', '8')), 
+   *                 'params' => array(':id1'=>5, ':id2'=>10)
+   *                 );
+   */  
+  final function getList($conditions = array(), $params = array())
+    {
+    $condition = $this->prepareCondition($conditions, $params);
+    $where = "{$condition['join']} {$condition['where']} {$condition['group']} {$condition['order']} {$condition['limit']}";
+    return $this->select($this->table, $condition['fields'], $where, true);   
+    }
+   
+  final function getCount($params)
+    {
+    $params['fields'] = 'COUNT(*) as count';
+    $result = $this->getList($params);
+    return $result[0]['count']; 
+    }
+    
   final function getFirst($params)
     {
-     
+    $params['limit'] = 1;
+    $params['order'] = 'id';
+ 
+    $result = $this->getList($params);
+    
+    return $result[0];
     }
+    
   final function getLast($params)
     {
+    $params['limit'] = 1;
+    $params['order'] = 'id DESC';
+ 
+    $result = $this->getList($params);
     
+    return $result[0];
+    }
+    
+  final function deleteAll($conditions = array(), $params = array())
+    {
+    $condition = $this->prepareCondition($conditions, $params);
+    $where = "{$condition['join']} {$condition['where']} {$condition['limit']}";
+    $this->query("DELETE FROM {$this->table} $where)");
     }
   }
 ?>

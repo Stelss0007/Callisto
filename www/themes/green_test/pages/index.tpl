@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <title>{$module_page_title}</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8;charset=utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=windows-1251;" />
     <meta name="description" content="{$module_meta_description}"/>
     <meta name="keywords" lang="ru" content="{$module_meta_keywords}"/>
     <link rel="stylesheet" href="themes/green_test/css/style.css" type="text/css" />

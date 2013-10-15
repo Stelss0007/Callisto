@@ -5,7 +5,7 @@ class Index extends Controller
   
   function groups_list()
     {
-    $this->groups = $this->groups->group_list(true);
+    $this->groups_list = $this->groups->group_list(true);
     $this->viewPage();
     }
     

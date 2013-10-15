@@ -5,15 +5,26 @@ class Index extends Controller
   
   function users_list()
     {
-    $params = array(
-                    'fields' => array('id', 'login')
-                    );
-    print_r($this->users->getList($params));exit;
+//    $params = array(
+//                    'fields' => '',
+//                    'limit' => 4,
+//                    'offset' => 0,
+//                    'order' => 'id',
+////                    'condition' => "id > :id1 and id < :id2", 
+//                    'condition' => array('id'=>array('8', '4')), 
+//                    'params' => array(':id1'=>5, ':id2'=>10)
+//                    );
+//    //appDebug($this->users->getFirst());exit;
+//    //appDebug($this->users->getLast());exit;
+//    appDebug($this->users->getCount($params));
+//    appDebug($this->users->getList($params));exit;
+    
+    
     $this->getAccess(ACCESS_ADD);
     $this->usesModel('groups');
     
-    $this->groups = $this->groups->group_list(false);
-    $this->users = $this->users->user_list(true);
+    $this->groups_list = $this->groups->group_list(false);
+    $this->users_list = $this->users->user_list(true);
     $this->viewPage();
     //$this->viewJSON();
     }

@@ -47,6 +47,41 @@ class DBConnector
     //mysql_close();
     }
 
+  function prepareValue($value)
+    {
+    if(is_array($value))
+      {
+      foreach($value as $k=>$v)
+        {
+        if (!get_magic_quotes_runtime())
+          {
+          $value[$k] = mysql_real_escape_string($value[$k]);
+          }
+        if(!get_magic_quotes_gpc())
+          {
+          $value[$k] = addslashes($value[$k]);
+          }
+
+        $value[$k] = str_replace("\\r\\n",'<br>', $value[$k]);
+        }
+      }
+    else
+      {
+      if (!get_magic_quotes_runtime())
+        {
+        $value = mysql_real_escape_string($value);
+        }
+      if(!get_magic_quotes_gpc())
+        {
+        $value = addslashes($value);
+        }
+
+      $value = str_replace("\\r\\n",'<br>', $value);
+      }
+
+    
+    return $value;
+    }
  
   function query()
     {
@@ -61,7 +96,15 @@ class DBConnector
 
       $args[$key] = addslashes(str_replace("\\r\\n",' ',$args[$key]));
       }
-    $valid_sql = vsprintf($template, array_values($args));
+      
+    if($args) 
+      {
+      $valid_sql = vsprintf($template, array_values($args));
+      }
+    else
+      {
+      $valid_sql = $template;
+      }
     
     if(!empty($coreConfig['debug.enabled']))
       {
@@ -72,7 +115,7 @@ class DBConnector
       // Складываем секунды и миллисекунды
       $start_time = $current_time[1] + $current_time[0];
       }
-    
+ 
     $result = mysql_query($valid_sql);
     
     
@@ -107,19 +150,28 @@ class DBConnector
     }
 
     
-  final function select($table, $column=array(), $where='', $multi = false)
+  final function select($table, $column=array(), $where='', $multi = false, $join='')
     {
-    $columns_string = implode(', ', $column);
+    if(is_array($column))
+      {
+      $columns_string = implode(', ', $column);
+      }
+    else
+      {
+      $columns_string = $column;
+      }
+      
     if (empty ($columns_string)) 
       $columns_string = '*';
 
     //Производим выборку
     $sql = "SELECT $columns_string
               FROM $table
+              $join
               $where";
     
     if (!$multi) $sql.= ' LIMIT 1';
-
+//echo $sql;
     $this->query($sql);
 
     //RESULT
@@ -187,10 +239,7 @@ class DBConnector
 
       $keys .= $key.',';
 
-      if (!get_magic_quotes_runtime())
-        $value = mysql_real_escape_string($value);
-
-      $value = addslashes(str_replace("\\r\\n",'<br>',$value));
+      $value = $this->prepareValue($value);
 
       $values .=  "'".$value."',";
       }
@@ -229,10 +278,7 @@ class DBConnector
 
       $keys .= $key." = ";
 
-      if (!get_magic_quotes_runtime())
-        $value = mysql_real_escape_string($value);
-
-      $value = addslashes(str_replace("\\r\\n",'<br>',$value));
+      $value = $this->prepareValue($value);
 
       $keys .=  "'".$value."',";
       }

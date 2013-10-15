@@ -29,7 +29,7 @@
    </tr>
   </thead>
   <tbody>
-   {foreach from=$users item=user}
+   {foreach from=$users_list item=user}
     {cycle name="users" values="even,odd" assign="class" print=false}
     <tr class='{$class}'>
       <td>
@@ -49,7 +49,7 @@
       </td>
      
       <td>
-        {$groups[$user.gid]}
+        {$groups_list[$user.gid]}
       </td>
       
       <td>

@@ -12,6 +12,7 @@ class Groups extends Model
     $result = array();
     $this->query("SELECT * FROM `group` ORDER BY group_displayname");
     $groups = $this->fetch_array();
+    
     if($full)
       return $groups;
     
