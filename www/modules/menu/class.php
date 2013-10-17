@@ -124,6 +124,10 @@ class Menu extends Model
     if(!is_numeric($id))
       return false;
     
+    //Сведенья до момента редактирования
+    $old_data = $this->getById($id);
+    
+    
     //Получим полный путь родителей
     if(!isset($data['menu_parent_id']))
       $data['menu_parent_id'] = '0';
@@ -131,7 +135,7 @@ class Menu extends Model
     $parent = $this->getById($data['menu_parent_id']);
     if($parent)
       {
-      $data['menu_path'] = ($parent['menu_path']) ? $parent['menu_path'] : '0'.'::'.$data['menu_parent_id'];
+      $data['menu_path'] = ($parent['menu_path']) ? $parent['menu_path'].'::'.$data['menu_parent_id'] : '0'.'::'.$data['menu_parent_id'];
       }
     else
       {
