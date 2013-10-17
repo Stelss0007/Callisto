@@ -861,7 +861,7 @@ function appCreateTree($array, $curParent, $currLevel = 0, $prevLevel = -1, $res
   {
   foreach ($array as $categoryId => $category) 
     {
-    if ($curParent == $category['parent_id']) 
+    if ($curParent == $category['menu_parent_id']) 
       {
       $category['level'] = $currLevel;
       $result[$categoryId] = $category;

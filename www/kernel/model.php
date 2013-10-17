@@ -285,6 +285,8 @@ class Model extends DBConnector
   //////////////////////////////////////////////////////////////////////////////
   function deleteObject($id)
     {
+    $this->beforDelete();
+    
     if(is_array($id))
       {
       $id = "'".implode("', '", $id)."'";
@@ -301,6 +303,8 @@ class Model extends DBConnector
     $this->query($sql2);
     $this->query("COMMIT");
     
+    $this->afterDelete();
+    
     return true;
     }
   //////////////////////////////////////////////////////////////////////////////  
@@ -310,22 +314,34 @@ class Model extends DBConnector
       {
       if(empty($guid) && empty($this->vars['guid']))
         {
-        return $this->createObject();
+        $this->beforCreate();
+        $result = $this->createObject();
+        $this->afterCreate();
+        
+        return $result;
         }
       else
         {
         $id = (isset($this->vars['guid'])) ? $this->vars['guid'] : 0;
         if(!empty($guid))
           $id = $guid;
-
-        return $this->updateObject($id);
+        
+        $this->beforUpdate();
+        $result = $this->updateObject($id);
+        $this->afterUpdate();
+        
+        return $result;
         }
       }
     else
       {
       if(empty($guid) && empty($this->vars['id']))
         {
-        return $this->insert($this->table, $this->vars);
+        $this->beforCreate();
+        $result = $this->insert($this->table, $this->vars);
+        $this->afterCreate();
+        
+        return $result;
         }
       else
         {
@@ -333,7 +349,10 @@ class Model extends DBConnector
         if(!empty($guid))
           $id = $guid;
         
+        $this->beforUpdate();
         $this->update($this->table, $this->vars, "id = '{$id}'");
+        $this->afterUpdate();
+        
         return $id;
         }
      
@@ -348,7 +367,9 @@ class Model extends DBConnector
       }
     else
       {
+      $this->beforDelete();
       $this->query("DELETE FROM {$this->table} WHERE id = '%d'", $id);
+      $this->afterDelete();
       }
     }
   
@@ -629,7 +650,8 @@ class Model extends DBConnector
           else
             {
             preg_match_all("/^([<>=!]+|like).*$/is", $value, $operator);
-              if($operator)
+
+              if($operator[1][0])
                 {
                 $value = trim(preg_replace("/^(<>|<|>|!=|like)(.*)$/is", "$2", $value));
                 //print_r($operator);exit;
@@ -742,7 +764,15 @@ class Model extends DBConnector
     $where = "{$condition['join']} {$condition['where']} {$condition['group']} {$condition['order']} {$condition['limit']}";
     return $this->select($this->table, $condition['fields'], $where, true);   
     }
-   
+  final function getById($id)
+    {
+    $params['limit'] = 1;
+    $params['condition'] = array('id'=>$id);
+ 
+    $result = $this->getList($params);
+    
+    return $result[0];
+    }
   final function getCount($params)
     {
     $params['fields'] = 'COUNT(*) as count';
@@ -772,9 +802,49 @@ class Model extends DBConnector
     
   final function deleteAll($conditions = array(), $params = array())
     {
+    $this->beforDelete();
     $condition = $this->prepareCondition($conditions, $params);
     $where = "{$condition['join']} {$condition['where']} {$condition['limit']}";
     $this->query("DELETE FROM {$this->table} $where)");
+    $this->afterDelete();
     }
+    
+    
+  final function beforDelete()
+    {
+    return true;
+    }
+  final function afterDelete()
+    {
+    return true;
+    }
+    
+  final function beforCreate()
+    {
+    return true;
+    }
+  final function afterCreate()
+    {
+    return true;
+    }
+    
+  final function beforUpdate()
+    {
+    return true;
+    }
+  final function afterUpdate()
+    {
+    return true;
+    }
+    
+  final function beforSave()
+    {
+    return true;
+    }
+  final function afterSave()
+    {
+    return true;
+    }
+   
   }
 ?>

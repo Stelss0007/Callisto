@@ -18,7 +18,7 @@
     {cycle name="menu" values="even,odd" assign="class" print=false}
     <tr class='{$class}'>
       <td>
-        <a href="/menu/menu_list/{$menu.id}">{$menu.menu_title}{if $menu.menu_subitem_counter > 0}&nbsp;({$menu.menu_subitem_counter}){/if}</a>
+        <a href="/menu/menu_list/{$menu.id}">{$menu.menu_title|escape|tree:$menu.level}{if $menu.menu_subitem_counter > 0}&nbsp;({$menu.menu_subitem_counter}){/if}</a>
       </td>
      
       <td>

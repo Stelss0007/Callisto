@@ -3,7 +3,7 @@
 {array_append name='yes_no' key='1' value='Да'}
 {array_append name='yes_no' key='0' value='Нет'}
 
-<form name="item_new_form" action="" method="post">
+<form name="item_new_form" action="/menu/manage/{$id}" method="post">
   <input type="hidden" name="id" value="{$id}">
   <table class="outer" cellSpacing="1" cellPadding="4" width="100%">
     <colgroup>

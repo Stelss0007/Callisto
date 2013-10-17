@@ -215,8 +215,25 @@ abstract class Controller
       $this->$name = $value;
       return true;
       }
-    $this->vars[$name] = $value;
+    $this->assign($name, $value);
     return true;
+    }
+    
+  final function assign($var_name = null, $var_value = '')
+    {
+    if(empty($var_name))
+      {
+      return true;
+      }
+    if(is_array($var_name))
+      {
+      $this->vars = array_merge($this->vars, $var_name);
+      }
+    else
+      {
+      $this->vars[$var_name] = $var_value;
+      }
+    
     }
     
   final public function action($action_name)

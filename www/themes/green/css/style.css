@@ -333,9 +333,9 @@ ul.usermenu li.active a {
 a:active {
     color:#D97307;
     /*background: #f5f5f5 url(img/point2.png) no-repeat 2px 6px;*/
-    background-color: #fff;/*F2F2F2;*/
+/*    background-color: #fff;F2F2F2;
     border-left: 1px solid #E6AE82;
-    border-right: 1px solid #E6AE82;
+    border-right: 1px solid #E6AE82;*/
     border-bottom: none;/*1px solid #fff;*/
 }
 

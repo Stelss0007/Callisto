@@ -1,34 +1,41 @@
-﻿# SQL Manager 2005 for MySQL 3.6.5.8
+# SQL Manager 2007 for MySQL 4.5.0.4
 # ---------------------------------------
 # Host     : localhost
 # Port     : 3306
 # Database : test
 
 
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES latin1 */;
+
 SET FOREIGN_KEY_CHECKS=0;
 
---CREATE DATABASE `test`
---    CHARACTER SET 'cp1251'
---    COLLATE 'cp1251_general_ci';
+CREATE DATABASE `test`
+    CHARACTER SET 'latin1'
+    COLLATE 'latin1_swedish_ci';
+
+USE `test`;
 
 #
 # Structure for the `blocks` table : 
 #
 
 CREATE TABLE `blocks` (
-  `id` int(11) NOT NULL auto_increment,
-  `weight` int(1) NOT NULL default '0',
-  `block_name` varchar(60) NOT NULL default '',
-  `block_displayname` varchar(60) NOT NULL default '',
-  `block_pattern` varchar(255) NOT NULL default '',
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `weight` int(1) NOT NULL DEFAULT '0',
+  `block_name` varchar(60) NOT NULL DEFAULT '',
+  `block_displayname` varchar(60) NOT NULL DEFAULT '',
+  `block_pattern` varchar(255) NOT NULL DEFAULT '',
   `block_content` text NOT NULL,
-  `block_position` varchar(10) NOT NULL default 'l',
-  `block_active` tinyint(1) NOT NULL default '0',
-  `block_refresh` int(11) NOT NULL default '0',
-  `block_last_update` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
-  `block_lang` varchar(5) NOT NULL default '',
-  `block_css_class` varchar(40) default NULL,
-  PRIMARY KEY  (`id`),
+  `block_position` varchar(10) NOT NULL DEFAULT 'l',
+  `block_active` tinyint(1) NOT NULL DEFAULT '0',
+  `block_refresh` int(11) NOT NULL DEFAULT '0',
+  `block_last_update` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `block_lang` varchar(5) NOT NULL DEFAULT '',
+  `block_css_class` varchar(40) DEFAULT NULL,
+  PRIMARY KEY (`id`),
   KEY `weight` (`weight`),
   KEY `block_position` (`block_position`),
   KEY `block_active` (`block_active`),
@@ -40,22 +47,22 @@ CREATE TABLE `blocks` (
 #
 
 CREATE TABLE `group` (
-  `id` int(11) NOT NULL auto_increment,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `group_displayname` varchar(60) NOT NULL,
-  `group_description` varchar(255) NOT NULL default '',
-  PRIMARY KEY  (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=19 DEFAULT CHARSET=cp1251;
+  `group_description` varchar(255) NOT NULL DEFAULT '',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=20 DEFAULT CHARSET=cp1251;
 
 #
 # Structure for the `helper` table : 
 #
 
 CREATE TABLE `helper` (
-  `id` int(11) unsigned NOT NULL auto_increment,
-  `object_type` int(11) unsigned default NULL,
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `object_type` int(11) unsigned DEFAULT NULL,
   `helper_typer` int(11) unsigned NOT NULL,
-  `helper_value` int(11) default NULL,
-  PRIMARY KEY  (`id`),
+  `helper_value` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
   UNIQUE KEY `id` (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=cp1251;
 
@@ -64,9 +71,9 @@ CREATE TABLE `helper` (
 #
 
 CREATE TABLE `helper_type` (
-  `id` int(11) unsigned NOT NULL auto_increment,
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `helper_type` varchar(255) NOT NULL,
-  PRIMARY KEY  (`id`),
+  PRIMARY KEY (`id`),
   UNIQUE KEY `id` (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=cp1251;
 
@@ -75,36 +82,36 @@ CREATE TABLE `helper_type` (
 #
 
 CREATE TABLE `menu` (
-  `id` int(11) NOT NULL auto_increment,
-  `weight` int(4) NOT NULL default '0',
-  `parent_id` int(11) NOT NULL default '0',
-  `item_type` tinyint(1) NOT NULL default '-1',
-  `subitem_counter` int(11) NOT NULL default '0',
-  `title` varchar(60) NOT NULL,
-  `description` text NOT NULL,
-  `content` text NOT NULL,
-  `active` tinyint(1) NOT NULL default '0',
-  `path` text,
-  PRIMARY KEY  (`id`),
-  KEY `parent_id` (`parent_id`),
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `weight` int(4) NOT NULL DEFAULT '0',
+  `menu_parent_id` int(11) NOT NULL DEFAULT '0',
+  `menu_item_type` tinyint(1) NOT NULL DEFAULT '3',
+  `menu_subitem_counter` int(11) NOT NULL DEFAULT '0',
+  `menu_title` varchar(60) NOT NULL,
+  `menu_description` text,
+  `menu_content` text,
+  `menu_active` tinyint(1) NOT NULL DEFAULT '0',
+  `menu_path` text,
+  PRIMARY KEY (`id`),
+  KEY `parent_id` (`menu_parent_id`),
   KEY `weight` (`weight`),
-  KEY `item_type` (`item_type`),
-  KEY `active` (`active`),
-  FULLTEXT KEY `path` (`path`)
-) ENGINE=MyISAM AUTO_INCREMENT=43 DEFAULT CHARSET=cp1251;
+  KEY `item_type` (`menu_item_type`),
+  KEY `active` (`menu_active`),
+  FULLTEXT KEY `path` (`menu_path`)
+) ENGINE=MyISAM AUTO_INCREMENT=49 DEFAULT CHARSET=cp1251;
 
 #
 # Structure for the `object` table : 
 #
 
 CREATE TABLE `object` (
-  `guid` int(11) unsigned NOT NULL auto_increment,
-  `type` int(11) unsigned default NULL,
-  `owner_id` int(11) unsigned NOT NULL default '0',
-  `time_create` int(11) unsigned default NULL,
-  `time_update` int(11) unsigned default NULL,
-  `active` enum('0','1') default NULL,
-  PRIMARY KEY  (`guid`),
+  `guid` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `type` int(11) unsigned DEFAULT NULL,
+  `owner_id` int(11) unsigned NOT NULL DEFAULT '0',
+  `time_create` int(11) unsigned DEFAULT NULL,
+  `time_update` int(11) unsigned DEFAULT NULL,
+  `active` enum('0','1') DEFAULT NULL,
+  PRIMARY KEY (`guid`),
   UNIQUE KEY `guid` (`guid`),
   KEY `type` (`type`),
   KEY `time_create` (`time_create`),
@@ -117,9 +124,9 @@ CREATE TABLE `object` (
 #
 
 CREATE TABLE `object_field` (
-  `id` int(11) unsigned NOT NULL auto_increment,
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `field` varchar(200) NOT NULL,
-  PRIMARY KEY  (`id`),
+  PRIMARY KEY (`id`),
   UNIQUE KEY `field` (`field`)
 ) ENGINE=MyISAM AUTO_INCREMENT=31 DEFAULT CHARSET=cp1251;
 
@@ -128,9 +135,9 @@ CREATE TABLE `object_field` (
 #
 
 CREATE TABLE `object_type` (
-  `id` int(11) unsigned NOT NULL auto_increment,
-  `type` varchar(200) default NULL,
-  PRIMARY KEY  (`id`),
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `type` varchar(200) DEFAULT NULL,
+  PRIMARY KEY (`id`),
   KEY `type` (`type`)
 ) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=cp1251;
 
@@ -139,8 +146,8 @@ CREATE TABLE `object_type` (
 #
 
 CREATE TABLE `object_value` (
-  `guid` int(11) default NULL,
-  `field_id` int(11) default NULL,
+  `guid` int(11) DEFAULT NULL,
+  `field_id` int(11) DEFAULT NULL,
   `value` text,
   KEY `guid` (`guid`),
   KEY `field_id` (`field_id`),
@@ -152,10 +159,10 @@ CREATE TABLE `object_value` (
 #
 
 CREATE TABLE `test` (
-  `id` int(11) unsigned NOT NULL auto_increment,
-  `name` varchar(20) default NULL,
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(20) DEFAULT NULL,
   `description` text,
-  PRIMARY KEY  (`id`)
+  PRIMARY KEY (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=cp1251;
 
 #
@@ -163,8 +170,8 @@ CREATE TABLE `test` (
 #
 
 CREATE TABLE `tttt` (
-  `id` int(11) default NULL,
-  `name` varchar(20) default NULL
+  `id` int(11) DEFAULT NULL,
+  `name` varchar(20) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=cp1251;
 
 #
@@ -172,16 +179,16 @@ CREATE TABLE `tttt` (
 #
 
 CREATE TABLE `user` (
-  `id` int(11) unsigned NOT NULL auto_increment,
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `gid` int(11) unsigned NOT NULL,
-  `login` varchar(20) default NULL,
-  `pass` varchar(40) default NULL,
-  `active` enum('0','1') NOT NULL default '0',
-  `addtime` int(11) unsigned default NULL,
-  `last_visit` int(11) unsigned default NULL,
-  `mail` varchar(40) default NULL,
-  `displayname` varchar(50) default NULL,
-  PRIMARY KEY  (`id`),
+  `login` varchar(20) DEFAULT NULL,
+  `pass` varchar(40) DEFAULT NULL,
+  `active` enum('0','1') NOT NULL DEFAULT '0',
+  `addtime` int(11) unsigned DEFAULT NULL,
+  `last_visit` int(11) unsigned DEFAULT NULL,
+  `mail` varchar(40) DEFAULT NULL,
+  `displayname` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`id`),
   UNIQUE KEY `id` (`id`),
   KEY `pass` (`pass`)
 ) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=cp1251;
@@ -191,13 +198,13 @@ CREATE TABLE `user` (
 #
 
 CREATE TABLE `user_group_permission` (
-  `id` int(11) unsigned NOT NULL auto_increment,
-  `gid` int(11) default NULL,
-  `weight` int(11) unsigned default NULL,
-  `level` smallint(6) unsigned default NULL,
-  `pattern` varchar(250) default NULL,
-  `description` varchar(300) default NULL,
-  PRIMARY KEY  (`id`),
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `gid` int(11) DEFAULT NULL,
+  `weight` int(11) unsigned DEFAULT NULL,
+  `level` smallint(6) unsigned DEFAULT NULL,
+  `pattern` varchar(250) DEFAULT NULL,
+  `description` varchar(300) DEFAULT NULL,
+  PRIMARY KEY (`id`),
   UNIQUE KEY `id` (`id`),
   KEY `weight` (`weight`)
 ) ENGINE=MyISAM AUTO_INCREMENT=13 DEFAULT CHARSET=cp1251;
@@ -210,11 +217,10 @@ INSERT INTO `blocks` (`id`, `weight`, `block_name`, `block_displayname`, `block_
   (22,1,'anekdot_block','??????? ???33','.*','','l',0,0,'2013-02-24 16:02:50','',NULL),
   (23,2,'html_block','Html ???44','.*','','l',0,0,'2013-02-20 00:32:17','',NULL),
   (24,3,'menu_block','????','.*','a:3:{s:2:\\\"id\\\";s:2:\\\"24\\\";s:6:\\\"weight\\\";s:1:\\\"3\\\";s:9:\\\"menu_type\\\";s:1:\\\"2\\\";}','l',1,0,'2013-04-30 00:06:54','',NULL),
-  (28,4,'test_block','Test','.*','','l',1,0,'2013-04-22 17:08:59','',NULL),
   (26,2,'modules_block','??????','.*','','r',0,0,'2013-02-19 01:30:55','',NULL),
   (27,1,'userlogin_block','????','.*','','r',0,0,'2013-06-24 14:52:44','',NULL),
+  (28,4,'test_block','Test','.*','','l',1,0,'2013-04-22 17:08:59','',NULL),
   (30,3,'test_block','Test','.*','','r',1,0,'2013-04-29 15:15:04','','rus_css');
-
 COMMIT;
 
 #
@@ -227,27 +233,31 @@ INSERT INTO `group` (`id`, `group_displayname`, `group_description`) VALUES
   (2,'??????????????????','?????????????????? ????????????'),
   (3,'??????????','?????????? ?????'),
   (4,'????????','????????'),
+  (17,'????','????????'),
   (18,'????','?erte'),
-  (17,'????','????????');
-
+  (19,'Admin','Admin');
 COMMIT;
 
 #
 # Data for the `menu` table  (LIMIT 0,500)
 #
 
-INSERT INTO `menu` (`id`, `weight`, `parent_id`, `item_type`, `subitem_counter`, `title`, `description`, `content`, `active`, `path`) VALUES 
-  (33,1,0,-1,0,'Menu1','ds','/users/',1,'0'),
-  (34,2,0,1,0,'Menu2','ds','/users/',1,'0'),
-  (35,3,0,1,0,'Menu3','ds','/users/',1,'0'),
-  (36,1,33,-1,0,'Menu1_1','ds','/users/',1,'0::33'),
-  (37,2,33,-1,0,'Menu1_2','ds','/users/',1,'0::33'),
-  (38,1,35,-1,0,'Menu3_1','ds','/users/',1,'0::35'),
-  (39,2,35,-1,0,'Menu3_2','ds','/users/',1,'0::35'),
-  (40,2,37,-1,0,'Menu1_2_1','ds','/users/',1,'0::33::37'),
-  (41,1,37,-1,0,'Menu1_2_2','ds','/users/',1,'0::33::37'),
-  (42,0,36,-1,0,'','rsdfsdfsdfsfsfs fsf d','',1,'0::33::36');
-
+INSERT INTO `menu` (`id`, `weight`, `menu_parent_id`, `menu_item_type`, `menu_subitem_counter`, `menu_title`, `menu_description`, `menu_content`, `menu_active`, `menu_path`) VALUES 
+  (33,1,0,3,1,'Menu1','ds','/users/',1,'0'),
+  (34,2,0,3,0,'Menu2','ds','/users/',1,'0'),
+  (35,3,0,3,0,'Menu3','ds','/users/',1,'0'),
+  (36,1,0,3,0,'Menu1_1','ds','/users/',1,'0'),
+  (37,2,0,3,1,'Menu1_2','ds','/users/',1,'0'),
+  (38,1,0,3,0,'Menu3_1','ds','/users/',1,'0'),
+  (39,2,0,3,0,'Menu3_2','ds','/users/',1,'0'),
+  (40,2,0,3,0,'Menu1_2_1','ds','/users/',1,'0'),
+  (41,1,0,3,0,'Menu1_2_2','ds','/users/',1,'0'),
+  (42,0,36,3,0,'','rsdfsdfsdfsfsfs fsf d','',1,'0::33::36'),
+  (43,0,0,3,1,'dir2','dfg dfg fdgfdg df','/users/',0,'0'),
+  (44,0,0,2,0,'dir3',NULL,NULL,1,'0'),
+  (45,0,0,3,0,'Test 5',NULL,'/users/',0,'0'),
+  (46,0,0,3,0,'Test 57',' sdf sdf sd fsdf sdf ','/users/',0,'0'),
+  (48,0,0,3,0,'Test 578','fsdfsdf','/users/',0,'0');
 COMMIT;
 
 #
@@ -755,7 +765,6 @@ INSERT INTO `object` (`guid`, `type`, `owner_id`, `time_create`, `time_update`, 
   (499,1,0,1348910105,1348910105,'1'),
   (500,1,0,1348910105,1348910105,'1'),
   (501,1,0,1348910105,1348910105,'1');
-
 COMMIT;
 
 #
@@ -1263,7 +1272,6 @@ INSERT INTO `object` (`guid`, `type`, `owner_id`, `time_create`, `time_update`, 
   (999,1,0,1348910198,1348910198,'1'),
   (1000,1,0,1348910198,1348910198,'1'),
   (1001,1,0,1348910199,1348910199,'1');
-
 COMMIT;
 
 #
@@ -1771,7 +1779,6 @@ INSERT INTO `object` (`guid`, `type`, `owner_id`, `time_create`, `time_update`, 
   (1499,1,0,1348910297,1348910297,'1'),
   (1500,1,0,1348910297,1348910297,'1'),
   (1501,1,0,1348910297,1348910297,'1');
-
 COMMIT;
 
 #
@@ -2279,7 +2286,6 @@ INSERT INTO `object` (`guid`, `type`, `owner_id`, `time_create`, `time_update`, 
   (1999,1,0,1348910387,1348910387,'1'),
   (2000,1,0,1348910387,1348910387,'1'),
   (2001,1,0,1348910388,1348910388,'1');
-
 COMMIT;
 
 #
@@ -2787,7 +2793,6 @@ INSERT INTO `object` (`guid`, `type`, `owner_id`, `time_create`, `time_update`, 
   (2499,1,0,1348910478,1348910478,'1'),
   (2500,1,0,1348910478,1348910478,'1'),
   (2501,1,0,1348910478,1348910478,'1');
-
 COMMIT;
 
 #
@@ -3295,7 +3300,6 @@ INSERT INTO `object` (`guid`, `type`, `owner_id`, `time_create`, `time_update`, 
   (2999,1,0,1348910569,1348910569,'1'),
   (3000,1,0,1348910569,1348910569,'1'),
   (3001,1,0,1348910570,1348910570,'1');
-
 COMMIT;
 
 #
@@ -3803,7 +3807,6 @@ INSERT INTO `object` (`guid`, `type`, `owner_id`, `time_create`, `time_update`, 
   (3499,1,0,1348910659,1348910659,'1'),
   (3500,1,0,1348910659,1348910659,'1'),
   (3501,1,0,1348910659,1348910659,'1');
-
 COMMIT;
 
 #
@@ -4311,7 +4314,6 @@ INSERT INTO `object` (`guid`, `type`, `owner_id`, `time_create`, `time_update`, 
   (3999,1,0,1348910750,1348910750,'1'),
   (4000,1,0,1348910750,1348910750,'1'),
   (4001,1,0,1348910751,1348910751,'1');
-
 COMMIT;
 
 #
@@ -4819,7 +4821,6 @@ INSERT INTO `object` (`guid`, `type`, `owner_id`, `time_create`, `time_update`, 
   (4499,1,0,1348910844,1348910844,'1'),
   (4500,1,0,1348910844,1348910844,'1'),
   (4501,1,0,1348910845,1348910845,'1');
-
 COMMIT;
 
 #
@@ -5327,7 +5328,6 @@ INSERT INTO `object` (`guid`, `type`, `owner_id`, `time_create`, `time_update`, 
   (4999,1,0,1348910944,1348910944,'1'),
   (5000,1,0,1348910944,1348910944,'1'),
   (5001,1,0,1348910944,1348910944,'1');
-
 COMMIT;
 
 #
@@ -5835,7 +5835,6 @@ INSERT INTO `object` (`guid`, `type`, `owner_id`, `time_create`, `time_update`, 
   (5499,1,0,1348911040,1348911040,'1'),
   (5500,1,0,1348911040,1348911040,'1'),
   (5501,1,0,1348911040,1348911040,'1');
-
 COMMIT;
 
 #
@@ -6343,7 +6342,6 @@ INSERT INTO `object` (`guid`, `type`, `owner_id`, `time_create`, `time_update`, 
   (5999,1,0,1348911149,1348911149,'1'),
   (6000,1,0,1348911149,1348911149,'1'),
   (6001,1,0,1348911149,1348911149,'1');
-
 COMMIT;
 
 #
@@ -6851,7 +6849,6 @@ INSERT INTO `object` (`guid`, `type`, `owner_id`, `time_create`, `time_update`, 
   (6499,1,0,1348911251,1348911251,'1'),
   (6500,1,0,1348911251,1348911251,'1'),
   (6501,1,0,1348911251,1348911251,'1');
-
 COMMIT;
 
 #
@@ -7359,7 +7356,6 @@ INSERT INTO `object` (`guid`, `type`, `owner_id`, `time_create`, `time_update`, 
   (6999,1,0,1348911357,1348911357,'1'),
   (7000,1,0,1348911357,1348911357,'1'),
   (7001,1,0,1348911358,1348911358,'1');
-
 COMMIT;
 
 #
@@ -7497,7 +7493,6 @@ INSERT INTO `object` (`guid`, `type`, `owner_id`, `time_create`, `time_update`, 
   (7129,3,0,1361224844,1361224844,'1'),
   (7130,3,0,1361224866,1361224866,'1'),
   (7131,3,0,1361225094,1361225094,'1');
-
 COMMIT;
 
 #
@@ -7534,7 +7529,6 @@ INSERT INTO `object_field` (`id`, `field`) VALUES
   (28,'block_last_update'),
   (29,'block_position'),
   (30,'block_pattern');
-
 COMMIT;
 
 #
@@ -7545,7 +7539,6 @@ INSERT INTO `object_type` (`id`, `type`) VALUES
   (1,'test'),
   (2,'sysGroups'),
   (3,'sysBlocks');
-
 COMMIT;
 
 #
@@ -8053,7 +8046,6 @@ INSERT INTO `object_value` (`guid`, `field_id`, `value`) VALUES
   (105,5,'1178'),
   (105,6,'Atamas16'),
   (105,7,'Company5');
-
 COMMIT;
 
 #
@@ -8561,7 +8553,6 @@ INSERT INTO `object_value` (`guid`, `field_id`, `value`) VALUES
   (205,5,'1246'),
   (205,6,'Atamas4'),
   (205,7,'Company6');
-
 COMMIT;
 
 #
@@ -9069,7 +9060,6 @@ INSERT INTO `object_value` (`guid`, `field_id`, `value`) VALUES
   (305,5,'1640'),
   (305,6,'Atamas17'),
   (305,7,'Company8');
-
 COMMIT;
 
 #
@@ -9577,7 +9567,6 @@ INSERT INTO `object_value` (`guid`, `field_id`, `value`) VALUES
   (405,5,'1641'),
   (405,6,'Atamas5'),
   (405,7,'Company8');
-
 COMMIT;
 
 #
@@ -10085,7 +10074,6 @@ INSERT INTO `object_value` (`guid`, `field_id`, `value`) VALUES
   (505,5,'1030'),
   (505,6,'Atamas10'),
   (505,7,'Company3');
-
 COMMIT;
 
 #
@@ -10593,7 +10581,6 @@ INSERT INTO `object_value` (`guid`, `field_id`, `value`) VALUES
   (605,5,'1090'),
   (605,6,'Atamas2'),
   (605,7,'Company9');
-
 COMMIT;
 
 #
@@ -11101,7 +11088,6 @@ INSERT INTO `object_value` (`guid`, `field_id`, `value`) VALUES
   (705,5,'1601'),
   (705,6,'Atamas1'),
   (705,7,'Company3');
-
 COMMIT;
 
 #
@@ -11609,7 +11595,6 @@ INSERT INTO `object_value` (`guid`, `field_id`, `value`) VALUES
   (805,5,'1845'),
   (805,6,'Atamas18'),
   (805,7,'Company2');
-
 COMMIT;
 
 #
@@ -12117,7 +12102,6 @@ INSERT INTO `object_value` (`guid`, `field_id`, `value`) VALUES
   (905,5,'1601'),
   (905,6,'Atamas14'),
   (905,7,'Company1');
-
 COMMIT;
 
 #
@@ -12625,7 +12609,6 @@ INSERT INTO `object_value` (`guid`, `field_id`, `value`) VALUES
   (1005,5,'1153'),
   (1005,6,'Atamas19'),
   (1005,7,'Company8');
-
 COMMIT;
 
 #
@@ -13133,7 +13116,6 @@ INSERT INTO `object_value` (`guid`, `field_id`, `value`) VALUES
   (1105,5,'1281'),
   (1105,6,'Atamas14'),
   (1105,7,'Company9');
-
 COMMIT;
 
 #
@@ -13641,7 +13623,6 @@ INSERT INTO `object_value` (`guid`, `field_id`, `value`) VALUES
   (1205,5,'1266'),
   (1205,6,'Atamas10'),
   (1205,7,'Company1');
-
 COMMIT;
 
 #
@@ -14149,7 +14130,6 @@ INSERT INTO `object_value` (`guid`, `field_id`, `value`) VALUES
   (1305,5,'1891'),
   (1305,6,'Atamas7'),
   (1305,7,'Company10');
-
 COMMIT;
 
 #
@@ -14657,7 +14637,6 @@ INSERT INTO `object_value` (`guid`, `field_id`, `value`) VALUES
   (1405,5,'1435'),
   (1405,6,'Atamas15'),
   (1405,7,'Company3');
-
 COMMIT;
 
 #
@@ -15165,7 +15144,6 @@ INSERT INTO `object_value` (`guid`, `field_id`, `value`) VALUES
   (1505,5,'1680'),
   (1505,6,'Atamas17'),
   (1505,7,'Company6');
-
 COMMIT;
 
 #
@@ -15673,7 +15651,6 @@ INSERT INTO `object_value` (`guid`, `field_id`, `value`) VALUES
   (1605,5,'1908'),
   (1605,6,'Atamas1'),
   (1605,7,'Company7');
-
 COMMIT;
 
 #
@@ -16181,7 +16158,6 @@ INSERT INTO `object_value` (`guid`, `field_id`, `value`) VALUES
   (1705,5,'1899'),
   (1705,6,'Atamas9'),
   (1705,7,'Company10');
-
 COMMIT;
 
 #
@@ -16689,7 +16665,6 @@ INSERT INTO `object_value` (`guid`, `field_id`, `value`) VALUES
   (1805,5,'1936'),
   (1805,6,'Atamas12'),
   (1805,7,'Company4');
-
 COMMIT;
 
 #
@@ -17197,7 +17172,6 @@ INSERT INTO `object_value` (`guid`, `field_id`, `value`) VALUES
   (1905,5,'1798'),
   (1905,6,'Atamas9'),
   (1905,7,'Company4');
-
 COMMIT;
 
 #
@@ -17705,7 +17679,6 @@ INSERT INTO `object_value` (`guid`, `field_id`, `value`) VALUES
   (2005,5,'1768'),
   (2005,6,'Atamas12'),
   (2005,7,'Company8');
-
 COMMIT;
 
 #
@@ -18213,7 +18186,6 @@ INSERT INTO `object_value` (`guid`, `field_id`, `value`) VALUES
   (2105,5,'1626'),
   (2105,6,'Atamas1'),
   (2105,7,'Company1');
-
 COMMIT;
 
 #
@@ -18721,7 +18693,6 @@ INSERT INTO `object_value` (`guid`, `field_id`, `value`) VALUES
   (2205,5,'1655'),
   (2205,6,'Atamas7'),
   (2205,7,'Company1');
-
 COMMIT;
 
 #
@@ -19229,7 +19200,6 @@ INSERT INTO `object_value` (`guid`, `field_id`, `value`) VALUES
   (2305,5,'1634'),
   (2305,6,'Atamas10'),
   (2305,7,'Company3');
-
 COMMIT;
 
 #
@@ -19737,7 +19707,6 @@ INSERT INTO `object_value` (`guid`, `field_id`, `value`) VALUES
   (2405,5,'1847'),
   (2405,6,'Atamas2'),
   (2405,7,'Company5');
-
 COMMIT;
 
 #
@@ -20245,7 +20214,6 @@ INSERT INTO `object_value` (`guid`, `field_id`, `value`) VALUES
   (2505,5,'1071'),
   (2505,6,'Atamas2'),
   (2505,7,'Company3');
-
 COMMIT;
 
 #
@@ -20753,7 +20721,6 @@ INSERT INTO `object_value` (`guid`, `field_id`, `value`) VALUES
   (2605,5,'1593'),
   (2605,6,'Atamas2'),
   (2605,7,'Company4');
-
 COMMIT;
 
 #
@@ -21261,7 +21228,6 @@ INSERT INTO `object_value` (`guid`, `field_id`, `value`) VALUES
   (2705,5,'1189'),
   (2705,6,'Atamas1'),
   (2705,7,'Company3');
-
 COMMIT;
 
 #
@@ -21769,7 +21735,6 @@ INSERT INTO `object_value` (`guid`, `field_id`, `value`) VALUES
   (2805,5,'1143'),
   (2805,6,'Atamas11'),
   (2805,7,'Company9');
-
 COMMIT;
 
 #
@@ -22277,7 +22242,6 @@ INSERT INTO `object_value` (`guid`, `field_id`, `value`) VALUES
   (2905,5,'1236'),
   (2905,6,'Atamas13'),
   (2905,7,'Company6');
-
 COMMIT;
 
 #
@@ -22785,7 +22749,6 @@ INSERT INTO `object_value` (`guid`, `field_id`, `value`) VALUES
   (3005,5,'1749'),
   (3005,6,'Atamas16'),
   (3005,7,'Company3');
-
 COMMIT;
 
 #
@@ -23293,7 +23256,6 @@ INSERT INTO `object_value` (`guid`, `field_id`, `value`) VALUES
   (3105,5,'1463'),
   (3105,6,'Atamas1'),
   (3105,7,'Company4');
-
 COMMIT;
 
 #
@@ -23801,7 +23763,6 @@ INSERT INTO `object_value` (`guid`, `field_id`, `value`) VALUES
   (3205,5,'1660'),
   (3205,6,'Atamas20'),
   (3205,7,'Company8');
-
 COMMIT;
 
 #
@@ -24309,7 +24270,6 @@ INSERT INTO `object_value` (`guid`, `field_id`, `value`) VALUES
   (3305,5,'1119'),
   (3305,6,'Atamas13'),
   (3305,7,'Company9');
-
 COMMIT;
 
 #
@@ -24817,7 +24777,6 @@ INSERT INTO `object_value` (`guid`, `field_id`, `value`) VALUES
   (3405,5,'1124'),
   (3405,6,'Atamas9'),
   (3405,7,'Company7');
-
 COMMIT;
 
 #
@@ -25325,7 +25284,6 @@ INSERT INTO `object_value` (`guid`, `field_id`, `value`) VALUES
   (3505,5,'1456'),
   (3505,6,'Atamas11'),
   (3505,7,'Company5');
-
 COMMIT;
 
 #
@@ -25833,7 +25791,6 @@ INSERT INTO `object_value` (`guid`, `field_id`, `value`) VALUES
   (3605,5,'1394'),
   (3605,6,'Atamas8'),
   (3605,7,'Company3');
-
 COMMIT;
 
 #
@@ -26341,7 +26298,6 @@ INSERT INTO `object_value` (`guid`, `field_id`, `value`) VALUES
   (3705,5,'1722'),
   (3705,6,'Atamas2'),
   (3705,7,'Company4');
-
 COMMIT;
 
 #
@@ -26849,7 +26805,6 @@ INSERT INTO `object_value` (`guid`, `field_id`, `value`) VALUES
   (3805,5,'1719'),
   (3805,6,'Atamas2'),
   (3805,7,'Company8');
-
 COMMIT;
 
 #
@@ -27357,7 +27312,6 @@ INSERT INTO `object_value` (`guid`, `field_id`, `value`) VALUES
   (3905,5,'1167'),
   (3905,6,'Atamas10'),
   (3905,7,'Company8');
-
 COMMIT;
 
 #
@@ -27865,7 +27819,6 @@ INSERT INTO `object_value` (`guid`, `field_id`, `value`) VALUES
   (4005,5,'1348'),
   (4005,6,'Atamas16'),
   (4005,7,'Company4');
-
 COMMIT;
 
 #
@@ -28373,7 +28326,6 @@ INSERT INTO `object_value` (`guid`, `field_id`, `value`) VALUES
   (4105,5,'1042'),
   (4105,6,'Atamas1'),
   (4105,7,'Company10');
-
 COMMIT;
 
 #
@@ -28881,7 +28833,6 @@ INSERT INTO `object_value` (`guid`, `field_id`, `value`) VALUES
   (4205,5,'1532'),
   (4205,6,'Atamas15'),
   (4205,7,'Company4');
-
 COMMIT;
 
 #
@@ -29389,7 +29340,6 @@ INSERT INTO `object_value` (`guid`, `field_id`, `value`) VALUES
   (4305,5,'1598'),
   (4305,6,'Atamas18'),
   (4305,7,'Company2');
-
 COMMIT;
 
 #
@@ -29897,7 +29847,6 @@ INSERT INTO `object_value` (`guid`, `field_id`, `value`) VALUES
   (4405,5,'1520'),
   (4405,6,'Atamas3'),
   (4405,7,'Company1');
-
 COMMIT;
 
 #
@@ -30405,7 +30354,6 @@ INSERT INTO `object_value` (`guid`, `field_id`, `value`) VALUES
   (4505,5,'1082'),
   (4505,6,'Atamas9'),
   (4505,7,'Company6');
-
 COMMIT;
 
 #
@@ -30913,7 +30861,6 @@ INSERT INTO `object_value` (`guid`, `field_id`, `value`) VALUES
   (4605,5,'1564'),
   (4605,6,'Atamas6'),
   (4605,7,'Company7');
-
 COMMIT;
 
 #
@@ -31421,7 +31368,6 @@ INSERT INTO `object_value` (`guid`, `field_id`, `value`) VALUES
   (4705,5,'1747'),
   (4705,6,'Atamas16'),
   (4705,7,'Company6');
-
 COMMIT;
 
 #
@@ -31929,7 +31875,6 @@ INSERT INTO `object_value` (`guid`, `field_id`, `value`) VALUES
   (4805,5,'1912'),
   (4805,6,'Atamas9'),
   (4805,7,'Company4');
-
 COMMIT;
 
 #
@@ -32437,7 +32382,6 @@ INSERT INTO `object_value` (`guid`, `field_id`, `value`) VALUES
   (4905,5,'1841'),
   (4905,6,'Atamas6'),
   (4905,7,'Company4');
-
 COMMIT;
 
 #
@@ -32945,7 +32889,6 @@ INSERT INTO `object_value` (`guid`, `field_id`, `value`) VALUES
   (5005,5,'1814'),
   (5005,6,'Atamas17'),
   (5005,7,'Company5');
-
 COMMIT;
 
 #
@@ -33453,7 +33396,6 @@ INSERT INTO `object_value` (`guid`, `field_id`, `value`) VALUES
   (5105,5,'1614'),
   (5105,6,'Atamas3'),
   (5105,7,'Company2');
-
 COMMIT;
 
 #
@@ -33961,7 +33903,6 @@ INSERT INTO `object_value` (`guid`, `field_id`, `value`) VALUES
   (5205,5,'1521'),
   (5205,6,'Atamas15'),
   (5205,7,'Company3');
-
 COMMIT;
 
 #
@@ -34469,7 +34410,6 @@ INSERT INTO `object_value` (`guid`, `field_id`, `value`) VALUES
   (5305,5,'1317'),
   (5305,6,'Atamas13'),
   (5305,7,'Company2');
-
 COMMIT;
 
 #
@@ -34977,7 +34917,6 @@ INSERT INTO `object_value` (`guid`, `field_id`, `value`) VALUES
   (5405,5,'1283'),
   (5405,6,'Atamas8'),
   (5405,7,'Company9');
-
 COMMIT;
 
 #
@@ -35485,7 +35424,6 @@ INSERT INTO `object_value` (`guid`, `field_id`, `value`) VALUES
   (5505,5,'1200'),
   (5505,6,'Atamas20'),
   (5505,7,'Company8');
-
 COMMIT;
 
 #
@@ -35993,7 +35931,6 @@ INSERT INTO `object_value` (`guid`, `field_id`, `value`) VALUES
   (5605,5,'1350'),
   (5605,6,'Atamas20'),
   (5605,7,'Company8');
-
 COMMIT;
 
 #
@@ -36501,7 +36438,6 @@ INSERT INTO `object_value` (`guid`, `field_id`, `value`) VALUES
   (5705,5,'1513'),
   (5705,6,'Atamas9'),
   (5705,7,'Company2');
-
 COMMIT;
 
 #
@@ -37009,7 +36945,6 @@ INSERT INTO `object_value` (`guid`, `field_id`, `value`) VALUES
   (5805,5,'1972'),
   (5805,6,'Atamas17'),
   (5805,7,'Company10');
-
 COMMIT;
 
 #
@@ -37517,7 +37452,6 @@ INSERT INTO `object_value` (`guid`, `field_id`, `value`) VALUES
   (5905,5,'1506'),
   (5905,6,'Atamas6'),
   (5905,7,'Company6');
-
 COMMIT;
 
 #
@@ -38025,7 +37959,6 @@ INSERT INTO `object_value` (`guid`, `field_id`, `value`) VALUES
   (6005,5,'1397'),
   (6005,6,'Atamas5'),
   (6005,7,'Company8');
-
 COMMIT;
 
 #
@@ -38533,7 +38466,6 @@ INSERT INTO `object_value` (`guid`, `field_id`, `value`) VALUES
   (6105,5,'1428'),
   (6105,6,'Atamas15'),
   (6105,7,'Company2');
-
 COMMIT;
 
 #
@@ -39041,7 +38973,6 @@ INSERT INTO `object_value` (`guid`, `field_id`, `value`) VALUES
   (6205,5,'1879'),
   (6205,6,'Atamas7'),
   (6205,7,'Company6');
-
 COMMIT;
 
 #
@@ -39549,7 +39480,6 @@ INSERT INTO `object_value` (`guid`, `field_id`, `value`) VALUES
   (6305,5,'1530'),
   (6305,6,'Atamas1'),
   (6305,7,'Company4');
-
 COMMIT;
 
 #
@@ -40057,7 +39987,6 @@ INSERT INTO `object_value` (`guid`, `field_id`, `value`) VALUES
   (6405,5,'1664'),
   (6405,6,'Atamas8'),
   (6405,7,'Company5');
-
 COMMIT;
 
 #
@@ -40565,7 +40494,6 @@ INSERT INTO `object_value` (`guid`, `field_id`, `value`) VALUES
   (6505,5,'1061'),
   (6505,6,'Atamas10'),
   (6505,7,'Company3');
-
 COMMIT;
 
 #
@@ -41073,7 +41001,6 @@ INSERT INTO `object_value` (`guid`, `field_id`, `value`) VALUES
   (6605,5,'1003'),
   (6605,6,'Atamas15'),
   (6605,7,'Company8');
-
 COMMIT;
 
 #
@@ -41581,7 +41508,6 @@ INSERT INTO `object_value` (`guid`, `field_id`, `value`) VALUES
   (6705,5,'1272'),
   (6705,6,'Atamas6'),
   (6705,7,'Company3');
-
 COMMIT;
 
 #
@@ -42089,7 +42015,6 @@ INSERT INTO `object_value` (`guid`, `field_id`, `value`) VALUES
   (6805,5,'1148'),
   (6805,6,'Atamas12'),
   (6805,7,'Company8');
-
 COMMIT;
 
 #
@@ -42597,7 +42522,6 @@ INSERT INTO `object_value` (`guid`, `field_id`, `value`) VALUES
   (6905,5,'1413'),
   (6905,6,'Atamas14'),
   (6905,7,'Company6');
-
 COMMIT;
 
 #
@@ -43105,7 +43029,6 @@ INSERT INTO `object_value` (`guid`, `field_id`, `value`) VALUES
   (7005,5,'1348'),
   (7005,6,'Atamas3'),
   (7005,7,'Company6');
-
 COMMIT;
 
 #
@@ -43613,7 +43536,6 @@ INSERT INTO `object_value` (`guid`, `field_id`, `value`) VALUES
   (7105,5,'1734'),
   (7105,6,'Atamas20'),
   (7105,7,'Company3');
-
 COMMIT;
 
 #
@@ -43809,7 +43731,6 @@ INSERT INTO `object_value` (`guid`, `field_id`, `value`) VALUES
   (7131,28,'1361225094'),
   (7131,29,'l'),
   (7131,30,'.*');
-
 COMMIT;
 
 #
@@ -43819,7 +43740,6 @@ COMMIT;
 INSERT INTO `test` (`id`, `name`, `description`) VALUES 
   (1,'11111','wwwwww'),
   (2,'2222','dddddddd');
-
 COMMIT;
 
 #
@@ -43828,7 +43748,6 @@ COMMIT;
 
 INSERT INTO `tttt` (`id`, `name`) VALUES 
   (5,'gfdgdgdfg');
-
 COMMIT;
 
 #
@@ -43840,7 +43759,6 @@ INSERT INTO `user` (`id`, `gid`, `login`, `pass`, `active`, `addtime`, `last_vis
   (4,2,'aaa','698d51a19d8a121ce581499d7b701668','0',1322259668,1322259668,'stelss@rambler.ru',NULL),
   (8,2,'2222','934b535800b1cba8f96a5d72f72f1611','0',1322345001,1322345001,'sss@dddd.ru',NULL),
   (9,2,'000','c6f057b86584942e415435ffb1fa93d4','1',1322398476,1322398476,'222@fff.ru','Ruslan');
-
 COMMIT;
 
 #
@@ -43856,6 +43774,10 @@ INSERT INTO `user_group_permission` (`id`, `gid`, `weight`, `level`, `pattern`, 
   (7,1,5,0,'.*::view_mod5','Test'),
   (10,1,7,50,'.*::view_mod','gdfgdfsgdg'),
   (12,-1,8,20,'.*','dfgdfgd');
-
 COMMIT;
 
+
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
