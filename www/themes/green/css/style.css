@@ -545,7 +545,13 @@ table.profile {
 }
 table.profile thead, table.profile_photo thead {
     text-align: center;
-    background: #88AE60 url(../images/bk-table.png) repeat-x bottom;
+    background: url("../images/mnu-gree.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+}
+th
+{
+  background: url("../images/mnu-gree.png") repeat-x scroll 0 0 rgba(0, 0, 0, 0);
+  color: #fff;
+  font-weight: bolder;
 }
 table.profile thead th, table.profile_photo thead th {
     color: #ffffff;

@@ -400,6 +400,20 @@ abstract class Controller
   //////////////////////////////////////////////////////////////////////////////
   ////////////////////////////   URLS       ////////////////////////////////////
   //////////////////////////////////////////////////////////////////////////////
+  function setReferer($url)
+    {
+    if(empty($url))
+      $url = $_SERVER['HTTP_REFERER'];
+    $this->session->setVar('app_referer', $url);
+    }
+  function getReferer($url='/')
+    {
+    $url_ = $this->session->getVar('app_referer');
+    if(!empty($url_))
+      $url= $url_;
+    return $url;
+    }
+    
   function getCurrentURL()
     {
     if (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off')
@@ -579,31 +593,57 @@ abstract class Controller
   //////////////////////////////////////////////////////////////////////////////  
   final public function showMessage($message='', $url='', $data='')
     {
-    $this->session->setVar('sysMessage', $message);
-    $this->session->setVar('sysMessageData', $data);
+    $this->session->setVar('appMessage', $message);
+    $this->session->setVar('appMessageData', $data);
+    $this->session->setVar('appRedirectUrl', $url);
     
-    $this->redirect($url);
+    if($url)
+      $this->redirect($url);
+    return true;
     }
 
   final private function displayMessage()
     {
-    $message = $this->session->getVar('sysMessage');
-    $data = $this->session->getVar('sysMessageData');
-        
+    $message  = $this->session->getVar('appMessage');
+    $data     = $this->session->getVar('appMessageData');
+    $url      = $this->session->getVar('appRedirectUrl'); 
+    
+    
     if($message)
-      $this->smarty->assign('sysMessage', $message);
+      $this->assign('appMessage', $message);
     
     if(!empty($data))
       {
       foreach($data as $key=>$value)
         {
-        $this->$key = $value;
+        $this->assign($key, $value);
         }
       }
     
     //Clean session vars
-    $this->session->delVar('sysMessage');
-    $this->session->delVar('sysMessageData');
+    $this->session->delVar('appMessage');
+    $this->session->delVar('appMessageData');
+    $this->session->delVar('appRedirectUrl');
+    
+    
+    /////////////////////////////////////////////////////
+    /////// Для вывода сообщений в отдельном окне ///////
+    if(empty($message))
+      return;
+    if(empty($url))
+      {
+      $url = $this->session->getVar('prevURL');
+      }
+    $time = 2;
+    $this->smarty->caching = false;
+    $this->smarty->assign('url', $url);
+    $this->smarty->assign('message', $message);
+    $this->smarty->assign('time', $time);
+    //Смотрим че у нас в сесии (Какая тема)
+    //$themename = sysUserTheme ();
+    //$sysTpl->display("themes/test/messages/normal.tpl");
+    $this->smarty->display("themes/green/messages/normal.tpl");
+    exit;
     }
     
     

@@ -30,6 +30,8 @@ class Index extends Controller
     
   function modify($id=0)
     {
+    $this->setReferer();
+    
     $menu = $this->menu->getById($id);
     $browsein = $this->menu->parent_browsein($menu['menu_path']);
     $browsein[] =array('url'=>"/menu/menu_list/{$menu['id']}", 'displayname'=>$menu['menu_title']);
@@ -46,6 +48,8 @@ class Index extends Controller
     
   function create($id=0)
     {
+    $this->setReferer();
+  
     $menu = $this->menu->getById($id);
     $browsein = $this->menu->parent_browsein($menu['menu_path']);
     if($id > 0)
@@ -68,17 +72,19 @@ class Index extends Controller
 
     if($data['submit'])
       {
+      $data['menu_content'] = $data["menu_content{$data['menu_item_type']}"];
       if($id)
         {
         $this->menu->menuUpdate($data, $id);
+        $this->showMessage('Ёлемент меню успешно изменен!');
         }
       else
         {
-        $data['menu_content'] = $data["menu_content{$data['menu_item_type']}"];
         $this->menu->menuCreate($data);
+        $this->showMessage('Ёлемент меню успешно добавлен!');
         }
       }
-    $this->redirect('/menu/menu_list');
+    $this->redirect($this->getReferer('/menu/menu_list'));
     }
     
   function delete($id=0)
@@ -88,10 +94,11 @@ class Index extends Controller
     
     if($this->menu->hasSubitemById($id))
       {
-      $this->showMessage('Menu has subitems! Can not delete');
+      $this->showMessage('Ёлемент меню не может быть удален! ≈сть дочерние элементы.');
       }
     
     $this->menu->menu_delete($id);
+    $this->showMessage('Ёлемент меню успешно удален!');
     $this->redirect();
     }
    

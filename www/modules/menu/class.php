@@ -57,7 +57,7 @@ class Menu extends Model
   function hasSubitemById($id)
     {
     $menu = $this->getById($id);
-    if($this->subitemCount($menu['menu_path']))
+    if($this->subitemCount($id))
       {
       return true;
       }
@@ -66,9 +66,9 @@ class Menu extends Model
       return false;
       }
     }
-  function hasSubitem($id)
+  function hasSubitem($parent_id)
     {
-    if($this->subitemCount($path))
+    if($this->subitemCount($parent_id))
       {
       return true;
       }
@@ -78,20 +78,16 @@ class Menu extends Model
       }
     }
     
-  function subitemCount($path)
+  function subitemCount($parent_id)
     {
-    $params = array('condition'=>array('menu_path'=>"like '$path::%'"));
+    $params = array('condition'=>array('menu_parent_id'=>$parent_id));
     return $this->getCount($params);
     }
     
-  function updateSubitemCounter($path)
+  function updateSubitemCounter($id)
     {
-    $parents = $this->getParents($path);
-    foreach($parents as $parent)
-      {
-      $data['menu_subitem_counter'] = $this->subitemCount($parent['menu_path']);
-      $this->update($this->table, $data, "id = '{$parent['id']}'");
-      }
+    $data['menu_subitem_counter'] = $this->subitemCount($id);
+    $this->update($this->table, $data, "id = '$id'");
     }
     
   function menuCreate($data)
@@ -115,7 +111,7 @@ class Menu extends Model
     
     if($parent)
       {
-      $this->updateSubitemCounter($data['menu_path']);
+      $this->updateSubitemCounter($data['menu_parent_id']);
       }
     }
     
@@ -143,6 +139,21 @@ class Menu extends Model
       }
     
     $this->update($this->table, $data, "id = '$id'");
+    
+    
+      
+    if($old_data['menu_path'] != $data['menu_path'])
+      {
+      $sql = "UPDATE {$this->table} SET menu_path = REPLACE(menu_path, '{$old_data['menu_path']}::{$id}', '{$data['menu_path']}::{$id}') WHERE menu_path LIKE '{$old_data['menu_path']}::{$id}%'";
+      $this->query($sql);
+
+      $this->updateSubitemCounter($old_data['menu_parent_id']);
+      }
+      
+    if($parent)
+      {
+      $this->updateSubitemCounter($data['menu_parent_id']);
+      }
     }
     
   function menu_delete($id)
@@ -150,7 +161,9 @@ class Menu extends Model
     if(!is_numeric($id))
       return false;
 
+    $menu = $this->getById($id);
     $this->query("DELETE FROM $this->table WHERE id='$id'");
+    $this->updateSubitemCounter($menu['menu_parent_id']);
     }
     
   function tree_items($parent_id = 0, $active = true)
