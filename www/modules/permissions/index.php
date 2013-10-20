@@ -9,8 +9,8 @@ class Index extends Controller
     
     $this->group_permission = $this->permissions->group_permissions_list();
     $this->levels = $this->permissions->permission_level();
-    
-    $this->group = $this->groups->group_list();
+   
+    $this->assign('group', $this->groups->group_list());
     $this->viewPage();
     }
     
@@ -33,7 +33,7 @@ class Index extends Controller
     ////////////////////////////////////////////////////////////////////////////
     
     $this->usesModel('groups');
-    $this->groups = $this->groups->group_list();
+    $this->assign('groups', $this->groups->group_list());
     
     
   

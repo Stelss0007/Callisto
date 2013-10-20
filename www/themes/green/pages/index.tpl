@@ -82,24 +82,7 @@
         <tr>
           <td class="fblock">
             <span class='sbtitle'>Меню пользователя</span>
-            <div class='usermenu'>
-              <span id='mnu_title1' class='usermnutitle-g'>
-                Зарабатывать
-              </span>
-              <div id='mnu_tblock1' class='usermnublock'>
-                <span class='usermnudelim'></span>
-                <a class='usermnuline' href="?page=main">Главная</a>
-                <a class='usermnuline' href="index.php?module=user&func=login">Вход</a>
-                <a class='usermnuline' href="index.php?module=test">Test</a>
-                <a class='usermnuline' href="index.php?module=article&type=admin&func=article_new">Создать статью</a>
-                <a class='usermnuline' href="index.php?module=article&type=user&func=article_list">Статьи</a>
-                <a class='usermnuline' href="index.php?module=groups&type=admin">Группы пользователей</a>
-                <a class='usermnuline' href="index.php?module=user&type=admin&func=user_list">Пользователи</a>
-                <a class='usermnuline-act' href="index.php?module=blocks&type=admin">Блоки</a>
-                <span class='usermnudelim'></span>
-              </div>
-
-              {* Левая часть *}
+            {* Левая часть *}
               {if $blocks.left}
                 {foreach item=block from=$blocks.left}
                  <span id='mnu_title1' class='usermnutitle-g'>

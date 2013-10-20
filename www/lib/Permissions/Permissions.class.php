@@ -74,7 +74,7 @@
     $groups_perms_column = sysDBGetColumns($groups_perms_table);
 
     //Находим и задаем самый большой вес
-    $MaxWeight = sysDbMaxWeight ($groups_perms_table);
+    $MaxWeight = appDbMaxWeight ($groups_perms_table);
     $MaxWeight++;
     $args ['weight'] = $MaxWeight;
 
@@ -89,11 +89,11 @@
   */
   function groupPermsUpdate($args)
     {
-    $groups_perms_table = sysDBGetTable('groups_perms');
-    $groups_perms_column = sysDBGetColumns($groups_perms_table);
+    $groups_perms_table = appDBGetTable('groups_perms');
+    $groups_perms_column = appDBGetColumns($groups_perms_table);
     //Добавляем элимент в базу.
     unset ($args ['weight']);//Подстраховка
-    sysDbUpdate ($groups_perms_table, $args, "WHERE $groups_perms_column[id]='$args[id]'");
+    appDbUpdate ($groups_perms_table, $args, "WHERE $groups_perms_column[id]='$args[id]'");
     //Очищаем кеш прав доступа группы
     appVarDelCached('kernel', 'sec_levels');
     return true;
@@ -107,10 +107,10 @@
     sysExtLibLoad();
     $dbdata = $this->groups_perms_get_info ($id);
     //Удаление
-    $groups_perms_table = sysDBGetTable('groups_perms');
-    $groups_perms_column = sysDBGetColumns($groups_perms_table);
-    sysDbDelete ($groups_perms_table, "WHERE $groups_perms_column[id]='$id'");
-    sysDbWeightDelete ($groups_perms_table, $dbdata['weight'],'');
+    $groups_perms_table = appDBGetTable('groups_perms');
+    $groups_perms_column = appDBGetColumns($groups_perms_table);
+    appDbDelete ($groups_perms_table, "WHERE $groups_perms_column[id]='$id'");
+    appDbWeightDelete ($groups_perms_table, $dbdata['weight'],'');
     //Очищаем кеш прав доступа группы
     appVarDelCached('kernel', 'sec_levels');
     return true;
@@ -126,7 +126,7 @@
     $groups_perms_column = sysDBGetColumns($groups_perms_table);
     $dbdata = $this->groups_perms_get_info ($id);
 
-    sysDbWeightMoveUp ($groups_perms_table, $dbdata['weight']);
+    appDbWeightMoveUp ($groups_perms_table, $dbdata['weight']);
 
     appVarDelCached('kernel', 'sec_levels');
     return true;
@@ -142,7 +142,7 @@
     $groups_perms_column = sysDBGetColumns($groups_perms_table);
     $dbdata = $this->groups_perms_get_info ($id);
 
-    sysDbWeightMoveDown ($groups_perms_table, $dbdata['weight']);
+    appDbWeightMoveDown ($groups_perms_table, $dbdata['weight']);
 
     appVarDelCached('kernel', 'sec_levels');
     return true;

@@ -36,9 +36,13 @@ class Block
   public $lib;
   public $libs = array();
   protected $modname;
+  
+  private $lang;
+  private $lang_default = 'rus';
 
   function __construct($block_info) 
     {
+    global $coreConfig;
     $this->root_dir = $_SERVER['DOCUMENT_ROOT'].'/';
     foreach($block_info as $key=>$value)
       {
@@ -60,6 +64,9 @@ class Block
     require_once(SMARTY_DIR.'Smarty.class.php');
     $this->smarty = new viewTpl();
     $this->smarty->assign($block_info);
+    
+    //Установим язык
+    $this->setLang($coreConfig['lang']);
     }
     /************************** Блоки  *******************************/
   //Соберем все блоки и приготовим к отображению по своим местам
@@ -128,12 +135,12 @@ class Block
     //Подключим файл блока, если он есть, если нет вернем ошибку
     $fname = "blocks/$block[block_name]/block.php";
     
-    
     if (file_exists($fname))
       {
       include_once ($fname);
       
       $$block[block_name] = new $block[block_name]($block);
+      $$block[block_name]->loadBlockLang($block[block_name]);
       }
     else
       {
@@ -187,6 +194,10 @@ class Block
       $this->smarty->assign($name, $value, false);
       }
     }
+    
+    
+    
+    
     
   final public function tplFileName($method, $debug=false)
     {
@@ -303,6 +314,24 @@ class Block
 
     $this->session = & new UserSession;
     //print_r(get_class_methods($this->$modelname));
+    }
+    
+  function setLang($lang='rus')
+    {
+    $this->lang = $lang;
+    }
+    
+  function loadBlockLang($blockName)
+    {
+    if (file_exists ("blocks/$blockName/lang/$this->lang/lang.conf"))
+      {
+      $this->smarty->config_load("blocks/$blockName/lang/$this->lang/lang.conf");
+      }
+    elseif (($this->lang !=$this->lang_default) && file_exists("blocks/$blockName/lang/$this->lang_default/lang.conf"))
+      {
+      $this->smarty->config_load("blocks/$blockName/lang/$this->lang_default/lang.conf");
+      }
+    return true;
     }
   }
 ?>

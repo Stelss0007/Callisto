@@ -1,4 +1,4 @@
-<h2>Меню</h2>
+<h2>{#menu_header#}</h2>
 <table border='1' width='100%' cellspacing=0 cellpadding=4>
   <colgroup>
     <col width='340'>
@@ -9,16 +9,16 @@
   <thead>
     <tr>
       <th>
-        Название
+        {#menu_title#}
       </th>
       <th>
-        Путь (URL)
+        {#menu_url#}
       </th>
       <th>
-        Порядок
+        {#menu_order#}
       </th>
       <th>
-        Действия
+        {#menu_actions#}
       </th>
    </tr>
   </thead>
@@ -38,13 +38,13 @@
         <a href='/menu/menu_down/{$menu.id}'><img src="/files/shared/images/system/down.gif"></a>
       </td>
       <td>
-        <a href='/menu/modify/{$menu.id}'>Edit</a>
-        <a href='/menu/delete/{$menu.id}' onclick="return confirm('Удалить элемент?')">Delete</a>
+        <a href='/menu/modify/{$menu.id}' title="{#sys_edit#}"><img alt="{#sys_edit#}" src="/files/shared/images/system/edit.gif"></a>
+        <a href='/menu/delete/{$menu.id}' title="{#sys_delete#}" onclick="return confirm('{#sys_confirm_delete#}');"><img alt="{#sys_delete#}" src="/files/shared/images/system/del.gif"></a>
       </td>
     </tr>
    {/foreach}
   </tbody>
 </table>
 <div style="text-align: center;">
-  [ <a href='/menu/create{if $parent_id}/{$parent_id}{/if}'>Добавить</a> ]
+  [ <a href='/menu/create{if $parent_id}/{$parent_id}{/if}'>{#menu_add#}</a> ]
 </div>

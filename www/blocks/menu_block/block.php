@@ -3,6 +3,9 @@ class menu_block extends Block
   {
   function display(&$blockinfo)
     {
+    //print_r($blockinfo);
+    $this->usesModel('menu');
+    $this->menu_list = $this->menu->getList(array('condition'=>$blockinfo['id']));
     return $this->view();
     }
     

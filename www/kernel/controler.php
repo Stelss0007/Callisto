@@ -17,6 +17,8 @@ abstract class Controller
   protected $action;
   public $input_vars = array();
   protected $input_vars_clear = array();
+  private $lang;
+  private $lang_default = 'rus';
   
   public $URL;
   public $prevURL;
@@ -101,6 +103,11 @@ abstract class Controller
     //??????? ???? ???????????
     $this->theme = 'green';
     
+    //Установим язык
+    $this->setLang($coreConfig['lang']);
+    $this->loadLang();
+    $this->loadModuleLang($this->modname);
+    
     //$this->object_name = $this->getObjectName();
 
     //??????? ??? ????????? ? ??????? ?????????? ? ???????? input_vars
@@ -115,6 +122,7 @@ abstract class Controller
     
     $this->displayMessage();
     }
+    
   function __destruct()
     {
     global $coreConfig;
@@ -346,6 +354,52 @@ abstract class Controller
       $args .= '|'.$value;
       }
     return $this->modname.'|'.$this->type.'|'.$action.$args;
+    }
+    
+    
+  //////////////////////////////////////////////////////////////////////////////
+  ///////////////////////////// Languages //////////////////////////////////////
+  function setLang($lang='rus')
+    {
+    $this->lang = $lang;
+    }
+  function loadLang()
+    {
+    if (file_exists ("lang/$this->lang/lang.conf"))
+      {
+      $this->smarty->config_load("lang/$this->lang/lang.conf");
+      }
+    elseif (($this->lang !=$this->lang_default) && file_exists("lang/$this->lang_default/lang.conf"))
+      {
+      $this->smarty->config_load("lang/$this->lang_default/lang.conf");
+      }
+    return true;
+    }
+    
+  function loadBlockLang($blockName)
+    {
+    if (file_exists ("blocks/$blockName/lang/$this->lang/lang.conf"))
+      {
+      $this->smarty->config_load("blocks/$blockName/lang/$this->lang/lang.conf");
+      }
+    elseif (($this->lang !=$this->lang_default) && file_exists("blocks/$blockName/lang/$this->lang_default/lang.conf"))
+      {
+      $this->smarty->config_load("blocks/$blockName/lang/$this->lang_default/lang.conf");
+      }
+    return true;
+    }
+    
+  function loadModuleLang($moduleName)
+    {
+    if(file_exists ("modules/$moduleName/lang/$this->lang/lang.conf"))
+      {
+      $this->smarty->config_load("modules/$moduleName/lang/$this->lang/lang.conf");
+      }
+    elseif(($this->lang !=$this->lang_default) && file_exists("modules/$moduleName/lang/$this->lang_default/lang.conf"))
+      {
+      $this->smarty->config_load("modules/$moduleName/lang/$this->lang_default/lang.conf");
+      }
+    return true;
     }
 
   //////////////////////////////////////////////////////////////////////////////
