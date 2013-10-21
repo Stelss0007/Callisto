@@ -102,17 +102,34 @@ class Index extends Controller
     $this->redirect();
     }
    
-  //////////////////////////////////////////////////////////////////////////////  
-  function test()
+   function weight_up($weight, $menu_parent_id)
     {
-    $element = $this->menu->getByIdOrderByGroup_Displayname("'1', '3'");
-    print_r($element);
+    $this->getAccess(ACCESS_ADMIN);
+    $this->menu->weightUp($weight, "menu_parent_id = '$menu_parent_id'");
+    $this->redirect();
     }
     
-  function tree()
+  function weight_down($weight, $menu_parent_id)
     {
-    $element = $this->menu->tree_items();
-    print_r($element);
+    $this->getAccess(ACCESS_ADMIN);
+    $this->menu->weightDown($weight, "menu_parent_id = '$menu_parent_id'");
+    $this->redirect();
+    }
+    
+  function active($id)
+    {
+    $this->getAccess(ACCESS_ADMIN);
+    $this->menu->block_active = '1';
+    $this->menu->save($id);
+    $this->redirect();
+    }
+    
+  function deactive($id)
+    {
+    $this->getAccess(ACCESS_ADMIN);
+    $this->menu->block_active = '0';
+    $this->menu->save($id);
+    $this->redirect();
     }
   }
 ?>

@@ -10,7 +10,7 @@ class Menu extends Model
   function menu_list($parent_id = 0)
     {
 
-    $this->query("SELECT * FROM $this->table WHERE menu_parent_id = '%d'", $parent_id);
+    $this->query("SELECT * FROM $this->table WHERE menu_parent_id = '%d' ORDER BY menu_weight", $parent_id);
     $menu = $this->fetch_array();
     
     return $menu;
@@ -89,6 +89,18 @@ class Menu extends Model
     $data['menu_subitem_counter'] = $this->subitemCount($id);
     $this->update($this->table, $data, "id = '$id'");
     }
+ 
+  function isChild($parent_id = 0, $element_id = 0)
+    {
+    if(empty($parent_id)) $parent_id =0;
+    if(empty($element_id)) $element_id =0;
+    
+    $conditions = array(
+                       'condition'  => "(menu_parent_id = :pid OR menu_path LIKE '%:::pid::%') AND id = :id",
+                       'params' => array(':pid'=>$element_id, ':id'=>$parent_id)
+                       );
+    return ($this->getList($conditions)) ? true : false;
+    }
     
   function menuCreate($data)
     {
@@ -106,6 +118,9 @@ class Menu extends Model
       $data['menu_path'] = '0';
       }
 
+    $weight = $this->weightMax("menu_parent_id = '{$data['menu_parent_id']}'");
+    $weight++;
+    $data['menu_weight'] = $weight;
       
     $this->insert($this->table, $data);
     
@@ -129,6 +144,10 @@ class Menu extends Model
       $data['menu_parent_id'] = '0';
     
     $parent = $this->getById($data['menu_parent_id']);
+  
+    if($this->isChild($parent['id'], $id))
+      $this->errors->setError('Нельзя вложить элемент в дочерний элемент!');
+    
     if($parent)
       {
       $data['menu_path'] = ($parent['menu_path']) ? $parent['menu_path'].'::'.$data['menu_parent_id'] : '0'.'::'.$data['menu_parent_id'];
@@ -137,11 +156,9 @@ class Menu extends Model
       {
       $data['menu_path'] = '0';
       }
-    
+        
     $this->update($this->table, $data, "id = '$id'");
     
-    
-      
     if($old_data['menu_path'] != $data['menu_path'])
       {
       $sql = "UPDATE {$this->table} SET menu_path = REPLACE(menu_path, '{$old_data['menu_path']}::{$id}', '{$data['menu_path']}::{$id}') WHERE menu_path LIKE '{$old_data['menu_path']}::{$id}%'";

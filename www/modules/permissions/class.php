@@ -9,7 +9,7 @@ class Permissions extends Model
   
   function group_permissions_list()
     {
-    $this->query("SELECT * FROM user_group_permission ORDER BY weight");
+    $this->query("SELECT * FROM user_group_permission ORDER BY {$this->table}_weight");
     return $this->fetch_array();
     }
     
@@ -60,7 +60,7 @@ class Permissions extends Model
     if(!is_numeric($id))
       return false;
     $group_permision = $this->group_permission($id);
-    $this->weightDelete($group_permision['weight'], $where);
+    $this->weightDelete($group_permision["{$this->table}_weight"], $where);
     $this->query("DELETE FROM user_group_permission WHERE id='$id'");
     }
   }

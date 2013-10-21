@@ -23,7 +23,7 @@
    </tr>
   </thead>
   <tbody>
-   {foreach from=$menus item=menu}
+   {foreach from=$menus item=menu name=menu_}
     {cycle name="menu" values="even,odd" assign="class" print=false}
     <tr class='{$class}'>
       <td>
@@ -34,8 +34,17 @@
         <a href="{$menu.menu_content}">{$menu.menu_content}</a>
       </td>
       <td style="text-align: center;">
-        <a href='/menu/menu_up/{$menu.id}'><img src="/files/shared/images/system/up.gif"></a>
-        <a href='/menu/menu_down/{$menu.id}'><img src="/files/shared/images/system/down.gif"></a>
+          {if !$smarty.foreach.menu_.first}
+            <a href="/menu/weight_up/{$menu.menu_weight}/{$menu.menu_parent_id}"><img border="0" src="/files/shared/images/system/up.gif"></a>
+          {/if}
+          {if !$smarty.foreach.menu_.first && !$smarty.foreach.menu_.last}
+            &nbsp;
+          {/if}
+          {if !$smarty.foreach.menu_.last}
+            <a href="/menu/weight_down/{$menu.menu_weight}/{$menu.menu_parent_id}"><img border="0" src="/files/shared/images/system/down.gif"></a>
+          {/if}
+       {* <a href='/menu/weight_up/{$menu.menu_weight}/{$menu.menu_parent_id}'><img src="/files/shared/images/system/up.gif"></a>
+        <a href='/menu/weight_down/{$menu.menu_weight}/{$menu.menu_parent_id}'><img src="/files/shared/images/system/down.gif"></a>*}
       </td>
       <td>
         <a href='/menu/modify/{$menu.id}' title="{#sys_edit#}"><img alt="{#sys_edit#}" src="/files/shared/images/system/edit.gif"></a>

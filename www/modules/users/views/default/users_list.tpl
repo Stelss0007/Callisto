@@ -1,32 +1,32 @@
 <h2>Групы пользователей</h2>
-<table border='0' width='100%' cellspacing=0 cellpadding=2>
-  <thead style="text-align: left; font-size: 12px; background-color: #64BC51; color: #fff;">
-  <tr>
-    <th>
-      ID
-    </th>
-    <th>
-      Логин
-    </th>
-    <th>
-      Имя(Ф.И.О)
-    </th>
-    <th>
-      E-mail
-    </th>
-    <th>
-      Группа
-    </th>
-    <th>
-      Дата Регистрации
-    </th>
-    <th>
-      Последний вход в стистему
-    </th>
-    <th>
-      Действия
-    </th>
-   </tr>
+<table border='1' width='100%' cellspacing=0 cellpadding=2>
+  <thead style="">
+    <tr>
+      <th>
+        ID
+      </th>
+      <th>
+        Логин
+      </th>
+      <th>
+        Имя(Ф.И.О)
+      </th>
+      <th>
+        E-mail
+      </th>
+      <th>
+        Группа
+      </th>
+      <th>
+        Дата Регистрации
+      </th>
+      <th>
+        Последний вход в стистему
+      </th>
+      <th>
+        Действия
+      </th>
+     </tr>
   </thead>
   <tbody>
    {foreach from=$users_list item=user}

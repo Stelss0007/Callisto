@@ -13,6 +13,7 @@ class Model extends DBConnector
     global $coreConfig;
     
     //echo "host=".$coreConfig['DB.Host'];
+    $this->errors =& ErrorHandler::getInstance();
     
     $this->Host = $coreConfig['DB.Host'];
     $this->User = $coreConfig['DB.UserName'];
@@ -524,7 +525,7 @@ class Model extends DBConnector
       $where = str_replace('WHERE', '', $where);
       if(!empty($where))
         $where = ' WHERE '.$where;
-      $this->query("SELECT MAX(weight) as max FROM {$this->table}".$where);
+      $this->query("SELECT MAX({$this->table}_weight) as max FROM {$this->table}".$where);
       $result = $this->fetch_array();
       $maxweight = $result[0]['max'];
       return $maxweight;
@@ -541,7 +542,7 @@ class Model extends DBConnector
         $where=" AND $where";
         };
 
-      $this->query("UPDATE {$this->table} SET weight = weight-1 WHERE weight >'$weight' $where");
+      $this->query("UPDATE {$this->table} SET {$this->table}_weight = {$this->table}_weight-1 WHERE {$this->table}_weight >'$weight' $where");
 
       return true;
       }
@@ -561,15 +562,15 @@ class Model extends DBConnector
         }
       
       $next_weight = $weight--;
-      $this->query("SELECT * FROM {$this->table} WHERE weight IN ('$weight', '$next_weight') $where ORDER BY weight LIMIT 2");
+      $this->query("SELECT * FROM {$this->table} WHERE {$this->table}_weight IN ('$weight', '$next_weight') $where ORDER BY {$this->table}_weight LIMIT 2");
       $dbresult = $this->fetch_array();
 
       //????????????
-      $dbresult[0][weight]++;
-      $dbresult[1][weight]--;
+      $dbresult[0]["{$this->table}_weight"]++;
+      $dbresult[1]["{$this->table}_weight"]--;
 
       foreach ($dbresult as $newresult)
-        $this->query("UPDATE {$this->table} SET weight = '$newresult[weight]' WHERE id = '$newresult[id]'");
+        $this->query("UPDATE {$this->table} SET {$this->table}_weight = '".$newresult["{$this->table}_weight"]."' WHERE id = '$newresult[id]'");
 
       return true;
       }
@@ -590,15 +591,15 @@ class Model extends DBConnector
         }
       
       $next_weight = $weight++;
-      $this->query("SELECT * FROM {$this->table} WHERE weight IN ('$weight', '$next_weight') $where ORDER BY weight LIMIT 2");
+      $this->query("SELECT * FROM {$this->table} WHERE {$this->table}_weight IN ('$weight', '$next_weight') $where ORDER BY {$this->table}_weight LIMIT 2");
       $dbresult = $this->fetch_array();
 
       //????????????
-      $dbresult[0][weight]++;
-      $dbresult[1][weight]--;
+      $dbresult[0]["{$this->table}_weight"]++;
+      $dbresult[1]["{$this->table}_weight"]--;
 
       foreach ($dbresult as $newresult)
-        $this->query("UPDATE {$this->table} SET weight = '$newresult[weight]' WHERE id = '$newresult[id]'");
+        $this->query("UPDATE {$this->table} SET {$this->table}_weight = '".$newresult["{$this->table}_weight"]."' WHERE id = '$newresult[id]'");
 
       return true;
       }

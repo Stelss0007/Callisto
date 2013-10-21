@@ -15,7 +15,7 @@
       <td class="head">
         Группа
       </td>
-      <td>
+      <td class="even">
         {html_options name=gid options=$groups selected=$gid}
       </td>
     </tr>
@@ -23,15 +23,15 @@
       <td class="head">
         Объект
       </td>
-      <td>
-        <input type="text" name='pattern' value='{$pattern}'>
+      <td class="even">
+        <input type="text" name='pattern' value='{$pattern}'  style="width: 98%;">
       </td>
     </tr>
     <tr>
       <td class="head">
         Уровень доступа
       </td>
-      <td>
+      <td class="even">
         {html_options name=level options=$levels selected=$level}
       </td>
     </tr>
@@ -39,8 +39,8 @@
       <td class="head">
         Описание
       </td>
-      <td>
-        <textarea name=description>{$description}</textarea>
+      <td class="even">
+        <textarea name='description' style="width: 98%;">{$description}</textarea>
       </td>
     </tr>
     </tbody>  

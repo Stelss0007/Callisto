@@ -23,7 +23,7 @@
    </tr>
   </thead>
   <tbody>
-   {foreach from=$menus item=menu}
+   {foreach from=$menus item=menu name=menu_}
     {cycle name="menu" values="even,odd" assign="class" print=false}
     <tr class='{$class}'>
       <td>
@@ -33,12 +33,20 @@
       <td>
         <a href="{$menu.menu_content}">{$menu.menu_content}</a>
       </td>
-      <td>
-        
+      <td style="text-align: center;">
+        {if !$smarty.foreach.menu_.first}
+            <a href="/menu/weight_up/{$menu.menu_weight}/{$menu.menu_parent_id}"><img border="0" src="/files/shared/images/system/up.gif"></a>
+        {/if}
+        {if !$smarty.foreach.menu_.first && !$smarty.foreach.menu_.last}
+          &nbsp;
+        {/if}
+        {if !$smarty.foreach.menu_.last}
+          <a href="/menu/weight_down/{$menu.menu_weight}/{$menu.menu_parent_id}"><img border="0" src="/files/shared/images/system/down.gif"></a>
+        {/if}
       </td>
       <td>
-        <a href='/menu/modify/{$menu.id}'>Edit</a>
-        <a href='/menu/delete/{$menu.id}' onclick="return confirm('Удалить элемент?')">Delete</a>
+        <a href='/menu/modify/{$menu.id}' title="{#sys_edit#}"><img alt="{#sys_edit#}" src="/files/shared/images/system/edit.gif"></a>
+        <a href='/menu/delete/{$menu.id}' title="{#sys_delete#}" onclick="return confirm('{#sys_confirm_delete#}');"><img alt="{#sys_delete#}" src="/files/shared/images/system/del.gif"></a>
       </td>
     </tr>
    {/foreach}

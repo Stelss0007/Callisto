@@ -301,20 +301,20 @@ abstract class Controller
       $this->tpls[] = '(Overridden by Theme) '.'themes/'.$this->theme.'/'.$this->module_dir.$view_file_name.'.tpl';
       return $this->root_dir.'themes/'.$this->theme.'/'.$this->module_dir.$view_file_name.'.tpl';
       }
-    elseif(file_exists($this->root_dir.$this->module_dir.'themes/default/'.$view_file_name.'.tpl'))
+    elseif(file_exists($this->root_dir.$this->module_dir.'views/default/'.$view_file_name.'.tpl'))
       {
       $this->tpls[] = '(Original Module TPL) '.$this->module_dir.'themes/default/'.$view_file_name.'.tpl';
-      return $this->root_dir.$this->module_dir.'themes/default/'.$view_file_name.'.tpl';
+      return $this->root_dir.$this->module_dir.'views/default/'.$view_file_name.'.tpl';
       }
     elseif(!empty($debug))
       {
-      $this->tpls[] = '(TPL file is not exist!) '.$this->module_dir.'themes/default/'.$view_file_name.'.tpl';
-      return 'TPL file is not exist! '.$this->root_dir.$this->module_dir.'themes/default/'.$view_file_name.'.tpl <br> You most created tpl file <b>"'.$view_file_name.'.tpl"</b> for module <b>'.$this->modname.'</b><br>';
+      $this->tpls[] = '(TPL file is not exist!) '.$this->module_dir.'views/default/'.$view_file_name.'.tpl';
+      return 'TPL file is not exist! '.$this->root_dir.$this->module_dir.'views/default/'.$view_file_name.'.tpl <br> You most created tpl file <b>"'.$view_file_name.'.tpl"</b> for module <b>'.$this->modname.'</b><br>';
       }
     else
       {
-      $this->tpls[] = '(TPL file is not exist!) '.$this->module_dir.'themes/default/'.$view_file_name.'.tpl';
-      echo 'TPL file is not exist! '.$this->root_dir.$this->module_dir.'themes/default/'.$view_file_name.'.tpl <br> You most created tpl file <b>"'.$view_file_name.'.tpl"</b> for module <b>'.$this->modname.'</b><br>';
+      $this->tpls[] = '(TPL file is not exist!) '.$this->module_dir.'views/default/'.$view_file_name.'.tpl';
+      echo 'TPL file is not exist! '.$this->root_dir.$this->module_dir.'views/default/'.$view_file_name.'.tpl <br> You most created tpl file <b>"'.$view_file_name.'.tpl"</b> for module <b>'.$this->modname.'</b><br>';
       echo "Values for TPL:<br>";
       echo "<pre>";
       print_r($this->vars);

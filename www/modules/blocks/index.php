@@ -160,38 +160,35 @@ class Index extends Controller
     $position[c]='Поцентру';
 
 
-    $blocks_list = $this->blocks->getById($id);
-
-    foreach($blocks_list[0] as $key=>$value)
-      $this->$key = $value;
+    $block = $this->blocks->getById($id);
     
     $this->positions = $position;
     $this->ref = $_SERVER['HTTP_REFERER'];
 
     //Получим доп настройки блока, передав ему управление
-    $block_file='blocks/'.$blocks_list[0]['block_name'].'/block.php';
+    $block_file='blocks/'.$block['block_name'].'/block.php';
     if (file_exists ($block_file))
       {
       include_once($block_file);
-      $block = new $blocks_list[0]['block_name']($blocks_list[0]);
-      $block->block_name = $blocks_list[0]['block_name'];
+      $block_obj = new $block['block_name']($block);
+      $block_obj->block_name = $block['block_name'];
 //      $block_modify_fn = $blocks_list[0]['block_name'].'_modify';
       $block_modify_fn = 'modify';
-      if (method_exists($block, $block_modify_fn))
+      if (method_exists($block_obj, $block_modify_fn))
         {
-        $block_config_result = $block->$block_modify_fn($blocks_list[0]);
+        $block_config_result = $block_obj->$block_modify_fn($block);
         $this->block_config_result = $block_config_result['block_content'];
         }
       }
 
-
+    $this->assign($block);
 
     //BrowseIn
     $browsein = array();
     $browsein[] = array ('url'=>'/blocks/',
                         'displayname'=>'Блоки');
     $browsein[] = array ('url'=>'/blocks/',
-                        'displayname'=>'Редактирование блока "'.$blocks_list[0]['block_name'].'"');
+                        'displayname'=>'Редактирование блока "'.$block['block_name'].'"');
 
     $this->module_browsein = $browsein;
     $this->viewPage();
@@ -214,22 +211,22 @@ class Index extends Controller
     $this->arrayToModel($this->blocks, $this->input_vars);
     $id = $this->blocks->save();
 
-    $blocks_list = $this->blocks->getById($id);
+    $block = $this->blocks->getById($id);
 
     //Обновим доп настройки блока, передав ему управление
-    $block_file='blocks/'.$blocks_list[0]['block_name'].'/block.php';
+    $block_file='blocks/'.$block['block_name'].'/block.php';
     
     if (file_exists ($block_file))
       {
       include_once($block_file);
-      $block = new $blocks_list[0]['block_name']($blocks_list[0]);
-      $block->block_name = $blocks_list[0]['block_name'];
+      $block_obj = new $block['block_name']($block);
+      $block_obj->block_name = $block['block_name'];
 //      $block_modify_fn = $blocks_list[0]['block_name'].'_modify';
       $block_modify_fn = 'update';
-      if (method_exists($block, $block_modify_fn))
+      if (method_exists($block_obj, $block_modify_fn))
         {
-        $block->input_vars = $this->input_vars;
-        $block_config_result = $block->$block_modify_fn($blocks_list[0]);
+        $block_obj->input_vars = $this->input_vars;
+        $block_config_result = $block_obj->$block_modify_fn($block);
         }
       }
     /*TODO Доделать пересчет весов если изменилась позиция блока*/

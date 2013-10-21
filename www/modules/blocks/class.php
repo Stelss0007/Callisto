@@ -5,11 +5,11 @@
  */
 class Blocks extends Model
   {
-  var $table = 'blocks';
+  var $table = 'block';
   
   function block_list()
     {
-    $this->query("SELECT * FROM blocks ORDER BY block_position, weight");
+    $this->query("SELECT * FROM block ORDER BY block_position, {$this->table}_weight");
     $blocks= $this->fetch_array();
 
     $blocks_list = array();
@@ -38,41 +38,7 @@ class Blocks extends Model
     return $blocks_list;
     }
     
-  function block($id)
-    {
-    if(!is_numeric($id))
-      return false;
-    
-    $this->query("SELECT * FROM block WHERE id='$id'");
-    $block =  $this->fetch_array();
-    return $block[0];
-    }
-    
-  function block_create($data)
-    {
-    if($data['pass'])
-      $data['pass'] = md5($data['pass']);
-    
-    $this->insert($this->table, $data);
-    }
-    
-  function block_update($data, $id)
-    {
-    if(!is_numeric($id))
-      return false;
-    if($data['pass'])
-      $data['pass'] = md5($data['pass']);
-    
-    $this->update($this->table, $data, "id = '$id'");
-    }
-    
-  function block_delete($id)
-    {
-    if(!is_numeric($id))
-      return false;
 
-    $this->query("DELETE FROM block WHERE id='$id'");
-    }
     
   function block_activation($id)
     {
@@ -80,38 +46,6 @@ class Blocks extends Model
       return false;
 
     $this->query("UPDATE block SET active = IF(active ='1','0','1') WHERE id='$id'");
-    }
-    
-  function logIn($login, $pass)
-    {
-    $pass = md5($pass);
-    $this->query("SELECT * FROM block WHERE login='%s' AND pass='%s' AND active = '1'", $login, $pass);
-    $block =  $this->fetch_array();
-    
-    if(empty($block))
-      return false;
-    
-    $this->session->blockLogin($block[0]);
-    return true;
-    }
-    
-  function logOut()
-    {
-    $this->session->blockLogOut();
-    }
-    
-  function isLogin()
-    {
-    return $this->session->isLogin();
-    }
-    
-  function blockId()
-    {
-    return $this->session->blockId();
-    }
-  function blockGid()
-    {
-    return $this->session->blockGid();
     }
   }
 ?>

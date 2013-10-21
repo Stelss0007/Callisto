@@ -75,7 +75,7 @@ class Block
     {
     $db=DBConnector::getInstance();
     $ses_info=UserSession::getInstance();
-    $db->query("SELECT * FROM blocks WHERE block_active = '1' ORDER BY block_position, weight");
+    $db->query("SELECT * FROM block WHERE block_active = '1' ORDER BY block_position, block_weight");
     $db_block_list = $db->fetch_array();
   //  echo 'Результат значений:<br><pre>';
   //  print_r($object);

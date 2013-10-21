@@ -27,12 +27,10 @@ class Index extends Controller
       }
     ////////////////////////////////////////////////////////////////////////////
  
-    $group = $this->groups->group($id);
+    $group = $this->groups->getById($id);
     if($group)
       {
-      $this->id = $group['id'];
-      $this->group_displayname = $group['group_displayname'];
-      $this->group_description = $group['group_description'];
+      $this->assign($group);
       }
        
     $this->viewPage();
