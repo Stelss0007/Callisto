@@ -763,6 +763,7 @@ class Model extends DBConnector
     {
     $condition = $this->prepareCondition($conditions, $params);
     $where = "{$condition['join']} {$condition['where']} {$condition['group']} {$condition['order']} {$condition['limit']}";
+
     return $this->select($this->table, $condition['fields'], $where, true);   
     }
   final function getById($id)

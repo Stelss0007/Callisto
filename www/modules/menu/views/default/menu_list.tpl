@@ -43,8 +43,6 @@
           {if !$smarty.foreach.menu_.last}
             <a href="/menu/weight_down/{$menu.menu_weight}/{$menu.menu_parent_id}"><img border="0" src="/files/shared/images/system/down.gif"></a>
           {/if}
-       {* <a href='/menu/weight_up/{$menu.menu_weight}/{$menu.menu_parent_id}'><img src="/files/shared/images/system/up.gif"></a>
-        <a href='/menu/weight_down/{$menu.menu_weight}/{$menu.menu_parent_id}'><img src="/files/shared/images/system/down.gif"></a>*}
       </td>
       <td>
         <a href='/menu/modify/{$menu.id}' title="{#sys_edit#}"><img alt="{#sys_edit#}" src="/files/shared/images/system/edit.gif"></a>

@@ -24,26 +24,26 @@
     {cycle name="permsls" values="even,odd" assign="class" print=false}
     <tr class='{$class}'>
       <td>
-        {$group[$permission.gid]}
+        {$group[$permission.group_permission_gid]}
       </td>
       <td>
         {#permissions_element#}
       </td>
       <td>
-        {$permission.pattern}
+        {$permission.group_permission_pattern}
       </td>
       <td>
-        {$levels[$permission.level]}
+        {$levels[$permission.group_permission_level]}
       </td>
       <td style="text-align: center;">
           {if !$smarty.foreach.permission_.first}
-            <a href="/menu/weight_up/{$permission.user_group_permission_weight}"><img border="0" src="/files/shared/images/system/up.gif"></a>
+            <a href="/menu/weight_up/{$permission.group_permission_weight}"><img border="0" src="/files/shared/images/system/up.gif"></a>
           {/if}
           {if !$smarty.foreach.permission_.first && !$smarty.foreach.permission_.last}
             &nbsp;
           {/if}
           {if !$smarty.foreach.permission_.last}
-            <a href="/menu/weight_down/{$permission.user_group_permission_weight}"><img border="0" src="/files/shared/images/system/down.gif"></a>
+            <a href="/menu/weight_down/{$permission.group_permission_weight}"><img border="0" src="/files/shared/images/system/down.gif"></a>
           {/if}
       </td>
       <td>

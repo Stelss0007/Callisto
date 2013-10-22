@@ -5,11 +5,11 @@
  */
 class Permissions extends Model
   {
-  var $table = 'user_group_permission';
+  var $table = 'group_permission';
   
   function group_permissions_list()
     {
-    $this->query("SELECT * FROM user_group_permission ORDER BY {$this->table}_weight");
+    $this->query("SELECT * FROM {$this->table} ORDER BY {$this->table}_weight");
     return $this->fetch_array();
     }
     
@@ -18,7 +18,7 @@ class Permissions extends Model
     if(!is_numeric($id))
       return false;
     
-    $this->query("SELECT * FROM user_group_permission WHERE id='$id'");
+    $this->query("SELECT * FROM {$this->table} WHERE id='$id'");
     $permission =  $this->fetch_array();
     return $permission[0];
     }
@@ -43,7 +43,7 @@ class Permissions extends Model
     }
   function group_permissions_create($data)
     {
-    $data['weight'] = $this->weightMax()+1;
+    $data["{$this->table}_weight"] = $this->weightMax()+1;
     $this->insert($this->table, $data);
     }
     
@@ -61,7 +61,44 @@ class Permissions extends Model
       return false;
     $group_permision = $this->group_permission($id);
     $this->weightDelete($group_permision["{$this->table}_weight"], $where);
-    $this->query("DELETE FROM user_group_permission WHERE id='$id'");
+    $this->query("DELETE FROM {$this->table} WHERE id='$id'");
+    }
+    
+    
+  function getAccess($obj_name, $level)
+    {
+    $ses_info=UserSession::getInstance();
+    $gid = $ses_info->userGid();
+    $perms_list = $this->groupPermsGetList($gid);
+
+    if(empty($perms_list))
+      return false;
+
+    foreach($perms_list as $key=>$permission)
+      {
+      $this_pattern = $permission["{$this->table}_pattern"];
+      $pattern = "/$this_pattern/Ui";
+      if(preg_match($pattern, $obj_name))
+        {
+        if($level<=$permission["{$this->table}_level"])
+          {
+          print_r($perms_list[$key]);
+          return true;
+          }
+        return false;
+        }
+      }
+    return false;
+    }
+   
+  function groupPermsGetList($gid=null)
+    {
+    $params = array(
+                    'condition' => array("{$this->table}_gid" => $gid),
+                    'order' => "{$this->table}_weight"
+                    );
+    
+    return $this->getList($params);
     }
   }
 ?>

@@ -16,7 +16,7 @@
         Группа
       </td>
       <td class="even">
-        {html_options name=gid options=$groups selected=$gid}
+        {html_options name=gid options=$groups selected=$group_permission_gid}
       </td>
     </tr>
     <tr>
@@ -24,7 +24,7 @@
         Объект
       </td>
       <td class="even">
-        <input type="text" name='pattern' value='{$pattern}'  style="width: 98%;">
+        <input type="text" name='pattern' value='{$group_permission_pattern}'  style="width: 98%;">
       </td>
     </tr>
     <tr>
@@ -32,7 +32,7 @@
         Уровень доступа
       </td>
       <td class="even">
-        {html_options name=level options=$levels selected=$level}
+        {html_options name=level options=$levels selected=$group_permission_level}
       </td>
     </tr>
     <tr>
@@ -40,7 +40,7 @@
         Описание
       </td>
       <td class="even">
-        <textarea name='description' style="width: 98%;">{$description}</textarea>
+        <textarea name='description' style="width: 98%;">{$group_permission_description}</textarea>
       </td>
     </tr>
     </tbody>  

@@ -409,7 +409,8 @@ abstract class Controller
     {
     $object = $this->getObjectName();
     
-    if(getAccess($object, $access_type)==true)
+    $this->usesModel('permissions');
+    if($this->permissions->getAccess($object, $access_type)==true)
       return true;
     
     $this->notAccess();

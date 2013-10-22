@@ -41,11 +41,7 @@ class Index extends Controller
     $permission = $this->permissions->group_permission($id);
     if($permission)
       {
-      $this->id = $permission['id'];
-      $this->gid = $permission['gid'];
-      $this->level = $permission['level'];
-      $this->pattern = $permission['pattern'];
-      $this->description = $permission['description'];
+      $this->assign($permission);
       }
        
     $this->viewPage();
