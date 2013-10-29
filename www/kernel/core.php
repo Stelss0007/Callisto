@@ -44,6 +44,14 @@ define('BLOCK_NOT_EXIST', 8);
 define('BLOCK_FILE_NOT_EXIST', 9);
 define('BLOCK_FUNCTION_NOT_EXIST', 10);
 
+define('RELATION_TYPE_ONE_TO_ONE', 1);
+define('RELATION_TYPE_ONE_TO_MANY', 2);
+define('RELATION_TYPE_MANY_TO_MANY', 3);
+
+define('RELATION_ACTION_NONE', 0);
+define('RELATION_ACTION_CASCADE', 1);
+define('RELATION_ACTION_RESTRICT', 2);
+
 
 //coreSetGlobal();
 //coreLibLoad('Smarty');
