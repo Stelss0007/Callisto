@@ -7,6 +7,6 @@ class Theme extends Model
                                                  'class'  => 'User',
                                                  'foreign_key'  => 'user_id',
                                                 )
-                                  );
+                                   );
   }
 ?>

@@ -82,7 +82,7 @@ class Permissions extends Model
         {
         if($level<=$permission["{$this->table}_level"])
           {
-          print_r($perms_list[$key]);
+          //print_r($perms_list[$key]);
           return true;
           }
         return false;
