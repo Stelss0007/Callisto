@@ -7,6 +7,8 @@ class Model extends DBConnector
   
   var $session = null;
   
+  public static $relations = array();
+  
   //////////////////////////////////////////////////////////////////////////////
   function __construct($guid=0)
     {
@@ -811,6 +813,44 @@ class Model extends DBConnector
     $this->afterDelete();
     }
     
+  //...........ÑÂßÇÈ.................
+  final function prepareRelations()
+    {
+    
+    }
+  
+  final function getRelations(&$model_result=array())
+    {
+    if(empty($model_result))
+      return;
+    
+    $foreign_keys = array();
+    foreach(self::$relations as $key=>$value)
+      {
+      if(!isset($model_result[0]["{$value['foreign_key']}"]))
+        {
+        unset(self::$relations[$key]);
+        continue;
+        }
+      
+      $foreign_keys["{$value['foreign_key']}"][] = $key;
+      }
+    
+    $relation_ids = array();  
+    foreach($model_result as $result)
+      {
+      foreach($foreign_keys as $foreign_key=>$val)
+        {
+        $relation_ids[$foreign_key][] = $result[$foreign_key];
+        }
+      }
+    
+      
+    foreach(self::$relations as $key=>$value)
+      {
+      
+      }
+    }
     
   final function beforDelete()
     {
