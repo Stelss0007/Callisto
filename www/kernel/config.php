@@ -11,7 +11,7 @@ $coreConfig['locale.lc_all'] = 'ru_RU.CP1251';
 $coreConfig['DB.UserName'] = 'root';
 
 // Пароль пользователя базы данных
-$coreConfig['DB.Password'] = '';
+$coreConfig['DB.Password'] = 'root32pass';
 
 // Сервер базы данных
 $coreConfig['DB.Host'] = 'localhost';

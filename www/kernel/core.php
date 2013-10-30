@@ -1,94 +1,12 @@
 <?php
-define('DS', DIRECTORY_SEPARATOR );
-/**
- * ?????? ??????
- */
-define('APPLICATION_VERSION_NUM',       '0.0.1');
-define('APPLICATION_VERSION_ID',        'Callisto');
-define('APPLICATION_VERSION_SUB',       'Paradise');
+include_once 'kernel/constants.php';
 
-/**
- * ????????? ???????
- */
-define('MODULE_STATE_NA', 0);
-define('MODULE_STATE_UNINITIALISED', 10);
-define('MODULE_STATE_INACTIVE', 20);
-define('MODULE_STATE_ACTIVE', 30);
-define('MODULE_STATE_MISSING', 40);
-define('MODULE_STATE_UPGRADED', 50);
-
-/**
- * ?????? ???????
- */
-define('ACCESS_INVALID', -1);
-define('ACCESS_NONE', 0);
-define('ACCESS_OVERVIEW', 10);
-define('ACCESS_READ', 20);
-define('ACCESS_COMMENT', 30);
-define('ACCESS_ADD', 40);
-define('ACCESS_EDIT', 50);
-define('ACCESS_DELETE', 60);
-define('ACCESS_ADMIN', 70);
-
-/**
- * ???? ?????????????? ????????
- */
-define('BAD_PARAM', 1);
-define('DATABASE_ERROR', 2);
-define('ID_NOT_EXIST', 3);
-define('NO_PERMISSION', 4);
-define('MODULE_NOT_EXIST', 5);
-define('MODULE_FILE_NOT_EXIST', 6);
-define('MODULE_FUNCTION_NOT_EXIST', 7);
-define('BLOCK_NOT_EXIST', 8);
-define('BLOCK_FILE_NOT_EXIST', 9);
-define('BLOCK_FUNCTION_NOT_EXIST', 10);
-
-define('RELATION_TYPE_ONE_TO_ONE', 1);
-define('RELATION_TYPE_ONE_TO_MANY', 2);
-define('RELATION_TYPE_MANY_TO_MANY', 3);
-
-define('RELATION_ACTION_NONE', 0);
-define('RELATION_ACTION_CASCADE', 1);
-define('RELATION_ACTION_RESTRICT', 2);
-
-
-//coreSetGlobal();
-//coreLibLoad('Smarty');
-
-//???? ???????? register_globals - ?????? ?????????? ???????????
-if (ini_get('register_globals') != 1)
-  {
-  if(isset($_REQUEST))
-    extract($_REQUEST, EXTR_OVERWRITE);
-  if(isset($_ENV))
-    extract($_ENV, EXTR_OVERWRITE);
-  if(isset($_SERVER))
-    extract($_SERVER, EXTR_OVERWRITE);
-  if(isset($_POST))
-    extract($_POST, EXTR_OVERWRITE);
-  if(isset($_GET))
-    extract($_GET, EXTR_OVERWRITE);
-  if(isset($_FILES))
-    extract($_FILES, EXTR_OVERWRITE);
-  if(isset($_GLOBALS))
-    extract($_GLOBALS, EXTR_OVERWRITE);
-  }
-
-appLibLoad('Permissions');
+appLibLoad('Smarty');
 appLibLoad('DBConnector');
+appLibLoad('UserSession');
 
 
 $db = new DBConnector();
-//$db->Host = $coreConfig['DB.Host'];
-//$db->User = $coreConfig['DB.UserName'];
-//$db->Password = $coreConfig['DB.Password'];
-//$db->Database = $coreConfig['DB.Name'];
-//$db->query('SELECT * FROM user where id=%s',2);
-//print_r($db->fetch_array());
-//exit;
-appLibLoad('UserSession');
-
 
 function appDebug($value)
   {
@@ -378,117 +296,44 @@ function appLibLoad($lib_name = 'extlib')
   $loaded["$lib_name"] = true;
   return true;
   }
-
   
-/************************* ?????? ********************************\
-
-/*
- * @desc - ???????? ??????
- * @return bool
- * $modname - ???????????? ? ??????? ??? ??????
- * $type - ??? ??????? ??????
- */
-function appModLoad($modname, $type='user')
+  
+function appJsLoad($modname='kernel', $scriptname='main')
   {
-  static $loaded = array();
-
-  //???????? ?? ???????? ?????
-  if (!$modname)
-    appException ('coreModLoad', BAD_PARAM, "\$modname - $modname");
-
-  //???????? ????? ??? ????????? ?
-  if ($loaded["$modname$type"])
+  global $jsLoaded;
+  
+  if (!empty($jsLoaded["$modname.$scriptname"])) 
     return true;
-
-	//?????? ?????????
-//  if (!coreModAvailable ($modname))
-//    coreException ('coreModLoad', MODULE_NOT_EXIST, '?????? ??? ?????????? ??? ?? ?????????? '.$modname);
-
-  // Load the module and module language files
-//  list($osmodname, $ostype) = coreVarPrepForOS($modname, $type);
-//  $osfile = "modules/$osmodname/$ostype.php";
-  $osfile = "modules/$modname/$type.php";
-
-  //????????? ????
-  include_once $osfile;
-  $loaded["$modname$type"] = true;
+  
+  if($modname == 'kernel')
+    {
+    if($scriptname == 'main')
+      {
+      $jsLoaded["$modname.$scriptname"] = "/scripts/js/$scriptname.js";
+      }
+    else
+      {
+      $jsLoaded["$modname.$scriptname"] = "/scripts/js/$scriptname/$scriptname.js";
+      }
+    }
+  else
+    {
+    if($scriptname == 'main')
+      {
+      $jsLoaded["$modname.$scriptname"] = "/scripts/js/$scriptname.js";
+      }
+    else
+      {
+      $jsLoaded["$modname.$scriptname"] = "/modules/$modname/js/$scriptname.js";
+      }
+    }
 
   return true;
   }
 
-/*
- * @desc ???????? ?????? ??????
- * @return bool
- * $modname - ???????????? ? ??????? ??? ??????
- */
-function appModClassLoad($modname)
-  {
-  static $loaded = array();
 
-  //???????? ?? ???????? ?????
-  if (!$modname)
-    appException ('coreModClassLoad', BAD_PARAM, "\$modname - $modname");
 
-  //???????? ????? ??? ????????? ?
-  if ($loaded["$modname"])
-    return true;
 
-//  if (!coreModAvailable ($modname))
-//    {//?????? ??????????
-//    die ('?????? ??????????');
-//    return false;
-//    };
-
-  // Load the module and module language files
-  //$osmodname = coreVarPrepForOS($modname);
-  $osmodname = $modname;
-  $osfile = "modules/$osmodname/class.php";
-
-  if (!file_exists($osfile))
-    appException ('coreModClassLoad', MODULE_FILE_NOT_EXIST, 'File does not exist');
-
-  //????????? ????
-  include_once $osfile;
-  $loaded["$modname"] = 1;
-
-  return true;
-  }
-
-/*
- * @desc ????? ??????? ??????? ??????
- * @return bool
- * $modname string - ???????????? ? ??????? ??? ??????
- * $type string - ??? ??????? ??????
- * $func string - ??? ??????? ??????
- * $args array - ????????? ??????? ??????
- */
-function appModFunc($modname, $type='user', $func='main', $args=array())
-  {
-  //????????
-  if (empty($modname))
-    {
-    appException ('coreModFunc', BAD_PARAM, "\$modname - $modname");
-    }
-
-  if (empty($type))
-    {
-    $func = 'user';
-    }
-
-  if (empty($func))
-    {
-    $func = 'main';
-    }
-
-  // Build function name and call function
-  $modfunc = "{$modname}_{$type}_{$func}";
-  if (function_exists($modfunc))
-    {
-    return $modfunc($args);
-    }
-  return $modfunc($args);
-  appException ('coreModFunc', MODULE_FUNCTION_NOT_EXIST, '?????? ?????????? ??????? ?????? '. $modfunc);
-  } 
 
 /*************************  ????????? ****************************\
 /**

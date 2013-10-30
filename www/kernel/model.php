@@ -7,7 +7,7 @@ class Model extends DBConnector
   
   var $session = null;
   
-  public static $relations = array();
+  var $relations = array();
   
   //////////////////////////////////////////////////////////////////////////////
   function __construct($guid=0)
@@ -766,7 +766,9 @@ class Model extends DBConnector
     $condition = $this->prepareCondition($conditions, $params);
     $where = "{$condition['join']} {$condition['where']} {$condition['group']} {$condition['order']} {$condition['limit']}";
 
-    return $this->select($this->table, $condition['fields'], $where, true);   
+    $result = $this->select($this->table, $condition['fields'], $where, true);   
+    $this->getRelations($result);
+    return $result;
     }
   final function getById($id)
     {
@@ -821,15 +823,17 @@ class Model extends DBConnector
   
   final function getRelations(&$model_result=array())
     {
-    if(empty($model_result))
+    if(empty($model_result) || empty($this->relations))
       return;
-    
+
     $foreign_keys = array();
-    foreach(self::$relations as $key=>$value)
+    $id_keys = array();
+    
+    foreach($this->relations as $key=>$value)
       {
-      if(!isset($model_result[0]["{$value['foreign_key']}"]))
+      if($value['type'] == RELATION_TYPE_ONE_TO_ONE && !isset($model_result[0]["{$value['foreign_key']}"]))
         {
-        unset(self::$relations[$key]);
+        unset($this->$relations[$key]);
         continue;
         }
       
@@ -839,6 +843,7 @@ class Model extends DBConnector
     $relation_ids = array();  
     foreach($model_result as $result)
       {
+      $id_keys[] = $result['id'];
       foreach($foreign_keys as $foreign_key=>$val)
         {
         $relation_ids[$foreign_key][] = $result[$foreign_key];
@@ -846,10 +851,41 @@ class Model extends DBConnector
       }
     
       
-    foreach(self::$relations as $key=>$value)
+    foreach($this->relations as $key=>$value)
       {
-      
+      switch($value['type'])
+        {
+        case RELATION_TYPE_ONE_TO_ONE:
+          if(empty($relation_ids[$value['foreign_key']]))
+            continue;
+
+          $keys = implode("', '", $relation_ids[$value['foreign_key']]);
+          $relations_result[$key] = $this->select($value['table'], array(), "WHERE id IN ('$keys')", true, '', 'id');
+
+          foreach($model_result as $result_key => $result_value)
+            {
+            $model_result[$result_key][$key] = ($relations_result[$key][$result_value[$value['foreign_key']]][0]) ? $relations_result[$key][$result_value[$value['foreign_key']]][0] : array();
+            }
+          break;
+          
+        case RELATION_TYPE_ONE_TO_MANY:
+          $keys = implode("', '", $id_keys);
+          $relations_result[$key] = $this->select($value['table'], array(), "WHERE {$value['foreign_key']} IN ('$keys')", true, '', $value['foreign_key']);
+
+          foreach($model_result as $result_key => $result_value)
+            {
+            $model_result[$result_key][$key] = ($relations_result[$key][$result_value['id']]) ? $relations_result[$key][$result_value['id']] : array();
+            }
+          break;
+
+        default:
+          break;
+        }
+        
+
       }
+
+    return true;
     }
     
   final function beforDelete()

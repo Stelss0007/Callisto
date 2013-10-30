@@ -9,6 +9,8 @@
 
     <link rel="stylesheet" href="/themes/green/css/style.css" type="text/css" />
 
+    {appJsLoad modname='kernel' scriptname='jQuery'}
+    {appJsOutput}
     <link rel="stylesheet" href="/scripts/js/jsValidate/jsValidate.css" type="text/css" />
     <script type="text/javascript" src="/scripts/js/jQuery/jQuery.js"></script>
     <script type="text/javascript" src="/scripts/js/jsValidate/jsValidate.js"></script>
@@ -192,6 +194,7 @@
 
       </div>
 </div>
+
 </body>
 </html>
 {/strip}

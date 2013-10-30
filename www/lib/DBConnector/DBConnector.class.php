@@ -150,7 +150,7 @@ class DBConnector
     }
 
     
-  final function select($table, $column=array(), $where='', $multi = false, $join='')
+  final function select($table, $column=array(), $where='', $multi = false, $join='', $field_is_index = false)
     {
     if(is_array($column))
       {
@@ -181,7 +181,7 @@ class DBConnector
       }
     else //Много записей возвращаем как массив масивов
       {
-      return $this->fetch_array();
+      return $this->fetch_array(1, $field_is_index);
       }
     }
   
@@ -196,7 +196,7 @@ class DBConnector
     return mysql_fetch_array($this->QueryResult);
     }
 
-  function fetch_array($type=1)
+  function fetch_array($type=1, $field_is_index = false)
     {
     while ($row = mysql_fetch_array($this->QueryResult, $type))
       {
@@ -204,7 +204,10 @@ class DBConnector
         {
         $row[$key] = stripslashes($value);
         }
-      $result[] = $row;
+      if($field_is_index)
+        $result[$row[$field_is_index]][] = $row;
+      else  
+        $result[] = $row;
       }
       
     return $result;

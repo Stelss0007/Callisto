@@ -6,6 +6,7 @@ class Index extends Controller
   function theme_list()
     {
     //print_r('333');
+    //appDebug($this->theme->getList());
     $this->viewPage();
     }
   }

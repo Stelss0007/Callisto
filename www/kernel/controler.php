@@ -9,7 +9,7 @@ abstract class Controller
   protected $smarty;
   protected $module_dir;
   public    $root_dir;
-  protected $theme;
+  protected $current_theme;
   protected $vars = array();
   protected $modname;
   protected $object_name;
@@ -101,7 +101,7 @@ abstract class Controller
     //?????? ????????? ????? ?????????????
     $this->smarty = new viewTpl();
     //??????? ???? ???????????
-    $this->theme = 'green';
+    $this->current_theme = 'green';
     
     //Установим язык
     $this->setLang($coreConfig['lang']);
@@ -157,7 +157,7 @@ abstract class Controller
         $debuger->debugAdd('Controler: '.$this->modname, null, INFO);
         $debuger->debugAdd('Action: '.$this->action, null, INFO);
         $debuger->debugAdd('Object Name: '.$this->object_name, null, INFO);
-        $debuger->debugAdd('Theme: '.$this->theme, null, INFO);
+        $debuger->debugAdd('Theme: '.$this->current_theme, null, INFO);
         //
         $debuger->debugAddCreateGroup("Uses Tpls (".sizeof($this->tpls).")");
         if($this->tpls)
@@ -287,8 +287,8 @@ abstract class Controller
     $ObjectName = $this->getTplObjectName();
     $modresult['content'] = $this->smarty->fetch($tpl_dir, $ObjectName);
     
-    $pageTplFile = $this->root_dir."themes/".$this->theme.'/pages/'.$this->page.'.tpl';
-    $this->tpls[] = '(Main Template)'."themes/".$this->theme.'/pages/'.$this->page.'.tpl';
+    $pageTplFile = $this->root_dir."themes/".$this->current_theme.'/pages/'.$this->page.'.tpl';
+    $this->tpls[] = '(Main Template)'."themes/".$this->current_theme.'/pages/'.$this->page.'.tpl';
     $this->smarty->assign('module_content', $modresult['content']);
     echo $this->smarty->fetch($pageTplFile);
     }
@@ -296,10 +296,10 @@ abstract class Controller
   final public function tplFileName($debug=false)
     {
     $view_file_name = $this->action;
-    if(file_exists($this->root_dir.'themes/'.$this->theme.'/'.$this->module_dir.$view_file_name.'.tpl'))
+    if(file_exists($this->root_dir.'themes/'.$this->current_theme.'/'.$this->module_dir.$view_file_name.'.tpl'))
       {
-      $this->tpls[] = '(Overridden by Theme) '.'themes/'.$this->theme.'/'.$this->module_dir.$view_file_name.'.tpl';
-      return $this->root_dir.'themes/'.$this->theme.'/'.$this->module_dir.$view_file_name.'.tpl';
+      $this->tpls[] = '(Overridden by Theme) '.'themes/'.$this->current_theme.'/'.$this->module_dir.$view_file_name.'.tpl';
+      return $this->root_dir.'themes/'.$this->current_theme.'/'.$this->module_dir.$view_file_name.'.tpl';
       }
     elseif(file_exists($this->root_dir.$this->module_dir.'views/default/'.$view_file_name.'.tpl'))
       {
@@ -857,7 +857,7 @@ abstract class Controller
   //Add all blocks to tpl
   final public function blockToTpl()
     {
-    Block::blockShowAll($this->smarty, $this->object_name, $this->theme);
+    Block::blockShowAll($this->smarty, $this->object_name, $this->current_theme);
     //$this->smarty->assign('blocks', $this->block, false);
     }
   
