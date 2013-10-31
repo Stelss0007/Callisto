@@ -9,7 +9,7 @@ abstract class Controller
   protected $smarty;
   protected $module_dir;
   public    $root_dir;
-  protected $current_theme;
+  public    $current_theme;
   protected $vars = array();
   protected $modname;
   protected $object_name;
@@ -258,9 +258,25 @@ abstract class Controller
     
     $this->action = $action_name;
     $this->object_name = $this->getObjectName();
+    
+    //Подключим джаваскрипты
+    appJsLoad('kernel', 'main');
+    appJsLoad('kernel', 'jQuery');
+    
+    //Подключим стили 
+    //Без аргументов подключится стиль текущей темы
+    appCssLoad();
+    
     call_user_method_array($action_name, $this, $this->input_vars);
     }
-  
+  final public function getThemeName()
+    {
+    return $this->current_theme;
+    }
+  final public function getModName()
+    {
+    return $this->modname;
+    }
   //////////////////////////////////////////////////////////////////////////////
   ////////////////////////////   TEMPLATES  ////////////////////////////////////
   //////////////////////////////////////////////////////////////////////////////

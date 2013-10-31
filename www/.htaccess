@@ -18,6 +18,8 @@ RewriteCond    %{REQUEST_URI}        !^/scripts
 RewriteCond    %{REQUEST_URI}        !^/images
 #Файла (архивы там и прочее)
 RewriteCond    %{REQUEST_URI}        !^/files
+#Файла (архивы там и прочее)
+RewriteCond    %{REQUEST_URI}        !^/public
 #Все остальное куда бы пользователь не полез - перенаправляется на наш файл redirect.php
 RewriteRule     ^(.*)$            index.php [PT]
 #Запрещаем доступ к файлам .ini и .cfg

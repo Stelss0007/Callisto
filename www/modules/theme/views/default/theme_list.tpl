@@ -1,2 +1,2 @@
-{appJsLoad modname='theme'}
-THEME LIST
+{appJsLoad modname='theme' scriptname='jQuery'}
+THEME LIST12

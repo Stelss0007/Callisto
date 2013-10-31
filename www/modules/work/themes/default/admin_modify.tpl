@@ -90,19 +90,19 @@
           <td class="{$class}" align="center">{$perms_level_list[$groups_perms.level]}</td>
           <td class="{$class}" nowrap align="center">
             {if $groups_perms.weight_moveup_url}
-              <a href="{$groups_perms.weight_moveup_url}"><img border="0" src="/files/shared/images/system/up.gif"></a>
+              <a href="{$groups_perms.weight_moveup_url}"><img border="0" src="/public/images/system/up.gif"></a>
             {/if}
             {if $groups_perms.weight_moveup_url && $groups_perms.weight_movedown_url}
               &nbsp;
             {/if}
             {if $groups_perms.weight_movedown_url}
-              <a href="{$groups_perms.weight_movedown_url}"><img border="0" src="/files/shared/images/system/down.gif"></a>
+              <a href="{$groups_perms.weight_movedown_url}"><img border="0" src="/public/images/system/down.gif"></a>
             {/if}
           </td>
           <td class="{$class}" align="center">
             
-            <a href="/index.php?module=groups&type=admin&func=perms_modify&id={$groups_perms.id}"><img border="0" src="/files/shared/images/system/edit.gif" alt="Редактировать"></a>&nbsp;
-            <a href="/index.php?module=groups&type=admin&func=perms_delete&id={$groups_perms.id}" onclick="return confirm('Удалить запись?')"><img border="0" src="/files/shared/images/system/del.gif" alt="Удалить"></a>
+            <a href="/index.php?module=groups&type=admin&func=perms_modify&id={$groups_perms.id}"><img border="0" src="/public/images/system/edit.gif" alt="Редактировать"></a>&nbsp;
+            <a href="/index.php?module=groups&type=admin&func=perms_delete&id={$groups_perms.id}" onclick="return confirm('Удалить запись?')"><img border="0" src="/public/images/system/del.gif" alt="Удалить"></a>
           </td>
         </tr>
       {/foreach}

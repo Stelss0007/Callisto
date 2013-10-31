@@ -35,18 +35,18 @@
       </td>
       <td style="text-align: center;">
           {if !$smarty.foreach.menu_.first}
-            <a href="/menu/weight_up/{$menu.menu_weight}/{$menu.menu_parent_id}"><img border="0" src="/files/shared/images/system/up.gif"></a>
+            <a href="/menu/weight_up/{$menu.menu_weight}/{$menu.menu_parent_id}"><img border="0" src="/public/images/system/up.gif"></a>
           {/if}
           {if !$smarty.foreach.menu_.first && !$smarty.foreach.menu_.last}
             &nbsp;
           {/if}
           {if !$smarty.foreach.menu_.last}
-            <a href="/menu/weight_down/{$menu.menu_weight}/{$menu.menu_parent_id}"><img border="0" src="/files/shared/images/system/down.gif"></a>
+            <a href="/menu/weight_down/{$menu.menu_weight}/{$menu.menu_parent_id}"><img border="0" src="/public/images/system/down.gif"></a>
           {/if}
       </td>
       <td>
-        <a href='/menu/modify/{$menu.id}' title="{#sys_edit#}"><img alt="{#sys_edit#}" src="/files/shared/images/system/edit.gif"></a>
-        <a href='/menu/delete/{$menu.id}' title="{#sys_delete#}" onclick="return confirm('{#sys_confirm_delete#}');"><img alt="{#sys_delete#}" src="/files/shared/images/system/del.gif"></a>
+        <a href='/menu/modify/{$menu.id}' title="{#sys_edit#}"><img alt="{#sys_edit#}" src="/public/images/system/edit.gif"></a>
+        <a href='/menu/delete/{$menu.id}' title="{#sys_delete#}" onclick="return confirm('{#sys_confirm_delete#}');"><img alt="{#sys_delete#}" src="/public/images/system/del.gif"></a>
       </td>
     </tr>
    {/foreach}

@@ -49,8 +49,8 @@
             {* Формируем масив переменные для урла *}
             {array name='url_vars'}
             {array_append name='url_vars' key='id' value=$user.id}
-              <a href="/index.php?module=user&type=admin&func=user_modify&id={$user.id}"><img border="0" src="/files/shared/images/system/edit.gif" alt="Редактировать"></a>&nbsp;
-              <a href="/index.php?module=user&type=admin&func=user_delete&id={$user.id}"><img border="0" src="/files/shared/images/system/del.gif" alt="Удалить"></a>
+              <a href="/index.php?module=user&type=admin&func=user_modify&id={$user.id}"><img border="0" src="/public/images/system/edit.gif" alt="Редактировать"></a>&nbsp;
+              <a href="/index.php?module=user&type=admin&func=user_delete&id={$user.id}"><img border="0" src="/public/images/system/del.gif" alt="Удалить"></a>
           </td>
         </tr>
       {/foreach}

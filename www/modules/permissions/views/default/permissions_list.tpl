@@ -37,18 +37,18 @@
       </td>
       <td style="text-align: center;">
           {if !$smarty.foreach.permission_.first}
-            <a href="/menu/weight_up/{$permission.group_permission_weight}"><img border="0" src="/files/shared/images/system/up.gif"></a>
+            <a href="/menu/weight_up/{$permission.group_permission_weight}"><img border="0" src="/public/images/system/up.gif"></a>
           {/if}
           {if !$smarty.foreach.permission_.first && !$smarty.foreach.permission_.last}
             &nbsp;
           {/if}
           {if !$smarty.foreach.permission_.last}
-            <a href="/menu/weight_down/{$permission.group_permission_weight}"><img border="0" src="/files/shared/images/system/down.gif"></a>
+            <a href="/menu/weight_down/{$permission.group_permission_weight}"><img border="0" src="/public/images/system/down.gif"></a>
           {/if}
       </td>
       <td>
-        <a href='/permissions/manage/{$permission.id}' title="{#sys_edit#}"><img alt="{#sys_edit#}" src="/files/shared/images/system/edit.gif"></a>
-        <a href='/permissions/delete/{$permission.id}' title="{#sys_delete#}" onclick="return confirm('{#sys_confirm_delete#}');"><img alt="{#sys_delete#}" src="/files/shared/images/system/del.gif"></a>
+        <a href='/permissions/manage/{$permission.id}' title="{#sys_edit#}"><img alt="{#sys_edit#}" src="/public/images/system/edit.gif"></a>
+        <a href='/permissions/delete/{$permission.id}' title="{#sys_delete#}" onclick="return confirm('{#sys_confirm_delete#}');"><img alt="{#sys_delete#}" src="/public/images/system/del.gif"></a>
       </td>
     </tr>
    {/foreach}

@@ -47,7 +47,7 @@ ACCESS_ADMIN     70
 
 {if $curuser_sec_level>=70}
 {if $doc.active!=true}
-<img src="/files/shared/images/system/notactive.gif" width="16" height="16" alt="Ќе активирован" border=0 style="padding-right:10px;">
+<img src="/public/images/system/notactive.gif" width="16" height="16" alt="Ќе активирован" border=0 style="padding-right:10px;">
 {/if}
 {/if}
 {if ($name)}
@@ -61,27 +61,27 @@ ACCESS_ADMIN     70
 {if $curuser_sec_level>=70}
 {* добовл€ем ссылки дл€ передвижки весов*}
 {if $doc.weight_moveup_url}
-<a href="{$doc.weight_moveup_url}"><img border="0" src="/files/shared/images/system/up.gif"></a>
+<a href="{$doc.weight_moveup_url}"><img border="0" src="/public/images/system/up.gif"></a>
 {/if}
 
 {if $doc.weight_movedown_url}
-<a href="{$doc.weight_movedown_url}"><img border="0" src="/files/shared/images/system/down.gif"></a>
+<a href="{$doc.weight_movedown_url}"><img border="0" src="/public/images/system/down.gif"></a>
 {/if}
 
 {* добавл€ем ссылки дл€ редактировани€ и удалени€*}
 
 <a href="{mod_url type='admin' modname='content' func='doc_modify' vars=$url_vars}" title="{#editdoc#}">
-<img src="/files/shared/images/system/edit.gif" width="16" height="16" alt="{#editdoc#}" border=0>
+<img src="/public/images/system/edit.gif" width="16" height="16" alt="{#editdoc#}" border=0>
 </a>
 <a href="{mod_url type='admin' modname='content' func='doc_links_dg' vars=$url_vars}" title="{#managelink#}">
-<img src="/files/shared/images/system/links.png" width="16" height="16" alt="{#managelink#}" border=0>
+<img src="/public/images/system/links.png" width="16" height="16" alt="{#managelink#}" border=0>
 </a>
 <a href="{mod_url type='admin' modname='content' func='doc_copy_dg' vars=$url_vars}" title="{#copydoc#}">
-<img src="/files/shared/images/system/copy.gif" width="16" height="16" alt="{#copydoc#}" border=0>
+<img src="/public/images/system/copy.gif" width="16" height="16" alt="{#copydoc#}" border=0>
 </a>
 
 <a href="{mod_url type='admin' modname='content' func='doc_confirm_delete' vars=$url_vars}" title="{#deletedoc#}">
-<img src="/files/shared/images/system/del.gif" width="16" height="16" alt="{#deletedoc#}" border=0>
+<img src="/public/images/system/del.gif" width="16" height="16" alt="{#deletedoc#}" border=0>
 </a>
 
 {/if}
@@ -123,7 +123,7 @@ ACCESS_ADMIN     70
 {* ≈сли раздел не активен ставим хрестик *}
 {if $curuser_sec_level>=70}
 {if $folder.active!=true}
-<img src="/files/shared/images/system/notactive.gif" width="16" height="16" alt="Ќе активирован" border=0 style="padding-right:10px;">
+<img src="/public/images/system/notactive.gif" width="16" height="16" alt="Ќе активирован" border=0 style="padding-right:10px;">
 {/if}
 {/if}
 {if $folder.name}
@@ -135,24 +135,24 @@ ACCESS_ADMIN     70
 <span>
 {* добавл€ем ссылки дл€ передвижки весов*}
 {if $folder.weight_moveup_url}
-<a href="{$folder.weight_moveup_url}"><img border="0" src="/files/shared/images/system/up.gif"></a>
+<a href="{$folder.weight_moveup_url}"><img border="0" src="/public/images/system/up.gif"></a>
 {/if}
 
 {if $folder.weight_movedown_url}
-<a href="{$folder.weight_movedown_url}"><img border="0" src="/files/shared/images/system/down.gif"></a>
+<a href="{$folder.weight_movedown_url}"><img border="0" src="/public/images/system/down.gif"></a>
 {/if}
 
 {* добавл€ем ссылки дл€ редактировани€ и удалени€*}
 <a href="{mod_url type='admin' modname='content' func='folder_modify' vars=$url_vars}">
-<img src="/files/shared/images/system/edit.gif" width="16" height="16" alt="{#editfolder#}" border=0>
+<img src="/public/images/system/edit.gif" width="16" height="16" alt="{#editfolder#}" border=0>
 </a>
 
 <a href="{mod_url type='admin' modname='content' func='folder_copy_dg' vars=$url_vars}">
-<img src="/files/shared/images/system/copy.gif" width="16" height="16" alt="{#copyfolder#}" border=0>
+<img src="/public/images/system/copy.gif" width="16" height="16" alt="{#copyfolder#}" border=0>
 </a>
 
 <a href="{mod_url type='admin' modname='content' func='folder_confirm_delete' vars=$url_vars}">
-<img src="/files/shared/images/system/del.gif" width="16" height="16" alt="{#deletefolder#}" border=0>
+<img src="/public/images/system/del.gif" width="16" height="16" alt="{#deletefolder#}" border=0>
 </a>
 </span>
 <br>

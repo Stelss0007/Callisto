@@ -40,13 +40,13 @@
         {* Weight *}
         <td class="{$class}" align="center" nowrap>
           {if !$smarty.foreach.fblock_l.first}
-            <a href="/blocks/weight_up/{$block.block_weight}/{$block.block_position}"><img border="0" src="/files/shared/images/system/up.gif"></a>
+            <a href="/blocks/weight_up/{$block.block_weight}/{$block.block_position}"><img border="0" src="/public/images/system/up.gif"></a>
           {/if}
           {if !$smarty.foreach.fblock_l.first && !$smarty.foreach.fblock_l.last}
             &nbsp;
           {/if}
           {if !$smarty.foreach.fblock_l.last}
-            <a href="/blocks/weight_down/{$block.block_weight}/{$block.block_position}"><img border="0" src="/files/shared/images/system/down.gif"></a>
+            <a href="/blocks/weight_down/{$block.block_weight}/{$block.block_position}"><img border="0" src="/public/images/system/down.gif"></a>
           {/if}
         </td>
 
@@ -54,14 +54,14 @@
           {* Действия над блоком *}
           {array name='url_vars'}
           {array_append name='url_vars' key='id' value=$block.id}
-          <a href=""><img border="0" src="/files/shared/images/system/info.gif" alt="Информация"></a>&nbsp;
+          <a href=""><img border="0" src="/public/images/system/info.gif" alt="Информация"></a>&nbsp;
           {if $block.block_active}
-            <a href="/blocks/deactive/{$block.id}"><img border="0" src="/files/shared/images/system/deactivate.gif" alt="Деактивировать"></a>&nbsp;
-            <a href="/blocks/modify/{$block.id}"><img border="0" src="/files/shared/images/system/edit.gif" alt="Редактировать"></a>&nbsp;
+            <a href="/blocks/deactive/{$block.id}"><img border="0" src="/public/images/system/deactivate.gif" alt="Деактивировать"></a>&nbsp;
+            <a href="/blocks/modify/{$block.id}"><img border="0" src="/public/images/system/edit.gif" alt="Редактировать"></a>&nbsp;
           {else}
-            <a href="/blocks/active/{$block.id}"><img border="0" src="/files/shared/images/system/activate.gif" alt="Активировать"></a>&nbsp;
-            <a href="/blocks/modify/{$block.id}"><img border="0" src="/files/shared/images/system/edit.gif" alt="Редактировать"></a>&nbsp;
-            <a href="/blocks/delete/{$block.id}/{$block.block_weight}/{$block.block_position}" onclick="return confirm('Удалить?')"><img border="0" src="/files/shared/images/system/del.gif" alt="Удалить"></a>&nbsp;
+            <a href="/blocks/active/{$block.id}"><img border="0" src="/public/images/system/activate.gif" alt="Активировать"></a>&nbsp;
+            <a href="/blocks/modify/{$block.id}"><img border="0" src="/public/images/system/edit.gif" alt="Редактировать"></a>&nbsp;
+            <a href="/blocks/delete/{$block.id}/{$block.block_weight}/{$block.block_position}" onclick="return confirm('Удалить?')"><img border="0" src="/public/images/system/del.gif" alt="Удалить"></a>&nbsp;
           {/if}
 
         </td>
@@ -112,13 +112,13 @@
         {* Weight *}
         <td class="{$class}" align="center" nowrap>
           {if !$smarty.foreach.fblock_r.first}
-            <a href="/blocks/weight_up/{$block.block_weight}/{$block.block_position}"><img border="0" src="/files/shared/images/system/up.gif"></a>
+            <a href="/blocks/weight_up/{$block.block_weight}/{$block.block_position}"><img border="0" src="/public/images/system/up.gif"></a>
           {/if}
           {if !$smarty.foreach.fblock_r.first && !$smarty.foreach.fblock_r.last}
             &nbsp;
           {/if}
           {if !$smarty.foreach.fblock_r.last}
-            <a href="/blocks/weight_down/{$block.block_weight}/{$block.block_position}"><img border="0" src="/files/shared/images/system/down.gif"></a>
+            <a href="/blocks/weight_down/{$block.block_weight}/{$block.block_position}"><img border="0" src="/public/images/system/down.gif"></a>
           {/if}
         </td>
 
@@ -126,14 +126,14 @@
           {* Действия над блоком *}
           {array name='url_vars'}
           {array_append name='url_vars' key='id' value=$block.id}
-          <a href=""><img border="0" src="/files/shared/images/system/info.gif" alt="Информация"></a>&nbsp;
+          <a href=""><img border="0" src="/public/images/system/info.gif" alt="Информация"></a>&nbsp;
           {if $block.block_active}
-            <a href="/blocks/deactive/{$block.id}"><img border="0" src="/files/shared/images/system/deactivate.gif" alt="Деактивировать"></a>&nbsp;
-            <a href="/blocks/modify/{$block.id}"><img border="0" src="/files/shared/images/system/edit.gif" alt="Редактировать"></a>&nbsp;
+            <a href="/blocks/deactive/{$block.id}"><img border="0" src="/public/images/system/deactivate.gif" alt="Деактивировать"></a>&nbsp;
+            <a href="/blocks/modify/{$block.id}"><img border="0" src="/public/images/system/edit.gif" alt="Редактировать"></a>&nbsp;
           {else}
-            <a href="/blocks/active/{$block.id}"><img border="0" src="/files/shared/images/system/activate.gif" alt="Активировать"></a>&nbsp;
-            <a href="/blocks/modify/{$block.id}"><img border="0" src="/files/shared/images/system/edit.gif" alt="Редактировать"></a>&nbsp;
-            <a href="/blocks/delete/{$block.id}/{$block.block_weight}/{$block.block_position}" onclick="return confirm('Удалить?')"><img border="0" src="/files/shared/images/system/del.gif" alt="Удалить"></a>&nbsp;
+            <a href="/blocks/active/{$block.id}"><img border="0" src="/public/images/system/activate.gif" alt="Активировать"></a>&nbsp;
+            <a href="/blocks/modify/{$block.id}"><img border="0" src="/public/images/system/edit.gif" alt="Редактировать"></a>&nbsp;
+            <a href="/blocks/delete/{$block.id}/{$block.block_weight}/{$block.block_position}" onclick="return confirm('Удалить?')"><img border="0" src="/public/images/system/del.gif" alt="Удалить"></a>&nbsp;
           {/if}
 
         </td>
@@ -184,13 +184,13 @@
         {* Weight *}
         <td class="{$class}" align="center" nowrap>
           {if !$smarty.foreach.fblock_t.first}
-            <a href="/blocks/weight_up/{$block.block_weight}/{$block.block_position}"><img border="0" src="/files/shared/images/system/up.gif"></a>
+            <a href="/blocks/weight_up/{$block.block_weight}/{$block.block_position}"><img border="0" src="/public/images/system/up.gif"></a>
           {/if}
           {if !$smarty.foreach.fblock_t.first && !$smarty.foreach.fblock_t.last}
             &nbsp;
           {/if}
           {if !$smarty.foreach.fblock_t.last}
-            <a href="/blocks/weight_down/{$block.block_weight}/{$block.block_position}"><img border="0" src="/files/shared/images/system/down.gif"></a>
+            <a href="/blocks/weight_down/{$block.block_weight}/{$block.block_position}"><img border="0" src="/public/images/system/down.gif"></a>
           {/if}
         </td>
 
@@ -198,14 +198,14 @@
           {* Действия над блоком *}
           {array name='url_vars'}
           {array_append name='url_vars' key='id' value=$block.id}
-          <a href=""><img border="0" src="/files/shared/images/system/info.gif" alt="Информация"></a>&nbsp;
+          <a href=""><img border="0" src="/public/images/system/info.gif" alt="Информация"></a>&nbsp;
           {if $block.block_active}
-            <a href="/blocks/deactive/{$block.id}"><img border="0" src="/files/shared/images/system/deactivate.gif" alt="Деактивировать"></a>&nbsp;
-            <a href="/blocks/modify/{$block.id}"><img border="0" src="/files/shared/images/system/edit.gif" alt="Редактировать"></a>&nbsp;
+            <a href="/blocks/deactive/{$block.id}"><img border="0" src="/public/images/system/deactivate.gif" alt="Деактивировать"></a>&nbsp;
+            <a href="/blocks/modify/{$block.id}"><img border="0" src="/public/images/system/edit.gif" alt="Редактировать"></a>&nbsp;
           {else}
-            <a href="/blocks/active/{$block.id}"><img border="0" src="/files/shared/images/system/activate.gif" alt="Активировать"></a>&nbsp;
-            <a href="/blocks/modify/{$block.id}"><img border="0" src="/files/shared/images/system/edit.gif" alt="Редактировать"></a>&nbsp;
-            <a href="/blocks/delete/{$block.id}/{$block.block_weight}/{$block.block_position}" onclick="return confirm('Удалить?')"><img border="0" src="/files/shared/images/system/del.gif" alt="Удалить"></a>&nbsp;
+            <a href="/blocks/active/{$block.id}"><img border="0" src="/public/images/system/activate.gif" alt="Активировать"></a>&nbsp;
+            <a href="/blocks/modify/{$block.id}"><img border="0" src="/public/images/system/edit.gif" alt="Редактировать"></a>&nbsp;
+            <a href="/blocks/delete/{$block.id}/{$block.block_weight}/{$block.block_position}" onclick="return confirm('Удалить?')"><img border="0" src="/public/images/system/del.gif" alt="Удалить"></a>&nbsp;
           {/if}
 
         </td>
@@ -257,13 +257,13 @@
         {* Weight *}
         <td class="{$class}" align="center" nowrap>
           {if !$smarty.foreach.fblock_b.first}
-            <a href="/blocks/weight_up/{$block.block_weight}/{$block.block_position}"><img border="0" src="/files/shared/images/system/up.gif"></a>
+            <a href="/blocks/weight_up/{$block.block_weight}/{$block.block_position}"><img border="0" src="/public/images/system/up.gif"></a>
           {/if}
           {if !$smarty.foreach.fblock_b.first && !$smarty.foreach.fblock_b.last}
             &nbsp;
           {/if}
           {if !$smarty.foreach.fblock_b.last}
-            <a href="/blocks/weight_down/{$block.block_weight}/{$block.block_position}"><img border="0" src="/files/shared/images/system/down.gif"></a>
+            <a href="/blocks/weight_down/{$block.block_weight}/{$block.block_position}"><img border="0" src="/public/images/system/down.gif"></a>
           {/if}
         </td>
 
@@ -271,14 +271,14 @@
           {* Действия над блоком *}
           {array name='url_vars'}
           {array_append name='url_vars' key='id' value=$block.id}
-          <a href=""><img border="0" src="/files/shared/images/system/info.gif" alt="Информация"></a>&nbsp;
+          <a href=""><img border="0" src="/public/images/system/info.gif" alt="Информация"></a>&nbsp;
           {if $block.block_active}
-            <a href="/blocks/deactive/{$block.id}"><img border="0" src="/files/shared/images/system/deactivate.gif" alt="Деактивировать"></a>&nbsp;
-            <a href="/blocks/modify/{$block.id}"><img border="0" src="/files/shared/images/system/edit.gif" alt="Редактировать"></a>&nbsp;
+            <a href="/blocks/deactive/{$block.id}"><img border="0" src="/public/images/system/deactivate.gif" alt="Деактивировать"></a>&nbsp;
+            <a href="/blocks/modify/{$block.id}"><img border="0" src="/public/images/system/edit.gif" alt="Редактировать"></a>&nbsp;
           {else}
-            <a href="/blocks/active/{$block.id}"><img border="0" src="/files/shared/images/system/activate.gif" alt="Активировать"></a>&nbsp;
-            <a href="/blocks/modify/{$block.id}"><img border="0" src="/files/shared/images/system/edit.gif" alt="Редактировать"></a>&nbsp;
-            <a href="/blocks/delete/{$block.id}/{$block.block_weight}/{$block.block_position}" onclick="return confirm('Удалить?')"><img border="0" src="/files/shared/images/system/del.gif" alt="Удалить"></a>&nbsp;
+            <a href="/blocks/active/{$block.id}"><img border="0" src="/public/images/system/activate.gif" alt="Активировать"></a>&nbsp;
+            <a href="/blocks/modify/{$block.id}"><img border="0" src="/public/images/system/edit.gif" alt="Редактировать"></a>&nbsp;
+            <a href="/blocks/delete/{$block.id}/{$block.block_weight}/{$block.block_position}" onclick="return confirm('Удалить?')"><img border="0" src="/public/images/system/del.gif" alt="Удалить"></a>&nbsp;
           {/if}
 
         </td>
@@ -329,13 +329,13 @@
         {* Weight *}
         <td class="{$class}" align="center" nowrap>
           {if !$smarty.foreach.fblock_c.first}
-            <a href="/blocks/weight_up/{$block.block_weight}/{$block.block_position}"><img border="0" src="/files/shared/images/system/up.gif"></a>
+            <a href="/blocks/weight_up/{$block.block_weight}/{$block.block_position}"><img border="0" src="/public/images/system/up.gif"></a>
           {/if}
           {if !$smarty.foreach.fblock_c.first && !$smarty.foreach.fblock_c.last}
             &nbsp;
           {/if}
           {if !$smarty.foreach.fblock_c.last}
-            <a href="/blocks/weight_down/{$block.block_weight}/{$block.block_position}"><img border="0" src="/files/shared/images/system/down.gif"></a>
+            <a href="/blocks/weight_down/{$block.block_weight}/{$block.block_position}"><img border="0" src="/public/images/system/down.gif"></a>
           {/if}
         </td>
 
@@ -343,14 +343,14 @@
           {* Действия над блоком *}
           {array name='url_vars'}
           {array_append name='url_vars' key='id' value=$block.id}
-          <a href=""><img border="0" src="/files/shared/images/system/info.gif" alt="Информация"></a>&nbsp;
+          <a href=""><img border="0" src="/public/images/system/info.gif" alt="Информация"></a>&nbsp;
           {if $block.block_active}
-            <a href="/blocks/deactive/{$block.id}"><img border="0" src="/files/shared/images/system/deactivate.gif" alt="Деактивировать"></a>&nbsp;
-            <a href="/blocks/modify/{$block.id}"><img border="0" src="/files/shared/images/system/edit.gif" alt="Редактировать"></a>&nbsp;
+            <a href="/blocks/deactive/{$block.id}"><img border="0" src="/public/images/system/deactivate.gif" alt="Деактивировать"></a>&nbsp;
+            <a href="/blocks/modify/{$block.id}"><img border="0" src="/public/images/system/edit.gif" alt="Редактировать"></a>&nbsp;
           {else}
-            <a href="/blocks/active/{$block.id}"><img border="0" src="/files/shared/images/system/activate.gif" alt="Активировать"></a>&nbsp;
-            <a href="/blocks/modify/{$block.id}"><img border="0" src="/files/shared/images/system/edit.gif" alt="Редактировать"></a>&nbsp;
-            <a href="/blocks/delete/{$block.id}/{$block.block_weight}/{$block.block_position}" onclick="return confirm('Удалить?')"><img border="0" src="/files/shared/images/system/del.gif" alt="Удалить"></a>&nbsp;
+            <a href="/blocks/active/{$block.id}"><img border="0" src="/public/images/system/activate.gif" alt="Активировать"></a>&nbsp;
+            <a href="/blocks/modify/{$block.id}"><img border="0" src="/public/images/system/edit.gif" alt="Редактировать"></a>&nbsp;
+            <a href="/blocks/delete/{$block.id}/{$block.block_weight}/{$block.block_position}" onclick="return confirm('Удалить?')"><img border="0" src="/public/images/system/del.gif" alt="Удалить"></a>&nbsp;
           {/if}
 
         </td>

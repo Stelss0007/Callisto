@@ -110,7 +110,7 @@ function smarty_function_my_hit_search($params, &$smarty)
       {
       $script .="
                var objName = $('#".$obj_id."_text').val();
-               var add_btn=\"&nbsp;<a href='' onclick='myWindow(\\\"$autoAdd\\\", \\\"Добавление\\\", \\\"\"+objName+\"\\\"); return false;\'><img src=\'/files/shared/images/system/add.gif\' style=\'vertical-align: middle;\'></a>\";
+               var add_btn=\"&nbsp;<a href='' onclick='myWindow(\\\"$autoAdd\\\", \\\"Добавление\\\", \\\"\"+objName+\"\\\"); return false;\'><img src=\'/public/images/system/add.gif\' style=\'vertical-align: middle;\'></a>\";
                ";
       }
      $script .="

@@ -5,7 +5,6 @@ appLibLoad('Smarty');
 appLibLoad('DBConnector');
 appLibLoad('UserSession');
 
-
 $db = new DBConnector();
 
 function appDebug($value)
@@ -301,6 +300,11 @@ function appLibLoad($lib_name = 'extlib')
 function appJsLoad($modname='kernel', $scriptname='main')
   {
   global $jsLoaded;
+ 
+  if(empty($scriptname))
+    $scriptname = 'main';
+  if(empty($modname))
+    $modname = 'kernel';
   
   if (!empty($jsLoaded["$modname.$scriptname"])) 
     return true;
@@ -309,23 +313,44 @@ function appJsLoad($modname='kernel', $scriptname='main')
     {
     if($scriptname == 'main')
       {
-      $jsLoaded["$modname.$scriptname"] = "/scripts/js/$scriptname.js";
+      $jsLoaded["$modname.$scriptname"] = "/public/js/$scriptname.js";
       }
     else
       {
-      $jsLoaded["$modname.$scriptname"] = "/scripts/js/$scriptname/$scriptname.js";
+      $jsLoaded["$modname.$scriptname"] = "/public/js/$scriptname/$scriptname.js";
       }
     }
   else
     {
-    if($scriptname == 'main')
-      {
-      $jsLoaded["$modname.$scriptname"] = "/scripts/js/$scriptname.js";
-      }
-    else
-      {
-      $jsLoaded["$modname.$scriptname"] = "/modules/$modname/js/$scriptname.js";
-      }
+    $jsLoaded["$modname.$scriptname"] = "/modules/$modname/js/$scriptname.js";
+    }
+
+  return true;
+  }
+  
+function appCssLoad($modname='', $scriptname='main')
+  {
+  global $cssLoaded;
+  
+  if(empty($scriptname))
+    $scriptname = 'main';
+  
+  if (!empty($cssLoaded["$modname.$scriptname"])) 
+    return true;
+  
+  if($modname == 'kernel')
+    {
+    $cssLoaded["$modname.$scriptname"] = "/public/css/$scriptname.css";
+    }
+  elseif(empty($modname))
+    {
+    global $mod_controller;
+    $current_theme = $mod_controller->getThemeName();
+    $cssLoaded["theme.$current_theme.$scriptname"] = "/themes/$current_theme/css/$scriptname.css";
+    }
+  else
+    {
+    $cssLoaded["$modname.$scriptname"] = "/modules/$modname/css/$scriptname.css";
     }
 
   return true;

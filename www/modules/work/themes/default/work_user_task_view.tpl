@@ -14,8 +14,8 @@
           № {$task.id}: «{$task.displayname}»
           {if 1}
           <div style="float:right;">
-            <a href="/index.php?module=work&type=user&func=task_modify&id={$task.id}"><img border="0" src="/files/shared/images/system/edit.gif" alt="Редактировать"></a>&nbsp;
-            <a href="/index.php?module=work&type=user&func=task_delete&id={$task.id}"><img border="0" src="/files/shared/images/system/del.gif" alt="Удалить"></a>
+            <a href="/index.php?module=work&type=user&func=task_modify&id={$task.id}"><img border="0" src="/public/images/system/edit.gif" alt="Редактировать"></a>&nbsp;
+            <a href="/index.php?module=work&type=user&func=task_delete&id={$task.id}"><img border="0" src="/public/images/system/del.gif" alt="Удалить"></a>
           </div>
           {/if}
         </span>

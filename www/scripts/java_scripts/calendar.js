@@ -1,1 +1,0 @@
-function doCalendar(a,b){var c=new ajax();var d='';c.setVar('module','calendar');c.setVar('type','ajax');c.setVar('func','view');c.setVar('year',b);c.setVar('month',a);c.requestFile='/index.php';c.method='GET';c.element='calendar-layer';c.sendAJAX(d)};

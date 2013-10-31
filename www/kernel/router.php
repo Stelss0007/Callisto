@@ -108,6 +108,10 @@ class Router
     //$module = new $mod();
     $module = new Index($mod);
     
+    global $mod_controller;
+    $mod_controller = $module;
+    
+    
     $module->input_vars = array_merge($parameters, $module->input_vars);
     
     
@@ -115,7 +119,7 @@ class Router
       $module->type = 'user';
     else  
       $module->type = ($_REQUEST['type'] == 'user' || $_REQUEST['type'] == 'admin'  || $_REQUEST['type'] == 'ajax') ? $_REQUEST['type'] : 'user';
-
+    
     $module->action($action);
 
     exit; 

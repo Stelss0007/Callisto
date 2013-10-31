@@ -167,19 +167,19 @@
 
             <td class="{$class}" align="center" nowrap>
               {if $image.weight_moveup_url}
-                <a href="{$image.weight_moveup_url}"><img border="0" src="/files/shared/images/system/up.gif"></a>
+                <a href="{$image.weight_moveup_url}"><img border="0" src="/public/images/system/up.gif"></a>
               {/if}
               {if $image.weight_moveup_url && $image.weight_movedown_url}
                 &nbsp;
               {/if}
               {if $image.weight_movedown_url}
-                <a href="{$image.weight_movedown_url}"><img border="0" src="/files/shared/images/system/down.gif"></a>
+                <a href="{$image.weight_movedown_url}"><img border="0" src="/public/images/system/down.gif"></a>
               {/if}
             </td>
 
             <td class="{$class}" align="center" nowrap>
-              <a href="{mod_url type='admin' modname='content' func='image_modify' vars=$url_vars}"><img border="0" src="/files/shared/images/system/edit.gif" alt="Редактировать"></a>&nbsp;
-              <a href="{mod_url type='admin' modname='content' func='image_confirm_delete' vars=$url_vars}"><img border="0" src="/files/shared/images/system/del.gif" alt="Удалить"></a>
+              <a href="{mod_url type='admin' modname='content' func='image_modify' vars=$url_vars}"><img border="0" src="/public/images/system/edit.gif" alt="Редактировать"></a>&nbsp;
+              <a href="{mod_url type='admin' modname='content' func='image_confirm_delete' vars=$url_vars}"><img border="0" src="/public/images/system/del.gif" alt="Удалить"></a>
 
 </td>
           </tr>
@@ -223,20 +223,20 @@
 
             <td class="{$class}" align="center" nowrap>
               {if $subdoc.weight_moveup_url}
-                <a href="{$subdoc.weight_moveup_url}"><img border="0" src="/files/shared/images/system/up.gif"></a>
+                <a href="{$subdoc.weight_moveup_url}"><img border="0" src="/public/images/system/up.gif"></a>
               {/if}
               {if $subdoc.weight_moveup_url && $subdoc.weight_movedown_url}
                 &nbsp;
               {/if}
               {if $subdoc.weight_movedown_url}
-                <a href="{$subdoc.weight_movedown_url}"><img border="0" src="/files/shared/images/system/down.gif"></a>
+                <a href="{$subdoc.weight_movedown_url}"><img border="0" src="/public/images/system/down.gif"></a>
               {/if}
             </td>
 
             <td class="{$class}" align="center" nowrap>
-              <a href="{mod_url type='admin' modname='content' func='subdoc_modify' vars=$url_vars}"><img border="0" src="/files/shared/images/system/edit.gif" alt="{#edit#}"></a>&nbsp;
-              <a href="{mod_url type='admin' modname='content' func='subdoc_new' vars=$url_vars}"><img border="0" src="/files/shared/images/system/add.gif" alt="{#add#}"></a>&nbsp;
-              <a href="{mod_url type='admin' modname='content' func='subdoc_confirm_delete' vars=$url_vars}"><img border="0" src="/files/shared/images/system/del.gif" alt="{#delete#}"></a>
+              <a href="{mod_url type='admin' modname='content' func='subdoc_modify' vars=$url_vars}"><img border="0" src="/public/images/system/edit.gif" alt="{#edit#}"></a>&nbsp;
+              <a href="{mod_url type='admin' modname='content' func='subdoc_new' vars=$url_vars}"><img border="0" src="/public/images/system/add.gif" alt="{#add#}"></a>&nbsp;
+              <a href="{mod_url type='admin' modname='content' func='subdoc_confirm_delete' vars=$url_vars}"><img border="0" src="/public/images/system/del.gif" alt="{#delete#}"></a>
             </td>
           </tr>
         {/foreach}

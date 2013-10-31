@@ -33,12 +33,12 @@
             {* Формируем масив переменные для урла *}
             {array name='url_vars'}
             {array_append name='url_vars' key='user_gid' value=$group.id}
-            <a href=""><img border="0" src="/files/shared/images/system/info.gif" alt="Журнал действий"></a>&nbsp;
+            <a href=""><img border="0" src="/public/images/system/info.gif" alt="Журнал действий"></a>&nbsp;
 
             {array name='url_vars'}
             {array_append name='url_vars' key='id' value=$group.id}
-            <a href="/index.php?module=groups&type=admin&func=modify&id={$group.id}"><img border="0" src="/files/shared/images/system/edit.gif" alt="Редактировать"></a>&nbsp;
-            <a href="/index.php?module=groups&type=admin&func=delete&id={$group.id}"><img border="0" src="/files/shared/images/system/del.gif" alt="Удалить"></a>
+            <a href="/index.php?module=groups&type=admin&func=modify&id={$group.id}"><img border="0" src="/public/images/system/edit.gif" alt="Редактировать"></a>&nbsp;
+            <a href="/index.php?module=groups&type=admin&func=delete&id={$group.id}"><img border="0" src="/public/images/system/del.gif" alt="Удалить"></a>
           </td>
         </tr>
       {/foreach}

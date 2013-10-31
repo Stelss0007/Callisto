@@ -34,8 +34,8 @@
           
           {array name='url_vars'}
           {array_append name='url_vars' key='block_name' value=$block.block_name}
-          <a href=""><img border="0" src="/files/shared/images/system/info.gif" alt="Информация"></a>&nbsp;
-          <a href="/blocks/add/{$position}/{$block.block_name}"><img border="0" src="/files/shared/images/system/add.gif" alt="Добавить"></a>
+          <a href=""><img border="0" src="/public/images/system/info.gif" alt="Информация"></a>&nbsp;
+          <a href="/blocks/add/{$position}/{$block.block_name}"><img border="0" src="/public/images/system/add.gif" alt="Добавить"></a>
         </td>
       </tr>
       {/foreach}
