@@ -38,7 +38,7 @@ function smarty_modifier_autosmile($string)
 
         							 '=-O'   => 'ai.gif',
         							 '=O'    => 'ai.gif',
-//        							 '=-o'   => 'ai.gif',
+
         							 '=0'    => 'ai.gif',
 
         							 ':-*'   => 'aj.gif',
@@ -48,7 +48,6 @@ function smarty_modifier_autosmile($string)
         							 ':-\'(' => 'ak.gif',
 
         							 ':-X'   => 'al.gif',
-//        							 ':-x'   => 'al.gif',
 
         							 '>:o'   => 'am.gif',
         							 '>:O'   => 'am.gif',
@@ -87,7 +86,6 @@ function smarty_modifier_autosmile($string)
 
         							 '@}->--'    => 'ax.gif',
         							 '@}-:--'    => 'ax.gif',
-//        							 '@>}--`---' => 'ax.gif',
 
         							 '*THUMBS UP*' => 'ay.gif',
         							 '*GOOD*'      => 'ay.gif',
@@ -203,34 +201,18 @@ function smarty_modifier_autosmile($string)
         							 '*PARTY*'    => 'dv.gif',
         							 );
 
-  $site_url = sysModGetVar('SYS_config','site_url');
 	foreach ($replace_arr as $s=>$r)
-	  $string = str_ireplace($s, '<img src="'.$site_url.'files/shared/images/smiles/basic/'.$r.'" alt="'.$s.'" border="0">', $string);
+	  $string = str_ireplace($s, '<img src="/public/images/smiles/basic/'.$r.'" alt="'.$s.'" border="0">', $string);
 
   //Антимат
 	$censor_words = unserialize(sysModGetVar('SYS_config','censor_words'));
 	if ($censor_words)
 		{
 		foreach ($censor_words as $s)
-		  $string = str_ireplace($s, '<img src="'.$site_url.'files/shared/images/smiles/basic/censor.gif" border="0">', $string);
+		  $string = str_ireplace($s, '<img src="/public/images/smiles/basic/censor.gif" border="0">', $string);
 	  }
 
 	return $string;
 	}
-
-function mb_str_replace($needle, $replacement, $haystack)
-  {
-  $needle_len = mb_strlen($needle);
-  $replacement_len = mb_strlen($replacement);
-  $pos = mb_stripos($haystack, $needle);
-  while ($pos !== false)
-    {
-    $haystack = mb_substr($haystack, 0, $pos) . $replacement
-               . mb_substr($haystack, $pos + $needle_len);
-    $pos = mb_stripos($haystack, $needle, $pos + $replacement_len);
-    }
-  return $haystack;
-  }
-
 
 ?>

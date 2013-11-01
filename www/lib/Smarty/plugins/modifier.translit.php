@@ -7,7 +7,7 @@
 
 function smarty_modifier_translit($text)
   {
-  return sysVarTranslit($text);
+  return appTranslit($text);
   }
 
 /* vim: set expandtab: */

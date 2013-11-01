@@ -25,7 +25,7 @@ function smarty_function_counter_stat_view_add($params, &$smarty)
 	                   'comm_key_b'      =>  $params['comm_key_b']
 	                  );
 
-	$modresult =& sysModFunc('counter', 'ajax', 'list_add', $mod_param);
+	$modresult = & sysModFunc('counter', 'ajax', 'list_add', $mod_param);
 
   return $modresult['content'];
   }

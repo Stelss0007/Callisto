@@ -300,6 +300,7 @@ function appLibLoad($lib_name = 'extlib')
 function appJsLoad($modname='kernel', $scriptname='main')
   {
   global $jsLoaded;
+  global $jsLoadedHasModScript;
  
   if(empty($scriptname))
     $scriptname = 'main';
@@ -322,6 +323,7 @@ function appJsLoad($modname='kernel', $scriptname='main')
     }
   else
     {
+    $jsLoadedHasModScript = 1;
     $jsLoaded["$modname.$scriptname"] = "/modules/$modname/js/$scriptname.js";
     }
 
@@ -331,6 +333,7 @@ function appJsLoad($modname='kernel', $scriptname='main')
 function appCssLoad($modname='', $scriptname='main')
   {
   global $cssLoaded;
+  global $cssLoadedHasModScript;
   
   if(empty($scriptname))
     $scriptname = 'main';
@@ -350,6 +353,7 @@ function appCssLoad($modname='', $scriptname='main')
     }
   else
     {
+    $cssLoadedHasModScript = 1;
     $cssLoaded["$modname.$scriptname"] = "/modules/$modname/css/$scriptname.css";
     }
 

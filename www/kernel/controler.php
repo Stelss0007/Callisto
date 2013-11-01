@@ -263,7 +263,9 @@ abstract class Controller
     appJsLoad('kernel', 'main');
     appJsLoad('kernel', 'jQuery');
     
-    //Подключим стили 
+    //Подключим стили
+    //Стили ядра
+    appCssLoad('kernel'); 
     //Без аргументов подключится стиль текущей темы
     appCssLoad();
     

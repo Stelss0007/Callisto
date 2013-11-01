@@ -11,11 +11,18 @@
  */
 function smarty_function_appCssOutput($params, &$smarty)
   {
-  global $cssLoaded, $coreConfig, $mod_controller;
-  $modname = $mod_controller->getModName();
-  $params['input'] = $cssLoaded;
-  $params['output'] = "/public/cache/$modname.main.css";
-  
+  global $cssLoaded, $coreConfig, $mod_controller, $cssLoadedHasModScript;
+  $modname          = $mod_controller->getModName();
+  $params['input']  = $cssLoaded;
+  if(isset($cssLoadedHasModScript) && !empty($cssLoadedHasModScript))
+    {
+    $params['output'] = "/public/cache/$modname.main.css";
+    }
+  else
+    {
+    $params['output'] = "/public/cache/main.css";
+    }
+
   if($coreConfig['debug.enabled'])
     {
     if($params['debug_age'])
@@ -28,19 +35,37 @@ function smarty_function_appCssOutput($params, &$smarty)
       }
     }
 
-  
-  if (!function_exists('sfc_print_out_css')) {
-          function sfc_print_out_css($params) {
-                  $last_mtime = file_get_contents($_SERVER['DOCUMENT_ROOT'].$params['cache_file_name']);
-                  $output_filename = preg_replace("/\.(css)$/i", date("_YmdHis.",$last_mtime)."$1", $params['output']);
-                  echo "<link type='text/css' href='$output_filename' rel='stylesheet'>";
-          }        
-  } 
-  
-  
-  
+
+  if(!function_exists('sfc_print_out_css_nocache'))
+    {
+
+    function sfc_print_out_css_nocache($params)
+      {
+      foreach($params['input'] as $item)
+        {
+        echo "<link type='text/css' href='$item' rel='stylesheet'>";
+        }
+      }
+
+    }
+
+  if(!function_exists('sfc_print_out_css'))
+    {
+
+    function sfc_print_out_css($params)
+      {
+      $last_mtime      = file_get_contents($_SERVER['DOCUMENT_ROOT'] . $params['cache_file_name']);
+      $output_filename = preg_replace("/\.(css)$/i", date("_YmdHis.", $last_mtime) . "$1", $params['output']);
+      echo "<link type='text/css' href='$output_filename' rel='stylesheet'>";
+      }
+
+    }
+
+
+
   if(!function_exists('sfc_build_combine_css'))
     {
+
     function sfc_build_combine_css($params)
       {
 
@@ -69,7 +94,13 @@ function smarty_function_appCssOutput($params, &$smarty)
           foreach($filelist as $file)
             {
             fputs($fh, PHP_EOL . PHP_EOL . "/* " . $file['name'] . " @ " . date("c", $file['time']) . " */" . PHP_EOL . PHP_EOL);
-            fputs($fh, file_get_contents($_SERVER['DOCUMENT_ROOT'] . $file['name']));
+            //Получаем содержимое файла исходника и пишем файл кеша
+            $buf = file_get_contents($_SERVER['DOCUMENT_ROOT'] . $file['name']);
+            //А теперь поменяем все пути с относительных на абсолютные
+            $uri_path = dirname($file['name']);
+            $buf = preg_replace('/(:?\s*url\s*\()[\'"\s]*([^\/\'"].*)[\'"\s]*\)/isU', '$1' . ($uri_path == '/' ? '/' : $uri_path . '/') . '$2)', $buf);
+            //Сохраним результат в файл кеша
+            fputs($fh, $buf);
             }
           flock($fh, LOCK_UN);
           file_put_contents($_SERVER['DOCUMENT_ROOT'] . $params['cache_file_name'], $lastest_mtime, LOCK_EX);
@@ -82,32 +113,34 @@ function smarty_function_appCssOutput($params, &$smarty)
       }
 
     }
-    
-    
+
+  if(!isset($params['cache']) || empty($params['cache']))
+    sfc_print_out_css_nocache($params);
+  else
   if(isset($params['input']))
     {
-   
+
     if(is_array($params['input']) && count($params['input']) > 0)
       {
-       
+
       $ext = pathinfo($params['input'][0], PATHINFO_EXTENSION);
       if(true || in_array($ext, array('js', 'css')))
         {
 
-        $params['type']            = $ext;
+        $params['type']   = $ext;
         if(!isset($params['output']))
-          $params['output']          = dirname($params['input'][0]) . '/combined.' . $ext;
-        
+          $params['output'] = dirname($params['input'][0]) . '/combined.' . $ext;
+
         if(!isset($params['age']))
-          $params['age']             = 3600;
-        
+          $params['age'] = 3600;
+
         if(!isset($params['cache_file_name']))
           $params['cache_file_name'] = $params['output'] . '.cache';
-        
-        $cache_file_name           = $params['cache_file_name'];
+
+        $cache_file_name = $params['cache_file_name'];
         if(file_exists($_SERVER['DOCUMENT_ROOT'] . $cache_file_name))
           {
-          $cache_mtime = filemtime($_SERVER['DOCUMENT_ROOT'] . $cache_file_name); 
+          $cache_mtime = filemtime($_SERVER['DOCUMENT_ROOT'] . $cache_file_name);
           if($cache_mtime + $params['age'] < time())
             {
             sfc_build_combine_css($params);

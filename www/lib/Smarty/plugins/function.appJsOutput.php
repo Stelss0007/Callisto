@@ -11,11 +11,20 @@
  */
 function smarty_function_appJsOutput($params, &$smarty)
   {
-  global $jsLoaded, $coreConfig, $mod_controller;
-  $modname = $mod_controller->getModName();
-  $params['input'] = $jsLoaded;
-  $params['output'] = "/public/cache/$modname.main.js";
+  global $jsLoaded, $coreConfig, $mod_controller, $jsLoadedHasModScript;
+  $modname          = $mod_controller->getModName();
+  $params['input']  = $jsLoaded;
   
+  if(isset($jsLoadedHasModScript) && !empty($jsLoadedHasModScript))
+    {
+    $params['output'] = "/public/cache/$modname.main.js";
+    }
+  else
+    {
+    $params['output'] = "/public/cache/main.js";
+    }
+ 
+
   if($coreConfig['debug.enabled'])
     {
     if($params['debug_age'])
@@ -27,18 +36,35 @@ function smarty_function_appJsOutput($params, &$smarty)
       $params['age'] = 4;
       }
     }
-  
-  
-  if (!function_exists('sfc_print_out')) {
-          function sfc_print_out($params) {
-                  $last_mtime = file_get_contents($_SERVER['DOCUMENT_ROOT'].$params['cache_file_name']);
-                  $output_filename = preg_replace("/\.(js|css)$/i", date("_YmdHis.",$last_mtime)."$1", $params['output']);
-                  echo "<script type='text/javascript' src='$output_filename'></script>";
-          }        
-  } 
-  
+
+
+  if(!function_exists('sfc_print_out_nocache'))
+    {
+    function sfc_print_out_nocache($params)
+      {
+      foreach($params['input'] as $item)
+        {
+        echo "<script type='text/javascript' src='$item'></script>";
+        }
+      }
+
+    }
+
+  if(!function_exists('sfc_print_out'))
+    {
+
+    function sfc_print_out($params)
+      {
+      $last_mtime      = file_get_contents($_SERVER['DOCUMENT_ROOT'] . $params['cache_file_name']);
+      $output_filename = preg_replace("/\.(js|css)$/i", date("_YmdHis.", $last_mtime) . "$1", $params['output']);
+      echo "<script type='text/javascript' src='$output_filename'></script>";
+      }
+
+    }
+
   if(!function_exists('sfc_build_combine'))
     {
+
     function sfc_build_combine($params)
       {
       $filelist      = array();
@@ -79,6 +105,10 @@ function smarty_function_appJsOutput($params, &$smarty)
       }
 
     }
+
+  if(!isset($params['cache']) || empty($params['cache']))
+    sfc_print_out_nocache($params);
+  else
   if(isset($params['input']))
     {
     if(is_array($params['input']) && count($params['input']) > 0)
