@@ -7,11 +7,8 @@
     <meta name="description" content="{$module_meta_description}"/>
     <meta name="keywords" lang="ru" content="{$module_meta_keywords}"/>
     {appJsLoad modname='kernel' scriptname='jQuery'}
-    {appCssOutput cache=1}
+    {appCssOutput cache=0}
     {appJsOutput}
-    <link rel="stylesheet" href="/public/js/jsValidate/jsValidate.css" type="text/css" />
-    <script type="text/javascript" src="/public/js/jQuery/jQuery.js"></script>
-    <script type="text/javascript" src="/public/js/jsValidate/jsValidate.js"></script>
   </head>
   <body>
     <div id="main">

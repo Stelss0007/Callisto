@@ -330,7 +330,7 @@ function appJsLoad($modname='kernel', $scriptname='main')
   return true;
   }
   
-function appCssLoad($modname='', $scriptname='main')
+function appCssLoad($modname='', $scriptname='main', $dir='')
   {
   global $cssLoaded;
   global $cssLoadedHasModScript;
@@ -343,7 +343,21 @@ function appCssLoad($modname='', $scriptname='main')
   
   if($modname == 'kernel')
     {
-    $cssLoaded["$modname.$scriptname"] = "/public/css/$scriptname.css";
+    if($scriptname=='main')
+      {
+      $cssLoaded["$modname.$scriptname"] = "/public/css/$scriptname.css";
+      }
+    else
+      {
+      if(empty($dir))
+        {
+        $cssLoaded["$modname.$scriptname"] = "/public/css/$scriptname/$scriptname.css";
+        }
+      else
+        {
+        $cssLoaded["$modname.$dir.$scriptname"] = "/public/css/$dir/$scriptname.css";
+        }
+      }
     }
   elseif(empty($modname))
     {

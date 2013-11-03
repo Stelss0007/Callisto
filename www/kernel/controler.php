@@ -260,8 +260,8 @@ abstract class Controller
     $this->object_name = $this->getObjectName();
     
     //Подключим джаваскрипты
-    appJsLoad('kernel', 'main');
     appJsLoad('kernel', 'jQuery');
+    appJsLoad('kernel', 'main');
     
     //Подключим стили
     //Стили ядра
