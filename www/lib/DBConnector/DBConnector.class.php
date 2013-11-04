@@ -85,7 +85,7 @@ class DBConnector
  
   function query()
     {
-    global $coreConfig;
+    global $appConfig;
 
     $args = func_get_args();
     $template = array_shift($args);
@@ -106,7 +106,7 @@ class DBConnector
       $valid_sql = $template;
       }
     
-    if(!empty($coreConfig['debug.enabled']))
+    if(!empty($appConfig['debug.enabled']))
       {
       // Считываем текущее время
       $current_time = microtime();
@@ -119,7 +119,7 @@ class DBConnector
     $result = mysql_query($valid_sql);
     
     
-    if(!empty($coreConfig['debug.enabled']))
+    if(!empty($appConfig['debug.enabled']))
       {
       // То же, что и в 1 части
       $current_time = microtime();

@@ -2,7 +2,8 @@
 .outer {border: 0px;padding:5px;}
 .head
    {
-   background: url("../images/bk-table.png") repeat-x scroll center bottom #88AE60;
+/*   background: url("../images/bk-table.png") repeat-x scroll center bottom #88AE60;*/
+   background: #88AE60;
 /*   text-align: center;*/
    color: #fff;
    }

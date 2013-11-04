@@ -2,6 +2,7 @@
 
 abstract class Controller
   {
+  private   $message = '';
   private   $start_debug_time = 0;
   public    $defaultAction = '';
   protected $errors;
@@ -15,10 +16,11 @@ abstract class Controller
   protected $object_name;
   protected $type;
   protected $action;
-  public $input_vars = array();
+  public    $input_vars = array();
   protected $input_vars_clear = array();
-  private $lang;
-  private $lang_default = 'rus';
+  private   $lang;
+  private   $lang_default = 'rus';
+  public    $config = null;
   
   public $URL;
   public $prevURL;
@@ -58,7 +60,7 @@ abstract class Controller
     // Складываем секунды и миллисекунды
     $this->start_debug_time =$current_time[1] + $current_time[0];
     
-    global $coreConfig;
+    $this->setConfig();
     //$coreConfig['debug.enabled']-Статус дебагера;  
     //Init Errors
     $this->errors =& ErrorHandler::getInstance();
@@ -86,7 +88,7 @@ abstract class Controller
 
     $this->module_dir = 'modules/'.$this->modname.'/';
     
-    if($coreConfig['debug.enabled'])
+    if($this->config['debug.enabled'])
       {
       require_once(KERNEL_DIR.'debuger.php');
       $this->debuger = & Debuger::getInstance();
@@ -102,9 +104,10 @@ abstract class Controller
     $this->smarty = new viewTpl();
     //??????? ???? ???????????
     $this->current_theme = 'green';
+    //$this->current_theme = 'blog_theme1';
     
     //Установим язык
-    $this->setLang($coreConfig['lang']);
+    $this->setLang($this->config['lang']);
     $this->loadLang();
     $this->loadModuleLang($this->modname);
     
@@ -125,9 +128,7 @@ abstract class Controller
     
   function __destruct()
     {
-    global $coreConfig;
-    
-    if($coreConfig['debug.enabled'])
+    if($this->config['debug.enabled'])
       {
         
       $current_time = microtime();
@@ -279,6 +280,16 @@ abstract class Controller
     {
     return $this->modname;
     }
+  final public function getActionName()
+    {
+    return $this->action;
+    }
+    
+  final function setConfig()
+    {
+    global $appConfig;
+    $this->config = &$appConfig;
+    }
   //////////////////////////////////////////////////////////////////////////////
   ////////////////////////////   TEMPLATES  ////////////////////////////////////
   //////////////////////////////////////////////////////////////////////////////
@@ -288,6 +299,16 @@ abstract class Controller
     $this->allVarToTpl();
     $ObjectName = $this->getTplObjectName();
     echo $this->smarty->fetch($tpl_dir, $ObjectName);
+    }
+    
+  /**
+   * Получить значение  из словаря в Smarty (lang.conf)
+   * @param string $const Ключ словаря
+   * @return string Результат, предложение в текущей локали
+   */
+  final public function t($const)
+    {
+    return $this->smarty->get_config_vars($const);
     }
     
   final public function viewJSON()
@@ -303,12 +324,23 @@ abstract class Controller
     $this->allVarToTpl();
     $this->blockToTpl();
     $ObjectName = $this->getTplObjectName();
-    $modresult['content'] = $this->smarty->fetch($tpl_dir, $ObjectName);
     
-    $pageTplFile = $this->root_dir."themes/".$this->current_theme.'/pages/'.$this->page.'.tpl';
-    $this->tpls[] = '(Main Template)'."themes/".$this->current_theme.'/pages/'.$this->page.'.tpl';
-    $this->smarty->assign('module_content', $modresult['content']);
-    echo $this->smarty->fetch($pageTplFile);
+    //Прикрепим меседж в тело.
+    $modresult['content'] = $this->message.$this->smarty->fetch($tpl_dir, $ObjectName);
+    
+    //Если это запрос через AJAX, то выводим только результат работы модуля
+    if(isAjax())
+      {
+      echo $modresult['content'];
+      }
+    else
+      {
+      $pageTplFile = $this->root_dir."themes/".$this->current_theme.'/pages/'.$this->page.'.tpl';
+      $this->tpls[] = '(Main Template)'."themes/".$this->current_theme.'/pages/'.$this->page.'.tpl';
+      $this->smarty->assign('module_content', $modresult['content']);
+      echo $this->smarty->fetch($pageTplFile);
+      }
+
     }
 
   final public function tplFileName($debug=false)
@@ -440,10 +472,10 @@ abstract class Controller
     $logedin = $this->session->isLogin();
     if(empty($logedin))
       {
-      $this->showMessage("Access to the page is forbidden. You are not allowed!", '/users/login');
+      $this->showMessage($this->t('page_not_access_most_login'), '/users/login');
       }
       
-    $this->errors->setError("Access to the page is forbidden. You are not allowed!");
+    $this->errors->setError($this->t('page_not_access'));
     }
 
     
@@ -664,11 +696,12 @@ abstract class Controller
   //////////////////////////////////////////////////////////////////////////////
   //////////////////////   SYSTEM MESSAGES  ////////////////////////////////////
   //////////////////////////////////////////////////////////////////////////////  
-  final public function showMessage($message='', $url='', $data='')
+  final public function showMessage($message='', $url='', $data='', $type = MESSAGE_INFO)
     {
     $this->session->setVar('appMessage', $message);
     $this->session->setVar('appMessageData', $data);
     $this->session->setVar('appRedirectUrl', $url);
+    $this->session->setVar('appMessageType', $type);
     
     if($url)
       $this->redirect($url);
@@ -680,10 +713,13 @@ abstract class Controller
     $message  = $this->session->getVar('appMessage');
     $data     = $this->session->getVar('appMessageData');
     $url      = $this->session->getVar('appRedirectUrl'); 
+    $type     = $this->session->getVar('appMessageType'); 
     
-    
-    if($message)
-      $this->assign('appMessage', $message);
+    //Clean session vars
+    $this->session->delVar('appMessage');
+    $this->session->delVar('appMessageData');
+    $this->session->delVar('appRedirectUrl');
+    $this->session->delVar('appMessageType');
     
     if(!empty($data))
       {
@@ -693,30 +729,39 @@ abstract class Controller
         }
       }
     
-    //Clean session vars
-    $this->session->delVar('appMessage');
-    $this->session->delVar('appMessageData');
-    $this->session->delVar('appRedirectUrl');
-    
-    
-    /////////////////////////////////////////////////////
-    /////// Для вывода сообщений в отдельном окне ///////
-    if(empty($message))
-      return;
-    if(empty($url))
+    if($this->config['Message.type']=='js')
       {
-      $url = $this->session->getVar('prevURL');
+      if($message)
+        {
+        $this->message = "<div style='display:none;' id='appMessage_'>
+                          <input type='hidden' id='appMessageType' value='$type'>
+                          <input type='hidden' id='appMessageText' value='$message'>
+                          </div>";
+
+        $this->assign('appMessage', $message);
+        }
       }
-    $time = 2;
-    $this->smarty->caching = false;
-    $this->smarty->assign('url', $url);
-    $this->smarty->assign('message', $message);
-    $this->smarty->assign('time', $time);
-    //Смотрим че у нас в сесии (Какая тема)
-    //$themename = sysUserTheme ();
-    //$sysTpl->display("themes/test/messages/normal.tpl");
-    $this->smarty->display("themes/green/messages/normal.tpl");
-    exit;
+    else
+      {
+      /////////////////////////////////////////////////////
+      /////// Для вывода сообщений в отдельном окне ///////
+      if(empty($message))
+        return;
+      if(empty($url))
+        {
+        $url = $this->session->getVar('prevURL');
+        }
+      $time = 2;
+      $this->smarty->caching = false;
+      $this->smarty->assign('url', $url);
+      $this->smarty->assign('message', $message);
+      $this->smarty->assign('time', $time);
+      //Смотрим че у нас в сесии (Какая тема)
+      //$themename = sysUserTheme ();
+      //$sysTpl->display("themes/test/messages/normal.tpl");
+      $this->smarty->display("themes/green/messages/normal.tpl");
+      exit;
+      }
     }
     
     

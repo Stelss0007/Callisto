@@ -11,19 +11,20 @@
  */
 function smarty_function_appCssOutput($params, &$smarty)
   {
-  global $cssLoaded, $coreConfig, $mod_controller, $cssLoadedHasModScript;
+  global $cssLoaded, $appConfig, $mod_controller, $cssLoadedHasModScript;
   $modname          = $mod_controller->getModName();
+  $action           = $mod_controller->getActionName();
   $params['input']  = $cssLoaded;
   if(isset($cssLoadedHasModScript) && !empty($cssLoadedHasModScript))
     {
-    $params['output'] = "/public/cache/$modname.main.css";
+    $params['output'] = "/public/cache/$modname.$action.main.css";
     }
   else
     {
     $params['output'] = "/public/cache/main.css";
     }
 
-  if($coreConfig['debug.enabled'])
+  if($appConfig['debug.enabled'])
     {
     if($params['debug_age'])
       {

@@ -13,6 +13,16 @@ function appDebug($value)
   print_r($value);
   echo "</pre>";
   }
+  
+function isAjax()
+  {
+  if(isset($_SERVER['HTTP_X_REQUESTED_WITH']) && 
+     !empty($_SERVER['HTTP_X_REQUESTED_WITH']) &&
+     strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') {
+    return true;
+    }
+  return false;
+  }
 
 $ses_info = new UserSession();
 /**
@@ -25,27 +35,27 @@ function appInit()
   //include_once 'lang/rus/kernel.php';
 
   //????????? ????????? ?? ????????????????? ?????
-  global $coreConfig;
-  $coreConfig = array();
+  global $appConfig;
+  $appConfig = array();
   include_once 'kernel/config.php';
 
   // ????????? ???????? PHP
-  if ($coreConfig['locale.lc_all']) setlocale(LC_ALL, $coreConfig['locale.lc_all']);
+  if ($appConfig['locale.lc_all']) setlocale(LC_ALL, $appConfig['locale.lc_all']);
 	  else setlocale(LC_ALL, 'ru_RU.CP1251');
   ignore_user_abort(true);
 
   // ???? ????? ?????????? ?????? ? ????? ?? ???????
-  if ($coreConfig['DB.Encoded'])
+  if ($appConfig['DB.Encoded'])
     {
-    $coreConfig['DB.UserName'] = base64_decode($coreConfig['DB.UserName']);
-    $coreConfig['DB.Password'] = base64_decode($coreConfig['DB.Password']);
-    $coreConfig['DB.Encoded'] = 0;
+    $appConfig['DB.UserName'] = base64_decode($appConfig['DB.UserName']);
+    $appConfig['DB.Password'] = base64_decode($appConfig['DB.Password']);
+    $appConfig['DB.Encoded'] = 0;
     }
 
   header("Content-Type: text/html; charset=windows-1251");
 
   //????????? ??? ???????
-  if ($coreConfig['debug.enabled'])
+  if ($appConfig['debug.enabled'])
     error_reporting (E_ALL ^ E_NOTICE);
     else
       error_reporting (E_ERROR);
@@ -605,7 +615,7 @@ function appWeightDelete($table, $weight, $where='')
  */
 function appVarSetCached($component, $cacheKey, $value=null, $ttl=null)
   {
-  global $coreConfig;
+  global $appConfig;
 
   //Empty приводим к false
   if (!isset ($value)) $value = false;
@@ -614,31 +624,31 @@ function appVarSetCached($component, $cacheKey, $value=null, $ttl=null)
 	$cacheKey = $component.'_'.$cacheKey;
 
   //Складываем ключь в память
-  $coreConfig[$cacheKey] = $value;
+  $appConfig[$cacheKey] = $value;
 
   //В зависимости от типа сохраняем кеш в внешнее хранилище
-  if ($coreConfig['Var.caching'] == 'disk')
+  if ($appConfig['Var.caching'] == 'disk')
     {
     $cacheKey_crc = (string)abs (crc32 ($cacheKey));
     $dir_way = './cache/vars/'.$cacheKey_crc[0].'/'.$cacheKey_crc[1].'/';
     if (!file_exists($dir_way)) 
-      mkdir($dir_way, $coreConfig['default.dir.perms'], true);
+      mkdir($dir_way, $appConfig['default.dir.perms'], true);
     
     return (file_put_contents($dir_way.$cacheKey, serialize($value)));
     }
-  elseif ($coreConfig['Var.caching'] == 'xcache')
+  elseif ($appConfig['Var.caching'] == 'xcache')
     {
-		if (!$ttl) $ttl = $coreConfig['Var.cache_lifetime'];
+		if (!$ttl) $ttl = $appConfig['Var.cache_lifetime'];
     return (xcache_set('appVar_'.$cacheKey, $value, $ttl));
     }
-  elseif ($coreConfig['Var.caching'] == 'eaccelerator')
+  elseif ($appConfig['Var.caching'] == 'eaccelerator')
     {
-		if (!$ttl) $ttl = $coreConfig['Var.cache_lifetime'];
+		if (!$ttl) $ttl = $appConfig['Var.cache_lifetime'];
     return (eaccelerator_put('appVar_'.$cacheKey, $value, $ttl));
     }
-  elseif ($coreConfig['Var.caching'] == 'apc')
+  elseif ($appConfig['Var.caching'] == 'apc')
     {
-		if (!$ttl) $ttl = $coreConfig['Var.cache_lifetime'];
+		if (!$ttl) $ttl = $appConfig['Var.cache_lifetime'];
     return (apc_store('appVar_'.$cacheKey, $value, $ttl));
     }
 
@@ -653,37 +663,37 @@ function appVarSetCached($component, $cacheKey, $value=null, $ttl=null)
  */
 function appVarGetCached($component, $cacheKey)
   {
-  global $coreConfig;
+  global $appConfig;
 	//Удлиняем $cacheKey
 	$cacheKey = $component.'_'.$cacheKey;
 
   //Если есть ключь в памяти - возвращаем из памяти
-  if (isset($coreConfig[$cacheKey])) return $coreConfig['appVar_cache'][$cacheKey];
+  if (isset($appConfig[$cacheKey])) return $appConfig['appVar_cache'][$cacheKey];
 
   //В зависимости от типа загружаем кеш из внешнего хранилища
-  if ($coreConfig['Var.caching'] == 'disk')
+  if ($appConfig['Var.caching'] == 'disk')
     {
     $cacheKey_crc = (string)abs(crc32($cacheKey));
     $file_way = './cache/vars/' . $cacheKey_crc[0] . '/' . $cacheKey_crc[1] . '/' . $cacheKey;
     if (file_exists($file_way))
-      $coreConfig['appVar_cache'][$cacheKey] = unserialize(file_get_contents($file_way));
+      $appConfig['appVar_cache'][$cacheKey] = unserialize(file_get_contents($file_way));
 		    else return;
     }
-  elseif ($coreConfig['Var.caching'] == 'xcache')
+  elseif ($appConfig['Var.caching'] == 'xcache')
     {
-    $coreConfig['appVar_cache'][$cacheKey] = xcache_get('appVar_' . $cacheKey);
+    $appConfig['appVar_cache'][$cacheKey] = xcache_get('appVar_' . $cacheKey);
     }
-  elseif ($coreConfig['appConfig']['Var.caching'] == 'eaccelerator')
+  elseif ($appConfig['appConfig']['Var.caching'] == 'eaccelerator')
     {
-    $coreConfig['appVar_cache'][$cacheKey] = eaccelerator_get('appVar_' . $cacheKey);
+    $appConfig['appVar_cache'][$cacheKey] = eaccelerator_get('appVar_' . $cacheKey);
     }
-  elseif ($coreConfig['Var.caching'] == 'apc')
+  elseif ($appConfig['Var.caching'] == 'apc')
     {
 		$apc_value = apc_fetch('appVar_' . $cacheKey, $success);
-		if ($success) $coreConfig['appVar_cache'][$cacheKey] = $apc_value;
+		if ($success) $appConfig['appVar_cache'][$cacheKey] = $apc_value;
     }
 
-  if (isset($coreConfig['appVar_cache'][$cacheKey])) return $coreConfig['appVar_cache'][$cacheKey];
+  if (isset($appConfig['appVar_cache'][$cacheKey])) return $appConfig['appVar_cache'][$cacheKey];
     else return;
   }
 
@@ -708,30 +718,30 @@ function appVarIsCached($component, $cacheKey)
  */
 function appVarDelCached($component, $cacheKey)
   {
-  global $coreConfig;
+  global $appConfig;
   
   if (!appVarIsCached($component, $cacheKey)) return true;
 
 	//Удлиняем $cacheKey
 	$cacheKey = $component.'_'.$cacheKey;
 
-  unset($coreConfig['appVar_cache'][$cacheKey]);
+  unset($appConfig['appVar_cache'][$cacheKey]);
   //В зависимости от типа уничтожаем информацию в кеше
-  if ($coreConfig['Var.caching'] == 'disk')
+  if ($appConfig['Var.caching'] == 'disk')
     {
     $cacheKey_crc = (string)abs(crc32($cacheKey));
     $file_way = './cache/vars/' . $cacheKey_crc[0] . '/' . $cacheKey_crc[1] . '/' . $cacheKey;
     @unlink($file_way);
     }
-  elseif ($coreConfig['Var.caching'] == 'xcache')
+  elseif ($appConfig['Var.caching'] == 'xcache')
     {
     xcache_unset('appVar_' . $cacheKey);
     }
-  elseif ($coreConfig['Var.caching'] == 'eaccelerator')
+  elseif ($appConfig['Var.caching'] == 'eaccelerator')
     {
     eaccelerator_rm('appVar_' . $cacheKey);
     }
-  elseif ($coreConfig['Var.caching'] == 'apc')
+  elseif ($appConfig['Var.caching'] == 'apc')
     {
     apc_delete('appVar_' . $cacheKey);
     }

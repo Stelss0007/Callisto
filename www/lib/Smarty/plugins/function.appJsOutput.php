@@ -11,13 +11,14 @@
  */
 function smarty_function_appJsOutput($params, &$smarty)
   {
-  global $jsLoaded, $coreConfig, $mod_controller, $jsLoadedHasModScript;
+  global $jsLoaded, $appConfig, $mod_controller, $jsLoadedHasModScript;
   $modname          = $mod_controller->getModName();
+  $action           = $mod_controller->getActionName();
   $params['input']  = $jsLoaded;
   
   if(isset($jsLoadedHasModScript) && !empty($jsLoadedHasModScript))
     {
-    $params['output'] = "/public/cache/$modname.main.js";
+    $params['output'] = "/public/cache/$modname.$action.main.js";
     }
   else
     {
@@ -25,7 +26,7 @@ function smarty_function_appJsOutput($params, &$smarty)
     }
  
 
-  if($coreConfig['debug.enabled'])
+  if($appConfig['debug.enabled'])
     {
     if($params['debug_age'])
       {

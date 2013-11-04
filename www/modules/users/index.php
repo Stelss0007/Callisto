@@ -85,16 +85,15 @@ class Index extends Controller
     {
 
     $data = $this->input_vars;
-
     if($data['submit'])
       {
       $login = $this->users->logIn($data['login'], $data['pass']);
       if(empty($login))
         {
-        $this->showMessage('No Login');
+        $this->showMessage($this->t('no_user_pass'), null, null, MESSAGE_ERROR);
         $this->redirect();
         }
-      $this->showMessage('Login Success');
+      $this->showMessage($this->t('login_success'));
       $this->redirect();
       }
       
@@ -112,6 +111,7 @@ class Index extends Controller
   function logout()
     {
     $this->users->logOut();
+    $this->showMessage($this->t('login_success'));
     $this->redirect();
     }
     

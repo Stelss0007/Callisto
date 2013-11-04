@@ -70,3 +70,50 @@ blockquote cite {
 div { min-height: 1.25em; }
 h1, h2, h3, h4, h5, h6 { padding: 0; margin: 0; }
 
+
+/*Messages*/
+#appMessage_conteiner
+{
+  position: absolute;
+  width: 100%;
+  display: none;
+}
+
+#appMessage_msg_text
+{
+  margin: 0 5px;
+  color: #000;
+  font-size: 12px;
+  font-family: Arial;
+  text-align: center;
+  padding: 5px 7px;
+  background-color: #E2E281;
+  border: 2px solid #CD6300;
+  cursor: pointer;
+  background-repeat: no-repeat;
+  min-height: 36px;
+  background-position: 5px 5px;
+}
+
+#appMessage_conteiner .info
+{
+  background-image: url(../images/system/message/info.png);
+  background-color: #E2E281;
+  border: 2px solid #CD6300;
+}
+
+#appMessage_conteiner .warning
+{
+  background-image: url(../images/system/message/warning.png);
+  background-color: #ffe45c;
+  border: 2px solid #CD6300;
+}
+
+#appMessage_conteiner .error
+{
+  background-image: url(../images/system/message/error.png);
+  background-color: #D80015;
+  border: 2px solid #CD6300;
+  color: #fff;
+}
+

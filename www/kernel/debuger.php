@@ -41,8 +41,8 @@ class Debuger
 
   function debug($name, $var = null, $type = LOG)
     {
-    global $coreConfig;
-    if(empty($coreConfig['debug.enabled']))
+    global $appConfig;
+    if(empty($appConfig['debug.enabled']))
       return;
 
     echo '<script type="text/javascript">'.NL;
@@ -113,8 +113,8 @@ class Debuger
     
   function debugAdd($name, $var = null, $type = LOG)
     {
-    global $coreConfig;
-    if(empty($coreConfig['debug.enabled']))
+    global $appConfig;
+    if(empty($appConfig['debug.enabled']))
       return;
 
     

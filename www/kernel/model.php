@@ -4,6 +4,7 @@ class Model extends DBConnector
   var $type = '';
   var $vars = array();
   var $table = 'object';
+  var $config = null;
   
   var $session = null;
   
@@ -12,15 +13,14 @@ class Model extends DBConnector
   //////////////////////////////////////////////////////////////////////////////
   function __construct($guid=0)
     {
-    global $coreConfig;
-    
+    $this->setConfig();
     //echo "host=".$coreConfig['DB.Host'];
     $this->errors =& ErrorHandler::getInstance();
     
-    $this->Host = $coreConfig['DB.Host'];
-    $this->User = $coreConfig['DB.UserName'];
-    $this->Password = $coreConfig['DB.Password'];
-    $this->Database = $coreConfig['DB.Name'];
+    $this->Host = $this->config['DB.Host'];
+    $this->User = $this->config['DB.UserName'];
+    $this->Password = $this->config['DB.Password'];
+    $this->Database = $this->config['DB.Name'];
     
     $this->connect();
       
@@ -49,6 +49,12 @@ class Model extends DBConnector
     return true;
     }
     
+    
+  final function setConfig()
+    {
+    global $appConfig;
+    $this->config = & $appConfig;
+    }
   //////////////////////////////////////////////////////////////////////////////  
   function getObject($guid=0)
     {

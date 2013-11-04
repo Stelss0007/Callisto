@@ -221,9 +221,9 @@ class ErrorHandler
     
   function showWarnings()
     {
-    global $coreConfig;
+    global $appConfig;
   
-    if(empty($coreConfig['debug.enabled']))
+    if(empty($appConfig['debug.enabled']))
       return true;
     
     $debug = Debuger::getInstance();

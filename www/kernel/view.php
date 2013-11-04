@@ -9,7 +9,7 @@ class viewTpl extends Smarty
   **/
   function viewTpl()
     {
-    global $coreConfig;
+    global $appConfig;
 
     //???????? ??????????? ??????
     $this->Smarty();
@@ -23,10 +23,10 @@ class viewTpl extends Smarty
     $this->config_dir='';
     $this->cache_dir = 'cache/content';
     $this->compile_dir = 'cache/templates';
-    $this->_file_perms=$coreConfig['default.file.perms'];
-    $this->_dir_perms=$coreConfig['default.dir.perms'];
+    $this->_file_perms=$appConfig['default.file.perms'];
+    $this->_dir_perms=$appConfig['default.dir.perms'];
     $this->use_sub_dirs=true;//$coreConfig['coretpl.use_sub_dirs'];
-    $this->cache_lifetime=$coreConfig['coretpl.cache_lifetime'];
+    $this->cache_lifetime=$appConfig['coretpl.cache_lifetime'];
 
     //????????????? ???????? ???????????
 //    if ($coreConfig['Var.caching']=='xcache')

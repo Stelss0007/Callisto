@@ -12,7 +12,6 @@
   </head>
   <body>
     <div id="main">
-
       <table class='siteheader'>
         <tr>
           <td>

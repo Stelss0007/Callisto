@@ -45,4 +45,8 @@ define('RELATION_TYPE_MANY_TO_MANY', 3);
 define('RELATION_ACTION_NONE', 0);
 define('RELATION_ACTION_CASCADE', 1);
 define('RELATION_ACTION_RESTRICT', 2);
+
+define('MESSAGE_INFO', 'info');
+define('MESSAGE_WARNING', 'warning');
+define('MESSAGE_ERROR', 'error');
 ?>

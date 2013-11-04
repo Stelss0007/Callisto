@@ -42,7 +42,7 @@ class Block
 
   function __construct($block_info) 
     {
-    global $coreConfig;
+    global $appConfig;
     $this->root_dir = $_SERVER['DOCUMENT_ROOT'].'/';
     foreach($block_info as $key=>$value)
       {
@@ -66,7 +66,7 @@ class Block
     $this->smarty->assign($block_info);
     
     //Установим язык
-    $this->setLang($coreConfig['lang']);
+    $this->setLang($appConfig['lang']);
     }
     /************************** Блоки  *******************************/
   //Соберем все блоки и приготовим к отображению по своим местам
