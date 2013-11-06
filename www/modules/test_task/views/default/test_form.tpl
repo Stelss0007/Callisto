@@ -1,6 +1,7 @@
 {appJsLoad modname='test_task'}
 <form action='/test_task/save_data' id="test_form">
   <input type="hidden" id="element_id" value="{$id}">
+  <input type="hidden" id="update_time" value="">
   <table>
     <tr>
       <td>Field 1</td>

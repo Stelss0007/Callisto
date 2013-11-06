@@ -23,7 +23,7 @@ class Index extends Controller
     $this->test_task->save($data['element_id']);
     
     $data = $this->test_task->getById($data['element_id']);
-    appVarSetCached('test_task', 'time', $data);
+    appVarSetCached('test_task', 'time.'+$data['element_id'], $data);
     }
     
   function get_data()
@@ -39,10 +39,18 @@ class Index extends Controller
     
     for($i=0; $i<5; $i++)
       {
-      $db = appVarGetCached('test_task', 'time');
-      
-      echo json_encode($db);
-      echo str_repeat( ' ', 1024);
+      $db = appVarGetCached('test_task.'+$data['element_id'], 'time');
+      if($db['update_time'] == $data['update_time'])
+        {
+        sleep(2);
+        continue;
+        }
+      $execute = '';
+      foreach($db as $key=>$value)
+        {
+        $execute .= "$('$key').val($value);";
+        }
+      echo $execute;
       ob_flush();
       flush();
       
