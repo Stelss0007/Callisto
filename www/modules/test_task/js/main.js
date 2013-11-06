@@ -59,7 +59,10 @@ $('document').ready(function(){
           $.post("/test_task/save_data", params);
       }, 2000);
       
-      
+  //eval("$('#id').val('6');$('#field_1').val('0000');$('#field_2').val('222');$('#field_3').val('567544412211777');$('#field_4').val('777754654656777');$('#update_time').val('1383702723')");
+
+
+    
    getUpdate();
 });
 
