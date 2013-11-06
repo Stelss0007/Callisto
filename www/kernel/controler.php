@@ -53,6 +53,8 @@ abstract class Controller
   
   function __construct($mod)
     {
+    //$_SERVER['DOCUMENT_ROOT'] = dirname(__FILE__);
+    print_r('wwww');exit;
     //$this->start_debug_time = time();
     $current_time = microtime();
     // Отделяем секунды от миллисекунд

@@ -165,6 +165,14 @@ function app_cp1251_utf8 (&$value)
     else
       array_walk($value,'core_cp1251_utf8');
   }
+  
+function app_utf8_cp1251 (&$value)
+  {
+  if(!is_array($value))
+    $value = iconv('utf-8', 'cp1251', $value);
+    else
+      array_walk($value,'app_utf8_cp1251');
+  }
 
 
 
@@ -634,7 +642,7 @@ function appVarSetCached($component, $cacheKey, $value=null, $ttl=null)
     if (!file_exists($dir_way)) 
       mkdir($dir_way, $appConfig['default.dir.perms'], true);
     
-    return (file_put_contents($dir_way.$cacheKey, serialize($value)));
+    return (file_put_contents($dir_way.$cacheKey, serialize($value),LOCK_EX));
     }
   elseif ($appConfig['Var.caching'] == 'xcache')
     {

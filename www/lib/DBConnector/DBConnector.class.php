@@ -275,8 +275,8 @@ class DBConnector
 
     foreach($array as $key=>$value)
       {
-      if ($value==='')
-        continue;
+//      if ($value==='')
+//        continue;
       
       if(!in_array($key, $columns, true))
         continue;

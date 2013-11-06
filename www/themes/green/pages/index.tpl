@@ -112,36 +112,8 @@
        </td>
       <td class="fblock">
 
-        <span class="sbtitle">Выбор заданий</span>
+        <span class="sbtitle">Правое мненю</span>
         <div class="usermenu">
-          <span id="tsk_mnu1" class='usermnutitle-g'>По параметрам</span>
-          <div id="tsk_mnu_block1" class="usermnublock" >
-            <span class='usermnuline-act'>
-              <b>Все задания</b>
-            </span>
-            <span class='usermnuline'>
-              Только новые задания
-            </span>
-            <span class='usermnuline'>
-              Многоразовые задания
-            </span>
-            <span class='usermnuline'>
-              Избранное
-            </span>
-            <span class='usermnuline'>
-              Над которыми работаю
-            </span>
-            <span class='usermnuline'>
-              Находятся на проверке
-            </span>
-            <span class='usermnuline'>
-              Оплачены
-            </span>
-            <span class='usermnuline'>
-              Отклонены
-            </span>
-          </div>
-
           {* Левая часть *}
           {if $blocks.right}
             {foreach item=block from=$blocks.right}
