@@ -43,7 +43,7 @@ class Block
   function __construct($block_info) 
     {
     global $appConfig;
-    $this->root_dir = $_SERVER['DOCUMENT_ROOT'].'/';
+    $this->root_dir = APP_DIRECTORY.'/';
     foreach($block_info as $key=>$value)
       {
       $this->$key = $value;

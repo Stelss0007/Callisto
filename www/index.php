@@ -1,4 +1,5 @@
 <?php
+define('APP_DIRECTORY', dirname(__FILE__));
 include_once 'lib/ErrorHandler/ErrorHandler.class.php';
 $errors = ErrorHandler::getInstance();
 

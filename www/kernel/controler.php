@@ -21,7 +21,7 @@ abstract class Controller
   private   $lang;
   private   $lang_default = 'rus';
   public    $config = null;
-  
+    
   public $URL;
   public $prevURL;
 
@@ -53,7 +53,7 @@ abstract class Controller
   
   function __construct($mod)
     {
-    //$_SERVER['DOCUMENT_ROOT'] = dirname(__FILE__);
+    //APP_DIRECTORY = dirname(__FILE__);
     //print_r('wwww');exit;
     //$this->start_debug_time = time();
     $current_time = microtime();
@@ -67,20 +67,20 @@ abstract class Controller
     //Init Errors
     $this->errors =& ErrorHandler::getInstance();
     
-    $this->root_dir = $_SERVER['DOCUMENT_ROOT'].'/';
+    $this->root_dir = APP_DIRECTORY.'/';
     
-    define('LIB_DIR',$_SERVER['DOCUMENT_ROOT'].'/lib/');
+    define('LIB_DIR',APP_DIRECTORY.'/lib/');
     //????????? ???? DBConnector
-    define('DB_DIR',$_SERVER['DOCUMENT_ROOT'].'/lib/DBConnector/');
+    define('DB_DIR',APP_DIRECTORY.'/lib/DBConnector/');
     require_once(DB_DIR.'DBConnector.class.php');
     //????????? ???? ??????
-    define('SMARTY_DIR',$_SERVER['DOCUMENT_ROOT'].'/lib/Smarty/');
+    define('SMARTY_DIR',APP_DIRECTORY.'/lib/Smarty/');
     require_once(SMARTY_DIR.'Smarty.class.php');
 
-    define('SESSION_DIR',$_SERVER['DOCUMENT_ROOT'].'/lib/UserSession/');
+    define('SESSION_DIR',APP_DIRECTORY.'/lib/UserSession/');
     require_once(SESSION_DIR.'UserSession.class.php');
     
-    define('KERNEL_DIR',$_SERVER['DOCUMENT_ROOT'].'/kernel/');
+    define('KERNEL_DIR',APP_DIRECTORY.'/kernel/');
     require_once(KERNEL_DIR.'block.php');
     require_once(KERNEL_DIR.'view.php');
 
@@ -772,7 +772,7 @@ abstract class Controller
   //////////////////////////////////////////////////////////////////////////////
   final public function getPostData()
     {
-    define('VALIDATOR_DIR',$_SERVER['DOCUMENT_ROOT'].'/lib/validateForm/');
+    define('VALIDATOR_DIR',APP_DIRECTORY.'/lib/validateForm/');
     require_once(VALIDATOR_DIR.'validateForm.class.php');
     
     $form = new validateForm($_POST);

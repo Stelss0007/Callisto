@@ -56,7 +56,7 @@ function smarty_function_appJsOutput($params, &$smarty)
 
     function sfc_print_out($params)
       {
-      $last_mtime      = file_get_contents($_SERVER['DOCUMENT_ROOT'] . $params['cache_file_name']);
+      $last_mtime      = file_get_contents(APP_DIRECTORY . $params['cache_file_name']);
       $output_filename = preg_replace("/\.(js|css)$/i", date("_YmdHis.", $last_mtime) . "$1", $params['output']);
       echo "<script type='text/javascript' src='$output_filename'></script>";
       }
@@ -72,36 +72,36 @@ function smarty_function_appJsOutput($params, &$smarty)
       $lastest_mtime = 0;
       foreach($params['input'] as $item)
         {
-        $mtime         = filemtime($_SERVER['DOCUMENT_ROOT'] . $item);
+        $mtime         = filemtime(APP_DIRECTORY . $item);
         $lastest_mtime = max($lastest_mtime, $mtime);
         $filelist[]    = array('name' => $item, 'time' => $mtime);
         }
-      $last_cmtime = file_get_contents($_SERVER['DOCUMENT_ROOT'] . $params['cache_file_name']);
+      $last_cmtime = file_get_contents(APP_DIRECTORY . $params['cache_file_name']);
       if($lastest_mtime > $last_cmtime)
         {
         $glob_mask        = preg_replace("/\.(js|css)$/i", "_*.$1", $params['output']);
-        $files_to_cleanup = glob($_SERVER['DOCUMENT_ROOT'] . $glob_mask);
+        $files_to_cleanup = glob(APP_DIRECTORY . $glob_mask);
         foreach($files_to_cleanup as $cfile)
           {
-          if(is_file($_SERVER['DOCUMENT_ROOT'] . $cfile) && file_exists($_SERVER['DOCUMENT_ROOT'] . $cfile))
-            @unlink($_SERVER['DOCUMENT_ROOT'] . $cfile);
+          if(is_file(APP_DIRECTORY . $cfile) && file_exists(APP_DIRECTORY . $cfile))
+            @unlink(APP_DIRECTORY . $cfile);
           }
         $output_filename = preg_replace("/\.(js|css)$/i", date("_YmdHis.", $lastest_mtime) . "$1", $params['output']);
-        $fh              = fopen($_SERVER['DOCUMENT_ROOT'] . $output_filename, "a+");
+        $fh              = fopen(APP_DIRECTORY . $output_filename, "a+");
         if(flock($fh, LOCK_EX))
           {
           foreach($filelist as $file)
             {
             fputs($fh, PHP_EOL . PHP_EOL . "/* " . $file['name'] . " @ " . date("c", $file['time']) . " */" . PHP_EOL . PHP_EOL);
-            fputs($fh, file_get_contents($_SERVER['DOCUMENT_ROOT'] . $file['name']));
+            fputs($fh, file_get_contents(APP_DIRECTORY . $file['name']));
             }
           flock($fh, LOCK_UN);
-          file_put_contents($_SERVER['DOCUMENT_ROOT'] . $params['cache_file_name'], $lastest_mtime, LOCK_EX);
+          file_put_contents(APP_DIRECTORY . $params['cache_file_name'], $lastest_mtime, LOCK_EX);
           }
         fclose($fh);
         clearstatcache();
         }
-      touch($_SERVER['DOCUMENT_ROOT'] . $params['cache_file_name']);
+      touch(APP_DIRECTORY . $params['cache_file_name']);
       sfc_print_out($params);
       }
 
@@ -125,9 +125,9 @@ function smarty_function_appJsOutput($params, &$smarty)
         if(!isset($params['cache_file_name']))
           $params['cache_file_name'] = $params['output'] . '.cache';
         $cache_file_name           = $params['cache_file_name'];
-        if(file_exists($_SERVER['DOCUMENT_ROOT'] . $cache_file_name))
+        if(file_exists(APP_DIRECTORY . $cache_file_name))
           {
-          $cache_mtime = filemtime($_SERVER['DOCUMENT_ROOT'] . $cache_file_name);
+          $cache_mtime = filemtime(APP_DIRECTORY . $cache_file_name);
           if($cache_mtime + $params['age'] < time())
             {
             sfc_build_combine($params);
