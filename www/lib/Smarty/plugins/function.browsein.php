@@ -18,51 +18,42 @@ if (!isset ($delimiter))
   $delimiter = "&nbsp;<span style=\"font-weight:bold;\">&raquo;</span>&nbsp;";
   };
 
-if (isset($show_last) && !$show_last)
-  {//≈сли show_last = false не показываем последний элимент
-  array_pop ($date);
-  };
-
-if ($lastname_only)
-  {//≈сли только последний
-  $last_item = array_pop ($date);
-  $result = $last_item[displayname];
-  return ($result);
-  };
-
 //‘ормируем список
 $result='';
 for ($i=0; $i<count($date); $i++)
   {
+  if(!isset($date[$i]))
+    continue;
+  
   $item=$date[$i];
-  if ((($i+1) < count($date)) || $href_last)
+  if ((($i+1) < count($date)))
     {
     if ($a_attr)//формируем с дополнительными атрибутами href
       {
       if (($i+1) != count($date)) //≈сли не последний выводим разделитель
         {
-        $result.="<a $a_attr href=\"$item[url]\">$item[displayname]</a>$delimiter";
+        $result.="<a $a_attr href=\"$item[url]\">{$item['displayname']}</a>$delimiter";
         }
         else
           {//≈сли последний без разделител€
-          $result.="<a $a_attr href=\"$item[url]\">$item[displayname]</a>";
+          $result.="<a $a_attr href=\"$item[url]\">{$item['displayname']}</a>";
           };
       }
       else//формируем без дополнительных атрибутов href
         {
         if (($i+1) != count($date)) //≈сли не последний выводим разделитель
           {
-          $result.="<a href=\"$item[url]\">$item[displayname]</a>$delimiter";
+          $result.="<a href=\"$item[url]\">{$item['displayname']}</a>$delimiter";
           }
           else
             {//≈сли последний без разделител€
-            $result.="<a href=\"$item[url]\">$item[displayname]</a>";
+            $result.="<a href=\"$item[url]\">{$item['displayname']}</a>";
             };
         };
     }
     else//выводим просто название
       {
-      $result.=$item[displayname];
+      $result.= isset($item['displayname']) ? $item['displayname'] : '';
       };
   };
 

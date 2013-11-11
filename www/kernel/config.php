@@ -1,7 +1,7 @@
 <?php
 
 //Настройки отладки
-$appConfig['debug.enabled'] = false;
+$appConfig['debug.enabled'] = true;
 
 //Настройки локали
 $appConfig['lang'] = 'rus';
@@ -11,7 +11,7 @@ $appConfig['locale.lc_all'] = 'ru_RU.CP1251';
 $appConfig['DB.UserName'] = 'root';
 
 // Пароль пользователя базы данных
-$appConfig['DB.Password'] = 'root32pass';
+$appConfig['DB.Password'] = '';
 
 // Сервер базы данных
 $appConfig['DB.Host'] = 'localhost';

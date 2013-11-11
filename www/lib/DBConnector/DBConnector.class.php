@@ -198,6 +198,7 @@ class DBConnector
 
   function fetch_array($type=1, $field_is_index = false)
     {
+    $result = array();
     while ($row = mysql_fetch_array($this->QueryResult, $type))
       {
       foreach ($row as $key => $value)
@@ -297,7 +298,8 @@ class DBConnector
     
   function __destruct() 
     {
-    mysql_free_result($this->QueryResult);
+    if(isset($this->QueryResult) && !empty($this->QueryResult))
+      mysql_free_result($this->QueryResult);
     }
 
   }

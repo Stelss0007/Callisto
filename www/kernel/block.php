@@ -131,16 +131,19 @@ class Block
   public static function blockRun($block)
     {
     $result = array ();
-    $$block[block_name] = null;
+    if(!isset($block['block_name']))
+      return $result;
+    
+    $$block['block_name'] = null;
     //Подключим файл блока, если он есть, если нет вернем ошибку
-    $fname = "blocks/$block[block_name]/block.php";
+    $fname = "blocks/{$block['block_name']}/block.php";
     
     if (file_exists($fname))
       {
       include_once ($fname);
       
-      $$block[block_name] = new $block[block_name]($block);
-      $$block[block_name]->loadBlockLang($block[block_name]);
+      $$block['block_name'] = new $block['block_name']($block);
+      $$block['block_name']->loadBlockLang($block['block_name']);
       }
     else
       {
@@ -151,14 +154,14 @@ class Block
     //Ищем функцию отображения результатов работы блока
     $blockfunc = "display";
 
-    if (method_exists($$block[block_name], $blockfunc))
+    if (method_exists($$block['block_name'], $blockfunc))
       {
       
-      $result = $$block[block_name]->$blockfunc($block);
+      $result = $$block['block_name']->$blockfunc($block);
 
       if (!empty ($result['block_content']))
         {
-        $result['id'] = $blockinfo['id'];
+        $result['id'] = isset($blockinfo['id']) ? $blockinfo['id'] : 0;
         $result = array_merge ($block, $result);
         }
         

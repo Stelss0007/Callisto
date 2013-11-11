@@ -70,10 +70,10 @@ abstract class Controller
     $this->root_dir = APP_DIRECTORY.'/';
     
     define('LIB_DIR',APP_DIRECTORY.'/lib/');
-    //????????? ???? DBConnector
+    
     define('DB_DIR',APP_DIRECTORY.'/lib/DBConnector/');
     require_once(DB_DIR.'DBConnector.class.php');
-    //????????? ???? ??????
+    
     define('SMARTY_DIR',APP_DIRECTORY.'/lib/Smarty/');
     require_once(SMARTY_DIR.'Smarty.class.php');
 

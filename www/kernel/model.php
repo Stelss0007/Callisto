@@ -660,7 +660,7 @@ class Model extends DBConnector
             {
             preg_match_all("/^([<>=!]+|like).*$/is", $value, $operator);
 
-              if($operator[1][0])
+              if(isset($operator[1][0]) && $operator[1][0])
                 {
                 $value = trim(preg_replace("/^(<>|<|>|!=|like)(.*)$/is", "$2", $value));
                 //print_r($operator);exit;
@@ -692,7 +692,7 @@ class Model extends DBConnector
         $where = " WHERE ".$where;
         }
         
-      if($conditions['params'] && !empty($conditions['params']))
+      if(isset($conditions['params']) && !empty($conditions['params']))
         {
         $search = array_keys($conditions['params']);
         $replace = $this->prepareValue(array_values($conditions['params']));
@@ -702,7 +702,7 @@ class Model extends DBConnector
       }
     
     //Set join tables
-    if($conditions['join'])
+    if(isset($conditions['join']) && $conditions['join'])
       {
       $join = $conditions['join'];
       }
@@ -783,7 +783,7 @@ class Model extends DBConnector
  
     $result = $this->getList($params);
     
-    return $result[0];
+    return isset($result[0]) ? $result[0] : array();
     }
   final function getCount($params)
     {

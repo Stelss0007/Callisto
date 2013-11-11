@@ -26,7 +26,7 @@ function smarty_function_appCssOutput($params, &$smarty)
 
   if($appConfig['debug.enabled'])
     {
-    if($params['debug_age'])
+    if(isset($params['debug_age']) && !empty($params['debug_age']))
       {
       $params['age'] = $params['debug_age'];
       }
