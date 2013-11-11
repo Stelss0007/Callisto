@@ -1,5 +1,5 @@
 <h2>{#menu_header#}</h2>
-<table border='1' width='100%' cellspacing=0 cellpadding=4>
+<table width='100%' cellspacing=0 cellpadding=4 class="admin_table">
   <colgroup>
     <col width='340'>
     <col width='*'>
@@ -35,18 +35,18 @@
       </td>
       <td style="text-align: center;">
           {if !$smarty.foreach.menu_.first}
-            <a href="/menu/weight_up/{$menu.menu_weight}/{$menu.menu_parent_id}"><img border="0" src="/public/images/system/up.gif"></a>
+            <a href="/menu/weight_up/{$menu.menu_weight}/{$menu.menu_parent_id}" class="btn-icon btn-up" title="{#sys_up#}"></a>
           {/if}
           {if !$smarty.foreach.menu_.first && !$smarty.foreach.menu_.last}
-            &nbsp;
+            
           {/if}
           {if !$smarty.foreach.menu_.last}
-            <a href="/menu/weight_down/{$menu.menu_weight}/{$menu.menu_parent_id}"><img border="0" src="/public/images/system/down.gif"></a>
+            <a href="/menu/weight_down/{$menu.menu_weight}/{$menu.menu_parent_id}" class="btn-icon btn-down" title="{#sys_down#}"></a>
           {/if}
       </td>
       <td>
-        <a href='/menu/modify/{$menu.id}' title="{#sys_edit#}"><img alt="{#sys_edit#}" src="/public/images/system/edit.gif"></a>
-        <a href='/menu/delete/{$menu.id}' title="{#sys_delete#}" onclick="return confirm('{#sys_confirm_delete#}');"><img alt="{#sys_delete#}" src="/public/images/system/del.gif"></a>
+        <a href='/menu/modify/{$menu.id}' title="{#sys_edit#}" class="btn-icon btn-edit"></a>
+        <a href='/menu/delete/{$menu.id}' title="{#sys_delete#}" class="btn-icon btn-delete" onclick="return confirm('{#sys_confirm_delete#}');"></a>
       </td>
     </tr>
    {/foreach}

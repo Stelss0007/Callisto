@@ -1,5 +1,5 @@
 <h2>Групы пользователей</h2>
-<table border='1' width='100%' cellspacing=0 cellpadding=2>
+<table  width='100%' cellspacing=0 cellpadding=2 class="admin_table">
   <thead style="">
     <tr>
       <th>
@@ -23,7 +23,7 @@
       <th>
         Последний вход в стистему
       </th>
-      <th>
+      <th style="width: 100px;">
         Действия
       </th>
      </tr>
@@ -62,12 +62,12 @@
       
       <td>
         {if $user.active}
-          <a href='/users/activation/{$user.id}' onclick="return confirm('Деактивировать?')">Disabled</a>&nbsp;|&nbsp;
+          <a href='/users/activation/{$user.id}' onclick="return confirm('{#user_disabled#}?')" title='{#user_disabled#}' class="btn-icon btn-pause"></a>
         {else}
-          <a href='/users/activation/{$user.id}' onclick="return confirm('Активировать?')">Enabled</a>&nbsp;|&nbsp;
+          <a href='/users/activation/{$user.id}' onclick="return confirm('{#user_enabled#}?')" title='{#user_enabled#}' class="btn-icon btn-play"></a>
         {/if}
-        <a href='/users/manage/{$user.id}'>Edit</a>&nbsp;|&nbsp;
-        <a href='/users/delete/{$user.id}' onclick="return confirm('Удалить элемент?')">Delete</a>
+        <a href='/users/manage/{$user.id}' title='{#user_edit#}' class="btn-icon btn-edit"></a>
+        <a href='/users/delete/{$user.id}' title='{#user_delete#}' onclick="return confirm({#user_delete#}?')" class="btn-icon btn-delete"></a>
       </td>
     </tr>
    {/foreach}
