@@ -1,4 +1,4 @@
-<h2>{#themes_header#}</h2>
+<h2>{#themes_add_header#}</h2>
 <table class="admin_table" width='100%' cellspacing=0 cellpadding=4>
   <thead>
   <tr>
@@ -27,22 +27,22 @@
     {cycle name="permsls" values="even,odd" assign="class" print=false}
     <tr class='{$class}'>
       <td>
-        {$theme.title}
+        {$theme.title}&nbsp;
       </td>
       <td>
-        {$theme.description}
+        {$theme.description}&nbsp;
       </td>
       <td>
-        {$theme.author}
+        {$theme.author}&nbsp;
       </td>
       <td>
-        {$theme.name}
+        {$theme.name}&nbsp;
       </td>
       <td style="text-align: center;">
-        {$theme.version}
+        {$theme.version}&nbsp;
       </td>
       <td>
-        <a href='/theme/add/{$theme.name}' class="btn-icon btn-upload" title="{#sys_install#}"></a>
+        <a href='/theme/add/{$theme.name}' class="btn-icon btn-upload" title="{#sys_install#}"><span>&nbsp;{#sys_install#}</span></a>
       </td>
     </tr>
    {/foreach}

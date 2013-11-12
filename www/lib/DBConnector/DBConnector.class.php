@@ -33,7 +33,8 @@ class DBConnector
       $this->Link_ID = mysql_connect($this->Host,
                       $this->User,
                       $this->Password);
-
+      mysql_set_charset('cp1251', $this->Link_ID);
+      //mysql_query("SET character_set_results = 'utf8', character_set_client = 'utf8', character_set_connection = 'utf8', character_set_database = 'utf8', character_set_server = 'utf8'", $this->Link_ID);
       $SelectResult = mysql_select_db($this->Database, $this->Link_ID);
       if (!$SelectResult)
         {
@@ -258,8 +259,10 @@ class DBConnector
     }
 
 
-  function update($table, $array, $where)
+  function update($table, $array, $where = '1=1')
     {
+    if(empty($where))
+      $where = '1 = 1';
     $where = 'WHERE '.str_ireplace('where', '', $where);
     $sql = 'SHOW COLUMNS FROM '.$table;
     $this->query($sql);

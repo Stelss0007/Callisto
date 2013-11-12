@@ -105,7 +105,8 @@ abstract class Controller
     //?????? ????????? ????? ?????????????
     $this->smarty = new viewTpl();
     //??????? ???? ???????????
-    $this->current_theme = 'green';
+//    $this->current_theme = 'green';
+    $this->setTheme();
     //$this->current_theme = 'blog_theme1';
     
     //Установим язык
@@ -273,6 +274,11 @@ abstract class Controller
     appCssLoad();
     
     call_user_method_array($action_name, $this, $this->input_vars);
+    }
+  final public function setTheme()
+    {
+    $this->usesModel('theme');
+    $this->current_theme = $this->theme->getActiveName();
     }
   final public function getThemeName()
     {

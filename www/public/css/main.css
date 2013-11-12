@@ -121,6 +121,7 @@ h1, h2, h3, h4, h5, h6 { padding: 0; margin: 0; }
 /*
 Работа с  иконками, подключим шрифты иконки
 Перечень кодов: http://www.entypo.com/characters/
+http://fortawesome.github.io/Font-Awesome/cheatsheet/
 */
 
 @font-face {
@@ -159,6 +160,11 @@ h1, h2, h3, h4, h5, h6 { padding: 0; margin: 0; }
      border: none;
      color: #222;
 /*     background-color: #ddd;*/
+   }
+   
+   .btn-icon span
+   {
+     font-size: 12px;
    }
   
   /* 
@@ -628,8 +634,9 @@ h1, h2, h3, h4, h5, h6 { padding: 0; margin: 0; }
   .admin_table thead td
   {
     border: none;
-    border-right: 1px solid #ccc;
-    border-left: 1px solid #ccc;
+    border-right: 1px solid #fff;
+    border-left: 1px solid #fff;
+    background-color: #D4D0C8;
   }
   
   .admin_table tbody{

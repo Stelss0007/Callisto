@@ -132,7 +132,7 @@ em { color: #fff; font-weight: 400 }
 	text-align: center;
 	font-weight: 700;
 	text-decoration: none;
-	background: url(../images/templatemo_menu_divider.jpg) center right no-repeat;
+/*	background: url(../images/templatemo_menu_divider.jpg) center right no-repeat;*/
 	border-right: 2px solid #e9bb7b;
 }
 
@@ -149,7 +149,7 @@ em { color: #fff; font-weight: 400 }
 
 #templatemo_content_wrapper { float: left; width: 660px; background: url(../images/templatemo_content.jpg) repeat-y; }
 #templatemo_content_top { width: 660px; height: 90px; background: url(../images/templatemo_content_top.jpg) no-repeat }
-#templatemo_content_bottom { clear: both; width: 660px; height: 135px; background: url(images/templatemo_content_bottom.jpg) no-repeat }
+#templatemo_content_bottom { clear: both; width: 660px; height: 135px; /*background: url(images/templatemo_content_bottom.jpg) no-repeat */}
 #templatemo_content { padding: 0 30px }
 
 .content_box { clear: both; margin-bottom: 60px }
