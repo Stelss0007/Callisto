@@ -21,7 +21,8 @@ abstract class Controller
   private   $lang;
   private   $lang_default = 'rus';
   public    $config = null;
-    
+  private   $mod_vars = array();
+  
   public $URL;
   public $prevURL;
 
@@ -114,6 +115,7 @@ abstract class Controller
     $this->loadLang();
     $this->loadModuleLang($this->modname);
     
+    $this->loadModVars('kernel');
     //$this->object_name = $this->getObjectName();
 
     //??????? ??? ????????? ? ??????? ?????????? ? ???????? input_vars
@@ -122,6 +124,7 @@ abstract class Controller
     unset ($this->input_vars['module']);
     unset ($this->input_vars['action']);
     unset ($this->input_vars['type']);
+    //unset ($this->input_vars['submit']);
     unset ($this->input_vars['PHPSESSID']);
     
     $this->getCurrentURL();
@@ -297,6 +300,15 @@ abstract class Controller
     {
     global $appConfig;
     $this->config = &$appConfig;
+    }
+    
+  final function getInput($var, $default)
+    {
+    if(empty($var))
+      {
+      return $this->input_vars;
+      }
+    return isset($this->input_vars[$var]) ? $this->input_vars[$var] : $default;
     }
   //////////////////////////////////////////////////////////////////////////////
   ////////////////////////////   TEMPLATES  ////////////////////////////////////
@@ -1063,6 +1075,79 @@ abstract class Controller
     
     
     } 
+    
+  ///////////////////////////// MOD VARS ///////////////////////////////////////
+  final public function loadModVars($mod='')
+    {
+    if(empty($mod))
+      {
+      return false;
+      }
+    $this->usesModel('modconfig');
+    
+    $vars = $this->modconfig->getVars($mod);
+    $this->mod_vars[$mod] = $vars[$mod];
+    }
+    
+  final public function getModVars($mod='')
+    {
+    if(empty($mod))
+      {
+      return false;
+      }
+    
+    if(empty($this->mod_vars[$mod])) 
+      {
+      $this->loadModVars($mod);
+      }
+    return isset($this->mod_vars[$mod]) ? $this->mod_vars[$mod] : array();
+    }
+    
+  final public function getModVar($mod='', $key='')
+    {
+    if(empty($key) && empty($mod))
+      {
+      return false;
+      }
+    if(empty($key))
+      {
+      $key = $mod;
+      $mod = false;
+      }
+    if(empty($mod))
+      {
+      $mod = $this->modname;
+      }
+    if(empty($this->mod_vars[$mod])) 
+      {
+      $this->loadModVars($mod);
+      }
+    return isset($this->mod_vars[$mod][$key]) ? $this->mod_vars[$mod][$key] : null;
+    }
+    
+  final public function setModVar($mod='', $key='', $var)
+    {
+    if(empty($key) && empty($mod))
+      {
+      return false;
+      }
+    if(func_num_args() == 2)
+      {
+      $mod = false;
+      $key = func_get_arg(0);
+      $var = func_get_arg(1);
+      }
+    if(empty($mod))
+      {
+      $mod = $this->modname;
+      }
+      
+    $this->usesModel('modconfig');
+    
+    $this->modconfig->setVar($mod, $key, $var);
+    $this->loadModVars($mod);
+    return true;
+    }
   
   //////////////////////////////////////////////////////////////////////////////
   ////////////////////////////   DEBUG      ////////////////////////////////////

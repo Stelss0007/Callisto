@@ -5,6 +5,7 @@ class Index extends Controller
   
   function theme_list()
     {
+    print_r($this->getModVar('test_key'));
     $browsein = array();
     $browsein[] = array ('url'=>'/theme',
                         'displayname'=>'Темы');
