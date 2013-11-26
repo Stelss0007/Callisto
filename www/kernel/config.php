@@ -11,7 +11,7 @@ $appConfig['locale.lc_all'] = 'ru_RU.CP1251';
 $appConfig['DB.UserName'] = 'root';
 
 // Пароль пользователя базы данных
-$appConfig['DB.Password'] = '';
+$appConfig['DB.Password'] = 'root32pass';
 
 // Сервер базы данных
 $appConfig['DB.Host'] = 'localhost';
