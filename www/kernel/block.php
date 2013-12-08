@@ -9,10 +9,10 @@
  *
  * @author Your Name <your.name at your.org>
  */
-class Block
+class Block extends AppObject
   {
   
-  public $vars = array();
+  //public $vars = array();
   public $smarty = null;
   public $block_id;
   public $block_name;
@@ -30,11 +30,11 @@ class Block
   
   public $block_object;
   public $root_dir;
-  public $theme;
+  //public $theme;
   
-  public $session;
+  //public $session;
   public $lib;
-  public $libs = array();
+  //public $libs = array();
   protected $modname;
   
   private $lang;
@@ -189,19 +189,7 @@ class Block
     $this->vars[$name] = $value;
     return true;
     }  
-    
-  final public function allVarToTpl()
-    {
-    foreach ($this->vars as $name => $value)
-      {
-      $this->smarty->assign($name, $value, false);
-      }
-    }
-    
-    
-    
-    
-    
+   
   final public function tplFileName($method, $debug=false)
     {
     $view_file_name = $method;
@@ -231,19 +219,7 @@ class Block
       die();
       }
     }
-    
-  final public function GetCallingMethodName($position = null, $with_args = false)
-    {
-    $e = new Exception();
-    $trace = $e->getTrace();
-    
-    $position = ($position) ? $position : (sizeof($trace)-1);
-    if(empty($with_args))
-      return $trace[$position]['function'];
-    
-    return array('function'=>$trace[$position]['function'], 'args' => $trace[$position]['args']);
-    print_r($trace);
-    }
+   
     
   final public function view()
     {
@@ -263,62 +239,7 @@ class Block
     $this->blocks->block_content = serialize($this->vars);
     $this->blocks->save($id);
     }
-    
-  //////////////////////////////////////////////////////////////////////////////
-  ////////////////////////////   MODELS     ////////////////////////////////////
-  //////////////////////////////////////////////////////////////////////////////
-  final public function usesModel($modulename=null)
-    {
-    //echo $this->modname;exit;
-    $modelname = (!empty($modulename)) ? $modulename : $this->modname; 
-    $modulename = (!empty($modulename)) ? $modulename : $this->modname; 
-    require_once 'modules/'.$modulename.'/class.php';
-    $className = $modulename;
-    //$this->$modelname = & new $className($className);
-    $this->$modelname = & new $className($className);
-    $this->$modelname->type = $modulename;
-    
-    $this->$modelname->session = & $this->session;
-    
-    //echo $modelname;
-    //print_r(get_class_methods($this->$modelname));
-    $this->models[] = $modulename.' (modules/'.$modulename.'/class.php)';
-    return $this->$modelname;
-    }
-  
-  final public function arrayToModel(&$model, $array)
-    {
-    if(empty($array))
-      return false;
-    foreach($array as $key=>$value)
-      {
-      $model->$key = $value;
-      }
-    }
 
-  //////////////////////////////////////////////////////////////////////////////
-  ////////////////////////////   LIB        ////////////////////////////////////
-  //////////////////////////////////////////////////////////////////////////////
-  final public function usesLib($libname=null)
-    {
-    require_once 'lib/'.$libname.'/'.$libname.'.class.php';
-    $className = $libname;
-    $obj = & new $className();
-    $this->lib->$libname = $obj;
-    $this->libs[] = $className.' (lib/'.$libname.'/'.$libname.'.class.php)';
-    return $obj;
-    }  
-    
-  //////////////////////////////////////////////////////////////////////////////
-  ////////////////////////////   SESSIONS    ///////////////////////////////////
-  //////////////////////////////////////////////////////////////////////////////
-  final public function sessinInit()
-    {
-
-    $this->session = & new UserSession;
-    //print_r(get_class_methods($this->$modelname));
-    }
-    
   function setLang($lang='rus')
     {
     $this->lang = $lang;

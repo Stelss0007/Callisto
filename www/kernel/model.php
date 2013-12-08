@@ -772,7 +772,7 @@ class Model extends DBConnector
     $condition = $this->prepareCondition($conditions, $params);
     $where = "{$condition['join']} {$condition['where']} {$condition['group']} {$condition['order']} {$condition['limit']}";
 
-    $result = $this->select($this->table, $condition['fields'], $where, true);   
+    $result = $this->select($this->table, $condition['fields'], $where, true);
     $this->getRelations($result);
     return $result;
     }
@@ -782,7 +782,7 @@ class Model extends DBConnector
     $params['condition'] = array('id'=>$id);
  
     $result = $this->getList($params);
-    
+  
     return isset($result[0]) ? $result[0] : array();
     }
   final function getCount($params)

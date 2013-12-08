@@ -20,6 +20,7 @@ class Groups extends Model
       {
       $result[$group['id']] = $group['group_displayname'];
       }
+    //print_r($result);exit;
     return $result;
     }
     

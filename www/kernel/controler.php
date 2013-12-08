@@ -1,6 +1,6 @@
 <?php
 
-abstract class Controller
+abstract class Controller extends AppObject
   {
   private   $message = '';
   private   $start_debug_time = 0;
@@ -37,7 +37,7 @@ abstract class Controller
                           'right' =>array(),
                           'bottom'=>array()
                           );
-  protected $models= array();
+  public $models= array();
   protected $libs = array();
   protected $tpls = array();
   
@@ -278,6 +278,7 @@ abstract class Controller
     
     call_user_method_array($action_name, $this, $this->input_vars);
     }
+    
   final public function setTheme()
     {
     $this->usesModel('theme');
@@ -392,15 +393,7 @@ abstract class Controller
       die();
       }
     }
-    
-  final public function allVarToTpl()
-    {
-    foreach ($this->vars as $name => $value)
-      {
-      $this->smarty->assign($name, $value, false);
-      }
-    }
-
+   
   final public function getObjectName()
     {
     //$url_result = $this->GetCallingMethodName(3, true);
@@ -509,18 +502,18 @@ abstract class Controller
     }
     
     
-  final public function GetCallingMethodName($position = null, $with_args = false)
-    {
-    $e = new Exception();
-    $trace = $e->getTrace();
-    
-    $position = ($position) ? $position : (sizeof($trace)-1);
-    if(empty($with_args))
-      return $trace[$position]['function'];
-    
-    return array('function'=>$trace[$position]['function'], 'args' => $trace[$position]['args']);
-    print_r($trace);
-    }
+//  final public function GetCallingMethodName($position = null, $with_args = false)
+//    {
+//    $e = new Exception();
+//    $trace = $e->getTrace();
+//    
+//    $position = ($position) ? $position : (sizeof($trace)-1);
+//    if(empty($with_args))
+//      return $trace[$position]['function'];
+//    
+//    return array('function'=>$trace[$position]['function'], 'args' => $trace[$position]['args']);
+//    print_r($trace);
+//    }
  
   //////////////////////////////////////////////////////////////////////////////
   ////////////////////////////   URLS       ////////////////////////////////////
@@ -872,61 +865,7 @@ abstract class Controller
 			return $resarray;
     }
 
-
-  //////////////////////////////////////////////////////////////////////////////
-  ////////////////////////////   MODELS     ////////////////////////////////////
-  //////////////////////////////////////////////////////////////////////////////
-  final public function usesModel($modulename=null)
-    {
-    //echo $this->modname;exit;
-    $modelname = (!empty($modulename)) ? $modulename : $this->modname; 
-    $modulename = (!empty($modulename)) ? $modulename : $this->modname; 
-    require_once 'modules/'.$modulename.'/class.php';
-    $className = $modulename;
-    //$this->$modelname = & new $className($className);
-    $this->$modelname = & new $className($className);
-    $this->$modelname->type = $modulename;
-    
-    $this->$modelname->session = & $this->session;
-    
-    //echo $modelname;
-    //print_r(get_class_methods($this->$modelname));
-    $this->models[] = $modulename.' (modules/'.$modulename.'/class.php)';
-    return $this->$modelname;
-    }
   
-  final public function arrayToModel(&$model, $array)
-    {
-    if(empty($array))
-      return false;
-    foreach($array as $key=>$value)
-      {
-      $model->$key = $value;
-      }
-    }
-
-  //////////////////////////////////////////////////////////////////////////////
-  ////////////////////////////   LIB        ////////////////////////////////////
-  //////////////////////////////////////////////////////////////////////////////
-  final public function usesLib($libname=null)
-    {
-    require_once 'lib/'.$libname.'/'.$libname.'.class.php';
-    $className = $libname;
-    $obj = & new $className();
-    $this->lib->$libname = $obj;
-    $this->libs[] = $className.' (lib/'.$libname.'/'.$libname.'.class.php)';
-    return $obj;
-    }  
-    
-  //////////////////////////////////////////////////////////////////////////////
-  ////////////////////////////   SESSIONS    ///////////////////////////////////
-  //////////////////////////////////////////////////////////////////////////////
-  final public function sessinInit()
-    {
-
-    $this->session = & new UserSession;
-    //print_r(get_class_methods($this->$modelname));
-    }
   
   //////////////////////////////////////////////////////////////////////////////
   ////////////////////////////   BLOCKS     ////////////////////////////////////

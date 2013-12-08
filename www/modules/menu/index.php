@@ -6,6 +6,7 @@ class Index extends Controller
   function menu_list($parent_id = 0)
     {
     $menu = $this->menu->getById($parent_id);
+
     $browsein = $this->menu->parent_browsein($menu['menu_path']);
     if($parent_id > 0)
       {
