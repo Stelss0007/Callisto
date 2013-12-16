@@ -1,6 +1,6 @@
 <?php
 class Config extends Model
   {
-  var $table = '`group`'
+  var $table = '`group`';
   }
 

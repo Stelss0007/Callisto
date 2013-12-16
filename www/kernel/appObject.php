@@ -57,13 +57,14 @@ class AppObject
     $usedResult = appUsesModel($modulename);
     //require_once 'modules/'.$modulename.'/class.php';
     
-    if(!$autocreate)
-      return true;
-    
     $className = $modulename;
+    
+    if(!$autocreate)
+      return new $className($className);
+  
     //$this->$modelname = & new $className($className);
     $this->$modelname = & new $className($className);
-    $this->$modelname->type = $modulename;
+    $this->$modelname->type = 'user';//$modulename;
     
     $this->$modelname->session = & $this->session;
     
@@ -72,11 +73,33 @@ class AppObject
     $this->models[] = key($usedResult)." ({$usedResult[key($usedResult)]})";
     return $this->$modelname;
     }
-  
+    
+  final public function usesModule($modulename=null, $autocreate=true)
+    {
+    $models = appUsesModule($modulename);
+    if($autocreate)
+      {
+      foreach($models as $model=>$src)
+        {
+        $this->$model = & new $model($model);
+        $this->$model->type = 'user';
+
+        $this->$model->session = & $this->session;
+
+        //echo $modelname;
+        //print_r(get_class_methods($this->$modelname));
+        $this->models[] =$model." ({$src})";
+        }
+      }
+    return true;
+    }
+    
   final public function arrayToModel(&$model, $array)
     {
     if(empty($array))
+      {
       return false;
+      }
     foreach($array as $key=>$value)
       {
       $model->$key = $value;
@@ -86,14 +109,22 @@ class AppObject
   //////////////////////////////////////////////////////////////////////////////
   ////////////////////////////   LIB        ////////////////////////////////////
   //////////////////////////////////////////////////////////////////////////////
-  final public function usesLib($libname=null)
+  final public function usesLib($libname = 'extlib', $autocreate=true, $file=false)
     {
-    require_once 'lib/'.$libname.'/'.$libname.'.class.php';
+    $file_src = appUsesLib($libname, $file);
+       
     $className = $libname;
+    
+    $this->libs[] = $className.' ('.$file_src.')';
+
     $obj = & new $className();
+    
+    if(empty($autocreate))
+      return $obj;
+      
     $this->lib->$libname = $obj;
-    $this->libs[] = $className.' (lib/'.$libname.'/'.$libname.'.class.php)';
-    return $obj;
+    
+    return $this->lib->$libname;
     }  
     
   //////////////////////////////////////////////////////////////////////////////
@@ -101,7 +132,6 @@ class AppObject
   //////////////////////////////////////////////////////////////////////////////
   final public function sessinInit()
     {
-
     $this->session = & new UserSession;
     //print_r(get_class_methods($this->$modelname));
     }

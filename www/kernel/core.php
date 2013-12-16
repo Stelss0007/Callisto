@@ -295,23 +295,84 @@ function appCaptureMessage()
   //????????????? ???????
   exit;
   }
-/******************** ?????????????? ???? **************************\
+/******************** ?????????????? ???? **************************/
 
+function appUsesModule($module_name)
+  {
+  global $appConfig;
+  
+  $mod_identy_type ='models_module';
+  
+  if(empty($module_name))
+    return array();
+  //Предотвращаем повторные загрузки
+  static $loaded = array();
+  static $models = array();
+  
+  if (!empty($loaded["$module_name"])) 
+    return true;
+
+  //Проверим кеш
+  if(empty($models) && !appVarIsCached('app', 'models') || $appConfig['debug.enabled'])
+    {
+    $models = appGetModelList();
+    appVarSetCached('app', 'models', $models);
+    
+    if(empty($models[$mod_identy_type][$module_name]))
+      return array();
+    }
+  else
+    {
+    if(empty($models[$module_name]))
+      {
+      $models = appVarGetCached('app', 'models');
+     
+      if(empty($models[$mod_identy_type][$module_name]))
+        {
+        $models = appGetModelList();
+ //print_r($models);       
+        appVarSetCached('app', 'models', $models);
+        }
+      if(empty($models[$mod_identy_type][$module_name]))
+        return array();
+      }
+    }
+    
+  foreach($models[$mod_identy_type][$module_name] as $src)
+    {
+    require_once ($src);
+    }
+  
+
+  $loaded["$module_name"] = true;
+  
+  return $models[$mod_identy_type][$module_name];
+  }
 /**
  * Загрузка мсторонних библиотек
  */
-function appUsesLib($lib_name = 'extlib')
+function appUsesLib($lib_name = 'extlib', $file = false)
   {
-  //???????? ????? ??? ????????? ?
   static $loaded = array();
   
-  if (!empty($loaded["$lib_name"])) return true;
+  $file_src = '';
+  if($file)
+    {
+    $file = rtrim($file, ".php");
+    $file_src = './lib/'.$lib_name.'/'.$file.'.php';
+    }
+  else
+    {
+    $file_src = './lib/'.$lib_name.'/'.$lib_name.'.class.php';
+    }
+  
+  if (!empty($loaded["$file_src"])) return true;
 
-  //????????? ????
-  require_once('./lib/'.$lib_name.'/'.$lib_name.'.class.php');
+  require_once($file_src);
 
   $loaded["$lib_name"] = true;
-  return true;
+  
+  return $file_src;
   }
   
 /**

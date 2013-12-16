@@ -10,7 +10,7 @@ include_once 'kernel/router.php';
 include_once 'kernel/controler.php';
 include_once 'kernel/model.php';
 
-//print_r(appUsesModel('blocks'));exit;
+//print_r(appUsesModule('groups'));exit;
 
 $router = new Router();
 $router->run();
