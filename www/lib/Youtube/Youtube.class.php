@@ -65,6 +65,42 @@ class Youtube
     $this->_yuotube = new Zend_Gdata_YouTube($httpClient);
     }
     
+  function youtubeUpload($file)
+    {
+    $myVideoEntry = new Zend_Gdata_YouTube_VideoEntry();
+
+    $filesource = $this->_yuotube->newMediaFileSource($file['tmp_name']);
+ 
+    $filesource->setContentType($file['type']);
+    $filesource->setSlug($file['name']);
+
+    $myVideoEntry->setMediaSource($filesource);
+    $myVideoEntry->setVideoTitle($title);
+    $myVideoEntry->setVideoDescription($description);
+    $myVideoEntry->setVideoCategory('People');
+    $uploadUrl = 'http://uploads.gdata.youtube.com/feeds/users/default/uploads';
+
+    try
+      {
+      $newEntry = $this->_yuotube->insertEntry($myVideoEntry, $uploadUrl, 'Zend_Gdata_YouTube_VideoEntry');
+
+      // גûהטנאול איהט גטהומ
+      preg_match("(^http:\/\/gdata.youtube.com.*\/(.*)$)", $newEntry->id->text, $pregres);
+ 
+      return $pregres[1];
+      }
+    catch (Zend_Gdata_App_HttpException $httpException)
+      {
+      echo $httpException->getRawResponseBody();
+      return $httpException->getRawResponseBody();
+      }
+    catch (Zend_Gdata_App_Exception $e)
+      {
+      echo $e->getMessage();
+      return $e->getMessage();
+      }
+    }
+    
   function youtubeGetVideoById($video_id)
     {
     return $this->_video = $this->_yuotube->getVideoEntry($video_id, null, true);
