@@ -6,7 +6,13 @@ class Index extends Controller
   function blocks_list()
     {
     $this->getAccess(ACCESS_ADMIN);
-    
+  
+    $this->usesLib('Youtube');  
+    $this->lib->Youtube->connect($settings);
+    $this->lib->Youtube->youtubeGetVideoById('zcj_uD0lSq8');
+    $this->lib->Youtube->printVideoEntry();
+    exit;
+  
     $blocks = $this->blocks->block_list();
    
     $this->blocks_list_l = $blocks['blocks_list_l'];

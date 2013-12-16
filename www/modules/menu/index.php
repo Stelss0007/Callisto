@@ -5,6 +5,19 @@ class Index extends Controller
   
   function menu_list($parent_id = 0)
     {
+//    error_reporting(E_ERROR | E_WARNING | E_PARSE | E_NOTICE);
+//    
+//    $array[1] = 1000000;
+//    echo $array['1'];
+//    
+//    $array[name] = ' hello ';
+//    echo $array['name'];
+//    
+//    $array['second_name'] = ' world ';
+//    echo $array[second_name];
+//
+//    exit;
+    
     $menu = $this->menu->getById($parent_id);
 
     $browsein = $this->menu->parent_browsein($menu['menu_path']);
