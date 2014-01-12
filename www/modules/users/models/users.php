@@ -1,12 +1,23 @@
 <?php
-/* 
+/** 
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
+ * @Table('111') 
  */
 class users extends Model
   {
+  /**
+   *
+   * @Column(type='string', default='1', primaryKey = true) 
+   * @Index(type='integer')
+   */
   var $table = 'user';
   
+  /**
+   * @id
+   * @param type $full
+   * @return type 
+   */
   function user_list($full=false)
     {
     $result = array();
@@ -22,6 +33,11 @@ class users extends Model
     return $result;
     }
     
+  /**
+   *
+   * @Column(type='string', length=10) 
+   * @Index(type='integer')
+   */  
   function user($id)
     {
     if(!is_numeric($id))

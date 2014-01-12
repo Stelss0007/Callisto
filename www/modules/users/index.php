@@ -20,6 +20,14 @@ class Index extends Controller
 //    appDebug($this->users->getList($params));exit;
     
     
+        $annotation = $this->usesLib('Annotations');
+        $annotation->setClass('users');
+        appDebug($annotation->fieldsAnnotations);
+        appDebug($annotation->methodsAnnotations);
+
+        exit;
+    
+    
     $this->getAccess(ACCESS_ADD);
     $this->usesModel('groups');
  
