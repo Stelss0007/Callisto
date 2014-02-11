@@ -206,5 +206,25 @@ class Index extends Controller
     $this->lib->Image->test1();
     $a->test();
     }
+    
+  function youtube()
+    {
+    $this->viewPage();
+    }
+  function table()
+    {
+    $this->viewPage();
+    }
+  function table_ajax()
+    {
+    $strRequest = file_get_contents('php://input');
+    $Request = json_decode($strRequest);
+    
+    foreach($Request as $key=>$item)
+      {
+      $Request[$key]->number =  $Request[$key]->number . ' add message'.$key;
+      }
+    echo json_encode($Request);
+    }
   }
 ?>

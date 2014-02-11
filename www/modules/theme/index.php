@@ -11,6 +11,8 @@ class Index extends Controller
     
     $this->module_browsein = $browsein;
     
+    //appDebug($this->theme->with('user')->with('block')->getList());exit;
+    
     $this->assign('themes_list_all', $this->theme->getList());
     $this->viewPage();
     }
