@@ -1,7 +1,7 @@
 <?php
 
 //Настройки отладки
-$appConfig['debug.enabled'] = false;
+$appConfig['debug.enabled'] = true;
 
 //Настройки локали
 $appConfig['lang'] = 'rus';

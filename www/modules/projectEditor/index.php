@@ -1,5 +1,5 @@
 <?php
-class Index extends Controller
+class IndexController extends Controller
   {
   function viewEditor()
     {

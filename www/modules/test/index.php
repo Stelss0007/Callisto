@@ -1,5 +1,5 @@
 <?php
-class Index extends Controller
+class IndexController extends Controller
   {
   //Пример отображения результата модуля
   function view_mod()

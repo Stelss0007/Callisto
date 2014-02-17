@@ -22,6 +22,7 @@ abstract class Controller extends AppObject
   private   $lang_default = 'rus';
   public    $config = null;
   private   $mod_vars = array();
+  public    $controllerName = 'IndexController';
   
   public $URL;
   public $prevURL;
@@ -97,7 +98,7 @@ abstract class Controller extends AppObject
       $this->debuger = & Debuger::getInstance();
       $this->debuger->startRenderPage();
       }
-    
+ 
     //Session init
     $this->sessinInit();
     //?????????????? ?????? ???????? ??????
@@ -114,6 +115,7 @@ abstract class Controller extends AppObject
     //Установим язык
     $this->setLang($this->config['lang']);
     $this->loadLang();
+    
     $this->loadModuleLang($this->modname);
     
     $this->loadModVars('kernel');
@@ -162,7 +164,7 @@ abstract class Controller extends AppObject
       $debuger->debugAdd("PHP Execute Time (".$debug_time." sec)", '');
       
       $debuger->debugAddCreateGroup("Callisto Debug Detail");
-        $debuger->debugAdd('Controler: '.$this->modname, null, INFO);
+        $debuger->debugAdd('Controller: '.$this->modname, null, INFO);
         $debuger->debugAdd('Action: '.$this->action, null, INFO);
         $debuger->debugAdd('Object Name: '.$this->object_name, null, INFO);
         $debuger->debugAdd('Theme: '.$this->current_theme, null, INFO);
@@ -254,15 +256,19 @@ abstract class Controller extends AppObject
     
   final public function action($action_name)
     {
-    if(empty($action_name) || $action_name == 'default')
+    if(empty($action_name) || $action_name == 'index')
       {
       if(!empty($this->defaultAction))
         {
         $action_name = $this->defaultAction;
         }
+      else
+        {
+        $action_name = 'index';
+        }
       }
     if(!method_exists($this, $action_name))
-      $this->errors->setError('Action is not exist in this module');
+      $this->errors->setError('Action "'.$action_name.'" is not exist in this module "'.$this->modname.'", conroller "'.$this->controllerName.'"');
     
     $this->action = $action_name;
     $this->object_name = $this->getObjectName();
@@ -273,7 +279,9 @@ abstract class Controller extends AppObject
     
     //Подключим стили
     //Стили ядра
+    appCssLoad('kernel', 'bootstrap');
     appCssLoad('kernel'); 
+     
     //Без аргументов подключится стиль текущей темы
     appCssLoad();
     
@@ -348,18 +356,27 @@ abstract class Controller extends AppObject
     $ObjectName = $this->getTplObjectName();
     
     //Прикрепим меседж в тело.
-    $modresult['content'] = $this->message.$this->smarty->fetch($tpl_dir, $ObjectName);
+    $modContent = $this->message.$this->smarty->fetch($tpl_dir, $ObjectName);
     
     //Если это запрос через AJAX, то выводим только результат работы модуля
     if(isAjax())
       {
-      echo $modresult['content'];
+      echo $modContent;
       }
     else
       {
-      $pageTplFile = $this->root_dir."themes/".$this->current_theme.'/pages/'.$this->page.'.tpl';
-      $this->tpls[] = '(Main Template)'."themes/".$this->current_theme.'/pages/'.$this->page.'.tpl';
-      $this->smarty->assign('module_content', $modresult['content']);
+      if($this->type == 'admin')
+        {
+        $pageTplFile = $this->root_dir.'themes/admin/pages/index.tpl';
+        $this->tpls[] = '(Main Template)themes/admin/pages/index.tpl';
+        }
+      else
+        {
+        $pageTplFile = $this->root_dir."themes/".$this->current_theme.'/pages/'.$this->page.'.tpl';
+        $this->tpls[] = '(Main Template)'."themes/".$this->current_theme.'/pages/'.$this->page.'.tpl';
+        }
+
+      $this->smarty->assign('module_content', $modContent);
       echo $this->smarty->fetch($pageTplFile);
       }
 
@@ -368,31 +385,58 @@ abstract class Controller extends AppObject
   final public function tplFileName($debug=false)
     {
     $view_file_name = $this->action;
-    if(file_exists($this->root_dir.'themes/'.$this->current_theme.'/'.$this->module_dir.$view_file_name.'.tpl'))
+    if($this->type == 'admin')
       {
-      $this->tpls[] = '(Overridden by Theme) '.'themes/'.$this->current_theme.'/'.$this->module_dir.$view_file_name.'.tpl';
-      return $this->root_dir.'themes/'.$this->current_theme.'/'.$this->module_dir.$view_file_name.'.tpl';
-      }
-    elseif(file_exists($this->root_dir.$this->module_dir.'views/default/'.$view_file_name.'.tpl'))
-      {
-      $this->tpls[] = '(Original Module TPL) '.$this->module_dir.'themes/default/'.$view_file_name.'.tpl';
-      return $this->root_dir.$this->module_dir.'views/default/'.$view_file_name.'.tpl';
-      }
-    elseif(!empty($debug))
-      {
-      $this->tpls[] = '(TPL file is not exist!) '.$this->module_dir.'views/default/'.$view_file_name.'.tpl';
-      return 'TPL file is not exist! '.$this->root_dir.$this->module_dir.'views/default/'.$view_file_name.'.tpl <br> You most created tpl file <b>"'.$view_file_name.'.tpl"</b> for module <b>'.$this->modname.'</b><br>';
+      if(file_exists($this->root_dir.$this->module_dir.'views/default/admin/'.$view_file_name.'.tpl'))
+        {
+        $this->tpls[] = '(Original Module TPL) '.$this->module_dir.'themes/default/admin/'.$view_file_name.'.tpl';
+        return $this->root_dir.$this->module_dir.'views/default/admin/'.$view_file_name.'.tpl';
+        }
+      elseif(!empty($debug))
+        {
+        $this->tpls[] = '(TPL file is not exist!) '.$this->module_dir.'views/default/admin/'.$view_file_name.'.tpl';
+        return 'TPL file is not exist! '.$this->root_dir.$this->module_dir.'views/default/admin/'.$view_file_name.'.tpl <br> You most created tpl file <b>"'.$view_file_name.'.tpl"</b> for module <b>'.$this->modname.'</b><br>';
+        }
+      else
+        {
+        $this->tpls[] = '(TPL file is not exist!) '.$this->module_dir.'views/default/admin/'.$view_file_name.'.tpl';
+        echo 'TPL file is not exist! '.$this->root_dir.$this->module_dir.'views/default/admin/'.$view_file_name.'.tpl <br> You most created tpl file <b>"'.$view_file_name.'.tpl"</b> for module <b>'.$this->modname.'</b><br>';
+        echo "Values for TPL:<br>";
+        echo "<pre>";
+        print_r($this->vars);
+        echo "</pre>";
+        die();
+        }
       }
     else
       {
-      $this->tpls[] = '(TPL file is not exist!) '.$this->module_dir.'views/default/'.$view_file_name.'.tpl';
-      echo 'TPL file is not exist! '.$this->root_dir.$this->module_dir.'views/default/'.$view_file_name.'.tpl <br> You most created tpl file <b>"'.$view_file_name.'.tpl"</b> for module <b>'.$this->modname.'</b><br>';
-      echo "Values for TPL:<br>";
-      echo "<pre>";
-      print_r($this->vars);
-      echo "</pre>";
-      die();
+      if(file_exists($this->root_dir.'themes/'.$this->current_theme.'/'.$this->module_dir.$view_file_name.'.tpl'))
+        {
+        $this->tpls[] = '(Overridden by Theme) '.'themes/'.$this->current_theme.'/'.$this->module_dir.$view_file_name.'.tpl';
+        return $this->root_dir.'themes/'.$this->current_theme.'/'.$this->module_dir.$view_file_name.'.tpl';
+        }
+      elseif(file_exists($this->root_dir.$this->module_dir.'views/default/'.$view_file_name.'.tpl'))
+        {
+        $this->tpls[] = '(Original Module TPL) '.$this->module_dir.'themes/default/'.$view_file_name.'.tpl';
+        return $this->root_dir.$this->module_dir.'views/default/'.$view_file_name.'.tpl';
+        }
+      elseif(!empty($debug))
+        {
+        $this->tpls[] = '(TPL file is not exist!) '.$this->module_dir.'views/default/'.$view_file_name.'.tpl';
+        return 'TPL file is not exist! '.$this->root_dir.$this->module_dir.'views/default/'.$view_file_name.'.tpl <br> You most created tpl file <b>"'.$view_file_name.'.tpl"</b> for module <b>'.$this->modname.'</b><br>';
+        }
+      else
+        {
+        $this->tpls[] = '(TPL file is not exist!) '.$this->module_dir.'views/default/'.$view_file_name.'.tpl';
+        echo 'TPL file is not exist! '.$this->root_dir.$this->module_dir.'views/default/'.$view_file_name.'.tpl <br> You most created tpl file <b>"'.$view_file_name.'.tpl"</b> for module <b>'.$this->modname.'</b><br>';
+        echo "Values for TPL:<br>";
+        echo "<pre>";
+        print_r($this->vars);
+        echo "</pre>";
+        die();
+        }
       }
+
     }
    
   final public function getObjectName()

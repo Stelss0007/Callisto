@@ -554,7 +554,7 @@ function appCssLoad($modname='', $scriptname='main', $dir='')
   
   if($modname == 'kernel')
     {
-    if($scriptname=='main')
+    if($scriptname=='main' || $scriptname=='bootstrap')
       {
       $cssLoaded["$modname.$scriptname"] = "/public/css/$scriptname.css";
       }

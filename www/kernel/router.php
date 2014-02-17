@@ -84,7 +84,7 @@ class Router
           }
         
         if(!file_exists("modules/$mod/index.php"))
-          trigger_error ("Module '".$mod."' or module controler not exist", E_USER_ERROR);
+          trigger_error ("Module '".$mod."' or module controller not exist", E_USER_ERROR);
 
         
         foreach($route_vars as $var)
@@ -196,33 +196,59 @@ class Router
       $segments = explode('/', trim($fullURL['path'], '/'));
       // ѕервый сегмент Ч модуль.
       $mod = array_shift($segments);
+      if($mod == 'admin')
+        {
+        $type = 'admin';
+        $mod = array_shift($segments);
+        }
       // ¬торой Ч действие.
       $action = str_replace($this->fileExt, '', array_shift($segments));
       
       if(empty($action))
-        $action = 'default';
+        $action = 'index';
       // ќстальные сегменты Ч параметры.
       $parameters = $segments;
       }
 
-    if(!file_exists("modules/$mod/index.php"))
-      trigger_error ("Module '".$mod."' or module controler not exist", E_USER_ERROR);
-
-    include_once "modules/$mod/index.php";
-    //$module = new $mod();
-    $module = new Index($mod);
-    
+    if($type)
+      {
+      if(!file_exists("modules/$mod/admin.php"))
+        {
+        trigger_error ("Module '".$mod."' or module controller 'AdminController' not exist", E_USER_ERROR);
+        }
+      include_once "modules/$mod/admin.php";
+      $module = new AdminController($mod);
+      $module->controllerName = 'AdminController';
+      }
+    else
+      {
+      if(!file_exists("modules/$mod/index.php"))
+        {
+        trigger_error ("Module '".$mod."' or module controller 'IndexController' not exist", E_USER_ERROR);
+        }
+      include_once "modules/$mod/index.php";
+      $module = new IndexController($mod);
+      $module->controllerName = 'IndexController';
+      }
+      
     global $mod_controller;
     $mod_controller = $module;
     
     
     $module->input_vars = array_merge($parameters, $module->input_vars);
     
-    
-    if(empty($_REQUEST['type']))
+    if($type)
+      {
+      $module->type = $type;
+      }
+    elseif(empty($_REQUEST['type']))
+      {
       $module->type = 'user';
-    else  
+      }
+    else
+      {
       $module->type = ($_REQUEST['type'] == 'user' || $_REQUEST['type'] == 'admin'  || $_REQUEST['type'] == 'ajax') ? $_REQUEST['type'] : 'user';
+      }
     
     $module->action($action);
 
