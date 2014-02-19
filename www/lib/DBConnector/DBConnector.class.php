@@ -1,6 +1,6 @@
 <?php
 
-class DBConnector
+class DBConnector// extends AppObject
   {
 
   var $Host = '';

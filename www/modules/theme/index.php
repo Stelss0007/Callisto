@@ -1,16 +1,17 @@
 <?php
-class Index extends Controller
+class IndexController extends Controller
   {
   public $defaultAction = 'theme_list';
   
   function theme_list()
     {
-    print_r($this->getModVar('test_key'));
     $browsein = array();
     $browsein[] = array ('url'=>'/theme',
                         'displayname'=>'Темы');
     
     $this->module_browsein = $browsein;
+    
+    //appDebug($this->theme->with('user')->with('block')->getList());exit;
     
     $this->assign('themes_list_all', $this->theme->getList());
     $this->viewPage();

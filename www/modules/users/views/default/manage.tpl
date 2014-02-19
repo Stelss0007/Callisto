@@ -36,7 +36,7 @@
         {#user_group#}
       </td>
       <td class="even">
-        {html_options name=gid options=$groups selected=$gid}
+        {html_options name=gid options=$groups_list selected=$gid}
       </td>
     </tr>
 

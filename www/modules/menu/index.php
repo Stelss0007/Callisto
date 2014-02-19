@@ -1,5 +1,5 @@
 <?php
-class Index extends Controller
+class IndexController extends Controller
   {
   public $defaultAction = 'menu_list';
   
@@ -19,6 +19,7 @@ class Index extends Controller
 //    exit;
     
     $menu = $this->menu->getById($parent_id);
+
     $browsein = $this->menu->parent_browsein($menu['menu_path']);
     if($parent_id > 0)
       {

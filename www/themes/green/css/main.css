@@ -7,6 +7,18 @@
 /*   text-align: center;*/
    color: #fff;
    }
+ 
+* {
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+  }
+table {
+   border-collapse: inherit;  
+   }
+   
+td, th {
+  padding: 4px;
+}
  #contentmain td {
     background: none repeat scroll 0 0 #F3F2E7;
     }

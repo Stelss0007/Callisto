@@ -1,11 +1,11 @@
 <?php
 include_once 'kernel/constants.php';
 
-appLibLoad('Smarty');
-appLibLoad('DBConnector');
-appLibLoad('UserSession');
+appUsesLib('Smarty');
+appUsesLib('DBConnector');
+appUsesLib('UserSession');
 
-$db = new DBConnector();
+//$db = new DBConnector();
 
 function appDebug($value)
   {
@@ -295,25 +295,218 @@ function appCaptureMessage()
   //????????????? ???????
   exit;
   }
-/******************** ?????????????? ???? **************************\
+/******************** ?????????????? ???? **************************/
 
-/**
- * ???????? ?????????? ??????
- */
-function appLibLoad($lib_name = 'extlib')
+function appUsesModule($module_name)
   {
-  //???????? ????? ??? ????????? ?
+  global $appConfig;
+  
+  $mod_identy_type ='models_module';
+  
+  if(empty($module_name))
+    return array();
+  //Предотвращаем повторные загрузки
+  static $loaded = array();
+  static $models = array();
+  
+  if (!empty($loaded["$module_name"])) 
+    return true;
+
+  //Проверим кеш
+  if(empty($models) && !appVarIsCached('app', 'models') || $appConfig['debug.enabled'])
+    {
+    $models = appGetModelList();
+    appVarSetCached('app', 'models', $models);
+    
+    if(empty($models[$mod_identy_type][$module_name]))
+      return array();
+    }
+  else
+    {
+    if(empty($models[$module_name]))
+      {
+      $models = appVarGetCached('app', 'models');
+     
+      if(empty($models[$mod_identy_type][$module_name]))
+        {
+        $models = appGetModelList();
+ //print_r($models);       
+        appVarSetCached('app', 'models', $models);
+        }
+      if(empty($models[$mod_identy_type][$module_name]))
+        return array();
+      }
+    }
+    
+  foreach($models[$mod_identy_type][$module_name] as $src)
+    {
+    require_once ($src);
+    }
+  
+
+  $loaded["$module_name"] = true;
+  
+  return $models[$mod_identy_type][$module_name];
+  }
+/**
+ * Загрузка мсторонних библиотек
+ */
+function appUsesLib($lib_name = 'extlib', $file = false)
+  {
   static $loaded = array();
   
-  if (!empty($loaded["$lib_name"])) return true;
+  $file_src = '';
+  if($file)
+    {
+    $file = rtrim($file, ".php");
+    $file_src = './lib/'.$lib_name.'/'.$file.'.php';
+    }
+  else
+    {
+    $file_src = './lib/'.$lib_name.'/'.$lib_name.'.class.php';
+    }
+  
+  if (!empty($loaded["$file_src"])) return true;
 
-  //????????? ????
-  require_once('./lib/'.$lib_name.'/'.$lib_name.'.class.php');
+  require_once($file_src);
 
   $loaded["$lib_name"] = true;
-  return true;
+  
+  return $file_src;
   }
   
+/**
+ * Загрузка мсторонних библиотек
+ */
+function appUsesModel($model_name)
+  {
+  $mod_identy_type ='models_all';
+  
+  if(empty($model_name))
+    return array();
+  //Предотвращаем повторные загрузки
+  static $loaded = array();
+  static $models = array();
+  
+  if (!empty($loaded["$model_name"])) 
+    return true;
+
+  //Проверим кеш
+  if(empty($models) && !appVarIsCached('app', 'models'))
+    {
+    $models = appGetModelList();
+    appVarSetCached('app', 'models', $models);
+    
+    if(empty($models[$mod_identy_type][$model_name]))
+      return array();
+    }
+  else
+    {
+    if(empty($models[$model_name]))
+      {
+      $models = appVarGetCached('app', 'models');
+     
+      if(empty($models[$mod_identy_type][$model_name]))
+        {
+        $models = appGetModelList();
+ //print_r($models);       
+        appVarSetCached('app', 'models', $models);
+        }
+      if(empty($models[$mod_identy_type][$model_name]))
+        return array();
+      }
+    }
+
+  require_once($models[$mod_identy_type][$model_name]);
+
+  $loaded["$model_name"] = true;
+  
+  return array("$model_name"=>$models[$mod_identy_type][$model_name]);
+  }
+
+  
+function appGetModuleSrc(array $mod)
+  {
+  return $mod[appGetModuleName($mod)];
+  }
+function appGetModuleName(array $mod)
+  {
+  return key($mod);
+  }
+function appGetModuleList()
+  {
+  return appGetDirList('modules');
+  }
+function appGetModelList()
+  {
+  $modules = appGetModuleList();
+
+  $models = array();
+  foreach($modules as $module)
+    {
+    $files = appGetFileList(appGetModuleSrc($module).'/models');
+    foreach($files as $file)
+      {
+      $models['models_all'][str_replace('.php', '', appGetModuleName($file))] = appGetModuleSrc($file);
+      $models['models_module'][appGetModuleName($module)][str_replace('.php', '', appGetModuleName($file))] = appGetModuleSrc($file);
+      $models['module_model'][appGetModuleName($module).'.'.str_replace('.php', '', appGetModuleName($file))] = appGetModuleSrc($file);
+      }
+    }
+  
+  return $models;
+  }
+
+function appGetDirList($dir_ = null)
+  {
+  //Взяли список с диска
+  $dir_list = array();
+  
+  if(empty($dir_))
+    return $dir_list;
+
+  $dir_ = APP_DIRECTORY.'/'.$dir_;
+
+  $dir_handler = opendir($dir_);
+  while ($dir = readdir($dir_handler))
+    {
+    if ((is_dir("{$dir_}/$dir")) &&
+                  ($dir != '.') &&
+                  ($dir != '..') &&
+                  ($dir != 'CVS'))
+      {
+      // Found
+      $dir_list[] = array("$dir" => "{$dir_}/$dir");
+      }
+    }
+  closedir($dir_handler);
+  
+  return $dir_list;
+  }
+  
+function appGetFileList($dir_ = null)
+  {
+  //Взяли список с диска
+  $file_list = array();
+  
+  if(empty($dir_))
+    return $file_list;
+
+  $dir_handler = opendir($dir_);
+  while ($dir = readdir($dir_handler))
+    {
+    if ((is_file("{$dir_}/$dir")) &&
+                  ($dir != '.') &&
+                  ($dir != '..') &&
+                  ($dir != 'CVS')
+                  )
+      {
+      $file_list[] = array("$dir" => "{$dir_}/$dir");
+      }
+    }
+  closedir($dir_handler);
+  
+  return $file_list;
+  }
   
 function appJsLoad($modname='kernel', $scriptname='main')
   {
@@ -361,7 +554,7 @@ function appCssLoad($modname='', $scriptname='main', $dir='')
   
   if($modname == 'kernel')
     {
-    if($scriptname=='main')
+    if($scriptname=='main' || $scriptname=='bootstrap')
       {
       $cssLoaded["$modname.$scriptname"] = "/public/css/$scriptname.css";
       }

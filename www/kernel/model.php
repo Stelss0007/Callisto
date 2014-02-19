@@ -8,7 +8,9 @@ class Model extends DBConnector
   
   var $session = null;
   
-  var $relations = array();
+  public $relations = array();
+  
+  private $used_relations = array();
   
   //////////////////////////////////////////////////////////////////////////////
   function __construct($guid=0)
@@ -772,7 +774,7 @@ class Model extends DBConnector
     $condition = $this->prepareCondition($conditions, $params);
     $where = "{$condition['join']} {$condition['where']} {$condition['group']} {$condition['order']} {$condition['limit']}";
 
-    $result = $this->select($this->table, $condition['fields'], $where, true);   
+    $result = $this->select($this->table, $condition['fields'], $where, true);
     $this->getRelations($result);
     return $result;
     }
@@ -782,7 +784,7 @@ class Model extends DBConnector
     $params['condition'] = array('id'=>$id);
  
     $result = $this->getList($params);
-    
+  
     return isset($result[0]) ? $result[0] : array();
     }
   final function getCount($params)
@@ -826,20 +828,33 @@ class Model extends DBConnector
     {
     
     }
+    
+  final function with()
+    {
+    if($relations = func_get_args())
+      foreach($relations as $relation)
+        {
+        if(isset($this->relations[$relation]))
+          {
+          $this->used_relations[$relation] = $this->relations[$relation];
+          }
+        }
+    return $this;
+    }
   
   final function getRelations(&$model_result=array())
     {
-    if(empty($model_result) || empty($this->relations))
+    if(empty($model_result) || empty($this->used_relations))
       return;
 
     $foreign_keys = array();
     $id_keys = array();
     
-    foreach($this->relations as $key=>$value)
+    foreach($this->used_relations as $key=>$value)
       {
       if($value['type'] == RELATION_TYPE_ONE_TO_ONE && !isset($model_result[0]["{$value['foreign_key']}"]))
         {
-        unset($this->$relations[$key]);
+        unset($this->used_relations[$key]);
         continue;
         }
       
@@ -857,7 +872,7 @@ class Model extends DBConnector
       }
     
       
-    foreach($this->relations as $key=>$value)
+    foreach($this->used_relations as $key=>$value)
       {
       switch($value['type'])
         {
@@ -887,8 +902,6 @@ class Model extends DBConnector
         default:
           break;
         }
-        
-
       }
 
     return true;

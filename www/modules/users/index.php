@@ -1,5 +1,5 @@
 <?php
-class Index extends Controller
+class IndexController extends Controller
   {
   public $defaultAction = 'users_list';
   
@@ -20,10 +20,19 @@ class Index extends Controller
 //    appDebug($this->users->getList($params));exit;
     
     
+//        $annotation = $this->usesLib('Annotations');
+//        $annotation->setClass('users');
+//        appDebug($annotation->fieldsAnnotations);
+//        appDebug($annotation->methodsAnnotations);
+//
+//        exit;
+    
+    
     $this->getAccess(ACCESS_ADD);
     $this->usesModel('groups');
-    
+ 
     $this->groups_list = $this->groups->group_list(false);
+    //print_r($this->groups->group_list(false));exit;
     $this->users_list = $this->users->user_list(true);
     $this->viewPage();
     //$this->viewJSON();
@@ -57,7 +66,7 @@ class Index extends Controller
       }
       
     $this->usesModel('groups');
-    $this->groups = $this->groups->group_list();
+    $this->groups_list = $this->groups->group_list();
     
     $this->viewPage();
     }

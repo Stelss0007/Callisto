@@ -7,7 +7,7 @@ IndexIgnore *.ini *.cfg
 RewriteEngine   on
 #На нижеследующие папки от корня сайт mod_rewrite не действует т.е отправляет запрос пользователя как есть прямо в папку
 #Админка
-RewriteCond    %{REQUEST_URI}        !^/admin
+#RewriteCond    %{REQUEST_URI}        !^/admin
 #Темы
 RewriteCond    %{REQUEST_URI}        !^/themes
 #Стили 

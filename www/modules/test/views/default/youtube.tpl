@@ -57,6 +57,7 @@
 
     </div>
 
+
 <div id='file_content'></div>
 
 <span class='st_sharethis_large' displayText='ShareThis'></span>
@@ -258,7 +259,22 @@ textarea {
       $this.html(html);
       };
       
-
+    var getRemoteVideoInfo = function (url){
+      jQuery.ajax({
+        cache: true,
+        async: false,
+        type: 'HEAD',
+        url: url,
+        success: function(d,r,xhr){
+          fileInfo = {
+                      fileSize : xhr.getResponseHeader('Content-Length'),
+                      fileType : xhr.getResponseHeader('Content-Type')
+                      };
+          },
+        error: function(xhr, desc, er){alert('ERROR: "' + xhr.responseText + '"')}
+        });
+      return fileInfo;
+      };
                               
     var getLocalVideoInfo = function (){
       var file = $htis.find('.yt-ypload-file').get(0).files[0];
@@ -274,25 +290,7 @@ textarea {
  
 ////////////////////////////////////////////////////////////////////////////////
 
-window.googleIsAuthorized = false;
- 
-var getRemoteVideoInfo = function (url){
- jQuery.ajax({
-   cache: true,
-   async: false,
-   type: 'HEAD',
-   url: url,
-   success: function(d,r,xhr){
-     fileInfo = {
-                 fileSize : xhr.getResponseHeader('Content-Length'),
-                 fileType : xhr.getResponseHeader('Content-Type'),
-                 fileSrc  : url
-                 };
-     },
-   error: function(xhr, desc, er){alert('ERROR: "' + xhr.responseText + '"')}
-   });
- return fileInfo;
- };
+ window.googleIsAuthorized = false;
  
  window.oauth2Callback = function(authResult) {
     if (authResult['access_token']) {
@@ -315,7 +313,6 @@ var getRemoteVideoInfo = function (url){
         window.googleIsAuthorized = true;  
         //$('.pre-sign-in').hide();
         $('.post-sign-in').show();
-        deleteVideo('dzZ91Il7IRE');
       });
     }
   };
@@ -418,105 +415,6 @@ var getRemoteVideoInfo = function (url){
       $('#submit').attr('disabled', false);
     });
   }
-  
-  //////////////////////////////////////////////////////////////////////////////
-  ///////////// Remote FILE ////////////////////////////////////////////////////
-  function initiateRemoteUpload(e) {
-    e.preventDefault();
-
-    var file = getRemoteVideoInfo('http://callisto.com/public/images/vid.mp4');
-    if (file) {
-      $('#submit').attr('disabled', true);
-
-      var metadata = {
-        snippet: {
-          title: $('#title').val(),
-          description: $('#description').val(),
-          categoryId: 22
-        }
-      };
-
-      $.ajax({
-        url: VIDEOS_UPLOAD_SERVICE_URL,
-        method: 'POST',
-        contentType: 'application/json',
-        headers: {
-          Authorization: 'Bearer ' + accessToken,
-          'x-upload-content-length': file.fileSize,
-          'x-upload-content-type': file.fileType
-        },
-        data: JSON.stringify(metadata)
-      }).done(function(data, textStatus, jqXHR) {
-        resumableRemoteUpload({
-          url: jqXHR.getResponseHeader('Location'),
-          file: file,
-          start: 0
-        });
-      });
-    }
-  }
-
-  function resumableRemoteUpload(options) {
-    $('.yt-share-info-block').hide();
-    $('.yt-share-info-status').html('Uploading.<br> Plese wite...').show();
-    
-    var ajax = $.ajax({
-      url: options.url,
-      method: 'PUT',
-      contentType: options.file.fileType,
-      headers: {
-        'Content-Range': 'bytes ' + options.start + '-' + (options.file.fileSize - 1) + '/' + options.file.fileSize
-      },
-      xhr: function() {
-        // Thanks to http://stackoverflow.com/a/8758614/385997
-        var xhr = $.ajaxSettings.xhr();
-
-        if (xhr.upload) {
-          xhr.upload.addEventListener(
-            'progress',
-            function(e) {
-              if(e.lengthComputable) {
-                var bytesTransferred = e.loaded;
-                var totalBytes = e.total;
-                var percentage = Math.round(100 * bytesTransferred / totalBytes);
-
-                $('#upload-progress').attr({
-                  value: bytesTransferred,
-                  max: totalBytes
-                });
-
-                $('#percent-transferred').text(percentage);
-                $('#bytes-transferred').text(bytesTransferred);
-                $('#total-bytes').text(totalBytes);
-
-                $('.during-upload').show();
-              }
-            },
-            false
-          );
-        }
-
-        return xhr;
-      },
-      processData: false,
-      data: 'data:video/mp4;base64,' + getRemoteVideo(options.file.src)
-    });
-
-    ajax.done(function(response) {
-      var videoId = response.id;
-      $('#video-id').text(videoId);
-      $('.post-upload').show();
-      checkVideoStatus(videoId, INITIAL_STATUS_POLLING_INTERVAL_MS);
-    });
-
-    ajax.fail(function() {
-      $('#submit').click(function() {
-        alert('Not yet implemented!');
-      });
-      $('#submit').val('Resume Upload');
-      $('#submit').attr('disabled', false);
-    });
-  }
 
   function checkVideoStatus(videoId, waitForNextPoll) {
     $.ajax({
@@ -554,116 +452,16 @@ var getRemoteVideoInfo = function (url){
       else {
         if(uploadStatus=='rejected'){
           $('.yt-share-info-status').html('Error.<br> Video already exists in your accaunt! ').addClass('yt-share-error');
-          deleteVideo(videoId);
         }
       }
 
     });
   }
-  
-  function deleteVideo(videoId){
-      $.ajax({
-      method: 'DELETE',
-      url: 'https://content.googleapis.com/youtube/v3/videos?id=UFZsIwflQyQ&key=AIzaSyB6oG5RweGVKO7SnxW8X6GP8_35OMiMUSw',
-      
-      headers: {
-        Authorization: 'Bearer ' + accessToken
-      }//,
-      
-      //data: {
-      //  id: videoId,
-      //  key: 'AIzaSyB6oG5RweGVKO7SnxW8X6GP8_35OMiMUSw'
-      //}
-    }).done(function(response) {
-      alert('deleted');
-    });
-  }
-  
-  function playList(){
-      $.ajax({
-      method: 'get',
-      url: 'https://www.googleapis.com/youtube/v3/playlistItems',
-      
-      headers: {
-        Authorization: 'Bearer ' + accessToken
-      },
-      data: {
-        part: 'snippet',
-        playlistId: 'PLeP_AgsEtNxpINfXUeGq-woTvxKikkNRX',
-        key: 'AIzaSyB6oG5RweGVKO7SnxW8X6GP8_35OMiMUSw'
-      }
-    }).done(function(response) {
-      alert('get');
-    });
-  }
-  
-  function playListAdd(){
-      $.ajax({
-      method: 'post',
-      url: 'https://www.googleapis.com/youtube/v3/playlistItems',
-      dataType: 'json',
-      
-      
-      headers: {
-        Authorization: 'Bearer ' + accessToken
-      },
-      data: {
-              "snippet": {
-               "playlistId": "PLeP_AgsEtNxpINfXUeGq-woTvxKikkNRX",
-               "resourceId": {
-                "kind": "youtube#video",
-                "videoId": "YWZa6ZgbGXo"
-               }
-              }
-            }
-    }).done(function(response) {
-      alert('get');
-    });
-  }
-  
- 
-
-function getRemoteVideo(url){
-  //result = null;
-  //jQuery.ajax({
-   //cache: false,
-   //async: false,
-   //type: 'HEAD',
-   //url: url,
-   //success: function(data){
-    // result = data;
-    // },
-   //error: function(xhr, desc, er){alert('ERROR: "' + xhr.responseText + '"')}
-   //});
-  //return result;
-  
-  
-  
-}
-
-
-
-//getRemoteVideo('http://callisto.com/public/images/vid.mp4');
 
   $(function() {
     $.getScript(GOOGLE_PLUS_SCRIPT_URL);
 
-    //$('#upload-form').submit(initiateUpload);
-    $('#upload-form').submit(initiateRemoteUpload);
- 
-    
-          //test section    
-          $('#playList').on('click', function(){
-            playList();
-            }); 
-            
-          $('#playListAdd').on('click', function(){
-            playListAdd();
-            }); 
-            
-          $('#deleteVideo').on('click', function(){
-            deleteVideo('6u_O_cXRuP8');
-            }); 
+    $('#upload-form').submit(initiateUpload);
   });
   
 })( jQuery );
@@ -688,6 +486,9 @@ limitations under the License.
 $('.test_y').youtubeShare();
 
 
+
+
+
 (function() {
   
   //getRemoteVideo('http://callisto.com/public/images/vid.mp4');
@@ -705,41 +506,6 @@ $('.test_y').youtubeShare();
 })();
 
 
-function readURL(input) {
-  
-    file = getRemoteVideoInfo('http://callisto.com/public/images/vid.mp4');
-  alert(file.fileSize);
-    if (input.files && input.files[0]) {
-      alert(input.files[0].size);
-        var reader = new FileReader();
-        // set where you want to attach the preview
-        reader.target_elem = $(input).parent().find('#preview');
-        reader.onload = function (e) {
-           // Attach the preview
-           $(reader.target_elem).attr('src', e.target.result);
-        };
-
-        reader.readAsDataURL(input.files[0]);
-    }
- }
-
 
 </script>
-
-
-
 {/literal}
-
-
-<div>
-  <form>
-    <input id='test_file' type="file">
-    <img id='preview' src=''>
-    <a href='#' onclick="readURL($('#test_file').get(0));return false;">Test</a>
-  </form>
-  
-  <input type="button" id="playlist" value="PlayList">
-  <input type="button" id="playListAdd" value="PlayListAdd">
-  <input type="button" id="deleteVideo" value="DeleteVideo">
-</div>
-

@@ -1,5 +1,5 @@
 <?php
-class Index extends Controller
+class IndexController extends Controller
   {
   //Пример отображения результата модуля
   function view_mod()
@@ -211,5 +211,23 @@ class Index extends Controller
     {
     $this->viewPage();
     }
+
+  function table()
+    {
+    $this->viewPage();
+    }
+    
+  function table_ajax()
+    {
+    $strRequest = file_get_contents('php://input');
+    $Request = json_decode($strRequest);
+    
+    foreach($Request as $key=>$item)
+      {
+      $Request[$key]->number =  $Request[$key]->number . ' add message'.$key;
+      }
+    echo json_encode($Request);
+    }
+
   }
 ?>
