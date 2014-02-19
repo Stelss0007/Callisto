@@ -13,8 +13,8 @@ class Index extends Controller
   function view_page()
     {
     //$_SESSION['user_gid'] = -1;
-    $this->debuger->debug("Очень простое сообщение на консоль");
-    $this->debuger->debug("object", $this);
+//    $this->debuger->debug("Очень простое сообщение на консоль");
+//    $this->debuger->debug("object", $this);
     $obj1 = $this->test->getObjectsList(array('arg1'=>'1'), array('arg2'=>'asc'), $offset);
     
     $obj2 = $this->test->get_5_ByYearOrderByYear('49, 50, 48');
@@ -205,6 +205,11 @@ class Index extends Controller
     $a = $this->usesLib('Image');
     $this->lib->Image->test1();
     $a->test();
+    }
+    
+  function youtube()
+    {
+    $this->viewPage();
     }
   }
 ?>

@@ -50,3 +50,14 @@ $('document').ready(function(){
   });
   showAppMessage();
 });
+
+
+// $(window).ready(function(){
+//    var hasChanged =1;  
+//    $(window).bind("beforeunload",function(event) {
+//        if(hasChanged) return "You have unsaved changes";
+//    });
+//    
+//    window.onblur = function () {document.title='документ неактивен'}
+//    window.onunload = function () {return "1111";}
+// });
