@@ -31,7 +31,10 @@
     <script type="text/javascript">
       // See https://developers.google.com/youtube/2.0/developers_guide_protocol#Developer_Key
       var YT_DEVELOPER_KEY = 'AI39si5mwSg8AxZSqXrBkdesNkAjL355kMTZ3FSUgZou6BbPJB5FwA_pr8NbgLvrKX6Tc-Fb207TpOZfgcFKWADS3fDBF8NcUg';
+
+      // See http://code.google.com/p/google-api-javascript-client/wiki/Authentication
       var YT_OAUTH2_SCOPE = 'https://gdata.youtube.com';
+//      var OAUTH2_CLIENT_ID = '458967539764.apps.googleusercontent.com';
       var OAUTH2_CLIENT_ID = '698320483112-a262nb4rl15008safll6pjk0qfvv8q8b.apps.googleusercontent.com';
       var OAUTH2_TOKEN_TYPE = 'Bearer';
 
@@ -81,18 +84,18 @@
       function handleAuthResult(authResult) {
         if (authResult) {
           // If we have a valid auth token, then proceed.
+          $('#login-button').hide();
           prepareUploadForm();
         } else {
-          alert('www');
           // Otherwise, set things up so that the OAuth 2 flow is started when the user clicks the Auth button.
-          $('.share-youtube').unbind('click').click(function() {
+          $('#login-button').unbind('click').click(function() {
             gapi.auth.authorize({
               client_id: OAUTH2_CLIENT_ID,
               scope: [ YT_OAUTH2_SCOPE ],
               immediate: false
             }, handleAuthResult);
           });
-          //$('.share-youtube').unbind('click');
+          $('#login-button').show();
         }
       }
 
@@ -138,29 +141,51 @@
         });
       }
 
-      function uploadServerToServer(yt_upload_url, token, upload_url){
+      // Retrieve the list of valid YouTube categories at runtime.
+      // This also was not possible before CORS support, since there is no JSONP for this XML resource.
+      function getCategories() {
         $.ajax({
-          type: 'POST',
-          url: upload_url,
-          data: {yt_upload_url: yt_upload_url, yt_upload_token: token},
-          success: function(responseData) {
-            alert(responseData);
+          dataType: 'xml',
+          type: 'GET',
+          url: 'https://gdata.youtube.com/schemas/2007/categories.cat',
+          headers: generateYouTubeApiHeaders(),
+          success: function(responseXml) {
+            // This is about 1000 times easier using jQuery's selectors than any other way of dealing with XML.
+            // Some browsers require the namespace, and some don't.
+            var assignableCategories = $(responseXml).find('atom\\:category:has(yt\\:assignable), category:has(assignable)');
+            var options = [];
+            $.each(assignableCategories, function() {
+              var term = $(this).attr('term');
+              var label = $(this).attr('label');
+              // data-label in there is to ensure that the sorting happens alphabetically based on the label value.
+              options.push('<option data-label="' + label + '" value="' + term + '">' + label + '</option>');
+            });
+            $('#category').html(options.sort().join(''));
+          },
+          error: function(jqXHR) {
+            showMessage('The list of YouTube categories could not be loaded: ' + jqXHR.responseText);
           }
         });
       }
-      
+
       // Wire up all the necessary logic to get the upload form working.
       function prepareUploadForm() {
-      
-        $('.share-youtube').click(function() {
-          
-          var $this = $(this),
-            title = escapeXmlEntities($this.attr('data-title')),
-            description = escapeXmlEntities($this.attr('data-description')),
-            category = 'Film',
-            upload_url = escapeXmlEntities($this.attr('data-upload-url'))
-          ;
+        getDisplayName();
+        getCategories();
 
+        $('#upload').click(function() {
+          // We're using the Browser-based Upload flow.
+          // https://developers.google.com/youtube/2.0/developers_guide_protocol_browser_based_uploading
+          $('#upload').attr('disabled', true);
+          $('#upload').val('Uploading...');
+
+          // We're not validating metadata client-side, but bad metadata will lead to an upload failure.
+          var title = escapeXmlEntities($('#title').val());
+          var description = escapeXmlEntities($('#description').val());
+          var category = escapeXmlEntities($('#category option:selected').val());
+
+          // It's not currently possible to use JSON data for the request body.
+          // You can use something more official than string concatenation to create your XML if you'd prefer.
           var xmlBody = '<?xml version="1.0"?> <entry xmlns="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/" xmlns:yt="http://gdata.youtube.com/schemas/2007"> <media:group> <media:title type="plain">' + title + '</media:title> <media:description type="plain">' + description + '</media:description> <media:category scheme="http://gdata.youtube.com/schemas/2007/categories.cat">' + category + '</media:category> </media:group> </entry>';
 
           $.ajax({
@@ -180,14 +205,37 @@
               // The response also contains a unique token value that needs to be included in the form POST request.
               var token = xml.find('token').text();
 
-              uploadServerToServer(submissionUrl, token, upload_url);
+              // Set the target of the form to the submission URL we constructed.
+              $('#upload-form').attr('action', submissionUrl);
+              // Add the token as a hidden form element as required by the API.
+              $('<input>').attr({
+                type: 'hidden',
+                name: 'token',
+                value: token
+              }).appendTo('#upload-form');
+
+              // Submit the form to upload the file.
+              // This doesn't actually rely on CORS, but the previous step's metadata submission did.
+              //$('#upload-form').submit();
             },
             error: function(jqXHR) {
               showMessage('Metadata submission failed: ' + jqXHR.responseText);
+              $('#upload').removeAttr('disabled');
+              $('#upload').val('Upload');
             }
           });
         });
 
+        // We only want the Upload button to be clickable if there's a file selected.
+        $('#file').change(function() {
+          if ($(this).val()) {
+            $('#upload').removeAttr('disabled');
+          } else {
+            $('#upload').attr('disabled', true);
+          }
+        });
+
+        $('#upload-form').show();
       }
     </script>
     <script type="text/javascript" src="https://apis.google.com/js/client.js?onload=onAuthReady"></script>
@@ -197,10 +245,37 @@
   <body>
     <h1>Share File</h1>
     <div id="upload-container">
-      <input type="button" class="share-youtube" data-title="my title" data-description="my description" data-upload-url="http://callisto.com/test/youtube_upload" value="Share Youtube"/>
+      <div id="message"></div>
+      <input id="login-button" type="button" value="Authorize Access"/>
+      <form id="upload-form" enctype="multipart/form-data" method="POST">
+        <div>You're logged in as <span id="display-name"></span></div>
+        <div>
+          <label for="title">Title</label>
+          <input id="title" type="text" class="wide" maxlength="90" value="Title"/>
+        </div>
+        <div>
+          <label for="description">Description</label>
+          <textarea id="description" type="text" class="wide" maxlength="1000">Description</textarea>
+        </div>
+        <div>
+          <label for="category">Category</label>
+          <select id="category" class="wide"></select>
+        </div>
+        <div>
+          <label for="file">Video File</label>
+          <input id="file" name="file" type="file"/>
+        </div>
+        <div>
+          <input id="upload" type="button" value="Upload" disabled/>
+          <input id="upload_file" type="button" value="Upload File!"/>
+        </div>
+      </form>
     </div>
     {literal}
     <script>
+      $('#upload_file').on('click', function(){
+        $('#upload-form').submit();
+      });
     </script>
     {/literal}
   </body>

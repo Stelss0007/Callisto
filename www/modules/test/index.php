@@ -209,8 +209,41 @@ class IndexController extends Controller
     
   function youtube()
     {
-    $this->viewPage();
+    $this->view();
     }
+  function youtube_result()
+    {
+    print_r($_COOKIE);
+    print_r($_POST);
+    print_r($_FILES);
+    }
+    
+  function youtube_upload()
+    {
+    $target_url = $_POST['yt_upload_url'];//"https://uploads.gdata.youtube.com/action/FormDataUpload/AIwbFATEHzMjIEYmJl1DVdXgDbtEcmP42AYX-Y1VA9Md7wW5ATSi6uis3C8MZXCUsc3CcrzqkBMfTaikPw2hS-pxkIlLZL1NEA?nexturl=http%3A%2F%2Fcallisto.com%2Ftest%2Fyoutube%2F";
+    $token = $_POST['yt_upload_token']; //'AIwbFATKcAOblRNxotDckF320VqUq2mHkBkDeMiljM7ZQn4TMCpywIPuvegQEZtjOnvDN9JBc7sVZ37cM0hkj6LnzB-GXnel7Vl2MpBULhUTP-dUCSKAYkp_v5pAQdIRv84LWoJYX3pkWfxEeZHJDwabc9WiGqfiX8C-0dNxh7u0ot9S235Fo8zNP7ndfpQ-SQMeeqpC0dlvbIDO3Mbe1vrSUef8TqYFAzC83jb0LmML3pEtYE9ianwRq-_JcI7IVXh4-cz5RCrU722lvhNx92wt254qnIOYdg';
+
+    $file_name_with_full_path = realpath('./PSYCHO.mp4');
+   
+    $post = array('token' => $token,'file'=>'@'.$file_name_with_full_path);
+    
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+    curl_setopt($ch, CURLOPT_HEADER, 1);
+    curl_setopt($ch, CURLOPT_VERBOSE, 1);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    
+    curl_setopt($ch, CURLOPT_USERAGENT, "Mozilla/4.0 (compatible;)");
+    curl_setopt($ch, CURLOPT_URL, $target_url);
+    curl_setopt($ch, CURLOPT_POST, true);
+   
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $post); 
+    $response = curl_exec($ch);
+    
+    print_r($response);
+    exit;
+    }
+  
 
   function table()
     {
@@ -227,6 +260,15 @@ class IndexController extends Controller
       $Request[$key]->number =  $Request[$key]->number . ' add message'.$key;
       }
     echo json_encode($Request);
+    }
+    
+    
+    
+    
+    
+  function test_y()
+    {
+    
     }
 
   }
