@@ -44,10 +44,10 @@ class Menu extends Model
       }
       
     $parrents = $this->fetch_array();
-    $browsein[] = array('url'=>'/menu/menu_list/', 'displayname'=>'Menu');
+    $browsein[] = array('url'=>'/admin/menu/menu_list/', 'displayname'=>'Menu');
     foreach($parrents as $value)
       {
-      $browsein[] = array('url'=>'/menu/menu_list/'.$value['id'], 'displayname'=>$value['menu_title']);
+      $browsein[] = array('url'=>'/admin/menu/menu_list/'.$value['id'], 'displayname'=>$value['menu_title']);
       }
     
     return $browsein;

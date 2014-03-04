@@ -15,7 +15,7 @@
         </div>
       </div>
       <div class="box-content">
-        <form class="form-horizontal">
+
           <fieldset>
            {* <legend>Manage form</legend>*}
             <br><br>
@@ -73,7 +73,7 @@
               <button type="reset" class="btn">Cancel</button>
             </div>
           </fieldset>
-        </form>   
+ 
 
       </div>
     </div><!--/span-->

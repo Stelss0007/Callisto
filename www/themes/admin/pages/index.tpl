@@ -19,19 +19,8 @@
 	<meta name="author" content="Muhammad Usman">
 
 	<!-- The styles -->
-	<link id="bs-css" href="css/bootstrap-cerulean.css" rel="stylesheet">
-  {literal}
-	<style type="text/css">
-	  body {
-		padding-bottom: 40px;
-	  }
-	  .sidebar-nav {
-		padding: 9px 0;
-	  }
-	</style>
-  {/literal}
 	<link href="/themes/admin/css/main.css" rel="stylesheet">
-	<link href="/themes/admin/css/bootstrap-responsive.css" rel="stylesheet">
+
 	<link href="/themes/admin/css/charisma-app.css" rel="stylesheet">
 	<link href="/themes/admin/css/jquery-ui-1.8.21.custom.css" rel="stylesheet">
 	<link href='/themes/admin/css/fullcalendar.css' rel='stylesheet'>
@@ -106,21 +95,18 @@
 				<div class="well nav-collapse sidebar-nav">
 					<ul class="nav nav-tabs nav-stacked main-menu">
 						<li class="nav-header hidden-tablet">Main</li>
-						<li><a class="ajax-link" href="index.html"><i class="icon-home"></i><span class="hidden-tablet"> Dashboard</span></a></li>
-						<li><a class="ajax-link" href="ui.html"><i class="icon-eye-open"></i><span class="hidden-tablet"> UI Features</span></a></li>
-						<li><a class="ajax-link" href="form.html"><i class="icon-edit"></i><span class="hidden-tablet"> Forms</span></a></li>
-						<li><a class="ajax-link" href="chart.html"><i class="icon-list-alt"></i><span class="hidden-tablet"> Charts</span></a></li>
-						<li><a class="ajax-link" href="typography.html"><i class="icon-font"></i><span class="hidden-tablet"> Typography</span></a></li>
-						<li><a class="ajax-link" href="gallery.html"><i class="icon-picture"></i><span class="hidden-tablet"> Gallery</span></a></li>
-						<li class="nav-header hidden-tablet">Sample Section</li>
-						<li><a class="ajax-link" href="table.html"><i class="icon-align-justify"></i><span class="hidden-tablet"> Tables</span></a></li>
-						<li><a class="ajax-link" href="calendar.html"><i class="icon-calendar"></i><span class="hidden-tablet"> Calendar</span></a></li>
-						<li><a class="ajax-link" href="grid.html"><i class="icon-th"></i><span class="hidden-tablet"> Grid</span></a></li>
-						<li><a class="ajax-link" href="file-manager.html"><i class="icon-folder-open"></i><span class="hidden-tablet"> File Manager</span></a></li>
-						<li><a href="tour.html"><i class="icon-globe"></i><span class="hidden-tablet"> Tour</span></a></li>
-						<li><a class="ajax-link" href="icon.html"><i class="icon-star"></i><span class="hidden-tablet"> Icons</span></a></li>
-						<li><a href="error.html"><i class="icon-ban-circle"></i><span class="hidden-tablet"> Error Page</span></a></li>
-						<li><a href="login.html"><i class="icon-lock"></i><span class="hidden-tablet"> Login Page</span></a></li>
+						<li><a class="ajax-link" href="/admin/main"><i class="icon-home"></i><span class="hidden-tablet"> Dashboard</span></a></li>
+						<li><a class="ajax-link" href="/admin/groups"><i class="icon-user"></i><span class="hidden-tablet"> Groups</span></a></li>
+						<li><a class="ajax-link" href="/admin/users/users_list"><i class="icon-user"></i><span class="hidden-tablet"> Users</span></a></li>
+            <li><a class="ajax-link" href="/admin/permissions"><i class="icon-eye-open"></i><span class="hidden-tablet"> Permission</span></a></li>
+            <li><a class="ajax-link" href="/admin/menu"><i class="icon-list"></i><span class="hidden-tablet"> Menu</span></a></li>
+            <li><a class="ajax-link" href="/admin/modules"><i class="icon-list-alt"></i><span class="hidden-tablet"> Modules</span></a></li>
+            <li><a class="ajax-link" href="/admin/blocks"><i class="icon-th"></i><span class="hidden-tablet"> Blocks</span></a></li>
+            <li><a class="ajax-link" href="/admin/theme"><i class="icon-picture"></i><span class="hidden-tablet"> Themes</span></a></li>
+            <li><a class="ajax-link" href="/admin/files"><i class="icon-file"></i><span class="hidden-tablet"> Files</span></a></li>
+            
+            <li class="nav-header hidden-tablet"></li>
+            <li><a class="ajax-link" href="/admin/permissions"><i class="icon-off"></i><span class="hidden-tablet"> LogOut</span></a></li>
 					</ul>
 					<label id="for-is-ajax" class="hidden-tablet" for="is-ajax"><input id="is-ajax" type="checkbox"> Ajax on menu</label>
 				</div><!--/.well -->
