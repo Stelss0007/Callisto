@@ -470,6 +470,7 @@ abstract class Controller extends AppObject
   function setLang($lang='rus')
     {
     $this->lang = $lang;
+    $this->assign('lang', $lang);
     }
   function loadLang()
     {

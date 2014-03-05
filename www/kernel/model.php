@@ -378,9 +378,9 @@ class Model extends DBConnector
       }
     else
       {
-      $this->beforDelete();
+      $this->beforDelete($id);
       $this->query("DELETE FROM {$this->table} WHERE id = '%d'", $id);
-      $this->afterDelete();
+      $this->afterDelete($id);
       }
     }
   

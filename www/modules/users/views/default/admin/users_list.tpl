@@ -1,14 +1,21 @@
-<div class="row-fluid sortable">		
+<div class="row-fluid">		
   <div class="box span12">
     <div class="box-header well" data-original-title>
       <h2><i class="icon-user"></i> Members</h2>
-      <div class="box-icon">
-        <a href="#" class="btn btn-setting btn-round"><i class="icon-cog"></i></a>
-        <a href="#" class="btn btn-minimize btn-round"><i class="icon-chevron-up"></i></a>
-        <a href="#" class="btn btn-close btn-round"><i class="icon-remove"></i></a>
-      </div>
     </div>
     <div class="box-content">
+      
+      <div class="btn-toolbar batch-actions-buttons">
+        <div class="btn-group">
+          <a href='/admin/users/manage' class='btn'><i class="icon icon-add"></i> {#sys_add#}</a>
+          <a href='/admin/users/activate/' class="btn btn-icon btn-star-o" title="{#sys_activate#}"><i class="icon-play"></i> {#sys_activate#}</a>
+          <a href='/admin/users/deactivate/' class="btn btn-icon btn-star-o" title="{#sys_activate#}"><i class="icon-pause"></i> {#sys_deactivate#}</a>
+        </div>
+
+        <div class="btn-group delete-group">
+          <a class="btn btn-danger batch-delete-button table_actions_link" rel="delete" href="#"><i class="icon-trash icon-white"></i> {#sys_delete#}</a>
+        </div>
+      </div>
 
       <table  width='100%' cellspacing=0 cellpadding=2 class="table table-striped table-bordered bootstrap-datatable datatable">
         <thead style="">
@@ -86,10 +93,7 @@
           {/foreach}
         </tbody>
       </table>
-      <div style="text-align: center;">
-        <a href='/admin/users/manage' class='btn'><i class="icon icon-add"></i> Добавить</a>
-      </div>
-
+     
     </div>
   </div><!--/span-->
 

@@ -18,7 +18,7 @@ class AdminController extends Controller
     {
     $data = $this->input_vars;
 
-    if($data[submit])
+    if($data['submit'])
       {
       if($id)
         {
@@ -59,6 +59,26 @@ class AdminController extends Controller
     $this->groups->group_delete($id);
     $this->redirect();
     }
+    
+  function group_operation()
+    {
+    $data = $this->input_vars;
+    
+    switch($data['action_name'])
+      {
+      case 'delete':
+        print_r($data['entities']);exit;
+        foreach($data['entities'] as $id)
+          {
+          $this->groups->group_delete($id);
+          }
+        break;
+
+      default:
+        break;
+      }
+    }
+    
   function test()
     {
     $element = $this->groups->getByIdOrderByGroup_Displayname("'1', '3'");

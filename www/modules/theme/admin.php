@@ -1,7 +1,7 @@
 <?php
 class AdminController extends Controller
   {
-    public $defaultAction = 'theme_list';
+  public $defaultAction = 'theme_list';
   
   function theme_list()
     {

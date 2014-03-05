@@ -161,6 +161,15 @@
 	================================================== -->
 	<!-- Placed at the end of the document so the pages load faster -->
 
+  <script>
+    var language = "{$lang}";
+    var
+      sys_confirm_group_delete = "{#sys_confirm_group_delete#}",
+      sys_confirm_group_activate = "{#sys_confirm_group_activate#}",
+      sys_confirm_group_deactivate = "{#sys_confirm_group_deactivate#}",
+      sys_confirm_group_not_selected = "{#sys_confirm_group_not_selected#}"
+    ;
+  </script>
 	<!-- jQuery -->
 	<script src="/themes/admin/js/jquery-1.7.2.min.js"></script>
 	<!-- jQuery UI -->
@@ -228,9 +237,12 @@
 	<script src="/themes/admin/js/jquery.uploadify-3.1.min.js"></script>
 	<!-- history.js for cross-browser state change on ajax -->
 	<script src="/themes/admin/js/jquery.history.js"></script>
+  <!-- bootbox (alert, prompt, confirm) -->
+	<script src="/themes/admin/js/bootbox.min.js"></script>
 	<!-- application script for Charisma demo -->
 	<script src="/themes/admin/js/charisma.js"></script>
 	
+  
 		
 </body>
 </html>
