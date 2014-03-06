@@ -632,13 +632,19 @@ function docReady(){
       message = '',
       selected_item_count = $('.td_entities:checked').length
     ; 
+    
+    if($this.hasClass('disabled'))
+        {
+        return false;
+        }
+    
     if($this.attr('href') == '#') {
       if(selected_item_count < 1){
          bootbox.alert(sys_confirm_group_not_selected , function(result) {
         });
       return false;
       }
-      
+   
       event.preventDefault();
       switch($this.attr('rel')){
         case 'delete':
@@ -659,8 +665,7 @@ function docReady(){
           data.push({name: 'action_name', value: $this.attr('rel')});
           $.post(form.attr('action'), data)
             .done(function(data) {
-              //location.reload();
-              alert(data);
+              location.reload();
             })
             .fail(function() {
               alert( "error" );
@@ -671,6 +676,18 @@ function docReady(){
   
     }
   });
+  
+  $('a.btn-delete, a.delete').on('click', function(event){
+    event.preventDefault();
+    var $this = $(this);
+    bootbox.confirm(sys_confirm_delete, function(result) {
+      if(result)
+        {
+        window.location.href = $this.attr('href');
+        }
+    });
+  });
+  
 }
 
 

@@ -63,15 +63,19 @@ class AdminController extends Controller
   function group_operation()
     {
     $data = $this->input_vars;
-    
+ 
     switch($data['action_name'])
       {
       case 'delete':
-        print_r($data['entities']);exit;
         foreach($data['entities'] as $id)
           {
           $this->groups->group_delete($id);
           }
+        $this->showMessage("Ёлементы успешно удалены");
+        break;
+      case 'activate':
+          $this->groups->user_group_active($data['entities']);
+          $this->showMessage("Ёлементы успешно удалены");
         break;
 
       default:

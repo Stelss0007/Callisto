@@ -34,7 +34,7 @@
 	<link href='/themes/admin/css/elfinder.min.css' rel='stylesheet'>
 	<link href='/themes/admin/css/elfinder.theme.css' rel='stylesheet'>
 	<link href='/themes/admin/css/jquery.iphone.toggle.css' rel='stylesheet'>
-	<link href='/themes/admin/css/opa-icons.css' rel='stylesheet'>
+	{*<link href='/themes/admin/css/opa-icons.css' rel='stylesheet'>*}
 	<link href='/themes/admin/css/uploadify.css' rel='stylesheet'>
 
 	<!-- The HTML5 shim, for IE6-8 support of HTML5 elements -->
@@ -48,6 +48,11 @@
 </head>
 
 <body>
+{*  <div class="alert alert-dismissable alert-warning">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    <p><strong>Hello</p>
+  </div>
+  *}
 		<!-- topbar starts -->
 	<div class="navbar">
 		<div class="navbar-inner">
@@ -124,6 +129,7 @@
         <!-- content starts -->
         <div>
           <div class="breadcrumb">
+            <i class="icon-home"></i>
             {browsein date=$module_browsein|escape delimiter='<span class="divider">/</span>'}
           </div>
         </div>
@@ -167,7 +173,8 @@
       sys_confirm_group_delete = "{#sys_confirm_group_delete#}",
       sys_confirm_group_activate = "{#sys_confirm_group_activate#}",
       sys_confirm_group_deactivate = "{#sys_confirm_group_deactivate#}",
-      sys_confirm_group_not_selected = "{#sys_confirm_group_not_selected#}"
+      sys_confirm_group_not_selected = "{#sys_confirm_group_not_selected#}",
+      sys_confirm_delete = "{#sys_confirm_delete#}"
     ;
   </script>
 	<!-- jQuery -->
@@ -239,6 +246,9 @@
 	<script src="/themes/admin/js/jquery.history.js"></script>
   <!-- bootbox (alert, prompt, confirm) -->
 	<script src="/themes/admin/js/bootbox.min.js"></script>
+	
+  <script src="/public/js/main.js"></script>
+  
 	<!-- application script for Charisma demo -->
 	<script src="/themes/admin/js/charisma.js"></script>
 	

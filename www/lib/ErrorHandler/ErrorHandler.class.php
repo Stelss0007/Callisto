@@ -144,6 +144,7 @@ class ErrorHandler
     
   function showErrors()
     {
+    header('HTTP/1.1 500 Internal Server Error');
     ?>
     <body style="background-color: #DDB000;">
       <style>

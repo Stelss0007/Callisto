@@ -23,7 +23,7 @@ class AdminController extends Controller
     {
     $data = $this->input_vars;
     //print_r($data);exit;
-    if($data[submit])
+    if($data['submit'])
       {
       if($id)
         {
@@ -33,7 +33,7 @@ class AdminController extends Controller
         {
         $this->permissions->group_permissions_create($data);
         }
-      $this->redirect('/permissions/permissions_list');
+      $this->redirect('/admin/permissions/permissions_list');
       }
     ////////////////////////////////////////////////////////////////////////////
     
@@ -41,7 +41,7 @@ class AdminController extends Controller
     $this->assign('groups', $this->groups->group_list());
     
     $browsein[] =array('url'=>"/admin/main", 'displayname'=>'Dashboard');
-    $browsein[] =array('url'=>'/admin/groups', 'displayname'=>'Permissions');  
+    $browsein[] =array('url'=>'/admin/permissions', 'displayname'=>'Permissions');  
   
     $this->levels = $this->permissions->permission_level();
     $permission = $this->permissions->group_permission($id);

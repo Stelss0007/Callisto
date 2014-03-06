@@ -50,7 +50,7 @@ class AdminController extends Controller
         $this->users->user_create($data);
         }
    
-      $this->redirect('/users/users_list');
+      $this->redirect('/admin/users/users_list');
       }
     ////////////////////////////////////////////////////////////////////////////
     
@@ -128,6 +128,35 @@ class AdminController extends Controller
     $this->users->logOut();
     $this->showMessage($this->t('login_success'));
     $this->redirect();
+    }
+    
+  function group_operation()
+    {
+    $data = $this->input_vars;
+ 
+    switch($data['action_name'])
+      {
+      case 'delete':
+        foreach($data['entities'] as $id)
+          {
+          $this->users->delete($id);
+          }
+        $this->showMessage("Ёлементы успешно удалены");
+        break;
+        
+      case 'activate':
+        $this->users->user_group_active($data['entities']);
+        $this->showMessage("Ёлементы успешно активированы");
+        break;
+      
+      case 'deactivate':
+        $this->users->user_group_deactive($data['entities']);
+        $this->showMessage("Ёлементы успешно активированы");
+        break;
+
+      default:
+        break;
+      }
     }
     
   function test()

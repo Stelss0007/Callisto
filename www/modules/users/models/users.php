@@ -82,6 +82,22 @@ class users extends Model
     $this->query("UPDATE user SET active = IF(active ='1','0','1') WHERE id='$id'");
     }
     
+  function user_group_active($ids)
+    {
+    if(empty($ids))
+      return false;
+    $ids = implode("','", $ids);
+    $this->query("UPDATE user SET active = '1' WHERE id in ('$ids')");
+    }
+    
+  function user_group_deactive($ids)
+    {
+    if(empty($ids))
+      return false;
+    $ids = implode("','", $ids);
+    $this->query("UPDATE user SET active = '0' WHERE id in ('$ids')");
+    }
+    
   function logIn($login, $pass)
     {
     $pass = md5($pass);

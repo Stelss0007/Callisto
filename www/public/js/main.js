@@ -28,12 +28,19 @@
 //    };
 //})(jQuery);
 
-function showAppMessage()
+function showAppMessage(message)
   {
-
-  if($('#appMessage_').html())
+  if($('#appMessage_').html() || message)
     {
-    $('#appMessage_msg_text').html($('#appMessageText').val()).attr('class', $('#appMessageType').val());
+    if(message) 
+      {
+      $('#appMessage_msg_text').html($('#appMessageText').val()).attr('class', $('#appMessageType').val());
+      }
+    else
+      {
+      $('#appMessage_msg_text').html($('#appMessageText').val()).attr('class', $('#appMessageType').val());
+      }
+    
     $('#appMessage_conteiner').stop().show().animate({"opacity": "1"}, "fast").delay(3000).stop().animate({"opacity": "0"}, "slow", function(){$(this).hide()});
     $('#appMessage_msg_text').on('click', function() {
         $('#appMessage_conteiner').stop().animate({"opacity": "0"}, "fast");

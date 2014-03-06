@@ -4,24 +4,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/www/callisto/www/modules/theme/views/default/admin/install.tpl</file>
-            <file>file:/D:/www/callisto/www/modules/groups/models/groups.php</file>
-            <file>file:/D:/www/callisto/www/kernel/controller.php</file>
-            <file>file:/D:/www/callisto/www/themes/admin/js/charisma.js</file>
-            <file>file:/D:/www/callisto/www/modules/theme/views/default/theme_list.tpl</file>
-            <file>file:/D:/www/callisto/www/themes/admin/pages/index.tpl</file>
+            <file>file:/D:/www/callisto/www/modules/permissions/admin.php</file>
             <file>file:/D:/www/callisto/www/modules/users/admin.php</file>
-            <file>file:/D:/www/callisto/www/modules/theme/views/default/admin/theme_list.tpl</file>
-            <file>file:/D:/www/callisto/www/modules/groups/views/default/admin/groups_list.tpl</file>
-            <file>file:/D:/www/callisto/www/modules/theme/models/theme.php</file>
-            <file>file:/D:/www/callisto/www/themes/admin/css/main.css</file>
-            <file>file:/D:/www/callisto/www/lang/rus/lang.conf</file>
-            <file>file:/D:/www/callisto/www/modules/theme/index.php</file>
-            <file>file:/D:/www/callisto/www/modules/theme/admin.php</file>
-            <file>file:/D:/www/callisto/www/kernel/model.php</file>
-            <file>file:/D:/www/callisto/www/kernel/config.php</file>
-            <file>file:/D:/www/callisto/www/modules/groups/views/default/admin/manage.tpl</file>
-            <file>file:/D:/www/callisto/www/modules/groups/admin.php</file>
+            <file>file:/D:/www/callisto/www/modules/permissions/views/default/admin/manage.tpl</file>
+            <file>file:/D:/www/callisto/www/modules/permissions/views/default/admin/permissions_list.tpl</file>
             <file>file:/D:/www/callisto/www/modules/users/views/default/admin/users_list.tpl</file>
         </group>
     </open-files>
