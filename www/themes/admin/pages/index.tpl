@@ -173,6 +173,7 @@
       sys_confirm_group_delete = "{#sys_confirm_group_delete#}",
       sys_confirm_group_activate = "{#sys_confirm_group_activate#}",
       sys_confirm_group_deactivate = "{#sys_confirm_group_deactivate#}",
+      sys_confirm_group_install = "{#sys_confirm_group_install#}",
       sys_confirm_group_not_selected = "{#sys_confirm_group_not_selected#}",
       sys_confirm_delete = "{#sys_confirm_delete#}"
     ;

@@ -3,7 +3,7 @@ class AdminController extends Controller
   {
   public $defaultAction = 'theme_list';
   
-  function theme_list()
+  function themeList()
     {
     $browsein = array();
     $browsein[] = array ('url'=>'/admin/theme',
@@ -80,5 +80,10 @@ class AdminController extends Controller
     $this->theme->delete($id);
     $this->showMessage($this->t('theme_deleted'), '/admin/theme');
     }
+  function getActive()
+    {
+    appDebug($this->theme->getActive());
+    }
+
   }
 ?>

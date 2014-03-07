@@ -3,7 +3,7 @@ class IndexController extends Controller
   {
   var $defaultAction = 'permissions_list';
   
-  function permissions_list()
+  function permissionsList()
     {
     $this->usesModel('groups');
     
@@ -56,13 +56,13 @@ class IndexController extends Controller
     $this->redirect();
     }
     
-  function permission_weight_up($weight)
+  function permissionWeightUp($weight)
     {  
     $this->permissions->weightUp($weight);
     $this->redirect();
     }
     
-  function permission_weight_down($weight)
+  function permissionWeightDown($weight)
     {  
     $this->permissions->weightDown($weight);
     $this->redirect();

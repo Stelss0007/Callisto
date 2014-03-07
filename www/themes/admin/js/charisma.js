@@ -632,7 +632,7 @@ function docReady(){
       message = '',
       selected_item_count = $('.td_entities:checked').length
     ; 
-    
+  
     if($this.hasClass('disabled'))
         {
         return false;
@@ -640,11 +640,10 @@ function docReady(){
     
     if($this.attr('href') == '#') {
       if(selected_item_count < 1){
-         bootbox.alert(sys_confirm_group_not_selected , function(result) {
-        });
+         bootbox.alert(sys_confirm_group_not_selected);
       return false;
       }
-   
+
       event.preventDefault();
       switch($this.attr('rel')){
         case 'delete':
@@ -656,6 +655,11 @@ function docReady(){
         case 'deactivate':
           message += sys_confirm_group_deactivate
           break;
+        case 'install':
+          message += sys_confirm_group_install
+          break;
+        default:
+          message += sys_confirm
       }
       bootbox.confirm(message, function(result) {
         if(result) {
@@ -665,7 +669,8 @@ function docReady(){
           data.push({name: 'action_name', value: $this.attr('rel')});
           $.post(form.attr('action'), data)
             .done(function(data) {
-              location.reload();
+              //alert( "ok" );
+             location.reload();
             })
             .fail(function() {
               alert( "error" );

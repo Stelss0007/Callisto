@@ -14,28 +14,28 @@
             <div class="control-group">
               <label class="control-label" for="date01">Группа</label>
               <div class="controls">
-                {html_options name=gid options=$groups selected=$group_permission_gid}
+                {html_options name=group_permission_gid options=$groups selected=$group_permission_gid}
               </div>
             </div>
             
             <div class="control-group">
               <label class="control-label" for="date01">Объект</label>
               <div class="controls">
-                 <input type="text" name='pattern' value='{$group_permission_pattern}'  style="width: 98%;">
+                 <input type="text" name='group_permission_pattern' value='{$group_permission_pattern}'  style="width: 98%;">
               </div>
             </div>
             
             <div class="control-group">
               <label class="control-label" for="date01">Уровень доступа</label>
               <div class="controls">
-                {html_options name=level options=$levels selected=$group_permission_level}
+                {html_options name=group_permission_level options=$levels selected=$group_permission_level}
               </div>
             </div>
             
             <div class="control-group">
               <label class="control-label" for="date01">Описание</label>
               <div class="controls">
-                <textarea name='description' style="width: 98%;">{$group_permission_description}</textarea>
+                <textarea name='group_permission_description' style="width: 98%;">{$group_permission_description}</textarea>
               </div>
             </div>
               

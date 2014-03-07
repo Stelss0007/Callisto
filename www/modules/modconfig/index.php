@@ -3,7 +3,7 @@ class IndexController extends Controller
   {
   public $defaultAction = 'config_main';
   
-  public function config_main()
+  public function configMain()
     {
     $timeformat_list['g:i a'] = date("g:i a", time());
     $timeformat_list['g:i:s a'] = date("g:i:s a", time());
@@ -26,7 +26,7 @@ class IndexController extends Controller
     $this->viewPage();
     }
     
-  public function config_update()
+  public function configUpdate()
     {
     $vars = $this->getInput('config');
     foreach($vars as $key=>$value)

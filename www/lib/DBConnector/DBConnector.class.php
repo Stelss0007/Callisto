@@ -1,6 +1,6 @@
 <?php
 
-class DBConnector// extends AppObject
+class DBConnector extends AppObject
   {
 
   var $Host = '';
@@ -220,8 +220,13 @@ class DBConnector// extends AppObject
     return mysql_num_rows($this->QueryResult);
     }
 
-  function insert($table, $array)
+  function getFields($table)
     {
+    if(appVarIsCached('dbTableFields', $table))
+      {
+      return appVarGetCached('dbTableFields', $table);
+      }
+    
     $sql = 'SHOW COLUMNS FROM '.$table;
     $this->query($sql);
     $result = $this->fetch_array();
@@ -231,7 +236,19 @@ class DBConnector// extends AppObject
       {
       $columns[] = $value['Field'];
       }
+    appVarSetCached('dbTableFields', $table, $columns);
     
+    return $columns;
+    }
+    
+  function hasTableField($table, $field)
+    {
+    return in_array($field, $this->getFields($table), true);
+    }
+    
+  function insert($table, $array)
+    {
+    $columns = $this->getFields($table);
     $keys = '';
     $values = '';
 
@@ -264,15 +281,8 @@ class DBConnector// extends AppObject
     if(empty($where))
       $where = '1 = 1';
     $where = 'WHERE '.str_ireplace('where', '', $where);
-    $sql = 'SHOW COLUMNS FROM '.$table;
-    $this->query($sql);
-    $result = $this->fetch_array();
-
-    $columns = array();
-    foreach ($result as $value)
-      {
-      $columns[] = $value['Field'];
-      }
+    
+    $columns = $this->getFields($table);
 
     $keys = '';
     $values = '';

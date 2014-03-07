@@ -3,7 +3,7 @@ class AdminController extends Controller
   {
   var $defaultAction = 'permissions_list';
   
-  function permissions_list()
+  function permissionsList()
     {
     $this->usesModel('groups');
     
@@ -69,14 +69,14 @@ class AdminController extends Controller
     $this->permissions->group_permission_delete($id);
     $this->redirect();
     }
-    
-  function permission_weight_up($weight)
+      
+  function permissionWeightUp($weight)
     {  
     $this->permissions->weightUp($weight);
     $this->redirect();
     }
     
-  function permission_weight_down($weight)
+  function permissionWeightDown($weight)
     {  
     $this->permissions->weightDown($weight);
     $this->redirect();

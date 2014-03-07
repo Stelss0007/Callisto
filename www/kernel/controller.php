@@ -267,6 +267,10 @@ abstract class Controller extends AppObject
         $action_name = 'index';
         }
       }
+      
+    //Заменим - и _ на Большие буквы, тоесть приобразуем урл в Камелкейсподобный вид  
+    $action_name = $this->urlToCamelCase($action_name);
+      
     if(!method_exists($this, $action_name))
       $this->errors->setError('Action "'.$action_name.'" is not exist in this module "'.$this->modname.'", conroller "'.$this->controllerName.'"');
     
@@ -287,7 +291,11 @@ abstract class Controller extends AppObject
     
     call_user_method_array($action_name, $this, $this->input_vars);
     }
-    
+   
+  final private function urlToCamelCase($string)
+    {
+    return preg_replace("/[\_,\-](.)/e", "strtoupper('\\1')", $string);
+    }
   final public function setTheme()
     {
     $this->usesModel('theme');
@@ -1159,6 +1167,39 @@ abstract class Controller extends AppObject
     print_r($this->vars);
     echo "</pre>";
     die();
+    }
+    
+  public function groupOperation()
+    {
+    $data = $this->input_vars;
+    
+    $model_name = $this->modname;
+    
+    switch($data['action_name'])
+      {
+      case 'delete':
+        $this->$model_name->groupActionDelete($data['entities']);
+        $this->showMessage($this->t('sys_elements_is_removed'));
+        break;
+        
+      case 'activate':
+        $this->$model_name->groupActionActivate($data['entities']);
+        $this->showMessage($this->t('sys_elements_is_actived'));
+        break;
+      
+      case 'deactivate':
+        $this->$model_name->groupActionDeactivate($data['entities']);
+        $this->showMessage($this->t('sys_elements_is_deactived'));
+        break;
+      
+      case 'install':
+        $this->$model_name->groupActionInstall($data['entities']);
+        $this->showMessage($this->t('sys_elements_is_installed'));
+        break;
+
+      default:
+        break;
+      }
     }
   }
 

@@ -96,6 +96,7 @@ class AppObject
     
   final public function arrayToModel(&$model, $array)
     {
+    echo '11111111';
     if(empty($array))
       {
       return false;
@@ -103,6 +104,7 @@ class AppObject
     foreach($array as $key=>$value)
       {
       $model->$key = $value;
+      echo ' '.$key.' ';
       }
     }
     

@@ -3,7 +3,7 @@ class IndexController extends Controller
   {
   public $defaultAction = 'blocks_list';
   
-  function blocks_list()
+  function blocksList()
     {
     $this->getAccess(ACCESS_ADMIN);
   
@@ -111,14 +111,14 @@ class IndexController extends Controller
     $this->showMessage('Ёлемент добавлен', '/blocks');
     }
     
-  function weight_up($weight,$block_position)
+  function weightUp($weight,$block_position)
     {
     $this->getAccess(ACCESS_ADMIN);
     $this->blocks->weightUp($weight, "block_position = '$block_position'");
     $this->redirect();
     }
     
-  function weight_down($weight,$block_position)
+  function weightDown($weight,$block_position)
     {
     $this->getAccess(ACCESS_ADMIN);
     $this->blocks->weightDown($weight ,"block_position = '$block_position'");

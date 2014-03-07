@@ -943,5 +943,44 @@ class Model extends DBConnector
     return true;
     }
    
+  // √руповые операции
+    
+  /**
+   * –руповое удаление
+   * @param type $ids
+   * @return boolean
+   */
+  function groupActionDelete($ids)
+    {
+    if(empty($ids))
+      return false;
+    
+    $ids = implode("','", $ids);
+    $this->query("DELETE FROM {$this->table} WHERE id in ('$ids')");
+    }
+  function groupActionActivate($ids)
+    {
+    if(empty($ids) || !$this->hasTableField($this->table, 'active'))
+      return false;
+    
+    $ids = implode("','", $ids);
+    $this->query("UPDATE {$this->table} SET active = '1' WHERE id in ('$ids')");
+    }
+  function groupActionDeactivate($ids)
+    {
+    if(empty($ids) || !$this->hasTableField($this->table, 'active'))
+      return false;
+    
+    $ids = implode("','", $ids);
+    $this->query("UPDATE {$this->table} SET active = '0' WHERE id in ('$ids')");
+    }
+  function groupActionInstall($ids)
+    {
+    if(empty($ids) || !$this->hasTableField($this->table, 'active'))
+      return false;
+    
+    $ids = implode("','", $ids);
+    $this->query("UPDATE {$this->table} SET active = '0' WHERE id in ('$ids')");
+    }
   }
 ?>

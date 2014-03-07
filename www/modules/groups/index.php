@@ -3,7 +3,7 @@ class IndexController extends Controller
   {
   public $defaultAction = 'groups_list';
   
-  function groups_list()
+  function groupsList()
     {
     $this->groups_list = $this->groups->group_list(true);
     $this->viewPage();

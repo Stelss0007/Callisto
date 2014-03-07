@@ -3,7 +3,7 @@ class IndexController extends Controller
   {
   public $defaultAction = 'menu_list';
   
-  function menu_list($parent_id = 0)
+  function menuList($parent_id = 0)
     {
 //    error_reporting(E_ERROR | E_WARNING | E_PARSE | E_NOTICE);
 //    
@@ -33,7 +33,7 @@ class IndexController extends Controller
     $this->viewPage();
     }
     
-  function menu_tree()
+  function menuTree()
     {
     $this->assign('parent_id', 0);
     $this->assign('menus', $this->menu->tree_items(0));
@@ -116,14 +116,14 @@ class IndexController extends Controller
     $this->redirect();
     }
    
-   function weight_up($weight, $menu_parent_id)
+   function weightUp($weight, $menu_parent_id)
     {
     $this->getAccess(ACCESS_ADMIN);
     $this->menu->weightUp($weight, "menu_parent_id = '$menu_parent_id'");
     $this->redirect();
     }
     
-  function weight_down($weight, $menu_parent_id)
+  function weightDown($weight, $menu_parent_id)
     {
     $this->getAccess(ACCESS_ADMIN);
     $this->menu->weightDown($weight, "menu_parent_id = '$menu_parent_id'");

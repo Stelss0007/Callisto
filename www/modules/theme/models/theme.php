@@ -21,6 +21,14 @@ class Theme extends Model
     return $theme[0]['theme_name'];
     }
     
+  function getActive()
+    {
+    $result = $this->getList(array('condition'=>"active = '1'"));
+    
+    if($result)
+      return $result[0];
+    return false;
+    }
   /**
    * Активация темы, все остальные деактивируются.
    * @param int $id ИД активируваемой темы
@@ -80,6 +88,53 @@ class Theme extends Model
         }
       }
     return $theme_list_fs;
+    }
+    
+  function groupActionDelete($ids)
+    {
+    $active_theme = $this->getActive();
+    $ids = array_diff($ids, array($active_theme['id']));
+    if(empty($ids))
+      return false;
+    
+    $ids = implode("','", $ids);
+    $this->query("DELETE FROM {$this->table} WHERE id in ('$ids')");
+    }
+    
+  function install($theme_name)
+    {
+    //Взяли список с диска
+    if(!file_exists ("themes/$theme_name/info.php")) 
+      die ('Тема отсутствует!');
+
+    // Found
+    $info = array();
+    $info['version']      = '0';
+    $info['description']  = '';
+    
+    include("themes/$theme_name/info.php");
+    
+    $info['theme_name']         = $theme_name;
+    $info['theme_title']        = $info['title'];
+    $info['theme_author']       = $info['author'];
+    $info['theme_description']  = $info['description'];
+    $info['theme_version']      = $info['version'];
+    $info['theme_last_update']  = time();
+
+   
+    $this->arrayToModel(&$this, $info);
+     
+    $id = $this->save();
+    }
+  function groupActionInstall($themes)
+    {
+    if(empty($themes))
+      return false;
+    
+    foreach($themes as $theme)
+      {
+      $this->install($theme);
+      }
     }
   }
 ?>

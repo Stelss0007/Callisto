@@ -3,7 +3,7 @@ class AdminController extends Controller
   {
   public $defaultAction = 'groups_list';
   
-  function groups_list()
+  function groupsList()
     {
     $this->groups_list = $this->groups->group_list(true);
     
@@ -60,28 +60,28 @@ class AdminController extends Controller
     $this->redirect();
     }
     
-  function group_operation()
-    {
-    $data = $this->input_vars;
- 
-    switch($data['action_name'])
-      {
-      case 'delete':
-        foreach($data['entities'] as $id)
-          {
-          $this->groups->group_delete($id);
-          }
-        $this->showMessage("Ёлементы успешно удалены");
-        break;
-      case 'activate':
-          $this->groups->user_group_active($data['entities']);
-          $this->showMessage("Ёлементы успешно удалены");
-        break;
-
-      default:
-        break;
-      }
-    }
+//  function groupOperation()
+//    {
+//    $data = $this->input_vars;
+// 
+//    switch($data['action_name'])
+//      {
+//      case 'delete':
+//        foreach($data['entities'] as $id)
+//          {
+//          $this->groups->group_delete($id);
+//          }
+//        $this->showMessage("Ёлементы успешно удалены");
+//        break;
+//      case 'activate':
+//          $this->groups->user_group_active($data['entities']);
+//          $this->showMessage("Ёлементы успешно удалены");
+//        break;
+//
+//      default:
+//        break;
+//      }
+//    }
     
   function test()
     {

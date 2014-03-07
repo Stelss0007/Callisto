@@ -3,7 +3,7 @@ class IndexController extends Controller
   {
   public $defaultAction = 'theme_list';
   
-  function theme_list()
+  function themeList()
     {
     $browsein = array();
     $browsein[] = array ('url'=>'/theme',

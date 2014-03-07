@@ -3,7 +3,7 @@ class IndexController extends Controller
   {
   public $defaultAction = 'users_list';
   
-  function users_list()
+  function usersList()
     {
 //    $params = array(
 //                    'fields' => '',

@@ -16,7 +16,7 @@ class AdminController extends Controller
     {
     $this->redirect('/admin/users/users_list');
     }
-  function users_list()
+  function usersList()
     {
     $this->getAccess(ACCESS_ADD);
     $this->usesModel('groups');
@@ -129,36 +129,7 @@ class AdminController extends Controller
     $this->showMessage($this->t('login_success'));
     $this->redirect();
     }
-    
-  function group_operation()
-    {
-    $data = $this->input_vars;
- 
-    switch($data['action_name'])
-      {
-      case 'delete':
-        foreach($data['entities'] as $id)
-          {
-          $this->users->delete($id);
-          }
-        $this->showMessage("Ёлементы успешно удалены");
-        break;
-        
-      case 'activate':
-        $this->users->user_group_active($data['entities']);
-        $this->showMessage("Ёлементы успешно активированы");
-        break;
       
-      case 'deactivate':
-        $this->users->user_group_deactive($data['entities']);
-        $this->showMessage("Ёлементы успешно активированы");
-        break;
-
-      default:
-        break;
-      }
-    }
-    
   function test()
     {
     $element = $this->users->getByIdOrderByuser_Displayname("'1', '3'");
