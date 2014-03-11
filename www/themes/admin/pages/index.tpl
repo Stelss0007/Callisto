@@ -250,6 +250,8 @@
 	
   <script src="/public/js/main.js"></script>
   
+  <script charset="UTF-8" src="/themes/admin/js/lang/elfinder/elfinder.ru.js"></script>
+  
 	<!-- application script for Charisma demo -->
 	<script src="/themes/admin/js/charisma.js"></script>
 	

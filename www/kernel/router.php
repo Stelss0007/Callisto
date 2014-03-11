@@ -149,6 +149,8 @@ class Router
 
   function run()
     {
+    global $router_vars;
+    
     $this->runModuleRoutes();
     
     $fullURL = parse_url($_SERVER["REQUEST_URI"]);
@@ -234,6 +236,9 @@ class Router
     global $mod_controller;
     $mod_controller = $module;
     
+    $router_vars['type'] = $type; 
+    $router_vars['module'] = $mod; 
+    $router_vars['action'] = $action; 
     
     $module->input_vars = array_merge($parameters, $module->input_vars);
     

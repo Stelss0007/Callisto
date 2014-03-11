@@ -21,6 +21,14 @@ function isAjax()
      strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') {
     return true;
     }
+    
+  global $router_vars;
+
+  if($router_vars['module'] == 'files' && $router_vars['action'] == 'get_list' || ($_SERVER['REQUEST_URI']=='/admin/files/get_list'))
+    {
+    return true;
+    }
+    
   return false;
   }
 

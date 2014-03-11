@@ -95,6 +95,7 @@ abstract class Controller extends AppObject
     if($this->config['debug.enabled'])
       {
       require_once(KERNEL_DIR.'debuger.php');
+      
       $this->debuger = & Debuger::getInstance();
       $this->debuger->startRenderPage();
       }
@@ -137,7 +138,7 @@ abstract class Controller extends AppObject
     
   function __destruct()
     {
-    if($this->config['debug.enabled'])
+    if($this->config['debug.enabled'] && !isAjax())
       {
         
       $current_time = microtime();

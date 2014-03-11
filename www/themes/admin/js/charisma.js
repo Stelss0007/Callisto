@@ -146,7 +146,8 @@ function docReady(){
 
 	//file manager
 	var elf = $('.file-manager').elfinder({
-		url : 'misc/elfinder-connector/connector.php'  // connector URL (REQUIRED)
+		url : '/admin/files/get_list',  // connector URL (REQUIRED),
+    lang : 'ru'
 	}).elfinder('instance');
 
 	//iOS / iPhone style toggle switch
@@ -259,7 +260,7 @@ function docReady(){
 			"sDom": "<'row-fluid'<'span6'l><'span6'f>r>t<'row-fluid'<'span6'i><'span6 'p>>",
 			"sPaginationType": "bootstrap",
 			"oLanguage": {
-        "sUrl": "/themes/admin/js/lang/datatable_" +language+ ".txt"
+        "sUrl": "/themes/admin/js/lang/datatable/datatable." +language+ ".txt"
       },
       "fnDrawCallback": function() {
 //        if ($(".datatable").find("tr:not(.ui-widget-header)").length <= 5) {

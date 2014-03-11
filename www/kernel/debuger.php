@@ -20,6 +20,9 @@ class Debuger
    
   function __construct()
     {
+    if(isAjax())
+      return;
+    
     if (!defined("LOG")) define("LOG", 1);
     if (!defined("INFO")) define("INFO", 2);
     if (!defined("WARN")) define("WARN", 3);
@@ -209,10 +212,16 @@ class Debuger
     
   function startRenderPage()
     {
+    if(isAjax())
+      return;
+    
     echo '<script type="text/javascript">'.NL.' var startRenderPage = new Date().getTime();'.NL.'</script>'.NL;
     }
   function endRenderPage()
     {
+    if(isAjax())
+      return;
+    
     echo '<script type="text/javascript">'.NL.' window.onload = function() { var endRenderPage = new Date().getTime(); var timeRenderPage = (endRenderPage - startRenderPage)/1000; console.log("Time Render Page "+timeRenderPage+" sec")}'.NL.'</script>'.NL;
     }
   }
