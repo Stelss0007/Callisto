@@ -27,6 +27,7 @@ function smarty_function_texteditor($params, &$smarty)
   
   echo "<textarea id='$id' name='$name' class='$class' style='height:{$height}px;width:{$width};'>" . htmlspecialchars($text, ENT_QUOTES) . "</textarea>";
   echo '<script>
+    $(document).ready(function(){
             var tinyMCEPreInit = {
             suffix: "",
             base: "/public/js/tinymce/",
@@ -61,6 +62,8 @@ function smarty_function_texteditor($params, &$smarty)
         external_link_list_url : "js/link_list.js",
         external_image_list_url : "js/image_list.js",
         media_external_list_url : "js/media_list.js",
+
+});
 
 });
         </script>';

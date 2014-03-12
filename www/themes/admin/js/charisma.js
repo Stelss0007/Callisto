@@ -671,7 +671,7 @@ function docReady(){
           $.post(form.attr('action'), data)
             .done(function(data) {
               //alert( "ok" );
-             location.reload();
+              location.reload();
             })
             .fail(function() {
               alert( "error" );

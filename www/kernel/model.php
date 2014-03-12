@@ -960,27 +960,29 @@ class Model extends DBConnector
     }
   function groupActionActivate($ids)
     {
-    if(empty($ids) || !$this->hasTableField($this->table, 'active'))
+    $field = 'active';
+    $has_field = $this->hasTableField($this->table, array('active', $this->table.'_active'));
+    
+    if(empty($ids) || !$has_field)
       return false;
     
     $ids = implode("','", $ids);
-    $this->query("UPDATE {$this->table} SET active = '1' WHERE id in ('$ids')");
+    $this->query("UPDATE {$this->table} SET $has_field = '1' WHERE id in ('$ids')");
     }
   function groupActionDeactivate($ids)
     {
-    if(empty($ids) || !$this->hasTableField($this->table, 'active'))
+    $field = 'active';
+    $has_field = $this->hasTableField($this->table, array('active', $this->table.'_active'));
+    
+    if(empty($ids) || !$has_field)
       return false;
     
     $ids = implode("','", $ids);
-    $this->query("UPDATE {$this->table} SET active = '0' WHERE id in ('$ids')");
+    $this->query("UPDATE {$this->table} SET $has_field = '0' WHERE id in ('$ids')");
     }
   function groupActionInstall($ids)
     {
-    if(empty($ids) || !$this->hasTableField($this->table, 'active'))
-      return false;
     
-    $ids = implode("','", $ids);
-    $this->query("UPDATE {$this->table} SET active = '0' WHERE id in ('$ids')");
     }
   }
 ?>

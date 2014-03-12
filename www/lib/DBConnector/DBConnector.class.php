@@ -243,7 +243,20 @@ class DBConnector extends AppObject
     
   function hasTableField($table, $field)
     {
-    return in_array($field, $this->getFields($table), true);
+    if(is_array($field))
+      {
+      $table_fields = $this->getFields($table);
+      foreach($field as $value)
+        {
+        if(in_array($value, $table_fields, true))
+          return $value;
+        }
+      return false;
+      }
+    else
+      {
+      return in_array($field, $this->getFields($table), true);
+      }
     }
     
   function insert($table, $array)

@@ -15,6 +15,14 @@ class AdminController extends Controller
     $this->blocks_list_b = $blocks['blocks_list_b'];
     $this->blocks_list_c = $blocks['blocks_list_c'];
     
+    $browsein = array();
+    $browsein[] = array ('url'=>'/admin/main',
+                        'displayname'=>'Dasboard');
+    $browsein[] = array ('url'=>'/admin/blocks',
+                        'displayname'=>'Блоки');
+       
+    $this->module_browsein = $browsein;
+    
     $this->viewPage();
     }
     
@@ -22,11 +30,11 @@ class AdminController extends Controller
     {
     $this->getAccess(ACCESS_ADMIN);
     
-    $position[l]='Слева';
-    $position[r]='Справа';
-    $position[t]='Сверху';
-    $position[b]='Снизу';
-    $position[c]='Поцентру';
+    $position['l']='Слева';
+    $position['r']='Справа';
+    $position['t']='Сверху';
+    $position['b']='Снизу';
+    $position['c']='Поцентру';
 
     $position = $position[$input_position];
     if(empty ($position)) 
@@ -59,9 +67,11 @@ class AdminController extends Controller
     $this->position = $input_position;
     
     $browsein = array();
-    $browsein[] = array ('url'=>'/blocks',
+    $browsein[] = array ('url'=>'/admin/main',
+                        'displayname'=>'Dasboard');
+    $browsein[] = array ('url'=>'/admin/blocks',
                         'displayname'=>'Блоки');
-    $browsein[] = array ('url'=>'/blocks/install',
+    $browsein[] = array ('url'=>'/admin/blocks/install',
                         'displayname'=>'Добавление блока "'.$position.'"');
     
     $this->module_browsein = $browsein;
@@ -73,11 +83,11 @@ class AdminController extends Controller
     {
     $this->getAccess(ACCESS_ADMIN);
     
-    $position[l]='Слева';
-    $position[r]='Справа';
-    $position[t]='Сверху';
-    $position[b]='Снизу';
-    $position[c]='Поцентру';
+    $position['l']='Слева';
+    $position['r']='Справа';
+    $position['t']='Сверху';
+    $position['b']='Снизу';
+    $position['c']='Поцентру';
 
     $position = $position[$input_position];
     if(empty ($position)) 
@@ -104,11 +114,9 @@ class AdminController extends Controller
    
     $this->arrayToModel($this->blocks, $info);
     
-    //$this->debugGetModelVars();
-    
     $id = $this->blocks->save();
     
-    $this->showMessage('Элемент добавлен', '/blocks');
+    $this->showMessage('Элемент добавлен', '/admin/blocks');
     }
     
   function weightUp($weight,$block_position)
@@ -153,11 +161,11 @@ class AdminController extends Controller
     {
     $this->getAccess(ACCESS_ADMIN);
     
-    $position[l]='Слева';
-    $position[r]='Справа';
-    $position[t]='Сверху';
-    $position[b]='Снизу';
-    $position[c]='Поцентру';
+    $position['l']='Слева';
+    $position['r']='Справа';
+    $position['t']='Сверху';
+    $position['b']='Снизу';
+    $position['c']='Поцентру';
 
 
     $block = $this->blocks->getById($id);
@@ -185,9 +193,11 @@ class AdminController extends Controller
 
     //BrowseIn
     $browsein = array();
-    $browsein[] = array ('url'=>'/blocks/',
+    $browsein[] = array ('url'=>'/admin/main',
+                        'displayname'=>'Dasboard');
+    $browsein[] = array ('url'=>'/admin/blocks/',
                         'displayname'=>'Блоки');
-    $browsein[] = array ('url'=>'/blocks/',
+    $browsein[] = array ('url'=>'/admin/blocks/',
                         'displayname'=>'Редактирование блока "'.$block['block_name'].'"');
 
     $this->module_browsein = $browsein;
@@ -198,11 +208,11 @@ class AdminController extends Controller
     {
     $this->getAccess(ACCESS_ADMIN);
     
-    $position[l]='Слева';
-    $position[r]='Справа';
-    $position[t]='Сверху';
-    $position[b]='Снизу';
-    $position[c]='Поцентру';
+    $position['l']='Слева';
+    $position['r']='Справа';
+    $position['t']='Сверху';
+    $position['b']='Снизу';
+    $position['c']='Поцентру';
 
     $position = $position["{$this->input_vars['block_position']}"];
     if(empty ($position)) 
@@ -231,7 +241,39 @@ class AdminController extends Controller
       }
     /*TODO Доделать пересчет весов если изменилась позиция блока*/
       
-    $this->showMessage('Изменеия сохранены',$this->input_vars['ref']);
+    $this->showMessage('Изменеия сохранены', $this->input_vars['ref']);
+    }
+    
+  function info($block_name, $position)
+    {
+    if(!file_exists ("blocks/$block_name/info.php"))
+      {
+      $this->showMessage('Блок не найден', $this->input_vars['ref']);
+      }
+      
+    $position_['l']='Слева';
+    $position_['r']='Справа';
+    $position_['t']='Сверху';
+    $position_['b']='Снизу';
+    $position_['c']='Поцентру';
+      
+    include_once "blocks/$block_name/info.php";
+    $this->assign('block_info', $info);
+    
+    $browsein = array();
+    $browsein[] = array ('url'=>'/admin/main',
+                        'displayname'=>'Dasboard');
+    $browsein[] = array ('url'=>'/admin/blocks/',
+                        'displayname'=>'Блоки');
+    $browsein[] = array ('url'=>'/admin/blocks/install/'.$position,
+                        'displayname'=>'Добавление блока "'.$position_[$position].'"');
+    
+    $browsein[] = array ('url'=>'/admin/blocks/',
+                        'displayname'=>'Информация о блоке "'.$info['block_displayname'].'"');
+
+    $this->module_browsein = $browsein;
+    
+    $this->viewPage();
     }
   }
 ?>

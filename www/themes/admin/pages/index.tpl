@@ -44,7 +44,9 @@
 
 	<!-- The fav icon -->
 	<link rel="shortcut icon" href="img/favicon.ico">
-		
+  
+  {appJsOutput}
+	<script src="/themes/admin/js/jquery-ui-1.8.21.custom.min.js"></script>	
 </head>
 
 <body>
@@ -110,10 +112,10 @@
             <li><a class="ajax-link" href="/admin/theme"><i class="icon-picture"></i><span class="hidden-tablet"> Themes</span></a></li>
             <li><a class="ajax-link" href="/admin/files"><i class="icon-file"></i><span class="hidden-tablet"> Files</span></a></li>
             
-            <li class="nav-header hidden-tablet"></li>
+
             <li><a class="ajax-link" href="/admin/permissions"><i class="icon-off"></i><span class="hidden-tablet"> LogOut</span></a></li>
 					</ul>
-					<label id="for-is-ajax" class="hidden-tablet" for="is-ajax"><input id="is-ajax" type="checkbox"> Ajax on menu</label>
+					
 				</div><!--/.well -->
 			</div><!--/span-->
 			<!-- left menu ends -->
@@ -178,11 +180,7 @@
       sys_confirm_delete = "{#sys_confirm_delete#}"
     ;
   </script>
-	<!-- jQuery -->
-	<script src="/themes/admin/js/jquery-1.7.2.min.js"></script>
-	<!-- jQuery UI -->
-	<script src="/themes/admin/js/jquery-ui-1.8.21.custom.min.js"></script>
-	<!-- transition / effect library -->
+	
 	
 	<!-- alert enhancer library -->
 	<script src="/themes/admin/js/bootstrap-alert.js"></script>
@@ -254,8 +252,6 @@
   
 	<!-- application script for Charisma demo -->
 	<script src="/themes/admin/js/charisma.js"></script>
-	
-  
-		
+
 </body>
 </html>

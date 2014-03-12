@@ -1,18 +1,17 @@
 {strip}
-  <tr>
-    <td width="20%" align="left" class="head">Поведение меню :</td>
-    <td width="80%" align="left" class="even">
-      <select name=menu_type>
+  <div class="control-group">
+    <label class="control-label" for="date01">Поведение меню:</label>
+    <div class="controls">
+     <select name=menu_type>
         {html_options options=$menutypes_list selected=$menu_type}
       </select>
-    </td>
-  </tr>
-
-  <tr>
-    <td width="20%" align="left" class="head">Начинать с элемента :</td>
-    <td width="80%" align="left" class="even">
-
-      {* Формируем масив для вункции html_options *}
+    </div>
+  </div>
+      
+  <div class="control-group">
+    <label class="control-label" for="date01">Начинать с элемента:</label>
+    <div class="controls">
+     {* Формируем масив для вункции html_options *}
       {array name='flat_itemslist'}
       {array_append name='flat_itemslist' key='0' value='Корень'}
       
@@ -23,8 +22,7 @@
       <select name="parent_id">
         {html_options options=$flat_itemslist selected=$parent_id}
       </select>
-
-    </td>
-  </tr>
+    </div>
+  </div>
 
 {/strip}

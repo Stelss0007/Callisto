@@ -388,9 +388,9 @@ margin-bottom:0;
 margin-left:10px;
 }
 .navbar-inner{
-border-radius:0 0 10px 10px;
--webkit-border-radius:0 0 10px 10px;
--moz-border-radius:0 0 10px 10px;
+border-radius:0;
+-webkit-border-radius:0;
+-moz-border-radius:0;
 padding-top:5px; 
 padding-bottom:5px; 
 }
