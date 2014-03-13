@@ -5,7 +5,7 @@ class AdminController extends Controller
   
   function articleList()
     {
-    echo '222';
+    $this->viewPage();
     }
     
   function articleManage()

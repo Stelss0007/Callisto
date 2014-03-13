@@ -4,47 +4,57 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/www/callisto/www/modules/theme/views/default/admin/install.tpl</file>
             <file>file:/D:/www/callisto/www/kernel/controller.php</file>
             <file>file:/D:/www/callisto/www/themes/admin/js/charisma.js</file>
             <file>file:/D:/www/callisto/www/modules/blocks/admin.php</file>
-            <file>file:/D:/www/callisto/www/themes/admin/pages/index.tpl</file>
-            <file>file:/D:/www/callisto/www/lib/ElFinder/connector.php</file>
-            <file>file:/D:/www/callisto/www/modules/blocks/views/default/admin/blocksList.tpl</file>
             <file>file:/D:/www/callisto/www/modules/articles/admin.php</file>
-            <file>file:/D:/www/callisto/www/modules/permissions/index.php</file>
-            <file>file:/D:/www/callisto/www/modules/articles/lang/rus/lang.conf</file>
-            <file>file:/D:/www/callisto/www/modules/groups/index.php</file>
-            <file>file:/D:/www/callisto/www/lib/ElFinder/elFinderConnector.class.php</file>
-            <file>file:/D:/www/callisto/www/lang/rus/lang.conf</file>
+            <file>file:/D:/www/callisto/www/themes/admin/css/charisma-app.css</file>
             <file>file:/D:/www/callisto/www/modules/permissions/views/default/admin/manage.tpl</file>
-            <file>file:/D:/www/callisto/www/modules/users/index.php</file>
-            <file>file:/D:/www/callisto/www/kernel/router.php</file>
-            <file>file:/D:/www/callisto/www/modules/theme/admin.php</file>
+            <file>file:/D:/www/callisto/www/modules/blocks/views/default/admin/modify.tpl</file>
             <file>file:/D:/www/callisto/www/modules/files/index.php</file>
             <file>file:/D:/www/callisto/www/modules/files/models/files.php</file>
             <file>file:/D:/www/callisto/www/modules/groups/views/default/admin/groupsList.tpl</file>
             <file>file:/D:/www/callisto/www/modules/blocks/views/default/admin/install.tpl</file>
             <file>file:/D:/www/callisto/www/kernel/core.php</file>
             <file>file:/D:/www/callisto/www/modules/permissions/admin.php</file>
-            <file>file:/D:/www/callisto/www/modules/users/admin.php</file>
-            <file>file:/D:/www/callisto/www/lib/ElFinder/ElFinder.class.php</file>
+            <file>file:/D:/www/callisto/www/modules/articles/views/default/admin/articleManage.tpl</file>
             <file>file:/D:/www/callisto/www/lib/DBConnector/DBConnector.class.php</file>
-            <file>file:/D:/www/callisto/www/kernel/debuger.php</file>
             <file>file:/D:/www/callisto/www/modules/files/admin.php</file>
             <file>file:/D:/www/callisto/www/modules/articles/models/articles.php</file>
-            <file>file:/D:/www/callisto/www/modules/users/models/users.php</file>
-            <file>file:/D:/www/callisto/www/modules/theme/models/theme.php</file>
-            <file>file:/D:/www/callisto/www/themes/admin/js/jquery.elfinder.min.js</file>
-            <file>file:/D:/www/callisto/www/lib/ElFinder/elFinderVolumeLocalFileSystem.class.php</file>
+            <file>file:/D:/www/callisto/www/blocks/menu_block/info.php</file>
             <file>file:/D:/www/callisto/www/modules/permissions/models/permissions.php</file>
-            <file>file:/D:/www/callisto/www/modules/theme/lang/rus/lang.conf</file>
-            <file>file:/D:/www/callisto/www/modules/articles/models/articleCategory.php</file>
+            <file>file:/D:/www/callisto/www/modules/blocks/views/default/admin/info.tpl</file>
             <file>file:/D:/www/callisto/www/modules/theme/views/default/admin/themeList.tpl</file>
             <file>file:/D:/www/callisto/www/modules/files/views/default/admin/fileList.tpl</file>
-            <file>file:/D:/www/callisto/www/modules/permissions/views/default/admin/permissionsList.tpl</file>
             <file>file:/D:/www/callisto/www/kernel/appObject.php</file>
+            <file>file:/D:/www/callisto/www/modules/permissions/views/default/admin/permissionsList.tpl</file>
+            <file>file:/D:/www/callisto/www/blocks/menu_block/themes/default/modify.tpl</file>
             <file>file:/D:/www/callisto/www/kernel/model.php</file>
+            <file>file:/D:/www/callisto/www/modules/theme/views/default/admin/install.tpl</file>
+            <file>file:/D:/www/callisto/www/lib/UserSession/UserSession.class.php</file>
+            <file>file:/D:/www/callisto/www/themes/admin/pages/index.tpl</file>
+            <file>file:/D:/www/callisto/www/lib/ElFinder/connector.php</file>
+            <file>file:/D:/www/callisto/www/modules/theme/views/default/install.tpl</file>
+            <file>file:/D:/www/callisto/www/modules/blocks/views/default/admin/blocksList.tpl</file>
+            <file>file:/D:/www/callisto/www/modules/permissions/index.php</file>
+            <file>file:/D:/www/callisto/www/modules/articles/lang/rus/lang.conf</file>
+            <file>file:/D:/www/callisto/www/modules/groups/index.php</file>
+            <file>file:/D:/www/callisto/www/lang/rus/lang.conf</file>
+            <file>file:/D:/www/callisto/www/lib/ElFinder/elFinderConnector.class.php</file>
+            <file>file:/D:/www/callisto/www/modules/users/index.php</file>
+            <file>file:/D:/www/callisto/www/modules/theme/admin.php</file>
+            <file>file:/D:/www/callisto/www/kernel/router.php</file>
+            <file>file:/D:/www/callisto/www/modules/groups/views/default/admin/manage.tpl</file>
+            <file>file:/D:/www/callisto/www/modules/users/admin.php</file>
+            <file>file:/D:/www/callisto/www/lib/ElFinder/ElFinder.class.php</file>
+            <file>file:/D:/www/callisto/www/kernel/debuger.php</file>
+            <file>file:/D:/www/callisto/www/modules/theme/models/theme.php</file>
+            <file>file:/D:/www/callisto/www/modules/users/models/users.php</file>
+            <file>file:/D:/www/callisto/www/themes/admin/js/jquery.elfinder.min.js</file>
+            <file>file:/D:/www/callisto/www/lib/ElFinder/elFinderVolumeLocalFileSystem.class.php</file>
+            <file>file:/D:/www/callisto/www/modules/blocks/models/blocks.php</file>
+            <file>file:/D:/www/callisto/www/modules/theme/lang/rus/lang.conf</file>
+            <file>file:/D:/www/callisto/www/modules/articles/models/articleCategory.php</file>
             <file>file:/D:/www/callisto/www/modules/users/views/default/admin/usersList.tpl</file>
             <file>file:/D:/www/callisto/www/modules/articles/index.php</file>
         </group>

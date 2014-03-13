@@ -45,6 +45,12 @@
 	<!-- The fav icon -->
 	<link rel="shortcut icon" href="img/favicon.ico">
   
+  <!-- jQuery -->
+	<script src="/themes/admin/js/jquery-1.7.2.min.js"></script>
+	<!-- jQuery UI -->
+	
+	<!-- transition / effect library -->
+  
   {appJsOutput}
 	<script src="/themes/admin/js/jquery-ui-1.8.21.custom.min.js"></script>	
 </head>
@@ -110,7 +116,8 @@
             <li><a class="ajax-link" href="/admin/modules"><i class="icon-list-alt"></i><span class="hidden-tablet"> Modules</span></a></li>
             <li><a class="ajax-link" href="/admin/blocks"><i class="icon-th"></i><span class="hidden-tablet"> Blocks</span></a></li>
             <li><a class="ajax-link" href="/admin/theme"><i class="icon-picture"></i><span class="hidden-tablet"> Themes</span></a></li>
-            <li><a class="ajax-link" href="/admin/files"><i class="icon-file"></i><span class="hidden-tablet"> Files</span></a></li>
+            <li><a class="ajax-link" href="/admin/files"><i class="icon-folder-close"></i><span class="hidden-tablet"> Files</span></a></li>
+            <li><a class="ajax-link" href="/admin/articles"><i class="icon-file"></i><span class="hidden-tablet"> Articles</span></a></li>
             
 
             <li><a class="ajax-link" href="/admin/permissions"><i class="icon-off"></i><span class="hidden-tablet"> LogOut</span></a></li>
