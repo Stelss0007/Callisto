@@ -47,7 +47,7 @@
               <label class="control-label" for="date01">Положение:</label>
               <div class="controls">
                 <select name='block_position'>
-                  {html_options options=$positions selected=$block_position}</td>
+                  {html_options options=$positions selected=$block_position}
                 </select>
               </div>
              </div>

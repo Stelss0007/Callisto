@@ -100,6 +100,10 @@ function docReady(){
 	
 	//datepicker
 	$('.datepicker').datepicker();
+  $('.input-group .add-on').click(function(){
+    var $this = $(this);
+    $this.parent('.input-group').find('input').click();
+  });
 	
 	//notifications
 	$('.noty').click(function(e){

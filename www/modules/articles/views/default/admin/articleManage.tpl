@@ -1,5 +1,5 @@
 {appJsLoad modname='kernel' scriptname='tinymce'}    
-<form action="/admin/groups/manage" method="post" class="">
+<form action="/admin/articles/article_manage" method="post" class="">
   <input type="hidden" name='id' value="{$id}">
   <div class="row-fluid">
     <div class="box span12">
@@ -12,12 +12,10 @@
 
         <fieldset>
           {* <legend>Manage form</legend>*}
-
+          <br>
           <div class="control-group">
-            <span class="control-label">{#sys_title#}</span>
-            <div class="controls">
-              <input type="text" name='group_displayname' value='{$group_displayname}' style="width: 98%;">
-            </div>
+            <span class="control-label">{#sys_title#}</span>&nbsp;
+            <input type="text" name='article_title' value='{$article_title}' style="width: 90%;">
           </div>
 
           <div class="box-content">
@@ -30,15 +28,15 @@
             <div class="tab-content" id="myTabContent">
               <div id="info" class="tab-pane active row-fluid">
                 <div class="span10">
-                  {texteditor}
+                  {texteditor name=article_description value=$article_description}
                 </div>
 
                 <div class="span2 form-vertical">
                   <div class="control-group">
-                    <label class="control-label" for="date01">Категории:</label>
+                    <label class="control-label" for="date01">Категория:</label>
                     <div class="controls">
-                      <select name=menu_type class="chzn-done" data-rel="chosen">
-
+                      <select name="article_category" data-rel="chosen">
+                        {html_options options=$article_categories selected=$article_category}
                       </select>
                     </div>
                   </div>
@@ -51,12 +49,8 @@
                   <div class="control-group">
                     <label class="control-label" for="date01">Метки: </label>
                     <div class="controls">
-                      <select id="selectError1" multiple data-rel="chosen">
-                        <option>Option 1</option>
-                        <option selected>Option 2</option>
-                        <option>Option 3</option>
-                        <option>Option 4</option>
-                        <option>Option 5</option>
+                      <select name="article_trags" multiple data-rel="chosen">
+                        {html_options options=$tags selected=$article_tags}
                       </select>
                     </div>
                   </div>
@@ -68,19 +62,28 @@
                 <div class="control-group">
                   <label class="control-label" for="date01">Начало публикации: </label>
                   <div class="controls">
-                    <input class="span2 datepicker" maxlength="45" size="42" type="text" value="12-02-2012" data-date-format="mm-dd-yyyy">
+                    <div class="input-group input-append">
+                      <input class="datepicker" size="16" type="text" name="article_start_time" value="{$article_start_time}">
+                      <span class="add-on"><i class="icon-calendar"></i></span>
+                    </div>
                   </div>
                 </div>
                 <div class="control-group">
                   <label class="control-label" for="date01">Окончание публикации: </label>
                   <div class="controls">
-                    <input class="span2 datepicker" size="16" type="text" value="12-02-2012">
+                    <div class="input-group input-append">
+                      <input class="datepicker" size="16" type="text" name="article_end_time" value="{$article_end_time}">
+                      <span class="add-on"><i class="icon-calendar"></i></span>
+                    </div>
                   </div>
                 </div>
                 <div class="control-group">
                   <label class="control-label" for="date01">Дата создания: </label>
                   <div class="controls">
-                    <input class="span2 datepicker" size="16" type="text" value="12-02-2012">
+                    <div class="input-group input-append">
+                      <input class="datepicker" size="16" type="text" name="article_add_time" value="{$article_add_time}">
+                      <span class="add-on"><i class="icon-calendar"></i></span>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -89,14 +92,14 @@
                 <div class="control-group">
                   <label class="control-label" for="date01">Мета-тег Description: </label>
                   <div class="controls">
-                    <textarea cols="700" rows="5" style="width: 700px;"></textarea>
+                    <textarea cols="700" rows="5" style="width: 700px;" name="article_meta_description">{$article_meta_description}</textarea>
                   </div>
                 </div>
                 
                 <div class="control-group">
                   <label class="control-label" for="date01">Мета-тег Keywords: </label>
                   <div class="controls">
-                    <textarea cols="70" rows="5" style="width: 700px;"></textarea>
+                    <textarea cols="70" rows="5" style="width: 700px;" name="article_meta_keywords">{$article_meta_keywords}</textarea>
                   </div>
                 </div>
               </div>

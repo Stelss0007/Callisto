@@ -18,6 +18,7 @@
             <file>file:/D:/www/callisto/www/kernel/core.php</file>
             <file>file:/D:/www/callisto/www/modules/permissions/admin.php</file>
             <file>file:/D:/www/callisto/www/modules/articles/views/default/admin/articleManage.tpl</file>
+            <file>file:/D:/www/callisto/www/modules/articles/views/default/admin/articleList.tpl</file>
             <file>file:/D:/www/callisto/www/lib/DBConnector/DBConnector.class.php</file>
             <file>file:/D:/www/callisto/www/modules/files/admin.php</file>
             <file>file:/D:/www/callisto/www/modules/articles/models/articles.php</file>
@@ -37,6 +38,7 @@
             <file>file:/D:/www/callisto/www/modules/theme/views/default/install.tpl</file>
             <file>file:/D:/www/callisto/www/modules/blocks/views/default/admin/blocksList.tpl</file>
             <file>file:/D:/www/callisto/www/modules/permissions/index.php</file>
+            <file>file:/D:/www/callisto/www/modules/groups/lang/rus/lang.conf</file>
             <file>file:/D:/www/callisto/www/modules/articles/lang/rus/lang.conf</file>
             <file>file:/D:/www/callisto/www/modules/groups/index.php</file>
             <file>file:/D:/www/callisto/www/lang/rus/lang.conf</file>
