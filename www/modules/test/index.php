@@ -263,7 +263,10 @@ class IndexController extends Controller
     }
     
     
-    
+  function tessst($id='1', $a)
+    {
+    echo $id. ' '. $a;
+    }
     
     
   function test_y()

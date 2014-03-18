@@ -43,4 +43,9 @@ class AdminController extends Controller
     $this->assign('module_browsein', $browsein);
     $this->viewPage();
     }
+    
+  function categoryList()
+    {
+    
+    }
   }
