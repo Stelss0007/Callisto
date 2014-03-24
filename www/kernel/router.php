@@ -202,6 +202,13 @@ class Router
         {
         $type = 'admin';
         $mod = array_shift($segments);
+        
+        if(empty($mod))
+          {
+          header("HTTP/1.1 302 Found");
+          header("Location: /admin/main");
+          exit;
+          }
         }
       // ¬торой Ч действие.
       $action = str_replace($this->fileExt, '', array_shift($segments));

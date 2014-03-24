@@ -31,6 +31,18 @@ class Model extends DBConnector
 //    print_r($this->fetch_array());exit;
     }
 
+  function getTable()
+    {
+    return $this->table;
+    }
+    
+  function getModelTable($model_name)
+    {
+    appUsesModel($model_name);
+    $model = new $model_name();
+    return $model->getTable();
+    
+    }
   //////////////////////////////////////////////////////////////////////////////
   function __destruct() 
     {
@@ -943,6 +955,15 @@ class Model extends DBConnector
     return true;
     }
    
+  function activation($id)
+    {
+    $has_field = $this->hasTableField($this->table, array('active', $this->table.'_active'));
+  
+    if(!is_numeric($id))
+      return false;
+
+    $this->query("UPDATE {$this->table} SET $has_field = IF($has_field ='1','0','1') WHERE id='$id'");
+    }
   // Груповые операции
     
   /**
@@ -960,27 +981,29 @@ class Model extends DBConnector
     }
   function groupActionActivate($ids)
     {
-    if(empty($ids) || !$this->hasTableField($this->table, 'active'))
+    $field = 'active';
+    $has_field = $this->hasTableField($this->table, array('active', $this->table.'_active'));
+    
+    if(empty($ids) || !$has_field)
       return false;
     
     $ids = implode("','", $ids);
-    $this->query("UPDATE {$this->table} SET active = '1' WHERE id in ('$ids')");
+    $this->query("UPDATE {$this->table} SET $has_field = '1' WHERE id in ('$ids')");
     }
   function groupActionDeactivate($ids)
     {
-    if(empty($ids) || !$this->hasTableField($this->table, 'active'))
+    $field = 'active';
+    $has_field = $this->hasTableField($this->table, array('active', $this->table.'_active'));
+    
+    if(empty($ids) || !$has_field)
       return false;
     
     $ids = implode("','", $ids);
-    $this->query("UPDATE {$this->table} SET active = '0' WHERE id in ('$ids')");
+    $this->query("UPDATE {$this->table} SET $has_field = '0' WHERE id in ('$ids')");
     }
   function groupActionInstall($ids)
     {
-    if(empty($ids) || !$this->hasTableField($this->table, 'active'))
-      return false;
     
-    $ids = implode("','", $ids);
-    $this->query("UPDATE {$this->table} SET active = '0' WHERE id in ('$ids')");
     }
   }
 ?>

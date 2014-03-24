@@ -47,5 +47,52 @@ class Blocks extends Model
 
     $this->query("UPDATE block SET active = IF(active ='1','0','1') WHERE id='$id'");
     }
+    
+  function install($block_name, $input_position = 'l')
+    {
+    $position['l']='Слева';
+    $position['r']='Справа';
+    $position['t']='Сверху';
+    $position['b']='Снизу';
+    $position['c']='Поцентру';
+
+    $position = $position[$input_position];
+    if(empty ($position)) 
+      die('Неизвестная позиция!');
+    
+    //Взяли список с диска
+    if(!file_exists ("blocks/$block_name/info.php")) 
+      die ('Отсутствует блок!');
+
+    // Found
+    $info = array();
+    $info['version'] = '0';
+    $info['description'] = '';
+    include("blocks/$block_name/info.php");
+    $info['name'] = $block_name;
+    
+    $weight = $this->weightMax("block_position = '{$input_position}'");
+    $weight++;
+
+    $info['block_weight'] = $weight;
+    $info['block_last_update'] = time();
+    $info['block_position'] = $input_position;
+    $info['block_pattern'] = '.*';
+   
+    $this->arrayToModel(&$this, $info);
+    
+    $this->save();
+    }
+    
+  function groupActionInstall($blocks)
+    {
+    if(empty($blocks))
+      return false;
+
+    foreach($blocks as $block)
+      {
+      $this->install($block, $this->getInput('position', 'l'));
+      }
+    }
   }
 ?>

@@ -20,13 +20,14 @@ function smarty_function_texteditor($params, &$smarty)
   if (empty ($id)) $id='texteditor_'.$bbeditor_num;
   if (empty ($class)) $class='texteditor_class';
   if (empty ($width)) $width = '100%';
-  if (empty ($height)) $height=25;
+  if (empty ($height)) $height=425;
   
   appJsLoad('kernel', 'tinymce');
 //  appCssLoad('kernel', 'default','jsBBCode');
   
   echo "<textarea id='$id' name='$name' class='$class' style='height:{$height}px;width:{$width};'>" . htmlspecialchars($text, ENT_QUOTES) . "</textarea>";
   echo '<script>
+    $(document).ready(function(){
             var tinyMCEPreInit = {
             suffix: "",
             base: "/public/js/tinymce/",
@@ -40,10 +41,14 @@ function smarty_function_texteditor($params, &$smarty)
             remove_script_host : false,
             convert_urls : true,
         // General options
-        resize: false,
         mode : "exact",
+        
         elements : "'.$id.'",
         theme : "advanced",
+        //resize: false,
+        autoresize_min_height: 400,
+        autoresize_max_height: 400,
+        
         plugins : "autolink,lists,spellchecker,pagebreak,style,layer,table,save,advhr,advimage,advlink,emotions,iespell,inlinepopups,insertdatetime,preview,media,searchreplace,print,contextmenu,paste,directionality,fullscreen,noneditable,visualchars,nonbreaking,xhtmlxtras,template",
 
         // Theme options
@@ -54,13 +59,15 @@ function smarty_function_texteditor($params, &$smarty)
         theme_advanced_toolbar_location : "top",
         theme_advanced_toolbar_align : "left",
         theme_advanced_statusbar_location : "bottom",
-        theme_advanced_resizing : true,
+        theme_advanced_resizing : false,
 
         // Drop lists for link/image/media/template dialogs
         template_external_list_url : "js/template_list.js",
         external_link_list_url : "js/link_list.js",
         external_image_list_url : "js/image_list.js",
         media_external_list_url : "js/media_list.js",
+
+});
 
 });
         </script>';

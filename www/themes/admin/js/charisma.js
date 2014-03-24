@@ -99,7 +99,14 @@ function docReady(){
 	$('.cleditor').cleditor();
 	
 	//datepicker
-	$('.datepicker').datepicker();
+ 	$('.datepicker').datepicker({
+    dateFormat: 'dd.mm.yy'
+  });
+  
+  $('.input-group .add-on').click(function(){
+    var $this = $(this);
+    $this.parent('.input-group').find('input').click();
+  });
 	
 	//notifications
 	$('.noty').click(function(e){
@@ -671,7 +678,7 @@ function docReady(){
           $.post(form.attr('action'), data)
             .done(function(data) {
               //alert( "ok" );
-             location.reload();
+              location.reload();
             })
             .fail(function() {
               alert( "error" );

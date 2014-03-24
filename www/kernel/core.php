@@ -384,7 +384,7 @@ function appUsesLib($lib_name = 'extlib', $file = false)
   }
   
 /**
- * Загрузка мсторонних библиотек
+ * Загрузка моделей
  */
 function appUsesModel($model_name)
   {

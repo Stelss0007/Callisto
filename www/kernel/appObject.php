@@ -96,7 +96,6 @@ class AppObject
     
   final public function arrayToModel(&$model, $array)
     {
-    echo '11111111';
     if(empty($array))
       {
       return false;
@@ -104,7 +103,6 @@ class AppObject
     foreach($array as $key=>$value)
       {
       $model->$key = $value;
-      echo ' '.$key.' ';
       }
     }
     
@@ -128,6 +126,22 @@ class AppObject
     
     return $this->lib->$libname;
     }  
+    
+  public function getInput($input_var, $default = false)
+    {
+    if($_REQUEST[$input_var])
+      {
+      return $_REQUEST[$input_var];
+      }
+      
+    return $this->session->getVar($input_var, $default);
+    }
+    
+  public function setInput($input_var, $value='')
+    {
+    $this->session->setVar($input_var, $value);
+    return true;
+    }
     
   //////////////////////////////////////////////////////////////////////////////
   ////////////////////////////   SESSIONS    ///////////////////////////////////

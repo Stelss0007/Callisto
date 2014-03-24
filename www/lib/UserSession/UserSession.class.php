@@ -16,6 +16,7 @@ class UserSession
    * @var object 
    */
   static $instance;
+  var $prefix = '';
   
   /**
    * current user name

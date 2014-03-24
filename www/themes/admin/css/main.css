@@ -46,7 +46,9 @@ a:focus {
 }
 
 a:hover,
-a:active {
+a:active,
+a:focus
+{
   outline: 0;
 }
 
@@ -799,7 +801,7 @@ input[type="color"],
 
 input,
 textarea {
-  width: 210px;
+  width: 225px;
 }
 
 textarea {
@@ -5081,4 +5083,13 @@ a.badge:hover {
   background-color: #D80015;
   border: 2px solid #CD6300;
   color: #fff;
+}
+
+.input-prepend .add-on, .input-append .add-on {
+  margin-left: -5px;
+  padding: 3px 5px;
+}
+
+.chzn-container-multi .chzn-choices .search-field input {
+  height: 30px !important;
 }
