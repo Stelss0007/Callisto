@@ -32,13 +32,14 @@ function showAppMessage(message)
   {
   if($('#appMessage_').html() || message)
     {
+    var close_btn = '<button data-dismiss="alert" class="close" type="button">x</button>'; 
     if(message) 
       {
-      $('#appMessage_msg_text').html($('#appMessageText').val()).attr('class', $('#appMessageType').val());
+      $('#appMessage_msg_text').html($('#appMessageText').val()+close_btn).attr('class', 'alert alert-'+$('#appMessageType').val());
       }
     else
       {
-      $('#appMessage_msg_text').html($('#appMessageText').val()).attr('class', $('#appMessageType').val());
+      $('#appMessage_msg_text').html($('#appMessageText').val()+close_btn).attr('class', 'alert alert-'+$('#appMessageType').val());
       }
     
     $('#appMessage_conteiner').stop().show().animate({"opacity": "1"}, "fast").delay(3000).stop().animate({"opacity": "0"}, "slow", function(){$(this).hide()});
@@ -51,7 +52,7 @@ function showAppMessage(message)
   }
 
 $('document').ready(function(){
-  $('body').prepend("<div id='appMessage_conteiner'><div id='appMessage_msg_text'></div></div>");
+  $('body').prepend("<div id='appMessage_conteiner'><div class='alert alert-success' id='appMessage_msg_text'></div></div>");
   $('#appMessage_msg_text').on('click', function() {
      $('#appMessage_conteiner').stop().animate({"opacity": "0"}, "fast");
   });

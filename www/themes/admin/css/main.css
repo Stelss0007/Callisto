@@ -5047,9 +5047,16 @@ a.badge:hover {
   z-index: 10000;
 }
 
+#appMessage_msg_text .close
+{
+    font-family: cursive;
+    font-size: 18px;
+    right: 2px;
+    top: -4px;
+}
 #appMessage_msg_text
 {
-  margin: 0 5px;
+/*  margin: 0 5px;
   color: #000;
   font-size: 12px;
   font-family: Arial;
@@ -5060,29 +5067,37 @@ a.badge:hover {
   cursor: pointer;
   background-repeat: no-repeat;
   min-height: 36px;
-  background-position: 5px 5px;
+  background-position: 5px 5px;*/
+
+    background-repeat: no-repeat;
+    background-position: 10px 10px;
+    border-width: 2px;
+    margin: 0 2px;
+    min-height: 30px;
+    padding: 10px 7px;
+    text-align: center;
 }
 
-#appMessage_conteiner .info
+#appMessage_conteiner .alert-info
 {
   background-image: url(/public/images/system/message/info.png);
-  background-color: #E2E281;
-  border: 2px solid #CD6300;
+/*  background-color: #E2E281;
+  border: 2px solid #CD6300;*/
 }
 
-#appMessage_conteiner .warning
+#appMessage_conteiner .alert-warning
 {
   background-image: url(/public/images/system/message/warning.png);
-  background-color: #ffe45c;
-  border: 2px solid #CD6300;
+/*  background-color: #ffe45c;
+  border: 2px solid #CD6300;*/
 }
 
-#appMessage_conteiner .error
+#appMessage_conteiner .alert-error
 {
   background-image: url(/public/images/system/message/error.png);
-  background-color: #D80015;
+/*  background-color: #D80015;
   border: 2px solid #CD6300;
-  color: #fff;
+  color: #fff;*/
 }
 
 .input-prepend .add-on, .input-append .add-on {

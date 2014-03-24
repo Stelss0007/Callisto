@@ -115,4 +115,39 @@ class AdminController extends Controller
     $this->assign('module_browsein', $browsein);
     $this->viewPage();
     }
+    
+  function categoryGroupOperation()
+    {
+    $data = $this->input_vars;
+    
+    $model_name = 'articleCategory';
+    
+    switch($data['action_name'])
+      {
+      case 'delete':
+        $this->$model_name->groupActionDelete($data['entities']);
+        $this->showMessage($this->t('sys_elements_is_removed'));
+        break;
+        
+      case 'activate':
+        $this->$model_name->groupActionActivate($data['entities']);
+        $this->showMessage($this->t('sys_elements_is_actived'));
+        break;
+      
+      case 'deactivate':
+        $this->$model_name->groupActionDeactivate($data['entities']);
+        $this->showMessage($this->t('sys_elements_is_deactived'));
+        break;
+      
+      case 'install':
+        $this->$model_name->groupActionInstall($data['entities']);
+        $this->showMessage($this->t('sys_elements_is_installed'));
+        break;
+
+      default:
+        break;
+      }
+    }
   }
+  
+  
