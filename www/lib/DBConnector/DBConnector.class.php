@@ -222,7 +222,9 @@ class DBConnector extends AppObject
 
   function getFields($table)
     {
-    if(appVarIsCached('dbTableFields', $table))
+    global $appConfig;
+
+    if(appVarIsCached('dbTableFields', $table) && !$appConfig['debug.enabled'])
       {
       return appVarGetCached('dbTableFields', $table);
       }

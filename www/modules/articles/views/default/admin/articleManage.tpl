@@ -1,4 +1,4 @@
-{appJsLoad modname='kernel' scriptname='tinymce'}    
+{appJsLoad modname='kernel' scriptname='tinymce'} 
 <form action="/admin/articles/article_manage" method="post" class="">
   <input type="hidden" name='id' value="{$id}">
   <div class="row-fluid">
@@ -27,23 +27,23 @@
 
             <div class="tab-content" id="myTabContent">
               <div id="info" class="tab-pane active row-fluid">
-                <div class="span10">
-                  {texteditor name=article_description value=$article_description}
+                <div class="span9" style="position: relative;">
+                  {texteditor name=article_description text=$article_description}
                 </div>
 
                 <div class="span2 form-vertical">
                   <div class="control-group">
                     <label class="control-label" for="date01">Категория:</label>
                     <div class="controls">
-                      <select name="article_category" data-rel="chosen">
-                        {html_options options=$article_categories selected=$article_category}
+                      <select name="article_category_id" data-rel="chosen">
+                        {html_options options=$article_category_list selected=$article_category_id}
                       </select>
                     </div>
                   </div>
                   <div class="control-group">
                     <label class="control-label" for="date01">Состояние: </label>
                     <div class="controls">
-                      <input data-no-uniform="true" type="checkbox" name="article_active" checked="checked" class="iphone-toggle">
+                      <input data-no-uniform="true" type="checkbox" name="article_active" {if $article_active}checked="checked"{/if} value="1" class="iphone-toggle">
                     </div>
                   </div>
                   <div class="control-group">
@@ -63,7 +63,7 @@
                   <label class="control-label" for="date01">Начало публикации: </label>
                   <div class="controls">
                     <div class="input-group input-append">
-                      <input class="datepicker" size="16" type="text" name="article_start_time" value="{$article_start_time}">
+                      <input class="datepicker" size="16" type="text" name="article_start_time" value="{$article_start_time|date_format}">
                       <span class="add-on"><i class="icon-calendar"></i></span>
                     </div>
                   </div>
@@ -72,7 +72,7 @@
                   <label class="control-label" for="date01">Окончание публикации: </label>
                   <div class="controls">
                     <div class="input-group input-append">
-                      <input class="datepicker" size="16" type="text" name="article_end_time" value="{$article_end_time}">
+                      <input class="datepicker" size="16" type="text" name="article_end_time" value="{$article_end_time|date_format}">
                       <span class="add-on"><i class="icon-calendar"></i></span>
                     </div>
                   </div>
@@ -81,7 +81,7 @@
                   <label class="control-label" for="date01">Дата создания: </label>
                   <div class="controls">
                     <div class="input-group input-append">
-                      <input class="datepicker" size="16" type="text" name="article_add_time" value="{$article_add_time}">
+                      <input class="datepicker" size="16" type="text" name="article_add_time" data-date-format=dd.mm.yyyy" value="{$article_add_time|date_format}">
                       <span class="add-on"><i class="icon-calendar"></i></span>
                     </div>
                   </div>

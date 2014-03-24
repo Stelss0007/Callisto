@@ -278,6 +278,8 @@ abstract class Controller extends AppObject
     $this->action = $action_name;
     $this->object_name = $this->getObjectName();
     
+    $this->smarty->assign('config', $this->config);
+    
     //Подключим джаваскрипты
     appJsLoad('kernel', 'jQuery');
     appJsLoad('kernel', 'main');
@@ -1201,6 +1203,28 @@ abstract class Controller extends AppObject
       default:
         break;
       }
+    }
+  public function delete($id)
+    {
+    if(empty($id))
+      $this->errors->setError("ID of object is missing!");
+    
+    $model_name = $this->modname;
+    
+    $this->$model_name->delete($id);
+    $this->showMessage($this->t('sys_element_is_removed'));
+    $this->redirect();
+    }
+    
+  public function activation($id)
+    {
+    if(empty($id))
+      $this->errors->setError("ID of user is missing!");
+    
+    $model_name = $this->modname;
+     
+    $this->$model_name->activation($id);
+    $this->redirect();
     }
   }
 

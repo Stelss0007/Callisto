@@ -99,7 +99,10 @@ function docReady(){
 	$('.cleditor').cleditor();
 	
 	//datepicker
-	$('.datepicker').datepicker();
+ 	$('.datepicker').datepicker({
+    dateFormat: 'dd.mm.yy'
+  });
+  
   $('.input-group .add-on').click(function(){
     var $this = $(this);
     $this.parent('.input-group').find('input').click();

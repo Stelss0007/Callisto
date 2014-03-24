@@ -186,6 +186,9 @@
       sys_confirm_group_not_selected = "{#sys_confirm_group_not_selected#}",
       sys_confirm_delete = "{#sys_confirm_delete#}"
     ;
+    var date_format = "{$config.date_format_js}",
+        time_format = "{$config.time_format_js}"
+    ;
   </script>
 	
 	

@@ -31,6 +31,18 @@ class Model extends DBConnector
 //    print_r($this->fetch_array());exit;
     }
 
+  function getTable()
+    {
+    return $this->table;
+    }
+    
+  function getModelTable($model_name)
+    {
+    appUsesModel($model_name);
+    $model = new $model_name();
+    return $model->getTable();
+    
+    }
   //////////////////////////////////////////////////////////////////////////////
   function __destruct() 
     {
@@ -943,6 +955,15 @@ class Model extends DBConnector
     return true;
     }
    
+  function activation($id)
+    {
+    $has_field = $this->hasTableField($this->table, array('active', $this->table.'_active'));
+  
+    if(!is_numeric($id))
+      return false;
+
+    $this->query("UPDATE {$this->table} SET $has_field = IF($has_field ='1','0','1') WHERE id='$id'");
+    }
   // Груповые операции
     
   /**

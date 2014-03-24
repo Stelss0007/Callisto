@@ -3,6 +3,14 @@
 //Настройки отладки
 $appConfig['debug.enabled'] = true;
 
+//Параметры для форматирования даты поумолчанию
+$appConfig['date_format'] = '%d.%m.%Y';
+$appConfig['time_format'] = '%H:%M';
+
+//Параметры для форматирования даты поумолчанию в javascript (например в datepicker)
+$appConfig['date_format_js'] = 'dd.mm.yy';
+$appConfig['time_format_js'] = 'H:M';
+
 //Настройки локали
 $appConfig['lang'] = 'rus';
 $appConfig['locale.lc_all'] = 'ru_RU.CP1251';
