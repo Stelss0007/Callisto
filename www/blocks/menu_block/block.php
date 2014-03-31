@@ -3,6 +3,8 @@ class menu_block extends Block
   {
   function display(&$blockinfo)
     {
+    //$this->viewCached();
+    
     $config = unserialize($blockinfo['block_content']);
     $this->usesModel('menu');
     $this->menu_list = $this->menu->getList(array(

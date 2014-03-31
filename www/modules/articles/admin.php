@@ -5,8 +5,10 @@ class AdminController extends Controller
   
   function articleList()
     {
-    $this->usesModel('articleCategory');
+    $this->viewCachedPage();
     
+    $this->usesModel('articleCategory');
+
     $this->articles_list = $this->articles->article_list(true);
     $this->article_category_list = $this->articleCategory->category_list(false);
     
@@ -39,6 +41,7 @@ class AdminController extends Controller
         
         $this->articles->article_create($data);
         }
+      $this->deleteCache();
       $this->redirect('/admin/articles/article_list');
       }
     ////////////////////////////////////////////////////////////////////////////
@@ -92,6 +95,8 @@ class AdminController extends Controller
         {
         $this->articleCategory->category_create($data);
         }
+        
+      $this->deleteCache();
       $this->redirect('/admin/articles/category_list');
       }
       
