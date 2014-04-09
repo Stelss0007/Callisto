@@ -19,8 +19,8 @@ $appConfig['locale.lc_all'] = 'ru_RU.CP1251';
 $appConfig['DB.UserName'] = 'root';
 
 // Пароль пользователя базы данных
-//$appConfig['DB.Password'] = 'root32pass';
-$appConfig['DB.Password'] = '';
+$appConfig['DB.Password'] = 'root32pass';
+//$appConfig['DB.Password'] = '';
 
 // Сервер базы данных
 $appConfig['DB.Host'] = 'localhost';
@@ -59,7 +59,7 @@ $appConfig['default.dir.perms'] = 0755;
  */
 
 //Включение кеширования шаблонов
-$appConfig['coretpl.caching'] = true;
+$appConfig['coretpl.caching'] = false;
 
 //Создавать поддиректории при организации кэшей.
 $appConfig['coretpl.use_sub_dirs'] = true;
@@ -74,14 +74,14 @@ $appConfig['coretpl.cache_lifetime'] = 10800;
  * до тех пор, пока шаблон не будет перекомпилирован. Если caching и compile_check активированы, 
  * файлы кэша будут регенерированы при обновлении связанных с ним шаблонов или конфигурационных файлов.
  */
-$appConfig['coretpl.compile_check'] = false;
+$appConfig['coretpl.compile_check'] = true;
 
 //Всегда перекомпилировать шаблоны (только для отладки)
 /*
  * Указывает Smarty (пере)компилировать шаблоны при каждом вызове. 
  * Этот параметр перекрывает действие $compile_check и по умолчанию не активирован. 
  */
-$appConfig['coretpl.force_compile'] = false;
+$appConfig['coretpl.force_compile'] = true;
 
 
 

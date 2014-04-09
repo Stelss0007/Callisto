@@ -297,7 +297,11 @@ abstract class Controller extends AppObject
     
     call_user_method_array($action_name, $this, $this->input_vars);
     }
-   
+  final public function setViewType($type = 'user')
+    {
+    $this->type = $type;
+    }
+
   final private function urlToCamelCase($string)
     {
     return preg_replace("/[\_,\-](.)/e", "strtoupper('\\1')", $string);
@@ -1207,6 +1211,7 @@ abstract class Controller extends AppObject
     $this->loadModVars($mod);
     return true;
     }
+   
   
   //////////////////////////////////////////////////////////////////////////////
   ////////////////////////////   DEBUG      ////////////////////////////////////
@@ -1234,6 +1239,10 @@ abstract class Controller extends AppObject
     echo "</pre>";
     die();
     }
+    
+    
+    
+    
     
   public function groupOperation()
     {

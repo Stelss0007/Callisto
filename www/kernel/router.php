@@ -43,6 +43,7 @@ class Router
       {
       $mod = $route[1]['controller'];
       $action = $route[1]['action'];
+      $type = $route[1]['type'];
       $pattern = str_replace("/", "\/", $route[0]);  
       $route_vars =array();
       $parameters = array();
@@ -82,30 +83,44 @@ class Router
           $action = $matches['action'];
           unset($matches['action']);
           }
-        
-        if(!file_exists("modules/$mod/index.php"))
-          trigger_error ("Module '".$mod."' or module controller not exist", E_USER_ERROR);
 
-        
         foreach($route_vars as $var)
           {
           $parameters[$var] = $matches[$var];
-          }
-        
-        
-        include_once "modules/$mod/index.php";
-        //$module = new $mod();
-        $module = new Index($mod);
+          }   
 
+        if($type == 'admin')
+          {
+          if(!file_exists("modules/$mod/admin.php"))
+            {
+            trigger_error ("Module '".$mod."' or module controller 'AdminController' not exist", E_USER_ERROR);
+            }
+          include_once "modules/$mod/admin.php";
+          $module = new AdminController($mod);
+          $module->controllerName = 'AdminController';
+          $module->setViewType($type);
+          }
+        else
+          {
+          if(!file_exists("modules/$mod/index.php"))
+            {
+            trigger_error ("Module '".$mod."' or module controller 'IndexController' not exist", E_USER_ERROR);
+            }
+          include_once "modules/$mod/index.php";
+          $module = new IndexController($mod);
+          $module->controllerName = 'IndexController';
+          $module->setViewType($type);
+          }
+               
         global $mod_controller;
         $mod_controller = $module;
 
         $module->input_vars = array_merge($parameters, $module->input_vars);
 
-        if(empty($_REQUEST['type']))
-          $module->type = 'user';
-        else  
-          $module->type = ($_REQUEST['type'] == 'user' || $_REQUEST['type'] == 'admin'  || $_REQUEST['type'] == 'ajax') ? $_REQUEST['type'] : 'user';
+//        if(empty($_REQUEST['type']))
+//          $module->type = 'user';
+//        else  
+//          $module->type = ($_REQUEST['type'] == 'user' || $_REQUEST['type'] == 'admin'  || $_REQUEST['type'] == 'ajax') ? $_REQUEST['type'] : 'user';
 
         $module->action($action);
 
