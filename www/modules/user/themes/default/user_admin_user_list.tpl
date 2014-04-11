@@ -1,4 +1,8 @@
 {strip}
+{* да нет *}
+{array name='yes_no'}
+{array_append name='yes_no' key='1' value=Да}
+{array_append name='yes_no' key='0' value=Нет}
   <table class="outer" cellSpacing="1" cellPadding="4" width="100%">
     <colgroup>
       <col width="20%">
@@ -47,7 +51,7 @@
           <td class="{$class}">{$user.last_visit|date_format:"%d.%m.%Y %H:%M"}</td>
           <td class="{$class}" align="center" nowrap>
             {* Формируем масив переменные для урла *}
-            {array name='url_vars'}
+            
             {array_append name='url_vars' key='id' value=$user.id}
               <a href="/index.php?module=user&type=admin&func=user_modify&id={$user.id}"><img border="0" src="/public/images/system/edit.gif" alt="Редактировать"></a>&nbsp;
               <a href="/index.php?module=user&type=admin&func=user_delete&id={$user.id}"><img border="0" src="/public/images/system/del.gif" alt="Удалить"></a>

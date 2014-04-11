@@ -14,7 +14,25 @@ class AdminController extends Controller
       
     $this->loadModuleLang($module);  
       
+    $timeformat_list['g:i a'] = date("g:i a", time());
+    $timeformat_list['g:i:s a'] = date("g:i:s a", time());
+    $timeformat_list['H:i'] = date("H:i", time());
+    $timeformat_list['H:i:s'] = date("H:i:s", time());
+    
+    $dateformat_list['Y-m-d'] = date("Y-m-d", time());
+    $dateformat_list['d-m-Y'] = date("d-m-Y", time());
+    $dateformat_list['d/m/Y'] = date("d/m/Y", time());
+    $dateformat_list['m/d/Y'] = date("m/d/Y", time());
+    $dateformat_list['d.m.Y'] = date("d.m.Y", time());
+    $dateformat_list['d.m.y'] = date("d.m.y", time());
+    $dateformat_list['d M Y'] = date("d M Y", time());
+    $dateformat_list['d F Y'] = date("d F Y", time());
+    
+    $this->smarty->assign('site_timeformat_list', $timeformat_list);
+    $this->smarty->assign('site_dateformat_list', $dateformat_list);
+    
     $this->assign('module_name', $module);
+    $this->smarty->assign('modconfig', $this->configuration->getModConfigurationAll());   
     $this->assign('config_body', $this->smarty->fetch($config_view, $ObjectName));
     
     $browsein   = array();
@@ -27,8 +45,15 @@ class AdminController extends Controller
     
   function saveConfiguration()
     {
-    $params = $this->getInput('config');
-    print_r($params);
+    $params = $this->getInput('modconfig');
+    //appDebug($params);exit;
+    foreach($params as $module => $values)
+      {
+      $this->configuration->saveConfiguration($module, $values);
+      }
+      
+    $this->showMessage($this->t('sys_saved'));
+    $this->redirect();
     }
   }
 ?>

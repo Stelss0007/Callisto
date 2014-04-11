@@ -5,7 +5,22 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/D:/www/callisto/www/kernel/controller.php</file>
+            <file>file:/D:/www/callisto/www/modules/articles/views/default/admin/articleList.tpl</file>
+            <file>file:/D:/www/callisto/www/modules/configuration/views/default/admin/configEdit.tpl</file>
+            <file>file:/D:/www/callisto/www/modules/files/admin.php</file>
+            <file>file:/D:/www/callisto/www/modules/articles/admin.php</file>
+            <file>file:/D:/www/callisto/www/modules/configuration/router.php</file>
+            <file>file:/D:/www/callisto/www/modules/configuration/index.php</file>
+            <file>file:/D:/www/callisto/www/modules/blocks/router.php</file>
+            <file>file:/D:/www/callisto/www/lang/rus/lang.conf</file>
+            <file>file:/D:/www/callisto/www/blocks/test_block/block.php</file>
+            <file>file:/D:/www/callisto/www/modules/blocks/index.php</file>
+            <file>file:/D:/www/callisto/www/modules/articles/views/default/admin/config.tpl</file>
+            <file>file:/D:/www/callisto/www/modules/configuration/admin.php</file>
             <file>file:/D:/www/callisto/www/kernel/router.php</file>
+            <file>file:/D:/www/callisto/www/modules/configuration/models/configuration.php</file>
+            <file>file:/D:/www/callisto/www/modules/modconfig/index.php</file>
+            <file>file:/D:/www/callisto/www/modules/main/views/default/admin/config.tpl</file>
         </group>
     </open-files>
 </project-private>

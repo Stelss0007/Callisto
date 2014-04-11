@@ -5390,3 +5390,16 @@ a.badge:hover {
 .panel-danger > .panel-footer + .panel-collapse .panel-body {
   border-bottom-color: #ebccd1;
 }
+
+.yes.active {
+  background-color: #51A351;
+  color: #fff;
+}
+.no.active {
+  background-color: #BD362F;
+  color: #fff;
+}
+
+.control-group .controls label{
+  display: inline-block;
+}
