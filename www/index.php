@@ -3,6 +3,7 @@ define('APP_DIRECTORY', dirname(__FILE__));
 include_once 'lib/ErrorHandler/ErrorHandler.class.php';
 $errors = ErrorHandler::getInstance();
 
+include_once 'kernel/globals.php';
 include_once 'kernel/config.php';
 include_once 'kernel/appObject.php';
 include_once 'kernel/core.php';

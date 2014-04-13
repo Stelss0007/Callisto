@@ -15,18 +15,17 @@ class viewTpl extends Smarty
     $this->Smarty();
     //????????? ???? ?????????? ???????????
     $this->debugging = false;
-    $this->caching = false;
-    $this->use_sub_dirs = true;
-    $this->force_compile = false;//$coreConfig['systpl.force_compile'];
-    $this->compile_check = true;//false;
+    $this->caching = $appConfig['coretpl.caching'];
+    $this->use_sub_dirs = $appConfig['coretpl.use_sub_dirs'];
+    $this->force_compile = $appConfig['coretpl.force_compile'];
+    $this->compile_check = $appConfig['coretpl.compile_check'];
     $this->template_dir = '';
     $this->config_dir='';
     $this->cache_dir = 'cache/content';
     $this->compile_dir = 'cache/templates';
-    $this->_file_perms=$appConfig['default.file.perms'];
-    $this->_dir_perms=$appConfig['default.dir.perms'];
-    $this->use_sub_dirs=true;//$coreConfig['coretpl.use_sub_dirs'];
-    $this->cache_lifetime=$appConfig['coretpl.cache_lifetime'];
+    $this->_file_perms  = $appConfig['default.file.perms'];
+    $this->_dir_perms = $appConfig['default.dir.perms'];
+    $this->cache_lifetime =  $appConfig['coretpl.cache_lifetime'];
 
     //????????????? ???????? ???????????
 //    if ($coreConfig['Var.caching']=='xcache')
@@ -106,15 +105,7 @@ class viewTpl extends Smarty
     {
     if (!$tpl_file) appException ('core_tpl->is_cached', BAD_PARAM, "Tpl file name empty");
 
-    if ($cache_id)
-      {//???? ? ??? ???????? ?? ????????, ??????? ??????????????
-      //$coreSecLevel = coreSecGetLevel ($cache_id);
-      $this->assign('coreSecLevel', $coreSecLevel);
-      $this->assign('coreObject', $cache_id);
-
-      $cache_id = str_replace('::', '|', $cache_id);
-      $cache_id.= "|$coreSecLevel";
-      }
+    //echo $tpl_file.' '.$cache_id;
     return (Smarty::is_cached($tpl_file, $cache_id, $compile_id));
     }
 

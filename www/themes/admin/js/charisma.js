@@ -94,8 +94,10 @@ function docReady(){
 	$('a[href="#"][data-top!=true]').click(function(e){
 		e.preventDefault();
 	});
+  
+	//acordion
 	
-	//rich text editor
+  //rich text editor
 	$('.cleditor').cleditor();
 	
 	//datepicker

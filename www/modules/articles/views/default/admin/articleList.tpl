@@ -72,7 +72,7 @@
                   {$article.article_title|escape}
                 </td>
                 <td>
-                  {$article.article_category_id}
+                  {$article_category_list[$article.article_category_id]}
                 </td>
                 <td>
                   <a href="#{$article.article_user_id}">

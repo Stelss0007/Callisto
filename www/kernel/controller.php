@@ -24,6 +24,8 @@ abstract class Controller extends AppObject
   private   $mod_vars = array();
   public    $controllerName = 'IndexController';
   
+  public    $permissionLavel = 0;
+  
   public $URL;
   public $prevURL;
 
@@ -277,6 +279,7 @@ abstract class Controller extends AppObject
     
     $this->action = $action_name;
     $this->object_name = $this->getObjectName();
+    $this->permissionLavel = $GLOBALS['permissionLavel'] = $this->getPermissionLavel($this->object_name);
     
     $this->smarty->assign('config', $this->config);
     
@@ -294,7 +297,11 @@ abstract class Controller extends AppObject
     
     call_user_method_array($action_name, $this, $this->input_vars);
     }
-   
+  final public function setViewType($type = 'user')
+    {
+    $this->type = $type;
+    }
+
   final private function urlToCamelCase($string)
     {
     return preg_replace("/[\_,\-](.)/e", "strtoupper('\\1')", $string);
@@ -334,6 +341,50 @@ abstract class Controller extends AppObject
   //////////////////////////////////////////////////////////////////////////////
   ////////////////////////////   TEMPLATES  ////////////////////////////////////
   //////////////////////////////////////////////////////////////////////////////
+  final public function isCached()
+    {
+    $tpl_dir = $this->tplFileName();
+    $ObjectName = $this->getTplObjectName();
+    
+    return $this->smarty->is_cached($tpl_dir, $ObjectName);
+    }
+    
+  final public function deleteCache($ObjectName = false)
+    {
+    //$tpl_dir = $this->tplFileName();
+    
+    if(empty($ObjectName))
+      $ObjectName = $this->modname.'|'.$this->type;
+ 
+    if(empty($ObjectName)) 
+      return;
+    
+    return $this->smarty->clear_cache(null, $ObjectName);
+    }
+    
+  final public function viewCached()
+    {
+    $tpl_dir = $this->tplFileName();
+    $ObjectName = $this->getTplObjectName();
+    
+    if(!$this->smarty->is_cached($tpl_dir, $ObjectName))
+      return false;
+    
+    echo $this->smarty->fetch($tpl_dir, $ObjectName);
+    exit;
+    }
+    
+  final public function viewCachedPage()
+    {
+    $tpl_dir = $this->tplFileName();
+    $ObjectName = $this->getTplObjectName();
+  
+    if(!$this->smarty->is_cached($tpl_dir, $ObjectName))
+      return false;
+    
+    $this->viewPage();
+    }
+    
   final public function view()
     {
     $tpl_dir = $this->tplFileName();
@@ -368,11 +419,12 @@ abstract class Controller extends AppObject
     
     //Прикрепим меседж в тело.
     $modContent = $this->message.$this->smarty->fetch($tpl_dir, $ObjectName);
-    
+   
     //Если это запрос через AJAX, то выводим только результат работы модуля
     if(isAjax())
       {
       echo $modContent;
+      exit;
       }
     else
       {
@@ -380,18 +432,25 @@ abstract class Controller extends AppObject
         {
         $pageTplFile = $this->root_dir.'themes/admin/pages/index.tpl';
         $this->tpls[] = '(Main Template)themes/admin/pages/index.tpl';
+        
+        $ObjectThemeName = 'themes|admin|pages|index';
         }
       else
         {
         $pageTplFile = $this->root_dir."themes/".$this->current_theme.'/pages/'.$this->page.'.tpl';
         $this->tpls[] = '(Main Template)'."themes/".$this->current_theme.'/pages/'.$this->page.'.tpl';
+        
+        $ObjectThemeName = 'themes|'.$this->current_theme.'|pages|'.$this->page.'';
         }
 
       $this->smarty->assign('module_content', $modContent);
+      
+      $this->smarty->caching = false;
       echo $this->smarty->fetch($pageTplFile);
       }
-
+    exit(); 
     }
+  
 
   final public function tplFileName($debug=false)
     {
@@ -465,14 +524,14 @@ abstract class Controller extends AppObject
     
   final public function getTplObjectName()
     {
-    $url_result = $this->GetCallingMethodName(3, true);
-    $action = $url_result['function'];
+    //$url_result = $this->GetCallingMethodName(3, true);
+    $action = $this->action;//$url_result['function'];
     $args = '';
     foreach($url_result['args'] as $value)
       {
       $args .= '|'.$value;
       }
-    return $this->modname.'|'.$this->type.'|'.$action.$args;
+    return $this->modname.'|'.$this->type.'|'.$action.$args.'|ACCESS_LEVEL_'.$this->permissionLavel;
     }
     
     
@@ -525,6 +584,14 @@ abstract class Controller extends AppObject
   //////////////////////////////////////////////////////////////////////////////
   ////////////////////////////   ACCESS     ////////////////////////////////////
   //////////////////////////////////////////////////////////////////////////////  
+  final private function getPermissionLavel($object=false)
+    {
+    if(empty($object))
+      $object = $this->getObjectName();
+    
+    $this->usesModel('permissions');
+    return $this->permissionLavel = $this->permissions->objectGetPermsLevel($object);
+    }
   final public function getAccess($access_type=ACCESS_READ)
     {
     $object = $this->getObjectName();
@@ -1144,6 +1211,7 @@ abstract class Controller extends AppObject
     $this->loadModVars($mod);
     return true;
     }
+   
   
   //////////////////////////////////////////////////////////////////////////////
   ////////////////////////////   DEBUG      ////////////////////////////////////
@@ -1171,6 +1239,10 @@ abstract class Controller extends AppObject
     echo "</pre>";
     die();
     }
+    
+    
+    
+    
     
   public function groupOperation()
     {

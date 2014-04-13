@@ -91,6 +91,69 @@ class Permissions extends Model
     return false;
     }
    
+    
+/**
+ * @desc Считаем уровень доступа текушего пользователя к тестируемому обьекту
+ * @return integer
+ * @param testobject string
+ * @param ownerid int
+ */
+function objectGetPermsLevel ($object, $ownerid=-1)
+  {
+  if (!$object) 
+    {
+    die('$object is empty');
+    }
+
+  static $loaded = array();
+  if (!empty($loaded["$object, $ownerid"]))
+    return $loaded["$object, $ownerid"];
+
+  $level = ACCESS_INVALID;
+
+  $ses_info=UserSession::getInstance();
+  $gid = $ses_info->userGid();
+  
+  
+	if (!isset($groups_perms_list))
+		{
+    $groups_perms_list = $this->groupPermsGetList($gid);
+		appVarSetCached('core', 'groups_perms_list', $groups_perms_list);
+		}
+
+  if ($groups_perms_list)
+    {
+    foreach ($groups_perms_list as $permission)
+      {
+      if (($permission[gid]!=$gid) && ($permission[gid]!=-1))
+        continue;
+
+      if ($permission[component]) 
+        $pattern="/^$permission[component]::$permission[pattern]/Ui";
+      else 
+            $pattern="/^.*::$permission[pattern]/Ui";
+      if (preg_match ($pattern, $object))
+        {
+        if ($permission[level] > $level) 
+          $level = $permission[level];
+        break;
+        }
+      }
+    }
+
+
+  //Права владельцев
+  if (($ownerid>-1) && ($ownerid==$uid))
+    {
+    $level = ACCESS_DELETE;
+    }
+
+  $loaded["$object, $ownerid"] = $level;
+ 
+  return $level;
+  }
+  
+  
   function groupPermsGetList($gid=null)
     {
     $params = array(
