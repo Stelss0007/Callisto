@@ -1,0 +1,37 @@
+#Options -Indexes -Multiviews FollowSymLinks
+#Order allow,deny
+#Allow from all
+#Запрещаем попытки индексирования .ini, .cfg файлов т.к они у меня лежат в корне сайта и хранят настройки доступа к СУБД mySQL
+IndexIgnore *.ini *.cfg
+#Включаем mod_rewrite
+RewriteEngine   on
+#На нижеследующие папки от корня сайт mod_rewrite не действует т.е отправляет запрос пользователя как есть прямо в папку
+#Админка
+#RewriteCond    %{REQUEST_URI}        !^/admin
+#Темы
+RewriteCond    %{REQUEST_URI}        !^/themes
+#Стили 
+RewriteCond    %{REQUEST_URI}        !^/styles
+#JavaScripts
+RewriteCond    %{REQUEST_URI}        !^/scripts
+#Картинки
+RewriteCond    %{REQUEST_URI}        !^/images
+#Файла (архивы там и прочее)
+RewriteCond    %{REQUEST_URI}        !^/files
+#Файла (архивы там и прочее)
+RewriteCond    %{REQUEST_URI}        !^/public
+#Файла (архивы там и прочее)
+RewriteCond    %{REQUEST_URI}        !^/modules/(.*)/js
+#Все остальное куда бы пользователь не полез - перенаправляется на наш файл redirect.php
+RewriteRule     ^(.*)$            index.php [PT]
+#Запрещаем доступ к файлам .ini и .cfg
+<Files ~ "\.ini$">
+ Order allow,deny
+ Deny from all
+ Satisfy All
+</Files>
+<Files ~ "\.cfg$">
+ Order allow,deny
+ Deny from all
+ Satisfy All
+</Files>
