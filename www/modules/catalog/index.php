@@ -1,10 +1,11 @@
 <?php
 class IndexController extends Controller
   {
-  public $defaultAction = 'config_list';
+  public $defaultAction = 'main_list';
   
-  function actionConfigList()
+  function mainList()
     {
     
     }
   }
+

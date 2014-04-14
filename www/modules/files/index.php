@@ -3,9 +3,9 @@ class IndexController extends Controller
   {
   public $defaultAction = 'theme_list';
   
-  function fileList()
+  function actionFileList()
     {
     $this->redirect("/admin/files/file_list");
     }
   }
-?>
+

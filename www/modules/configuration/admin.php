@@ -3,7 +3,7 @@ class AdminController extends Controller
   {
   public $defaultAction = 'config_edit';
   
-  function configEdit($module = 'main')
+  function actionConfigEdit($module = 'main')
     {
     $config_view = $this->root_dir.'modules/'.$module.'/views/default/admin/config.tpl';
     $ObjectName = $module.'::views::default::admin::config';
@@ -43,7 +43,7 @@ class AdminController extends Controller
     $this->viewPage();
     }
     
-  function saveConfiguration()
+  function actionSaveConfiguration()
     {
     $params = $this->getInput('modconfig');
     //appDebug($params);exit;
@@ -56,4 +56,4 @@ class AdminController extends Controller
     $this->redirect();
     }
   }
-?>
+

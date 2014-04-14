@@ -3,7 +3,7 @@ class AdminController extends Controller
   {
   public $defaultAction = 'article_list';
   
-  function articleList()
+  function actionArticleList()
     {
     $this->viewCachedPage();
     
@@ -20,7 +20,7 @@ class AdminController extends Controller
     $this->viewPage();
     }
     
-  function articleManage($id=0)
+  function actionArticleManage($id=0)
     {
     $data = $this->input_vars;
     $this->article_category_list = $this->articleCategory->category_list(false);
@@ -67,7 +67,7 @@ class AdminController extends Controller
     $this->viewPage();
     }
     
-  function categoryList()
+  function actionCategoryList()
     {
     $this->categories_list = $this->articleCategory->getList();
     //appDebug($this->articleCategory->getList());exit;   
@@ -80,7 +80,7 @@ class AdminController extends Controller
     $this->viewPage();
     }
     
-  function categoryManage($id=0)
+  function actionCategoryManage($id=0)
     {
     $data = $this->input_vars;
     //appDebug($data);exit;
@@ -121,7 +121,7 @@ class AdminController extends Controller
     $this->viewPage();
     }
     
-  function categoryGroupOperation()
+  function actionCategoryGroupOperation()
     {
     $data = $this->input_vars;
     

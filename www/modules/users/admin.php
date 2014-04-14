@@ -12,11 +12,11 @@
  */
 class AdminController extends Controller
   {
-  function index()
+  function actionIndex()
     {
     $this->redirect('/admin/users/users_list');
     }
-  function usersList()
+  function actionUsersList()
     {
     $this->getAccess(ACCESS_ADD);
     $this->usesModel('groups');
@@ -32,7 +32,7 @@ class AdminController extends Controller
     $this->viewPage();
     }
     
-  function manage($id=0)
+  function actionManage($id=0)
     {
     $data = $this->input_vars;
     
@@ -77,7 +77,7 @@ class AdminController extends Controller
     $this->viewPage();
     }
     
-  function delete($id=0)
+  function actionDelete($id=0)
     {
     if(empty($id))
       $this->errors->setError("ID of user is missing!");
@@ -86,7 +86,7 @@ class AdminController extends Controller
     $this->redirect();
     }
     
-  function activation($id=0)
+  function actionActivation($id=0)
     {
     if(empty($id))
       $this->errors->setError("ID of user is missing!");
@@ -96,7 +96,7 @@ class AdminController extends Controller
     }
     
     
-  function login()
+  function actionLogin()
     {
 
     $data = $this->input_vars;
@@ -123,14 +123,14 @@ class AdminController extends Controller
     $this->viewPage();
     }
     
-  function logout()
+  function actionLogout()
     {
     $this->users->logOut();
     $this->showMessage($this->t('login_success'));
     $this->redirect();
     }
       
-  function test()
+  function actionTest()
     {
     $element = $this->users->getByIdOrderByuser_Displayname("'1', '3'");
     print_r($element);

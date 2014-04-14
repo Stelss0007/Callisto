@@ -3,7 +3,7 @@ class AdminController extends Controller
   {
   public $defaultAction = 'theme_list';
   
-  function themeList()
+  function actionThemeList()
     {
     $browsein = array();
     $browsein[] = array ('url'=>'/admin/theme',
@@ -17,7 +17,7 @@ class AdminController extends Controller
     $this->viewPage();
     }
 
-  function install($input_position)
+  function actionInstall($input_position)
     {
     $this->getAccess(ACCESS_ADMIN);
     
@@ -38,7 +38,7 @@ class AdminController extends Controller
     $this->viewPage();
     }
     
-  function add($theme_name)
+  function actionAdd($theme_name)
     {
     $this->getAccess(ACCESS_ADMIN);
        
@@ -67,23 +67,22 @@ class AdminController extends Controller
     
     $this->showMessage('Ёлемент добавлен', '/admin/theme');
     }
-  function activate($id)
+  function actionActivate($id)
     {
     $this->getAccess(ACCESS_ADMIN);
     $this->theme->activate($id);
     $this->showMessage($this->t('theme_activated'), '/admin/theme');
     }
     
-  function delete($id)
+  function actionDelete($id)
     {
     $this->getAccess(ACCESS_ADMIN);
     $this->theme->delete($id);
     $this->showMessage($this->t('theme_deleted'), '/admin/theme');
     }
-  function getActive()
+  function actionGetActive()
     {
     appDebug($this->theme->getActive());
     }
 
   }
-?>

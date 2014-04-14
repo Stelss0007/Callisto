@@ -1,9 +1,9 @@
 <?php
 class IndexController extends Controller
   {
-  function index()
+  function actionIndex()
     {
     $this->redirect('/admin/main/');
     }
   }
-?>
+
