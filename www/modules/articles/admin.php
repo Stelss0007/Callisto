@@ -153,6 +153,57 @@ class AdminController extends Controller
         break;
       }
     }
+    
+    
+  function actionAjaxArticleList()
+    {
+    $aColumns = array( 'id', 'article_title', 'article_category_id', 'article_user_id', 'article_active', 'article_add_time' );
+    
+    $offset  = $this->getInput('iDisplayStart', '0');
+    $limit   = $this->getInput('iDisplayLength', '0');
+    $sEcho   = $this->getInput('sEcho', '0');
+    $sSearch = $this->getInput('sSearch', '');
+	
+    /* Indexed column (used for fast and accurate table cardinality) */
+    $sIndexColumn = "id";
+    
+    $this->usesModel('articleCategory');
+    $article_category_list = $this->articleCategory->category_list(false);
+    
+    $conditions = array(
+                        'join'   => "LEFT JOIN {$this->articles->getModelTable('users')} u ON (u.id=t.article_user_id)",
+                        'limit'  => $limit,
+                        'offset' => $offset
+                       );
+  
+    $totalCount = $this->articles->getCount();
+    $result     = $this->articles->getList($conditions);
+    
+    foreach($result as $key => $value)
+      {
+      $row = array(
+                  '<input type="checkbox" name="entities[]" class="td_entities" value="'.$value['id'].'">',
+                  $value['id'],
+                  $value['article_title'],
+                  $article_category_list[$value['article_category_id']],
+                  $value['login'],
+                  $value['active'],
+                  $value['article_add_time'],
+                  '<input type="checkbox" name="entities[]" class="td_entities" value="'.$value['id'].'">'
+                  );
+            
+      $result[$key] = $row;
+      }
+    
+    $output = array(
+                    "sEcho" => intval($sEcho),
+                    "iTotalRecords" => $totalCount,
+                    "iTotalDisplayRecords" => $totalCount,//count($result),
+                    "aaData" => array_values($result)
+                   );
+    
+    echo json_encode( $output );
+    }
   }
   
   
