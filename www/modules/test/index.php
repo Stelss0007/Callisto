@@ -1,6 +1,47 @@
 <?php
 class IndexController extends Controller
   {
+  function actionSms()
+    {
+    $conn = new SoapClient('http://gate.smsclub.mobi/soap/soapGateway.wsdl');
+    $login = '380978803826';    // строка, Логин пользователя (телефонный номер)
+    $password = '42dw7h6';        // строка, Пароль
+    $alphaName = 'StelsSoft';        // строка, Имя отправителя (альфа-имя) (пока Ваше альфа-имя не прописано, необходимо использовать это)
+    $text = 'Тест рассылки по протоколу soap';    // строка, Текст сообщения
+    // Отправка одиночного сообщения
+    $destAddr = '380978803826';    // строка, Номер получателя
+    try
+    {
+    $smscIds = $conn->sendSms($login,$password,$alphaName,$destAddr, iconv(mb_detect_encoding($text, mb_detect_order(), true), "UTF-8", $text));
+    }
+    catch (SoapFault $exception)
+    {
+             echo $exception;
+    }
+//    // $smscIds - список SMSCID, назначенных сервером (используется для проверки статуса сообщения), действителен в течении 3х дней
+//    // в данном случае состоит из одного элемента
+//    // Отправка массового сообщения
+//    $list = array('(050)123-45-67','(063)1234567','380661234567','0671234567','095-123-45-67','+380(99)123-45-67');          //список номеров в произвольном формате
+//    try
+//    {
+//             $smscIds = $conn->sendSms($login,$password,$alphaName,$list,$text);
+//    }
+//    catch (SoapFault $exception)
+//    {
+//             echo $exception;
+//    }
+//    // Получение отчета о состоянии сообщений
+//    $smscIds = array(1234,3212,2256);    // целое число/строка/массив строк/целых - список SMSCID, полученных при отправке сообщения
+//    try
+//    {
+//             $reports = $conn->getReports($login,$password,$smscIds);
+//    }
+//    catch (SoapFault $exception)
+//    {
+//             echo $exception;
+//    }
+         // $reports - ассоциативный массив вида SMSCID => статус сообщения (ENROUTE/DELIVRD/ACCEPTD/UNDELIV/REJECTD/DELETED)    
+    }
   //Пример отображения результата модуля
   function view_mod()
     {
