@@ -786,7 +786,7 @@ class Model extends DBConnector
     $condition = $this->prepareCondition($conditions, $params);
     $where = "{$condition['join']} {$condition['where']} {$condition['group']} {$condition['order']} {$condition['limit']}";
 
-    $result = $this->select($this->table, $condition['fields'], $where, true);
+    $result = $this->select($this->table.' as t', $condition['fields'], $where, true);
     $this->getRelations($result);
     return $result;
     }

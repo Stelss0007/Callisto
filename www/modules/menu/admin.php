@@ -3,7 +3,7 @@ class AdminController extends Controller
   {
   public $defaultAction = 'menu_list';
   
-  function menuList($parent_id = 0)
+  function actionMenuList($parent_id = 0)
     {
 //    error_reporting(E_ERROR | E_WARNING | E_PARSE | E_NOTICE);
 //    
@@ -33,7 +33,7 @@ class AdminController extends Controller
     $this->viewPage();
     }
     
-  function menuTree()
+  function actionMenuTree()
     {
     $this->assign('parent_id', 0);
     $this->assign('menus', $this->menu->tree_items(0));
@@ -42,7 +42,7 @@ class AdminController extends Controller
     $this->viewPage();
     }
     
-  function modify($id=0)
+  function actionModify($id=0)
     {
     $this->setReferer();
     
@@ -60,7 +60,7 @@ class AdminController extends Controller
     $this->viewPage();
     }
     
-  function create($id=0)
+  function actionCreate($id=0)
     {
     $this->setReferer();
   
@@ -80,7 +80,7 @@ class AdminController extends Controller
     $this->viewPage();
     }
     
-  function manage($id=0)
+  function actionManage($id=0)
     {
     $data = $this->input_vars;
 
@@ -101,7 +101,7 @@ class AdminController extends Controller
     $this->redirect($this->getReferer('/admin/menu/menu_list'));
     }
     
-  function delete($id=0)
+  function actionDelete($id=0)
     {
     if(empty($id))
       $this->errors->setError("ID of menu is missing!");
@@ -116,21 +116,21 @@ class AdminController extends Controller
     $this->redirect();
     }
    
-   function weightUp($weight, $menu_parent_id)
+   function actionWeightUp($weight, $menu_parent_id)
     {
     $this->getAccess(ACCESS_ADMIN);
     $this->menu->weightUp($weight, "menu_parent_id = '$menu_parent_id'");
     $this->redirect();
     }
     
-  function weightDown($weight, $menu_parent_id)
+  function actionWeightDown($weight, $menu_parent_id)
     {
     $this->getAccess(ACCESS_ADMIN);
     $this->menu->weightDown($weight, "menu_parent_id = '$menu_parent_id'");
     $this->redirect();
     }
     
-  function active($id)
+  function actionWctive($id)
     {
     $this->getAccess(ACCESS_ADMIN);
     $this->menu->block_active = '1';
@@ -138,7 +138,7 @@ class AdminController extends Controller
     $this->redirect();
     }
     
-  function deactive($id)
+  function actionDeactive($id)
     {
     $this->getAccess(ACCESS_ADMIN);
     $this->menu->block_active = '0';
@@ -146,4 +146,4 @@ class AdminController extends Controller
     $this->redirect();
     }
   }
-?>
+

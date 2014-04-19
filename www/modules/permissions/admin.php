@@ -3,7 +3,7 @@ class AdminController extends Controller
   {
   var $defaultAction = 'permissions_list';
   
-  function permissionsList()
+  function actionPermissionsList()
     {
     $this->usesModel('groups');
     
@@ -19,7 +19,7 @@ class AdminController extends Controller
     $this->viewPage();
     }
     
-  function manage($id=0)
+  function actionManage($id=0)
     {
     $data = $this->input_vars;
     //print_r($data);exit;
@@ -61,7 +61,7 @@ class AdminController extends Controller
     $this->viewPage();
     }
     
-  function delete($id=0)
+  function actionDelete($id=0)
     {
     if(empty($id))
       $this->errors->setError("ID of Permission is missing!");
@@ -70,16 +70,16 @@ class AdminController extends Controller
     $this->redirect();
     }
       
-  function permissionWeightUp($weight)
+  function actionPermissionWeightUp($weight)
     {  
     $this->permissions->weightUp($weight);
     $this->redirect();
     }
     
-  function permissionWeightDown($weight)
+  function actionPermissionWeightDown($weight)
     {  
     $this->permissions->weightDown($weight);
     $this->redirect();
     }
   }
-?>
+

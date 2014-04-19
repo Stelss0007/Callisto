@@ -121,7 +121,10 @@ abstract class Controller extends AppObject
     
     $this->loadModuleLang($this->modname);
     
-    $this->loadModVars('kernel');
+    //$this->loadModVars('kernel');
+    
+    $this->setModConfig();
+    
     //$this->object_name = $this->getObjectName();
 
     //??????? ??? ????????? ? ??????? ?????????? ? ???????? input_vars
@@ -270,11 +273,11 @@ abstract class Controller extends AppObject
         $action_name = 'index';
         }
       }
-      
+
     //Заменим - и _ на Большие буквы, тоесть приобразуем урл в Камелкейсподобный вид  
     $action_name = $this->urlToCamelCase($action_name);
       
-    if(!method_exists($this, $action_name))
+    if(!method_exists($this, 'action'.$action_name))
       $this->errors->setError('Action "'.$action_name.'" is not exist in this module "'.$this->modname.'", conroller "'.$this->controllerName.'"');
     
     $this->action = $action_name;
@@ -295,7 +298,7 @@ abstract class Controller extends AppObject
     //Без аргументов подключится стиль текущей темы
     appCssLoad();
     
-    call_user_method_array($action_name, $this, $this->input_vars);
+    call_user_method_array('action'.$action_name, $this, $this->input_vars);
     }
   final public function setViewType($type = 'user')
     {
@@ -328,6 +331,14 @@ abstract class Controller extends AppObject
     {
     global $appConfig;
     $this->config = &$appConfig;
+    }
+  final function setModConfig()
+    {
+    $this->usesModel('configuration');
+    $db_conf = $this->configuration->getModConfiguration('main');
+    $this->config = array_merge($this->config, $db_conf);
+    //appDebug($db_conf);exit;
+    unset($db_conf);
     }
     
   final function getInput($var, $default)
@@ -1140,77 +1151,77 @@ abstract class Controller extends AppObject
     } 
     
   ///////////////////////////// MOD VARS ///////////////////////////////////////
-  final public function loadModVars($mod='')
-    {
-    if(empty($mod))
-      {
-      return false;
-      }
-    $this->usesModel('modconfig');
-    
-    $vars = $this->modconfig->getVars($mod);
-    $this->mod_vars[$mod] = $vars[$mod];
-    }
-    
-  final public function getModVars($mod='')
-    {
-    if(empty($mod))
-      {
-      return false;
-      }
-    
-    if(empty($this->mod_vars[$mod])) 
-      {
-      $this->loadModVars($mod);
-      }
-    return isset($this->mod_vars[$mod]) ? $this->mod_vars[$mod] : array();
-    }
-    
-  final public function getModVar($mod='', $key='')
-    {
-    if(empty($key) && empty($mod))
-      {
-      return false;
-      }
-    if(empty($key))
-      {
-      $key = $mod;
-      $mod = false;
-      }
-    if(empty($mod))
-      {
-      $mod = $this->modname;
-      }
-    if(empty($this->mod_vars[$mod])) 
-      {
-      $this->loadModVars($mod);
-      }
-    return isset($this->mod_vars[$mod][$key]) ? $this->mod_vars[$mod][$key] : null;
-    }
-    
-  final public function setModVar($mod='', $key='', $var)
-    {
-    if(empty($key) && empty($mod))
-      {
-      return false;
-      }
-    if(func_num_args() == 2)
-      {
-      $mod = false;
-      $key = func_get_arg(0);
-      $var = func_get_arg(1);
-      }
-    if(empty($mod))
-      {
-      $mod = $this->modname;
-      }
-      
-    $this->usesModel('modconfig');
-    
-    $this->modconfig->setVar($mod, $key, $var);
-    $this->loadModVars($mod);
-    return true;
-    }
+//  final public function loadModVars($mod='')
+//    {
+//    if(empty($mod))
+//      {
+//      return false;
+//      }
+//    $this->usesModel('modconfig');
+//    
+//    $vars = $this->modconfig->getVars($mod);
+//    $this->mod_vars[$mod] = $vars[$mod];
+//    }
+//    
+//  final public function getModVars($mod='')
+//    {
+//    if(empty($mod))
+//      {
+//      return false;
+//      }
+//    
+//    if(empty($this->mod_vars[$mod])) 
+//      {
+//      $this->loadModVars($mod);
+//      }
+//    return isset($this->mod_vars[$mod]) ? $this->mod_vars[$mod] : array();
+//    }
+//    
+//  final public function getModVar($mod='', $key='')
+//    {
+//    if(empty($key) && empty($mod))
+//      {
+//      return false;
+//      }
+//    if(empty($key))
+//      {
+//      $key = $mod;
+//      $mod = false;
+//      }
+//    if(empty($mod))
+//      {
+//      $mod = $this->modname;
+//      }
+//    if(empty($this->mod_vars[$mod])) 
+//      {
+//      $this->loadModVars($mod);
+//      }
+//    return isset($this->mod_vars[$mod][$key]) ? $this->mod_vars[$mod][$key] : null;
+//    }
+//    
+//  final public function setModVar($mod='', $key='', $var)
+//    {
+//    if(empty($key) && empty($mod))
+//      {
+//      return false;
+//      }
+//    if(func_num_args() == 2)
+//      {
+//      $mod = false;
+//      $key = func_get_arg(0);
+//      $var = func_get_arg(1);
+//      }
+//    if(empty($mod))
+//      {
+//      $mod = $this->modname;
+//      }
+//      
+//    $this->usesModel('modconfig');
+//    
+//    $this->modconfig->setVar($mod, $key, $var);
+//    $this->loadModVars($mod);
+//    return true;
+//    }
    
   
   //////////////////////////////////////////////////////////////////////////////
@@ -1244,7 +1255,7 @@ abstract class Controller extends AppObject
     
     
     
-  public function groupOperation()
+  public function actionGroupOperation()
     {
     $data = $this->input_vars;
     
@@ -1276,7 +1287,7 @@ abstract class Controller extends AppObject
         break;
       }
     }
-  public function delete($id)
+  public function actionDelete($id)
     {
     if(empty($id))
       $this->errors->setError("ID of object is missing!");
@@ -1288,7 +1299,7 @@ abstract class Controller extends AppObject
     $this->redirect();
     }
     
-  public function activation($id)
+  public function actionActivation($id)
     {
     if(empty($id))
       $this->errors->setError("ID of user is missing!");

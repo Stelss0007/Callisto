@@ -3,13 +3,13 @@ class IndexController extends Controller
   {
   public $defaultAction = 'groups_list';
   
-  function groupsList()
+  function actionGroupsList()
     {
     $this->groups_list = $this->groups->group_list(true);
     $this->viewPage();
     }
     
-  function manage($id=0)
+  function actionManage($id=0)
     {
     $data = $this->input_vars;
 
@@ -36,7 +36,7 @@ class IndexController extends Controller
     $this->viewPage();
     }
     
-  function delete($id=0)
+  function actionDelete($id=0)
     {
     if(empty($id))
       $this->errors->setError("ID of Group is missing!");
@@ -44,10 +44,10 @@ class IndexController extends Controller
     $this->groups->group_delete($id);
     $this->redirect();
     }
-  function test()
+  function actionTest()
     {
     $element = $this->groups->getByIdOrderByGroup_Displayname("'1', '3'");
     print_r($element);
     }
   }
-?>
+

@@ -265,21 +265,28 @@ function docReady(){
 	}
 
 	//datatable
-	$('.datatable').dataTable({
-			"sDom": "<'row-fluid'<'span6'l><'span6'f>r>t<'row-fluid'<'span6'i><'span6 'p>>",
-			"sPaginationType": "bootstrap",
-			"oLanguage": {
-        "sUrl": "/themes/admin/js/lang/datatable/datatable." +language+ ".txt"
-      },
-      "fnDrawCallback": function() {
-//        if ($(".datatable").find("tr:not(.ui-widget-header)").length <= 5) {
-//          $('div.dataTables_paginate')[0].style.display = "none";
-//        } 
-//        else {
-//          $('div.dataTables_paginate')[0].style.display = "block";
-//        }
-      }
-		} );
+  $('.datatable').each(function(){
+      //Опции по умолчанию
+      var dt_options =  {
+                        "sDom": "<'row-fluid'<'span6'l><'span6'f>r>t<'row-fluid'<'span6'i><'span6 'p>>",
+                        "sPaginationType": "bootstrap",
+                        "oLanguage": {
+                                     "sUrl": "/themes/admin/js/lang/datatable/datatable." +language+ ".txt"
+                                     }
+                        };
+  
+      if($(this).attr('data-source')) 
+        {
+        dt_options.bProcessing = true;
+        dt_options.bServerSide = true;
+        dt_options.sAjaxSource = $(this).attr('data-source');
+        }
+      
+      $(this).dataTable(dt_options);
+    });
+    
+    
+    
 	$('.btn-close').click(function(e){
 		e.preventDefault();
 		$(this).parent().parent().parent().fadeOut();

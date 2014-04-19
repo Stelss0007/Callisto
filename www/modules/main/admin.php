@@ -12,10 +12,9 @@
  */
 class AdminController extends Controller
   {
-  function index()
+  function actionIndex()
     {
     $this->viewPage();
     }
   }
 
-?>

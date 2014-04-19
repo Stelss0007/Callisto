@@ -5,7 +5,7 @@ class AdminController extends Controller
 
   public $defaultAction = 'fileList';
 
-  function fileList()
+  function actionFileList()
     {
     $browsein   = array();
     $browsein[] = array('url' => "/admin/main", 'displayname' => 'Dashboard');
@@ -16,7 +16,7 @@ class AdminController extends Controller
     $this->viewPage();
     }
 
-  function getList()
+  function actionGetList()
     {
     $opts = array(
         //'debug' => true,
@@ -46,4 +46,3 @@ class AdminController extends Controller
 
   }
 
-?>

@@ -3,7 +3,7 @@ class AdminController extends Controller
   {
   public $defaultAction = 'blocks_list';
   
-  function blocksList()
+  function actionBlocksList()
     {
     $this->getAccess(ACCESS_ADMIN);
   
@@ -26,7 +26,7 @@ class AdminController extends Controller
     $this->viewPage();
     }
     
-  function install($input_position)
+  function actionInstall($input_position)
     {
     $this->getAccess(ACCESS_ADMIN);
     
@@ -79,7 +79,7 @@ class AdminController extends Controller
     $this->viewPage();
     }
     
-  function add($input_position, $block_name)
+  function actionAdd($input_position, $block_name)
     {
     $this->getAccess(ACCESS_ADMIN);
     
@@ -119,21 +119,21 @@ class AdminController extends Controller
     $this->showMessage('Элемент добавлен', '/admin/blocks');
     }
     
-  function weightUp($weight,$block_position)
+  function actionWeightUp($weight,$block_position)
     {
     $this->getAccess(ACCESS_ADMIN);
     $this->blocks->weightUp($weight, "block_position = '$block_position'");
     $this->redirect();
     }
     
-  function weightDown($weight,$block_position)
+  function actionWeightDown($weight,$block_position)
     {
     $this->getAccess(ACCESS_ADMIN);
     $this->blocks->weightDown($weight ,"block_position = '$block_position'");
     $this->redirect();
     }
     
-  function active($id)
+  function actionActive($id)
     {
     $this->getAccess(ACCESS_ADMIN);
     $this->blocks->block_active = '1';
@@ -141,7 +141,7 @@ class AdminController extends Controller
     $this->redirect();
     }
     
-  function deactive($id)
+  function actionDeactive($id)
     {
     $this->getAccess(ACCESS_ADMIN);
     $this->blocks->block_active = '0';
@@ -149,7 +149,7 @@ class AdminController extends Controller
     $this->redirect();
     }
     
-  function delete($id, $weight, $block_position)
+  function actionDelete($id, $weight, $block_position)
     {
     $this->getAccess(ACCESS_ADMIN);
     $this->blocks->weightDelete($weight ,"block_position = '$block_position'");
@@ -157,7 +157,7 @@ class AdminController extends Controller
     $this->redirect();
     }
     
-  function modify($id)
+  function actionModify($id)
     {
     $this->getAccess(ACCESS_ADMIN);
     
@@ -204,7 +204,7 @@ class AdminController extends Controller
     $this->viewPage();
     }
     
-  function update()
+  function actionUpdate()
     {
     $this->getAccess(ACCESS_ADMIN);
     
@@ -244,7 +244,7 @@ class AdminController extends Controller
     $this->showMessage('Изменеия сохранены', $this->input_vars['ref']);
     }
     
-  function info($block_name, $position)
+  function actionInfo($block_name, $position)
     {
     if(!file_exists ("blocks/$block_name/info.php"))
       {
@@ -276,4 +276,4 @@ class AdminController extends Controller
     $this->viewPage();
     }
   }
-?>
+
