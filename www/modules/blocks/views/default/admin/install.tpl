@@ -2,7 +2,7 @@
   <div class="row-fluid">		
     <div class="box span12">
       <div class="box-header well" data-original-title>
-        <h2><i class="icon-th"></i> Доступные блоки</h2>
+        <h2><i class="icon-th"></i> Р”РѕСЃС‚СѓРїРЅС‹Рµ Р±Р»РѕРєРё</h2>
       </div>
       <div class="box-content">
         <form action="/admin/blocks/group_operation">
@@ -28,11 +28,11 @@
                 <th>
                   <input type="checkbox" name="entities[]" class="td_entiies_group" value="">
                 </th>
-                <th class="head" nowrap>Отображаемое имя</th>
-                <th class="head">Имя блока</th>
-                <th class="head">Описание</th>
-                <th class="head">Версия</th>
-                <th class="head">Действия</th>
+                <th class="head" nowrap>РћС‚РѕР±СЂР°Р¶Р°РµРјРѕРµ РёРјСЏ</th>
+                <th class="head">РРјСЏ Р±Р»РѕРєР°</th>
+                <th class="head">РћРїРёСЃР°РЅРёРµ</th>
+                <th class="head">Р’РµСЂСЃРёСЏ</th>
+                <th class="head">Р”РµР№СЃС‚РІРёСЏ</th>
               </tr>
             </thead>
 

@@ -16,10 +16,10 @@ class menu_block extends Block
     
   function modify(&$blockinfo)
     {
-    //Òèïû ìåíþ
+    //Ð¢Ð¸Ð¿Ñ‹ Ð¼ÐµÐ½ÑŽ
     $this->usesModel('menu');
     $this->items_list =  $this->menu->tree_items(0);
-    $this->menutypes_list = array (1=>'Âñåãäà ðàçâåðíóòî',2=>'Ðàçâàðà÷èâàþøååñÿ');
+    $this->menutypes_list = array (1=>'Ð’ÑÐµÐ³Ð´Ð° Ñ€Ð°Ð·Ð²ÐµÑ€Ð½ÑƒÑ‚Ð¾',2=>'Ð Ð°Ð·Ð²Ð°Ñ€Ð°Ñ‡Ð¸Ð²Ð°ÑŽÑˆÐµÐµÑÑ');
     return $this->view();
     }
     

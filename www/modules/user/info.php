@@ -1,13 +1,13 @@
 <?php
 $info['mod_name'] = 'content';
 $info['mod_type'] = 'user';
-$info['mod_displayname'] = 'Êîíòåíò';
+$info['mod_displayname'] = 'ÐšÐ¾Ð½Ñ‚ÐµÐ½Ñ‚';
 $info['mod_version'] = '0.91';
-$info['mod_description'] = 'Óïðàâëåíèå êîíòåêñòîì';
+$info['mod_description'] = 'Ð£Ð¿Ñ€Ð°Ð²Ð»ÐµÐ½Ð¸Ðµ ÐºÐ¾Ð½Ñ‚ÐµÐºÑÑ‚Ð¾Ð¼';
 $info['mod_credits'] = '';
 $info['mod_changelog'] = '';
 $info['mod_license'] = '';
 $info['mod_official'] = 1;
-$info['mod_author'] = 'Èëüÿ Áåðäèíñêèõ';
+$info['mod_author'] = 'Ð˜Ð»ÑŒÑ Ð‘ÐµÑ€Ð´Ð¸Ð½ÑÐºÐ¸Ñ…';
 $info['mod_contact'] = 'elite@cherkassy.org';
 ?>

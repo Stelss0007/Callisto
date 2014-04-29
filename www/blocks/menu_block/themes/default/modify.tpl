@@ -1,6 +1,6 @@
 {strip}
   <div class="control-group">
-    <label class="control-label" for="date01">Поведение меню:</label>
+    <label class="control-label" for="date01">РџРѕРІРµРґРµРЅРёРµ РјРµРЅСЋ:</label>
     <div class="controls">
      <select name=menu_type>
         {html_options options=$menutypes_list selected=$menu_type}
@@ -9,11 +9,11 @@
   </div>
       
   <div class="control-group">
-    <label class="control-label" for="date01">Начинать с элемента:</label>
+    <label class="control-label" for="date01">РќР°С‡РёРЅР°С‚СЊ СЃ СЌР»РµРјРµРЅС‚Р°:</label>
     <div class="controls">
-     {* Формируем масив для вункции html_options *}
+     {* Р¤РѕСЂРјРёСЂСѓРµРј РјР°СЃРёРІ РґР»СЏ РІСѓРЅРєС†РёРё html_options *}
       {array name='flat_itemslist'}
-      {array_append name='flat_itemslist' key='0' value='Корень'}
+      {array_append name='flat_itemslist' key='0' value='РљРѕСЂРµРЅСЊ'}
       
       {foreach item=item from=$items_list}
         {array_append name='flat_itemslist' key=$item.id value=$item.menu_title|escape|tree:$item.level}

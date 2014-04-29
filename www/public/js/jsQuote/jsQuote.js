@@ -3,18 +3,18 @@
  * and open the template in the editor.
  */
 ////////////////////////////////////////////////////////////////////////////////
-///////////////////////Цитатник/////////////////////////////////////////////////
-/*Для скопирования в буфер (цитатник), типа плагин))*/
+///////////////////////Р¦РёС‚Р°С‚РЅРёРє/////////////////////////////////////////////////
+/*Р”Р»СЏ СЃРєРѕРїРёСЂРѕРІР°РЅРёСЏ РІ Р±СѓС„РµСЂ (С†РёС‚Р°С‚РЅРёРє), С‚РёРїР° РїР»Р°РіРёРЅ))*/
 
 
 
 jQuery.fn.addtocopy = function(usercopytxt)
   {
-  var options = '11111';//{htmlcopytxt: '<br>More: <a href="'+window.location.href+'">Источник</a><br>', minlen: 25, addcopyfirst: false}
+  var options = '11111';//{htmlcopytxt: '<br>More: <a href="'+window.location.href+'">РСЃС‚РѕС‡РЅРёРє</a><br>', minlen: 25, addcopyfirst: false}
   $.extend(options, usercopytxt);
   var copy_sp = document.createElement('span');
   copy_sp.id = 'ctrlcopy';
-  copy_sp.innerHTML = "<br>Детальнее: <a href='"+window.location.href+"'>Источник</a><br>";//options.htmlcopytxt;
+  copy_sp.innerHTML = "<br>Р”РµС‚Р°Р»СЊРЅРµРµ: <a href='"+window.location.href+"'>РСЃС‚РѕС‡РЅРёРє</a><br>";//options.htmlcopytxt;
 
   return this.each(function(){
     $(this).mousedown(function(){
@@ -23,7 +23,7 @@ jQuery.fn.addtocopy = function(usercopytxt)
 
     $(this).mouseup(function(e){
 
-      //если флаг быстрые цитаты установлен
+      //РµСЃР»Рё С„Р»Р°Рі Р±С‹СЃС‚СЂС‹Рµ С†РёС‚Р°С‚С‹ СѓСЃС‚Р°РЅРѕРІР»РµРЅ
       if($('input[name=hot_quote]').attr('checked'))
         {
         var html="";
@@ -66,7 +66,7 @@ jQuery.fn.addtocopy = function(usercopytxt)
           rng=document.selection.createRange();
           html=rng.htmlText||"";
           }
-        //alert('Вы скопировали текст\n'+ html);
+        //alert('Р’С‹ СЃРєРѕРїРёСЂРѕРІР°Р»Рё С‚РµРєСЃС‚\n'+ html);
         //alert( e.pageY);
 
 
@@ -81,7 +81,7 @@ jQuery.fn.addtocopy = function(usercopytxt)
 
         $.newWindow({
                      id:"winQuote",
-                     title:"Быстрые цитаты ",
+                     title:"Р‘С‹СЃС‚СЂС‹Рµ С†РёС‚Р°С‚С‹ ",
                      content: $('#WindowQuote').html(),
                      width: 400,
                      height: 280,
@@ -97,11 +97,11 @@ jQuery.fn.addtocopy = function(usercopytxt)
     });
   }
 
-//Запускаем плагин
+//Р—Р°РїСѓСЃРєР°РµРј РїР»Р°РіРёРЅ
 $(function()
 {
   $("#page_content").addtocopy({
-    htmlcopytxt: '<br>Подробнее: <a href="'+window.location.href+'">'+window.location.href+'</a>'
+    htmlcopytxt: '<br>РџРѕРґСЂРѕР±РЅРµРµ: <a href="'+window.location.href+'">'+window.location.href+'</a>'
   });
 });
 
@@ -124,7 +124,7 @@ function sendMyQuote()
     },
     function(data)
       {
-      alert("Данные успешно добавлены");
+      alert("Р”Р°РЅРЅС‹Рµ СѓСЃРїРµС€РЅРѕ РґРѕР±Р°РІР»РµРЅС‹");
       $.closeWindow("winQuote");
       }
     );

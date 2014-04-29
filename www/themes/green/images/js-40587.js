@@ -1,4 +1,4 @@
-var expires = new Date();
+﻿var expires = new Date();
 expires.setTime(expires.getTime() + 2592000000);
 $(document).ready(function(){
     $("#mnu_title1").click(function(){

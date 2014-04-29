@@ -1,18 +1,18 @@
 <?php
 /*
- * Отправка письма
+ * РћС‚РїСЂР°РІРєР° РїРёСЃСЊРјР°
 */
 function appMail($to, $subject, $body, $is_html=false)
   {
-  //Значит создали обьект
+  //Р—РЅР°С‡РёС‚ СЃРѕР·РґР°Р»Рё РѕР±СЊРµРєС‚
   require_once('kernel/phpmailer/class.phpmailer.php');
   $mail = new PHPMailer();
 
-  //Перекодируем все в кои8
+  //РџРµСЂРµРєРѕРґРёСЂСѓРµРј РІСЃРµ РІ РєРѕРё8
   $subject = convert_cyr_string($subject,"w","k");
   $body = convert_cyr_string($body,"w","k");
 
-  //Конфигурируем базовые настройки
+  //РљРѕРЅС„РёРіСѓСЂРёСЂСѓРµРј Р±Р°Р·РѕРІС‹Рµ РЅР°СЃС‚СЂРѕР№РєРё
   $mail->From = appModGetVar('app_config','mail_from');
   $mail->FromName = convert_cyr_string(appModGetVar('app_config','mail_fromname'),"w","k");
   $mail->CharSet = 'koi8-r';
@@ -20,11 +20,11 @@ function appMail($to, $subject, $body, $is_html=false)
   //$mail->Priority = $priority;
   //$mail->Encoding = $encoding;
 
-  //Составляем письмо
+  //РЎРѕСЃС‚Р°РІР»СЏРµРј РїРёСЃСЊРјРѕ
   $mail->IsHTML($is_html);
   $mail->Subject  =  $subject;
   $mail->Body     =  $body;
-  //Может быть один емайл, а может быть и много :))
+  //РњРѕР¶РµС‚ Р±С‹С‚СЊ РѕРґРёРЅ РµРјР°Р№Р», Р° РјРѕР¶РµС‚ Р±С‹С‚СЊ Рё РјРЅРѕРіРѕ :))
   if (is_array ($to))
     {
     foreach ($to as $value)
@@ -37,10 +37,10 @@ function appMail($to, $subject, $body, $is_html=false)
       $mail->AddAddress($to);
       };
 
-  //Конфигурируем метод отправки
+  //РљРѕРЅС„РёРіСѓСЂРёСЂСѓРµРј РјРµС‚РѕРґ РѕС‚РїСЂР°РІРєРё
   $mail_method = appModGetVar('app_config','mail_method');
 
-  //СМТП
+  //РЎРњРўРџ
   if ($mail_method == 'smtp')
     {
     $mail->IsSMTP();
@@ -85,28 +85,28 @@ function appMail($to, $subject, $body, $is_html=false)
   return false;
   }
 
-/* Увеличиваем вес элимента в базе
- * Пераетса массив в формате key=>value
+/* РЈРІРµР»РёС‡РёРІР°РµРј РІРµСЃ СЌР»РёРјРµРЅС‚Р° РІ Р±Р°Р·Рµ
+ * РџРµСЂР°РµС‚СЃР° РјР°СЃСЃРёРІ РІ С„РѕСЂРјР°С‚Рµ key=>value
  */
 function appDBWeightMoveUp ($apptable, $weight, $where='')
   {
-  //Если самый первый некуда уже двигать
+  //Р•СЃР»Рё СЃР°РјС‹Р№ РїРµСЂРІС‹Р№ РЅРµРєСѓРґР° СѓР¶Рµ РґРІРёРіР°С‚СЊ
   if ($weight==1){return true;};
 
   $column = appDBGetColumns($apptable);
-  //Подготавливаем $where
+  //РџРѕРґРіРѕС‚Р°РІР»РёРІР°РµРј $where
   $where=str_replace('WHERE ','',$where);
 
   if ($where!='')
     {
     $where="AND $where";
     };
-  //Передвигаемый элимент
+  //РџРµСЂРµРґРІРёРіР°РµРјС‹Р№ СЌР»РёРјРµРЅС‚
   $UpedEliment=appDbSelect ($apptable, $column, "WHERE $column[weight]='$weight' $where");
-  //Предвидущий элимент
+  //РџСЂРµРґРІРёРґСѓС‰РёР№ СЌР»РёРјРµРЅС‚
   $PreviusEliment=appDbSelect ($apptable, $column, "WHERE $column[weight]='".($weight-1)."' $where");
   //
-  //Собственно сама растусовка
+  //РЎРѕР±СЃС‚РІРµРЅРЅРѕ СЃР°РјР° СЂР°СЃС‚СѓСЃРѕРІРєР°
   $PreviusEliment[weight]=$PreviusEliment[weight]+1;
   $UpedEliment[weight]=$UpedEliment[weight]-1;
 
@@ -115,45 +115,45 @@ function appDBWeightMoveUp ($apptable, $weight, $where='')
   return true;
   };
 
-/* Увеличиваем вес элимента в базе
- * Пераетса массив в формате key=>value
+/* РЈРІРµР»РёС‡РёРІР°РµРј РІРµСЃ СЌР»РёРјРµРЅС‚Р° РІ Р±Р°Р·Рµ
+ * РџРµСЂР°РµС‚СЃР° РјР°СЃСЃРёРІ РІ С„РѕСЂРјР°С‚Рµ key=>value
  */
 function appDBWeightMoveDown ($apptable, $weight, $where='')
   {
-  //Если самый нижний некуда уже двигать
+  //Р•СЃР»Рё СЃР°РјС‹Р№ РЅРёР¶РЅРёР№ РЅРµРєСѓРґР° СѓР¶Рµ РґРІРёРіР°С‚СЊ
   $MaxWeight=appDbMaxWeight ($apptable, $where);
   if ($weight==$MaxWeight){return true;};
 
   $column =  appDBGetColumns($apptable);
-  //Подготавливаем $where
+  //РџРѕРґРіРѕС‚Р°РІР»РёРІР°РµРј $where
   $where=str_replace('WHERE ','',$where);
   if ($where!='')
     {
     $where="AND $where";
     };
 
-  //Передвигаемый элимент
+  //РџРµСЂРµРґРІРёРіР°РµРјС‹Р№ СЌР»РёРјРµРЅС‚
   $UpedEliment=appDbSelect ($apptable, $column, "WHERE $column[weight]='$weight' $where");
-  //Следующий элимент
+  //РЎР»РµРґСѓСЋС‰РёР№ СЌР»РёРјРµРЅС‚
   $NextEliment=appDbSelect ($apptable, $column, "WHERE $column[weight]='".($weight+1)."' $where");
   //
-  //Собственно сама растусовка
+  //РЎРѕР±СЃС‚РІРµРЅРЅРѕ СЃР°РјР° СЂР°СЃС‚СѓСЃРѕРІРєР°
   $NextEliment[weight]=$NextEliment[weight]-1;
   $UpedEliment[weight]=$UpedEliment[weight]+1;
 
   appDbUpdate ($apptable, $NextEliment, "WHERE $column[id]='".$NextEliment[id]."'");
   appDbUpdate ($apptable, $UpedEliment, "WHERE $column[id]='".$UpedEliment[id]."'");
   return true;
-  };
+  }
 
 /*
- * Удаления веса из таблицы
+ * РЈРґР°Р»РµРЅРёСЏ РІРµСЃР° РёР· С‚Р°Р±Р»РёС†С‹
 */
 function appDBWeightDelete ($apptable, $weight, $where='')
   {
-  //Получили столбцы
+  //РџРѕР»СѓС‡РёР»Рё СЃС‚РѕР»Р±С†С‹
   $column = appDBGetColumns($apptable);
-  //Подготавливаем $where
+  //РџРѕРґРіРѕС‚Р°РІР»РёРІР°РµРј $where
   $where=str_replace('WHERE ','',$where);
   if ($where!='')
     {
@@ -170,10 +170,10 @@ function appDBWeightDelete ($apptable, $weight, $where='')
     appException ('appDBWeightDelete', DATABASE_ERROR, mysql_error()."<br> $sql");
     };
   return true;
-  };
+  }
 
 /*
- * Возвращает спиисок временных зон
+ * Р’РѕР·РІСЂР°С‰Р°РµС‚ СЃРїРёРёСЃРѕРє РІСЂРµРјРµРЅРЅС‹С… Р·РѕРЅ
 */
 function appGetTzList ()
   {
@@ -211,15 +211,15 @@ function appGetTzList ()
                 '23'   => '(GMT +11:00 hours) Magadan, Solomon Islands, New Caledonia',
                 '24'   => '(GMT +12:00 hours) Auckland, Wellington, Fiji, Kamchatka');
   return ($tzinfo);
-  };
+  }
 
 /*
- * Возвращает спиисок языков в системе
+ * Р’РѕР·РІСЂР°С‰Р°РµС‚ СЃРїРёРёСЃРѕРє СЏР·С‹РєРѕРІ РІ СЃРёСЃС‚РµРјРµ
 */
 function appGetLangList()
   {
   $LangList=array();
-  //Доступные языки
+  //Р”РѕСЃС‚СѓРїРЅС‹Рµ СЏР·С‹РєРё
   $handle = opendir('lang');
   while ($f = readdir($handle))
     {
@@ -232,8 +232,5 @@ function appGetLangList()
   closedir($handle);
 //  sort($LangList);
   return ($LangList);
-  };
+  }
 
-
-
-?>

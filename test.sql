@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Хост: localhost
--- Время создания: Мар 24 2014 г., 18:05
+-- Время создания: Апр 22 2014 г., 17:26
 -- Версия сервера: 5.5.11
 -- Версия PHP: 5.3.6
 
@@ -40,7 +40,7 @@ CREATE TABLE IF NOT EXISTS `article` (
   `article_category_id` int(11) NOT NULL,
   `article_user_alias` varchar(200) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=21 ;
 
 --
 -- Дамп данных таблицы `article`
@@ -48,8 +48,20 @@ CREATE TABLE IF NOT EXISTS `article` (
 
 INSERT INTO `article` (`id`, `article_title`, `article_description`, `article_add_time`, `article_start_time`, `article_end_time`, `article_active`, `article_meta_description`, `article_meta_keywords`, `article_user_id`, `article_category_id`, `article_user_alias`) VALUES
 (1, 'First Article', '<p><strong style=\\"color: #000000; font-family: Arial, Helvetica, sans; font-size: 11px; font-style: normal; font-variant: normal; letter-spacing: normal; line-height: 14px; orphans: auto; text-align: justify; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;\\">Lorem Ipsum</strong><span style=\\"color: #000000; font-family: Arial, Helvetica, sans; font-size: 11px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 14px; orphans: auto; text-align: justify; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; display: inline !important; float: none;\\"><span class=\\"Apple-converted-space\\">&nbsp;</span>is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\\''s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</span></p>\\r\\n<p>rn</p>\\r\\n<p><span style=\\"color: #000000; font-family: Arial, Helvetica, sans; font-size: 11px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 14px; orphans: auto; text-align: justify; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; display: inline !important; float: none;\\"><strong style=\\"color: #000000; font-family: Arial, Helvetica, sans; font-size: 11px; font-style: normal; font-variant: normal; letter-spacing: normal; line-height: 14px; orphans: auto; text-align: justify; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;\\">Lorem Ipsum</strong><span style=\\"color: #000000; font-family: Arial, Helvetica, sans; font-size: 11px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 14px; orphans: auto; text-align: justify; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; display: inline !important; float: none;\\"><span class=\\"Apple-converted-space\\">&nbsp;</span>is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\\''s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</span><strong style=\\"color: #000000; font-family: Arial, Helvetica, sans; font-size: 11px; font-style: normal; font-variant: normal; letter-spacing: normal; line-height: 14px; orphans: auto; text-align: justify; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;\\">Lorem Ipsum</strong><span style=\\"color: #000000; font-family: Arial, Helvetica, sans; font-size: 11px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 14px; orphans: auto; text-align: justify; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; display: inline !important; float: none;\\"><span class=\\"Apple-converted-space\\">&nbsp;</span>is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\\''s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</span><strong style=\\"color: #000000; font-family: Arial, Helvetica, sans; font-size: 11px; font-style: normal; font-variant: normal; letter-spacing: normal; line-height: 14px; orphans: auto; text-align: justify; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;\\">Lorem Ipsum</strong><span style=\\"color: #000000; font-family: Arial, Helvetica, sans; font-size: 11px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 14px; orphans: auto; text-align: justify; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; display: inline !important; float: none;\\"><span class=\\"Apple-converted-space\\">&nbsp;</span>is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\\''s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</span><strong style=\\"color: #000000; font-family: Arial, Helvetica, sans; font-size: 11px; font-style: normal; font-variant: normal; letter-spacing: normal; line-height: 14px; orphans: auto; text-align: justify; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;\\">Lorem Ipsum</strong><span style=\\"color: #000000; font-family: Arial, Helvetica, sans; font-size: 11px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 14px; orphans: auto; text-align: justify; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; display: inline !important; float: none;\\"><span class=\\"Apple-converted-space\\">&nbsp;</span>is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\\''s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</span><strong style=\\"color: #000000; font-family: Arial, Helvetica, sans; font-size: 11px; font-style: normal; font-variant: normal; letter-spacing: normal; line-height: 14px; orphans: auto; text-align: justify; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;\\">Lorem Ipsum</strong><span style=\\"color: #000000; font-family: Arial, Helvetica, sans; font-size: 11px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 14px; orphans: auto; text-align: justify; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; display: inline !important; float: none;\\"><span class=\\"Apple-converted-space\\">&nbsp;</span>is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\\''s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</span><strong style=\\"color: #000000; font-family: Arial, Helvetica, sans; font-size: 11px; font-style: normal; font-variant: normal; letter-spacing: normal; line-height: 14px; orphans: auto; text-align: justify; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;\\">Lorem Ipsum</strong><span style=\\"color: #000000; font-family: Arial, Helvetica, sans; font-size: 11px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 14px; orphans: auto; text-align: justify; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; display: inline !important; float: none;\\"><span class=\\"Apple-converted-space\\">&nbsp;</span>is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\\''s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</span><strong style=\\"color: #000000; font-family: Arial, Helvetica, sans; font-size: 11px; font-style: normal; font-variant: normal; letter-spacing: normal; line-height: 14px; orphans: auto; text-align: justify; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;\\">Lorem Ipsum</strong><span style=\\"color: #000000; font-family: Arial, Helvetica, sans; font-size: 11px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 14px; orphans: auto; text-align: justify; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; display: inline !important; float: none;\\"><span class=\\"Apple-converted-space\\">&nbsp;</span>is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\\''s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</span><strong style=\\"color: #000000; font-family: Arial, Helvetica, sans; font-size: 11px; font-style: normal; font-variant: normal; letter-spacing: normal; line-height: 14px; orphans: auto; text-align: justify; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;\\">Lorem Ipsum</strong><span style=\\"color: #000000; font-family: Arial, Helvetica, sans; font-size: 11px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 14px; orphans: auto; text-align: justify; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; display: inline !important; float: none;\\"><span class=\\"Apple-converted-space\\">&nbsp;</span>is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\\''s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</span><strong style=\\"color: #000000; font-family: Arial, Helvetica, sans; font-size: 11px; font-style: normal; font-variant: normal; letter-spacing: normal; line-height: 14px; orphans: auto; text-align: justify; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;\\">Lorem Ipsum</strong><span style=\\"color: #000000; font-family: Arial, Helvetica, sans; font-size: 11px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 14px; orphans: auto; text-align: justify; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; display: inline !important; float: none;\\"><span class=\\"Apple-converted-space\\">&nbsp;</span>is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\\''s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</span><strong style=\\"color: #000000; font-family: Arial, Helvetica, sans; font-size: 11px; font-style: normal; font-variant: normal; letter-spacing: normal; line-height: 14px; orphans: auto; text-align: justify; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;\\">Lorem Ipsum</strong><span style=\\"color: #000000; font-family: Arial, Helvetica, sans; font-size: 11px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 14px; orphans: auto; text-align: justify; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; display: inline !important; float: none;\\"><span class=\\"Apple-converted-space\\">&nbsp;</span>is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\\''s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</span><strong style=\\"color: #000000; font-family: Arial, Helvetica, sans; font-size: 11px; font-style: normal; font-variant: normal; letter-spacing: normal; line-height: 14px; orphans: auto; text-align: justify; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;\\">Lorem Ipsum</strong><span style=\\"color: #000000; font-family: Arial, Helvetica, sans; font-size: 11px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 14px; orphans: auto; text-align: justify; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; display: inline !important; float: none;\\"><span class=\\"Apple-converted-space\\">&nbsp;</span>is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\\''s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</span><strong style=\\"color: #000000; font-family: Arial, Helvetica, sans; font-size: 11px; font-style: normal; font-variant: normal; letter-spacing: normal; line-height: 14px; orphans: auto; text-align: justify; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;\\">Lorem Ipsum</strong><span style=\\"color: #000000; font-family: Arial, Helvetica, sans; font-size: 11px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 14px; orphans: auto; text-align: justify; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; display: inline !important; float: none;\\"><span class=\\"Apple-converted-space\\">&nbsp;</span>is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\\''s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</span></span></p>\\r\\n<p>rn</p>\\r\\n<p><strong style=\\"color: #000000; font-family: Arial, Helvetica, sans; font-size: 11px; font-style: normal; font-variant: normal; letter-spacing: normal; line-height: 14px; orphans: auto; text-align: justify; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;\\">Lorem Ipsum</strong><span style=\\"color: #000000; font-family: Arial, Helvetica, sans; font-size: 11px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 14px; orphans: auto; text-align: justify; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; display: inline !important; float: none;\\"><span class=\\"Apple-converted-space\\">&nbsp;</span>is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\\''s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</span></p>\\r\\n<p>rn</p>\\r\\n<p>&nbsp;</p>\\r\\n<p>rn</p>\\r\\n<p><span style=\\"color: #000000; font-family: Arial, Helvetica, sans; font-size: 11px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 14px; orphans: auto; text-align: justify; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; display: inline !important; float: none;\\"><strong style=\\"color: #000000; font-family: Arial, Helvetica, sans; font-size: 11px; font-style: normal; font-variant: normal; letter-spacing: normal; line-height: 14px; orphans: auto; text-align: justify; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;\\">Lorem Ipsum</strong><span style=\\"color: #000000; font-family: Arial, Helvetica, sans; font-size: 11px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 14px; orphans: auto; text-align: justify; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; display: inline !important; float: none;\\"><span class=\\"Apple-converted-space\\">&nbsp;</span>is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\\''s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</span></span></p>\\r\\n<p>rn</p>\\r\\n<p>&nbsp;</p>\\r\\n<p>rn</p>\\r\\n<p><strong style=\\"color: #000000; font-family: Arial, Helvetica, sans; font-size: 11px; font-style: normal; font-variant: normal; letter-spacing: normal; line-height: 14px; orphans: auto; text-align: justify; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;\\">Lorem Ipsum</strong><span style=\\"color: #000000; font-family: Arial, Helvetica, sans; font-size: 11px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 14px; orphans: auto; text-align: justify; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; display: inline !important; float: none;\\"><span class=\\"Apple-converted-space\\">&nbsp;</span>is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\\''s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</span></p>\\r\\n<p>rn</p>\\r\\n<p>&nbsp;</p>\\r\\n<p>rn</p>\\r\\n<p>&nbsp;</p>\\r\\n<p>rn</p>\\r\\n<p>&nbsp;</p>\\r\\n<p>rn</p>\\r\\n<p><span style=\\"color: #000000; font-family: Arial, Helvetica, sans; font-size: 11px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 14px; orphans: auto; text-align: justify; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; display: inline !important; float: none;\\"><strong style=\\"color: #000000; font-family: Arial, Helvetica, sans; font-size: 11px; font-style: normal; font-variant: normal; letter-spacing: normal; line-height: 14px; orphans: auto; text-align: justify; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;\\">Lorem Ipsum</strong><span style=\\"color: #000000; font-family: Arial, Helvetica, sans; font-size: 11px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 14px; orphans: auto; text-align: justify; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; display: inline !important; float: none;\\"><span class=\\"Apple-converted-space\\">&nbsp;</span>is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\\''s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</span></span></p>', 1395093600, 1395698400, 0, 1, '', '', 0, 0, ''),
-(5, 'twert ewr tewrt ewrt erwt er', '<p>t ert ert erterw terwtert er tewrt erw</p>', 1388527200, 1388527200, 0, 1, '', '', 3, 2, ''),
-(6, 'rvqwewrwqerwverqw er ewqrwe wqe wre', '<p>rwerqwerwew qe rweqrweqrwqerqeqwcwwecrqwe</p>', 1395266400, 1395266400, 0, 0, '111111', '222222', 3, 0, '');
+(7, 'terwtwertwertwerte', '<p>rtertvwertverteev&nbsp; tewr wer t</p>', 1396213200, 1396213200, 0, 0, '', '', 3, 1, ''),
+(8, '22222', '<p>222222</p>', 1396213200, 1396213200, 0, 0, '', '', 3, 1, ''),
+(9, 'yrtyrty', 'rtyrtyrtyr rty rty ', 1396213200, 1396213200, 0, 0, '', '', 3, 1, ''),
+(10, '222222', '<p>333333</p>', 1396213200, 1396213200, 0, 1, '', '', 3, 2, ''),
+(11, '88888', '2223333', 1396213200, 1396213200, 0, 0, '', '', 3, 1, ''),
+(12, 'hjgjgf', 'jghjghj gh gf', 1396213200, 1396213200, 0, 0, '', '', 3, 1, ''),
+(13, 'hjgjgf', 'jghjghj gh gf', 1396213200, 1396213200, 0, 0, '', '', 3, 1, ''),
+(14, 'fghf fg hf', '<p>fgh fgh f</p>', 1396213200, 1396213200, 0, 0, '', '', 3, 1, ''),
+(15, 'gdfg df gdf', '<p>&nbsp;gdfg df gdf g</p>', 1396213200, 1396213200, 0, 0, '', '', 3, 1, ''),
+(16, '99999', '88888', 1396213200, 1396213200, 0, 0, '', '', 3, 1, ''),
+(17, '99999', '88888', 1396213200, 1396213200, 0, 0, '', '', 3, 1, ''),
+(18, '99999', '88888', 1396213200, 1396213200, 0, 0, '', '', 3, 1, ''),
+(19, '4444444444', '<p>1111111111</p>', 1396213200, 1396213200, 0, 0, '', '', 3, 1, ''),
+(20, '54321', '<p>54321</p>', 1396299600, 1396299600, 0, 0, '', '', 3, 1, '');
 
 -- --------------------------------------------------------
 
@@ -66,7 +78,7 @@ CREATE TABLE IF NOT EXISTS `article_category` (
   `article_category_meta_keywords` text NOT NULL,
   UNIQUE KEY `id` (`id`),
   KEY `id_2` (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
 
 --
 -- Дамп данных таблицы `article_category`
@@ -99,7 +111,7 @@ CREATE TABLE IF NOT EXISTS `block` (
   KEY `block_position` (`block_position`),
   KEY `block_active` (`block_active`),
   KEY `block_lang` (`block_lang`)
-) ENGINE=MyISAM  DEFAULT CHARSET=cp1251 AUTO_INCREMENT=50 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=50 ;
 
 --
 -- Дамп данных таблицы `block`
@@ -114,6 +126,26 @@ INSERT INTO `block` (`id`, `block_weight`, `block_name`, `block_displayname`, `b
 -- --------------------------------------------------------
 
 --
+-- Структура таблицы `configuration`
+--
+
+CREATE TABLE IF NOT EXISTS `configuration` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `module` varchar(100) CHARACTER SET utf8 NOT NULL,
+  `params` text CHARACTER SET utf8 NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+
+--
+-- Дамп данных таблицы `configuration`
+--
+
+INSERT INTO `configuration` (`id`, `module`, `params`) VALUES
+(3, 'main', 'a:12:{s:9:\\"site_name\\";s:11:\\"56546453333\\";s:11:\\"site_slogan\\";s:7:\\"6456456\\";s:16:\\"site_description\\";s:15:\\"ertertertertert\\";s:11:\\"site_footer\\";s:11:\\"футер423423\\";s:15:\\"site_dateformat\\";s:5:\\"d.m.Y\\";s:15:\\"site_timeformat\\";s:7:\\"g:i:s a\\";s:12:\\"site_offline\\";s:1:\\"0\\";s:20:\\"site_offline_message\\";s:73:\\"Сайт закрыт на техническое обслуживание.<br /> Пожалуйста, зайдите позже.\\";s:16:\\"site_list_lenght\\";s:2:\\"30\\";s:20:\\"site_seo_description\\";s:8:\\"erterter\\";s:17:\\"site_seo_keywords\\";s:12:\\"tretreterter\\";s:15:\\"site_seo_robots\\";s:17:\\"noindex, nofollow\\";}');
+
+-- --------------------------------------------------------
+
+--
 -- Структура таблицы `group`
 --
 
@@ -122,7 +154,7 @@ CREATE TABLE IF NOT EXISTS `group` (
   `group_displayname` varchar(60) NOT NULL,
   `group_description` varchar(255) NOT NULL DEFAULT '',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=cp1251 AUTO_INCREMENT=53 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=53 ;
 
 --
 -- Дамп данных таблицы `group`
@@ -152,7 +184,7 @@ CREATE TABLE IF NOT EXISTS `group_permission` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `id` (`id`),
   KEY `weight` (`group_permission_weight`)
-) ENGINE=MyISAM  DEFAULT CHARSET=cp1251 AUTO_INCREMENT=18 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=18 ;
 
 --
 -- Дамп данных таблицы `group_permission`
@@ -181,7 +213,7 @@ CREATE TABLE IF NOT EXISTS `helper` (
   `helper_value` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `id` (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=cp1251 AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -194,7 +226,7 @@ CREATE TABLE IF NOT EXISTS `helper_type` (
   `helper_type` varchar(255) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `id` (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=cp1251 AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -219,7 +251,7 @@ CREATE TABLE IF NOT EXISTS `menu` (
   KEY `item_type` (`menu_item_type`),
   KEY `active` (`menu_active`),
   FULLTEXT KEY `path` (`menu_path`)
-) ENGINE=MyISAM  DEFAULT CHARSET=cp1251 AUTO_INCREMENT=103 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=103 ;
 
 --
 -- Дамп данных таблицы `menu`
@@ -253,7 +285,7 @@ CREATE TABLE IF NOT EXISTS `mod_config` (
   UNIQUE KEY `id` (`id`),
   KEY `mod_config_mod_name` (`mod_config_mod_name`,`mod_config_key`),
   KEY `mod_config_mod_name_1` (`mod_config_mod_name`)
-) ENGINE=InnoDB  DEFAULT CHARSET=cp1251 AUTO_INCREMENT=12 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=12 ;
 
 --
 -- Дамп данных таблицы `mod_config`
@@ -289,7 +321,7 @@ CREATE TABLE IF NOT EXISTS `object` (
   KEY `time_create` (`time_create`),
   KEY `time_update` (`time_update`),
   KEY `owner_id` (`owner_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=cp1251 AUTO_INCREMENT=7132 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7132 ;
 
 --
 -- Дамп данных таблицы `object`
@@ -7443,7 +7475,7 @@ CREATE TABLE IF NOT EXISTS `object_field` (
   `field` varchar(200) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `field` (`field`)
-) ENGINE=MyISAM  DEFAULT CHARSET=cp1251 AUTO_INCREMENT=31 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=31 ;
 
 --
 -- Дамп данных таблицы `object_field`
@@ -7491,7 +7523,7 @@ CREATE TABLE IF NOT EXISTS `object_type` (
   `type` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `type` (`type`)
-) ENGINE=MyISAM  DEFAULT CHARSET=cp1251 AUTO_INCREMENT=4 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
 --
 -- Дамп данных таблицы `object_type`
@@ -7515,7 +7547,7 @@ CREATE TABLE IF NOT EXISTS `object_value` (
   KEY `guid` (`guid`),
   KEY `field_id` (`field_id`),
   KEY `value` (`value`(40))
-) ENGINE=MyISAM DEFAULT CHARSET=cp1251;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `object_value`
@@ -43234,7 +43266,7 @@ CREATE TABLE IF NOT EXISTS `test` (
   `name` varchar(20) DEFAULT NULL,
   `description` text,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=cp1251 AUTO_INCREMENT=3 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
 
 --
 -- Дамп данных таблицы `test`
@@ -43252,16 +43284,16 @@ INSERT INTO `test` (`id`, `name`, `description`) VALUES
 
 CREATE TABLE IF NOT EXISTS `test_task` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `field_1` varchar(100) CHARACTER SET latin1 DEFAULT NULL,
-  `field_2` varchar(100) CHARACTER SET latin1 DEFAULT NULL,
-  `field_3` varchar(100) CHARACTER SET latin1 DEFAULT NULL,
-  `field_4` varchar(100) CHARACTER SET latin1 DEFAULT NULL,
+  `field_1` varchar(100) CHARACTER SET utf8 DEFAULT NULL,
+  `field_2` varchar(100) CHARACTER SET utf8 DEFAULT NULL,
+  `field_3` varchar(100) CHARACTER SET utf8 DEFAULT NULL,
+  `field_4` varchar(100) CHARACTER SET utf8 DEFAULT NULL,
   `field_5` int(11) DEFAULT NULL,
-  `field_6` varchar(20) CHARACTER SET latin1 DEFAULT NULL,
+  `field_6` varchar(20) CHARACTER SET utf8 DEFAULT NULL,
   `update_time` int(11) unsigned DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `id` (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=cp1251 AUTO_INCREMENT=9 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=9 ;
 
 --
 -- Дамп данных таблицы `test_task`
@@ -43294,14 +43326,16 @@ CREATE TABLE IF NOT EXISTS `theme` (
   `theme_author` varchar(60) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `id` (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=45 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=49 ;
 
 --
 -- Дамп данных таблицы `theme`
 --
 
 INSERT INTO `theme` (`id`, `theme_name`, `theme_description`, `active`, `theme_last_update`, `theme_title`, `theme_version`, `theme_author`) VALUES
-(17, 'green', 'Green Theme', 1, 1384270019, 'Green', '1.0.0.1', 'Ruslan Atamas');
+(47, 'blog_theme', 'Blog Theme', 0, 1396334203, 'Blog Theme', '1.0.0.1', 'Ruslan Atamas'),
+(17, 'green', 'Green Theme', 1, 1384270019, 'Green', '1.0.0.1', 'Ruslan Atamas'),
+(48, 'blue', 'Blue Theme', 0, 1397476213, 'Blue', '1.0.0.1', 'Ruslan Atamas');
 
 -- --------------------------------------------------------
 
@@ -43312,7 +43346,7 @@ INSERT INTO `theme` (`id`, `theme_name`, `theme_description`, `active`, `theme_l
 CREATE TABLE IF NOT EXISTS `tttt` (
   `id` int(11) DEFAULT NULL,
   `name` varchar(20) DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=cp1251;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `tttt`
@@ -43340,7 +43374,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `id` (`id`),
   KEY `pass` (`pass`)
-) ENGINE=MyISAM  DEFAULT CHARSET=cp1251 AUTO_INCREMENT=14 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=14 ;
 
 --
 -- Дамп данных таблицы `user`

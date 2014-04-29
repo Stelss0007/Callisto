@@ -4,7 +4,7 @@
   <div class="row-fluid">
     <div class="box span12">
       <div class="box-header well" data-original-title>
-        <h2><i class="icon-edit"></i>  Менеджер статей</h2>
+        <h2><i class="icon-edit"></i>  РњРµРЅРµРґР¶РµСЂ СЃС‚Р°С‚РµР№</h2>
         <div class="box-icon">
         </div>
       </div>
@@ -20,8 +20,8 @@
 
           <div class="box-content">
             <ul id="myTab" class="nav nav-tabs">
-              <li class="active"><a href="#info">Статья</a></li>
-              <li><a href="#custom">Параметры публикации</a></li>
+              <li class="active"><a href="#info">РЎС‚Р°С‚СЊСЏ</a></li>
+              <li><a href="#custom">РџР°СЂР°РјРµС‚СЂС‹ РїСѓР±Р»РёРєР°С†РёРё</a></li>
               <li><a href="#messages">SEO</a></li>
             </ul>
 
@@ -33,7 +33,7 @@
 
                 <div class="span2 form-vertical">
                   <div class="control-group">
-                    <label class="control-label" for="date01">Категория:</label>
+                    <label class="control-label" for="date01">РљР°С‚РµРіРѕСЂРёСЏ:</label>
                     <div class="controls">
                       <select name="article_category_id" data-rel="chosen">
                         {html_options options=$article_category_list selected=$article_category_id}
@@ -41,13 +41,13 @@
                     </div>
                   </div>
                   <div class="control-group">
-                    <label class="control-label" for="date01">Состояние: </label>
+                    <label class="control-label" for="date01">РЎРѕСЃС‚РѕСЏРЅРёРµ: </label>
                     <div class="controls">
                       <input data-no-uniform="true" type="checkbox" name="article_active" {if $article_active}checked="checked"{/if} value="1" class="iphone-toggle">
                     </div>
                   </div>
                   <div class="control-group">
-                    <label class="control-label" for="date01">Метки: </label>
+                    <label class="control-label" for="date01">РњРµС‚РєРё: </label>
                     <div class="controls">
                       <select name="article_trags" multiple data-rel="chosen">
                         {html_options options=$tags selected=$article_tags}
@@ -60,7 +60,7 @@
                 
               <div id="custom" class="tab-pane form-horizontal">
                 <div class="control-group">
-                  <label class="control-label" for="date01">Начало публикации: </label>
+                  <label class="control-label" for="date01">РќР°С‡Р°Р»Рѕ РїСѓР±Р»РёРєР°С†РёРё: </label>
                   <div class="controls">
                     <div class="input-group input-append">
                       <input class="datepicker" size="16" type="text" name="article_start_time" value="{$article_start_time|date_format}">
@@ -69,7 +69,7 @@
                   </div>
                 </div>
                 <div class="control-group">
-                  <label class="control-label" for="date01">Окончание публикации: </label>
+                  <label class="control-label" for="date01">РћРєРѕРЅС‡Р°РЅРёРµ РїСѓР±Р»РёРєР°С†РёРё: </label>
                   <div class="controls">
                     <div class="input-group input-append">
                       <input class="datepicker" size="16" type="text" name="article_end_time" value="{$article_end_time|date_format}">
@@ -78,7 +78,7 @@
                   </div>
                 </div>
                 <div class="control-group">
-                  <label class="control-label" for="date01">Дата создания: </label>
+                  <label class="control-label" for="date01">Р”Р°С‚Р° СЃРѕР·РґР°РЅРёСЏ: </label>
                   <div class="controls">
                     <div class="input-group input-append">
                       <input class="datepicker" size="16" type="text" name="article_add_time" data-date-format=dd.mm.yyyy" value="{$article_add_time|date_format}">
@@ -90,14 +90,14 @@
                 
               <div id="messages" class="tab-pane">
                 <div class="control-group">
-                  <label class="control-label" for="date01">Мета-тег Description: </label>
+                  <label class="control-label" for="date01">РњРµС‚Р°-С‚РµРі Description: </label>
                   <div class="controls">
                     <textarea cols="700" rows="5" style="width: 700px;" name="article_meta_description">{$article_meta_description}</textarea>
                   </div>
                 </div>
                 
                 <div class="control-group">
-                  <label class="control-label" for="date01">Мета-тег Keywords: </label>
+                  <label class="control-label" for="date01">РњРµС‚Р°-С‚РµРі Keywords: </label>
                   <div class="controls">
                     <textarea cols="70" rows="5" style="width: 700px;" name="article_meta_keywords">{$article_meta_keywords}</textarea>
                   </div>

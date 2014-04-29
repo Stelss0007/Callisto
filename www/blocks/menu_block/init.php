@@ -2,7 +2,7 @@
 
 function menu_block_add($blockinfo)
   {
-  //Äîáîâëÿåì øàáëîí, åñëè íåòó åøå
+  //Ð”Ð¾Ð±Ð¾Ð²Ð»ÑÐµÐ¼ ÑˆÐ°Ð±Ð»Ð¾Ð½, ÐµÑÐ»Ð¸ Ð½ÐµÑ‚Ñƒ ÐµÑˆÐµ
   sysModClassLoad ('SYS_themes');
   $SYS_themes = new SYS_themes;  
   
@@ -13,7 +13,7 @@ function menu_block_add($blockinfo)
     $SYS_themes->tpl_add (array('tpl_compname'=>'menu_block',
                                 'tpl_name'=>'block_display.tpl',
                                 'tpl_pattern'=>$sysObject,
-                                'tpl_description'=>'Âûâîä ñîäåðæàíèÿ áëîêà'));
+                                'tpl_description'=>'Ð’Ñ‹Ð²Ð¾Ð´ ÑÐ¾Ð´ÐµÑ€Ð¶Ð°Ð½Ð¸Ñ Ð±Ð»Ð¾ÐºÐ°'));
     };
     
   $sysObject = 'menu_block::modify';
@@ -23,7 +23,7 @@ function menu_block_add($blockinfo)
     $SYS_themes->tpl_add (array('tpl_compname'=>'menu_block',
                                 'tpl_name'=>'block_modify.tpl',
                                 'tpl_pattern'=>$sysObject,
-                                'tpl_description'=>'Ðåäàêòèðîâàíèå áëîêà'));
+                                'tpl_description'=>'Ð ÐµÐ´Ð°ÐºÑ‚Ð¸Ñ€Ð¾Ð²Ð°Ð½Ð¸Ðµ Ð±Ð»Ð¾ÐºÐ°'));
     };
     
   return true;
@@ -50,27 +50,27 @@ function menu_block_deactivate($blockinfo)
 
 function menu_block_modify($blockinfo)
   {
-  //Ïðåëþäèå êàê ó âñåõ ìîäóëåé
+  //ÐŸÑ€ÐµÐ»ÑŽÐ´Ð¸Ðµ ÐºÐ°Ðº Ñƒ Ð²ÑÐµÑ… Ð¼Ð¾Ð´ÑƒÐ»ÐµÐ¹
   $sysObject = 'menu_block::modify';
   $sysModTpl = sysTplWay ($sysObject);
   $sysTpl = new sysTpl;
   $sysTpl->caching = false;
 
-  //Òèï ìåíþ
+  //Ð¢Ð¸Ð¿ Ð¼ÐµÐ½ÑŽ
   $menu_type = sysBlockGetVar ($blockinfo['id'], 'menu_type');
   $sysTpl->assign('menu_type', $menu_type);
 
-  //Òèïû ìåíþ
-  $menutypes_list = array (1=>'Âñåãäà ðàçâåðíóòî',2=>'Ðàçâàðà÷èâàþøååñÿ');
+  //Ð¢Ð¸Ð¿Ñ‹ Ð¼ÐµÐ½ÑŽ
+  $menutypes_list = array (1=>'Ð’ÑÐµÐ³Ð´Ð° Ñ€Ð°Ð·Ð²ÐµÑ€Ð½ÑƒÑ‚Ð¾',2=>'Ð Ð°Ð·Ð²Ð°Ñ€Ð°Ñ‡Ð¸Ð²Ð°ÑŽÑˆÐµÐµÑÑ');
   $sysTpl->assign('menutypes_list', $menutypes_list);
 
-  //Ïîñòðîèëè äåðåâî ðàçäåëîâ
+  //ÐŸÐ¾ÑÑ‚Ñ€Ð¾Ð¸Ð»Ð¸ Ð´ÐµÑ€ÐµÐ²Ð¾ Ñ€Ð°Ð·Ð´ÐµÐ»Ð¾Ð²
   sysModClassLoad ('menu','user');
   $menu = new menu;
   $items_list = $menu->ItemsTreeBuild (0, 0);
   $sysTpl->assign('items_list', $items_list);
 
-  //Òåêóùèé ýëåìåíò
+  //Ð¢ÐµÐºÑƒÑ‰Ð¸Ð¹ ÑÐ»ÐµÐ¼ÐµÐ½Ñ‚
   $parent_id = sysBlockGetVar ($blockinfo['id'], 'parent_id');
   $sysTpl->assign('parent_id', $parent_id);
 
@@ -80,12 +80,12 @@ function menu_block_modify($blockinfo)
 
 function menu_block_update($blockinfo)
   {
-  //Çàáèðàåì ïåðåìåííûå ñîâõîäà
+  //Ð—Ð°Ð±Ð¸Ñ€Ð°ÐµÐ¼ Ð¿ÐµÑ€ÐµÐ¼ÐµÐ½Ð½Ñ‹Ðµ ÑÐ¾Ð²Ñ…Ð¾Ð´Ð°
   $parent_id = sysVarCleanFromInput('parent_id');
   $menu_type = sysVarCleanFromInput('menu_type');
   sysBlockSetVar ($blockinfo['id'], 'parent_id', $parent_id);
   sysBlockSetVar ($blockinfo['id'], 'menu_type', $menu_type);
-  //×èñòèì êåø
+  //Ð§Ð¸ÑÑ‚Ð¸Ð¼ ÐºÐµÑˆ
   $sysTpl = new sysTpl;
   $sysTpl->clear_cache(null, "menu_block::display::$blockinfo[id]");
   }

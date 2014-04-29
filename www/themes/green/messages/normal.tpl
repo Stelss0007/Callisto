@@ -1,4 +1,4 @@
-<html>
+п»ї<html>
 <head>
 <title></title>
 <meta http-equiv="Content-Type" content="text/html; charset=windows-1251" />
@@ -17,7 +17,7 @@
 <div class="redirect">
   <span style="font-size: 16px; font-weight: bold;">{$message}</span>
   <hr style="height: 3px; border: 2px #99BA77 solid; width: 95%;" />
-  <p>Если страница автоматически не перезагрузится, пожалуйста нажмите <a href='{$url}'>сюда</a></p>
+  <p>Р•СЃР»Рё СЃС‚СЂР°РЅРёС†Р° Р°РІС‚РѕРјР°С‚РёС‡РµСЃРєРё РЅРµ РїРµСЂРµР·Р°РіСЂСѓР·РёС‚СЃСЏ, РїРѕР¶Р°Р»СѓР№СЃС‚Р° РЅР°Р¶РјРёС‚Рµ <a href='{$url}'>СЃСЋРґР°</a></p>
 </div>
 </div>
 </body>

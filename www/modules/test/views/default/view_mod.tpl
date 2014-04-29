@@ -12,16 +12,16 @@
 
     <thead>
       <tr>
-        <th colSpan="7">Пользователи</th>
+        <th colSpan="7">РџРѕР»СЊР·РѕРІР°С‚РµР»Рё</th>
       </tr>
       <tr class="head">
-        <th>Логин</th>
-        <th>Дата добавления</th>
-        <th>Группа</th>
-        <th>Отображаемое имя</th>
-        <th>Почта</th>
-        <th>Активен</th>
-        <th>Последний визит</th>
+        <th>Р›РѕРіРёРЅ</th>
+        <th>Р”Р°С‚Р° РґРѕР±Р°РІР»РµРЅРёСЏ</th>
+        <th>Р“СЂСѓРїРїР°</th>
+        <th>РћС‚РѕР±СЂР°Р¶Р°РµРјРѕРµ РёРјСЏ</th>
+        <th>РџРѕС‡С‚Р°</th>
+        <th>РђРєС‚РёРІРµРЅ</th>
+        <th>РџРѕСЃР»РµРґРЅРёР№ РІРёР·РёС‚</th>
         <th></th>
       </tr>
     </thead>
@@ -29,7 +29,7 @@
     <tfoot>
       <tr>
         <td width="100%" align="center" colspan="7" class="foot">
-          <a href="/index.php?module=user&type=admin&func=user_new">Добавить</a>
+          <a href="/index.php?module=user&type=admin&func=user_new">Р”РѕР±Р°РІРёС‚СЊ</a>
         </td>
       </tr>
     </tfoot>
@@ -46,11 +46,11 @@
           <td class="{$class}">{if $user.active}Yes{else}No{/if}</td>
           <td class="{$class}">{$user.last_visit|date_format:"%d.%m.%Y %H:%M"}</td>
           <td class="{$class}" align="center" nowrap>
-            {* Формируем масив переменные для урла *}
+            {* Р¤РѕСЂРјРёСЂСѓРµРј РјР°СЃРёРІ РїРµСЂРµРјРµРЅРЅС‹Рµ РґР»СЏ СѓСЂР»Р° *}
             {array name='url_vars'}
             {array_append name='url_vars' key='id' value=$user.id}
-              <a href="/index.php?module=user&type=admin&func=user_modify&id={$user.id}"><img border="0" src="/public/images/system/edit.gif" alt="Редактировать"></a>&nbsp;
-              <a href="/index.php?module=user&type=admin&func=user_delete&id={$user.id}"><img border="0" src="/public/images/system/del.gif" alt="Удалить"></a>
+              <a href="/index.php?module=user&type=admin&func=user_modify&id={$user.id}"><img border="0" src="/public/images/system/edit.gif" alt="Р РµРґР°РєС‚РёСЂРѕРІР°С‚СЊ"></a>&nbsp;
+              <a href="/index.php?module=user&type=admin&func=user_delete&id={$user.id}"><img border="0" src="/public/images/system/del.gif" alt="РЈРґР°Р»РёС‚СЊ"></a>
           </td>
         </tr>
       {/foreach}

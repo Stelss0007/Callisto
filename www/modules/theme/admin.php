@@ -7,7 +7,7 @@ class AdminController extends Controller
     {
     $browsein = array();
     $browsein[] = array ('url'=>'/admin/theme',
-                        'displayname'=>'Òåìû');
+                        'displayname'=>'Ð¢ÐµÐ¼Ñ‹');
     
     $this->module_browsein = $browsein;
     
@@ -21,17 +21,17 @@ class AdminController extends Controller
     {
     $this->getAccess(ACCESS_ADMIN);
     
-    //==================Âñå Òåìû=============================
-    //Âçÿëè ñïèñîê ñ äèñêà
+    //==================Ð’ÑÐµ Ð¢ÐµÐ¼Ñ‹=============================
+    //Ð’Ð·ÑÐ»Ð¸ ÑÐ¿Ð¸ÑÐ¾Ðº Ñ Ð´Ð¸ÑÐºÐ°
 
     
     $this->themes_list_all = $this->theme->fileSystemListActual();
         
     $browsein = array();
     $browsein[] = array ('url'=>'/admin/theme',
-                        'displayname'=>'Òåìû');
+                        'displayname'=>'Ð¢ÐµÐ¼Ñ‹');
     $browsein[] = array ('url'=>'/admin/theme/install',
-                        'displayname'=>'Óñòàíîâêà òåìû');
+                        'displayname'=>'Ð£ÑÑ‚Ð°Ð½Ð¾Ð²ÐºÐ° Ñ‚ÐµÐ¼Ñ‹');
     
     $this->module_browsein = $browsein;
     
@@ -42,9 +42,9 @@ class AdminController extends Controller
     {
     $this->getAccess(ACCESS_ADMIN);
        
-    //Âçÿëè ñïèñîê ñ äèñêà
+    //Ð’Ð·ÑÐ»Ð¸ ÑÐ¿Ð¸ÑÐ¾Ðº Ñ Ð´Ð¸ÑÐºÐ°
     if(!file_exists ("themes/$theme_name/info.php")) 
-      die ('Òåìà îòñóòñòâóåò!');
+      die ('Ð¢ÐµÐ¼Ð° Ð¾Ñ‚ÑÑƒÑ‚ÑÑ‚Ð²ÑƒÐµÑ‚!');
 
     // Found
     $info = array();
@@ -65,7 +65,7 @@ class AdminController extends Controller
      
     $id = $this->theme->save();
     
-    $this->showMessage('Ýëåìåíò äîáàâëåí', '/admin/theme');
+    $this->showMessage('Ð­Ð»ÐµÐ¼ÐµÐ½Ñ‚ Ð´Ð¾Ð±Ð°Ð²Ð»ÐµÐ½', '/admin/theme');
     }
   function actionActivate($id)
     {

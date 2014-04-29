@@ -171,4 +171,3 @@ class UserSession
     return -1;
     }
 }
-?>

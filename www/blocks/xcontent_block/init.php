@@ -4,7 +4,7 @@ function xcontent_block_add($blockinfo)
   sysModClassLoad ('SYS_themes');
   $SYS_themes = new SYS_themes;
 
-  //Добовляем шаблон, если нету еше
+  //Р”РѕР±РѕРІР»СЏРµРј С€Р°Р±Р»РѕРЅ, РµСЃР»Рё РЅРµС‚Сѓ РµС€Рµ
   $sysObject = 'xcontent_block::display';
   $sysModTpl = sysTplWay ($sysObject);
 
@@ -13,10 +13,10 @@ function xcontent_block_add($blockinfo)
     $SYS_themes->tpl_add (array('tpl_compname'=>'xcontent_block',
                                 'tpl_name'=>'block_display.tpl',
                                 'tpl_pattern'=>$sysObject,
-                                'tpl_description'=>'Вывод содержания блока'));
+                                'tpl_description'=>'Р’С‹РІРѕРґ СЃРѕРґРµСЂР¶Р°РЅРёСЏ Р±Р»РѕРєР°'));
     };
 
-  //Добовляем шаблон, если нету еше
+  //Р”РѕР±РѕРІР»СЏРµРј С€Р°Р±Р»РѕРЅ, РµСЃР»Рё РЅРµС‚Сѓ РµС€Рµ
   $sysObject = 'xcontent_block::modify';
   $sysModTpl = sysTplWay ($sysObject);
   if (empty ($sysModTpl))
@@ -24,7 +24,7 @@ function xcontent_block_add($blockinfo)
     $SYS_themes->tpl_add (array('tpl_compname'=>'xcontent_block',
                                 'tpl_name'=>'block_modify.tpl',
                                 'tpl_pattern'=>$sysObject,
-                                'tpl_description'=>'Редактирование содержания блока'));
+                                'tpl_description'=>'Р РµРґР°РєС‚РёСЂРѕРІР°РЅРёРµ СЃРѕРґРµСЂР¶Р°РЅРёСЏ Р±Р»РѕРєР°'));
     };
 
   return true;
@@ -37,12 +37,12 @@ function xcontent_block_delete($blockinfo)
 
 function xcontent_block_activate($blockinfo)
   {
-  //Забираем переменные блока
+  //Р—Р°Р±РёСЂР°РµРј РїРµСЂРµРјРµРЅРЅС‹Рµ Р±Р»РѕРєР°
   $doc_count = sysBlockGetVar ($blockinfo['id'], 'doc_count');
-  //Проверка если блок активируетса первый раз выставляем переменные по умолчанию.
+  //РџСЂРѕРІРµСЂРєР° РµСЃР»Рё Р±Р»РѕРє Р°РєС‚РёРІРёСЂСѓРµС‚СЃР° РїРµСЂРІС‹Р№ СЂР°Р· РІС‹СЃС‚Р°РІР»СЏРµРј РїРµСЂРµРјРµРЅРЅС‹Рµ РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ.
   if ((empty ($doc_count)) && (!is_numeric ($doc_count)))
     {
-    //Устанавливаем переменные
+    //РЈСЃС‚Р°РЅР°РІР»РёРІР°РµРј РїРµСЂРµРјРµРЅРЅС‹Рµ
     sysBlockSetVar ($blockinfo['id'], 'doc_count', 10);
     sysBlockSetVar ($blockinfo['id'], 'folder_id', 0);
     sysBlockSetVar ($blockinfo['id'], 'include_subfolders', 1);
@@ -61,24 +61,24 @@ function xcontent_block_deactivate($blockinfo)
 function xcontent_block_modify($blockinfo)
   {
   if (!sysModAvailable ('content'))
-    {//Модуль недоступен
+    {//РњРѕРґСѓР»СЊ РЅРµРґРѕСЃС‚СѓРїРµРЅ
     return true;
     };
 
-  //Прелюдие как у всех модулей
+  //РџСЂРµР»СЋРґРёРµ РєР°Рє Сѓ РІСЃРµС… РјРѕРґСѓР»РµР№
   $sysObject = 'xcontent_block::modify::'.$blockinfo['id'];
   $sysModTpl = sysTplWay ($sysObject);
   $sysTpl = new sysTpl;
   $sysTpl->caching = 0;
 
-  //Забираем переменные блока
+  //Р—Р°Р±РёСЂР°РµРј РїРµСЂРµРјРµРЅРЅС‹Рµ Р±Р»РѕРєР°
   $doc_count = sysBlockGetVar ($blockinfo['id'],'doc_count');
   $folder_id = sysBlockGetVar ($blockinfo['id'],'folder_id');
   $include_subfolders = sysBlockGetVar ($blockinfo['id'],'include_subfolders');
   $doc_orderby = sysBlockGetVar ($blockinfo['id'],'doc_orderby');
   $doc_order_asc = sysBlockGetVar ($blockinfo['id'],'doc_order_asc');
   $block_ttl = sysBlockGetVar ($blockinfo['id'],'block_ttl');
-  //Проверка если блок редактируетса первый раз выставляем переменные по умолчанию.
+  //РџСЂРѕРІРµСЂРєР° РµСЃР»Рё Р±Р»РѕРє СЂРµРґР°РєС‚РёСЂСѓРµС‚СЃР° РїРµСЂРІС‹Р№ СЂР°Р· РІС‹СЃС‚Р°РІР»СЏРµРј РїРµСЂРµРјРµРЅРЅС‹Рµ РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ.
   if ((empty ($doc_count)) && (!is_numeric ($doc_count)))
     {
     $doc_count = 10;
@@ -87,7 +87,7 @@ function xcontent_block_modify($blockinfo)
     $doc_orderby = 'displayname';
     $doc_order_asc = 1;
     $block_ttl = 60;
-    //Устанавливаем переменные
+    //РЈСЃС‚Р°РЅР°РІР»РёРІР°РµРј РїРµСЂРµРјРµРЅРЅС‹Рµ
     sysBlockSetVar ($blockinfo['id'], 'doc_count', $doc_count);
     sysBlockSetVar ($blockinfo['id'], 'folder_id', $folder_id);
     sysBlockSetVar ($blockinfo['id'], 'include_subfolders', $include_subfolders);
@@ -96,13 +96,13 @@ function xcontent_block_modify($blockinfo)
     sysBlockSetVar ($blockinfo['id'], 'block_ttl', $block_ttl);
     };
 
-  //Построили дерево
+  //РџРѕСЃС‚СЂРѕРёР»Рё РґРµСЂРµРІРѕ
   sysModClassLoad ('content');
   $content = new content;
   $folders_list = $content->folder_ItemsTreeBuild(0,0);
   $sysTpl->assign('folders_list', $folders_list);
 
-  //Назночаем ключи по каторым можно производить сортировку docfolder
+  //РќР°Р·РЅРѕС‡Р°РµРј РєР»СЋС‡Рё РїРѕ РєР°С‚РѕСЂС‹Рј РјРѕР¶РЅРѕ РїСЂРѕРёР·РІРѕРґРёС‚СЊ СЃРѕСЂС‚РёСЂРѕРІРєСѓ docfolder
   $docs_table = sysDBGetTable('content_docs');
   $docs_column = sysDBGetColumns($docs_table);
   $doc_orderslist = array();
@@ -116,7 +116,7 @@ function xcontent_block_modify($blockinfo)
   unset ($doc_orderslist[active]);
   $sysTpl->assign('doc_orders_list', $doc_orderslist);
 
-  //Заганяем сами пременные в шаблон
+  //Р—Р°РіР°РЅСЏРµРј СЃР°РјРё РїСЂРµРјРµРЅРЅС‹Рµ РІ С€Р°Р±Р»РѕРЅ
   $sysTpl->assign('doc_count', $doc_count);
   $sysTpl->assign('folder_id', $folder_id);
   $sysTpl->assign('include_subfolders', $include_subfolders);
@@ -130,11 +130,11 @@ function xcontent_block_modify($blockinfo)
 
 function xcontent_block_update($blockinfo)
   {
-  //Забираем переменные совхода
+  //Р—Р°Р±РёСЂР°РµРј РїРµСЂРµРјРµРЅРЅС‹Рµ СЃРѕРІС…РѕРґР°
   list ($doc_count, $folder_id, $include_subfolders, $doc_orderby, $doc_order_asc, $block_ttl) =
     sysVarCleanFromInput('doc_count', 'folder_id', 'include_subfolders', 'doc_orderby', 'doc_order_asc', 'block_ttl');
 
-  //Кеш будет тормазить низя меньше 1
+  //РљРµС€ Р±СѓРґРµС‚ С‚РѕСЂРјР°Р·РёС‚СЊ РЅРёР·СЏ РјРµРЅСЊС€Рµ 1
   if ($block_ttl<1)
     {
     $block_ttl=1;
@@ -146,7 +146,7 @@ function xcontent_block_update($blockinfo)
   sysBlockSetVar ($blockinfo['id'], 'doc_orderby', $doc_orderby);
   sysBlockSetVar ($blockinfo['id'], 'doc_order_asc', $doc_order_asc);
   sysBlockSetVar ($blockinfo['id'], 'block_ttl', $block_ttl);
-  //Очищаем кеш шаблонов
+  //РћС‡РёС‰Р°РµРј РєРµС€ С€Р°Р±Р»РѕРЅРѕРІ
   $sysTpl = new sysTpl;
   $sysTpl->clear_cache(null, 'xcontent_block::display');
   return true;

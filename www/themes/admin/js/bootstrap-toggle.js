@@ -1,4 +1,4 @@
-/**
+﻿/**
  * bootstrap-toggle.js v1.0
  * http://github.com/Nijikokun/bootstrap-toggle/
  * --

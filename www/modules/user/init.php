@@ -7,7 +7,7 @@ function content_init()
   sysModClassLoad ('SYS_themes');
   $SYS_themes = new SYS_themes();
 
-  //Создаем таблицу папак
+  //РЎРѕР·РґР°РµРј С‚Р°Р±Р»РёС†Сѓ РїР°РїР°Рє
   $folders_table = sysDBGetTable ('content_folders');
   $SYS_df->CreateTable($folders_table, array(
     'id' =>                   array('type'        => 'int',
@@ -121,7 +121,7 @@ function content_init()
                                     'canmodify'   => true,
                                     'default'     => '')));
 
-  //Создаем таблицу документов
+  //РЎРѕР·РґР°РµРј С‚Р°Р±Р»РёС†Сѓ РґРѕРєСѓРјРµРЅС‚РѕРІ
   $docs_table = sysDBGetTable ('content_docs');
   $SYS_df->CreateTable($docs_table, array(
     'id' =>                   array('type'        => 'int',
@@ -235,261 +235,261 @@ function content_init()
                                     'default'     => '')));
 
   ////////////////////////////////////////////////////////////////////////////////
-  ///////////////  Загрузка данных по умолчанию в базу  //////////////////////////
+  ///////////////  Р—Р°РіСЂСѓР·РєР° РґР°РЅРЅС‹С… РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ РІ Р±Р°Р·Сѓ  //////////////////////////
   ////////////////////////////////////////////////////////////////////////////////
   //$sql = implode ('', file ('modules/content/install/content_folders.sql'));
   $folders_table = sysDBGetTable('content_folders');
 
-  $sql="INSERT INTO `$folders_table` VALUES (1, 0, 1, 1, 1, 1, 2, 0, 'displayname', 1, 'pub_datetime', 0, 20, 100, 0, 0, 1, 1, 'Новости', '', '', '')";
+  $sql="INSERT INTO `$folders_table` VALUES (1, 0, 1, 1, 1, 1, 2, 0, 'displayname', 1, 'pub_datetime', 0, 20, 100, 0, 0, 1, 1, 'РќРѕРІРѕСЃС‚Рё', '', '', '')";
   mysql_query($sql);
-  $sql="INSERT INTO `$folders_table` VALUES (2, 0, 2, 1, 1, 1, 1, 0, 'displayname', 1, 'displayname', 1, 20, 100, 0, 0, 1, 1, 'Документы', '', '', '')";
+  $sql="INSERT INTO `$folders_table` VALUES (2, 0, 2, 1, 1, 1, 1, 0, 'displayname', 1, 'displayname', 1, 20, 100, 0, 0, 1, 1, 'Р”РѕРєСѓРјРµРЅС‚С‹', '', '', '')";
   mysql_query($sql);
-  $sql="INSERT INTO `$folders_table` VALUES (3, 0, 3, 1, 0, 1, 1, 0, 'displayname', 1, 'displayname', 1, 20, 100, 0, 0, 1, 1, 'Спец секция', '', '', '')";
+  $sql="INSERT INTO `$folders_table` VALUES (3, 0, 3, 1, 0, 1, 1, 0, 'displayname', 1, 'displayname', 1, 20, 100, 0, 0, 1, 1, 'РЎРїРµС† СЃРµРєС†РёСЏ', '', '', '')";
   mysql_query($sql);
-  $sql="INSERT INTO `$folders_table` VALUES (4, 0, 4, 1, 1, 1, 0, 0, 'displayname', 1, 'displayname', 1, 20, 100, 0, 0, 1, 1, 'Файлы', '', '', '')";
+  $sql="INSERT INTO `$folders_table` VALUES (4, 0, 4, 1, 1, 1, 0, 0, 'displayname', 1, 'displayname', 1, 20, 100, 0, 0, 1, 1, 'Р¤Р°Р№Р»С‹', '', '', '')";
   mysql_query($sql);
-  $sql="INSERT INTO `$folders_table` VALUES (5, 0, 5, 1, 1, 1, 0, 0, 'displayname', 1, 'displayname', 1, 20, 100, 0, 0, 1, 1, 'Web ссылки', '', '', '')";
+  $sql="INSERT INTO `$folders_table` VALUES (5, 0, 5, 1, 1, 1, 0, 0, 'displayname', 1, 'displayname', 1, 20, 100, 0, 0, 1, 1, 'Web СЃСЃС‹Р»РєРё', '', '', '')";
   mysql_query($sql);
   $sql="INSERT INTO `$folders_table` VALUES (6, 0, 6, 1, 1, 1, 0, 0, 'displayname', 1, 'displayname', 1, 20, 100, 0, 0, 1, 1, 'FAQ', '', '', '')";
   mysql_query($sql);
-  $sql="INSERT INTO `$folders_table` VALUES (7, 0, 7, 1, 1, 1, 0, 0, 'displayname', 1, 'pub_datetime', 0, 20, 100, 0, 0, 1, 1, 'Доска объявлений', '', '', '')";
+  $sql="INSERT INTO `$folders_table` VALUES (7, 0, 7, 1, 1, 1, 0, 0, 'displayname', 1, 'pub_datetime', 0, 20, 100, 0, 0, 1, 1, 'Р”РѕСЃРєР° РѕР±СЉСЏРІР»РµРЅРёР№', '', '', '')";
   mysql_query($sql);
-  $sql="INSERT INTO `$folders_table` VALUES (8, 0, 8, 1, 1, 1, 0, 0, 'displayname', 1, 'pub_datetime', 0, 20, 100, 0, 0, 1, 1, 'Гостевая книга', '', '', '')";
+  $sql="INSERT INTO `$folders_table` VALUES (8, 0, 8, 1, 1, 1, 0, 0, 'displayname', 1, 'pub_datetime', 0, 20, 100, 0, 0, 1, 1, 'Р“РѕСЃС‚РµРІР°СЏ РєРЅРёРіР°', '', '', '')";
   mysql_query($sql);
   ////////////////////////////////////////////////////////////////////////////////
-  ////////////////////////////////  Шаблоны  /////////////////////////////////////
+  ////////////////////////////////  РЁР°Р±Р»РѕРЅС‹  /////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////////////
 
-  //Регистрируем темплеи в системе сначала шаблоны просмотра
+  //Р РµРіРёСЃС‚СЂРёСЂСѓРµРј С‚РµРјРїР»РµРё РІ СЃРёСЃС‚РµРјРµ СЃРЅР°С‡Р°Р»Р° С€Р°Р±Р»РѕРЅС‹ РїСЂРѕСЃРјРѕС‚СЂР°
   $SYS_themes->tpl_add (array('tpl_compname'=>'content',
                               'tpl_name'=>'user_main.tpl',
                               'tpl_pattern'=>'content::user::main',
-                              'tpl_description'=>'Главная страница'));
+                              'tpl_description'=>'Р“Р»Р°РІРЅР°СЏ СЃС‚СЂР°РЅРёС†Р°'));
 
 
-  //Шаблоны для новостей
+  //РЁР°Р±Р»РѕРЅС‹ РґР»СЏ РЅРѕРІРѕСЃС‚РµР№
   $SYS_themes->tpl_add (array('tpl_compname'=>'content',
                               'tpl_name'=>'news/user_folder_view.tpl',
                               'tpl_pattern'=>'^content::user::folder::view::1(::|$)',
-                              'tpl_description'=>'Просмотр списка новостей'));
+                              'tpl_description'=>'РџСЂРѕСЃРјРѕС‚СЂ СЃРїРёСЃРєР° РЅРѕРІРѕСЃС‚РµР№'));
 
   $SYS_themes->tpl_add (array('tpl_compname'=>'content',
                               'tpl_name'=>'news/user_doc_view.tpl',
                               'tpl_pattern'=>'^content::user::doc::view::1(::|$)',
-                              'tpl_description'=>'Просмотр новости'));
+                              'tpl_description'=>'РџСЂРѕСЃРјРѕС‚СЂ РЅРѕРІРѕСЃС‚Рё'));
 
-  //Шаблоны для файлов
+  //РЁР°Р±Р»РѕРЅС‹ РґР»СЏ С„Р°Р№Р»РѕРІ
   $SYS_themes->tpl_add (array('tpl_compname'=>'content',
                               'tpl_name'=>'files/user_folder_view.tpl',
                               'tpl_pattern'=>'^content::user::folder::view::4(::|$)',
-                              'tpl_description'=>'Просмотр списка файлов'));
+                              'tpl_description'=>'РџСЂРѕСЃРјРѕС‚СЂ СЃРїРёСЃРєР° С„Р°Р№Р»РѕРІ'));
 
   $SYS_themes->tpl_add (array('tpl_compname'=>'content',
                               'tpl_name'=>'files/user_doc_view.tpl',
                               'tpl_pattern'=>'^content::user::doc::view::4(::|$)',
-                              'tpl_description'=>'Просмотр файла'));
+                              'tpl_description'=>'РџСЂРѕСЃРјРѕС‚СЂ С„Р°Р№Р»Р°'));
 
 
-  //Шаблоны для веб ссылок
+  //РЁР°Р±Р»РѕРЅС‹ РґР»СЏ РІРµР± СЃСЃС‹Р»РѕРє
   $SYS_themes->tpl_add (array('tpl_compname'=>'content',
                               'tpl_name'=>'weblinks/user_folder_view.tpl',
                               'tpl_pattern'=>'^content::user::folder::view::5(::|$)',
-                              'tpl_description'=>'Просмотр списка веб ссылок'));
+                              'tpl_description'=>'РџСЂРѕСЃРјРѕС‚СЂ СЃРїРёСЃРєР° РІРµР± СЃСЃС‹Р»РѕРє'));
 
   $SYS_themes->tpl_add (array('tpl_compname'=>'content',
                               'tpl_name'=>'weblinks/user_doc_view.tpl',
                               'tpl_pattern'=>'^content::user::doc::view::5(::|$)',
-                              'tpl_description'=>'Просмотр веб ссылок'));
+                              'tpl_description'=>'РџСЂРѕСЃРјРѕС‚СЂ РІРµР± СЃСЃС‹Р»РѕРє'));
 
 
-  //Шаблоны для faq
+  //РЁР°Р±Р»РѕРЅС‹ РґР»СЏ faq
   $SYS_themes->tpl_add (array('tpl_compname'=>'content',
                               'tpl_name'=>'faq/user_folder_view.tpl',
                               'tpl_pattern'=>'^content::user::folder::view::6(::|$)',
-                              'tpl_description'=>'Просмотр faq'));
+                              'tpl_description'=>'РџСЂРѕСЃРјРѕС‚СЂ faq'));
 
 
-  //Шаблоны для доски обьявлений
+  //РЁР°Р±Р»РѕРЅС‹ РґР»СЏ РґРѕСЃРєРё РѕР±СЊСЏРІР»РµРЅРёР№
   $SYS_themes->tpl_add (array('tpl_compname'=>'content',
                               'tpl_name'=>'board/user_folder_view.tpl',
                               'tpl_pattern'=>'^content::user::folder::view::7(::|$)',
-                              'tpl_description'=>'Просмотр списка обьявлений'));
+                              'tpl_description'=>'РџСЂРѕСЃРјРѕС‚СЂ СЃРїРёСЃРєР° РѕР±СЊСЏРІР»РµРЅРёР№'));
 
   $SYS_themes->tpl_add (array('tpl_compname'=>'content',
                               'tpl_name'=>'board/user_doc_view.tpl',
                               'tpl_pattern'=>'^content::user::doc::view::7(::|$)',
-                              'tpl_description'=>'Просмотр обьявления'));
+                              'tpl_description'=>'РџСЂРѕСЃРјРѕС‚СЂ РѕР±СЊСЏРІР»РµРЅРёСЏ'));
 
 
-  //Шаблоны для gb
+  //РЁР°Р±Р»РѕРЅС‹ РґР»СЏ gb
   $SYS_themes->tpl_add (array('tpl_compname'=>'content',
                               'tpl_name'=>'gb/user_folder_view.tpl',
                               'tpl_pattern'=>'^content::user::folder::view::8(::|$)',
-                              'tpl_description'=>'Просмотр гостевой книги'));
+                              'tpl_description'=>'РџСЂРѕСЃРјРѕС‚СЂ РіРѕСЃС‚РµРІРѕР№ РєРЅРёРіРё'));
 
 
-  //Шаблоны документов
+  //РЁР°Р±Р»РѕРЅС‹ РґРѕРєСѓРјРµРЅС‚РѕРІ
   $SYS_themes->tpl_add (array('tpl_compname'=>'content',
                               'tpl_name'=>'user_folder_view.tpl',
                               'tpl_pattern'=>'content::user::folder::view',
-                              'tpl_description'=>'Просмотр папки'));
+                              'tpl_description'=>'РџСЂРѕСЃРјРѕС‚СЂ РїР°РїРєРё'));
 
   $SYS_themes->tpl_add (array('tpl_compname'=>'content',
                               'tpl_name'=>'user_doc_view.tpl',
                               'tpl_pattern'=>'content::user::doc::view',
-                              'tpl_description'=>'Просмотр документа'));
+                              'tpl_description'=>'РџСЂРѕСЃРјРѕС‚СЂ РґРѕРєСѓРјРµРЅС‚Р°'));
 
   $SYS_themes->tpl_add (array('tpl_compname'=>'content',
                               'tpl_name'=>'user_subdoc_view.tpl',
                               'tpl_pattern'=>'content::user::subdoc::view',
-                              'tpl_description'=>'Просмотр страницы'));
+                              'tpl_description'=>'РџСЂРѕСЃРјРѕС‚СЂ СЃС‚СЂР°РЅРёС†С‹'));
 
   ////////////////////////////////////////////////////////////////////////////////
-  /////////////   Административная часть (шаблоны добавления и т.д.)  ////////////
+  /////////////   РђРґРјРёРЅРёСЃС‚СЂР°С‚РёРІРЅР°СЏ С‡Р°СЃС‚СЊ (С€Р°Р±Р»РѕРЅС‹ РґРѕР±Р°РІР»РµРЅРёСЏ Рё С‚.Рґ.)  ////////////
   ////////////////////////////////////////////////////////////////////////////////
 
-  // Новости
+  // РќРѕРІРѕСЃС‚Рё
   $SYS_themes->tpl_add (array('tpl_compname'=>'content',
                               'tpl_name'=>'news/admin_doc_new.tpl',
                               'tpl_pattern'=>'^content::admin::doc::new::1(::|$)',
-                              'tpl_description'=>'Создание новости'));
+                              'tpl_description'=>'РЎРѕР·РґР°РЅРёРµ РЅРѕРІРѕСЃС‚Рё'));
 
   $SYS_themes->tpl_add (array('tpl_compname'=>'content',
                               'tpl_name'=>'news/admin_doc_modify.tpl',
                               'tpl_pattern'=>'^content::admin::doc::modify::1(::|$)',
-                              'tpl_description'=>'Редактирование новости'));
+                              'tpl_description'=>'Р РµРґР°РєС‚РёСЂРѕРІР°РЅРёРµ РЅРѕРІРѕСЃС‚Рё'));
 
   $SYS_themes->tpl_add (array('tpl_compname'=>'content',
                               'tpl_name'=>'news/admin_doc_copy_dg.tpl',
                               'tpl_pattern'=>'^content::admin::doc::copy_dg::1(::|$)',
-                              'tpl_description'=>'Копирование новости'));
+                              'tpl_description'=>'РљРѕРїРёСЂРѕРІР°РЅРёРµ РЅРѕРІРѕСЃС‚Рё'));
 
   $SYS_themes->tpl_add (array('tpl_compname'=>'content',
                               'tpl_name'=>'news/admin_doc_confirm_delete.tpl',
                               'tpl_pattern'=>'^content::admin::doc::confirm_delete::1(::|$)',
-                              'tpl_description'=>'Подтверждение удаления новости'));
+                              'tpl_description'=>'РџРѕРґС‚РІРµСЂР¶РґРµРЅРёРµ СѓРґР°Р»РµРЅРёСЏ РЅРѕРІРѕСЃС‚Рё'));
 
-  // файлы
+  // С„Р°Р№Р»С‹
   $SYS_themes->tpl_add (array('tpl_compname'=>'content',
                               'tpl_name'=>'files/admin_doc_new.tpl',
                               'tpl_pattern'=>'^content::admin::doc::new::4(::|$)',
-                              'tpl_description'=>'Добавление файла'));
+                              'tpl_description'=>'Р”РѕР±Р°РІР»РµРЅРёРµ С„Р°Р№Р»Р°'));
 
   $SYS_themes->tpl_add (array('tpl_compname'=>'content',
                               'tpl_name'=>'files/admin_doc_modify.tpl',
                               'tpl_pattern'=>'^content::admin::doc::modify::4(::|$)',
-                              'tpl_description'=>'Редактирование файла'));
+                              'tpl_description'=>'Р РµРґР°РєС‚РёСЂРѕРІР°РЅРёРµ С„Р°Р№Р»Р°'));
 
   $SYS_themes->tpl_add (array('tpl_compname'=>'content',
                               'tpl_name'=>'files/admin_doc_copy_dg.tpl',
                               'tpl_pattern'=>'^content::admin::doc::copy_dg::4(::|$)',
-                              'tpl_description'=>'Копирование файла'));
+                              'tpl_description'=>'РљРѕРїРёСЂРѕРІР°РЅРёРµ С„Р°Р№Р»Р°'));
 
   $SYS_themes->tpl_add (array('tpl_compname'=>'content',
                               'tpl_name'=>'files/admin_doc_confirm_delete.tpl',
                               'tpl_pattern'=>'^content::admin::doc::confirm_delete::4(::|$)',
-                              'tpl_description'=>'Подтверждение удаления файла'));
+                              'tpl_description'=>'РџРѕРґС‚РІРµСЂР¶РґРµРЅРёРµ СѓРґР°Р»РµРЅРёСЏ С„Р°Р№Р»Р°'));
 
 
   // weblinks
   $SYS_themes->tpl_add (array('tpl_compname'=>'content',
                               'tpl_name'=>'weblinks/admin_doc_new.tpl',
                               'tpl_pattern'=>'^content::admin::doc::new::5(::|$)',
-                              'tpl_description'=>'Добавление ссылки'));
+                              'tpl_description'=>'Р”РѕР±Р°РІР»РµРЅРёРµ СЃСЃС‹Р»РєРё'));
 
   $SYS_themes->tpl_add (array('tpl_compname'=>'content',
                               'tpl_name'=>'weblinks/admin_doc_modify.tpl',
                               'tpl_pattern'=>'^content::admin::doc::modify::5(::|$)',
-                              'tpl_description'=>'Редактирование ссылки'));
+                              'tpl_description'=>'Р РµРґР°РєС‚РёСЂРѕРІР°РЅРёРµ СЃСЃС‹Р»РєРё'));
 
   $SYS_themes->tpl_add (array('tpl_compname'=>'content',
                               'tpl_name'=>'weblinks/admin_doc_copy_dg.tpl',
                               'tpl_pattern'=>'^content::admin::doc::copy_dg::5(::|$)',
-                              'tpl_description'=>'Копирование ссылки'));
+                              'tpl_description'=>'РљРѕРїРёСЂРѕРІР°РЅРёРµ СЃСЃС‹Р»РєРё'));
 
   $SYS_themes->tpl_add (array('tpl_compname'=>'content',
                               'tpl_name'=>'weblinks/admin_doc_confirm_delete.tpl',
                               'tpl_pattern'=>'^content::admin::doc::confirm_delete::5(::|$)',
-                              'tpl_description'=>'Подтверждение удаления ссылки'));
+                              'tpl_description'=>'РџРѕРґС‚РІРµСЂР¶РґРµРЅРёРµ СѓРґР°Р»РµРЅРёСЏ СЃСЃС‹Р»РєРё'));
 
   // faq
   $SYS_themes->tpl_add (array('tpl_compname'=>'content',
                               'tpl_name'=>'faq/admin_doc_new.tpl',
                               'tpl_pattern'=>'^content::admin::doc::new::6(::|$)',
-                              'tpl_description'=>'Добавление faq'));
+                              'tpl_description'=>'Р”РѕР±Р°РІР»РµРЅРёРµ faq'));
 
   $SYS_themes->tpl_add (array('tpl_compname'=>'content',
                               'tpl_name'=>'faq/admin_doc_modify.tpl',
                               'tpl_pattern'=>'^content::admin::doc::modify::6(::|$)',
-                              'tpl_description'=>'Редактирование faq'));
+                              'tpl_description'=>'Р РµРґР°РєС‚РёСЂРѕРІР°РЅРёРµ faq'));
 
   $SYS_themes->tpl_add (array('tpl_compname'=>'content',
                               'tpl_name'=>'faq/admin_doc_copy_dg.tpl',
                               'tpl_pattern'=>'^content::admin::doc::copy_dg::6(::|$)',
-                              'tpl_description'=>'Копировать faq'));
+                              'tpl_description'=>'РљРѕРїРёСЂРѕРІР°С‚СЊ faq'));
 
   $SYS_themes->tpl_add (array('tpl_compname'=>'content',
                               'tpl_name'=>'faq/admin_doc_confirm_delete.tpl',
                               'tpl_pattern'=>'^content::admin::doc::confirm_delete::6(::|$)',
-                              'tpl_description'=>'Подтверждение удаления faq'));
+                              'tpl_description'=>'РџРѕРґС‚РІРµСЂР¶РґРµРЅРёРµ СѓРґР°Р»РµРЅРёСЏ faq'));
 
   // board
   $SYS_themes->tpl_add (array('tpl_compname'=>'content',
                               'tpl_name'=>'board/admin_doc_new.tpl',
                               'tpl_pattern'=>'^content::admin::doc::new::7(::|$)',
-                              'tpl_description'=>'Добавление обьявления'));
+                              'tpl_description'=>'Р”РѕР±Р°РІР»РµРЅРёРµ РѕР±СЊСЏРІР»РµРЅРёСЏ'));
 
   $SYS_themes->tpl_add (array('tpl_compname'=>'content',
                               'tpl_name'=>'board/admin_doc_modify.tpl',
                               'tpl_pattern'=>'^content::admin::doc::modify::7(::|$)',
-                              'tpl_description'=>'Редактирование обьявления'));
+                              'tpl_description'=>'Р РµРґР°РєС‚РёСЂРѕРІР°РЅРёРµ РѕР±СЊСЏРІР»РµРЅРёСЏ'));
 
   $SYS_themes->tpl_add (array('tpl_compname'=>'content',
                               'tpl_name'=>'board/admin_doc_confirm_delete.tpl',
                               'tpl_pattern'=>'^content::admin::doc::confirm_delete::7(::|$)',
-                              'tpl_description'=>'Подтверждение удаления обьявления'));
+                              'tpl_description'=>'РџРѕРґС‚РІРµСЂР¶РґРµРЅРёРµ СѓРґР°Р»РµРЅРёСЏ РѕР±СЊСЏРІР»РµРЅРёСЏ'));
 
 
   // gb
   $SYS_themes->tpl_add (array('tpl_compname'=>'content',
                               'tpl_name'=>'gb/admin_doc_new.tpl',
                               'tpl_pattern'=>'^content::admin::doc::new::8(::|$)',
-                              'tpl_description'=>'Добавление записи'));
+                              'tpl_description'=>'Р”РѕР±Р°РІР»РµРЅРёРµ Р·Р°РїРёСЃРё'));
 
   $SYS_themes->tpl_add (array('tpl_compname'=>'content',
                               'tpl_name'=>'gb/admin_doc_modify.tpl',
                               'tpl_pattern'=>'^content::admin::doc::modify::8(::|$)',
-                              'tpl_description'=>'Редактирование записи'));
+                              'tpl_description'=>'Р РµРґР°РєС‚РёСЂРѕРІР°РЅРёРµ Р·Р°РїРёСЃРё'));
 
   $SYS_themes->tpl_add (array('tpl_compname'=>'content',
                               'tpl_name'=>'gb/admin_doc_confirm_delete.tpl',
                               'tpl_pattern'=>'^content::admin::doc::confirm_delete::8(::|$)',
-                              'tpl_description'=>'Подтверждение удаление записи'));
+                              'tpl_description'=>'РџРѕРґС‚РІРµСЂР¶РґРµРЅРёРµ СѓРґР°Р»РµРЅРёРµ Р·Р°РїРёСЃРё'));
 
 
 
 
 
-  //Создание разделов, везде одинаковое
+  //РЎРѕР·РґР°РЅРёРµ СЂР°Р·РґРµР»РѕРІ, РІРµР·РґРµ РѕРґРёРЅР°РєРѕРІРѕРµ
   $SYS_themes->tpl_add (array('tpl_compname'=>'content',
                               'tpl_name'=>'admin_folder_new.tpl',
                               'tpl_pattern'=>'content::admin::folder::new',
-                              'tpl_description'=>'Создание новой папки'));
+                              'tpl_description'=>'РЎРѕР·РґР°РЅРёРµ РЅРѕРІРѕР№ РїР°РїРєРё'));
 
   $SYS_themes->tpl_add (array('tpl_compname'=>'content',
                               'tpl_name'=>'admin_folder_modify.tpl',
                               'tpl_pattern'=>'content::admin::folder::modify',
-                              'tpl_description'=>'Редактирование папки'));
+                              'tpl_description'=>'Р РµРґР°РєС‚РёСЂРѕРІР°РЅРёРµ РїР°РїРєРё'));
 
   $SYS_themes->tpl_add (array('tpl_compname'=>'content',
                               'tpl_name'=>'admin_folder_copy_dg.tpl',
                               'tpl_pattern'=>'content::admin::folder::copy_dg',
-                              'tpl_description'=>'Копирование папки'));
+                              'tpl_description'=>'РљРѕРїРёСЂРѕРІР°РЅРёРµ РїР°РїРєРё'));
 
   $SYS_themes->tpl_add (array('tpl_compname'=>'content',
                               'tpl_name'=>'admin_folder_confirm_delete.tpl',
                               'tpl_pattern'=>'content::admin::folder::confirm_delete',
-                              'tpl_description'=>'Подтверждение удаления папки'));
+                              'tpl_description'=>'РџРѕРґС‚РІРµСЂР¶РґРµРЅРёРµ СѓРґР°Р»РµРЅРёСЏ РїР°РїРєРё'));
 
 
 
@@ -498,39 +498,39 @@ function content_init()
   $SYS_themes->tpl_add (array('tpl_compname'=>'content',
                               'tpl_name'=>'admin_doc_new.tpl',
                               'tpl_pattern'=>'content::admin::doc::new',
-                              'tpl_description'=>'Создание нового документа'));
+                              'tpl_description'=>'РЎРѕР·РґР°РЅРёРµ РЅРѕРІРѕРіРѕ РґРѕРєСѓРјРµРЅС‚Р°'));
 
   $SYS_themes->tpl_add (array('tpl_compname'=>'content',
                               'tpl_name'=>'admin_doc_modify.tpl',
                               'tpl_pattern'=>'content::admin::doc::modify',
-                              'tpl_description'=>'Редактирование документа'));
+                              'tpl_description'=>'Р РµРґР°РєС‚РёСЂРѕРІР°РЅРёРµ РґРѕРєСѓРјРµРЅС‚Р°'));
 
   $SYS_themes->tpl_add (array('tpl_compname'=>'content',
                               'tpl_name'=>'admin_doc_copy_dg.tpl',
                               'tpl_pattern'=>'content::admin::doc::copy_dg',
-                              'tpl_description'=>'Копирование документа'));
+                              'tpl_description'=>'РљРѕРїРёСЂРѕРІР°РЅРёРµ РґРѕРєСѓРјРµРЅС‚Р°'));
 
   $SYS_themes->tpl_add (array('tpl_compname'=>'content',
                               'tpl_name'=>'admin_doc_confirm_delete.tpl',
                               'tpl_pattern'=>'content::admin::doc::confirm_delete',
-                              'tpl_description'=>'Подтверждение удаления документа'));
+                              'tpl_description'=>'РџРѕРґС‚РІРµСЂР¶РґРµРЅРёРµ СѓРґР°Р»РµРЅРёСЏ РґРѕРєСѓРјРµРЅС‚Р°'));
 
 
 
   $SYS_themes->tpl_add (array('tpl_compname'=>'content',
                               'tpl_name'=>'admin_subdoc_new.tpl',
                               'tpl_pattern'=>'content::admin::subdoc::new',
-                              'tpl_description'=>'Создание нового документа вложенного в документ'));
+                              'tpl_description'=>'РЎРѕР·РґР°РЅРёРµ РЅРѕРІРѕРіРѕ РґРѕРєСѓРјРµРЅС‚Р° РІР»РѕР¶РµРЅРЅРѕРіРѕ РІ РґРѕРєСѓРјРµРЅС‚'));
 
   $SYS_themes->tpl_add (array('tpl_compname'=>'content',
                               'tpl_name'=>'admin_subdoc_modify.tpl',
                               'tpl_pattern'=>'content::admin::subdoc::modify',
-                              'tpl_description'=>'Редактированние документа вложенного в документ'));
+                              'tpl_description'=>'Р РµРґР°РєС‚РёСЂРѕРІР°РЅРЅРёРµ РґРѕРєСѓРјРµРЅС‚Р° РІР»РѕР¶РµРЅРЅРѕРіРѕ РІ РґРѕРєСѓРјРµРЅС‚'));
 
   $SYS_themes->tpl_add (array('tpl_compname'=>'content',
                               'tpl_name'=>'admin_subdoc_confirm_delete.tpl',
                               'tpl_pattern'=>'content::admin::subdoc::confirm_delete',
-                              'tpl_description'=>'Подтверждение удаления документа в документе'));
+                              'tpl_description'=>'РџРѕРґС‚РІРµСЂР¶РґРµРЅРёРµ СѓРґР°Р»РµРЅРёСЏ РґРѕРєСѓРјРµРЅС‚Р° РІ РґРѕРєСѓРјРµРЅС‚Рµ'));
 
   // Initialisation successful
   return true;

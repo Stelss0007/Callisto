@@ -84,7 +84,7 @@ class Youtube
       {
       $newEntry = $this->_yuotube->insertEntry($myVideoEntry, $uploadUrl, 'Zend_Gdata_YouTube_VideoEntry');
 
-      // âûäèðàåì àéäè âèäåî
+      // Ð²Ñ‹Ð´Ð¸Ñ€Ð°ÐµÐ¼ Ð°Ð¹Ð´Ð¸ Ð²Ð¸Ð´ÐµÐ¾
       preg_match("(^http:\/\/gdata.youtube.com.*\/(.*)$)", $newEntry->id->text, $pregres);
  
       return $pregres[1];
@@ -154,4 +154,4 @@ class Youtube
     }
   }
 
-?>
+

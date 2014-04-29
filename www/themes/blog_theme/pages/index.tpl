@@ -1,4 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+п»ї<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <title>{$module_page_title}</title>
@@ -74,7 +74,7 @@
 
             <div class="sidebar_box_wrapper">
               
-            {* Левая часть *}
+            {* Р›РµРІР°СЏ С‡Р°СЃС‚СЊ *}
               {if $blocks.left}
                 {foreach item=block from=$blocks.left}
                   <div class="sidebar_box">
@@ -87,9 +87,9 @@
                  </div>
                 {/foreach}
               {/if}
-            {* End левая часть*}
+            {* End Р»РµРІР°СЏ С‡Р°СЃС‚СЊ*}
             
-            {* Правая часть *}
+            {* РџСЂР°РІР°СЏ С‡Р°СЃС‚СЊ *}
               {if $blocks.right}
                 {foreach item=block from=$blocks.right}
                   <div class="sidebar_box">
@@ -102,7 +102,7 @@
                  </div>
                 {/foreach}
               {/if}
-            {* End правая часть*}
+            {* End РїСЂР°РІР°СЏ С‡Р°СЃС‚СЊ*}
             
             
             <div class="templatemo_cleaner"></div>            
@@ -128,7 +128,7 @@
         </div> <!-- end of main -->
 
         <div id="templatemo_footer">
-          Copyright © 2048 <a href="#">Your Company Name</a> | 
+          Copyright В© 2048 <a href="#">Your Company Name</a> | 
           Designed by <a href="http://www.templatemo.com" target="_parent">Free CSS Templates</a> | 
           Validate <a href="http://validator.w3.org/check?uri=referer">XHTML</a> &amp; 
           <a href="http://jigsaw.w3.org/css-validator/check/referer">CSS</a>

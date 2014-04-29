@@ -2,15 +2,15 @@
 function userlogin_block_display($blockinfo)
   {
   print_r($blockinfo);
-  //Ïðåëþäèå êàê ó âñåõ áëîêîâ
+  //ÐŸÑ€ÐµÐ»ÑŽÐ´Ð¸Ðµ ÐºÐ°Ðº Ñƒ Ð²ÑÐµÑ… Ð±Ð»Ð¾ÐºÐ¾Ð²
   $sysObject = 'userlogin_block::display'.$blockinfo['id'];
 
-  //Ïðîâåðêà íà äîñòóï
+  //ÐŸÑ€Ð¾Ð²ÐµÑ€ÐºÐ° Ð½Ð° Ð´Ð¾ÑÑ‚ÑƒÐ¿
   //if (!coreSecAuthAction($sysObject, ACCESS_READ)) return true;
 
 
 //  if (sysUserIsLoggedIn())
-//    {//Óæå çàëîãèíåí
+//    {//Ð£Ð¶Ðµ Ð·Ð°Ð»Ð¾Ð³Ð¸Ð½ÐµÐ½
 //    return true;
 //    }
 //    else
@@ -19,15 +19,15 @@ function userlogin_block_display($blockinfo)
 //      $sysTpl = new sysTpl;
 //      $sysTpl->cache_lifetime = -1;
 //
-//      //Ïðâåðêà â êåøå
+//      //ÐŸÑ€Ð²ÐµÑ€ÐºÐ° Ð² ÐºÐµÑˆÐµ
 //      if($sysTpl->is_cached($sysModTpl, $sysObject))
 //        {
-//        //Âîçâðàùàåì ðåçóëüòàò
+//        //Ð’Ð¾Ð·Ð²Ñ€Ð°Ñ‰Ð°ÐµÐ¼ Ñ€ÐµÐ·ÑƒÐ»ÑŒÑ‚Ð°Ñ‚
 //        $result['block_content'] =& $sysTpl->fetch($sysModTpl, $sysObject);
 //        return $result;
 //        };
 //
-//      //ÂÛâîäèì ñîäåðæàíèå áëîêà
+//      //Ð’Ð«Ð²Ð¾Ð´Ð¸Ð¼ ÑÐ¾Ð´ÐµÑ€Ð¶Ð°Ð½Ð¸Ðµ Ð±Ð»Ð¾ÐºÐ°
 //      $result['block_content'] =& $sysTpl->fetch($sysModTpl, $sysObject);
 //      return $result;
 //      };

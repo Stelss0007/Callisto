@@ -425,7 +425,7 @@ function rank_set(name, rank_module, rank_key_a, rank_key_b)
   rank_ajax.requestFile = '/index.php';
   rank_ajax.method = 'GET';
   rank_ajax.element = 'mod_rank';
-  rank_ajax.onShow ('Удаление отзыва');
+  rank_ajax.onShow ('РЈРґР°Р»РµРЅРёРµ РѕС‚Р·С‹РІР°');
 
   rank_ajax.sendAJAX(varsString);
 

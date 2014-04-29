@@ -7,13 +7,13 @@
     </colgroup>
     <thead>
       <th colspan="2">
-        Редактирование прав доступа
+        Р РµРґР°РєС‚РёСЂРѕРІР°РЅРёРµ РїСЂР°РІ РґРѕСЃС‚СѓРїР°
       </th>
     </thead>
     <tbody>
     <tr>
       <td class="head">
-        Группа
+        Р“СЂСѓРїРїР°
       </td>
       <td class="even">
         {html_options name=gid options=$groups selected=$group_permission_gid}
@@ -21,7 +21,7 @@
     </tr>
     <tr>
       <td class="head">
-        Объект
+        РћР±СЉРµРєС‚
       </td>
       <td class="even">
         <input type="text" name='pattern' value='{$group_permission_pattern}'  style="width: 98%;">
@@ -29,7 +29,7 @@
     </tr>
     <tr>
       <td class="head">
-        Уровень доступа
+        РЈСЂРѕРІРµРЅСЊ РґРѕСЃС‚СѓРїР°
       </td>
       <td class="even">
         {html_options name=level options=$levels selected=$group_permission_level}
@@ -37,7 +37,7 @@
     </tr>
     <tr>
       <td class="head">
-        Описание
+        РћРїРёСЃР°РЅРёРµ
       </td>
       <td class="even">
         <textarea name='description' style="width: 98%;">{$group_permission_description}</textarea>

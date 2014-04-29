@@ -1,7 +1,7 @@
-{* да нет *}
+{* РґР° РЅРµС‚ *}
 {array name='yes_no'}
-{array_append name='yes_no' key='1' value=Да}
-{array_append name='yes_no' key='0' value=Нет}
+{array_append name='yes_no' key='1' value=Р”Р°}
+{array_append name='yes_no' key='0' value=РќРµС‚}
 
 {array name='site_list_lenght_list'}
 {array_append name='site_list_lenght_list' key='5' value=5}
@@ -90,7 +90,7 @@
         <div class="control-group">
           <label for="date01" class="control-label">{#site_offline_message#}</label>
           <div class="controls">
-            <textarea style="width: 98%;" name="modconfig[main][site_offline_message]">{$modconfig.main.site_offline_message|default:'Сайт закрыт на техническое обслуживание.<br /> Пожалуйста, зайдите позже.'}</textarea>
+            <textarea style="width: 98%;" name="modconfig[main][site_offline_message]">{$modconfig.main.site_offline_message|default:'РЎР°Р№С‚ Р·Р°РєСЂС‹С‚ РЅР° С‚РµС…РЅРёС‡РµСЃРєРѕРµ РѕР±СЃР»СѓР¶РёРІР°РЅРёРµ.<br /> РџРѕР¶Р°Р»СѓР№СЃС‚Р°, Р·Р°Р№РґРёС‚Рµ РїРѕР·Р¶Рµ.'}</textarea>
           </div>
         </div>
               

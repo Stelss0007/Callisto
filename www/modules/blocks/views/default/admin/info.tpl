@@ -2,7 +2,7 @@
   <div class="row-fluid">
     <div class="box span12">
       <div class="box-header well" data-original-title>
-        <h2><i class="icon-edit"></i>  Информация о блоке</h2>
+        <h2><i class="icon-edit"></i>  РРЅС„РѕСЂРјР°С†РёСЏ Рѕ Р±Р»РѕРєРµ</h2>
         <div class="box-icon">
         </div>
       </div>

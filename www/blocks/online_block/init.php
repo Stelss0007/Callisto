@@ -2,18 +2,18 @@
 
 function online_block_add($blockinfo)
   {
-  //Добовляем шаблон, если нету еше
+  //Р”РѕР±РѕРІР»СЏРµРј С€Р°Р±Р»РѕРЅ, РµСЃР»Рё РЅРµС‚Сѓ РµС€Рµ
   $sysObject = 'online_block::display';
   $sysModTpl = sysTplWay ($sysObject);
   if (empty ($sysModTpl))
     {
-    //Добовляем шаблон, если нету еше
+    //Р”РѕР±РѕРІР»СЏРµРј С€Р°Р±Р»РѕРЅ, РµСЃР»Рё РЅРµС‚Сѓ РµС€Рµ
     sysModClassLoad ('SYS_themes');
     $SYS_themes = new SYS_themes;      
     $SYS_themes->tpl_add (array('tpl_compname'=>'online_block',
                                 'tpl_name'=>'block_display.tpl',
                                 'tpl_pattern'=>$sysObject,
-                                'tpl_description'=>'Вывод содержания блока'));
+                                'tpl_description'=>'Р’С‹РІРѕРґ СЃРѕРґРµСЂР¶Р°РЅРёСЏ Р±Р»РѕРєР°'));
     }
   return true;
   }

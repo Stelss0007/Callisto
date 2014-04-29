@@ -10,15 +10,15 @@
 
     <thead>
       <tr align="middle">
-        <th colspan="5">Доступные блоки</th>
+        <th colspan="5">Р”РѕСЃС‚СѓРїРЅС‹Рµ Р±Р»РѕРєРё</th>
       </tr>
 
       <tr align="middle">
-        <td class="head" nowrap>Отображаемое имя</td>
-        <td class="head">Имя блока</td>
-        <td class="head">Описание</td>
-        <td class="head">Версия</td>
-        <td class="head">Действия</td>
+        <td class="head" nowrap>РћС‚РѕР±СЂР°Р¶Р°РµРјРѕРµ РёРјСЏ</td>
+        <td class="head">РРјСЏ Р±Р»РѕРєР°</td>
+        <td class="head">РћРїРёСЃР°РЅРёРµ</td>
+        <td class="head">Р’РµСЂСЃРёСЏ</td>
+        <td class="head">Р”РµР№СЃС‚РІРёСЏ</td>
       </tr>
     </thead>
 
@@ -34,8 +34,8 @@
           
           {array name='url_vars'}
           {array_append name='url_vars' key='block_name' value=$block.block_name}
-          <a href=""><img border="0" src="/public/images/system/info.gif" alt="Информация"></a>&nbsp;
-          <a href="/blocks/add/{$position}/{$block.block_name}"><img border="0" src="/public/images/system/add.gif" alt="Добавить"></a>
+          <a href=""><img border="0" src="/public/images/system/info.gif" alt="РРЅС„РѕСЂРјР°С†РёСЏ"></a>&nbsp;
+          <a href="/blocks/add/{$position}/{$block.block_name}"><img border="0" src="/public/images/system/add.gif" alt="Р”РѕР±Р°РІРёС‚СЊ"></a>
         </td>
       </tr>
       {/foreach}

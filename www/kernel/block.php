@@ -65,11 +65,11 @@ class Block extends AppObject
     $this->smarty = new viewTpl();
     $this->smarty->assign($block_info);
     
-    //Установим язык
+    //РЈСЃС‚Р°РЅРѕРІРёРј СЏР·С‹Рє
     $this->setLang($appConfig['lang']);
     }
-    /************************** Блоки  *******************************/
-  //Соберем все блоки и приготовим к отображению по своим местам
+    /************************** Р‘Р»РѕРєРё  *******************************/
+  //РЎРѕР±РµСЂРµРј РІСЃРµ Р±Р»РѕРєРё Рё РїСЂРёРіРѕС‚РѕРІРёРј Рє РѕС‚РѕР±СЂР°Р¶РµРЅРёСЋ РїРѕ СЃРІРѕРёРј РјРµСЃС‚Р°Рј
 
   public static function blockShowAll(&$myTpl, &$object, $theme)
     {
@@ -77,7 +77,7 @@ class Block extends AppObject
     $ses_info=UserSession::getInstance();
     $db->query("SELECT * FROM block WHERE block_active = '1' ORDER BY block_position, block_weight");
     $db_block_list = $db->fetch_array();
-  //  echo 'Результат значений:<br><pre>';
+  //  echo 'Р РµР·СѓР»СЊС‚Р°С‚ Р·РЅР°С‡РµРЅРёР№:<br><pre>';
   //  print_r($object);
   //  echo '</pre>';
   //  exit;
@@ -91,21 +91,21 @@ class Block extends AppObject
 
     foreach($db_block_list as $item)
       {
-      //Проверим подходит ли этот блок данному объекту
+      //РџСЂРѕРІРµСЂРёРј РїРѕРґС…РѕРґРёС‚ Р»Рё СЌС‚РѕС‚ Р±Р»РѕРє РґР°РЅРЅРѕРјСѓ РѕР±СЉРµРєС‚Сѓ
       $pattern='/'.$item['block_pattern'].'/iU';
       if (!preg_match ($pattern, $object)) continue;
 
-      //В информацию о блоке добавляем - module_object
+      //Р’ РёРЅС„РѕСЂРјР°С†РёСЋ Рѕ Р±Р»РѕРєРµ РґРѕР±Р°РІР»СЏРµРј - module_object
       $item['module_object'] = $object;
       $item['theme'] = $theme;
 
-      //Выполним код блока и вернем результат
+      //Р’С‹РїРѕР»РЅРёРј РєРѕРґ Р±Р»РѕРєР° Рё РІРµСЂРЅРµРј СЂРµР·СѓР»СЊС‚Р°С‚
       $block_content = self::blockRun($item);
 
-      //В зависимости от положения
+      //Р’ Р·Р°РІРёСЃРёРјРѕСЃС‚Рё РѕС‚ РїРѕР»РѕР¶РµРЅРёСЏ
       switch ($item['block_position'])
         {
-        case 'l'://Левые блоки
+        case 'l'://Р›РµРІС‹Рµ Р±Р»РѕРєРё
           array_push ($result_blocks['left'], $block_content);
           break;
         case 'r':
@@ -123,7 +123,7 @@ class Block extends AppObject
         }
       }
 
-    //Загоняем в шаблон
+    //Р—Р°РіРѕРЅСЏРµРј РІ С€Р°Р±Р»РѕРЅ
     $myTpl->assign('blocks', $result_blocks);
     return true;
     }
@@ -135,7 +135,7 @@ class Block extends AppObject
       return $result;
     
     $$block['block_name'] = null;
-    //Подключим файл блока, если он есть, если нет вернем ошибку
+    //РџРѕРґРєР»СЋС‡РёРј С„Р°Р№Р» Р±Р»РѕРєР°, РµСЃР»Рё РѕРЅ РµСЃС‚СЊ, РµСЃР»Рё РЅРµС‚ РІРµСЂРЅРµРј РѕС€РёР±РєСѓ
     $fname = "blocks/{$block['block_name']}/block.php";
     
     if (file_exists($fname))
@@ -147,11 +147,11 @@ class Block extends AppObject
       }
     else
       {
-      $result['block_displayname'] = 'Блок не найден';
-      $result['block_content'] = 'Блок не найден';
+      $result['block_displayname'] = 'Р‘Р»РѕРє РЅРµ РЅР°Р№РґРµРЅ';
+      $result['block_content'] = 'Р‘Р»РѕРє РЅРµ РЅР°Р№РґРµРЅ';
       return $result;
       }
-    //Ищем функцию отображения результатов работы блока
+    //РС‰РµРј С„СѓРЅРєС†РёСЋ РѕС‚РѕР±СЂР°Р¶РµРЅРёСЏ СЂРµР·СѓР»СЊС‚Р°С‚РѕРІ СЂР°Р±РѕС‚С‹ Р±Р»РѕРєР°
     $blockfunc = "display";
 
     if (method_exists($$block['block_name'], $blockfunc))
@@ -169,8 +169,8 @@ class Block extends AppObject
       }
     else
       {
-      $result['block_displayname'] = 'Блок не найден';
-      $result['block_content'] = 'Блок не найден';
+      $result['block_displayname'] = 'Р‘Р»РѕРє РЅРµ РЅР°Р№РґРµРЅ';
+      $result['block_content'] = 'Р‘Р»РѕРє РЅРµ РЅР°Р№РґРµРЅ';
       return $result;
       }
 
@@ -271,4 +271,3 @@ class Block extends AppObject
     return true;
     }
   }
-?>

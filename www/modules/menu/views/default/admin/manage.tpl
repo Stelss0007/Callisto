@@ -1,7 +1,7 @@
 {strip}
 {array name='yes_no'}
-{array_append name='yes_no' key='1' value='Да'}
-{array_append name='yes_no' key='0' value='Нет'}
+{array_append name='yes_no' key='1' value='Р”Р°'}
+{array_append name='yes_no' key='0' value='РќРµС‚'}
 
 <form action="" method="post" name="item_new_form" class="form-horizontal">
   <input type="hidden" name='id' value="{$id}">
@@ -22,11 +22,11 @@
             <br><br>
 
             <div class="control-group">
-              <label class="control-label" for="date01">Находиться в</label>
+              <label class="control-label" for="date01">РќР°С…РѕРґРёС‚СЊСЃСЏ РІ</label>
               <div class="controls">
-                  {* Формируем плоский масив для функции html_options *}
+                  {* Р¤РѕСЂРјРёСЂСѓРµРј РїР»РѕСЃРєРёР№ РјР°СЃРёРІ РґР»СЏ С„СѓРЅРєС†РёРё html_options *}
                   {array name='flat_itemslist'}
-                  {array_append name='flat_itemslist' key='0' value='Корень'}
+                  {array_append name='flat_itemslist' key='0' value='РљРѕСЂРµРЅСЊ'}
 
                   {foreach item=item from=$items_list}
                     {array_append name='flat_itemslist' key=$item.id value=$item.menu_title|escape|tree:$item.level}
@@ -39,28 +39,28 @@
             </div>
 
             <div class="control-group">
-              <label class="control-label" for="date01">Активна</label>
+              <label class="control-label" for="date01">РђРєС‚РёРІРЅР°</label>
               <div class="controls">
                   {html_radios name="menu_active" options=$yes_no checked=$menu_active separator=" "}
               </div>
             </div>
               
             <div class="control-group">
-              <label class="control-label" for="date01">Имя</label>
+              <label class="control-label" for="date01">РРјСЏ</label>
               <div class="controls">
                  <input size="70" name="menu_title" value="{$menu_title|escape}">
               </div>
             </div>
 
             <div class="control-group">
-              <label class="control-label" for="date01">Маска, где развернуты вложенные элементы</label>
+              <label class="control-label" for="date01">РњР°СЃРєР°, РіРґРµ СЂР°Р·РІРµСЂРЅСѓС‚С‹ РІР»РѕР¶РµРЅРЅС‹Рµ СЌР»РµРјРµРЅС‚С‹</label>
               <div class="controls">
                  <input size="70" name="menu_item_pattern" value="{$menu_item_pattern}">
               </div>
             </div>
 
             <div class="control-group">
-              <label class="control-label" for="date01">Описание</label>
+              <label class="control-label" for="date01">РћРїРёСЃР°РЅРёРµ</label>
               <div class="controls">
                  <textarea name="menu_description" rows="5" cols="70">{$menu_description|escape}</textarea>
               </div>
@@ -69,18 +69,18 @@
             <div class="control-group">
               <table>
                 <tr>
-                  <th>Тип : </th>
-                  <th>Параметры : </th>
+                  <th>РўРёРї : </th>
+                  <th>РџР°СЂР°РјРµС‚СЂС‹ : </th>
                 </tr>
 
                 <tr>
                   {if $menu_item_type==1}
                     <td class="head">
-                      <input type="radio" value="1" name="menu_item_type" checked> Разделитель
+                      <input type="radio" value="1" name="menu_item_type" checked> Р Р°Р·РґРµР»РёС‚РµР»СЊ
                     </td>
                   {else}
                     <td class="head">
-                      <input type="radio" value="1" name="menu_item_type"> Разделитель
+                      <input type="radio" value="1" name="menu_item_type"> Р Р°Р·РґРµР»РёС‚РµР»СЊ
                     </td>
                   {/if}
                   <td class="even">&nbsp</td>
@@ -89,11 +89,11 @@
                 <tr>
                   {if $menu_item_type==2}
                     <td class="head">
-                      <input type="radio" value="2" name="menu_item_type" checked> Заголовок
+                      <input type="radio" value="2" name="menu_item_type" checked> Р—Р°РіРѕР»РѕРІРѕРє
                     </td>
                   {else}
                     <td class="head">
-                      <input type="radio" value="2" name="menu_item_type"> Заголовок
+                      <input type="radio" value="2" name="menu_item_type"> Р—Р°РіРѕР»РѕРІРѕРє
                     </td>
                   {/if}
                   <td class="even">&nbsp</td>
@@ -122,7 +122,7 @@
                 {if $menu_item_type==4}
                   <tr>
                     <td class="head">
-                      <input type="radio" value="4" name="menu_item_type" checked> Html код
+                      <input type="radio" value="4" name="menu_item_type" checked> Html РєРѕРґ
                     </td>
                     <td class="even">
                       <textarea name="menu_content4" rows="5" cols="70">{$menu_content|escape}</textarea>
@@ -131,7 +131,7 @@
                 {else}
                   <tr>
                     <td class="head">
-                      <input type="radio" value="4" name="menu_item_type"> Html код
+                      <input type="radio" value="4" name="menu_item_type"> Html РєРѕРґ
                     </td>
                     <td class="even">
                       <textarea name="menu_content4" rows="5" cols="70"></textarea>

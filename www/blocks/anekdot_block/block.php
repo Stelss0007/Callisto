@@ -3,11 +3,11 @@ class anekdot_block extends Block
   {
   function display(&$blockinfo)
     {
-    //Проверка на доступ
+    //РџСЂРѕРІРµСЂРєР° РЅР° РґРѕСЃС‚СѓРї
     //if (!sysSecAuthAction($sysObject, ACCESS_READ)) return true;
 
    
-    //Настройки модуля
+    //РќР°СЃС‚СЂРѕР№РєРё РјРѕРґСѓР»СЏ
     $port = '80';
     $query = 'anekdot/'.date('d').'.html';
     $host = 'anekdotov.net';
@@ -15,11 +15,11 @@ class anekdot_block extends Block
     $referer = 'http://www.anekdotov.net/';
     $useragent = 'Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1)';
     $timeout = 5;
-    $reload_time = 60*60*24; // Раз в сутки
-    $reload_iferr_time = 60*20; // 20 минут
+    $reload_time = 60*60*24; // Р Р°Р· РІ СЃСѓС‚РєРё
+    $reload_iferr_time = 60*20; // 20 РјРёРЅСѓС‚
 
 
-    //Скачиваем
+    //РЎРєР°С‡РёРІР°РµРј
 //    $fp = @fsockopen($host, $port, $errno, $errstr, $timeout);
 //
 //    fputs($fp, 'GET http://' . $host . '/' . $query . " HTTP/1.0\r\n");
@@ -38,7 +38,7 @@ class anekdot_block extends Block
 //    fputs($fp, "Connection: close\r\n\r\n");
 //    fclose($fp);
 //
-//    // Парсим
+//    // РџР°СЂСЃРёРј
 //    $anekdots_list = array();
 //    preg_match_all('/<p align=justify>(.*?)<br><br>/', $buffer, $struct);
 //    foreach ($struct[1] as $v)

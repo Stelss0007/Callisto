@@ -31,7 +31,7 @@ class Debuger
     define("NL", "\r\n");
     echo '<script type="text/javascript">'.NL;
 
-    /// Данный код предназначен для браузеров без консоли
+    /// Р”Р°РЅРЅС‹Р№ РєРѕРґ РїСЂРµРґРЅР°Р·РЅР°С‡РµРЅ РґР»СЏ Р±СЂР°СѓР·РµСЂРѕРІ Р±РµР· РєРѕРЅСЃРѕР»Рё
     echo 'if (!window.console) console = {};';
     echo 'console.log = console.log || function(){};';
     echo 'console.warn = console.warn || function(){};';
@@ -39,7 +39,7 @@ class Debuger
     echo 'console.info = console.info || function(){};';
     echo 'console.debug = console.debug || function(){};';
     echo '</script>';
-    /// Конец секции для браузеров без консоли
+    /// РљРѕРЅРµС† СЃРµРєС†РёРё РґР»СЏ Р±СЂР°СѓР·РµСЂРѕРІ Р±РµР· РєРѕРЅСЃРѕР»Рё
     }
 
   function debug($name, $var = null, $type = LOG)
@@ -226,4 +226,3 @@ class Debuger
     }
   }
 
-?>

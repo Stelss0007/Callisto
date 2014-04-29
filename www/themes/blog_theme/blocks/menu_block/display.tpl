@@ -1,4 +1,4 @@
-{strip}
+﻿{strip}
 <ul class="tmo_list">
 {foreach from=$menu_list item=menu}
   <li>

@@ -20,43 +20,43 @@ class ErrorHandler
   public function __construct()
     {
     error_reporting(0);
-    // ðåãèñòðàöèÿ îøèáîê
+    // Ñ€ÐµÐ³Ð¸ÑÑ‚Ñ€Ð°Ñ†Ð¸Ñ Ð¾ÑˆÐ¸Ð±Ð¾Ðº
     set_error_handler(array($this, 'OtherErrorCatcher'));
 
-    // ïåðåõâàò êðèòè÷åñêèõ îøèáîê
+    // Ð¿ÐµÑ€ÐµÑ…Ð²Ð°Ñ‚ ÐºÑ€Ð¸Ñ‚Ð¸Ñ‡ÐµÑÐºÐ¸Ñ… Ð¾ÑˆÐ¸Ð±Ð¾Ðº
     register_shutdown_function(array($this, 'FatalErrorCatcher'));
 
-    // ñîçäàíèå áóôåðà âûâîäà
+    // ÑÐ¾Ð·Ð´Ð°Ð½Ð¸Ðµ Ð±ÑƒÑ„ÐµÑ€Ð° Ð²Ñ‹Ð²Ð¾Ð´Ð°
     ob_start();
     }
 
   public function OtherErrorCatcher($errno, $errstr, $errfile, $errline)
     {
-    // êîíòðîëü îøèáîê:
-    // - çàïèñàòü â ëîã
+    // ÐºÐ¾Ð½Ñ‚Ñ€Ð¾Ð»ÑŒ Ð¾ÑˆÐ¸Ð±Ð¾Ðº:
+    // - Ð·Ð°Ð¿Ð¸ÑÐ°Ñ‚ÑŒ Ð² Ð»Ð¾Ð³
     
     switch ($errno) {
     case E_USER_ERROR:
       //echo "array('type' => $errno, 'message' => $errstr, 'file' => $errfile, 'line' => $errline);";
         $this->user_error_array[] = array('type' => $errno, 'message' => $errstr, 'file' => $errfile, 'line' => $errline);
         $this->__destruct();
-        //òóò ëó÷øå ñôîðìèðîâàòü ïèüñìî è îòïðàâèòü àäìèíèñòðàòîðó ñàéòû
+        //Ñ‚ÑƒÑ‚ Ð»ÑƒÑ‡ÑˆÐµ ÑÑ„Ð¾Ñ€Ð¼Ð¸Ñ€Ð¾Ð²Ð°Ñ‚ÑŒ Ð¿Ð¸ÑŒÑÐ¼Ð¾ Ð¸ Ð¾Ñ‚Ð¿Ñ€Ð°Ð²Ð¸Ñ‚ÑŒ Ð°Ð´Ð¼Ð¸Ð½Ð¸ÑÑ‚Ñ€Ð°Ñ‚Ð¾Ñ€Ñƒ ÑÐ°Ð¹Ñ‚Ñ‹
         break;
 
     case E_USER_WARNING:
     case E_WARNING:
-        //îáðàáàòûâàåì âàðíèíãè
+        //Ð¾Ð±Ñ€Ð°Ð±Ð°Ñ‚Ñ‹Ð²Ð°ÐµÐ¼ Ð²Ð°Ñ€Ð½Ð¸Ð½Ð³Ð¸
         $this->warning_array[] = array('type' => $errno, 'message' => $errstr, 'file' => $errfile, 'line' => $errline);
         break;
 
     case E_USER_NOTICE:
     case E_NOTICE:
-        //îáðàáàòûâàåì íîòèñû
+        //Ð¾Ð±Ñ€Ð°Ð±Ð°Ñ‚Ñ‹Ð²Ð°ÐµÐ¼ Ð½Ð¾Ñ‚Ð¸ÑÑ‹
         $this->notice_array[] = array('type' => $errno, 'message' => $errstr, 'file' => $errfile, 'line' => $errline);
         break;
 
     default:
-        //îáðàáàòûâàåì îñòàëüíûå ñîîáùåíèÿ î íåïîëàäêàõ
+        //Ð¾Ð±Ñ€Ð°Ð±Ð°Ñ‚Ñ‹Ð²Ð°ÐµÐ¼ Ð¾ÑÑ‚Ð°Ð»ÑŒÐ½Ñ‹Ðµ ÑÐ¾Ð¾Ð±Ñ‰ÐµÐ½Ð¸Ñ Ð¾ Ð½ÐµÐ¿Ð¾Ð»Ð°Ð´ÐºÐ°Ñ…
         //$this->error_array[] = array('type' => $errno, 'message' => $errstr, 'file' => $errfile, 'line' => $errline);
         break;
     }
@@ -74,23 +74,23 @@ class ErrorHandler
       if ($error['type'] == E_ERROR || $error['type'] == E_PARSE || $error['type'] == E_COMPILE_ERROR || $error['type'] == E_CORE_ERROR)
         {
         $this->error_array[] = $error;
-        ob_end_clean(); // ñáðîñèòü áóôåð, çàâåðøèòü ðàáîòó áóôåðà
+        ob_end_clean(); // ÑÐ±Ñ€Ð¾ÑÐ¸Ñ‚ÑŒ Ð±ÑƒÑ„ÐµÑ€, Ð·Ð°Ð²ÐµÑ€ÑˆÐ¸Ñ‚ÑŒ Ñ€Ð°Ð±Ð¾Ñ‚Ñƒ Ð±ÑƒÑ„ÐµÑ€Ð°
         $this->__destruct();
-        // êîíòðîëü êðèòè÷åñêèõ îøèáîê:
-        // - çàïèñàòü â ëîã
-        // - âåðíóòü çàãîëîâîê 500
-        // - âåðíóòü ïîñëå çàãîëîâêà äàííûå äëÿ ïîëüçîâàòåëÿ
+        // ÐºÐ¾Ð½Ñ‚Ñ€Ð¾Ð»ÑŒ ÐºÑ€Ð¸Ñ‚Ð¸Ñ‡ÐµÑÐºÐ¸Ñ… Ð¾ÑˆÐ¸Ð±Ð¾Ðº:
+        // - Ð·Ð°Ð¿Ð¸ÑÐ°Ñ‚ÑŒ Ð² Ð»Ð¾Ð³
+        // - Ð²ÐµÑ€Ð½ÑƒÑ‚ÑŒ Ð·Ð°Ð³Ð¾Ð»Ð¾Ð²Ð¾Ðº 500
+        // - Ð²ÐµÑ€Ð½ÑƒÑ‚ÑŒ Ð¿Ð¾ÑÐ»Ðµ Ð·Ð°Ð³Ð¾Ð»Ð¾Ð²ÐºÐ° Ð´Ð°Ð½Ð½Ñ‹Ðµ Ð´Ð»Ñ Ð¿Ð¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ñ‚ÐµÐ»Ñ
         }
       else
         {
         $this->user_error_array[] = $error;
-        ob_end_flush(); // âûâîä áóôåðà, çàâåðøèòü ðàáîòó áóôåðà
+        ob_end_flush(); // Ð²Ñ‹Ð²Ð¾Ð´ Ð±ÑƒÑ„ÐµÑ€Ð°, Ð·Ð°Ð²ÐµÑ€ÑˆÐ¸Ñ‚ÑŒ Ñ€Ð°Ð±Ð¾Ñ‚Ñƒ Ð±ÑƒÑ„ÐµÑ€Ð°
         $this->__destruct();
         }
       }
     else
       {
-      ob_end_flush(); // âûâîä áóôåðà, çàâåðøèòü ðàáîòó áóôåðà
+      ob_end_flush(); // Ð²Ñ‹Ð²Ð¾Ð´ Ð±ÑƒÑ„ÐµÑ€Ð°, Ð·Ð°Ð²ÐµÑ€ÑˆÐ¸Ñ‚ÑŒ Ñ€Ð°Ð±Ð¾Ñ‚Ñƒ Ð±ÑƒÑ„ÐµÑ€Ð°
       }
       
     return true;
@@ -244,4 +244,3 @@ class ErrorHandler
 
   }
 
-?>

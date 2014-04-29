@@ -1,4 +1,4 @@
-(function($)
+﻿(function($)
 {
     /**
      * Auto-growing textareas; technique ripped from Facebook

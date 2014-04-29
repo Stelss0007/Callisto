@@ -1,37 +1,37 @@
 {strip}
 {if $isLogin}
-  <h1>Добро пожаловать на наш сайт! </h1>
-  Сейчас Вы находитесь на странице выхода из системы. Для того чтобы выйти нажмите кнопку выйти
+  <h1>Р”РѕР±СЂРѕ РїРѕР¶Р°Р»РѕРІР°С‚СЊ РЅР° РЅР°С€ СЃР°Р№С‚! </h1>
+  РЎРµР№С‡Р°СЃ Р’С‹ РЅР°С…РѕРґРёС‚РµСЃСЊ РЅР° СЃС‚СЂР°РЅРёС†Рµ РІС‹С…РѕРґР° РёР· СЃРёСЃС‚РµРјС‹. Р”Р»СЏ С‚РѕРіРѕ С‡С‚РѕР±С‹ РІС‹Р№С‚Рё РЅР°Р¶РјРёС‚Рµ РєРЅРѕРїРєСѓ РІС‹Р№С‚Рё
    <form method="post" action="/users/logout" class="login" name="loginform">
     <center>
-      <b>Выход из системы</b>
+      <b>Р’С‹С…РѕРґ РёР· СЃРёСЃС‚РµРјС‹</b>
       <br><br><br>
-      <input type="submit" class="button-green" value="Выйти">
+      <input type="submit" class="button-green" value="Р’С‹Р№С‚Рё">
     </center>
         
   </form>
 {else}
- <h1>Добро пожаловать на наш сайт!</h1>
-  Для входа в свой аккаунт
-  , введите ваш регистрационный логин и пароль, после аунтификации Вы попадете в свой профиль.
+ <h1>Р”РѕР±СЂРѕ РїРѕР¶Р°Р»РѕРІР°С‚СЊ РЅР° РЅР°С€ СЃР°Р№С‚!</h1>
+  Р”Р»СЏ РІС…РѕРґР° РІ СЃРІРѕР№ Р°РєРєР°СѓРЅС‚
+  , РІРІРµРґРёС‚Рµ РІР°С€ СЂРµРіРёСЃС‚СЂР°С†РёРѕРЅРЅС‹Р№ Р»РѕРіРёРЅ Рё РїР°СЂРѕР»СЊ, РїРѕСЃР»Рµ Р°СѓРЅС‚РёС„РёРєР°С†РёРё Р’С‹ РїРѕРїР°РґРµС‚Рµ РІ СЃРІРѕР№ РїСЂРѕС„РёР»СЊ.
   <form method="post" action="" class="login" name="loginform">
-    <center><b>Вход в систему</b></center>
+    <center><b>Р’С…РѕРґ РІ СЃРёСЃС‚РµРјСѓ</b></center>
     <br>
     <div class="note">
-      <span class="note-text">Логин</span>
+      <span class="note-text">Р›РѕРіРёРЅ</span>
       <input type="text" style="width: 170px;" value="" maxlength="40" name="login">
     </div>
     <div class="note">
-      <span class="note-text">Пароль</span>
+      <span class="note-text">РџР°СЂРѕР»СЊ</span>
       <input type="password" style="width: 170px;" value="" maxlength="40" name="pass">
     </div>
     <br>
     <center>
-      <input class="button-green" type="submit" name="submit" value="Войти" />
+      <input class="button-green" type="submit" name="submit" value="Р’РѕР№С‚Рё" />
       <br>
       <font size="1">
-        Если Вы еще не зарегистрированы, &nbsp;
-        <a href='/users/register'>зарегистрируйтесь в системе</a>.
+        Р•СЃР»Рё Р’С‹ РµС‰Рµ РЅРµ Р·Р°СЂРµРіРёСЃС‚СЂРёСЂРѕРІР°РЅС‹, &nbsp;
+        <a href='/users/register'>Р·Р°СЂРµРіРёСЃС‚СЂРёСЂСѓР№С‚РµСЃСЊ РІ СЃРёСЃС‚РµРјРµ</a>.
       </font>
     </center>
   </form>

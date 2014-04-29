@@ -61,13 +61,13 @@ abstract class Controller extends AppObject
     //print_r('wwww');exit;
     //$this->start_debug_time = time();
     $current_time = microtime();
-    // Îòäåëÿåì ñåêóíäû îò ìèëëèñåêóíä
+    // ÐžÑ‚Ð´ÐµÐ»ÑÐµÐ¼ ÑÐµÐºÑƒÐ½Ð´Ñ‹ Ð¾Ñ‚ Ð¼Ð¸Ð»Ð»Ð¸ÑÐµÐºÑƒÐ½Ð´
     $current_time = explode(" ",$current_time);
-    // Ñêëàäûâàåì ñåêóíäû è ìèëëèñåêóíäû
+    // Ð¡ÐºÐ»Ð°Ð´Ñ‹Ð²Ð°ÐµÐ¼ ÑÐµÐºÑƒÐ½Ð´Ñ‹ Ð¸ Ð¼Ð¸Ð»Ð»Ð¸ÑÐµÐºÑƒÐ½Ð´Ñ‹
     $this->start_debug_time =$current_time[1] + $current_time[0];
     
     $this->setConfig();
-    //$coreConfig['debug.enabled']-Ñòàòóñ äåáàãåðà;  
+    //$coreConfig['debug.enabled']-Ð¡Ñ‚Ð°Ñ‚ÑƒÑ Ð´ÐµÐ±Ð°Ð³ÐµÑ€Ð°;  
     //Init Errors
     $this->errors =& ErrorHandler::getInstance();
     
@@ -115,7 +115,7 @@ abstract class Controller extends AppObject
     $this->setTheme();
     //$this->current_theme = 'blog_theme1';
     
-    //Óñòàíîâèì ÿçûê
+    //Ð£ÑÑ‚Ð°Ð½Ð¾Ð²Ð¸Ð¼ ÑÐ·Ñ‹Ðº
     $this->setLang($this->config['lang']);
     $this->loadLang();
     
@@ -274,7 +274,7 @@ abstract class Controller extends AppObject
         }
       }
 
-    //Çàìåíèì - è _ íà Áîëüøèå áóêâû, òîåñòü ïðèîáðàçóåì óðë â Êàìåëêåéñïîäîáíûé âèä  
+    //Ð—Ð°Ð¼ÐµÐ½Ð¸Ð¼ - Ð¸ _ Ð½Ð° Ð‘Ð¾Ð»ÑŒÑˆÐ¸Ðµ Ð±ÑƒÐºÐ²Ñ‹, Ñ‚Ð¾ÐµÑÑ‚ÑŒ Ð¿Ñ€Ð¸Ð¾Ð±Ñ€Ð°Ð·ÑƒÐµÐ¼ ÑƒÑ€Ð» Ð² ÐšÐ°Ð¼ÐµÐ»ÐºÐµÐ¹ÑÐ¿Ð¾Ð´Ð¾Ð±Ð½Ñ‹Ð¹ Ð²Ð¸Ð´  
     $action_name = $this->urlToCamelCase($action_name);
       
     if(!method_exists($this, 'action'.$action_name))
@@ -286,16 +286,16 @@ abstract class Controller extends AppObject
     
     $this->smarty->assign('config', $this->config);
     
-    //Ïîäêëþ÷èì äæàâàñêðèïòû
+    //ÐŸÐ¾Ð´ÐºÐ»ÑŽÑ‡Ð¸Ð¼ Ð´Ð¶Ð°Ð²Ð°ÑÐºÑ€Ð¸Ð¿Ñ‚Ñ‹
     appJsLoad('kernel', 'jQuery');
     appJsLoad('kernel', 'main');
     
-    //Ïîäêëþ÷èì ñòèëè
-    //Ñòèëè ÿäðà
+    //ÐŸÐ¾Ð´ÐºÐ»ÑŽÑ‡Ð¸Ð¼ ÑÑ‚Ð¸Ð»Ð¸
+    //Ð¡Ñ‚Ð¸Ð»Ð¸ ÑÐ´Ñ€Ð°
     appCssLoad('kernel', 'bootstrap');
     appCssLoad('kernel'); 
      
-    //Áåç àðãóìåíòîâ ïîäêëþ÷èòñÿ ñòèëü òåêóùåé òåìû
+    //Ð‘ÐµÐ· Ð°Ñ€Ð³ÑƒÐ¼ÐµÐ½Ñ‚Ð¾Ð² Ð¿Ð¾Ð´ÐºÐ»ÑŽÑ‡Ð¸Ñ‚ÑÑ ÑÑ‚Ð¸Ð»ÑŒ Ñ‚ÐµÐºÑƒÑ‰ÐµÐ¹ Ñ‚ÐµÐ¼Ñ‹
     appCssLoad();
     
     call_user_method_array('action'.$action_name, $this, $this->input_vars);
@@ -405,13 +405,15 @@ abstract class Controller extends AppObject
     }
     
   /**
-   * Ïîëó÷èòü çíà÷åíèå  èç ñëîâàðÿ â Smarty (lang.conf)
-   * @param string $const Êëþ÷ ñëîâàðÿ
-   * @return string Ðåçóëüòàò, ïðåäëîæåíèå â òåêóùåé ëîêàëè
+   * ÐŸÐ¾Ð»ÑƒÑ‡Ð¸Ñ‚ÑŒ Ð·Ð½Ð°Ñ‡ÐµÐ½Ð¸Ðµ  Ð¸Ð· ÑÐ»Ð¾Ð²Ð°Ñ€Ñ Ð² Smarty (lang.conf)
+   * @param string $const ÐšÐ»ÑŽÑ‡ ÑÐ»Ð¾Ð²Ð°Ñ€Ñ
+   * @return string Ð ÐµÐ·ÑƒÐ»ÑŒÑ‚Ð°Ñ‚, Ð¿Ñ€ÐµÐ´Ð»Ð¾Ð¶ÐµÐ½Ð¸Ðµ Ð² Ñ‚ÐµÐºÑƒÑ‰ÐµÐ¹ Ð»Ð¾ÐºÐ°Ð»Ð¸
    */
   final public function t($const)
     {
-    return $this->smarty->get_config_vars($const);
+    $result = $this->smarty->get_config_vars($const);
+    if($result) return ''.$result;
+    return '';
     }
     
   final public function viewJSON()
@@ -428,10 +430,10 @@ abstract class Controller extends AppObject
     $this->blockToTpl();
     $ObjectName = $this->getTplObjectName();
     
-    //Ïðèêðåïèì ìåñåäæ â òåëî.
+    //ÐŸÑ€Ð¸ÐºÑ€ÐµÐ¿Ð¸Ð¼ Ð¼ÐµÑÐµÐ´Ð¶ Ð² Ñ‚ÐµÐ»Ð¾.
     $modContent = $this->message.$this->smarty->fetch($tpl_dir, $ObjectName);
    
-    //Åñëè ýòî çàïðîñ ÷åðåç AJAX, òî âûâîäèì òîëüêî ðåçóëüòàò ðàáîòû ìîäóëÿ
+    //Ð•ÑÐ»Ð¸ ÑÑ‚Ð¾ Ð·Ð°Ð¿Ñ€Ð¾Ñ Ñ‡ÐµÑ€ÐµÐ· AJAX, Ñ‚Ð¾ Ð²Ñ‹Ð²Ð¾Ð´Ð¸Ð¼ Ñ‚Ð¾Ð»ÑŒÐºÐ¾ Ñ€ÐµÐ·ÑƒÐ»ÑŒÑ‚Ð°Ñ‚ Ñ€Ð°Ð±Ð¾Ñ‚Ñ‹ Ð¼Ð¾Ð´ÑƒÐ»Ñ
     if(isAjax())
       {
       echo $modContent;
@@ -892,7 +894,7 @@ abstract class Controller extends AppObject
     else
       {
       /////////////////////////////////////////////////////
-      /////// Äëÿ âûâîäà ñîîáùåíèé â îòäåëüíîì îêíå ///////
+      /////// Ð”Ð»Ñ Ð²Ñ‹Ð²Ð¾Ð´Ð° ÑÐ¾Ð¾Ð±Ñ‰ÐµÐ½Ð¸Ð¹ Ð² Ð¾Ñ‚Ð´ÐµÐ»ÑŒÐ½Ð¾Ð¼ Ð¾ÐºÐ½Ðµ ///////
       if(empty($message))
         return;
       if(empty($url))
@@ -904,7 +906,7 @@ abstract class Controller extends AppObject
       $this->smarty->assign('url', $url);
       $this->smarty->assign('message', $message);
       $this->smarty->assign('time', $time);
-      //Ñìîòðèì ÷å ó íàñ â ñåñèè (Êàêàÿ òåìà)
+      //Ð¡Ð¼Ð¾Ñ‚Ñ€Ð¸Ð¼ Ñ‡Ðµ Ñƒ Ð½Ð°Ñ Ð² ÑÐµÑÐ¸Ð¸ (ÐšÐ°ÐºÐ°Ñ Ñ‚ÐµÐ¼Ð°)
       //$themename = sysUserTheme ();
       //$sysTpl->display("themes/test/messages/normal.tpl");
       $this->smarty->display("themes/green/messages/normal.tpl");
@@ -1311,4 +1313,3 @@ abstract class Controller extends AppObject
     }
   }
 
-?>

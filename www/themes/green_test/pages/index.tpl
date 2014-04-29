@@ -1,4 +1,4 @@
-{strip}
+п»ї{strip}
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
@@ -17,7 +17,7 @@
       <table class='siteheader'>
         <tr>
           <td>
-            <a class='logo-winter' href='/index.php' title='Callisto - Тестовое задание'></a>
+            <a class='logo-winter' href='/index.php' title='Callisto - РўРµСЃС‚РѕРІРѕРµ Р·Р°РґР°РЅРёРµ'></a>
           </td>
           <td align='right' valign='bottom' nowrap='nowrap'>
             
@@ -39,25 +39,25 @@
       <table class="site">
         <tr>
           <td class="fblock">
-            <span class='sbtitle'>Меню пользователя</span>
+            <span class='sbtitle'>РњРµРЅСЋ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ</span>
             <div class='usermenu'>
               <span id='mnu_title1' class='usermnutitle-g'>
-                Управление
+                РЈРїСЂР°РІР»РµРЅРёРµ
               </span>
               <div id='mnu_tblock1' class='usermnublock'>
                 <span class='usermnudelim'></span>
-                <a class='usermnuline' href="/">Главная</a>
-                <a class='usermnuline' href="index.php?module=user&func=login">Вход</a>
+                <a class='usermnuline' href="/">Р“Р»Р°РІРЅР°СЏ</a>
+                <a class='usermnuline' href="index.php?module=user&func=login">Р’С…РѕРґ</a>
                 <a class='usermnuline' href="index.php?module=test">Test</a>
-                <a class='usermnuline' href="index.php?module=article&type=admin&func=article_new">Создать статью</a>
-                <a class='usermnuline' href="index.php?module=article&type=user&func=article_list">Статьи</a>
-                <a class='usermnuline' href="index.php?module=groups&type=admin">Группы пользователей</a>
-                <a class='usermnuline' href="index.php?module=user&type=admin&func=user_list">Пользователи</a>
-                <a class='usermnuline-act' href="index.php?module=blocks&type=admin">Блоки</a>
+                <a class='usermnuline' href="index.php?module=article&type=admin&func=article_new">РЎРѕР·РґР°С‚СЊ СЃС‚Р°С‚СЊСЋ</a>
+                <a class='usermnuline' href="index.php?module=article&type=user&func=article_list">РЎС‚Р°С‚СЊРё</a>
+                <a class='usermnuline' href="index.php?module=groups&type=admin">Р“СЂСѓРїРїС‹ РїРѕР»СЊР·РѕРІР°С‚РµР»РµР№</a>
+                <a class='usermnuline' href="index.php?module=user&type=admin&func=user_list">РџРѕР»СЊР·РѕРІР°С‚РµР»Рё</a>
+                <a class='usermnuline-act' href="index.php?module=blocks&type=admin">Р‘Р»РѕРєРё</a>
                 <span class='usermnudelim'></span>
               </div>
 
-              {* Левая часть *}
+              {* Р›РµРІР°СЏ С‡Р°СЃС‚СЊ *}
               {if $blocks.left}
                 {foreach item=block from=$blocks.left}
                  <span id='mnu_title1' class='usermnutitle-g'>
@@ -72,7 +72,7 @@
                 </div>
                 {/foreach}
               {/if}
-            {* End левая часть*}
+            {* End Р»РµРІР°СЏ С‡Р°СЃС‚СЊ*}
             </div>
           </td>
        <td class="contentmain">
@@ -82,7 +82,7 @@
           {$module_content}
 
           <div class="usermenu">
-          {* Нижняя часть *}
+          {* РќРёР¶РЅСЏСЏ С‡Р°СЃС‚СЊ *}
           {if $blocks.bottom}
             {foreach item=block from=$blocks.bottom}
             <div {if $block.block_css_class}class='{$block.block_css_class}'{/if}>
@@ -99,13 +99,13 @@
              </div>
             {/foreach}
           {/if}
-        {* End Нижняя часть*}
+        {* End РќРёР¶РЅСЏСЏ С‡Р°СЃС‚СЊ*}
         </div>
        </td>
       <td class="fblock">
-        <span class="sbtitle">Выбор заданий</span>
+        <span class="sbtitle">Р’С‹Р±РѕСЂ Р·Р°РґР°РЅРёР№</span>
         <div class="usermenu">
-          {* Левая часть *}
+          {* Р›РµРІР°СЏ С‡Р°СЃС‚СЊ *}
           {if $blocks.right}
             {foreach item=block from=$blocks.right}
              <span id='mnu_title1' class='usermnutitle-g'>
@@ -120,7 +120,7 @@
             </div>
             {/foreach}
           {/if}
-        {* End левая часть*}
+        {* End Р»РµРІР°СЏ С‡Р°СЃС‚СЊ*}
         </div>
       </td>
      </tr>
@@ -130,12 +130,12 @@
 <div id="footer">
   <div id="wrap">
     <div class="copyrate">
-      Сайт под умправлением CMS "Calisto"<br />
+      РЎР°Р№С‚ РїРѕРґ СѓРјРїСЂР°РІР»РµРЅРёРµРј CMS "Calisto"<br />
       Beta v0.0.1
     </div>
 
     <div class="footermenu">
-      <a href="http://vkontakte.ru/id12188100">Персональные даные</a>
+      <a href="http://vkontakte.ru/id12188100">РџРµСЂСЃРѕРЅР°Р»СЊРЅС‹Рµ РґР°РЅС‹Рµ</a>
     </div>
   </div>
 </div>

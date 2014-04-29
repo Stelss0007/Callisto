@@ -1,7 +1,7 @@
 <?php
 class IndexController extends Controller
   {
-  //Ïðèìåð îòîáðàæåíèÿ ðåçóëüòàòà ìîäóëÿ
+  //ÐŸÑ€Ð¸Ð¼ÐµÑ€ Ð¾Ñ‚Ð¾Ð±Ñ€Ð°Ð¶ÐµÐ½Ð¸Ñ Ñ€ÐµÐ·ÑƒÐ»ÑŒÑ‚Ð°Ñ‚Ð° Ð¼Ð¾Ð´ÑƒÐ»Ñ
   function view_mod()
     {
     //$this->errors->setError("Index not Exist!!!");
@@ -13,7 +13,7 @@ class IndexController extends Controller
   function view_page()
     {
     //$_SESSION['user_gid'] = -1;
-//    $this->debuger->debug("Î÷åíü ïðîñòîå ñîîáùåíèå íà êîíñîëü");
+//    $this->debuger->debug("ÐžÑ‡ÐµÐ½ÑŒ Ð¿Ñ€Ð¾ÑÑ‚Ð¾Ðµ ÑÐ¾Ð¾Ð±Ñ‰ÐµÐ½Ð¸Ðµ Ð½Ð° ÐºÐ¾Ð½ÑÐ¾Ð»ÑŒ");
 //    $this->debuger->debug("object", $this);
     $obj1 = $this->test->getObjectsList(array('arg1'=>'1'), array('arg2'=>'asc'), $offset);
     
@@ -38,13 +38,13 @@ class IndexController extends Controller
     $this->viewPage();
     }
 
-  //Ïðèìåð ïðèåìà ïàðàìåòðîâ ÷åðåç àðãóìåíòû ìåòîäà
+  //ÐŸÑ€Ð¸Ð¼ÐµÑ€ Ð¿Ñ€Ð¸ÐµÐ¼Ð° Ð¿Ð°Ñ€Ð°Ð¼ÐµÑ‚Ñ€Ð¾Ð² Ñ‡ÐµÑ€ÐµÐ· Ð°Ñ€Ð³ÑƒÐ¼ÐµÐ½Ñ‚Ñ‹ Ð¼ÐµÑ‚Ð¾Ð´Ð°
   function view_arg($a='1', $b=2, $c=4, $n='0')
     {
     echo $a.$b.$c.$n;
     }
     
-  //Ïðèìåð ðàáîòû ñ äîñòóïîì
+  //ÐŸÑ€Ð¸Ð¼ÐµÑ€ Ñ€Ð°Ð±Ð¾Ñ‚Ñ‹ Ñ Ð´Ð¾ÑÑ‚ÑƒÐ¿Ð¾Ð¼
   function view_access()
     {
     //$this->errors->setError("Index not Exist!!!");
@@ -53,32 +53,32 @@ class IndexController extends Controller
     $this->view();
     }
    
-  //Ïðèìåð ðàáîòû ñ äîñòóïîì
+  //ÐŸÑ€Ð¸Ð¼ÐµÑ€ Ñ€Ð°Ð±Ð¾Ñ‚Ñ‹ Ñ Ð´Ð¾ÑÑ‚ÑƒÐ¿Ð¾Ð¼
   function view_error()
     {
     $this->errors->setError("This is Error!!!");
     }  
     
-  //Ïðèìåð ïîëó÷åíèÿ îáúåêòà ïî åãî ÈÄ  
+  //ÐŸÑ€Ð¸Ð¼ÐµÑ€ Ð¿Ð¾Ð»ÑƒÑ‡ÐµÐ½Ð¸Ñ Ð¾Ð±ÑŠÐµÐºÑ‚Ð° Ð¿Ð¾ ÐµÐ³Ð¾ Ð˜Ð”  
   function view_object($guid=0)
     {
     print_r($this->test->getObject($guid));
-    $this->debuger->debug('Ïðèâåò');
+    $this->debuger->debug('ÐŸÑ€Ð¸Ð²ÐµÑ‚');
     }
   
-  //Ïðèìåð ïîëó÷åíèÿ ñïèñêà îáúåêòîâ  
+  //ÐŸÑ€Ð¸Ð¼ÐµÑ€ Ð¿Ð¾Ð»ÑƒÑ‡ÐµÐ½Ð¸Ñ ÑÐ¿Ð¸ÑÐºÐ° Ð¾Ð±ÑŠÐµÐºÑ‚Ð¾Ð²  
   function view_objects($offset=0)
     {
     print_r($this->test->getObjectsList(array('arg1'=>'1'), array('arg2'=>'asc'), $offset));
     }
   
-  //Ïðèìåð óäàëåíèÿ îáúåêòà ïî åãî ÈÄ
+  //ÐŸÑ€Ð¸Ð¼ÐµÑ€ ÑƒÐ´Ð°Ð»ÐµÐ½Ð¸Ñ Ð¾Ð±ÑŠÐµÐºÑ‚Ð° Ð¿Ð¾ ÐµÐ³Ð¾ Ð˜Ð”
   function delete_object($id=0)
     {
     $this->test->deleteObject($id);
     }
   
-  //Ïðèìåð îáíîâëåíèÿ îáúåêòà ïî åãî ÈÄ
+  //ÐŸÑ€Ð¸Ð¼ÐµÑ€ Ð¾Ð±Ð½Ð¾Ð²Ð»ÐµÐ½Ð¸Ñ Ð¾Ð±ÑŠÐµÐºÑ‚Ð° Ð¿Ð¾ ÐµÐ³Ð¾ Ð˜Ð”
   function update_object($a='1', $b=2, $c=4, $n='0')
     {
     //echo $this->test->sum(6,8);
@@ -120,7 +120,7 @@ class IndexController extends Controller
     echo $this->session->getVar('rus', '22');
     }
     
-  //Ïðèìåð ìîìåùåíèÿ äàíí³õ â ñåññèþ  
+  //ÐŸÑ€Ð¸Ð¼ÐµÑ€ Ð¼Ð¾Ð¼ÐµÑ‰ÐµÐ½Ð¸Ñ Ð´Ð°Ð½Ð½Ñ–Ñ… Ð² ÑÐµÑÑÐ¸ÑŽ  
   function set_session($a='hello')
     {
     $this->session->setVar('rus', $a);
@@ -128,46 +128,46 @@ class IndexController extends Controller
     echo $this->session->getVar('rus', '22');
     }
     
-  //Ïðèìåð ïîëó÷åíèÿ äàííûõ èç ñåññèè  
+  //ÐŸÑ€Ð¸Ð¼ÐµÑ€ Ð¿Ð¾Ð»ÑƒÑ‡ÐµÐ½Ð¸Ñ Ð´Ð°Ð½Ð½Ñ‹Ñ… Ð¸Ð· ÑÐµÑÑÐ¸Ð¸  
   function get_session($default_val='this is default')
     {
     echo $this->session->getVar('rus', $default_val);
     }
     
-  //Ïðèìåð ïîëüçîâàòåëüñêîãî ñîîáùåíèÿ  
+  //ÐŸÑ€Ð¸Ð¼ÐµÑ€ Ð¿Ð¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ñ‚ÐµÐ»ÑŒÑÐºÐ¾Ð³Ð¾ ÑÐ¾Ð¾Ð±Ñ‰ÐµÐ½Ð¸Ñ  
   function view_message($default_val='this is message')
     {
     $this->showMessage($default_val, '/index.php?module=test&action=validForm');
     }
     
-  //Ïðèìåð ïîëó÷åíèÿ òåêóùåãî óðëà è ïðåäûäóùåãî 
+  //ÐŸÑ€Ð¸Ð¼ÐµÑ€ Ð¿Ð¾Ð»ÑƒÑ‡ÐµÐ½Ð¸Ñ Ñ‚ÐµÐºÑƒÑ‰ÐµÐ³Ð¾ ÑƒÑ€Ð»Ð° Ð¸ Ð¿Ñ€ÐµÐ´Ñ‹Ð´ÑƒÑ‰ÐµÐ³Ð¾ 
   function view_urls()
     {
     echo 'url = '.$this->URL.'<br>';
     echo 'prev_url = '.$this->prevURL.'<br>';
     }
    
-  //Ïðèìåð ðåäèðåêòà 
+  //ÐŸÑ€Ð¸Ð¼ÐµÑ€ Ñ€ÐµÐ´Ð¸Ñ€ÐµÐºÑ‚Ð° 
   function view_redirect()
     {
     $this->redirect('/index.php?module=test&action=view_page');
     }
 
-  //Ïðèìåð ðàáîòû ôîðìû ïðèìåð îòîáðàæåíèÿ ôîðìû 
+  //ÐŸÑ€Ð¸Ð¼ÐµÑ€ Ñ€Ð°Ð±Ð¾Ñ‚Ñ‹ Ñ„Ð¾Ñ€Ð¼Ñ‹ Ð¿Ñ€Ð¸Ð¼ÐµÑ€ Ð¾Ñ‚Ð¾Ð±Ñ€Ð°Ð¶ÐµÐ½Ð¸Ñ Ñ„Ð¾Ñ€Ð¼Ñ‹ 
   function validForm()
     {
     echo stripslashes("KIOSQUE 31 L\'ESCALE BLEUE - Constitution de soci?t? : EURL");
     $this->view();
     }
 
-  //Ïðèìåð ðàáîòû ôîðìû ïðèìåð ïîëó÷åíèÿ ðåçóëüòàòîâ, âàëèäàöèè äàííûõ  
+  //ÐŸÑ€Ð¸Ð¼ÐµÑ€ Ñ€Ð°Ð±Ð¾Ñ‚Ñ‹ Ñ„Ð¾Ñ€Ð¼Ñ‹ Ð¿Ñ€Ð¸Ð¼ÐµÑ€ Ð¿Ð¾Ð»ÑƒÑ‡ÐµÐ½Ð¸Ñ Ñ€ÐµÐ·ÑƒÐ»ÑŒÑ‚Ð°Ñ‚Ð¾Ð², Ð²Ð°Ð»Ð¸Ð´Ð°Ñ†Ð¸Ð¸ Ð´Ð°Ð½Ð½Ñ‹Ñ…  
   function valid()
     {
     print_r($this->getPostData(array('lastname'=>'required min(2) max(6)', 'email'=>'email')));
     print_r($this->getPostData(array('lastname'=>'required min(2) max(6)')));
     }
     
-  //Ïðèìåð ïðåîáðàçîâàíèÿ ìàññèâà â ïîëÿ îáúåêòà
+  //ÐŸÑ€Ð¸Ð¼ÐµÑ€ Ð¿Ñ€ÐµÐ¾Ð±Ñ€Ð°Ð·Ð¾Ð²Ð°Ð½Ð¸Ñ Ð¼Ð°ÑÑÐ¸Ð²Ð° Ð² Ð¿Ð¾Ð»Ñ Ð¾Ð±ÑŠÐµÐºÑ‚Ð°
   function array_to_obj()
     {
     $test_array = array('name'=>'ruslan_test', 'telephone'=>'111112222');
@@ -178,13 +178,13 @@ class IndexController extends Controller
     
     $this->redirect('/index.php?module=test&action=array_to_obj_view&id='.$id);
     }
-  //Ïðèìåð ïðåîáðàçîâàíèÿ ìàññèâà â ïîëÿ îáúåêòà
+  //ÐŸÑ€Ð¸Ð¼ÐµÑ€ Ð¿Ñ€ÐµÐ¾Ð±Ñ€Ð°Ð·Ð¾Ð²Ð°Ð½Ð¸Ñ Ð¼Ð°ÑÑÐ¸Ð²Ð° Ð² Ð¿Ð¾Ð»Ñ Ð¾Ð±ÑŠÐµÐºÑ‚Ð°
   function array_to_obj_view($guid)
     {
     print_r($this->test->getObject($guid));
     }
     
-   //Ïðèìåð ïðåîáðàçîâàíèÿ ìàññèâà â ïîëÿ îáúåêòà
+   //ÐŸÑ€Ð¸Ð¼ÐµÑ€ Ð¿Ñ€ÐµÐ¾Ð±Ñ€Ð°Ð·Ð¾Ð²Ð°Ð½Ð¸Ñ Ð¼Ð°ÑÑÐ¸Ð²Ð° Ð² Ð¿Ð¾Ð»Ñ Ð¾Ð±ÑŠÐµÐºÑ‚Ð°
   function view_debugs()
     {
     $this->a = 2;

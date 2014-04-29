@@ -3,7 +3,7 @@ class test_block extends Block
   {
   function display(&$blockinfo)
     {
-    //Ïğîâåğêà íà äîñòóï
+    //ĞŸÑ€Ğ¾Ğ²ĞµÑ€ĞºĞ° Ğ½Ğ° Ğ´Ğ¾ÑÑ‚ÑƒĞ¿
     //if (!sysSecAuthAction($sysObject, ACCESS_READ)) return true;
     $this->usesModel('groups');
     $this->groups->group_list();

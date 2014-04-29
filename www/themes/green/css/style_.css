@@ -1,4 +1,4 @@
-/*Standart*/
+п»ї/*Standart*/
 .outer {border: 0px;padding:5px;}
 .head
    {
@@ -1355,7 +1355,7 @@ input.button-green, input.button-green-big, input.button-blue, input.button-red,
 }
 
 
-/*======================== Для серфинга ===============================*/
+/*======================== Р”Р»СЏ СЃРµСЂС„РёРЅРіР° ===============================*/
 .advertise-empty {
     background: url(../images/light.jpg) no-repeat top center;
     font-size: 14px;
@@ -1527,7 +1527,7 @@ a.workvir:hover, a.workcomp:hover { background-position: left top; }
 
 
 
-/*======================== Для заданий ===============================*/
+/*======================== Р”Р»СЏ Р·Р°РґР°РЅРёР№ ===============================*/
 .task-nowork {
     background: url(../images/baby.jpg) no-repeat top center;
     font-size: 14px;
@@ -1920,7 +1920,7 @@ div.filterlines {
     vertical-align: top;
 }
 
-/*=================== Для чтения рекламных писем и тестов ===============*/
+/*=================== Р”Р»СЏ С‡С‚РµРЅРёСЏ СЂРµРєР»Р°РјРЅС‹С… РїРёСЃРµРј Рё С‚РµСЃС‚РѕРІ ===============*/
 
 div.blockreply {
     display: block;
@@ -1941,7 +1941,7 @@ div.blocksuccesstest span{
     font-size: 12px;
 }
 
-/*=================== Для промо-материалов =====================*/
+/*=================== Р”Р»СЏ РїСЂРѕРјРѕ-РјР°С‚РµСЂРёР°Р»РѕРІ =====================*/
 .reflink {
     color:#1C8619;
     font-size: 14px;
@@ -1984,7 +1984,7 @@ img.refbaner {
 }
 
 
-/*=================== Для консоли рекламодателя =====================*/
+/*=================== Р”Р»СЏ РєРѕРЅСЃРѕР»Рё СЂРµРєР»Р°РјРѕРґР°С‚РµР»СЏ =====================*/
 .adv-serf {
     text-align: left;
     border-collapse: separate;
@@ -2581,7 +2581,7 @@ img.minibaner {
 }
 
 
-/*==================== Заказ рекламы ======================*/
+/*==================== Р—Р°РєР°Р· СЂРµРєР»Р°РјС‹ ======================*/
 table.reg {
     border-collapse: collapse;
     margin-bottom: 10px;
@@ -2960,7 +2960,7 @@ input.pininput {
     margin: 0 auto;
 }
 
-/*================= Модераторская ===================*/
+/*================= РњРѕРґРµСЂР°С‚РѕСЂСЃРєР°СЏ ===================*/
 table.advmoder {
     text-align: left;
     border-collapse: separate;
@@ -3096,7 +3096,7 @@ table.advmoder td a:hover {
 }
 
 
-/*=================== Новости =====================*/
+/*=================== РќРѕРІРѕСЃС‚Рё =====================*/
 table.news {
     text-align:left;
     border-collapse:collapse;
@@ -3194,7 +3194,7 @@ table.profitreestr tbody td.summa {
 
 
 
-/*=================== Рефералы ========================*/
+/*=================== Р РµС„РµСЂР°Р»С‹ ========================*/
 .referals {
     text-align: left;
     border-collapse: separate;
@@ -3407,7 +3407,7 @@ div.goexchangeblock input.gobutton {
 
 
 
-/*========================= Почта ========================*/
+/*========================= РџРѕС‡С‚Р° ========================*/
 div.mail-write {
     text-align: center;
     display: block;
@@ -3551,7 +3551,7 @@ table.mailpost td a:hover {
 
 
 
-/*==================== История операций ============================*/
+/*==================== РСЃС‚РѕСЂРёСЏ РѕРїРµСЂР°С†РёР№ ============================*/
 .filtermenu, .filtermenuactive, .filtermenu:hover, .filtermenuactive:hover {
     float: left;
     font-size: 12px;
@@ -3811,7 +3811,7 @@ img.refimg {
 }
 
 
-/*======================== Таблица рефералов ============================*/
+/*======================== РўР°Р±Р»РёС†Р° СЂРµС„РµСЂР°Р»РѕРІ ============================*/
 .refbonus-btn-dis, .refbonus-btn-future, .refbonus-btn-curr {
     font-size: 11px;
     text-align: center;
@@ -3866,7 +3866,7 @@ img.refimg {
 
 
 
-/*======================= Реклама от САПЫ ==============================*/
+/*======================= Р РµРєР»Р°РјР° РѕС‚ РЎРђРџР« ==============================*/
 .sape_block_links * {
     background:transparent none repeat scroll 0 0 !important;
     border:medium none !important;

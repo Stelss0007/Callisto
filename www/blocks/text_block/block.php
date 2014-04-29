@@ -2,10 +2,10 @@
 
 function text_block_display(&$blockinfo)
   {
-  //Ïğåëşäèå êàê ó âñåõ ìîäóëåé
+  //ĞŸÑ€ĞµĞ»ÑĞ´Ğ¸Ğµ ĞºĞ°Ğº Ñƒ Ğ²ÑĞµÑ… Ğ¼Ğ¾Ğ´ÑƒĞ»ĞµĞ¹
   $sysObject = 'text_block::display::'.$blockinfo['id'];
 
-  //Ïğîâåğêà íà äîñòóï
+  //ĞŸÑ€Ğ¾Ğ²ĞµÑ€ĞºĞ° Ğ½Ğ° Ğ´Ğ¾ÑÑ‚ÑƒĞ¿
   if (!sysSecAuthAction($sysObject, ACCESS_READ)) return true;
 
   $sysTpl = new sysTpl;
@@ -14,12 +14,12 @@ function text_block_display(&$blockinfo)
 
   if($sysTpl->is_cached($sysModTpl, $sysObject))
     {
-    //Âîçâğàùàåì ğåçóëüòàò
+    //Ğ’Ğ¾Ğ·Ğ²Ñ€Ğ°Ñ‰Ğ°ĞµĞ¼ Ñ€ĞµĞ·ÑƒĞ»ÑŒÑ‚Ğ°Ñ‚
     $result['block_content'] =& $sysTpl->fetch($sysModTpl,$sysObject);
     return $result;
     };
 
-  //Ñîäåğæàíèå
+  //Ğ¡Ğ¾Ğ´ĞµÑ€Ğ¶Ğ°Ğ½Ğ¸Ğµ
   $content =& sysBlockGetVar ($blockinfo['id'], 'content');
   $sysTpl->assign('content', $content);
 

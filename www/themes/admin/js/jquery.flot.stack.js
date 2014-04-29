@@ -1,4 +1,4 @@
-/*
+﻿/*
 Flot plugin for stacking data sets, i.e. putting them on top of each
 other, for accumulative graphs.
 

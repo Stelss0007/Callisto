@@ -1,4 +1,4 @@
-{strip}
+п»ї{strip}
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
@@ -15,7 +15,7 @@
       <table class='siteheader'>
         <tr>
           <td>
-            <a class='logo-winter' href='/index.php' title='SEOSPRINT - Всё для максимальной раскрутки!'></a>
+            <a class='logo-winter' href='/index.php' title='SEOSPRINT - Р’СЃС‘ РґР»СЏ РјР°РєСЃРёРјР°Р»СЊРЅРѕР№ СЂР°СЃРєСЂСѓС‚РєРё!'></a>
           </td>
           <td align='right' valign='bottom' nowrap='nowrap'>
             
@@ -31,30 +31,30 @@
           <td colspan='3'>
             <ul class='mainmenu'>
               {*<li>
-                <a href='' class='active'>Главная</a>
+                <a href='' class='active'>Р“Р»Р°РІРЅР°СЏ</a>
               </li>
               <li>
-                <a href='/index.php?module=article&type=user&func=article_view&id=17'>О портале</a>
+                <a href='/index.php?module=article&type=user&func=article_view&id=17'>Рћ РїРѕСЂС‚Р°Р»Рµ</a>
               </li>
               <li>
-                <a href=''>Технология сервиса</a>
+                <a href=''>РўРµС…РЅРѕР»РѕРіРёСЏ СЃРµСЂРІРёСЃР°</a>
               </li>
               <li>
-                <a href=''>Партнерам</a>
+                <a href=''>РџР°СЂС‚РЅРµСЂР°Рј</a>
               </li>
               <li>
-                <a href=''>Статьи</a>
+                <a href=''>РЎС‚Р°С‚СЊРё</a>
               </li>
               <li>
-                <a href=''>Выплаты</a>
+                <a href=''>Р’С‹РїР»Р°С‚С‹</a>
               </li>
               <li>
-                <a href=''>Форум</a>
+                <a href=''>Р¤РѕСЂСѓРј</a>
               </li>
               <li>
-                <a href=''>Помощь</a>
+                <a href=''>РџРѕРјРѕС‰СЊ</a>
               </li>*}
-              {* Верхняя часть *}
+              {* Р’РµСЂС…РЅСЏСЏ С‡Р°СЃС‚СЊ *}
               {if $blocks.top}
                 {foreach item=block from=$blocks.top}
 
@@ -64,7 +64,7 @@
 
                 {/foreach}
               {/if}
-              {* End верхняя часть*}
+              {* End РІРµСЂС…РЅСЏСЏ С‡Р°СЃС‚СЊ*}
             </ul>
           </td>
           <td valign='top'>
@@ -77,8 +77,8 @@
       <table class="site">
         <tr>
           <td class="fblock">
-            <span class='sbtitle'>Меню пользователя</span>
-            {* Левая часть *}
+            <span class='sbtitle'>РњРµРЅСЋ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ</span>
+            {* Р›РµРІР°СЏ С‡Р°СЃС‚СЊ *}
               {if $blocks.left}
                 {foreach item=block from=$blocks.left}
                  <span id='mnu_title1' class='usermnutitle-g'>
@@ -93,11 +93,11 @@
                 </div>
                 {/foreach}
               {/if}
-            {* End левая часть*}
+            {* End Р»РµРІР°СЏ С‡Р°СЃС‚СЊ*}
             </div>
 
-            <span class='sbtitle'>Мой баланс</span>
-            <div class='balance-block' title='Баланс пользователя'>0.00 <span class='text12'>руб</span>
+            <span class='sbtitle'>РњРѕР№ Р±Р°Р»Р°РЅСЃ</span>
+            <div class='balance-block' title='Р‘Р°Р»Р°РЅСЃ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ'>0.00 <span class='text12'>СЂСѓР±</span>
             </div>
           </td>
 
@@ -112,9 +112,9 @@
        </td>
       <td class="fblock">
 
-        <span class="sbtitle">Правое мненю</span>
+        <span class="sbtitle">РџСЂР°РІРѕРµ РјРЅРµРЅСЋ</span>
         <div class="usermenu">
-          {* Левая часть *}
+          {* Р›РµРІР°СЏ С‡Р°СЃС‚СЊ *}
           {if $blocks.right}
             {foreach item=block from=$blocks.right}
              <span id='mnu_title1' class='usermnutitle-g'>
@@ -129,10 +129,10 @@
             </div>
             {/foreach}
           {/if}
-        {* End левая часть*}
+        {* End Р»РµРІР°СЏ С‡Р°СЃС‚СЊ*}
           
         </div>
-        <span class="sbtitle">Наши здесь</span>
+        <span class="sbtitle">РќР°С€Рё Р·РґРµСЃСЊ</span>
         <table class="soc-table">
           <tr>
             <td><a class="soc-twitter" target='_blank' href="http://twitter.com/#!/seo_sprint"></a></td>
@@ -150,12 +150,12 @@
 <div id="footer">
       <div id="wrap">
         <div class="copyrate">
-          Сайт под умправлением CMS "Calisto"<br />
+          РЎР°Р№С‚ РїРѕРґ СѓРјРїСЂР°РІР»РµРЅРёРµРј CMS "Calisto"<br />
           Beta v0.0.12
         </div>
         
         <div class="footermenu">
-          <a href="http://vkontakte.ru/id12188100">Персональные даные</a>
+          <a href="http://vkontakte.ru/id12188100">РџРµСЂСЃРѕРЅР°Р»СЊРЅС‹Рµ РґР°РЅС‹Рµ</a>
         </div>
 
       </div>

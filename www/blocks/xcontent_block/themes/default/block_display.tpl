@@ -1,16 +1,16 @@
 {strip}
-{* Начальное значение счетчика *}
+{* РќР°С‡Р°Р»СЊРЅРѕРµ Р·РЅР°С‡РµРЅРёРµ СЃС‡РµС‚С‡РёРєР° *}
 {counter start=0 print=false}
 
-{* Меняем дизайн в зависимости от положения и типа сортировки*}
+{* РњРµРЅСЏРµРј РґРёР·Р°Р№РЅ РІ Р·Р°РІРёСЃРёРјРѕСЃС‚Рё РѕС‚ РїРѕР»РѕР¶РµРЅРёСЏ Рё С‚РёРїР° СЃРѕСЂС‚РёСЂРѕРІРєРё*}
 
 {if $blockinfo.block_position=='c' or $blockinfo.block_position=='t' or $blockinfo.block_position=='b'}
-  {* еге блок по центру, значить выводим максимум информации *}
+  {* РµРіРµ Р±Р»РѕРє РїРѕ С†РµРЅС‚СЂСѓ, Р·РЅР°С‡РёС‚СЊ РІС‹РІРѕРґРёРј РјР°РєСЃРёРјСѓРј РёРЅС„РѕСЂРјР°С†РёРё *}
     <table cellSpacing="1" cellPadding="4" width="100%">
       {foreach item=doc from=$docs_list}
         <tr>
           <td class="even">
-            {* Формируем масив переменные для урла *}
+            {* Р¤РѕСЂРјРёСЂСѓРµРј РјР°СЃРёРІ РїРµСЂРµРјРµРЅРЅС‹Рµ РґР»СЏ СѓСЂР»Р° *}
             {array name='url_vars'}
             {array_append name='url_vars' key='id' value=$doc.id}
             {array_append name='url_vars' key='fid' value=$doc.fid}
@@ -32,42 +32,42 @@
         <tr>
           <td align="right" class="odd">
           .:&nbsp;
-            Дата публикации: {$doc.pub_datetime|date_format:"%d.%m.%Y %H:%M"}&nbsp;::
+            Р”Р°С‚Р° РїСѓР±Р»РёРєР°С†РёРё: {$doc.pub_datetime|date_format:"%d.%m.%Y %H:%M"}&nbsp;::
 
-          {* выводим имя автора или email или url *}
+          {* РІС‹РІРѕРґРёРј РёРјСЏ Р°РІС‚РѕСЂР° РёР»Рё email РёР»Рё url *}
           {if $doc.author}
             {if $doc.author_email}
-              &nbsp;Прислал: {mailto address=$doc.author_email text=$doc.author}&nbsp;::
+              &nbsp;РџСЂРёСЃР»Р°Р»: {mailto address=$doc.author_email text=$doc.author}&nbsp;::
             {elseif $doc.url}
-              &nbsp;Прислал: <a href="{$doc.url}">{$doc.author|escape}</a>&nbsp;::
+              &nbsp;РџСЂРёСЃР»Р°Р»: <a href="{$doc.url}">{$doc.author|escape}</a>&nbsp;::
             {else}
-              &nbsp;Прислал: {$doc.author|escape}&nbsp;::
+              &nbsp;РџСЂРёСЃР»Р°Р»: {$doc.author|escape}&nbsp;::
             {/if}
 
           {else}
             {if $doc.author_email}
-              &nbsp;Прислал: {mailto address=$doc.author_email}&nbsp;::
+              &nbsp;РџСЂРёСЃР»Р°Р»: {mailto address=$doc.author_email}&nbsp;::
             {/if}
           {/if}
-          &nbsp;Просмотров: {$doc.counter}&nbsp;:.
+          &nbsp;РџСЂРѕСЃРјРѕС‚СЂРѕРІ: {$doc.counter}&nbsp;:.
           </td>
         </tr>
       {/foreach}
     </table>
     
 {else}
-  {* если збоку то выводим краткую информацию *}
+  {* РµСЃР»Рё Р·Р±РѕРєСѓ С‚Рѕ РІС‹РІРѕРґРёРј РєСЂР°С‚РєСѓСЋ РёРЅС„РѕСЂРјР°С†РёСЋ *}
   <table border="0" cellSpacing="0" cellPadding="0" width="100%">
 
     {section name=docs_loop loop=$docs_list}
       <tr>
         <td>
-          {* Формируем масив переменные для урла *}
+          {* Р¤РѕСЂРјРёСЂСѓРµРј РјР°СЃРёРІ РїРµСЂРµРјРµРЅРЅС‹Рµ РґР»СЏ СѓСЂР»Р° *}
           {array name='url_vars'}
           {array_append name='url_vars' key='id' value=$docs_list[docs_loop].id}
           {array_append name='url_vars' key='fid' value=$docs_list[docs_loop].fid}
           <a href="{mod_url type='user' modname='content' func='doc_view' vars=$url_vars}" title="{$docs_list[docs_loop].description|escape}">{$docs_list[docs_loop].displayname|escape}</a>
-          {* где-то здесь в зависимости от типа сортировки выводиться дополнительная информация *}
+          {* РіРґРµ-С‚Рѕ Р·РґРµСЃСЊ РІ Р·Р°РІРёСЃРёРјРѕСЃС‚Рё РѕС‚ С‚РёРїР° СЃРѕСЂС‚РёСЂРѕРІРєРё РІС‹РІРѕРґРёС‚СЊСЃСЏ РґРѕРїРѕР»РЅРёС‚РµР»СЊРЅР°СЏ РёРЅС„РѕСЂРјР°С†РёСЏ *}
 
           {if $doc_orderby=='counter'}
             &nbsp;({$docs_list[docs_loop].counter})
@@ -79,7 +79,7 @@
 
 
           {if $smarty.section.docs_loop.iteration!=$smarty.section.docs_loop.total}
-            {* Вывод символ перевода каретка но только если документ на последний*}
+            {* Р’С‹РІРѕРґ СЃРёРјРІРѕР» РїРµСЂРµРІРѕРґР° РєР°СЂРµС‚РєР° РЅРѕ С‚РѕР»СЊРєРѕ РµСЃР»Рё РґРѕРєСѓРјРµРЅС‚ РЅР° РїРѕСЃР»РµРґРЅРёР№*}
             <br>
             <br>
           {/if}

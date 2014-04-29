@@ -4,41 +4,41 @@ class user
   function professionList()
     {
     $result = array();
-    $result[0] = "Íå çàäàíî...";
-    $result[1] = "Ó÷óñü â øêîëå";
-    $result[2] = "Ñòóäåíò";
-    $result[3] = "Ïğåäïğèíèìàòåëü";
-    $result[4] = "Ğàáîòíèê íà ïğåäïğèÿòèè";
-    $result[5] = "Ñëóæàùèé íà ïğåäïğèÿòèè";
-    $result[6] = "Íå èìåş îñíîâíîãî ìåñòà ğàáîòû";
+    $result[0] = "ĞĞµ Ğ·Ğ°Ğ´Ğ°Ğ½Ğ¾...";
+    $result[1] = "Ğ£Ñ‡ÑƒÑÑŒ Ğ² ÑˆĞºĞ¾Ğ»Ğµ";
+    $result[2] = "Ğ¡Ñ‚ÑƒĞ´ĞµĞ½Ñ‚";
+    $result[3] = "ĞŸÑ€ĞµĞ´Ğ¿Ñ€Ğ¸Ğ½Ğ¸Ğ¼Ğ°Ñ‚ĞµĞ»ÑŒ";
+    $result[4] = "Ğ Ğ°Ğ±Ğ¾Ñ‚Ğ½Ğ¸Ğº Ğ½Ğ° Ğ¿Ñ€ĞµĞ´Ğ¿Ñ€Ğ¸ÑÑ‚Ğ¸Ğ¸";
+    $result[5] = "Ğ¡Ğ»ÑƒĞ¶Ğ°Ñ‰Ğ¸Ğ¹ Ğ½Ğ° Ğ¿Ñ€ĞµĞ´Ğ¿Ñ€Ğ¸ÑÑ‚Ğ¸Ğ¸";
+    $result[6] = "ĞĞµ Ğ¸Ğ¼ĞµÑ Ğ¾ÑĞ½Ğ¾Ğ²Ğ½Ğ¾Ğ³Ğ¾ Ğ¼ĞµÑÑ‚Ğ° Ñ€Ğ°Ğ±Ğ¾Ñ‚Ñ‹";
     return $result;
     }
 
   function maritalStatusList()
     {
     $result = array();
-    $result[0] = "Íå çàäàíî...";
-    $result[1] = "Æåíàò/çàìóæåì, åñòü äåòè";
-    $result[2] = "Æåíàò/çàìóæåì, íåò äåòåé";
-    $result[3] = "Íå æåíàò/íå çàìóæåì, åñòü äåòè";
-    $result[4] = "Íå æåíàò/íå çàìóæåì, íåò äåòåé";
-    $result[5] = "Ğàçâåä¸í/ğàçâåäåíà, åñòü äåòè";
-    $result[6] = "Ğàçâåä¸í/ğàçâåäåíà, íåò äåòåé";
+    $result[0] = "ĞĞµ Ğ·Ğ°Ğ´Ğ°Ğ½Ğ¾...";
+    $result[1] = "Ğ–ĞµĞ½Ğ°Ñ‚/Ğ·Ğ°Ğ¼ÑƒĞ¶ĞµĞ¼, ĞµÑÑ‚ÑŒ Ğ´ĞµÑ‚Ğ¸";
+    $result[2] = "Ğ–ĞµĞ½Ğ°Ñ‚/Ğ·Ğ°Ğ¼ÑƒĞ¶ĞµĞ¼, Ğ½ĞµÑ‚ Ğ´ĞµÑ‚ĞµĞ¹";
+    $result[3] = "ĞĞµ Ğ¶ĞµĞ½Ğ°Ñ‚/Ğ½Ğµ Ğ·Ğ°Ğ¼ÑƒĞ¶ĞµĞ¼, ĞµÑÑ‚ÑŒ Ğ´ĞµÑ‚Ğ¸";
+    $result[4] = "ĞĞµ Ğ¶ĞµĞ½Ğ°Ñ‚/Ğ½Ğµ Ğ·Ğ°Ğ¼ÑƒĞ¶ĞµĞ¼, Ğ½ĞµÑ‚ Ğ´ĞµÑ‚ĞµĞ¹";
+    $result[5] = "Ğ Ğ°Ğ·Ğ²ĞµĞ´Ñ‘Ğ½/Ñ€Ğ°Ğ·Ğ²ĞµĞ´ĞµĞ½Ğ°, ĞµÑÑ‚ÑŒ Ğ´ĞµÑ‚Ğ¸";
+    $result[6] = "Ğ Ğ°Ğ·Ğ²ĞµĞ´Ñ‘Ğ½/Ñ€Ğ°Ğ·Ğ²ĞµĞ´ĞµĞ½Ğ°, Ğ½ĞµÑ‚ Ğ´ĞµÑ‚ĞµĞ¹";
     return $result;
     }
 
   function sexList()
     {
     $result = array();
-    $result[0] = "Íå çàäàíî...";
-    $result[1] = "Ìóæñêîé";
-    $result[2] = "Æåíñêèé";
+    $result[0] = "ĞĞµ Ğ·Ğ°Ğ´Ğ°Ğ½Ğ¾...";
+    $result[1] = "ĞœÑƒĞ¶ÑĞºĞ¾Ğ¹";
+    $result[2] = "Ğ–ĞµĞ½ÑĞºĞ¸Ğ¹";
     return $result;
     }
 
   function createImage($upload, $insert_id)
     {
-    //Ïóòü ê êàğòèíêå èñòî÷íèêó
+    //ĞŸÑƒÑ‚ÑŒ Ğº ĞºĞ°Ñ€Ñ‚Ğ¸Ğ½ĞºĞµ Ğ¸ÑÑ‚Ğ¾Ñ‡Ğ½Ğ¸ĞºÑƒ
     $path = $upload['tmp_name'];
 
     $type_array = array('gif'=>IMG_GIF,
@@ -49,7 +49,7 @@ class user
                         'bmp'=>IMG_WBMP,
                         'wbmp'=>IMG_WBMP);
     
-    //Ïîïûòàåìñÿ ïğî÷èòàòü êàğòèíêó
+    //ĞŸĞ¾Ğ¿Ñ‹Ñ‚Ğ°ĞµĞ¼ÑÑ Ğ¿Ñ€Ğ¾Ñ‡Ğ¸Ñ‚Ğ°Ñ‚ÑŒ ĞºĞ°Ñ€Ñ‚Ğ¸Ğ½ĞºÑƒ
     $imginfo = getimagesize($path);
     if(!in_array($imginfo[2], $type_array))
       return false;
@@ -57,21 +57,21 @@ class user
     appUsesLib('Image');
     $im = new Image;
 
-    //Ğåâèçèÿ
+    //Ğ ĞµĞ²Ğ¸Ğ·Ğ¸Ñ
     $revision_sufix = ($upload['photo_r'])?$upload['photo_r']:'0';
-    //Ïóòü ê êàğòèíêå
+    //ĞŸÑƒÑ‚ÑŒ Ğº ĞºĞ°Ñ€Ñ‚Ğ¸Ğ½ĞºĞµ
     $full_fileid = str_pad($insert_id, 8, "0", STR_PAD_LEFT);
     $dir_photo = './images/user/photo/' . $full_fileid[7] . '/' . $full_fileid[6] . '/'.$full_fileid.'/';
     $src_photo = './images_src/user/photo/' . $full_fileid[7] . '/' . $full_fileid[6] . '/';
 
     $dir_perms = 0775;
-    //Ñîçäàäèì äèğåêòîğèş åñëè åå íåòó
+    //Ğ¡Ğ¾Ğ·Ğ´Ğ°Ğ´Ğ¸Ğ¼ Ğ´Ğ¸Ñ€ĞµĞºÑ‚Ğ¾Ñ€Ğ¸Ñ ĞµÑĞ»Ğ¸ ĞµĞµ Ğ½ĞµÑ‚Ñƒ
     if(!file_exists($dir_photo))
       mkdir($dir_photo, $dir_perms, true);
-    //Ñîçäàäèì äèğåêòîğèş åñëè åå íåòó
+    //Ğ¡Ğ¾Ğ·Ğ´Ğ°Ğ´Ğ¸Ğ¼ Ğ´Ğ¸Ñ€ĞµĞºÑ‚Ğ¾Ñ€Ğ¸Ñ ĞµÑĞ»Ğ¸ ĞµĞµ Ğ½ĞµÑ‚Ñƒ
     if(!file_exists($src_photo))
       mkdir($src_photo, $dir_perms, true);
-    //Èíôîğìàöèÿ î êàğòèíêå
+    //Ğ˜Ğ½Ñ„Ğ¾Ñ€Ğ¼Ğ°Ñ†Ğ¸Ñ Ğ¾ ĞºĞ°Ñ€Ñ‚Ğ¸Ğ½ĞºĞµ
     $photo_img_array = array();
     
     $im->load($path);

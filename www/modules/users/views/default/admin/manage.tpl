@@ -1,6 +1,6 @@
 {array name='yes_no'}
-{array_append name='yes_no' key='1' value=Да}
-{array_append name='yes_no' key='0' value=Нет}
+{array_append name='yes_no' key='1' value=Р”Р°}
+{array_append name='yes_no' key='0' value=РќРµС‚}
 
 <form action="/admin/users/manage" method="post" class="form-horizontal">
   <input type="hidden" name='id' value="{$id}">

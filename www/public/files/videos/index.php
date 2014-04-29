@@ -104,7 +104,7 @@
                         By combining industry 
                         leading security hardware 
                         with end-user customizable 
-                        software, BEC oﬀers a total 
+                        software, BEC oп¬Ђers a total 
                         solution proven to 
                         revolutionize the way 
                         companies operate.

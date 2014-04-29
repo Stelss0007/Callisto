@@ -19,7 +19,7 @@ class AdminController extends Controller
     $browsein[] = array ('url'=>'/admin/main',
                         'displayname'=>'Dasboard');
     $browsein[] = array ('url'=>'/admin/blocks',
-                        'displayname'=>'Áëîêè');
+                        'displayname'=>'Ð‘Ð»Ð¾ÐºÐ¸');
        
     $this->module_browsein = $browsein;
     
@@ -30,18 +30,18 @@ class AdminController extends Controller
     {
     $this->getAccess(ACCESS_ADMIN);
     
-    $position['l']='Ñëåâà';
-    $position['r']='Ñïðàâà';
-    $position['t']='Ñâåðõó';
-    $position['b']='Ñíèçó';
-    $position['c']='Ïîöåíòðó';
+    $position['l']='Ð¡Ð»ÐµÐ²Ð°';
+    $position['r']='Ð¡Ð¿Ñ€Ð°Ð²Ð°';
+    $position['t']='Ð¡Ð²ÐµÑ€Ñ…Ñƒ';
+    $position['b']='Ð¡Ð½Ð¸Ð·Ñƒ';
+    $position['c']='ÐŸÐ¾Ñ†ÐµÐ½Ñ‚Ñ€Ñƒ';
 
     $position = $position[$input_position];
     if(empty ($position)) 
-      $this->showMessage('Íåèçâåñòíàÿ ïîçèöèÿ!');
+      $this->showMessage('ÐÐµÐ¸Ð·Ð²ÐµÑÑ‚Ð½Ð°Ñ Ð¿Ð¾Ð·Ð¸Ñ†Ð¸Ñ!');
     
-    //==================Âñå áëîêè â äèðåêòîðèè áëîêîâ=============================
-    //Âçÿëè ñïèñîê ñ äèñêà
+    //==================Ð’ÑÐµ Ð±Ð»Ð¾ÐºÐ¸ Ð² Ð´Ð¸Ñ€ÐµÐºÑ‚Ð¾Ñ€Ð¸Ð¸ Ð±Ð»Ð¾ÐºÐ¾Ð²=============================
+    //Ð’Ð·ÑÐ»Ð¸ ÑÐ¿Ð¸ÑÐ¾Ðº Ñ Ð´Ð¸ÑÐºÐ°
     $block_list_all = array();
     $dir_handler = opendir('blocks');
     while ($dir = readdir($dir_handler))
@@ -70,9 +70,9 @@ class AdminController extends Controller
     $browsein[] = array ('url'=>'/admin/main',
                         'displayname'=>'Dasboard');
     $browsein[] = array ('url'=>'/admin/blocks',
-                        'displayname'=>'Áëîêè');
+                        'displayname'=>'Ð‘Ð»Ð¾ÐºÐ¸');
     $browsein[] = array ('url'=>'/admin/blocks/install',
-                        'displayname'=>'Äîáàâëåíèå áëîêà "'.$position.'"');
+                        'displayname'=>'Ð”Ð¾Ð±Ð°Ð²Ð»ÐµÐ½Ð¸Ðµ Ð±Ð»Ð¾ÐºÐ° "'.$position.'"');
     
     $this->module_browsein = $browsein;
     
@@ -83,19 +83,19 @@ class AdminController extends Controller
     {
     $this->getAccess(ACCESS_ADMIN);
     
-    $position['l']='Ñëåâà';
-    $position['r']='Ñïðàâà';
-    $position['t']='Ñâåðõó';
-    $position['b']='Ñíèçó';
-    $position['c']='Ïîöåíòðó';
+    $position['l']='Ð¡Ð»ÐµÐ²Ð°';
+    $position['r']='Ð¡Ð¿Ñ€Ð°Ð²Ð°';
+    $position['t']='Ð¡Ð²ÐµÑ€Ñ…Ñƒ';
+    $position['b']='Ð¡Ð½Ð¸Ð·Ñƒ';
+    $position['c']='ÐŸÐ¾Ñ†ÐµÐ½Ñ‚Ñ€Ñƒ';
 
     $position = $position[$input_position];
     if(empty ($position)) 
-      $this->showMessage('Íåèçâåñòíàÿ ïîçèöèÿ!');
+      $this->showMessage('ÐÐµÐ¸Ð·Ð²ÐµÑÑ‚Ð½Ð°Ñ Ð¿Ð¾Ð·Ð¸Ñ†Ð¸Ñ!');
     
-    //Âçÿëè ñïèñîê ñ äèñêà
+    //Ð’Ð·ÑÐ»Ð¸ ÑÐ¿Ð¸ÑÐ¾Ðº Ñ Ð´Ð¸ÑÐºÐ°
     if(!file_exists ("blocks/$block_name/info.php")) 
-      die ('Îòñóòñòâóåò áëîê!');
+      die ('ÐžÑ‚ÑÑƒÑ‚ÑÑ‚Ð²ÑƒÐµÑ‚ Ð±Ð»Ð¾Ðº!');
 
     // Found
     $info = array();
@@ -116,7 +116,7 @@ class AdminController extends Controller
     
     $id = $this->blocks->save();
     
-    $this->showMessage('Ýëåìåíò äîáàâëåí', '/admin/blocks');
+    $this->showMessage('Ð­Ð»ÐµÐ¼ÐµÐ½Ñ‚ Ð´Ð¾Ð±Ð°Ð²Ð»ÐµÐ½', '/admin/blocks');
     }
     
   function actionWeightUp($weight,$block_position)
@@ -161,11 +161,11 @@ class AdminController extends Controller
     {
     $this->getAccess(ACCESS_ADMIN);
     
-    $position['l']='Ñëåâà';
-    $position['r']='Ñïðàâà';
-    $position['t']='Ñâåðõó';
-    $position['b']='Ñíèçó';
-    $position['c']='Ïîöåíòðó';
+    $position['l']='Ð¡Ð»ÐµÐ²Ð°';
+    $position['r']='Ð¡Ð¿Ñ€Ð°Ð²Ð°';
+    $position['t']='Ð¡Ð²ÐµÑ€Ñ…Ñƒ';
+    $position['b']='Ð¡Ð½Ð¸Ð·Ñƒ';
+    $position['c']='ÐŸÐ¾Ñ†ÐµÐ½Ñ‚Ñ€Ñƒ';
 
 
     $block = $this->blocks->getById($id);
@@ -173,7 +173,7 @@ class AdminController extends Controller
     $this->positions = $position;
     $this->ref = $_SERVER['HTTP_REFERER'];
 
-    //Ïîëó÷èì äîï íàñòðîéêè áëîêà, ïåðåäàâ åìó óïðàâëåíèå
+    //ÐŸÐ¾Ð»ÑƒÑ‡Ð¸Ð¼ Ð´Ð¾Ð¿ Ð½Ð°ÑÑ‚Ñ€Ð¾Ð¹ÐºÐ¸ Ð±Ð»Ð¾ÐºÐ°, Ð¿ÐµÑ€ÐµÐ´Ð°Ð² ÐµÐ¼Ñƒ ÑƒÐ¿Ñ€Ð°Ð²Ð»ÐµÐ½Ð¸Ðµ
     $block_file='blocks/'.$block['block_name'].'/block.php';
     if (file_exists ($block_file))
       {
@@ -196,9 +196,9 @@ class AdminController extends Controller
     $browsein[] = array ('url'=>'/admin/main',
                         'displayname'=>'Dasboard');
     $browsein[] = array ('url'=>'/admin/blocks/',
-                        'displayname'=>'Áëîêè');
+                        'displayname'=>'Ð‘Ð»Ð¾ÐºÐ¸');
     $browsein[] = array ('url'=>'/admin/blocks/',
-                        'displayname'=>'Ðåäàêòèðîâàíèå áëîêà "'.$block['block_name'].'"');
+                        'displayname'=>'Ð ÐµÐ´Ð°ÐºÑ‚Ð¸Ñ€Ð¾Ð²Ð°Ð½Ð¸Ðµ Ð±Ð»Ð¾ÐºÐ° "'.$block['block_name'].'"');
 
     $this->module_browsein = $browsein;
     $this->viewPage();
@@ -208,22 +208,22 @@ class AdminController extends Controller
     {
     $this->getAccess(ACCESS_ADMIN);
     
-    $position['l']='Ñëåâà';
-    $position['r']='Ñïðàâà';
-    $position['t']='Ñâåðõó';
-    $position['b']='Ñíèçó';
-    $position['c']='Ïîöåíòðó';
+    $position['l']='Ð¡Ð»ÐµÐ²Ð°';
+    $position['r']='Ð¡Ð¿Ñ€Ð°Ð²Ð°';
+    $position['t']='Ð¡Ð²ÐµÑ€Ñ…Ñƒ';
+    $position['b']='Ð¡Ð½Ð¸Ð·Ñƒ';
+    $position['c']='ÐŸÐ¾Ñ†ÐµÐ½Ñ‚Ñ€Ñƒ';
 
     $position = $position["{$this->input_vars['block_position']}"];
     if(empty ($position)) 
-      die ('Íåèçâåñòíàÿ ïîçèöèÿ!');
+      die ('ÐÐµÐ¸Ð·Ð²ÐµÑÑ‚Ð½Ð°Ñ Ð¿Ð¾Ð·Ð¸Ñ†Ð¸Ñ!');
     
     $this->arrayToModel($this->blocks, $this->input_vars);
     $id = $this->blocks->save();
 
     $block = $this->blocks->getById($id);
 
-    //Îáíîâèì äîï íàñòðîéêè áëîêà, ïåðåäàâ åìó óïðàâëåíèå
+    //ÐžÐ±Ð½Ð¾Ð²Ð¸Ð¼ Ð´Ð¾Ð¿ Ð½Ð°ÑÑ‚Ñ€Ð¾Ð¹ÐºÐ¸ Ð±Ð»Ð¾ÐºÐ°, Ð¿ÐµÑ€ÐµÐ´Ð°Ð² ÐµÐ¼Ñƒ ÑƒÐ¿Ñ€Ð°Ð²Ð»ÐµÐ½Ð¸Ðµ
     $block_file='blocks/'.$block['block_name'].'/block.php';
     
     if (file_exists ($block_file))
@@ -239,23 +239,23 @@ class AdminController extends Controller
         $block_config_result = $block_obj->$block_modify_fn($block);
         }
       }
-    /*TODO Äîäåëàòü ïåðåñ÷åò âåñîâ åñëè èçìåíèëàñü ïîçèöèÿ áëîêà*/
+    /*TODO Ð”Ð¾Ð´ÐµÐ»Ð°Ñ‚ÑŒ Ð¿ÐµÑ€ÐµÑÑ‡ÐµÑ‚ Ð²ÐµÑÐ¾Ð² ÐµÑÐ»Ð¸ Ð¸Ð·Ð¼ÐµÐ½Ð¸Ð»Ð°ÑÑŒ Ð¿Ð¾Ð·Ð¸Ñ†Ð¸Ñ Ð±Ð»Ð¾ÐºÐ°*/
       
-    $this->showMessage('Èçìåíåèÿ ñîõðàíåíû', $this->input_vars['ref']);
+    $this->showMessage('Ð˜Ð·Ð¼ÐµÐ½ÐµÐ¸Ñ ÑÐ¾Ñ…Ñ€Ð°Ð½ÐµÐ½Ñ‹', $this->input_vars['ref']);
     }
     
   function actionInfo($block_name, $position)
     {
     if(!file_exists ("blocks/$block_name/info.php"))
       {
-      $this->showMessage('Áëîê íå íàéäåí', $this->input_vars['ref']);
+      $this->showMessage('Ð‘Ð»Ð¾Ðº Ð½Ðµ Ð½Ð°Ð¹Ð´ÐµÐ½', $this->input_vars['ref']);
       }
       
-    $position_['l']='Ñëåâà';
-    $position_['r']='Ñïðàâà';
-    $position_['t']='Ñâåðõó';
-    $position_['b']='Ñíèçó';
-    $position_['c']='Ïîöåíòðó';
+    $position_['l']='Ð¡Ð»ÐµÐ²Ð°';
+    $position_['r']='Ð¡Ð¿Ñ€Ð°Ð²Ð°';
+    $position_['t']='Ð¡Ð²ÐµÑ€Ñ…Ñƒ';
+    $position_['b']='Ð¡Ð½Ð¸Ð·Ñƒ';
+    $position_['c']='ÐŸÐ¾Ñ†ÐµÐ½Ñ‚Ñ€Ñƒ';
       
     include_once "blocks/$block_name/info.php";
     $this->assign('block_info', $info);
@@ -264,12 +264,12 @@ class AdminController extends Controller
     $browsein[] = array ('url'=>'/admin/main',
                         'displayname'=>'Dasboard');
     $browsein[] = array ('url'=>'/admin/blocks/',
-                        'displayname'=>'Áëîêè');
+                        'displayname'=>'Ð‘Ð»Ð¾ÐºÐ¸');
     $browsein[] = array ('url'=>'/admin/blocks/install/'.$position,
-                        'displayname'=>'Äîáàâëåíèå áëîêà "'.$position_[$position].'"');
+                        'displayname'=>'Ð”Ð¾Ð±Ð°Ð²Ð»ÐµÐ½Ð¸Ðµ Ð±Ð»Ð¾ÐºÐ° "'.$position_[$position].'"');
     
     $browsein[] = array ('url'=>'/admin/blocks/',
-                        'displayname'=>'Èíôîðìàöèÿ î áëîêå "'.$info['block_displayname'].'"');
+                        'displayname'=>'Ð˜Ð½Ñ„Ð¾Ñ€Ð¼Ð°Ñ†Ð¸Ñ Ð¾ Ð±Ð»Ð¾ÐºÐµ "'.$info['block_displayname'].'"');
 
     $this->module_browsein = $browsein;
     

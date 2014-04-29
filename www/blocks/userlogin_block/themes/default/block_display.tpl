@@ -2,28 +2,28 @@
       <form action="{mod_url type='user' modname='SYS_users' func='login'}" method="post" style="margin: 0;">
         <table cellSpacing="0" cellPadding="1" width="100%" border="0">
             <tr>
-              <td>&nbsp;Имя пользователя</td>
+              <td>&nbsp;РРјСЏ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ</td>
             </tr>
             <tr>
               <td><input maxLength="25" size="14" name="user_name"></td>
             </tr>
             <tr>
-              <td>&nbsp;Пароль</td>
+              <td>&nbsp;РџР°СЂРѕР»СЊ</td>
             </tr>
             <tr>
               <td><input type="password" maxLength="20" size="14" name="user_pass"></td>
             </tr>
             <tr>
-              <td><input type="checkbox" value="1" name="user_rememberme">&nbsp;Запомнить меня</td>
+              <td><input type="checkbox" value="1" name="user_rememberme">&nbsp;Р—Р°РїРѕРјРЅРёС‚СЊ РјРµРЅСЏ</td>
             </tr>
             <tr>
               <td><br>
-                <input type="submit" value="Вход">
+                <input type="submit" value="Р’С…РѕРґ">
               </td>
             </tr>
             <tr>
               <td><br>
-                Все еще не <a href="{mod_url type='user' modname='SYS_users' func='registerscreen'}">зарегистрировались</a>? Регистрация сделает комфортными Ваши посещения этого сайта, предоставит доступ ко многим дополнительным сервисам и настройкам, которые для анонимного пользователя недоступны.
+                Р’СЃРµ РµС‰Рµ РЅРµ <a href="{mod_url type='user' modname='SYS_users' func='registerscreen'}">Р·Р°СЂРµРіРёСЃС‚СЂРёСЂРѕРІР°Р»РёСЃСЊ</a>? Р РµРіРёСЃС‚СЂР°С†РёСЏ СЃРґРµР»Р°РµС‚ РєРѕРјС„РѕСЂС‚РЅС‹РјРё Р’Р°С€Рё РїРѕСЃРµС‰РµРЅРёСЏ СЌС‚РѕРіРѕ СЃР°Р№С‚Р°, РїСЂРµРґРѕСЃС‚Р°РІРёС‚ РґРѕСЃС‚СѓРї РєРѕ РјРЅРѕРіРёРј РґРѕРїРѕР»РЅРёС‚РµР»СЊРЅС‹Рј СЃРµСЂРІРёСЃР°Рј Рё РЅР°СЃС‚СЂРѕР№РєР°Рј, РєРѕС‚РѕСЂС‹Рµ РґР»СЏ Р°РЅРѕРЅРёРјРЅРѕРіРѕ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ РЅРµРґРѕСЃС‚СѓРїРЅС‹.
               </td>
             </tr>
         </table>

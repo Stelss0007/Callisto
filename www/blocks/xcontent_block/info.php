@@ -1,9 +1,9 @@
 <?php
 $info['block_name'] = 'xcontent_block';
 $info['block_type'] = 'block';
-$info['block_displayname'] = 'X контент';
+$info['block_displayname'] = 'X РєРѕРЅС‚РµРЅС‚';
 $info['block_version'] = '0.91';
-$info['block_description'] = 'Вывод X отсортированных документов.';
+$info['block_description'] = 'Р’С‹РІРѕРґ X РѕС‚СЃРѕСЂС‚РёСЂРѕРІР°РЅРЅС‹С… РґРѕРєСѓРјРµРЅС‚РѕРІ.';
 $info['block_credits'] = '';
 $info['block_changelog'] = '';
 $info['block_license'] = '';

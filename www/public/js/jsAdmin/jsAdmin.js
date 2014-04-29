@@ -1,7 +1,7 @@
 /*
- * Админские штучки
+ * РђРґРјРёРЅСЃРєРёРµ С€С‚СѓС‡РєРё
  */
-//Центр экрана
+//Р¦РµРЅС‚СЂ СЌРєСЂР°РЅР°
 jQuery.fn.center = function()
   {
   var w = $(window);
@@ -12,15 +12,15 @@ jQuery.fn.center = function()
   }
 
 /*
- * Подтверждение удаления
- * Для отлавливания перехода по ссылке удаления
- * нужно к ссылке повесить класс class='delete' и выводимое название элемента например: title="{$quote.quote_name}"
+ * РџРѕРґС‚РІРµСЂР¶РґРµРЅРёРµ СѓРґР°Р»РµРЅРёСЏ
+ * Р”Р»СЏ РѕС‚Р»Р°РІР»РёРІР°РЅРёСЏ РїРµСЂРµС…РѕРґР° РїРѕ СЃСЃС‹Р»РєРµ СѓРґР°Р»РµРЅРёСЏ
+ * РЅСѓР¶РЅРѕ Рє СЃСЃС‹Р»РєРµ РїРѕРІРµСЃРёС‚СЊ РєР»Р°СЃСЃ class='delete' Рё РІС‹РІРѕРґРёРјРѕРµ РЅР°Р·РІР°РЅРёРµ СЌР»РµРјРµРЅС‚Р° РЅР°РїСЂРёРјРµСЂ: title="{$quote.quote_name}"
  *
  */
 ///////////////////////////////////////////////////////////////////////////////////
 $(document).ready(function(){
   $("a.delete").click(function () {
-    return confirm('Вы действительно хотите удалить элемнт \"'+$(this).attr('title')+'\"?');
+    return confirm('Р’С‹ РґРµР№СЃС‚РІРёС‚РµР»СЊРЅРѕ С…РѕС‚РёС‚Рµ СѓРґР°Р»РёС‚СЊ СЌР»РµРјРЅС‚ \"'+$(this).attr('title')+'\"?');
   });
 
 //..........................................................................................
@@ -37,7 +37,7 @@ $(document).ready(function(){
   $(".formButton").click(function () {
     if(($('.isValid').val()=='') || ($('.isValid').val()==0)){
       $('.isValid').css("background","red");
-      alert('Не заполнено имя');
+      alert('РќРµ Р·Р°РїРѕР»РЅРµРЅРѕ РёРјСЏ');
       return false;
     }
   });
@@ -60,58 +60,58 @@ $(document).ready(function(){
 
 function cloneHTMLElement(myclass, element_name)
   {
-  var num     = $('.'+myclass).length; // Сколько всего елементов в класе
-  var newNum  = new Number(num + 1);      // Новый индекс для элемента
+  var num     = $('.'+myclass).length; // РЎРєРѕР»СЊРєРѕ РІСЃРµРіРѕ РµР»РµРјРµРЅС‚РѕРІ РІ РєР»Р°СЃРµ
+  var newNum  = new Number(num + 1);      // РќРѕРІС‹Р№ РёРЅРґРµРєСЃ РґР»СЏ СЌР»РµРјРµРЅС‚Р°
 
-  //Создадим клон елемента
+  //РЎРѕР·РґР°РґРёРј РєР»РѕРЅ РµР»РµРјРµРЅС‚Р°
   //var newElem = $('#'+myclass + num).clone().attr('id', myclass + newNum);
   var newElem = $('#'+myclass + 1).clone().attr('id', myclass + newNum);
 
-  //Манипуляции с свойствами созданого элемента
+  //РњР°РЅРёРїСѓР»СЏС†РёРё СЃ СЃРІРѕР№СЃС‚РІР°РјРё СЃРѕР·РґР°РЅРѕРіРѕ СЌР»РµРјРµРЅС‚Р°
   newElem.children(':first').attr('id', element_name + newNum).attr('name', element_name+'[]');
 
-  //Вставим элемент после родительского
+  //Р’СЃС‚Р°РІРёРј СЌР»РµРјРµРЅС‚ РїРѕСЃР»Рµ СЂРѕРґРёС‚РµР»СЊСЃРєРѕРіРѕ
   $('#'+myclass + num).after(newElem);
-  $('#'+myclass + newNum).append("<a href='#' onclick=\"deleteHTMLElement('"+myclass+"', '"+newNum+"'); return false;\">Удалить</a>");
+  $('#'+myclass + newNum).append("<a href='#' onclick=\"deleteHTMLElement('"+myclass+"', '"+newNum+"'); return false;\">РЈРґР°Р»РёС‚СЊ</a>");
 
-  // Енеблим кнопку del
+  // Р•РЅРµР±Р»РёРј РєРЅРѕРїРєСѓ del
   $('#btnDel').attr('disabled','');
 
-  // Добавлять только 5 элементов
+  // Р”РѕР±Р°РІР»СЏС‚СЊ С‚РѕР»СЊРєРѕ 5 СЌР»РµРјРµРЅС‚РѕРІ
   if (newNum == 5)
   $('#btnAdd').attr('disabled','disabled');
   }
 
 function deleteHTMLElement(myclass, num)
   {
-  //var num = $('.'+myclass).length;            // Сколько клонированых елементов в диве
-  $('#'+myclass + num).remove();         // Удалим последний элемент
+  //var num = $('.'+myclass).length;            // РЎРєРѕР»СЊРєРѕ РєР»РѕРЅРёСЂРѕРІР°РЅС‹С… РµР»РµРјРµРЅС‚РѕРІ РІ РґРёРІРµ
+  $('#'+myclass + num).remove();         // РЈРґР°Р»РёРј РїРѕСЃР»РµРґРЅРёР№ СЌР»РµРјРµРЅС‚
 
   // enable the "add" button
   $('#btnAdd').attr('disabled','');
 
-  // Если только один элемент дисеблим кнопку del
+  // Р•СЃР»Рё С‚РѕР»СЊРєРѕ РѕРґРёРЅ СЌР»РµРјРµРЅС‚ РґРёСЃРµР±Р»РёРј РєРЅРѕРїРєСѓ del
   if (num-1 == 1)
   $('#btnDel').attr('disabled','disabled');
   }
 
-////////////////////////ЦИТАТЫ//////////////////////////////////////////////////
+////////////////////////Р¦РРўРђРўР«//////////////////////////////////////////////////
 
-//Вывод выбраной картинки
+//Р’С‹РІРѕРґ РІС‹Р±СЂР°РЅРѕР№ РєР°СЂС‚РёРЅРєРё
 <!-- Begin
-/*Предпросмотр для upload картинок*/
-/***** Дефолтные переменные *****/
-// Ширина
+/*РџСЂРµРґРїСЂРѕСЃРјРѕС‚СЂ РґР»СЏ upload РєР°СЂС‚РёРЅРѕРє*/
+/***** Р”РµС„РѕР»С‚РЅС‹Рµ РїРµСЂРµРјРµРЅРЅС‹Рµ *****/
+// РЁРёСЂРёРЅР°
 var maxWidth=500;
-//Высота
+//Р’С‹СЃРѕС‚Р°
 var maxHeight=500;
-// Розрешенные типы
+// Р РѕР·СЂРµС€РµРЅРЅС‹Рµ С‚РёРїС‹
 var fileTypes=["bmp","gif","png","jpg","jpeg"];
-// Управляемая картинка
+// РЈРїСЂР°РІР»СЏРµРјР°СЏ РєР°СЂС‚РёРЅРєР°
 var outImage="previewField";
-// Деф картинка
+// Р”РµС„ РєР°СЂС‚РёРЅРєР°
 var defaultPic="spacer.gif";
-//Темп картинка
+//РўРµРјРї РєР°СЂС‚РёРЅРєР°
 var tempPic="";
 /**********/
 function imgPreview(what){
@@ -125,7 +125,7 @@ function imgPreview(what){
   globalPic=new Image();
   if (i<fileTypes.length){
 
-    //Для firefox
+    //Р”Р»СЏ firefox
     try{
       globalPic.src=what.files[0].getAsDataURL();
     }catch(err){
@@ -133,7 +133,7 @@ function imgPreview(what){
     }
   }else {
     globalPic.src=defaultPic;
-    alert("Не верный тип файла"+fileTypes.join(", "));
+    alert("РќРµ РІРµСЂРЅС‹Р№ С‚РёРї С„Р°Р№Р»Р°"+fileTypes.join(", "));
   }
   setTimeout("imgApplyChanges()",200);
 }
@@ -163,7 +163,7 @@ function imgApplyChanges(){
 //field.height=y;
 }
 
-//Обнулим картинку(вернем назад)
+//РћР±РЅСѓР»РёРј РєР°СЂС‚РёРЅРєСѓ(РІРµСЂРЅРµРј РЅР°Р·Р°Рґ)
 function imgPreviewReset(){
   var field=document.getElementById(outImage);
   field.src=tempPic;

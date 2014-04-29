@@ -2,10 +2,10 @@
 
 function search_block_display($blockinfo)
   {
-  //Ïðåëþäèå êàê ó âñåõ ìîäóëåé
+  //ÐŸÑ€ÐµÐ»ÑŽÐ´Ð¸Ðµ ÐºÐ°Ðº Ñƒ Ð²ÑÐµÑ… Ð¼Ð¾Ð´ÑƒÐ»ÐµÐ¹
   $sysObject = 'search_block::display'.$blockinfo['id'];
 
-  //Ïðîâåðêà íà äîñòóï
+  //ÐŸÑ€Ð¾Ð²ÐµÑ€ÐºÐ° Ð½Ð° Ð´Ð¾ÑÑ‚ÑƒÐ¿
   if (!sysSecAuthAction($sysObject, ACCESS_READ))
     {
     return true;
@@ -15,18 +15,18 @@ function search_block_display($blockinfo)
   $sysTpl = new sysTpl;
   $sysTpl->caching = -1;
 
-  //Ïðâåðêà â êåøå
+  //ÐŸÑ€Ð²ÐµÑ€ÐºÐ° Ð² ÐºÐµÑˆÐµ
   if($sysTpl->is_cached($sysModTpl,$sysObject))
     {
-    //Âîçâðàùàåì ðåçóëüòàò
+    //Ð’Ð¾Ð·Ð²Ñ€Ð°Ñ‰Ð°ÐµÐ¼ Ñ€ÐµÐ·ÑƒÐ»ÑŒÑ‚Ð°Ñ‚
     $result['block_content'] =& $sysTpl->fetch($sysModTpl,$sysObject);
     return $result;
     };
 
-  //Ðåíäåðèíã
+  //Ð ÐµÐ½Ð´ÐµÑ€Ð¸Ð½Ð³
   $sysTpl->assign('blockinfo', $blockinfo);
 
-  //ÂÛâîäèì ñîäåðæàíèå áëîêà
+  //Ð’Ð«Ð²Ð¾Ð´Ð¸Ð¼ ÑÐ¾Ð´ÐµÑ€Ð¶Ð°Ð½Ð¸Ðµ Ð±Ð»Ð¾ÐºÐ°
   $result['block_content'] =& $sysTpl->fetch($sysModTpl, $sysObject, $poll_stoped);
   return $result;
   }

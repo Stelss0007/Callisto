@@ -6,7 +6,7 @@
 <div class="row-fluid">
     <div class="box span12">
       <div class="box-header well" data-original-title>
-        <h2><i class="icon-edit"></i>  Редактирование блока "{$block_name}"</h2>
+        <h2><i class="icon-edit"></i>  Р РµРґР°РєС‚РёСЂРѕРІР°РЅРёРµ Р±Р»РѕРєР° "{$block_name}"</h2>
         <div class="box-icon">
         </div>
       </div>
@@ -16,7 +16,7 @@
            {* <legend>Manage form</legend>*}
             <br><br>
              <div class="control-group">
-              <label class="control-label" for="date01">Название :</label>
+              <label class="control-label" for="date01">РќР°Р·РІР°РЅРёРµ :</label>
               <div class="controls">
                 <input type="text" name="block_css_class" disabled="disabled" size="50" value="{$block_name|escape}">
               </div>
@@ -30,21 +30,21 @@
              </div>
              
              <div class="control-group">
-              <label class="control-label" for="date01">Отображаемое название:</label>
+              <label class="control-label" for="date01">РћС‚РѕР±СЂР°Р¶Р°РµРјРѕРµ РЅР°Р·РІР°РЅРёРµ:</label>
               <div class="controls">
                 <input type="text" name="block_displayname" size="50" value="{$block_displayname|escape}">
               </div>
              </div>
              
              <div class="control-group">
-              <label class="control-label" for="date01">Маска:</label>
+              <label class="control-label" for="date01">РњР°СЃРєР°:</label>
               <div class="controls">
                <input type="text" name="block_pattern" size="50" value="{$block_pattern|escape}">
               </div>
              </div>
              
              <div class="control-group">
-              <label class="control-label" for="date01">Положение:</label>
+              <label class="control-label" for="date01">РџРѕР»РѕР¶РµРЅРёРµ:</label>
               <div class="controls">
                 <select name='block_position'>
                   {html_options options=$positions selected=$block_position}
@@ -53,7 +53,7 @@
              </div>
              
              <div class="control-group">
-              <label class="control-label" for="date01">CSS класс:</label>
+              <label class="control-label" for="date01">CSS РєР»Р°СЃСЃ:</label>
               <div class="controls">
                 <input type="text" name="block_css_class" size="50" value="{$block_css_class|escape}">
               </div>

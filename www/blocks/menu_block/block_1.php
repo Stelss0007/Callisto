@@ -2,20 +2,20 @@
 function menu_block_display($info)
   {
   $menu_config = unserialize($info['block_content']);
-//	//Ìîäóëü äîñòóïåí?
+//	//ÐœÐ¾Ð´ÑƒÐ»ÑŒ Ð´Ð¾ÑÑ‚ÑƒÐ¿ÐµÐ½?
 //  if (!sysModAvailable ('menu')) return true;
 //
-//	//Íåò èíôîðìàöèè î òîì ÷òî âûâîäèòü?
+//	//ÐÐµÑ‚ Ð¸Ð½Ñ„Ð¾Ñ€Ð¼Ð°Ñ†Ð¸Ð¸ Ð¾ Ñ‚Ð¾Ð¼ Ñ‡Ñ‚Ð¾ Ð²Ñ‹Ð²Ð¾Ð´Ð¸Ñ‚ÑŒ?
 //  if (empty ($info['block_content'])) return true;
 
-  //Ïåðåìåííûå áëîêà
+  //ÐŸÐµÑ€ÐµÐ¼ÐµÐ½Ð½Ñ‹Ðµ Ð±Ð»Ð¾ÐºÐ°
 //  $parent_id = (int)sysBlockGetVar ($info[id], 'parent_id');
 //  $menu_type = sysBlockGetVar ($info[id], 'menu_type');
   $sysTpl = new coreTpl;
   $sysTpl->cache_lifetime = -1;
 
-  //Ïîñòðîèëè äåðåâî ðàçäåëîâ
-  //ïðîâåðÿåì åñëè åñòü â êåøå áåðåì èç êåøà
+  //ÐŸÐ¾ÑÑ‚Ñ€Ð¾Ð¸Ð»Ð¸ Ð´ÐµÑ€ÐµÐ²Ð¾ Ñ€Ð°Ð·Ð´ÐµÐ»Ð¾Ð²
+  //Ð¿Ñ€Ð¾Ð²ÐµÑ€ÑÐµÐ¼ ÐµÑÐ»Ð¸ ÐµÑÑ‚ÑŒ Ð² ÐºÐµÑˆÐµ Ð±ÐµÑ€ÐµÐ¼ Ð¸Ð· ÐºÐµÑˆÐ°
 	//$items_list = sysVarGetCached('menu', 'menu_tree_'.$parent_id.'_-1_'.true);
   $parent_id=$menu_config['parent_id'];
   $menu_type=1;
@@ -27,10 +27,10 @@ function menu_block_display($info)
 		//sysVarSetCached('menu', 'menu_tree_'.$parent.'_id_-1_'.true, $items_list);
 		}
 
-  //Åñëè ïóñòî, çíà÷èò áëîê åøå íå íàñòðîåí
+  //Ð•ÑÐ»Ð¸ Ð¿ÑƒÑÑ‚Ð¾, Ð·Ð½Ð°Ñ‡Ð¸Ñ‚ Ð±Ð»Ð¾Ðº ÐµÑˆÐµ Ð½Ðµ Ð½Ð°ÑÑ‚Ñ€Ð¾ÐµÐ½
   if (!$items_list) return true;
 
-  // Îïðåäåëÿåì id òåêóøåãî ýëåìåíòà
+  // ÐžÐ¿Ñ€ÐµÐ´ÐµÐ»ÑÐµÐ¼ id Ñ‚ÐµÐºÑƒÑˆÐµÐ³Ð¾ ÑÐ»ÐµÐ¼ÐµÐ½Ñ‚Ð°
   global $HTTP_SERVER_VARS;
   $cur_uri = $HTTP_SERVER_VARS['REQUEST_URI'];
 
@@ -44,20 +44,20 @@ function menu_block_display($info)
       }
     }
 
-  //Ðàññìàòðèâàåì 2 ñëó÷àÿ òèï ìåíþ 1 èëè 2
+  //Ð Ð°ÑÑÐ¼Ð°Ñ‚Ñ€Ð¸Ð²Ð°ÐµÐ¼ 2 ÑÐ»ÑƒÑ‡Ð°Ñ Ñ‚Ð¸Ð¿ Ð¼ÐµÐ½ÑŽ 1 Ð¸Ð»Ð¸ 2
 
-  //Òèï 1 - ìåíþøêà áûñòðåíüêàÿ
+  //Ð¢Ð¸Ð¿ 1 - Ð¼ÐµÐ½ÑŽÑˆÐºÐ° Ð±Ñ‹ÑÑ‚Ñ€ÐµÐ½ÑŒÐºÐ°Ñ
   if ($menu_type==1)
     {
     $tpl = tplInfo(__FUNCTION__, __FILE__);
     //$sysObject = 'menu_block::display::'.$info['id'].'::'.$cur_item_id;
-    //Ïðîâåðêà íà äîñòóï
+    //ÐŸÑ€Ð¾Ð²ÐµÑ€ÐºÐ° Ð½Ð° Ð´Ð¾ÑÑ‚ÑƒÐ¿
     //if (!sysSecAuthAction($sysObject, ACCESS_READ)) return true;
 
 //    $sysModTpl = sysTplWay ($sysObject);
 //    if ($sysTpl->is_cached ($sysModTpl, $sysObject))
 //      {
-//      //Âîçâðàùàåì
+//      //Ð’Ð¾Ð·Ð²Ñ€Ð°Ñ‰Ð°ÐµÐ¼
 //      $result['block_object'] =& $sysObject;
 //      $result['block_content'] =& $sysTpl->fetch($sysModTpl,$sysObject);
 //      return $result;
@@ -65,7 +65,7 @@ function menu_block_display($info)
 
     }
 
-  //HTML 4.01 Ó íàñ óðë à íå õòìë, ïîñåìó ïðåîáðàçîâûâàåì
+  //HTML 4.01 Ð£ Ð½Ð°Ñ ÑƒÑ€Ð» Ð° Ð½Ðµ Ñ…Ñ‚Ð¼Ð», Ð¿Ð¾ÑÐµÐ¼Ñƒ Ð¿Ñ€ÐµÐ¾Ð±Ñ€Ð°Ð·Ð¾Ð²Ñ‹Ð²Ð°ÐµÐ¼
   foreach ($items_list as $key=>$value)
     {
     if ($value['item_type']==3)
@@ -95,7 +95,7 @@ function menu_block_modify($info)
 
   $menu_config = unserialize($info['block_content']);
   
-  //Òåêóùèé ýëåìåíò
+  //Ð¢ÐµÐºÑƒÑ‰Ð¸Ð¹ ÑÐ»ÐµÐ¼ÐµÐ½Ñ‚
   $smarty->assign('parent_id', $menu_config['parent_id']);
 
   $items_list = $menu->menuTree(0, 0);
