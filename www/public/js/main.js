@@ -2,7 +2,7 @@
  * Autosave form function
  * Example:
  * 
- * //Автосохраняемся, после окончания ввода
+ * //РђРІС‚РѕСЃРѕС…СЂР°РЅСЏРµРјСЃСЏ, РїРѕСЃР»Рµ РѕРєРѕРЅС‡Р°РЅРёСЏ РІРІРѕРґР°
  *   $('#modify_diary input, #modify_diary textarea').autoSave(function($element){
  *     $.post("/memorials/modify_diary_autosave", $( "#modify_diary" ).serialize());
  *   }, 2000);
@@ -66,6 +66,6 @@ $('document').ready(function(){
 //        if(hasChanged) return "You have unsaved changes";
 //    });
 //    
-//    window.onblur = function () {document.title='документ неактивен'}
+//    window.onblur = function () {document.title='РґРѕРєСѓРјРµРЅС‚ РЅРµР°РєС‚РёРІРµРЅ'}
 //    window.onunload = function () {return "1111";}
 // });

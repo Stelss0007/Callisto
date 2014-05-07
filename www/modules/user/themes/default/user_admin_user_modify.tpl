@@ -1,12 +1,12 @@
 {strip}
-{* Для всех да нет *}
+{* Р”Р»СЏ РІСЃРµС… РґР° РЅРµС‚ *}
 {array name='yes_no'}
-{array_append name='yes_no' key='1' value=Да}
-{array_append name='yes_no' key='0' value=Нет}
-<h1>Личные данные пользователя</h1>
-Уважаемый пользователь! Будьте предельно внимательны при заполнении данных личного Профиля,
-особенно ваших электронных кошельков. К некоторым полям имеются подсказки.
-Воспользуйтесь ими, если в чём-либо сомневаетесь.
+{array_append name='yes_no' key='1' value=Р”Р°}
+{array_append name='yes_no' key='0' value=РќРµС‚}
+<h1>Р›РёС‡РЅС‹Рµ РґР°РЅРЅС‹Рµ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ</h1>
+РЈРІР°Р¶Р°РµРјС‹Р№ РїРѕР»СЊР·РѕРІР°С‚РµР»СЊ! Р‘СѓРґСЊС‚Рµ РїСЂРµРґРµР»СЊРЅРѕ РІРЅРёРјР°С‚РµР»СЊРЅС‹ РїСЂРё Р·Р°РїРѕР»РЅРµРЅРёРё РґР°РЅРЅС‹С… Р»РёС‡РЅРѕРіРѕ РџСЂРѕС„РёР»СЏ,
+РѕСЃРѕР±РµРЅРЅРѕ РІР°С€РёС… СЌР»РµРєС‚СЂРѕРЅРЅС‹С… РєРѕС€РµР»СЊРєРѕРІ. Рљ РЅРµРєРѕС‚РѕСЂС‹Рј РїРѕР»СЏРј РёРјРµСЋС‚СЃСЏ РїРѕРґСЃРєР°Р·РєРё.
+Р’РѕСЃРїРѕР»СЊР·СѓР№С‚РµСЃСЊ РёРјРё, РµСЃР»Рё РІ С‡С‘Рј-Р»РёР±Рѕ СЃРѕРјРЅРµРІР°РµС‚РµСЃСЊ.
 <form name="userform" action="/index.php?module=user&type=admin&func=user_update" method="post">
   <table class="outer" cellSpacing="1" cellPadding="4" width="100%">
     <colgroup>
@@ -16,37 +16,37 @@
 
     <thead>
       <tr>
-        <th colSpan="2"><h3>Мои персональные данные (необходимы для получения статуса "Рабочий")</h3></th>
+        <th colSpan="2"><h3>РњРѕРё РїРµСЂСЃРѕРЅР°Р»СЊРЅС‹Рµ РґР°РЅРЅС‹Рµ (РЅРµРѕР±С…РѕРґРёРјС‹ РґР»СЏ РїРѕР»СѓС‡РµРЅРёСЏ СЃС‚Р°С‚СѓСЃР° "Р Р°Р±РѕС‡РёР№")</h3></th>
       </tr>
       <tr>
-        <th class='head'>Параметр</th>
-        <th class='head'>Значения</th>
+        <th class='head'>РџР°СЂР°РјРµС‚СЂ</th>
+        <th class='head'>Р—РЅР°С‡РµРЅРёСЏ</th>
       </tr>
     </thead>
 
     <tfoot>
       <tr>
         <td class="even" colspan="2" align="center">
-          <input class="formButton" type="submit" value="Сохранить" name="submit">
+          <input class="formButton" type="submit" value="РЎРѕС…СЂР°РЅРёС‚СЊ" name="submit">
         </td>
       </tr>
     <tfoot>
 
     <tbody>
       <tr>
-        <td class="head" align="left">Имя пользователя<br>(login):</td>
+        <td class="head" align="left">РРјСЏ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ<br>(login):</td>
         <td class="even"><input maxLength="25" size="30" name="login" value="{$login|escape}"></td>
       </tr>
       <tr>
-        <td class="head" align="left">Пароль:</td>
+        <td class="head" align="left">РџР°СЂРѕР»СЊ:</td>
         <td class="even">
           <input type="password" maxLength="20" size="20" value name="pass" value="{$pass|escape}">
-          &nbsp;Подтвердить:
+          &nbsp;РџРѕРґС‚РІРµСЂРґРёС‚СЊ:
           <input type="password" maxLength="20" size="20" value name="pass2" value="{$pass|escape}">
         </td>
       </tr>
       <tr>
-        <td class="head" align="left">Имя (Ф.И.О.):</td>
+        <td class="head" align="left">РРјСЏ (Р¤.Р.Рћ.):</td>
         <td class="even"><input maxLength="60" size="40" name="displayname" value="{$displayname|escape}"></td>
       </tr>
       <tr>
@@ -55,7 +55,7 @@
       </tr>
       
       <tr>
-        <td class="head" align="left">Группа: </td>
+        <td class="head" align="left">Р“СЂСѓРїРїР°: </td>
         <td class="even">
           <select name = 'gid'>
             {html_options options=$group_list selected=$gid}
@@ -64,7 +64,7 @@
       </tr>
 
       <tr>
-        <td class="head" align="left">Активирован:</td>
+        <td class="head" align="left">РђРєС‚РёРІРёСЂРѕРІР°РЅ:</td>
         <td class="even">
           {html_radios name="active" options=$yes_no checked=$active separator=" "}
         </td>
@@ -78,14 +78,14 @@
       </tr>
 
       <tr>
-        <td class="head" align="left">Интересы:</td>
+        <td class="head" align="left">РРЅС‚РµСЂРµСЃС‹:</td>
         <td class="even">
           <input maxLength="255" size="70" name="interests" value="{$interests|escape}">
         </td>
       </tr>
 
       <tr>
-        <td class="head" align="left">О себе:</td>
+        <td class="head" align="left">Рћ СЃРµР±Рµ:</td>
         <td class="even">
           <textarea name="about" rows="8" cols="70">
             {$about|escape}

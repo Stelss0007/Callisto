@@ -1,5 +1,5 @@
 {strip}
-  <h3>Персональные данные пользователя</h3>
+  <h3>РџРµСЂСЃРѕРЅР°Р»СЊРЅС‹Рµ РґР°РЅРЅС‹Рµ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ</h3>
   <table width="100%">
     <tr>
       <td width="150" valign="top">
@@ -7,7 +7,7 @@
           <thead>
             <tr>
               <th>
-                Фото
+                Р¤РѕС‚Рѕ
               </th>
             </tr>
           </thead>
@@ -19,9 +19,9 @@
                   {if !$photo_r}
                     {assign var=photo_r value=0}
                   {/if}
-                  <img id='previewField' style="max-height: 400px; max-width: 150px;" src="/images/user/photo/{$fname[7]}/{$fname[6]}/{$fname}/{$fname}_w{$photo_w}_{$photo_r}.jpg" alt="Фотография" border="0"  align="center" >
+                  <img id='previewField' style="max-height: 400px; max-width: 150px;" src="/images/user/photo/{$fname[7]}/{$fname[6]}/{$fname}/{$fname}_w{$photo_w}_{$photo_r}.jpg" alt="Р¤РѕС‚РѕРіСЂР°С„РёСЏ" border="0"  align="center" >
                 {else}
-                  <img id='previewField' style="max-height: 400px; max-width: 150px;" src="/images/no_photo.jpg" alt="Фотография" border="0"  align="center" >
+                  <img id='previewField' style="max-height: 400px; max-width: 150px;" src="/images/no_photo.jpg" alt="Р¤РѕС‚РѕРіСЂР°С„РёСЏ" border="0"  align="center" >
                 {/if}
               </td>
             </tr>
@@ -32,13 +32,13 @@
         <table class="profile" border="0" cellpadding="0" cellspacing="0"  width="100%">
           <thead>
             <tr>
-              <th nowrap="nowrap" align="center" width="200">Параметр</th>
-              <th nowrap="nowrap" align="center">Значение</th>
+              <th nowrap="nowrap" align="center" width="200">РџР°СЂР°РјРµС‚СЂ</th>
+              <th nowrap="nowrap" align="center">Р—РЅР°С‡РµРЅРёРµ</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-               <td>Ник</td>
+               <td>РќРёРє</td>
                <td class="value">{$login}</td>
             </tr>
             <tr>
@@ -47,39 +47,39 @@
             </tr>
 
             <tr>
-              <td>Род деятельности</td>
+              <td>Р РѕРґ РґРµСЏС‚РµР»СЊРЅРѕСЃС‚Рё</td>
               <td class="value">
                 {$prof_list[$prof_id]}
               </td>
             </tr>
             <tr>
-              <td>Семейное положение</td>
+              <td>РЎРµРјРµР№РЅРѕРµ РїРѕР»РѕР¶РµРЅРёРµ</td>
               <td class="value">
                 {$family_list[$family_id]}
               </td>
             </tr>
             <tr>
-              <td>Пол</td>
+              <td>РџРѕР»</td>
               <td class="value">
                 {$sex_list[$sex_id]}
               </td>
             </tr>
             <tr>
-              <td>Регистрационный номер</td>
+              <td>Р РµРіРёСЃС‚СЂР°С†РёРѕРЅРЅС‹Р№ РЅРѕРјРµСЂ</td>
               <td class="value">
                 {$id}
               </td>
             </tr>
             <tr>
-              <td>Зарегистрирован</td>
+              <td>Р—Р°СЂРµРіРёСЃС‚СЂРёСЂРѕРІР°РЅ</td>
               <td class="value">
-                {$addtime|date_format:"%d.%m.%Y в %H:%M"}
+                {$addtime|date_format:"%d.%m.%Y РІ %H:%M"}
               </td>
             </tr>
             <tr>
-              <td>Последний визит</td>
+              <td>РџРѕСЃР»РµРґРЅРёР№ РІРёР·РёС‚</td>
               <td class="value">
-                {$last_visit|date_format:"%d.%m.%Y в %H:%M"}
+                {$last_visit|date_format:"%d.%m.%Y РІ %H:%M"}
               </td>
             </tr>
           </tbody>
@@ -88,29 +88,29 @@
     </tr>
   </table>
 
-  <h3>Мои платёжные реквизиты</h3>
+  <h3>РњРѕРё РїР»Р°С‚С‘Р¶РЅС‹Рµ СЂРµРєРІРёР·РёС‚С‹</h3>
   <table class="profile" border="0" cellpadding="0" cellspacing="0" width="100%">
     <thead>
       <tr>
-        <th nowrap="nowrap" align="center" width="51%">Платёжная система</th>
-        <th nowrap="nowrap" align="center">Номер кошелька</th>
+        <th nowrap="nowrap" align="center" width="51%">РџР»Р°С‚С‘Р¶РЅР°СЏ СЃРёСЃС‚РµРјР°</th>
+        <th nowrap="nowrap" align="center">РќРѕРјРµСЂ РєРѕС€РµР»СЊРєР°</th>
       </tr>
     </thead>
       <tbody>
         <tr>
-          <td nowrap="nowrap">Номер счёта в системе <a href="https://www.liqpay.com" target="_blank">LiqPay</a></td>
+          <td nowrap="nowrap">РќРѕРјРµСЂ СЃС‡С‘С‚Р° РІ СЃРёСЃС‚РµРјРµ <a href="https://www.liqpay.com" target="_blank">LiqPay</a></td>
           <td class="value">{$liqpay}</td>
         </tr>
         <tr>
-          <td nowrap="nowrap">Номер счёта в системе <a href="https://www.alertpay.com/?1OK3KSy62IYmKce8Iy5XwQ%3d%3d" target="_blank">AlertPay</a></td>
+          <td nowrap="nowrap">РќРѕРјРµСЂ СЃС‡С‘С‚Р° РІ СЃРёСЃС‚РµРјРµ <a href="https://www.alertpay.com/?1OK3KSy62IYmKce8Iy5XwQ%3d%3d" target="_blank">AlertPay</a></td>
           <td class="value">{$alertpay}</td>
         </tr>
         <tr>
-          <td nowrap="nowrap">Номер счёта в системе <a href="http://www.webmoney.ru" target="_blank">WebMoney</a> (WMR)</td>
+          <td nowrap="nowrap">РќРѕРјРµСЂ СЃС‡С‘С‚Р° РІ СЃРёСЃС‚РµРјРµ <a href="http://www.webmoney.ru" target="_blank">WebMoney</a> (WMR)</td>
           <td class="value">{$webmoney}</td>
         </tr>
         <tr>
-          <td nowrap="nowrap">Идентификатор в системе <a href="http://www.webmoney.ru" target="_blank">WebMoney</a> (WMID)</td>
+          <td nowrap="nowrap">РРґРµРЅС‚РёС„РёРєР°С‚РѕСЂ РІ СЃРёСЃС‚РµРјРµ <a href="http://www.webmoney.ru" target="_blank">WebMoney</a> (WMID)</td>
           <td class="value">{$wmid}</td>
         </tr>
       </tbody>

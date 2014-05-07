@@ -1,4 +1,4 @@
-(function() {
+﻿(function() {
   var iOSCheckbox;
   var __slice = Array.prototype.slice;
   iOSCheckbox = (function() {

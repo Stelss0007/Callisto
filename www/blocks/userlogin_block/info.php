@@ -1,9 +1,9 @@
 <?php
 $info['block_name'] = 'userlogin_block';
 $info['block_type'] = 'block';
-$info['block_displayname'] = 'Âõîä';
+$info['block_displayname'] = 'Ð’Ñ…Ð¾Ð´';
 $info['block_version'] = '0.31';
-$info['block_description'] = 'Âõîä äëÿ ïîëüçîâàòåëåé';
+$info['block_description'] = 'Ð’Ñ…Ð¾Ð´ Ð´Ð»Ñ Ð¿Ð¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ñ‚ÐµÐ»ÐµÐ¹';
 $info['block_credits'] = '';
 $info['block_changelog'] = '';
 $info['block_license'] = '';

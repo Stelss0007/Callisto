@@ -104,7 +104,7 @@ class Menu extends Model
     
   function menuCreate($data)
     {
-    //Получим полный путь родителей
+    //РџРѕР»СѓС‡РёРј РїРѕР»РЅС‹Р№ РїСѓС‚СЊ СЂРѕРґРёС‚РµР»РµР№
     if(!isset($data['menu_parent_id']))
       $data['menu_parent_id'] = '0';
     
@@ -135,18 +135,18 @@ class Menu extends Model
     if(!is_numeric($id))
       return false;
     
-    //Сведенья до момента редактирования
+    //РЎРІРµРґРµРЅСЊСЏ РґРѕ РјРѕРјРµРЅС‚Р° СЂРµРґР°РєС‚РёСЂРѕРІР°РЅРёСЏ
     $old_data = $this->getById($id);
     
     
-    //Получим полный путь родителей
+    //РџРѕР»СѓС‡РёРј РїРѕР»РЅС‹Р№ РїСѓС‚СЊ СЂРѕРґРёС‚РµР»РµР№
     if(!isset($data['menu_parent_id']))
       $data['menu_parent_id'] = '0';
     
     $parent = $this->getById($data['menu_parent_id']);
   
     if($this->isChild($parent['id'], $id))
-      $this->errors->setError('Нельзя вложить элемент в дочерний элемент!');
+      $this->errors->setError('РќРµР»СЊР·СЏ РІР»РѕР¶РёС‚СЊ СЌР»РµРјРµРЅС‚ РІ РґРѕС‡РµСЂРЅРёР№ СЌР»РµРјРµРЅС‚!');
     
     if($parent)
       {

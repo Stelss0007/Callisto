@@ -204,8 +204,8 @@ textarea {
       btnName: "Upload Video",
       btnBackground: "#ff0000",
       btnColor: "#fff",
-      defColor: "white", //цвет элемента над которым нет курсора
-      hoverColor: "red", //цвет элемента на который наведен курсор
+      defColor: "white", //С†РІРµС‚ СЌР»РµРјРµРЅС‚Р° РЅР°Рґ РєРѕС‚РѕСЂС‹Рј РЅРµС‚ РєСѓСЂСЃРѕСЂР°
+      hoverColor: "red", //С†РІРµС‚ СЌР»РµРјРµРЅС‚Р° РЅР° РєРѕС‚РѕСЂС‹Р№ РЅР°РІРµРґРµРЅ РєСѓСЂСЃРѕСЂ
       success: function(videoUrl){
         return true;
       }

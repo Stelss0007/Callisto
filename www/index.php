@@ -11,9 +11,11 @@ include_once 'kernel/router.php';
 include_once 'kernel/controller.php';
 include_once 'kernel/model.php';
 
-//print_r(appUsesModule('groups'));exit;
+//echo "<head><style>body {background: #ff0000;}</style></head><body>";
+//print_r(appUsesModule('groups'));
+//echo "</body>";
+//exit;
 
 $router = new Router();
 $router->run();
 
-?>

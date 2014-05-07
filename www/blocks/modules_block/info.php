@@ -1,9 +1,9 @@
 <?php
 $info['block_name'] = 'modules_block';
 $info['block_type'] = 'block';
-$info['block_displayname'] = 'Ìîäóëè';
+$info['block_displayname'] = 'ÐœÐ¾Ð´ÑƒÐ»Ð¸';
 $info['block_version'] = '0.31';
-$info['block_description'] = 'Ñïèñîê ìîäóëåé â ñèñòåìå';
+$info['block_description'] = 'Ð¡Ð¿Ð¸ÑÐ¾Ðº Ð¼Ð¾Ð´ÑƒÐ»ÐµÐ¹ Ð² ÑÐ¸ÑÑ‚ÐµÐ¼Ðµ';
 $info['block_credits'] = 'credits';
 $info['block_changelog'] = 'changelog';
 $info['block_license'] = '';

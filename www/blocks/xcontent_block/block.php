@@ -3,11 +3,11 @@
 function xcontent_block_display($blockinfo)
   {
   if (!sysModAvailable ('content'))
-    {//Модуль недоступен
+    {//РњРѕРґСѓР»СЊ РЅРµРґРѕСЃС‚СѓРїРµРЅ
     return true;
     };
 
-  //Забираем переменные блока
+  //Р—Р°Р±РёСЂР°РµРј РїРµСЂРµРјРµРЅРЅС‹Рµ Р±Р»РѕРєР°
   $folder_id = sysBlockGetVar ($blockinfo[id],'folder_id');
   $block_ttl = sysBlockGetVar ($blockinfo[id],'block_ttl');
 
@@ -16,22 +16,22 @@ function xcontent_block_display($blockinfo)
     $folder_id=0;
     };
 
-  //Строим имя и опредиляем если нужно текущий раздел
+  //РЎС‚СЂРѕРёРј РёРјСЏ Рё РѕРїСЂРµРґРёР»СЏРµРј РµСЃР»Рё РЅСѓР¶РЅРѕ С‚РµРєСѓС‰РёР№ СЂР°Р·РґРµР»
   if ($folder_id>=0)
     {
     $sysObject = 'xcontent_block::display::'.$blockinfo['id'];
     }
     else
-      {//Опредиляем текущий раздел
+      {//РћРїСЂРµРґРёР»СЏРµРј С‚РµРєСѓС‰РёР№ СЂР°Р·РґРµР»
       list($module,
            $func,
            $type) = sysVarCleanFromInput('module',
                                          'func',
                                          'type');
-      //Проверка эт content ?
+      //РџСЂРѕРІРµСЂРєР° СЌС‚ content ?
       if ($module!='content')
         {
-        //Выходим
+        //Р’С‹С…РѕРґРёРј
         return true;
         }
         elseif ($func=='folder_view')
@@ -56,14 +56,14 @@ function xcontent_block_display($blockinfo)
                 }
                 else
                   {
-                  //Неповезло, не определили, выходим
+                  //РќРµРїРѕРІРµР·Р»Рѕ, РЅРµ РѕРїСЂРµРґРµР»РёР»Рё, РІС‹С…РѕРґРёРј
                   return true;
                   }
       }
 
   ////////////////////////////////////////////////////////////////////////////////
-  //Все с именнами разобрались
-  //Проверка на доступ
+  //Р’СЃРµ СЃ РёРјРµРЅРЅР°РјРё СЂР°Р·РѕР±СЂР°Р»РёСЃСЊ
+  //РџСЂРѕРІРµСЂРєР° РЅР° РґРѕСЃС‚СѓРї
   if (!sysSecAuthAction($sysObject, ACCESS_READ)) return true;
 
   $sysTpl = new sysTpl;
@@ -73,12 +73,12 @@ function xcontent_block_display($blockinfo)
 
   if($sysTpl->is_cached($sysModTpl,$sysObject))
     {
-    //Возвращаем
+    //Р’РѕР·РІСЂР°С‰Р°РµРј
     $result['block_content'] =& $sysTpl->fetch($sysModTpl,$sysObject);
     return $result;
     };
 
-  //переменные блока
+  //РїРµСЂРµРјРµРЅРЅС‹Рµ Р±Р»РѕРєР°
   $doc_count = sysBlockGetVar ($blockinfo['id'], 'doc_count');
   $include_subfolders = sysBlockGetVar ($blockinfo['id'], 'include_subfolders');
   $doc_orderby = sysBlockGetVar ($blockinfo['id'], 'doc_orderby');
@@ -88,27 +88,27 @@ function xcontent_block_display($blockinfo)
   if (empty($doc_orderby))
     $doc_orderby = 'displayname';
 
-  //Так теперь делаем выборку
+  //РўР°Рє С‚РµРїРµСЂСЊ РґРµР»Р°РµРј РІС‹Р±РѕСЂРєСѓ
 
-  //Берем вложенные документы
+  //Р‘РµСЂРµРј РІР»РѕР¶РµРЅРЅС‹Рµ РґРѕРєСѓРјРµРЅС‚С‹
   $docs_table = sysDBGetTable('content_docs');
   $docs_column =  sysDBGetColumns($docs_table);
 
-  //Учитываем  limit_doc_olderdays  limit_doc_perfolder
+  //РЈС‡РёС‚С‹РІР°РµРј  limit_doc_olderdays  limit_doc_perfolder
   $now = date("Y-m-d H:i:00");
 
-  //Получили список вложенных документов
-  //Сортировать по возрастанию / убыванию
+  //РџРѕР»СѓС‡РёР»Рё СЃРїРёСЃРѕРє РІР»РѕР¶РµРЅРЅС‹С… РґРѕРєСѓРјРµРЅС‚РѕРІ
+  //РЎРѕСЂС‚РёСЂРѕРІР°С‚СЊ РїРѕ РІРѕР·СЂР°СЃС‚Р°РЅРёСЋ / СѓР±С‹РІР°РЅРёСЋ
   if (sysBlockGetVar ($blockinfo['id'],'doc_order_asc'))
     $order=' ASC';
     else
       $order=' DESC';
 
   $where = "$docs_column[fid] = '$folder_id'";
-  //Включать подразделы или нет ?
+  //Р’РєР»СЋС‡Р°С‚СЊ РїРѕРґСЂР°Р·РґРµР»С‹ РёР»Рё РЅРµС‚ ?
   if ($include_subfolders)
     {
-    //Если включать значит выстраиваем дерево
+    //Р•СЃР»Рё РІРєР»СЋС‡Р°С‚СЊ Р·РЅР°С‡РёС‚ РІС‹СЃС‚СЂР°РёРІР°РµРј РґРµСЂРµРІРѕ
     sysModClassLoad ('content');
     $content = new content;
     $folders_list = $content->folder_ItemsTreeBuild($folder_id, 0);
@@ -116,7 +116,7 @@ function xcontent_block_display($blockinfo)
       $where .= " OR $docs_column[fid] = '$folder[id]'";
     }
 
-  //Собственно выборка
+  //РЎРѕР±СЃС‚РІРµРЅРЅРѕ РІС‹Р±РѕСЂРєР°
   $docs_list = sysDbSelect ($docs_table, $docs_column,
     "WHERE ($where) AND $docs_column[active]=1
        AND $docs_column[pub_datetime]<'$now'
@@ -124,20 +124,20 @@ function xcontent_block_display($blockinfo)
        ORDER BY $doc_orderby $order
          LIMIT 0, $doc_count", true);
 
-  //Если нет документов, блок невыводим вообще
+  //Р•СЃР»Рё РЅРµС‚ РґРѕРєСѓРјРµРЅС‚РѕРІ, Р±Р»РѕРє РЅРµРІС‹РІРѕРґРёРј РІРѕРѕР±С‰Рµ
   //if (empty ($docs_list))
 	//    return true;
 
-  //С документами все Загоняем в шаблон
+  //РЎ РґРѕРєСѓРјРµРЅС‚Р°РјРё РІСЃРµ Р—Р°РіРѕРЅСЏРµРј РІ С€Р°Р±Р»РѕРЅ
   $sysTpl->assign('docs_list', $docs_list);
 
-  //Назначяем переменные (настройки блока)
+  //РќР°Р·РЅР°С‡СЏРµРј РїРµСЂРµРјРµРЅРЅС‹Рµ (РЅР°СЃС‚СЂРѕР№РєРё Р±Р»РѕРєР°)
   $sysTpl->assign('doc_count', $doc_count);
   $sysTpl->assign('include_subfolders', $include_subfolders);
   $sysTpl->assign('doc_orderby', $doc_orderby);
   $sysTpl->assign('doc_order_asc', $doc_order_asc);
 
-  //Информацию о блоке
+  //РРЅС„РѕСЂРјР°С†РёСЋ Рѕ Р±Р»РѕРєРµ
   $sysTpl->assign('blockinfo', $blockinfo);
 
   //The End

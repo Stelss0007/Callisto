@@ -1,5 +1,5 @@
 {strip}
-{******************************СЛЕВА*******************************************}
+{******************************РЎР›Р•Р’Рђ*******************************************}
   <table class="admin_table" cellSpacing="1" cellPadding="4" width="100%">
     <colgroup>
       <col width="20%">
@@ -11,20 +11,20 @@
 
     <thead>
       <tr align="middle">
-        <th colspan="6">Установленные блоки слева</th>
+        <th colspan="6">РЈСЃС‚Р°РЅРѕРІР»РµРЅРЅС‹Рµ Р±Р»РѕРєРё СЃР»РµРІР°</th>
       </tr>
 
       <tr align="middle">
-        <td class="head" nowrap>Отображаемое имя</td>
-        <td class="head">Имя блока</td>
-        <td class="head">Маска</td>
-        <td class="head">Порядок</td>
-        <td class="head">Действия</td>
+        <td class="head" nowrap>РћС‚РѕР±СЂР°Р¶Р°РµРјРѕРµ РёРјСЏ</td>
+        <td class="head">РРјСЏ Р±Р»РѕРєР°</td>
+        <td class="head">РњР°СЃРєР°</td>
+        <td class="head">РџРѕСЂСЏРґРѕРє</td>
+        <td class="head">Р”РµР№СЃС‚РІРёСЏ</td>
       </tr>
     </thead>
     <tfoot>
       <tr align="middle">
-        <td colspan="6">[<a href='/blocks/install/l'>Добавить блок</a>]</td>
+        <td colspan="6">[<a href='/blocks/install/l'>Р”РѕР±Р°РІРёС‚СЊ Р±Р»РѕРє</a>]</td>
       </tr>
     </tfoot>
 
@@ -51,7 +51,7 @@
         </td>
 
         <td class="{$class}" align="center" nowrap>
-          {* Действия над блоком *}
+          {* Р”РµР№СЃС‚РІРёСЏ РЅР°Рґ Р±Р»РѕРєРѕРј *}
           {array name='url_vars'}
           {array_append name='url_vars' key='id' value=$block.id}
           {if $block.block_active}
@@ -69,7 +69,7 @@
     </tbody>
   </table>
 <hr><br>
-{******************************СПРАВА*******************************************}
+{******************************РЎРџР РђР’Рђ*******************************************}
 
 <table class="admin_table" cellSpacing="1" cellPadding="4" width="100%">
     <colgroup>
@@ -82,20 +82,20 @@
 
     <thead>
       <tr align="middle">
-        <th colspan="6">Установленные блоки справа</th>
+        <th colspan="6">РЈСЃС‚Р°РЅРѕРІР»РµРЅРЅС‹Рµ Р±Р»РѕРєРё СЃРїСЂР°РІР°</th>
       </tr>
 
       <tr align="middle">
-        <td class="head" nowrap>Отображаемое имя</td>
-        <td class="head">Имя блока</td>
-        <td class="head">Маска</td>
-        <td class="head">Порядок</td>
-        <td class="head">Действия</td>
+        <td class="head" nowrap>РћС‚РѕР±СЂР°Р¶Р°РµРјРѕРµ РёРјСЏ</td>
+        <td class="head">РРјСЏ Р±Р»РѕРєР°</td>
+        <td class="head">РњР°СЃРєР°</td>
+        <td class="head">РџРѕСЂСЏРґРѕРє</td>
+        <td class="head">Р”РµР№СЃС‚РІРёСЏ</td>
       </tr>
     </thead>
     <tfoot>
       <tr align="middle">
-        <td colspan="6">[<a href='/blocks/install/r'>Добавить блок</a>]</td>
+        <td colspan="6">[<a href='/blocks/install/r'>Р”РѕР±Р°РІРёС‚СЊ Р±Р»РѕРє</a>]</td>
       </tr>
     </tfoot>
 
@@ -122,7 +122,7 @@
         </td>
 
         <td class="{$class}" align="center" nowrap>
-          {* Действия над блоком *}
+          {* Р”РµР№СЃС‚РІРёСЏ РЅР°Рґ Р±Р»РѕРєРѕРј *}
           {array name='url_vars'}
           {array_append name='url_vars' key='id' value=$block.id}
           {if $block.block_active}
@@ -140,7 +140,7 @@
     </tbody>
   </table>
 <hr><br>
-{******************************СВЕРХУ*******************************************}
+{******************************РЎР’Р•Р РҐРЈ*******************************************}
 
 <table class="admin_table" cellSpacing="1" cellPadding="4" width="100%">
     <colgroup>
@@ -153,20 +153,20 @@
 
     <thead>
       <tr align="middle">
-        <th colspan="6">Установленные блоки сверху</th>
+        <th colspan="6">РЈСЃС‚Р°РЅРѕРІР»РµРЅРЅС‹Рµ Р±Р»РѕРєРё СЃРІРµСЂС…Сѓ</th>
       </tr>
 
       <tr align="middle">
-        <td class="head" nowrap>Отображаемое имя</td>
-        <td class="head">Имя блока</td>
-        <td class="head">Маска</td>
-        <td class="head">Порядок</td>
-        <td class="head">Действия</td>
+        <td class="head" nowrap>РћС‚РѕР±СЂР°Р¶Р°РµРјРѕРµ РёРјСЏ</td>
+        <td class="head">РРјСЏ Р±Р»РѕРєР°</td>
+        <td class="head">РњР°СЃРєР°</td>
+        <td class="head">РџРѕСЂСЏРґРѕРє</td>
+        <td class="head">Р”РµР№СЃС‚РІРёСЏ</td>
       </tr>
     </thead>
     <tfoot>
       <tr align="middle">
-        <td colspan="6">[<a href='/blocks/install/t'>Добавить блок</a>]</td>
+        <td colspan="6">[<a href='/blocks/install/t'>Р”РѕР±Р°РІРёС‚СЊ Р±Р»РѕРє</a>]</td>
       </tr>
     </tfoot>
 
@@ -193,7 +193,7 @@
         </td>
 
         <td class="{$class}" align="center" nowrap>
-          {* Действия над блоком *}
+          {* Р”РµР№СЃС‚РІРёСЏ РЅР°Рґ Р±Р»РѕРєРѕРј *}
           {array name='url_vars'}
           {array_append name='url_vars' key='id' value=$block.id}
           {if $block.block_active}
@@ -212,7 +212,7 @@
   </table>
 <hr><br>
 
-{******************************СНИЗУ*******************************************}
+{******************************РЎРќРР—РЈ*******************************************}
 
 <table class="admin_table" cellSpacing="1" cellPadding="4" width="100%">
     <colgroup>
@@ -225,20 +225,20 @@
 
     <thead>
       <tr align="middle">
-        <th colspan="6">Установленные блоки снизу</th>
+        <th colspan="6">РЈСЃС‚Р°РЅРѕРІР»РµРЅРЅС‹Рµ Р±Р»РѕРєРё СЃРЅРёР·Сѓ</th>
       </tr>
 
       <tr align="middle">
-        <td class="head" nowrap>Отображаемое имя</td>
-        <td class="head">Имя блока</td>
-        <td class="head">Маска</td>
-        <td class="head">Порядок</td>
-        <td class="head">Действия</td>
+        <td class="head" nowrap>РћС‚РѕР±СЂР°Р¶Р°РµРјРѕРµ РёРјСЏ</td>
+        <td class="head">РРјСЏ Р±Р»РѕРєР°</td>
+        <td class="head">РњР°СЃРєР°</td>
+        <td class="head">РџРѕСЂСЏРґРѕРє</td>
+        <td class="head">Р”РµР№СЃС‚РІРёСЏ</td>
       </tr>
     </thead>
     <tfoot>
       <tr align="middle">
-        <td colspan="6">[<a href='/blocks/install/b'>Добавить блок</a>]</td>
+        <td colspan="6">[<a href='/blocks/install/b'>Р”РѕР±Р°РІРёС‚СЊ Р±Р»РѕРє</a>]</td>
       </tr>
     </tfoot>
 
@@ -265,7 +265,7 @@
         </td>
 
         <td class="{$class}" align="center" nowrap>
-          {* Действия над блоком *}
+          {* Р”РµР№СЃС‚РІРёСЏ РЅР°Рґ Р±Р»РѕРєРѕРј *}
           {array name='url_vars'}
           {array_append name='url_vars' key='id' value=$block.id}
           {if $block.block_active}
@@ -283,7 +283,7 @@
     </tbody>
   </table>
 <hr><br>
-{******************************ПОЦЕНТРУ****************************************}
+{******************************РџРћР¦Р•РќРўР РЈ****************************************}
 
 <table class="admin_table" cellSpacing="1" cellPadding="4" width="100%">
     <colgroup>
@@ -296,20 +296,20 @@
 
     <thead>
       <tr align="middle">
-        <th colspan="6">Установленные блоки поцентру</th>
+        <th colspan="6">РЈСЃС‚Р°РЅРѕРІР»РµРЅРЅС‹Рµ Р±Р»РѕРєРё РїРѕС†РµРЅС‚СЂСѓ</th>
       </tr>
 
       <tr align="middle">
-        <td class="head" nowrap>Отображаемое имя</td>
-        <td class="head">Имя блока</td>
-        <td class="head">Маска</td>
-        <td class="head">Порядок</td>
-        <td class="head">Действия</td>
+        <td class="head" nowrap>РћС‚РѕР±СЂР°Р¶Р°РµРјРѕРµ РёРјСЏ</td>
+        <td class="head">РРјСЏ Р±Р»РѕРєР°</td>
+        <td class="head">РњР°СЃРєР°</td>
+        <td class="head">РџРѕСЂСЏРґРѕРє</td>
+        <td class="head">Р”РµР№СЃС‚РІРёСЏ</td>
       </tr>
     </thead>
     <tfoot>
       <tr align="middle">
-        <td colspan="6">[<a href='/blocks/install/c'>Добавить блок</a>]</td>
+        <td colspan="6">[<a href='/blocks/install/c'>Р”РѕР±Р°РІРёС‚СЊ Р±Р»РѕРє</a>]</td>
       </tr>
     </tfoot>
 
@@ -336,7 +336,7 @@
         </td>
 
         <td class="{$class}" align="center" nowrap>
-          {* Действия над блоком *}
+          {* Р”РµР№СЃС‚РІРёСЏ РЅР°Рґ Р±Р»РѕРєРѕРј *}
           {array name='url_vars'}
           {array_append name='url_vars' key='id' value=$block.id}
           {if $block.block_active}

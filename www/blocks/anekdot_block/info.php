@@ -1,9 +1,9 @@
 <?php
 $info['block_name'] = 'anekdot_block';
 $info['block_type'] = 'block';
-$info['block_displayname'] = 'Àíåêäîò äíÿ';
+$info['block_displayname'] = 'ÐÐ½ÐµÐºÐ´Ð¾Ñ‚ Ð´Ð½Ñ';
 $info['block_version'] = '0.31';
-$info['block_description'] = 'Àíåêäîò äíÿ ñ anekdotov.net';
+$info['block_description'] = 'ÐÐ½ÐµÐºÐ´Ð¾Ñ‚ Ð´Ð½Ñ Ñ anekdotov.net';
 $info['block_credits'] = '';
 $info['block_changelog'] = '';
 $info['block_license'] = '';

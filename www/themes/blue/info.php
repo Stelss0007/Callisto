@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 $info['author'] = 'Ruslan Atamas';
 $info['title'] = 'Blue';
 $info['description'] = 'Blue Theme';

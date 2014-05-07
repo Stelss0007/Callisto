@@ -1,4 +1,4 @@
-# SQL Manager 2010 for MySQL 4.5.0.9
+﻿# SQL Manager 2010 for MySQL 4.5.0.9
 # ---------------------------------------
 # Host     : localhost
 # Port     : 3306

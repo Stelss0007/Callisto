@@ -74,7 +74,7 @@ class Model extends DBConnector
     {
     if(empty($guid))
       return false;
-    //Ïîëó÷èì îñíîâíóþ èíôó î áúåêòå
+    //ÐŸÐ¾Ð»ÑƒÑ‡Ð¸Ð¼ Ð¾ÑÐ½Ð¾Ð²Ð½ÑƒÑŽ Ð¸Ð½Ñ„Ñƒ Ð¾ Ð±ÑŠÐµÐºÑ‚Ðµ
     $sql = "SELECT SQL_CACHE  t.type as type,
                               o.guid,
                               o.owner_id,
@@ -87,7 +87,7 @@ class Model extends DBConnector
     $this->query($sql, $guid);
     $res_main = $this->fetch_array();
     
-    //Âûâåäèì âñå ïîëÿ è çíà÷åíèÿ ïðèíàäëåæàùèå îáúåêòó 
+    //Ð’Ñ‹Ð²ÐµÐ´Ð¸Ð¼ Ð²ÑÐµ Ð¿Ð¾Ð»Ñ Ð¸ Ð·Ð½Ð°Ñ‡ÐµÐ½Ð¸Ñ Ð¿Ñ€Ð¸Ð½Ð°Ð´Ð»ÐµÐ¶Ð°Ñ‰Ð¸Ðµ Ð¾Ð±ÑŠÐµÐºÑ‚Ñƒ 
     $sql = "SELECT SQL_CACHE f.`field`, 
                              v.`value` 
             FROM `object_value` v
@@ -99,12 +99,12 @@ class Model extends DBConnector
     
     $result = array();
     
-    //Ñîáåðåì ñâîéñòâà îáúåêòà ñíà÷àëà ñ ãëàâíîé òàáëèöû(ãëàâíàÿ èíôà)
+    //Ð¡Ð¾Ð±ÐµÑ€ÐµÐ¼ ÑÐ²Ð¾Ð¹ÑÑ‚Ð²Ð° Ð¾Ð±ÑŠÐµÐºÑ‚Ð° ÑÐ½Ð°Ñ‡Ð°Ð»Ð° Ñ Ð³Ð»Ð°Ð²Ð½Ð¾Ð¹ Ñ‚Ð°Ð±Ð»Ð¸Ñ†Ñ‹(Ð³Ð»Ð°Ð²Ð½Ð°Ñ Ð¸Ð½Ñ„Ð°)
     foreach($res_main[0] as $key=>$val)
       {
       $result[$key][] = $val;
       }
-    //Ñîáåðåì ñâîéñòâà îáúåêòà ñ òàáëèöû çíà÷åíèé îáúåêòà(âòîðîñòåïåííàÿ èíôà)
+    //Ð¡Ð¾Ð±ÐµÑ€ÐµÐ¼ ÑÐ²Ð¾Ð¹ÑÑ‚Ð²Ð° Ð¾Ð±ÑŠÐµÐºÑ‚Ð° Ñ Ñ‚Ð°Ð±Ð»Ð¸Ñ†Ñ‹ Ð·Ð½Ð°Ñ‡ÐµÐ½Ð¸Ð¹ Ð¾Ð±ÑŠÐµÐºÑ‚Ð°(Ð²Ñ‚Ð¾Ñ€Ð¾ÑÑ‚ÐµÐ¿ÐµÐ½Ð½Ð°Ñ Ð¸Ð½Ñ„Ð°)
     foreach($res_fields as $key=>$val)
       {
       $result[$val['field']][] = $val['value'];
@@ -132,7 +132,7 @@ class Model extends DBConnector
     $right_join_shablon = "RIGHT JOIN `object_value` w%d ON (w%d.guid = o.`guid`)";
     $where_shablon = " and w%d.`field_id` = '%d' and w%d.value IN (%s)";
     ////////////////////////////////////////////////////////////////////////////
-    //Ñîðòèðîâêà, ñîáåðåì ïåðåìåííûå äëÿ ñîðòèðîâêè
+    //Ð¡Ð¾Ñ€Ñ‚Ð¸Ñ€Ð¾Ð²ÐºÐ°, ÑÐ¾Ð±ÐµÑ€ÐµÐ¼ Ð¿ÐµÑ€ÐµÐ¼ÐµÐ½Ð½Ñ‹Ðµ Ð´Ð»Ñ ÑÐ¾Ñ€Ñ‚Ð¸Ñ€Ð¾Ð²ÐºÐ¸
     if(empty($order))
       $order = array('time_create'=>'asc');
     $num = 1;
@@ -158,7 +158,7 @@ class Model extends DBConnector
       
       
     ////////////////////////////////////////////////////////////////////////////  
-    //Îáðàáîòêà WHERE   
+    //ÐžÐ±Ñ€Ð°Ð±Ð¾Ñ‚ÐºÐ° WHERE   
     $num_where = 1; 
     if(empty($where_array))
       $where_array=array();
@@ -181,7 +181,7 @@ class Model extends DBConnector
     ////////////////////////////////////////////////////////////////////////////
     
       
-    //Ïîëó÷èì îáúåêòû
+    //ÐŸÐ¾Ð»ÑƒÑ‡Ð¸Ð¼ Ð¾Ð±ÑŠÐµÐºÑ‚Ñ‹
     $type_id = $this->getTypeId($this->type);
     
     $where = ltrim($where, 'and ');
@@ -208,7 +208,7 @@ class Model extends DBConnector
     
     $guids_str = implode("','", $guids);
     
-    //Ïîëó÷èì ïîëÿ ê îáúåêòàì
+    //ÐŸÐ¾Ð»ÑƒÑ‡Ð¸Ð¼ Ð¿Ð¾Ð»Ñ Ðº Ð¾Ð±ÑŠÐµÐºÑ‚Ð°Ð¼
     $sql = "SELECT SQL_NO_CACHE  v.`guid`, 
                               f.`field`,
                               v.`value`,
@@ -223,14 +223,14 @@ class Model extends DBConnector
 
     $object_list =array();
     
-    //Ýòî òèïà êîãäà ó îäíîãî ïîëÿ ìîæåò á³òü íåñêîëüêî çíà÷åíèé, ìû äëÿ âñåõ çàäàåì ÷òî ïîëå ìàññèâ, 
-    //Ïîòîì ëèøíåå ïðåîáðàçóåì îáðàòíî
+    //Ð­Ñ‚Ð¾ Ñ‚Ð¸Ð¿Ð° ÐºÐ¾Ð³Ð´Ð° Ñƒ Ð¾Ð´Ð½Ð¾Ð³Ð¾ Ð¿Ð¾Ð»Ñ Ð¼Ð¾Ð¶ÐµÑ‚ Ð±Ñ–Ñ‚ÑŒ Ð½ÐµÑÐºÐ¾Ð»ÑŒÐºÐ¾ Ð·Ð½Ð°Ñ‡ÐµÐ½Ð¸Ð¹, Ð¼Ñ‹ Ð´Ð»Ñ Ð²ÑÐµÑ… Ð·Ð°Ð´Ð°ÐµÐ¼ Ñ‡Ñ‚Ð¾ Ð¿Ð¾Ð»Ðµ Ð¼Ð°ÑÑÐ¸Ð², 
+    //ÐŸÐ¾Ñ‚Ð¾Ð¼ Ð»Ð¸ÑˆÐ½ÐµÐµ Ð¿Ñ€ÐµÐ¾Ð±Ñ€Ð°Ð·ÑƒÐµÐ¼ Ð¾Ð±Ñ€Ð°Ñ‚Ð½Ð¾
     foreach ($objects_result as $key => $value)
       {
       $object_list["{$value['guid']}"]["{$value['field']}"][] = $value['value'];
       }
     
-    //Òåïåðü ðàçáåðåì, êàêîå ïîëå ìàññèâ, à êàêîå íå ìàñèâ  
+    //Ð¢ÐµÐ¿ÐµÑ€ÑŒ Ñ€Ð°Ð·Ð±ÐµÑ€ÐµÐ¼, ÐºÐ°ÐºÐ¾Ðµ Ð¿Ð¾Ð»Ðµ Ð¼Ð°ÑÑÐ¸Ð², Ð° ÐºÐ°ÐºÐ¾Ðµ Ð½Ðµ Ð¼Ð°ÑÐ¸Ð²  
     foreach($object_list as $key1=>$result)
       foreach($result as $key=>$val)
         {
@@ -522,7 +522,7 @@ class Model extends DBConnector
     {
     if(empty($table))
       $table = $this->table;
-    //Ïðîâåðÿåì åñëè åñòü â êåøå âîçâðàùàåì èç êåøà
+    //ÐŸÑ€Ð¾Ð²ÐµÑ€ÑÐµÐ¼ ÐµÑÐ»Ð¸ ÐµÑÑ‚ÑŒ Ð² ÐºÐµÑˆÐµ Ð²Ð¾Ð·Ð²Ñ€Ð°Ñ‰Ð°ÐµÐ¼ Ð¸Ð· ÐºÐµÑˆÐ°
     $cached_columns = appVarGetCached('core', 'columns');
     if ($cached_columns[$table]) 
       return $cached_columns[$table];
@@ -534,7 +534,7 @@ class Model extends DBConnector
     foreach($columns as $value)
       $result[$table][] = $value['Field'];
     
-    //Êëàäåì â êåø
+    //ÐšÐ»Ð°Ð´ÐµÐ¼ Ð² ÐºÐµÑˆ
     appVarSetCached('core', 'columns', $result);
     
     return $result[$table];
@@ -835,7 +835,7 @@ class Model extends DBConnector
     $this->afterDelete();
     }
     
-  //...........ÑÂßÇÈ.................
+  //...........Ð¡Ð’Ð¯Ð—Ð˜.................
   final function prepareRelations()
     {
     
@@ -964,10 +964,10 @@ class Model extends DBConnector
 
     $this->query("UPDATE {$this->table} SET $has_field = IF($has_field ='1','0','1') WHERE id='$id'");
     }
-  // Ãðóïîâûå îïåðàöèè
+  // Ð“Ñ€ÑƒÐ¿Ð¾Ð²Ñ‹Ðµ Ð¾Ð¿ÐµÑ€Ð°Ñ†Ð¸Ð¸
     
   /**
-   * Ððóïîâîå óäàëåíèå
+   * Ð Ñ€ÑƒÐ¿Ð¾Ð²Ð¾Ðµ ÑƒÐ´Ð°Ð»ÐµÐ½Ð¸Ðµ
    * @param type $ids
    * @return boolean
    */
@@ -1006,4 +1006,4 @@ class Model extends DBConnector
     
     }
   }
-?>
+

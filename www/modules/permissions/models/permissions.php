@@ -93,7 +93,7 @@ class Permissions extends Model
    
     
 /**
- * @desc Ñ÷èòàåì óðîâåíü äîñòóïà òåêóøåãî ïîëüçîâàòåëÿ ê òåñòèðóåìîìó îáüåêòó
+ * @desc Ð¡Ñ‡Ð¸Ñ‚Ð°ÐµÐ¼ ÑƒÑ€Ð¾Ð²ÐµÐ½ÑŒ Ð´Ð¾ÑÑ‚ÑƒÐ¿Ð° Ñ‚ÐµÐºÑƒÑˆÐµÐ³Ð¾ Ð¿Ð¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ñ‚ÐµÐ»Ñ Ðº Ñ‚ÐµÑÑ‚Ð¸Ñ€ÑƒÐµÐ¼Ð¾Ð¼Ñƒ Ð¾Ð±ÑŒÐµÐºÑ‚Ñƒ
  * @return integer
  * @param testobject string
  * @param ownerid int
@@ -142,7 +142,7 @@ function objectGetPermsLevel ($object, $ownerid=-1)
     }
 
 
-  //Ïðàâà âëàäåëüöåâ
+  //ÐŸÑ€Ð°Ð²Ð° Ð²Ð»Ð°Ð´ÐµÐ»ÑŒÑ†ÐµÐ²
   if (($ownerid>-1) && ($ownerid==$uid))
     {
     $level = ACCESS_DELETE;

@@ -1,48 +1,7 @@
 <?php
 class IndexController extends Controller
   {
-  function actionSms()
-    {
-    $conn = new SoapClient('http://gate.smsclub.mobi/soap/soapGateway.wsdl');
-    $login = '380978803826';    // строка, Логин пользователя (телефонный номер)
-    $password = '42dw7h6';        // строка, Пароль
-    $alphaName = 'StelsSoft';        // строка, Имя отправителя (альфа-имя) (пока Ваше альфа-имя не прописано, необходимо использовать это)
-    $text = 'Тест рассылки по протоколу soap';    // строка, Текст сообщения
-    // Отправка одиночного сообщения
-    $destAddr = '380978803826';    // строка, Номер получателя
-    try
-    {
-    $smscIds = $conn->sendSms($login,$password,$alphaName,$destAddr, iconv(mb_detect_encoding($text, mb_detect_order(), true), "UTF-8", $text));
-    }
-    catch (SoapFault $exception)
-    {
-             echo $exception;
-    }
-//    // $smscIds - список SMSCID, назначенных сервером (используется для проверки статуса сообщения), действителен в течении 3х дней
-//    // в данном случае состоит из одного элемента
-//    // Отправка массового сообщения
-//    $list = array('(050)123-45-67','(063)1234567','380661234567','0671234567','095-123-45-67','+380(99)123-45-67');          //список номеров в произвольном формате
-//    try
-//    {
-//             $smscIds = $conn->sendSms($login,$password,$alphaName,$list,$text);
-//    }
-//    catch (SoapFault $exception)
-//    {
-//             echo $exception;
-//    }
-//    // Получение отчета о состоянии сообщений
-//    $smscIds = array(1234,3212,2256);    // целое число/строка/массив строк/целых - список SMSCID, полученных при отправке сообщения
-//    try
-//    {
-//             $reports = $conn->getReports($login,$password,$smscIds);
-//    }
-//    catch (SoapFault $exception)
-//    {
-//             echo $exception;
-//    }
-         // $reports - ассоциативный массив вида SMSCID => статус сообщения (ENROUTE/DELIVRD/ACCEPTD/UNDELIV/REJECTD/DELETED)    
-    }
-  //Пример отображения результата модуля
+
   function view_mod()
     {
     //$this->errors->setError("Index not Exist!!!");
@@ -54,7 +13,7 @@ class IndexController extends Controller
   function view_page()
     {
     //$_SESSION['user_gid'] = -1;
-//    $this->debuger->debug("Очень простое сообщение на консоль");
+//    $this->debuger->debug("РћС‡РµРЅСЊ РїСЂРѕСЃС‚РѕРµ СЃРѕРѕР±С‰РµРЅРёРµ РЅР° РєРѕРЅСЃРѕР»СЊ");
 //    $this->debuger->debug("object", $this);
     $obj1 = $this->test->getObjectsList(array('arg1'=>'1'), array('arg2'=>'asc'), $offset);
     
@@ -79,13 +38,13 @@ class IndexController extends Controller
     $this->viewPage();
     }
 
-  //Пример приема параметров через аргументы метода
+  //РџСЂРёРјРµСЂ РїСЂРёРµРјР° РїР°СЂР°РјРµС‚СЂРѕРІ С‡РµСЂРµР· Р°СЂРіСѓРјРµРЅС‚С‹ РјРµС‚РѕРґР°
   function view_arg($a='1', $b=2, $c=4, $n='0')
     {
     echo $a.$b.$c.$n;
     }
     
-  //Пример работы с доступом
+  //РџСЂРёРјРµСЂ СЂР°Р±РѕС‚С‹ СЃ РґРѕСЃС‚СѓРїРѕРј
   function view_access()
     {
     //$this->errors->setError("Index not Exist!!!");
@@ -94,32 +53,32 @@ class IndexController extends Controller
     $this->view();
     }
    
-  //Пример работы с доступом
+  //РџСЂРёРјРµСЂ СЂР°Р±РѕС‚С‹ СЃ РґРѕСЃС‚СѓРїРѕРј
   function view_error()
     {
     $this->errors->setError("This is Error!!!");
     }  
     
-  //Пример получения объекта по его ИД  
+  //РџСЂРёРјРµСЂ РїРѕР»СѓС‡РµРЅРёСЏ РѕР±СЉРµРєС‚Р° РїРѕ РµРіРѕ РР”  
   function view_object($guid=0)
     {
     print_r($this->test->getObject($guid));
-    $this->debuger->debug('Привет');
+    $this->debuger->debug('РџСЂРёРІРµС‚');
     }
   
-  //Пример получения списка объектов  
+  //РџСЂРёРјРµСЂ РїРѕР»СѓС‡РµРЅРёСЏ СЃРїРёСЃРєР° РѕР±СЉРµРєС‚РѕРІ  
   function view_objects($offset=0)
     {
     print_r($this->test->getObjectsList(array('arg1'=>'1'), array('arg2'=>'asc'), $offset));
     }
   
-  //Пример удаления объекта по его ИД
+  //РџСЂРёРјРµСЂ СѓРґР°Р»РµРЅРёСЏ РѕР±СЉРµРєС‚Р° РїРѕ РµРіРѕ РР”
   function delete_object($id=0)
     {
     $this->test->deleteObject($id);
     }
   
-  //Пример обновления объекта по его ИД
+  //РџСЂРёРјРµСЂ РѕР±РЅРѕРІР»РµРЅРёСЏ РѕР±СЉРµРєС‚Р° РїРѕ РµРіРѕ РР”
   function update_object($a='1', $b=2, $c=4, $n='0')
     {
     //echo $this->test->sum(6,8);
@@ -161,7 +120,7 @@ class IndexController extends Controller
     echo $this->session->getVar('rus', '22');
     }
     
-  //Пример момещения данніх в сессию  
+  //РџСЂРёРјРµСЂ РјРѕРјРµС‰РµРЅРёСЏ РґР°РЅРЅС–С… РІ СЃРµСЃСЃРёСЋ  
   function set_session($a='hello')
     {
     $this->session->setVar('rus', $a);
@@ -169,46 +128,46 @@ class IndexController extends Controller
     echo $this->session->getVar('rus', '22');
     }
     
-  //Пример получения данных из сессии  
+  //РџСЂРёРјРµСЂ РїРѕР»СѓС‡РµРЅРёСЏ РґР°РЅРЅС‹С… РёР· СЃРµСЃСЃРёРё  
   function get_session($default_val='this is default')
     {
     echo $this->session->getVar('rus', $default_val);
     }
     
-  //Пример пользовательского сообщения  
+  //РџСЂРёРјРµСЂ РїРѕР»СЊР·РѕРІР°С‚РµР»СЊСЃРєРѕРіРѕ СЃРѕРѕР±С‰РµРЅРёСЏ  
   function view_message($default_val='this is message')
     {
     $this->showMessage($default_val, '/index.php?module=test&action=validForm');
     }
     
-  //Пример получения текущего урла и предыдущего 
+  //РџСЂРёРјРµСЂ РїРѕР»СѓС‡РµРЅРёСЏ С‚РµРєСѓС‰РµРіРѕ СѓСЂР»Р° Рё РїСЂРµРґС‹РґСѓС‰РµРіРѕ 
   function view_urls()
     {
     echo 'url = '.$this->URL.'<br>';
     echo 'prev_url = '.$this->prevURL.'<br>';
     }
    
-  //Пример редиректа 
+  //РџСЂРёРјРµСЂ СЂРµРґРёСЂРµРєС‚Р° 
   function view_redirect()
     {
     $this->redirect('/index.php?module=test&action=view_page');
     }
 
-  //Пример работы формы пример отображения формы 
+  //РџСЂРёРјРµСЂ СЂР°Р±РѕС‚С‹ С„РѕСЂРјС‹ РїСЂРёРјРµСЂ РѕС‚РѕР±СЂР°Р¶РµРЅРёСЏ С„РѕСЂРјС‹ 
   function validForm()
     {
     echo stripslashes("KIOSQUE 31 L\'ESCALE BLEUE - Constitution de soci?t? : EURL");
     $this->view();
     }
 
-  //Пример работы формы пример получения результатов, валидации данных  
+  //РџСЂРёРјРµСЂ СЂР°Р±РѕС‚С‹ С„РѕСЂРјС‹ РїСЂРёРјРµСЂ РїРѕР»СѓС‡РµРЅРёСЏ СЂРµР·СѓР»СЊС‚Р°С‚РѕРІ, РІР°Р»РёРґР°С†РёРё РґР°РЅРЅС‹С…  
   function valid()
     {
     print_r($this->getPostData(array('lastname'=>'required min(2) max(6)', 'email'=>'email')));
     print_r($this->getPostData(array('lastname'=>'required min(2) max(6)')));
     }
     
-  //Пример преобразования массива в поля объекта
+  //РџСЂРёРјРµСЂ РїСЂРµРѕР±СЂР°Р·РѕРІР°РЅРёСЏ РјР°СЃСЃРёРІР° РІ РїРѕР»СЏ РѕР±СЉРµРєС‚Р°
   function array_to_obj()
     {
     $test_array = array('name'=>'ruslan_test', 'telephone'=>'111112222');
@@ -219,13 +178,13 @@ class IndexController extends Controller
     
     $this->redirect('/index.php?module=test&action=array_to_obj_view&id='.$id);
     }
-  //Пример преобразования массива в поля объекта
+  //РџСЂРёРјРµСЂ РїСЂРµРѕР±СЂР°Р·РѕРІР°РЅРёСЏ РјР°СЃСЃРёРІР° РІ РїРѕР»СЏ РѕР±СЉРµРєС‚Р°
   function array_to_obj_view($guid)
     {
     print_r($this->test->getObject($guid));
     }
     
-   //Пример преобразования массива в поля объекта
+   //РџСЂРёРјРµСЂ РїСЂРµРѕР±СЂР°Р·РѕРІР°РЅРёСЏ РјР°СЃСЃРёРІР° РІ РїРѕР»СЏ РѕР±СЉРµРєС‚Р°
   function view_debugs()
     {
     $this->a = 2;

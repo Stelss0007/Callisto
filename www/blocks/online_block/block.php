@@ -2,22 +2,22 @@
 
 function online_block_display($blockinfo)
   {
-  //Ïğåëşäèå êàê ó âñåõ
+  //ĞŸÑ€ĞµĞ»ÑĞ´Ğ¸Ğµ ĞºĞ°Ğº Ñƒ Ğ²ÑĞµÑ…
   $sysObject = 'online_block::display::'.$blockinfo['id'];
   $sysModTpl = sysTplWay ($sysObject);
 
-  //Ïğîâåğêà íà äîñòóï
+  //ĞŸÑ€Ğ¾Ğ²ĞµÑ€ĞºĞ° Ğ½Ğ° Ğ´Ğ¾ÑÑ‚ÑƒĞ¿
   if (!sysSecAuthAction($sysObject, ACCESS_READ)) return true;
 
   $sysTpl = new sysTpl;
-  $sysTpl->cache_lifetime = 900; //Âğåìÿ îáíîâëåíèÿ 5 ìèí
+  $sysTpl->cache_lifetime = 900; //Ğ’Ñ€ĞµĞ¼Ñ Ğ¾Ğ±Ğ½Ğ¾Ğ²Ğ»ĞµĞ½Ğ¸Ñ 5 Ğ¼Ğ¸Ğ½
 
-  //Ïğèâÿçêà êåøà èäåò ê $uid
+  //ĞŸÑ€Ğ¸Ğ²ÑĞ·ĞºĞ° ĞºĞµÑˆĞ° Ğ¸Ğ´ĞµÑ‚ Ğº $uid
   $uid = sysSessionGetVar ('user_id');
 
   if($sysTpl->is_cached($sysModTpl,$sysObject.'::'.$uid))
     {
-    //Âîçâğàùàåì
+    //Ğ’Ğ¾Ğ·Ğ²Ñ€Ğ°Ñ‰Ğ°ĞµĞ¼
     $result['block_content'] =& $sysTpl->fetch($sysModTpl,$sysObject.'::'.$uid);
     return $result;
     };
@@ -27,16 +27,16 @@ function online_block_display($blockinfo)
   $num_guests=0;
   $num_users=0;
 
-  //Âûãğåáàåì ñïèñîê ñåññèé ñ äèñêà ãäå äàòà áîëüøå $activetime
+  //Ğ’Ñ‹Ğ³Ñ€ĞµĞ±Ğ°ĞµĞ¼ ÑĞ¿Ğ¸ÑĞ¾Ğº ÑĞµÑÑĞ¸Ğ¹ Ñ Ğ´Ğ¸ÑĞºĞ° Ğ³Ğ´Ğµ Ğ´Ğ°Ñ‚Ğ° Ğ±Ğ¾Ğ»ÑŒÑˆĞµ $activetime
   $session_table = sysDBGetTable('session');
   $session_column = sysDBGetColumns($session_table);
 
-  //Ãîñòè
+  //Ğ“Ğ¾ÑÑ‚Ğ¸
   $sql = "SELECT COUNT(*) AS num_guests
             FROM $session_table
             WHERE $session_column[lastused] > '$activetime' AND
             			$session_column[user_gid] < '1'";
-  //Ëîãèğóåì âûáîğêó
+  //Ğ›Ğ¾Ğ³Ğ¸Ñ€ÑƒĞµĞ¼ Ğ²Ñ‹Ğ±Ğ¾Ñ€ĞºÑƒ
   global $dbg_sql_queries;
   $dbg_sql_queries[] = array('sql_query'=>$sql);
 	$mysql_result = sysDBQuery($sql);
@@ -45,12 +45,12 @@ function online_block_display($blockinfo)
   mysql_free_result($mysql_result);
   $num_guests=$sess_dbdate['num_guests'];
 
-  //Ïîëüçîâàòåëè
+  //ĞŸĞ¾Ğ»ÑŒĞ·Ğ¾Ğ²Ğ°Ñ‚ĞµĞ»Ğ¸
   $sql = "SELECT COUNT(*) AS num_users
             FROM $session_table
             WHERE $session_column[lastused] > '$activetime' AND
             			$session_column[user_gid] > '0'";
-  //Ëîãèğóåì âûáîğêó
+  //Ğ›Ğ¾Ğ³Ğ¸Ñ€ÑƒĞµĞ¼ Ğ²Ñ‹Ğ±Ğ¾Ñ€ĞºÑƒ
   global $dbg_sql_queries;
   $dbg_sql_queries[] = array('sql_query'=>$sql);
 	$mysql_result = sysDBQuery($sql);
@@ -59,7 +59,7 @@ function online_block_display($blockinfo)
   mysql_free_result($mysql_result);
   $num_users=$sess_dbdate['num_users'];
 
-  //Ïğîâåğêà åñëè îáà â 0 òî ..
+  //ĞŸÑ€Ğ¾Ğ²ĞµÑ€ĞºĞ° ĞµÑĞ»Ğ¸ Ğ¾Ğ±Ğ° Ğ² 0 Ñ‚Ğ¾ ..
   if (($num_users==0) and ($num_guests==0))
     {
     if (sysUserIsLoggedIn())
@@ -75,7 +75,7 @@ function online_block_display($blockinfo)
   $sysTpl->assign('num_users', $num_users);
   $sysTpl->assign('num_guests', $num_guests);
 
-  //Ïåğåìåííûå ïîëüçîâàòåëÿ
+  //ĞŸĞµÑ€ĞµĞ¼ĞµĞ½Ğ½Ñ‹Ğµ Ğ¿Ğ¾Ğ»ÑŒĞ·Ğ¾Ğ²Ğ°Ñ‚ĞµĞ»Ñ
   $user_vars = sysUserGetVars();
   $sysTpl->assign('user_vars', $user_vars);
 

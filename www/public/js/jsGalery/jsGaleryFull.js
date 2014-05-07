@@ -53,7 +53,7 @@ this.scroll(((this.options.wrap=='both'||this.options.wrap=='first')&&this.optio
  	var defaults = {
 		autoPlay: true,
 		speed: 5000,
-		text: { play: "Играть", stop: "Стоп", previous: "Назад", next: "Далее" },
+		text: { play: "РРіСЂР°С‚СЊ", stop: "РЎС‚РѕРї", previous: "РќР°Р·Р°Рґ", next: "Р”Р°Р»РµРµ" },
 		transition:[1],
 		showCaption: true,
 		IESafe: false,
@@ -160,7 +160,7 @@ this.scroll(((this.options.wrap=='both'||this.options.wrap=='first')&&this.optio
 			this.image 		= $("<img>").appendTo(this.wrap);
 			this.anchor		= this.image.wrap("<a>").parent();
 			this.imgNav 	= $("<div class='pika-imgnav'></div>").insertAfter(this.anchor);
-			this.imgPlay 	= $("<a>Проиграть</a>").appendTo(this.textNav);
+			this.imgPlay 	= $("<a>РџСЂРѕРёРіСЂР°С‚СЊ</a>").appendTo(this.textNav);
 			this.counter 	= $("<span class='pika-counter'></span>").appendTo(this.imgNav);
 			if(this.options.autoPlay){ this.imgPlay.addClass('pause'); }else{ this.imgPlay.addClass('play'); }
 			this.imgPrev 	= $("<a class='previous'></a>").insertAfter(this.imgPlay);

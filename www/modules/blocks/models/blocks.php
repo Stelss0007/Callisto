@@ -50,19 +50,19 @@ class Blocks extends Model
     
   function install($block_name, $input_position = 'l')
     {
-    $position['l']='Слева';
-    $position['r']='Справа';
-    $position['t']='Сверху';
-    $position['b']='Снизу';
-    $position['c']='Поцентру';
+    $position['l']='РЎР»РµРІР°';
+    $position['r']='РЎРїСЂР°РІР°';
+    $position['t']='РЎРІРµСЂС…Сѓ';
+    $position['b']='РЎРЅРёР·Сѓ';
+    $position['c']='РџРѕС†РµРЅС‚СЂСѓ';
 
     $position = $position[$input_position];
     if(empty ($position)) 
-      die('Неизвестная позиция!');
+      die('РќРµРёР·РІРµСЃС‚РЅР°СЏ РїРѕР·РёС†РёСЏ!');
     
-    //Взяли список с диска
+    //Р’Р·СЏР»Рё СЃРїРёСЃРѕРє СЃ РґРёСЃРєР°
     if(!file_exists ("blocks/$block_name/info.php")) 
-      die ('Отсутствует блок!');
+      die ('РћС‚СЃСѓС‚СЃС‚РІСѓРµС‚ Р±Р»РѕРє!');
 
     // Found
     $info = array();

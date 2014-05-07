@@ -71,11 +71,11 @@ class AdminController extends Controller
 //          {
 //          $this->groups->group_delete($id);
 //          }
-//        $this->showMessage("Элементы успешно удалены");
+//        $this->showMessage("Р­Р»РµРјРµРЅС‚С‹ СѓСЃРїРµС€РЅРѕ СѓРґР°Р»РµРЅС‹");
 //        break;
 //      case 'activate':
 //          $this->groups->user_group_active($data['entities']);
-//          $this->showMessage("Элементы успешно удалены");
+//          $this->showMessage("Р­Р»РµРјРµРЅС‚С‹ СѓСЃРїРµС€РЅРѕ СѓРґР°Р»РµРЅС‹");
 //        break;
 //
 //      default:

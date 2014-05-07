@@ -1,4 +1,4 @@
-<html xmlns="http://www.w3.org/1999/xhtml">
+п»ї<html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <title>{$module_page_title}</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8;charset=utf-8" />
@@ -17,18 +17,18 @@
       <table class='siteheader'>
         <tr>
           <td>
-            <a class='logo-winter' href='/index.php' title='SEOSPRINT - Всё для максимальной раскрутки!'></a>
+            <a class='logo-winter' href='/index.php' title='SEOSPRINT - Р’СЃС‘ РґР»СЏ РјР°РєСЃРёРјР°Р»СЊРЅРѕР№ СЂР°СЃРєСЂСѓС‚РєРё!'></a>
           </td>
           <td align='right' valign='bottom' nowrap='nowrap'>
             <div id='cartvisible'></div>
           </td>
           <td align='left' valign='bottom' nowrap='nowrap' width='150'>
             <div class='nameblock'>
-              <span class='nbtitle'>Добро пожаловать</span>
-              Имя: <b>Руслан</b>
+              <span class='nbtitle'>Р”РѕР±СЂРѕ РїРѕР¶Р°Р»РѕРІР°С‚СЊ</span>
+              РРјСЏ: <b>Р СѓСЃР»Р°РЅ</b>
               <br />
               ID: 580312,
-              Статус: <a style='color: #C08B06' href='/addphone.php'>Активировать аккаунт</a>
+              РЎС‚Р°С‚СѓСЃ: <a style='color: #C08B06' href='/addphone.php'>РђРєС‚РёРІРёСЂРѕРІР°С‚СЊ Р°РєРєР°СѓРЅС‚</a>
             </div>
           </td>
           <td align='right' valign='bottom' width='90' nowrap='nowrap'>
@@ -41,33 +41,33 @@
           <td colspan='3'>
             <ul class='mainmenu'>
               <li>
-                <a href='' class='active'>Главная</a>
+                <a href='' class='active'>Р“Р»Р°РІРЅР°СЏ</a>
               </li>
               <li>
-                <a href='/index.php?module=article&type=user&func=article_view&id=17'>О портале</a>
+                <a href='/index.php?module=article&type=user&func=article_view&id=17'>Рћ РїРѕСЂС‚Р°Р»Рµ</a>
               </li>
               <li>
-                <a href=''>Технология сервиса</a>
+                <a href=''>РўРµС…РЅРѕР»РѕРіРёСЏ СЃРµСЂРІРёСЃР°</a>
               </li>
               <li>
-                <a href=''>Партнерам</a>
+                <a href=''>РџР°СЂС‚РЅРµСЂР°Рј</a>
               </li>
               <li>
-                <a href=''>Статьи</a>
+                <a href=''>РЎС‚Р°С‚СЊРё</a>
               </li>
               <li>
-                <a href=''>Выплаты</a>
+                <a href=''>Р’С‹РїР»Р°С‚С‹</a>
               </li>
               <li>
-                <a href=''>Форум</a>
+                <a href=''>Р¤РѕСЂСѓРј</a>
               </li>
               <li>
-                <a href=''>Помощь</a>
+                <a href=''>РџРѕРјРѕС‰СЊ</a>
               </li>
             </ul>
           </td>
           <td valign='top'>
-            <a class='logout' href='' title='Выход'></a>
+            <a class='logout' href='' title='Р’С‹С…РѕРґ'></a>
           </td>
         </tr>
       </table>
@@ -76,46 +76,46 @@
       <table class="site">
         <tr>
           <td class="fblock">
-            <span class='sbtitle'>Меню пользователя</span>
+            <span class='sbtitle'>РњРµРЅСЋ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ</span>
             <div class='usermenu'>
               <span id='mnu_title1' class='usermnutitle-g'>
-                Зарабатывать
+                Р—Р°СЂР°Р±Р°С‚С‹РІР°С‚СЊ
               </span>
               <div id='mnu_tblock1' class='usermnublock'>
                 <span class='usermnudelim'></span>
-                <a class='usermnuline' href="?page=main">Главная</a>
-                <a class='usermnuline' href="index.php?module=user&func=login">Вход</a>
+                <a class='usermnuline' href="?page=main">Р“Р»Р°РІРЅР°СЏ</a>
+                <a class='usermnuline' href="index.php?module=user&func=login">Р’С…РѕРґ</a>
                 <a class='usermnuline' href="index.php?module=test">Test</a>
-                <a class='usermnuline' href="index.php?module=article&type=admin&func=article_new">Создать статью</a>
-                <a class='usermnuline' href="index.php?module=article&type=user&func=article_list">Статьи</a>
-                <a class='usermnuline' href="index.php?module=groups&type=admin">Группы пользователей</a>
-                <a class='usermnuline' href="index.php?module=user&type=admin&func=user_list">Пользователи</a>
-                <a class='usermnuline-act' href="index.php?module=blocks&type=admin">Блоки</a>
+                <a class='usermnuline' href="index.php?module=article&type=admin&func=article_new">РЎРѕР·РґР°С‚СЊ СЃС‚Р°С‚СЊСЋ</a>
+                <a class='usermnuline' href="index.php?module=article&type=user&func=article_list">РЎС‚Р°С‚СЊРё</a>
+                <a class='usermnuline' href="index.php?module=groups&type=admin">Р“СЂСѓРїРїС‹ РїРѕР»СЊР·РѕРІР°С‚РµР»РµР№</a>
+                <a class='usermnuline' href="index.php?module=user&type=admin&func=user_list">РџРѕР»СЊР·РѕРІР°С‚РµР»Рё</a>
+                <a class='usermnuline-act' href="index.php?module=blocks&type=admin">Р‘Р»РѕРєРё</a>
                 <span class='usermnudelim'></span>
               </div>
 
-              <span id='mnu_title3' class='usermnutitle-b'>Личный кабинет</span>
+              <span id='mnu_title3' class='usermnutitle-b'>Р›РёС‡РЅС‹Р№ РєР°Р±РёРЅРµС‚</span>
               <div id='mnu_tblock3' class='usermnublock'>
                 <span class='usermnudelim'></span>
-                <a class='usermnuline' href='/advmanager.php'>Управление рекламой
+                <a class='usermnuline' href='/advmanager.php'>РЈРїСЂР°РІР»РµРЅРёРµ СЂРµРєР»Р°РјРѕР№
                   <span class='usermnuline-none'></span></a>
                 <a class='usermnuline' href='/mails.php'>
-                  Моя почта<span class='usermnuline-mail'>0</span>
+                  РњРѕСЏ РїРѕС‡С‚Р°<span class='usermnuline-mail'>0</span>
                 </a>
-                <a class='usermnuline' href='/refs.php'>Мои рефералы
+                <a class='usermnuline' href='/refs.php'>РњРѕРё СЂРµС„РµСЂР°Р»С‹
                   <span class='usermnuline-ref'>0</span>
                 </a>
-                <a class='usermnuline' href='/promo.php'>Пригласить рефералов</a>
-                <a class='usermnuline' href='/refwelcome.php'>Приветствие и авторефбек</a>
-                <a class='usermnuline' href='/stat.php'>Моя статистика</a>
-                <a class='usermnuline' href='/history.php'>История операций</a>
-                <a class='usermnuline' href='/profile.php'>Мои личные данные</a>
+                <a class='usermnuline' href='/promo.php'>РџСЂРёРіР»Р°СЃРёС‚СЊ СЂРµС„РµСЂР°Р»РѕРІ</a>
+                <a class='usermnuline' href='/refwelcome.php'>РџСЂРёРІРµС‚СЃС‚РІРёРµ Рё Р°РІС‚РѕСЂРµС„Р±РµРє</a>
+                <a class='usermnuline' href='/stat.php'>РњРѕСЏ СЃС‚Р°С‚РёСЃС‚РёРєР°</a>
+                <a class='usermnuline' href='/history.php'>РСЃС‚РѕСЂРёСЏ РѕРїРµСЂР°С†РёР№</a>
+                <a class='usermnuline' href='/profile.php'>РњРѕРё Р»РёС‡РЅС‹Рµ РґР°РЅРЅС‹Рµ</a>
                 <a class='usermnuline' href='/withdraw.php'>
-                  <b>Получить деньги</b></a>
+                  <b>РџРѕР»СѓС‡РёС‚СЊ РґРµРЅСЊРіРё</b></a>
                 <span class='usermnudelim'></span>
               </div>
 
-              {* Левая часть *}
+              {* Р›РµРІР°СЏ С‡Р°СЃС‚СЊ *}
               {if $blocks.left}
                 {foreach item=block from=$blocks.left}
                  <span id='mnu_title1' class='usermnutitle-g'>
@@ -130,11 +130,11 @@
                 </div>
                 {/foreach}
               {/if}
-            {* End левая часть*}
+            {* End Р»РµРІР°СЏ С‡Р°СЃС‚СЊ*}
             </div>
 
-            <span class='sbtitle'>Мой баланс</span>
-            <div class='balance-block' title='Баланс пользователя'>0.00 <span class='text12'>руб</span>
+            <span class='sbtitle'>РњРѕР№ Р±Р°Р»Р°РЅСЃ</span>
+            <div class='balance-block' title='Р‘Р°Р»Р°РЅСЃ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ'>0.00 <span class='text12'>СЂСѓР±</span>
             </div>
           </td>
 
@@ -153,9 +153,9 @@
        </td>
       <td class="fblock">
 
-        <span class="sbtitle">Выбор заданий</span>
+        <span class="sbtitle">Р’С‹Р±РѕСЂ Р·Р°РґР°РЅРёР№</span>
         <div class="usermenu">
-          {* Левая часть *}
+          {* Р›РµРІР°СЏ С‡Р°СЃС‚СЊ *}
           {if $blocks.right}
             {foreach item=block from=$blocks.right}
              <span id='mnu_title1' class='usermnutitle-g'>
@@ -170,10 +170,10 @@
             </div>
             {/foreach}
           {/if}
-        {* End левая часть*}
+        {* End Р»РµРІР°СЏ С‡Р°СЃС‚СЊ*}
           
         </div>
-        <span class="sbtitle">Наши здесь</span>
+        <span class="sbtitle">РќР°С€Рё Р·РґРµСЃСЊ</span>
         <table class="soc-table">
           <tr>
             <td><a class="soc-twitter" target='_blank' href="http://twitter.com/#!/seo_sprint"></a></td>
@@ -199,25 +199,25 @@
           <img src='/images/88x31_wm_blue_on_white_ru.png' alt='www.megastock.ru' />
         </a>
         <a href='https://passport.webmoney.ru/asp/certview.asp?wmid=293160119471' target='_blank' style='margin-left: 2px; border: none;'>
-            <img src='/images/88x31_wm_v_blue_on_white_ru.png' alt='Здесь находится аттестат нашего WM идентификатора 293160119471' />
+            <img src='/images/88x31_wm_v_blue_on_white_ru.png' alt='Р—РґРµСЃСЊ РЅР°С…РѕРґРёС‚СЃСЏ Р°С‚С‚РµСЃС‚Р°С‚ РЅР°С€РµРіРѕ WM РёРґРµРЅС‚РёС„РёРєР°С‚РѕСЂР° 293160119471' />
         </a>
 
         <div class="footermenu">
-          <a href="/policy.php">Услуги и порядок оплаты</a>&nbsp;&sdot;&nbsp;
-          <a href="/codex.php">Админкодекс</a>&nbsp;&sdot;&nbsp;
+          <a href="/policy.php">РЈСЃР»СѓРіРё Рё РїРѕСЂСЏРґРѕРє РѕРїР»Р°С‚С‹</a>&nbsp;&sdot;&nbsp;
+          <a href="/codex.php">РђРґРјРёРЅРєРѕРґРµРєСЃ</a>&nbsp;&sdot;&nbsp;
 
-          <a href="/black-links.php">Чёрный список</a>&nbsp;&sdot;&nbsp;
-          <a href="/userinfo.php">Пользователи</a>&nbsp;&sdot;&nbsp;
-          <a href="/forum/index.php">Форум</a>&nbsp;&sdot;&nbsp;
-          <a href="/contact.php">Контакты</a>
+          <a href="/black-links.php">Р§С‘СЂРЅС‹Р№ СЃРїРёСЃРѕРє</a>&nbsp;&sdot;&nbsp;
+          <a href="/userinfo.php">РџРѕР»СЊР·РѕРІР°С‚РµР»Рё</a>&nbsp;&sdot;&nbsp;
+          <a href="/forum/index.php">Р¤РѕСЂСѓРј</a>&nbsp;&sdot;&nbsp;
+          <a href="/contact.php">РљРѕРЅС‚Р°РєС‚С‹</a>
           <br />
-          Всего пользователей:
+          Р’СЃРµРіРѕ РїРѕР»СЊР·РѕРІР°С‚РµР»РµР№:
           <font color='#114C5B'>380 272</font>
-          &hellip; Новых за 24 часа:
+          &hellip; РќРѕРІС‹С… Р·Р° 24 С‡Р°СЃР°:
           <font color='#114C5B'>2116</font>
           &hellip;
-          Всего выплачено:
-          <font color='#114C5B'>6 554 694.83</font> руб
+          Р’СЃРµРіРѕ РІС‹РїР»Р°С‡РµРЅРѕ:
+          <font color='#114C5B'>6 554 694.83</font> СЂСѓР±
         </div>
 
       </div>

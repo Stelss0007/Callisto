@@ -13,10 +13,10 @@
 
     <tbody>
       <tr>
-        <td class="head" align="right">ß èùó:</td>
+        <td class="head" align="right">Ð¯ Ð¸Ñ‰Ñƒ:</td>
         <td class="even">
          <input maxLength="255" size="80" name="search_string">&nbsp;&nbsp;
-         <input class="formButton" type="submit" value="Èñêàòü" name="submit">
+         <input class="formButton" type="submit" value="Ð˜ÑÐºÐ°Ñ‚ÑŒ" name="submit">
         </td>
       </tr>
     </tbody>
@@ -36,7 +36,7 @@
             </tr>
             <tr>
               <td align="center">
-                <input type="submit" value="Èñêàòü">
+                <input type="submit" value="Ð˜ÑÐºÐ°Ñ‚ÑŒ">
               </td>
             </tr>
         </table>

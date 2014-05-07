@@ -18,7 +18,7 @@
 		"Remove Formatting": "Verwijder opmaak",
 		"Cut": "Knippen",
 		"Your browser does not allow the cut command. Please use the keyboard shortcut Ctrl/Cmd-X": "Je browser staat het knippen commando niet toe. Gebruik de toetsenbord sneltoets Ctrl / Cmd-X",
-		"Copy": "Kopiëren",
+		"Copy": "KopiГ«ren",
 		"Your browser does not allow the copy command. Please use the keyboard shortcut Ctrl/Cmd-C": "Je browser staat het kopieer commando niet toe. Gebruik de toetsenbord sneltoets Ctrl / Cmd-C",
 		"Paste": "Plakken",
 		"Your browser does not allow the paste command. Please use the keyboard shortcut Ctrl/Cmd-V": "Je browser staat het plakken commando niet toe. Gebruik de toetsenbord sneltoets  Ctrl / Cmd-V",

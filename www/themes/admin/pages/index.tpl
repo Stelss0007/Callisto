@@ -1,18 +1,6 @@
-<!DOCTYPE html>
 <html>
     <head>
-        <!--
-                Charisma v1.0.0
-
-                Copyright 2012 Muhammad Usman
-                Licensed under the Apache License v2.0
-                http://www.apache.org/licenses/LICENSE-2.0
-
-                http://usman.it
-                http://twitter.com/halalit_usman
-        -->
-        {*<meta charset="utf-8">*}
-        <meta charset="windows-1251">
+        <meta charset="utf-8">
         <title>Administration</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="Charisma, a fully featured, responsive, HTML5, Bootstrap admin template.">

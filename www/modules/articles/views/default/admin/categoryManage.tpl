@@ -4,7 +4,7 @@
   <div class="row-fluid">
     <div class="box span12">
       <div class="box-header well" data-original-title>
-        <h2><i class="icon-edit"></i>  Менеджер категорий статей</h2>
+        <h2><i class="icon-edit"></i>  РњРµРЅРµРґР¶РµСЂ РєР°С‚РµРіРѕСЂРёР№ СЃС‚Р°С‚РµР№</h2>
         <div class="box-icon">
         </div>
       </div>
@@ -20,7 +20,7 @@
 
           <div class="box-content">
             <ul id="myTab" class="nav nav-tabs">
-              <li class="active"><a href="#info">Статья</a></li>
+              <li class="active"><a href="#info">РЎС‚Р°С‚СЊСЏ</a></li>
               <li><a href="#messages">SEO</a></li>
             </ul>
 
@@ -32,13 +32,13 @@
 
                 <div class="span2 form-vertical">
                   <div class="control-group">
-                    <label class="control-label" for="date01">Состояние: </label>
+                    <label class="control-label" for="date01">РЎРѕСЃС‚РѕСЏРЅРёРµ: </label>
                     <div class="controls">
                       <input data-no-uniform="true" type="checkbox" name="article_category_active" {if $article_category_active}checked="checked"{/if} value="1" class="iphone-toggle">
                     </div>
                   </div>
                   <div class="control-group">
-                    <label class="control-label" for="date01">Метки: </label>
+                    <label class="control-label" for="date01">РњРµС‚РєРё: </label>
                     <div class="controls">
                       <select name="article_category_tags" multiple data-rel="chosen">
                         {html_options options=$tags selected=$article_category_tags}
@@ -51,14 +51,14 @@
           
               <div id="messages" class="tab-pane">
                 <div class="control-group">
-                  <label class="control-label" for="date01">Мета-тег Description: </label>
+                  <label class="control-label" for="date01">РњРµС‚Р°-С‚РµРі Description: </label>
                   <div class="controls">
                     <textarea cols="700" rows="5" style="width: 700px;" name="article_category_meta_description">{$article_category_meta_description}</textarea>
                   </div>
                 </div>
                 
                 <div class="control-group">
-                  <label class="control-label" for="date01">Мета-тег Keywords: </label>
+                  <label class="control-label" for="date01">РњРµС‚Р°-С‚РµРі Keywords: </label>
                   <div class="controls">
                     <textarea cols="70" rows="5" style="width: 700px;" name="article_category_meta_keywords">{$article_category_meta_keywords}</textarea>
                   </div>

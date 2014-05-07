@@ -58,5 +58,5 @@
   </tbody>
 </table>
 <div style="text-align: center;">
-  [ <a href='/permissions/manage'>Добавить</a> ]
+  [ <a href='/permissions/manage'>Р”РѕР±Р°РІРёС‚СЊ</a> ]
 </div>

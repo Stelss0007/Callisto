@@ -110,4 +110,4 @@ class viewTpl extends Smarty
     }
 
   }
-?>
+

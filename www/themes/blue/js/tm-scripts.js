@@ -1,4 +1,4 @@
-/* panel */
+﻿/* panel */
 include('jquery.cookie.js');
 //----Include-Function----
 function include(url){ 

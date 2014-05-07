@@ -11,21 +11,21 @@
 
   <thead>
   <tr>
-    <th width="100%" align="center" colspan="2">Редактирование блока "{$block_name}"</th>
+    <th width="100%" align="center" colspan="2">Р РµРґР°РєС‚РёСЂРѕРІР°РЅРёРµ Р±Р»РѕРєР° "{$block_name}"</th>
   </tr>
   </thead>
 
   <tfoot>
   <tr>
     <td width="100%" align="center" class="foot" colspan="2">
-      <input type="submit" value="Сохранить" name="submit">
+      <input type="submit" value="РЎРѕС…СЂР°РЅРёС‚СЊ" name="submit">
     </th>
   </tr>
   </tfoot>
 
   <tbody>
   <tr>
-    <td width="20%" align="left" class="head">Название :</td>
+    <td width="20%" align="left" class="head">РќР°Р·РІР°РЅРёРµ :</td>
     <td width="80%" align="left" class="even">{$block_name}</td>
   </tr>
   <tr>
@@ -33,26 +33,26 @@
     <td width="80%" align="left" class="even">{$id}</td>
   </tr>
   <tr>
-    <td width="20%" align="left" class="head">Отображаемое название:</td>
+    <td width="20%" align="left" class="head">РћС‚РѕР±СЂР°Р¶Р°РµРјРѕРµ РЅР°Р·РІР°РЅРёРµ:</td>
     <td width="80%" align="left" class="even">
       <input type="text" name="block_displayname" size="50" value="{$block_displayname|escape}">
     </td>
   </tr>
   <tr>
-    <td width="20%" align="left" class="head">Маска :</td>
+    <td width="20%" align="left" class="head">РњР°СЃРєР° :</td>
     <td width="80%" align="left" class="even">
       <input type="text" name="block_pattern" size="50" value="{$block_pattern|escape}">
     </td>
   </tr>
   <tr>
-    <td width="20%" align="left" class="head">Положение :</td>
+    <td width="20%" align="left" class="head">РџРѕР»РѕР¶РµРЅРёРµ :</td>
     <td width="80%" align="left" class="even">
     <select name='block_position'>
       {html_options options=$positions selected=$block_position}</td>
     </select>
   </tr>
   <tr>
-    <td width="20%" align="left" class="head">CSS класс :</td>
+    <td width="20%" align="left" class="head">CSS РєР»Р°СЃСЃ :</td>
     <td width="80%" align="left" class="even">
       <input type="text" name="block_css_class" size="50" value="{$block_css_class|escape}">
     </td>

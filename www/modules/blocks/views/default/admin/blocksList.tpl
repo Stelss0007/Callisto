@@ -1,9 +1,9 @@
 {strip}
-  {******************************СЛЕВА*******************************************}
+  {******************************РЎР›Р•Р’Рђ*******************************************}
   <div class="row-fluid">		
     <div class="box span12">
       <div class="box-header well" data-original-title>
-        <h2><i class="icon-th"></i> Установленные блоки слева</h2>
+        <h2><i class="icon-th"></i> РЈСЃС‚Р°РЅРѕРІР»РµРЅРЅС‹Рµ Р±Р»РѕРєРё СЃР»РµРІР°</h2>
       </div>
       <div class="box-content">
         <form action="/admin/blocks/group_operation">
@@ -33,11 +33,11 @@
                 <th>
                   <input type="checkbox" name="entities[]" class="td_entiies_group" value="">
                 </th>
-                <th class="head" nowrap>Отображаемое имя</th>
-                <th class="head">Имя блока</th>
-                <th class="head">Маска</th>
-                <th class="head">Порядок</th>
-                <th class="head" style="width: 90px;">Действия</th>
+                <th class="head" nowrap>РћС‚РѕР±СЂР°Р¶Р°РµРјРѕРµ РёРјСЏ</th>
+                <th class="head">РРјСЏ Р±Р»РѕРєР°</th>
+                <th class="head">РњР°СЃРєР°</th>
+                <th class="head">РџРѕСЂСЏРґРѕРє</th>
+                <th class="head" style="width: 90px;">Р”РµР№СЃС‚РІРёСЏ</th>
               </tr>
             </thead>
 
@@ -67,7 +67,7 @@
 
                   <td class="{$class}" align="center" nowrap style="width: 120px;">
                     <div class="btn-group">
-                      {* Действия над блоком *}
+                      {* Р”РµР№СЃС‚РІРёСЏ РЅР°Рґ Р±Р»РѕРєРѕРј *}
                       {array name='url_vars'}
                       {array_append name='url_vars' key='id' value=$block.id}
                       {if $block.block_active}
@@ -91,12 +91,12 @@
   </div><!--/row-->
 
   <hr><br>
-  {******************************СПРАВА*******************************************}
+  {******************************РЎРџР РђР’Рђ*******************************************}
 
   <div class="row-fluid">		
     <div class="box span12">
       <div class="box-header well" data-original-title>
-        <h2><i class="icon-th"></i> Установленные блоки справа</h2>
+        <h2><i class="icon-th"></i> РЈСЃС‚Р°РЅРѕРІР»РµРЅРЅС‹Рµ Р±Р»РѕРєРё СЃРїСЂР°РІР°</h2>
       </div>
       <div class="box-content">
         <form action="/admin/blocks/group_operation">
@@ -127,11 +127,11 @@
                 <th>
                   <input type="checkbox" name="entities[]" class="td_entiies_group" value="">
                 </th>
-                <th class="head" nowrap>Отображаемое имя</th>
-                <th class="head">Имя блока</th>
-                <th class="head">Маска</th>
-                <th class="head">Порядок</th>
-                <th class="head">Действия</th>
+                <th class="head" nowrap>РћС‚РѕР±СЂР°Р¶Р°РµРјРѕРµ РёРјСЏ</th>
+                <th class="head">РРјСЏ Р±Р»РѕРєР°</th>
+                <th class="head">РњР°СЃРєР°</th>
+                <th class="head">РџРѕСЂСЏРґРѕРє</th>
+                <th class="head">Р”РµР№СЃС‚РІРёСЏ</th>
               </tr>
             </thead>
             <tbody>
@@ -162,7 +162,7 @@
 
                   <td class="{$class}" align="center" nowrap style="width: 120px;">
                     <div class="btn-group">
-                      {* Действия над блоком *}
+                      {* Р”РµР№СЃС‚РІРёСЏ РЅР°Рґ Р±Р»РѕРєРѕРј *}
                       {array name='url_vars'}
                       {array_append name='url_vars' key='id' value=$block.id}
                       {if $block.block_active}
@@ -186,12 +186,12 @@
   </div><!--/row-->
 
   <hr><br>
-  {******************************СВЕРХУ*******************************************}
+  {******************************РЎР’Р•Р РҐРЈ*******************************************}
 
   <div class="row-fluid">		
     <div class="box span12">
       <div class="box-header well" data-original-title>
-        <h2><i class="icon-th"></i> Установленные блоки сверху</h2>
+        <h2><i class="icon-th"></i> РЈСЃС‚Р°РЅРѕРІР»РµРЅРЅС‹Рµ Р±Р»РѕРєРё СЃРІРµСЂС…Сѓ</h2>
       </div>
       <div class="box-content">
         <form action="/admin/blocks/group_operation">
@@ -222,11 +222,11 @@
                 <th>
                   <input type="checkbox" name="entities[]" class="td_entiies_group" value="">
                 </th>
-                <th class="head" nowrap>Отображаемое имя</th>
-                <th class="head">Имя блока</th>
-                <th class="head">Маска</th>
-                <th class="head">Порядок</th>
-                <th class="head">Действия</th>
+                <th class="head" nowrap>РћС‚РѕР±СЂР°Р¶Р°РµРјРѕРµ РёРјСЏ</th>
+                <th class="head">РРјСЏ Р±Р»РѕРєР°</th>
+                <th class="head">РњР°СЃРєР°</th>
+                <th class="head">РџРѕСЂСЏРґРѕРє</th>
+                <th class="head">Р”РµР№СЃС‚РІРёСЏ</th>
               </tr>
             </thead>
            
@@ -256,7 +256,7 @@
 
                   <td class="{$class}" align="center" nowrap  style="width: 120px;">
                     <div class="btn-group">
-                      {* Действия над блоком *}
+                      {* Р”РµР№СЃС‚РІРёСЏ РЅР°Рґ Р±Р»РѕРєРѕРј *}
                       {array name='url_vars'}
                       {array_append name='url_vars' key='id' value=$block.id}
                       {if $block.block_active}
@@ -282,13 +282,13 @@
 
   <hr><br>
 
-  {******************************СНИЗУ*******************************************}
+  {******************************РЎРќРР—РЈ*******************************************}
 
 
   <div class="row-fluid">		
     <div class="box span12">
       <div class="box-header well" data-original-title>
-        <h2><i class="icon-th"></i> Установленные блоки снизу</h2>
+        <h2><i class="icon-th"></i> РЈСЃС‚Р°РЅРѕРІР»РµРЅРЅС‹Рµ Р±Р»РѕРєРё СЃРЅРёР·Сѓ</h2>
       </div>
       <div class="box-content">
         <form action="/admin/blocks/group_operation">
@@ -319,11 +319,11 @@
                 <th>
                   <input type="checkbox" name="entities[]" class="td_entiies_group" value="">
                 </th>
-                <th class="head" nowrap>Отображаемое имя</th>
-                <th class="head">Имя блока</th>
-                <th class="head">Маска</th>
-                <th class="head">Порядок</th>
-                <th class="head">Действия</th>
+                <th class="head" nowrap>РћС‚РѕР±СЂР°Р¶Р°РµРјРѕРµ РёРјСЏ</th>
+                <th class="head">РРјСЏ Р±Р»РѕРєР°</th>
+                <th class="head">РњР°СЃРєР°</th>
+                <th class="head">РџРѕСЂСЏРґРѕРє</th>
+                <th class="head">Р”РµР№СЃС‚РІРёСЏ</th>
               </tr>
             </thead>
 
@@ -354,7 +354,7 @@
 
                   <td class="{$class}" align="center" nowrap  style="width: 120px;">
                     <div class="btn-group">
-                      {* Действия над блоком *}
+                      {* Р”РµР№СЃС‚РІРёСЏ РЅР°Рґ Р±Р»РѕРєРѕРј *}
                       {array name='url_vars'}
                       {array_append name='url_vars' key='id' value=$block.id}
                       {if $block.block_active}
@@ -379,12 +379,12 @@
 
 
   <hr><br>
-  {******************************ПОЦЕНТРУ****************************************}
+  {******************************РџРћР¦Р•РќРўР РЈ****************************************}
 
   <div class="row-fluid">		
     <div class="box span12">
       <div class="box-header well" data-original-title>
-        <h2><i class="icon-th"></i> Установленные блоки по центру</h2>
+        <h2><i class="icon-th"></i> РЈСЃС‚Р°РЅРѕРІР»РµРЅРЅС‹Рµ Р±Р»РѕРєРё РїРѕ С†РµРЅС‚СЂСѓ</h2>
       </div>
       <div class="box-content">
         <form action="/admin/blocks/group_operation">
@@ -414,11 +414,11 @@
                 <th>
                   <input type="checkbox" name="entities[]" class="td_entiies_group" value="">
                 </th>
-                <th class="head" nowrap>Отображаемое имя</th>
-                <th class="head">Имя блока</th>
-                <th class="head">Маска</th>
-                <th class="head">Порядок</th>
-                <th class="head">Действия</th>
+                <th class="head" nowrap>РћС‚РѕР±СЂР°Р¶Р°РµРјРѕРµ РёРјСЏ</th>
+                <th class="head">РРјСЏ Р±Р»РѕРєР°</th>
+                <th class="head">РњР°СЃРєР°</th>
+                <th class="head">РџРѕСЂСЏРґРѕРє</th>
+                <th class="head">Р”РµР№СЃС‚РІРёСЏ</th>
               </tr>
             </thead>
             <tbody>
@@ -448,7 +448,7 @@
 
                   <td class="{$class}" align="center" nowrap style="width: 120px;">
                     <div class="btn-group">
-                      {* Действия над блоком *}
+                      {* Р”РµР№СЃС‚РІРёСЏ РЅР°Рґ Р±Р»РѕРєРѕРј *}
                       {array name='url_vars'}
                       {array_append name='url_vars' key='id' value=$block.id}
                       {if $block.block_active}

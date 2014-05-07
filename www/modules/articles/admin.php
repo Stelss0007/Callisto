@@ -189,7 +189,12 @@ class AdminController extends Controller
                   $value['login'],
                   $value['active'],
                   $value['article_add_time'],
-                  '<input type="checkbox" name="entities[]" class="td_entities" value="'.$value['id'].'">'
+                  ''
+                  .(($value['article_active']) ? "<a href='/admin/articles/activation/{$value['id']}' onclick=\"return confirm('".$this->t('sys_confirm_deactivate')."')\" title='".$this->t('sys_disabled')."' class=\"btn btn-icon btn-pause\"><i class=\"icon-pause\"></i></a>" : 
+                  "<a href='/admin/articles/activation/{$value['id']}' onclick=\"return confirm('".$this->t('sys_confirm_activate')."')\" title='".$this->t('sys_enabled')."' class=\"btn btn-icon btn-play\"><i class=\"icon-play\"></i></a>")
+                  . "<a href='/admin/articles/article_manage/{$value['id']}' title='{$this->t('sys_edit')}' class='btn btn-icon btn-edit'><i class='icon-edit'></i></a>"
+                  . "<a href='/admin/articles/delete/{$value['id']}' title='".$this->t('sys_delete')."' class='btn btn-icon btn-delete'><i class='icon-trash'></i></a>"
+                    
                   );
             
       $result[$key] = $row;
@@ -201,8 +206,9 @@ class AdminController extends Controller
                     "iTotalDisplayRecords" => $totalCount,//count($result),
                     "aaData" => array_values($result)
                    );
+    //print_r($output);
     
-    echo json_encode( $output );
+    echo json_encode( $output, JSON_ERROR_UTF8 );
     }
   }
   

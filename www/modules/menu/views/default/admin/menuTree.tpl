@@ -1,4 +1,4 @@
-<h2>Меню</h2>
+<h2>РњРµРЅСЋ</h2>
 <table border='1' width='100%' cellspacing=0 cellpadding=4>
    <colgroup>
     <col width='340'>
@@ -9,16 +9,16 @@
   <thead>
     <tr>
       <th>
-        Название
+        РќР°Р·РІР°РЅРёРµ
       </th>
       <th>
-        Путь (URL)
+        РџСѓС‚СЊ (URL)
       </th>
       <th>
-        Порядок
+        РџРѕСЂСЏРґРѕРє
       </th>
       <th>
-        Действия
+        Р”РµР№СЃС‚РІРёСЏ
       </th>
    </tr>
   </thead>
@@ -53,5 +53,5 @@
   </tbody>
 </table>
 <div style="text-align: center;">
-  [ <a href='/menu/create{if $parent_id}/{$parent_id}{/if}'>Добавить</a> ]
+  [ <a href='/menu/create{if $parent_id}/{$parent_id}{/if}'>Р”РѕР±Р°РІРёС‚СЊ</a> ]
 </div>

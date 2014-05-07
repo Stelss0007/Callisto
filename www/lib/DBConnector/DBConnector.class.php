@@ -33,12 +33,12 @@ class DBConnector extends AppObject
       $this->Link_ID = mysql_connect($this->Host,
                       $this->User,
                       $this->Password);
-      mysql_set_charset('cp1251', $this->Link_ID);
+      mysql_set_charset('windows-1251', $this->Link_ID);
       //mysql_query("SET character_set_results = 'utf8', character_set_client = 'utf8', character_set_connection = 'utf8', character_set_database = 'utf8', character_set_server = 'utf8'", $this->Link_ID);
       $SelectResult = mysql_select_db($this->Database, $this->Link_ID);
       if (!$SelectResult)
         {
-        echo "Ошибка подключения "; die ('NOT CONNECT TO DB');
+        echo "Error Connect to DB "; die ('NOT CONNECT TO DB');
         }
       }
     }
@@ -109,11 +109,11 @@ class DBConnector extends AppObject
     
     if(!empty($appConfig['debug.enabled']))
       {
-      // Считываем текущее время
+      // РЎС‡РёС‚С‹РІР°РµРј С‚РµРєСѓС‰РµРµ РІСЂРµРјСЏ
       $current_time = microtime();
-      // Отделяем секунды от миллисекунд
+      // РћС‚РґРµР»СЏРµРј СЃРµРєСѓРЅРґС‹ РѕС‚ РјРёР»Р»РёСЃРµРєСѓРЅРґ
       $current_time = explode(" ",$current_time);
-      // Складываем секунды и миллисекунды
+      // РЎРєР»Р°РґС‹РІР°РµРј СЃРµРєСѓРЅРґС‹ Рё РјРёР»Р»РёСЃРµРєСѓРЅРґС‹
       $start_time = $current_time[1] + $current_time[0];
       }
  
@@ -122,12 +122,12 @@ class DBConnector extends AppObject
     
     if(!empty($appConfig['debug.enabled']))
       {
-      // То же, что и в 1 части
+      // РўРѕ Р¶Рµ, С‡С‚Рѕ Рё РІ 1 С‡Р°СЃС‚Рё
       $current_time = microtime();
       $current_time = explode(" ",$current_time);
       $current_time = $current_time[1] + $current_time[0];
 
-      // Вычисляем время выполнения скрипта
+      // Р’С‹С‡РёСЃР»СЏРµРј РІСЂРµРјСЏ РІС‹РїРѕР»РЅРµРЅРёСЏ СЃРєСЂРёРїС‚Р°
       $result_time = ($current_time - $start_time);
      
       $debug = Debuger::getInstance();
@@ -138,7 +138,7 @@ class DBConnector extends AppObject
     
     if(mysql_error())
       {
-      echo 'Ошибка запроса:<br><pre>';
+      echo 'РћС€РёР±РєР° Р·Р°РїСЂРѕСЃР°:<br><pre>';
       echo '<b>'.$valid_sql.'</b>'.'<br><br>';
       echo '<font color="red">';
       print_r(mysql_error());
@@ -165,7 +165,7 @@ class DBConnector extends AppObject
     if (empty ($columns_string)) 
       $columns_string = '*';
 
-    //Производим выборку
+    //РџСЂРѕРёР·РІРѕРґРёРј РІС‹Р±РѕСЂРєСѓ
     $sql = "SELECT $columns_string
               FROM $table
               $join
@@ -180,7 +180,7 @@ class DBConnector extends AppObject
       {
       return $this->fetch_row();
       }
-    else //Много записей возвращаем как массив масивов
+    else //РњРЅРѕРіРѕ Р·Р°РїРёСЃРµР№ РІРѕР·РІСЂР°С‰Р°РµРј РєР°Рє РјР°СЃСЃРёРІ РјР°СЃРёРІРѕРІ
       {
       return $this->fetch_array(1, $field_is_index);
       }
@@ -332,4 +332,3 @@ class DBConnector extends AppObject
 
   }
 
-?>

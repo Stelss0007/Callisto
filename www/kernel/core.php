@@ -308,19 +308,19 @@ function appCaptureMessage()
 function appUsesModule($module_name)
   {
   global $appConfig;
-  
+
   $mod_identy_type ='models_module';
   
   if(empty($module_name))
     return array();
-  //Предотвращаем повторные загрузки
+  //РџСЂРµРґРѕС‚РІСЂР°С‰Р°РµРј РїРѕРІС‚РѕСЂРЅС‹Рµ Р·Р°РіСЂСѓР·РєРё
   static $loaded = array();
   static $models = array();
   
   if (!empty($loaded["$module_name"])) 
     return true;
 
-  //Проверим кеш
+  //РџСЂРѕРІРµСЂРёРј РєРµС€
   if(empty($models) && !appVarIsCached('app', 'models') || $appConfig['debug.enabled'])
     {
     $models = appGetModelList();
@@ -345,19 +345,19 @@ function appUsesModule($module_name)
         return array();
       }
     }
-    
+ 
   foreach($models[$mod_identy_type][$module_name] as $src)
     {
     require_once ($src);
     }
-  
+    
 
   $loaded["$module_name"] = true;
-  
+ 
   return $models[$mod_identy_type][$module_name];
   }
 /**
- * Загрузка мсторонних библиотек
+ * Р—Р°РіСЂСѓР·РєР° РјСЃС‚РѕСЂРѕРЅРЅРёС… Р±РёР±Р»РёРѕС‚РµРє
  */
 function appUsesLib($lib_name = 'extlib', $file = false)
   {
@@ -384,7 +384,7 @@ function appUsesLib($lib_name = 'extlib', $file = false)
   }
   
 /**
- * Загрузка моделей
+ * Р—Р°РіСЂСѓР·РєР° РјРѕРґРµР»РµР№
  */
 function appUsesModel($model_name)
   {
@@ -392,14 +392,14 @@ function appUsesModel($model_name)
   
   if(empty($model_name))
     return array();
-  //Предотвращаем повторные загрузки
+  //РџСЂРµРґРѕС‚РІСЂР°С‰Р°РµРј РїРѕРІС‚РѕСЂРЅС‹Рµ Р·Р°РіСЂСѓР·РєРё
   static $loaded = array();
   static $models = array();
   
   if (!empty($loaded["$model_name"])) 
     return true;
 
-  //Проверим кеш
+  //РџСЂРѕРІРµСЂРёРј РєРµС€
   if(empty($models) && !appVarIsCached('app', 'models'))
     {
     $models = appGetModelList();
@@ -466,7 +466,7 @@ function appGetModelList()
 
 function appGetDirList($dir_ = null)
   {
-  //Взяли список с диска
+  //Р’Р·СЏР»Рё СЃРїРёСЃРѕРє СЃ РґРёСЃРєР°
   $dir_list = array();
   
   if(empty($dir_))
@@ -493,7 +493,7 @@ function appGetDirList($dir_ = null)
   
 function appGetFileList($dir_ = null)
   {
-  //Взяли список с диска
+  //Р’Р·СЏР»Рё СЃРїРёСЃРѕРє СЃ РґРёСЃРєР°
   $file_list = array();
   
   if(empty($dir_))
@@ -816,26 +816,26 @@ function appWeightDelete($table, $weight, $where='')
   //////////////////////////////////////////////////////////////////////////////
   
   /**
- * @desc Кеширует переменную
+ * @desc РљРµС€РёСЂСѓРµС‚ РїРµСЂРµРјРµРЅРЅСѓСЋ
  * @return bool
- * @param component string Модуль к которому относится переменная
- * @param cacheKey string Ключь
- * @param value misc Значение
+ * @param component string РњРѕРґСѓР»СЊ Рє РєРѕС‚РѕСЂРѕРјСѓ РѕС‚РЅРѕСЃРёС‚СЃСЏ РїРµСЂРµРјРµРЅРЅР°СЏ
+ * @param cacheKey string РљР»СЋС‡СЊ
+ * @param value misc Р—РЅР°С‡РµРЅРёРµ
  */
 function appVarSetCached($component, $cacheKey, $value=null, $ttl=null)
   {
   global $appConfig;
 
-  //Empty приводим к false
+  //Empty РїСЂРёРІРѕРґРёРј Рє false
   if (!isset ($value)) $value = false;
 
-	//Удлиняем $cacheKey
+	//РЈРґР»РёРЅСЏРµРј $cacheKey
 	$cacheKey = $component.'_'.$cacheKey;
 
-  //Складываем ключь в память
+  //РЎРєР»Р°РґС‹РІР°РµРј РєР»СЋС‡СЊ РІ РїР°РјСЏС‚СЊ
   $appConfig[$cacheKey] = $value;
 
-  //В зависимости от типа сохраняем кеш в внешнее хранилище
+  //Р’ Р·Р°РІРёСЃРёРјРѕСЃС‚Рё РѕС‚ С‚РёРїР° СЃРѕС…СЂР°РЅСЏРµРј РєРµС€ РІ РІРЅРµС€РЅРµРµ С…СЂР°РЅРёР»РёС‰Рµ
   if ($appConfig['Var.caching'] == 'disk')
     {
     $cacheKey_crc = (string)abs (crc32 ($cacheKey));
@@ -865,21 +865,21 @@ function appVarSetCached($component, $cacheKey, $value=null, $ttl=null)
   }
 
 /**
- * @desc Извликает переменную из кеша
- * @return misc Значение переменной
- * @param component string Модуль к которому относится переменная
- * @param cacheKey string Ключь
+ * @desc РР·РІР»РёРєР°РµС‚ РїРµСЂРµРјРµРЅРЅСѓСЋ РёР· РєРµС€Р°
+ * @return misc Р—РЅР°С‡РµРЅРёРµ РїРµСЂРµРјРµРЅРЅРѕР№
+ * @param component string РњРѕРґСѓР»СЊ Рє РєРѕС‚РѕСЂРѕРјСѓ РѕС‚РЅРѕСЃРёС‚СЃСЏ РїРµСЂРµРјРµРЅРЅР°СЏ
+ * @param cacheKey string РљР»СЋС‡СЊ
  */
 function appVarGetCached($component, $cacheKey)
   {
   global $appConfig;
-	//Удлиняем $cacheKey
+	//РЈРґР»РёРЅСЏРµРј $cacheKey
 	$cacheKey = $component.'_'.$cacheKey;
 
-  //Если есть ключь в памяти - возвращаем из памяти
+  //Р•СЃР»Рё РµСЃС‚СЊ РєР»СЋС‡СЊ РІ РїР°РјСЏС‚Рё - РІРѕР·РІСЂР°С‰Р°РµРј РёР· РїР°РјСЏС‚Рё
   if (isset($appConfig[$cacheKey])) return $appConfig['appVar_cache'][$cacheKey];
 
-  //В зависимости от типа загружаем кеш из внешнего хранилища
+  //Р’ Р·Р°РІРёСЃРёРјРѕСЃС‚Рё РѕС‚ С‚РёРїР° Р·Р°РіСЂСѓР¶Р°РµРј РєРµС€ РёР· РІРЅРµС€РЅРµРіРѕ С…СЂР°РЅРёР»РёС‰Р°
   if ($appConfig['Var.caching'] == 'disk')
     {
     $cacheKey_crc = (string)abs(crc32($cacheKey));
@@ -907,10 +907,10 @@ function appVarGetCached($component, $cacheKey)
   }
 
 /**
- * @desc Проверяет наличие переменной в кеше
+ * @desc РџСЂРѕРІРµСЂСЏРµС‚ РЅР°Р»РёС‡РёРµ РїРµСЂРµРјРµРЅРЅРѕР№ РІ РєРµС€Рµ
  * @return bool
- * @param component string Модуль к которому относится переменная
- * @param cacheKey string Ключь
+ * @param component string РњРѕРґСѓР»СЊ Рє РєРѕС‚РѕСЂРѕРјСѓ РѕС‚РЅРѕСЃРёС‚СЃСЏ РїРµСЂРµРјРµРЅРЅР°СЏ
+ * @param cacheKey string РљР»СЋС‡СЊ
  */
 function appVarIsCached($component, $cacheKey)
   {
@@ -920,10 +920,10 @@ function appVarIsCached($component, $cacheKey)
   }
 
 /**
- * @desc Удаляет переменную из кеша
+ * @desc РЈРґР°Р»СЏРµС‚ РїРµСЂРµРјРµРЅРЅСѓСЋ РёР· РєРµС€Р°
  * @return bool
- * @param component string Модуль к которому относится переменная
- * @param cacheKey string Ключь
+ * @param component string РњРѕРґСѓР»СЊ Рє РєРѕС‚РѕСЂРѕРјСѓ РѕС‚РЅРѕСЃРёС‚СЃСЏ РїРµСЂРµРјРµРЅРЅР°СЏ
+ * @param cacheKey string РљР»СЋС‡СЊ
  */
 function appVarDelCached($component, $cacheKey)
   {
@@ -931,11 +931,11 @@ function appVarDelCached($component, $cacheKey)
   
   if (!appVarIsCached($component, $cacheKey)) return true;
 
-	//Удлиняем $cacheKey
+	//РЈРґР»РёРЅСЏРµРј $cacheKey
 	$cacheKey = $component.'_'.$cacheKey;
 
   unset($appConfig['appVar_cache'][$cacheKey]);
-  //В зависимости от типа уничтожаем информацию в кеше
+  //Р’ Р·Р°РІРёСЃРёРјРѕСЃС‚Рё РѕС‚ С‚РёРїР° СѓРЅРёС‡С‚РѕР¶Р°РµРј РёРЅС„РѕСЂРјР°С†РёСЋ РІ РєРµС€Рµ
   if ($appConfig['Var.caching'] == 'disk')
     {
     $cacheKey_crc = (string)abs(crc32($cacheKey));
@@ -1029,4 +1029,3 @@ function appCreateTreeHTML($array, $curParent, $currLevel = 0, $prevLevel = -1)
     }
 if ($currLevel == $prevLevel) echo " </li> </ul> ";
 }
-?>

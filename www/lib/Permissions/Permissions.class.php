@@ -25,7 +25,7 @@
 //   }
 //
 ///*
-//   * Èíôîðìàöèÿ î ïðàâàõ ãðóïï
+//   * Ð˜Ð½Ñ„Ð¾Ñ€Ð¼Ð°Ñ†Ð¸Ñ Ð¾ Ð¿Ñ€Ð°Ð²Ð°Ñ… Ð³Ñ€ÑƒÐ¿Ð¿
 //  */
 //  function groupPermsGetList($gid=null)
 //    {
@@ -37,7 +37,7 @@
 //    }
 //
 //  /*
-//   * Èíôîðìàöèÿ î ïðàâàõ ãðóïïû
+//   * Ð˜Ð½Ñ„Ð¾Ñ€Ð¼Ð°Ñ†Ð¸Ñ Ð¾ Ð¿Ñ€Ð°Ð²Ð°Ñ… Ð³Ñ€ÑƒÐ¿Ð¿Ñ‹
 //  */
 //  function groupPermsGetInfo($id)
 //    {
@@ -48,7 +48,7 @@
 //    }
 //
 //  /*
-//   * Âîçâðàøàåò àññîöèàòèâíûé ìàññèâ óðîâåíü ïðàâ->  ×åëîâå÷åñêîå íàçâàíèå
+//   * Ð’Ð¾Ð·Ð²Ñ€Ð°ÑˆÐ°ÐµÑ‚ Ð°ÑÑÐ¾Ñ†Ð¸Ð°Ñ‚Ð¸Ð²Ð½Ñ‹Ð¹ Ð¼Ð°ÑÑÐ¸Ð² ÑƒÑ€Ð¾Ð²ÐµÐ½ÑŒ Ð¿Ñ€Ð°Ð²->  Ð§ÐµÐ»Ð¾Ð²ÐµÑ‡ÐµÑÐºÐ¾Ðµ Ð½Ð°Ð·Ð²Ð°Ð½Ð¸Ðµ
 //  */
 //  function permsLevelGetList()
 //    {
@@ -64,59 +64,59 @@
 //    }
 //
 //  /*
-//  * Ñîçäàåò ïðàâà ãðóïïû
+//  * Ð¡Ð¾Ð·Ð´Ð°ÐµÑ‚ Ð¿Ñ€Ð°Ð²Ð° Ð³Ñ€ÑƒÐ¿Ð¿Ñ‹
 //  */
 //  function groupPermsCreate($args)
 //    {
-//    //Äåëàåì âñòàâêó èíôîðìàèè â áàçó
+//    //Ð”ÐµÐ»Ð°ÐµÐ¼ Ð²ÑÑ‚Ð°Ð²ÐºÑƒ Ð¸Ð½Ñ„Ð¾Ñ€Ð¼Ð°Ð¸Ð¸ Ð² Ð±Ð°Ð·Ñƒ
 //    $groups_perms_table = sysDBGetTable('groups_perms');
 //    $groups_perms_column = sysDBGetColumns($groups_perms_table);
 //
-//    //Íàõîäèì è çàäàåì ñàìûé áîëüøîé âåñ
+//    //ÐÐ°Ñ…Ð¾Ð´Ð¸Ð¼ Ð¸ Ð·Ð°Ð´Ð°ÐµÐ¼ ÑÐ°Ð¼Ñ‹Ð¹ Ð±Ð¾Ð»ÑŒÑˆÐ¾Ð¹ Ð²ÐµÑ
 //    $MaxWeight = appDbMaxWeight ($groups_perms_table);
 //    $MaxWeight++;
 //    $args ['weight'] = $MaxWeight;
 //
 //    sysDbInsert ($groups_perms_table, $args);
-//    //Î÷èùàåì êåø ïðàâ äîñòóïà
+//    //ÐžÑ‡Ð¸Ñ‰Ð°ÐµÐ¼ ÐºÐµÑˆ Ð¿Ñ€Ð°Ð² Ð´Ð¾ÑÑ‚ÑƒÐ¿Ð°
 //    appVarDelCached('kernel', 'sec_levels');
 //    return (mysql_insert_id());
 //    }
 //
 //  /*
-//   * Âíåñåíèå èçìåíåíèé â áàçó äàííûõ
+//   * Ð’Ð½ÐµÑÐµÐ½Ð¸Ðµ Ð¸Ð·Ð¼ÐµÐ½ÐµÐ½Ð¸Ð¹ Ð² Ð±Ð°Ð·Ñƒ Ð´Ð°Ð½Ð½Ñ‹Ñ…
 //  */
 //  function groupPermsUpdate($args)
 //    {
 //    $groups_perms_table = appDBGetTable('groups_perms');
 //    $groups_perms_column = appDBGetColumns($groups_perms_table);
-//    //Äîáàâëÿåì ýëèìåíò â áàçó.
-//    unset ($args ['weight']);//Ïîäñòðàõîâêà
+//    //Ð”Ð¾Ð±Ð°Ð²Ð»ÑÐµÐ¼ ÑÐ»Ð¸Ð¼ÐµÐ½Ñ‚ Ð² Ð±Ð°Ð·Ñƒ.
+//    unset ($args ['weight']);//ÐŸÐ¾Ð´ÑÑ‚Ñ€Ð°Ñ…Ð¾Ð²ÐºÐ°
 //    appDbUpdate ($groups_perms_table, $args, "WHERE $groups_perms_column[id]='$args[id]'");
-//    //Î÷èùàåì êåø ïðàâ äîñòóïà ãðóïïû
+//    //ÐžÑ‡Ð¸Ñ‰Ð°ÐµÐ¼ ÐºÐµÑˆ Ð¿Ñ€Ð°Ð² Ð´Ð¾ÑÑ‚ÑƒÐ¿Ð° Ð³Ñ€ÑƒÐ¿Ð¿Ñ‹
 //    appVarDelCached('kernel', 'sec_levels');
 //    return true;
 //    }
 //
 //  /*
-//   * Óäàëåíèå ïðàèëà ãðóïïâ
+//   * Ð£Ð´Ð°Ð»ÐµÐ½Ð¸Ðµ Ð¿Ñ€Ð°Ð¸Ð»Ð° Ð³Ñ€ÑƒÐ¿Ð¿Ð²
 //  */
 //  function groupPermsDelete($id)
 //    {
 //    sysExtLibLoad();
 //    $dbdata = $this->groups_perms_get_info ($id);
-//    //Óäàëåíèå
+//    //Ð£Ð´Ð°Ð»ÐµÐ½Ð¸Ðµ
 //    $groups_perms_table = appDBGetTable('groups_perms');
 //    $groups_perms_column = appDBGetColumns($groups_perms_table);
 //    appDbDelete ($groups_perms_table, "WHERE $groups_perms_column[id]='$id'");
 //    appDbWeightDelete ($groups_perms_table, $dbdata['weight'],'');
-//    //Î÷èùàåì êåø ïðàâ äîñòóïà ãðóïïû
+//    //ÐžÑ‡Ð¸Ñ‰Ð°ÐµÐ¼ ÐºÐµÑˆ Ð¿Ñ€Ð°Ð² Ð´Ð¾ÑÑ‚ÑƒÐ¿Ð° Ð³Ñ€ÑƒÐ¿Ð¿Ñ‹
 //    appVarDelCached('kernel', 'sec_levels');
 //    return true;
 //    }
 //
 //  /*
-//   * Óâåëè÷åíèå âåñ ïðàâèëà ãðóïïû
+//   * Ð£Ð²ÐµÐ»Ð¸Ñ‡ÐµÐ½Ð¸Ðµ Ð²ÐµÑ Ð¿Ñ€Ð°Ð²Ð¸Ð»Ð° Ð³Ñ€ÑƒÐ¿Ð¿Ñ‹
 //  */
 //  function groupPermsMoveUp($id)
 //    {
@@ -132,7 +132,7 @@
 //    }
 //
 //  /*
-//   * Óìåíüøûëè âåñ ïðàâèëà ãðóïïû
+//   * Ð£Ð¼ÐµÐ½ÑŒÑˆÑ‹Ð»Ð¸ Ð²ÐµÑ Ð¿Ñ€Ð°Ð²Ð¸Ð»Ð° Ð³Ñ€ÑƒÐ¿Ð¿Ñ‹
 //  */
 //  function groupPermsMoveDown($id)
 //    {
@@ -148,4 +148,3 @@
 //    }
 
 
-?>

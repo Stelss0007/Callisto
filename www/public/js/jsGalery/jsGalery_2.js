@@ -53,7 +53,7 @@ this.scroll(((this.options.wrap=='both'||this.options.wrap=='first')&&this.optio
  	var defaults = {
 		autoPlay: true,
 		speed: 5000,
-		text: { play: "Играть", stop: "Стоп", previous: "Назад", next: "Далее" },
+		text: { play: "РРіСЂР°С‚СЊ", stop: "РЎС‚РѕРї", previous: "РќР°Р·Р°Рґ", next: "Р”Р°Р»РµРµ" },
 		transition:[1],
 		showCaption: true,
 		IESafe: false,

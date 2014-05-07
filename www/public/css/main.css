@@ -121,8 +121,8 @@ h1, h2, h3, h4, h5, h6 { padding: 0; margin: 0; }
 
 
 /*
-Работа с  иконками, подключим шрифты иконки
-Перечень кодов: http://www.entypo.com/characters/
+Р Р°Р±РѕС‚Р° СЃ  РёРєРѕРЅРєР°РјРё, РїРѕРґРєР»СЋС‡РёРј С€СЂРёС„С‚С‹ РёРєРѕРЅРєРё
+РџРµСЂРµС‡РµРЅСЊ РєРѕРґРѕРІ: http://www.entypo.com/characters/
 http://fortawesome.github.io/Font-Awesome/cheatsheet/
 */
 
@@ -135,7 +135,7 @@ http://fortawesome.github.io/Font-Awesome/cheatsheet/
 }
 
   
-  * + html .btn-icon {  /* для ие */
+  * + html .btn-icon {  /* РґР»СЏ РёРµ */
       display: inline;
   }
   .btn-icon

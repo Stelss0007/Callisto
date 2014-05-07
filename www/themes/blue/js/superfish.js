@@ -1,4 +1,4 @@
-/*
+﻿/*
  * jQuery Superfish Menu Plugin - v1.7.4
  * Copyright (c) 2013 Joel Birch
  *

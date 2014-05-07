@@ -1,4 +1,4 @@
-$(document).ready(function(){
+п»ї$(document).ready(function(){
 	//themes, change CSS with JS
 	//default theme(CSS) is cerulean, change it if needed
 	var current_theme = $.cookie('current_theme')==null ? 'cerulean' :$.cookie('current_theme');
@@ -266,7 +266,7 @@ function docReady(){
 
 	//datatable
   $('.datatable').each(function(){
-      //Опции по умолчанию
+      //РћРїС†РёРё РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ
       var dt_options =  {
                         "sDom": "<'row-fluid'<'span6'l><'span6'f>r>t<'row-fluid'<'span6'i><'span6 'p>>",
                         "sPaginationType": "bootstrap",

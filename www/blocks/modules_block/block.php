@@ -2,11 +2,11 @@
 
 function modules_block_display(&$blockinfo)
   {
-  //Ïðåëþäèå êàê ó âñåõ ìîäóëåé
+  //ÐŸÑ€ÐµÐ»ÑŽÐ´Ð¸Ðµ ÐºÐ°Ðº Ñƒ Ð²ÑÐµÑ… Ð¼Ð¾Ð´ÑƒÐ»ÐµÐ¹
   $sysObject = 'modules_block::display::'.$blockinfo[id];
   $sysModTpl = sysTplWay ($sysObject);
 
-  //Ïðîâåðêà íà äîñòóï
+  //ÐŸÑ€Ð¾Ð²ÐµÑ€ÐºÐ° Ð½Ð° Ð´Ð¾ÑÑ‚ÑƒÐ¿
   if (!sysSecAuthAction($sysObject, ACCESS_READ)) return true;
 
   $sysTpl = new sysTpl;
@@ -14,12 +14,12 @@ function modules_block_display(&$blockinfo)
 
   if ($sysTpl->is_cached($sysModTpl, $sysObject))
     {
-    //Âîçâðàùàåì ðåçóëüòàò
+    //Ð’Ð¾Ð·Ð²Ñ€Ð°Ñ‰Ð°ÐµÐ¼ Ñ€ÐµÐ·ÑƒÐ»ÑŒÑ‚Ð°Ñ‚
     $result['block_content'] =& $sysTpl->fetch($sysModTpl,$sysObject);
     return $result;
     };
 
-  //Äåëàåì âûáîðêó
+  //Ð”ÐµÐ»Ð°ÐµÐ¼ Ð²Ñ‹Ð±Ð¾Ñ€ÐºÑƒ
   $modules_table = sysDBGetTable('modules');
   $modules_column = sysDBGetColumns($modules_table);
 
@@ -28,7 +28,7 @@ function modules_block_display(&$blockinfo)
 
   $sysTpl->assign('modules_list', $modules_list, false);
 
-  //Âîçâðàùàåì ðåçóëüòàò
+  //Ð’Ð¾Ð·Ð²Ñ€Ð°Ñ‰Ð°ÐµÐ¼ Ñ€ÐµÐ·ÑƒÐ»ÑŒÑ‚Ð°Ñ‚
   $result['block_content'] =& $sysTpl->fetch($sysModTpl,$sysObject);
   return $result;
   }

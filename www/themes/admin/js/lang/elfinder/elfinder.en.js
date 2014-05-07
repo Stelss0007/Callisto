@@ -1,4 +1,4 @@
-/**
+﻿/**
  * English translation
  * @author Troex Nevelin <troex@fury.scancode.ru>
  * @version 2013-07-03
@@ -70,7 +70,7 @@ if (elFinder && elFinder.prototype && typeof(elFinder.prototype.i18) == 'object'
 			'errArcType'           : 'Unsupported archive type.',
 			'errNoArchive'         : 'File is not archive or has unsupported archive type.',
 			'errCmdNoSupport'      : 'Backend does not support this command.',
-			'errReplByChild'       : 'The folder “$1” can’t be replaced by an item it contains.',
+			'errReplByChild'       : 'The folder вЂњ$1вЂќ canвЂ™t be replaced by an item it contains.',
 			'errArcSymlinks'       : 'For security reason denied to unpack archives contains symlinks or files with not allowed names.', // edited 24.06.2012
 			'errArcMaxSize'        : 'Archive files exceeds maximum allowed size.',
 			'errResize'            : 'Unable to resize "$1".',
@@ -248,7 +248,7 @@ if (elFinder && elFinder.prototype && typeof(elFinder.prototype.i18) == 'object'
 			'rotate'          : 'Rotate',
 			'rotate-cw'       : 'Rotate 90 degrees CW',
 			'rotate-ccw'      : 'Rotate 90 degrees CCW',
-			'degree'          : '°',
+			'degree'          : 'В°',
 			'netMountDialogTitle' : 'Mount network volume', // added 18.04.2012
 			'protocol'            : 'Protocol', // added 18.04.2012
 			'host'                : 'Host', // added 18.04.2012

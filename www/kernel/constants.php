@@ -49,4 +49,4 @@ define('RELATION_ACTION_RESTRICT', 2);
 define('MESSAGE_INFO', 'info');
 define('MESSAGE_WARNING', 'warning');
 define('MESSAGE_ERROR', 'error');
-?>
+

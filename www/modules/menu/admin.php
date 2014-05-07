@@ -90,12 +90,12 @@ class AdminController extends Controller
       if($id)
         {
         $this->menu->menuUpdate($data, $id);
-        $this->showMessage('İëåìåíò ìåíş óñïåøíî èçìåíåí!');
+        $this->showMessage('Ğ­Ğ»ĞµĞ¼ĞµĞ½Ñ‚ Ğ¼ĞµĞ½Ñ ÑƒÑĞ¿ĞµÑˆĞ½Ğ¾ Ğ¸Ğ·Ğ¼ĞµĞ½ĞµĞ½!');
         }
       else
         {
         $this->menu->menuCreate($data);
-        $this->showMessage('İëåìåíò ìåíş óñïåøíî äîáàâëåí!');
+        $this->showMessage('Ğ­Ğ»ĞµĞ¼ĞµĞ½Ñ‚ Ğ¼ĞµĞ½Ñ ÑƒÑĞ¿ĞµÑˆĞ½Ğ¾ Ğ´Ğ¾Ğ±Ğ°Ğ²Ğ»ĞµĞ½!');
         }
       }
     $this->redirect($this->getReferer('/admin/menu/menu_list'));
@@ -108,11 +108,11 @@ class AdminController extends Controller
     
     if($this->menu->hasSubitemById($id))
       {
-      $this->showMessage('İëåìåíò ìåíş íå ìîæåò áûòü óäàëåí! Åñòü äî÷åğíèå ıëåìåíòû.');
+      $this->showMessage('Ğ­Ğ»ĞµĞ¼ĞµĞ½Ñ‚ Ğ¼ĞµĞ½Ñ Ğ½Ğµ Ğ¼Ğ¾Ğ¶ĞµÑ‚ Ğ±Ñ‹Ñ‚ÑŒ ÑƒĞ´Ğ°Ğ»ĞµĞ½! Ğ•ÑÑ‚ÑŒ Ğ´Ğ¾Ñ‡ĞµÑ€Ğ½Ğ¸Ğµ ÑĞ»ĞµĞ¼ĞµĞ½Ñ‚Ñ‹.');
       }
     
     $this->menu->menu_delete($id);
-    $this->showMessage('İëåìåíò ìåíş óñïåøíî óäàëåí!');
+    $this->showMessage('Ğ­Ğ»ĞµĞ¼ĞµĞ½Ñ‚ Ğ¼ĞµĞ½Ñ ÑƒÑĞ¿ĞµÑˆĞ½Ğ¾ ÑƒĞ´Ğ°Ğ»ĞµĞ½!');
     $this->redirect();
     }
    

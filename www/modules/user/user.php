@@ -1,11 +1,11 @@
 <?php
 /*
- * Главная страница
+ * Р“Р»Р°РІРЅР°СЏ СЃС‚СЂР°РЅРёС†Р°
 */
 function user_user_main()
   {
   $tpl = tplInfo(__FUNCTION__, __FILE__);
-  //Проверка на доступ
+  //РџСЂРѕРІРµСЂРєР° РЅР° РґРѕСЃС‚СѓРї
   //if (!getAccess($tpl['object'], ACCESS_READ)) return;
 
   $smarty = new coreTpl();
@@ -24,7 +24,7 @@ function user_user_main()
 
   $browsein = array();
   $browsein[]=array ('url'=>'index.php?module=user&type=user&func=main',
-                     'displayname'=>'Личная страница');
+                     'displayname'=>'Р›РёС‡РЅР°СЏ СЃС‚СЂР°РЅРёС†Р°');
 
   $result['object'] = $tpl['object'];
   $result['content'] = $smarty->fetch($tpl['src'],$tpl['object']);
@@ -34,12 +34,12 @@ function user_user_main()
   }
 
 /*
- * Главная страница
+ * Р“Р»Р°РІРЅР°СЏ СЃС‚СЂР°РЅРёС†Р°
  */
 function user_user_login()
   {
   $tpl = tplInfo(__FUNCTION__, __FILE__);
-  //Проверка на доступ
+  //РџСЂРѕРІРµСЂРєР° РЅР° РґРѕСЃС‚СѓРї
   //if (!getAccess($tpl['object'], ACCESS_READ)) return;
   
   $db=DBConnector::getInstance();
@@ -48,7 +48,7 @@ function user_user_login()
   $smarty = new coreTpl();
   $smarty->caching = false;
 
-  //Построили дерево разделов
+  //РџРѕСЃС‚СЂРѕРёР»Рё РґРµСЂРµРІРѕ СЂР°Р·РґРµР»РѕРІ
   appModClassLoad ('user');
   $user = new user;
  
@@ -57,9 +57,9 @@ function user_user_login()
 
   $browsein = array();
   $browsein[]=array ('url'=>'index.php?module=user&type=user&func=main',
-                     'displayname'=>'Вход в систему');
+                     'displayname'=>'Р’С…РѕРґ РІ СЃРёСЃС‚РµРјСѓ');
 
-  //Вывод результатов
+  //Р’С‹РІРѕРґ СЂРµР·СѓР»СЊС‚Р°С‚РѕРІ
   $result['object'] = $tpl['object'];
   $result['content'] = $smarty->fetch($tpl['src'],$tpl['object']);
   $result['browsein'] = $browsein;
@@ -72,65 +72,65 @@ function user_user_login()
 function user_user_create_user()
   {
   $tpl = tplInfo(__FUNCTION__, __FILE__);
-  //Проверка на доступ
+  //РџСЂРѕРІРµСЂРєР° РЅР° РґРѕСЃС‚СѓРї
   //if (!getAccess($tpl['object'], ACCESS_READ)) return;
   $input_data = appCleanInputArray($_POST);
   //print_r($input_data);exit;
 
   /*****************************************************************************
-   *            ВАЛИДАЦИЯ НУЖНЫХ ПОЛЕЙ
+   *            Р’РђР›РР”РђР¦РРЇ РќРЈР–РќР«РҐ РџРћР›Р•Р™
    *****************************************************************************/
-  //Проверим поле логин
+  //РџСЂРѕРІРµСЂРёРј РїРѕР»Рµ Р»РѕРіРёРЅ
   if ($input_data['login'] == '')
     {
-    // Поле логин должно быть заполнено
-    appShowMessage($_SERVER['HTTP_REFERER'], 'Поле \'Логин\' не заполнено');
+    // РџРѕР»Рµ Р»РѕРіРёРЅ РґРѕР»Р¶РЅРѕ Р±С‹С‚СЊ Р·Р°РїРѕР»РЅРµРЅРѕ
+    appShowMessage($_SERVER['HTTP_REFERER'], 'РџРѕР»Рµ \'Р›РѕРіРёРЅ\' РЅРµ Р·Р°РїРѕР»РЅРµРЅРѕ');
     }
   elseif (!preg_match("/^\w{3,}$/", $input_data['login']))
     {
-    // Логин может состоять из букв, цифр и подчеркивания
-    appShowMessage($_SERVER['HTTP_REFERER'], 'В поле \'Логин\' введены недопустимые символы');
+    // Р›РѕРіРёРЅ РјРѕР¶РµС‚ СЃРѕСЃС‚РѕСЏС‚СЊ РёР· Р±СѓРєРІ, С†РёС„СЂ Рё РїРѕРґС‡РµСЂРєРёРІР°РЅРёСЏ
+    appShowMessage($_SERVER['HTTP_REFERER'], 'Р’ РїРѕР»Рµ \'Р›РѕРіРёРЅ\' РІРІРµРґРµРЅС‹ РЅРµРґРѕРїСѓСЃС‚РёРјС‹Рµ СЃРёРјРІРѕР»С‹');
     }
 
-  //Проверим поле почты
+  //РџСЂРѕРІРµСЂРёРј РїРѕР»Рµ РїРѕС‡С‚С‹
   if ($input_data['mail'] == '')
     {
-    // Проверяем e-mail на заполнение
-    appShowMessage($_SERVER['HTTP_REFERER'], 'Поле \'E-mail\' не заполнено');
+    // РџСЂРѕРІРµСЂСЏРµРј e-mail РЅР° Р·Р°РїРѕР»РЅРµРЅРёРµ
+    appShowMessage($_SERVER['HTTP_REFERER'], 'РџРѕР»Рµ \'E-mail\' РЅРµ Р·Р°РїРѕР»РЅРµРЅРѕ');
     }
   elseif (!preg_match("/^[a-zA-Z0-9_\.\-]+@([a-zA-Z0-9\-]+\.)+[a-zA-Z]{2,6}$/", $input_data['mail']))
     {
-    // Проверяем e-mail на корректность
-    appShowMessage($_SERVER['HTTP_REFERER'], 'Указанный \'E-mail\' имеет недопустимый формат');
+    // РџСЂРѕРІРµСЂСЏРµРј e-mail РЅР° РєРѕСЂСЂРµРєС‚РЅРѕСЃС‚СЊ
+    appShowMessage($_SERVER['HTTP_REFERER'], 'РЈРєР°Р·Р°РЅРЅС‹Р№ \'E-mail\' РёРјРµРµС‚ РЅРµРґРѕРїСѓСЃС‚РёРјС‹Р№ С„РѕСЂРјР°С‚');
     }
 
-  //Проверим поле пароль
+  //РџСЂРѕРІРµСЂРёРј РїРѕР»Рµ РїР°СЂРѕР»СЊ
   if ($input_data['pass'] == '' || $input_data['pass2'] == '')
     {
-    // Поле пароль и повтор пароля должны быть заполнеными
-    appShowMessage($_SERVER['HTTP_REFERER'], 'Поле \'Пароль\' не заполнено');
+    // РџРѕР»Рµ РїР°СЂРѕР»СЊ Рё РїРѕРІС‚РѕСЂ РїР°СЂРѕР»СЏ РґРѕР»Р¶РЅС‹ Р±С‹С‚СЊ Р·Р°РїРѕР»РЅРµРЅС‹РјРё
+    appShowMessage($_SERVER['HTTP_REFERER'], 'РџРѕР»Рµ \'РџР°СЂРѕР»СЊ\' РЅРµ Р·Р°РїРѕР»РЅРµРЅРѕ');
     }
   elseif ($input_data['pass'] !== $input_data['pass2'])
     {
-    // Поле пароль и повтор пароля должны быть одинаковыми
-    appShowMessage($_SERVER['HTTP_REFERER'], 'Поля \'Пароль\' и \'Повтор пароля\' не совпадают');
+    // РџРѕР»Рµ РїР°СЂРѕР»СЊ Рё РїРѕРІС‚РѕСЂ РїР°СЂРѕР»СЏ РґРѕР»Р¶РЅС‹ Р±С‹С‚СЊ РѕРґРёРЅР°РєРѕРІС‹РјРё
+    appShowMessage($_SERVER['HTTP_REFERER'], 'РџРѕР»СЏ \'РџР°СЂРѕР»СЊ\' Рё \'РџРѕРІС‚РѕСЂ РїР°СЂРѕР»СЏ\' РЅРµ СЃРѕРІРїР°РґР°СЋС‚');
     }
   elseif (!preg_match("/^\w{3,}$/", $input_data['pass']))
     {
-    // Пароль может состоять из букв, цифр и подчеркивания
-    appShowMessage($_SERVER['HTTP_REFERER'], 'В поле \'Пароль\' введены недопустимые символы');
+    // РџР°СЂРѕР»СЊ РјРѕР¶РµС‚ СЃРѕСЃС‚РѕСЏС‚СЊ РёР· Р±СѓРєРІ, С†РёС„СЂ Рё РїРѕРґС‡РµСЂРєРёРІР°РЅРёСЏ
+    appShowMessage($_SERVER['HTTP_REFERER'], 'Р’ РїРѕР»Рµ \'РџР°СЂРѕР»СЊ\' РІРІРµРґРµРЅС‹ РЅРµРґРѕРїСѓСЃС‚РёРјС‹Рµ СЃРёРјРІРѕР»С‹');
     }
-/***********************  КОНЕЦ ВАЛИДАЦИИ  *************************************/
+/***********************  РљРћРќР•Р¦ Р’РђР›РР”РђР¦РР  *************************************/
 
   $db=DBConnector::getInstance();
   $ses_info=UserSession::getInstance();
 
-  //Дополним пришедшую от клиента инфу
+  //Р”РѕРїРѕР»РЅРёРј РїСЂРёС€РµРґС€СѓСЋ РѕС‚ РєР»РёРµРЅС‚Р° РёРЅС„Сѓ
   $input_data['pass'] = md5($input_data['pass']);
   $input_data['addtime'] = time();
   $input_data['last_visit'] = $input_data['addtime'];
-  $input_data['gid'] = 2; //Группа по умолчанию "зарегистрированный пользователь"
-  $input_data['active'] = 1;//Сразу активен
+  $input_data['gid'] = 2; //Р“СЂСѓРїРїР° РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ "Р·Р°СЂРµРіРёСЃС‚СЂРёСЂРѕРІР°РЅРЅС‹Р№ РїРѕР»СЊР·РѕРІР°С‚РµР»СЊ"
+  $input_data['active'] = 1;//РЎСЂР°Р·Сѓ Р°РєС‚РёРІРµРЅ
   
   $insert_id = $db->insert('user', $input_data);
   //$db->query("INSERT INTO user (login, pass, mail, addtime, gid) VALUES ('%s', '%s','%s', '%s', '2')", $login, $pass, $mail, $addtime);
@@ -144,15 +144,15 @@ function user_user_create_user()
       $db->update('user', $img_info,"id='$insert_id'");
     }
 
-  //Зарегистрировались, теперь пойдем в свой профиль
-  //Для этого создадим сессию и перейдем на страницу с профилем
+  //Р—Р°СЂРµРіРёСЃС‚СЂРёСЂРѕРІР°Р»РёСЃСЊ, С‚РµРїРµСЂСЊ РїРѕР№РґРµРј РІ СЃРІРѕР№ РїСЂРѕС„РёР»СЊ
+  //Р”Р»СЏ СЌС‚РѕРіРѕ СЃРѕР·РґР°РґРёРј СЃРµСЃСЃРёСЋ Рё РїРµСЂРµР№РґРµРј РЅР° СЃС‚СЂР°РЅРёС†Сѓ СЃ РїСЂРѕС„РёР»РµРј
   $user_info['login'] = $input_data['login'];
   $user_info['gid'] = $input_data['gid'];
   $user_info['id'] = $insert_id;
   $ses_info->userLogin($user_info);
 
-  appShowMessage('index.php?module=user&type=user&func=user_view&id='.$insert_id, 'Регистрация успешно завершина');
-  //showMessage($_SERVER['HTTP_REFERER'], 'Регистрация успешно завершина');
+  appShowMessage('index.php?module=user&type=user&func=user_view&id='.$insert_id, 'Р РµРіРёСЃС‚СЂР°С†РёСЏ СѓСЃРїРµС€РЅРѕ Р·Р°РІРµСЂС€РёРЅР°');
+  //showMessage($_SERVER['HTTP_REFERER'], 'Р РµРіРёСЃС‚СЂР°С†РёСЏ СѓСЃРїРµС€РЅРѕ Р·Р°РІРµСЂС€РёРЅР°');
   }
 
 
@@ -161,7 +161,7 @@ function user_user_user_login()
   {
   //print_r($_SERVER['HTTP_HOST']);exit;
   $tpl = tplInfo(__FUNCTION__, __FILE__);
-  //Проверка на доступ
+  //РџСЂРѕРІРµСЂРєР° РЅР° РґРѕСЃС‚СѓРї
   //if (!getAccess($tpl['object'], ACCESS_READ)) return;
   
   $db=DBConnector::getInstance();
@@ -171,20 +171,20 @@ function user_user_user_login()
 
   if ($login == '')
     {
-    appShowMessage($_SERVER['HTTP_REFERER'], 'Поле \'Логин\' не заполнено');
-    //die("Поле 'Логин' не заполнено<br />\n");
-    // Логин может состоять из букв, цифр и подчеркивания
+    appShowMessage($_SERVER['HTTP_REFERER'], 'РџРѕР»Рµ \'Р›РѕРіРёРЅ\' РЅРµ Р·Р°РїРѕР»РЅРµРЅРѕ');
+    //die("РџРѕР»Рµ 'Р›РѕРіРёРЅ' РЅРµ Р·Р°РїРѕР»РЅРµРЅРѕ<br />\n");
+    // Р›РѕРіРёРЅ РјРѕР¶РµС‚ СЃРѕСЃС‚РѕСЏС‚СЊ РёР· Р±СѓРєРІ, С†РёС„СЂ Рё РїРѕРґС‡РµСЂРєРёРІР°РЅРёСЏ
     }
   elseif (!preg_match("/^\w{3,}$/", $login))
     {
-    appShowMessage($_SERVER['HTTP_REFERER'], 'В поле \'Логин\' введены недопустимые символы');
-    //die("В поле 'Логин' введены недопустимые символы<br />\n");
+    appShowMessage($_SERVER['HTTP_REFERER'], 'Р’ РїРѕР»Рµ \'Р›РѕРіРёРЅ\' РІРІРµРґРµРЅС‹ РЅРµРґРѕРїСѓСЃС‚РёРјС‹Рµ СЃРёРјРІРѕР»С‹');
+    //die("Р’ РїРѕР»Рµ 'Р›РѕРіРёРЅ' РІРІРµРґРµРЅС‹ РЅРµРґРѕРїСѓСЃС‚РёРјС‹Рµ СЃРёРјРІРѕР»С‹<br />\n");
     }
 
   if (!preg_match("/^\w{3,}$/", $pass))
     {
-    //die("В поле 'Пароль' введены недопустимые символы<br />\n");
-    appShowMessage($_SERVER['HTTP_REFERER'], 'В поле \'Пароль\' введены недопустимые символы');
+    //die("Р’ РїРѕР»Рµ 'РџР°СЂРѕР»СЊ' РІРІРµРґРµРЅС‹ РЅРµРґРѕРїСѓСЃС‚РёРјС‹Рµ СЃРёРјРІРѕР»С‹<br />\n");
+    appShowMessage($_SERVER['HTTP_REFERER'], 'Р’ РїРѕР»Рµ \'РџР°СЂРѕР»СЊ\' РІРІРµРґРµРЅС‹ РЅРµРґРѕРїСѓСЃС‚РёРјС‹Рµ СЃРёРјРІРѕР»С‹');
     }
 
   $pass = md5($pass);
@@ -199,27 +199,27 @@ function user_user_user_login()
     }
   else
     {
-    appShowMessage($_SERVER['HTTP_REFERER'], 'Не правильный логин или пароль');
+    appShowMessage($_SERVER['HTTP_REFERER'], 'РќРµ РїСЂР°РІРёР»СЊРЅС‹Р№ Р»РѕРіРёРЅ РёР»Рё РїР°СЂРѕР»СЊ');
     }
 
   appModClassLoad('user');
   $user = new user;
-  appShowMessage('index.php?module=user&type=user&func=user_view&id='.$ses_info->userId(), 'Вход выполнен');
-  //showMessage($_SERVER['HTTP_REFERER'], 'Вход выполнен');
+  appShowMessage('index.php?module=user&type=user&func=user_view&id='.$ses_info->userId(), 'Р’С…РѕРґ РІС‹РїРѕР»РЅРµРЅ');
+  //showMessage($_SERVER['HTTP_REFERER'], 'Р’С…РѕРґ РІС‹РїРѕР»РЅРµРЅ');
   }
 
 
 function user_user_user_logout()
   {
   $tpl = tplInfo(__FUNCTION__, __FILE__);
-  //Проверка на доступ
+  //РџСЂРѕРІРµСЂРєР° РЅР° РґРѕСЃС‚СѓРї
   //if (!getAccess($tpl['object'], ACCESS_READ)) return;
 
   $db=DBConnector::getInstance();
   $ses_info=UserSession::getInstance();
   
   $ses_info->userLogOut();
-  appShowMessage($_SERVER['HTTP_REFERER'], 'Выход из системы');
+  appShowMessage($_SERVER['HTTP_REFERER'], 'Р’С‹С…РѕРґ РёР· СЃРёСЃС‚РµРјС‹');
   }
 
 function user_user_user_view()
@@ -229,8 +229,8 @@ function user_user_user_view()
   $id = appCleanFromInput('id');
 
   if(!is_numeric($id))
-    appShowMessage($_SERVER['HTTP_REFERER'], 'Не верно указан ид пользователя!');
-  //Проверка на доступ
+    appShowMessage($_SERVER['HTTP_REFERER'], 'РќРµ РІРµСЂРЅРѕ СѓРєР°Р·Р°РЅ РёРґ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ!');
+  //РџСЂРѕРІРµСЂРєР° РЅР° РґРѕСЃС‚СѓРї
   //if (!getAccess($tpl['object'], ACCESS_READ)) return;
 
   $db=DBConnector::getInstance();
@@ -240,7 +240,7 @@ function user_user_user_view()
   $user_info = $db->fetch_array();
 
   if(!$user_info[0])
-    appShowMessage($_SERVER['HTTP_REFERER'], 'Страница пользователя не создана или не активна');
+    appShowMessage($_SERVER['HTTP_REFERER'], 'РЎС‚СЂР°РЅРёС†Р° РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ РЅРµ СЃРѕР·РґР°РЅР° РёР»Рё РЅРµ Р°РєС‚РёРІРЅР°');
 
   $smarty = new coreTpl();
   $smarty->caching = false;
@@ -260,7 +260,7 @@ function user_user_user_view()
 
   $browsein = array();
   $browsein[]=array ('url'=>'index.php?module=user&type=user&func=main',
-                     'displayname'=>'Личная страница');
+                     'displayname'=>'Р›РёС‡РЅР°СЏ СЃС‚СЂР°РЅРёС†Р°');
 
   $result['object'] = $tpl['object'];
   $result['content'] = $smarty->fetch($tpl['src'],$tpl['object']);

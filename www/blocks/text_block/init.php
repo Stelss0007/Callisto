@@ -2,7 +2,7 @@
 
 function text_block_add($blockinfo)
   {
-  //Äîáîâëÿåì øàáëîí, åñëè íåòó åøå
+  //Ð”Ð¾Ð±Ð¾Ð²Ð»ÑÐµÐ¼ ÑˆÐ°Ð±Ð»Ð¾Ð½, ÐµÑÐ»Ð¸ Ð½ÐµÑ‚Ñƒ ÐµÑˆÐµ
   sysModClassLoad ('SYS_themes');
   $SYS_themes = new SYS_themes;
 
@@ -14,10 +14,10 @@ function text_block_add($blockinfo)
     $SYS_themes->tpl_add (array('tpl_compname'=>'text_block',
                                'tpl_name'=>'block_display.tpl',
                                'tpl_pattern'=>$sysObject,
-                               'tpl_description'=>'Âûâîä ñîäåðæàíèÿ áëîêà'));
+                               'tpl_description'=>'Ð’Ñ‹Ð²Ð¾Ð´ ÑÐ¾Ð´ÐµÑ€Ð¶Ð°Ð½Ð¸Ñ Ð±Ð»Ð¾ÐºÐ°'));
     };
 
-  //Äîáîâëÿåì øàáëîí, åñëè íåòó åøå
+  //Ð”Ð¾Ð±Ð¾Ð²Ð»ÑÐµÐ¼ ÑˆÐ°Ð±Ð»Ð¾Ð½, ÐµÑÐ»Ð¸ Ð½ÐµÑ‚Ñƒ ÐµÑˆÐµ
   $sysObject = 'text_block::modify';
   $sysModTpl = sysTplWay ($sysObject);
   if (empty ($sysModTpl))
@@ -25,7 +25,7 @@ function text_block_add($blockinfo)
     $SYS_themes->tpl_add (array('tpl_compname'=>'text_block',
                                'tpl_name'=>'block_modify.tpl',
                                'tpl_pattern'=>$sysObject,
-                               'tpl_description'=>'Ðåäàêòèðîâàíèå ñîäåðæàíèÿ áëîêà'));
+                               'tpl_description'=>'Ð ÐµÐ´Ð°ÐºÑ‚Ð¸Ñ€Ð¾Ð²Ð°Ð½Ð¸Ðµ ÑÐ¾Ð´ÐµÑ€Ð¶Ð°Ð½Ð¸Ñ Ð±Ð»Ð¾ÐºÐ°'));
     };
 
   return true;
@@ -48,13 +48,13 @@ function text_block_deactivate($blockinfo)
 
 function text_block_modify($blockinfo)
   {
-  //Ïðåëþäèå êàê ó âñåõ ìîäóëåé
+  //ÐŸÑ€ÐµÐ»ÑŽÐ´Ð¸Ðµ ÐºÐ°Ðº Ñƒ Ð²ÑÐµÑ… Ð¼Ð¾Ð´ÑƒÐ»ÐµÐ¹
   $sysObject = 'text_block::modify::'.$blockinfo[id];
   $sysModTpl=sysTplWay ($sysObject);
   $sysTpl = new sysTpl;
   $sysTpl->caching = false;
 
-  //Ñîäåðæàíèå
+  //Ð¡Ð¾Ð´ÐµÑ€Ð¶Ð°Ð½Ð¸Ðµ
   $content = sysBlockGetVar ($blockinfo['id'], 'content');
   $sysTpl->assign('content', $content);
 
@@ -64,10 +64,10 @@ function text_block_modify($blockinfo)
 
 function text_block_update($blockinfo)
   {
-  //Çàáèðàåì ïåðåìåííûå ñîâõîäà
+  //Ð—Ð°Ð±Ð¸Ñ€Ð°ÐµÐ¼ Ð¿ÐµÑ€ÐµÐ¼ÐµÐ½Ð½Ñ‹Ðµ ÑÐ¾Ð²Ñ…Ð¾Ð´Ð°
   $content = sysVarCleanFromInput('content');
   sysBlockSetVar ($blockinfo['id'], 'content', $content);
-  //Î÷èùàåì êåø øàáëîíîâ
+  //ÐžÑ‡Ð¸Ñ‰Ð°ÐµÐ¼ ÐºÐµÑˆ ÑˆÐ°Ð±Ð»Ð¾Ð½Ð¾Ð²
   $sysTpl = new sysTpl;
   $sysTpl->clear_cache(null, 'text_block::display');
   }
