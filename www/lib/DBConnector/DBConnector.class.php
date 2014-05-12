@@ -30,16 +30,32 @@ class DBConnector extends AppObject
     global $DBType;
     if ($this->Link_ID == 0)
       {
+        
+//    $this->Host = 'localhost';
+//    $this->User = 'root';
+//    $this->Password = 'root32pass';
+//    $this->Database = 'test';
+      
       $this->Link_ID = mysql_connect($this->Host,
-                      $this->User,
-                      $this->Password);
-      mysql_set_charset('windows-1251', $this->Link_ID);
+                                     $this->User,
+                                     $this->Password
+                                    );
+      if(!$this->Link_ID)
+        {
+        die ('Cannot connect to server. '.mysql_errno().' : '.mysql_error());
+        }
+        
+      //mysql_set_charset('windows-1251', $this->Link_ID);
       //mysql_query("SET character_set_results = 'utf8', character_set_client = 'utf8', character_set_connection = 'utf8', character_set_database = 'utf8', character_set_server = 'utf8'", $this->Link_ID);
       $SelectResult = mysql_select_db($this->Database, $this->Link_ID);
       if (!$SelectResult)
         {
-        echo "Error Connect to DB "; die ('NOT CONNECT TO DB');
+        die ('Error Connect to DB. '.mysql_errno().' : '.mysql_error());
         }
+        
+      mysql_query("SET NAMES 'utf8'");
+//      mysql_query("SET CHARACTER SET utf8");
+//      mysql_query("SET COLLATION_CONNECTION = 'utf8_unicode_ci'");
       }
     }
     

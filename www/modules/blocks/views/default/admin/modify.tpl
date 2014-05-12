@@ -1,5 +1,5 @@
 {strip}
-<form action="/blocks/update" method="post" class="form-horizontal">
+<form action="/admin/blocks/update" method="post" class="form-horizontal">
 <input type="hidden" name="id" value="{$id}">
 <input type="hidden" name="ref" value="{$ref}">
 

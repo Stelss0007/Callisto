@@ -10,13 +10,33 @@
     <meta name="keywords" content="Your keywords">
     <meta name="author" content="Your name">
     <link rel="stylesheet" href="/themes/blue/css/bootstrap.css" >
+    <link rel="stylesheet" href="/themes/blue/css/style.css">
     <link rel="stylesheet" href="/themes/blue/fonts/font-awesome.css">
     <link rel="stylesheet" href="/themes/blue/css/camera.css">
     
-   {appJsLoad modname='kernel' scriptname='jQuery'}
-   {appCssOutput cache=0}
-   {appJsOutput}
-  
+    <script src="/themes/blue/js/jquery.js"></script>
+    <script src="/themes/blue/js/jquery-migrate-1.2.1.min.js"></script>
+    <script src="/themes/blue/js/superfish.js"></script>
+    <script src="/themes/blue/js/jquery.mobilemenu.js"></script>
+    <script src="/themes/blue/js/jquery.easing.1.3.js"></script>
+    <script src="/themes/blue/js/jquery.ui.totop.js"></script>
+    <script src="/themes/blue/js/jquery.touchSwipe.min.js"></script>
+    <script src="/themes/blue/js/jquery.equalheights.js"></script>
+    
+    <script src='/themes/blue/js/camera.js'></script>
+    <!--[if (gt IE 9)|!(IE)]><!-->
+    <script src="/themes/blue/js/jquery.mobile.customized.min.js"></script>
+    <!--<![endif]-->
+    {literal}
+      <script>	
+          $(window).load( function(){	
+
+           jQuery('.camera_wrap').camera();	 
+
+          });
+      </script>
+    {/literal}
+    
     <!--[if lt IE 9]>
         <script src="docs-assets/js/ie8-responsive-file-warning.js"></script>
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -101,25 +121,38 @@
     </section>
     <section class="row_1"> 
         <div class="container">
-            <div class="row">
-                <div class="col-xs-6 col-md-2 menu-left">
-                  {if $blocks.left}
-                    {foreach item=block from=$blocks.left}
-                      <div class="left_content">
-                        <span id='mnu_title1' class='usermnutitle-g'>
-                          {$block.block_displayname|escape}
-                        </span>
-                        {$block.block_content}
-                      </div>
-                    {/foreach}
-                   {/if}
-                </div>
-                <div class="col-xs-12 col-md-10 content">
-                    <article class="row">
-                        {$module_content}
-                    </article>
-                </div>
-            </div>
+            <article class="row">
+                <ul class="list1">
+                    <li class="col-lg-3 col-md-3 col-sm-6 col-xs-6 collist1 maxheight1">
+                        <p class="listtitle1">SCHEDULE<span>SERVICES</span></p>
+                        <figure><img src="/themes/blue/img/page1_img1.jpg" alt=""></figure>
+                        <p class="listtitle2">Lorem dolor conetetu.</p>
+                        <p class="mbot1">Lorem ipsum dolor sit amet, consectetur adipisc elit. Proin ultricies vestibulum velit, bibendum condimentum metusip.</p>
+                        <a href="#" class="btn btn-primary btn1"><span>more info</span><strong><img src="/themes/blue/img/arrow1.png" alt=""></strong></a>
+                    </li>
+                    <li class="col-lg-3 col-md-3 col-sm-6 col-xs-6 collist1 maxheight1">
+                        <p class="listtitle1">PREVENTIVE<span>MAINTENANCE</span></p>
+                        <figure><img src="/themes/blue/img/page1_img2.jpg" alt=""></figure>
+                        <p class="listtitle2">Lorem dolor conetetu.</p>
+                        <p class="mbot1">Lorem ipsum dolor sit amet, consectetur adipisc elit. Proin ultricies vestibulum velit, bibendum condimentum metusip.</p>
+                        <a href="#" class="btn btn-primary btn1"><span>more info</span><strong><img src="/themes/blue/img/arrow1.png" alt=""></strong></a>
+                    </li>
+                    <li class="col-lg-3 col-md-3 col-sm-6 col-xs-6 collist1 maxheight1">
+                        <p class="listtitle1">TIRE & WHEEL<span>SERVICES</span></p>
+                        <figure><img src="/themes/blue/img/page1_img3.jpg" alt=""></figure>
+                        <p class="listtitle2">Lorem dolor conetetu.</p>
+                        <p class="mbot1">Lorem ipsum dolor sit amet, consectetur adipisc elit. Proin ultricies vestibulum velit, bibendum condimentum metusip.</p>
+                        <a href="#" class="btn btn-primary btn1"><span>more info</span><strong><img src="/themes/blue/img/arrow1.png" alt=""></strong></a>
+                    </li>
+                    <li class="col-lg-3 col-md-3 col-sm-6 col-xs-6 collist1 maxheight1">
+                        <p class="listtitle1">REPAIR<span>SERVICES</span></p>
+                        <figure><img src="/themes/blue/img/page1_img4.jpg" alt=""></figure>
+                        <p class="listtitle2">Lorem dolor conetetu.</p>
+                        <p class="mbot1">Lorem ipsum dolor sit amet, consectetur adipisc elit. Proin ultricies vestibulum velit, bibendum condimentum metusip.</p>
+                        <a href="#" class="btn btn-primary btn1"><span>more info</span><strong><img src="/themes/blue/img/arrow1.png" alt=""></strong></a>
+                    </li>
+                </ul>
+            </article>
         </div>
     </section> 
     <section class="row_2"> 
@@ -158,7 +191,7 @@
                 <article class="col-lg-3 col-md-3 col-sm-6 acticle-1">
                         <h2 class="pad1">why us?</h2>
                         <h3>Mes cuml dia sed inenias cet inger lot aliiqtes</h3>
-                        <figure><img src="/themes/blue/img/page1_img5.jpg" alt=""></figure>
+                        <figure><img src="img/page1_img5.jpg" alt=""></figure>
                         <p>Mes cuml dia sed in lacus ut eniascet ing erto aliiqt es site amet eismod ictorligulate ameti dapibus ticdu nt mtsen lusto dolor ltissim comes cuml dia sed inertio lacusu eni ascet dolingerto aliiqt sit.</p>
                     
                 </article>
@@ -210,7 +243,7 @@
                     </ul> 
                </article>
                 <article class="col-lg-6 col-md-6 col-sm-6 col-lg-pull-6 col-md-pull-6 col-sm-pull-6 colfooterrow1">
-                    <p class="footerpriv"><a class="cname" href="index.html">Car Repair </a> <span>&copy;</span> <span id="copyright-year"></span> <img src="/themes/blue/img/linefooter.jpg" alt=""> <strong><a class="privacylink" href="index-5.html">Privacy Policy</a></strong></p>
+                    <p class="footerpriv"><a class="cname" href="index.html">Car Repair </a> <span>&copy;</span> <span id="copyright-year"></span> <img src="img/linefooter.jpg" alt=""> <strong><a class="privacylink" href="index-5.html">Privacy Policy</a></strong></p>
                     
                 </article>
             </div>
@@ -218,11 +251,11 @@
     </div>
 </footer>
 <!--end footer-->
-<script src="/themes/blue/js/bootstrap.js"></script>
+<script src="/themes/blue/js/bootstrap.min.js"></script>
+<script src="/themes/blue/js/tm-scripts.js"></script>
 {literal}
   <script type="text/javascript">
-   /*
-    var _gaq = _gaq || [];
+   var _gaq = _gaq || [];
     _gaq.push(['_setAccount', 'UA-7078796-5']);
     _gaq.push(['_trackPageview']);
     (function() {
@@ -230,7 +263,6 @@
       ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
       var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
     })();
-   */
   </script>
 {/literal}
 </body>

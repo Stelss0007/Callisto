@@ -25,7 +25,6 @@ class Model extends DBConnector
     $this->Database = $this->config['DB.Name'];
     
     $this->connect();
-      
     
 //    $this->query('SELECT * FROM test');
 //    print_r($this->fetch_array());exit;
@@ -499,7 +498,7 @@ class Model extends DBConnector
       }
       
     preg_match('/^getBy(.*)OrderBy(.*)/simu', $name, $matches);
-    if($matches)
+    if(isset($matches) && $matches)
       {
       $field = strtolower($matches[1]);
       $value = $arguments[0];
@@ -509,7 +508,7 @@ class Model extends DBConnector
       }
       
     preg_match('/^getBy(.*)/simu', $name, $matches);
-    if($matches)
+    if(isset($matches) && $matches)
       {
       $field = strtolower($matches[1]);
       $value = $arguments[0];

@@ -27,11 +27,11 @@ body {
 /*--------------- row_s ----------------*/
 .row_1 {
 	padding: 100px 0 15px;
-	background: #ffffff url(../img/shadow1.jpg) center top repeat-x;
+	background: #ffffff;
 }
 .row_2 {
 	padding: 54px 0 60px;
-	background: #ffffff url(../img/line1.jpg) center top no-repeat;
+	background: #ffffff;
 }
 .row_3 {
 	padding: 66px 0 19px;
@@ -42,7 +42,7 @@ body {
 }
 .row_4 {
 	padding: 25px 0 85px;
-	background: #ffffff url(../img/line1.jpg) center top no-repeat;
+	background: #ffffff ;
 }
 .row_4 h2 {
 	padding: 30px 0 25px;
@@ -160,7 +160,7 @@ h4 {
 	padding: 0;
 	z-index: 10;
 	line-height: 0;
-	padding-right: 45px;
+	padding-right: 30px;
 }
 .btn1 span {
 	text-transform: uppercase;
@@ -171,14 +171,14 @@ h4 {
 	font-size: 14px;
 	line-height: 22px;
 	font-weight: 600;
-	padding: 11px 15px 12px 15px;
+	padding: 5px 8px 7px;
 	background: #7ecefd;
 	-webkit-transition: all 0.2s ease;
 	transition: all 0.2s ease;
 }
 .btn1 strong {
 	top: 0;
-	padding: 13px 15px 14px 19px;
+	padding: 8px 10px;
 	position: absolute;
 	background: #2185c5;
 	-webkit-transition: all 0.2s ease;
@@ -340,7 +340,7 @@ header {
 }
 .tm_navbar .nav li:first-child a {
 	font-size: 0;
-	padding: 27px 0 33px;
+	padding: 7px 0;
 }
 .tm_navbar .nav li.last {
 	float: left;
@@ -368,9 +368,9 @@ header {
 	line-height: 22px;
 	font-weight: 600;
 	color: #FFF;
-	background: #2185c5 url(../img/linemenu.png) right top repeat-y;
+	background: #2185c5;
 	min-width: 188px;
-	padding: 33px 0 33px;
+	padding: 10px 0 10px;
 	border: none;
 	border-radius: 0;
 	text-shadow: none;
@@ -378,7 +378,7 @@ header {
 	transition: all 0.1s ease;
 }
 .tm_navbar .nav > li > a .indicator1 {
-	background: url(../img/indicator.png) no-repeat 0 bottom;
+/*	background: url(../img/indicator.png) no-repeat 0 bottom;*/
 	width: 7px;
 	height: 5px;
 	display: inline-block;
@@ -573,7 +573,9 @@ header {
 	overflow: hidden;
 	position: relative;
 	list-style: none;
-	margin-bottom: 40px;
+	margin-bottom: 20px;
+        padding-bottom: 20px;
+        border-bottom: 1px solid #ddd;
 }
 .list1 li figure {
 	overflow: hidden;
@@ -621,7 +623,7 @@ header {
 	font-weight: 300;
 	color: #3e454c !important;
 	padding: 0;
-	margin: 29px 0 20px;
+	margin: 0px 0 20px;
 }
 /*------------row2------------*/
 .row2title {
@@ -657,6 +659,14 @@ header {
 	margin-top: 25px;
 	margin-bottom: 8px;
 }
+
+.left_content {
+    padding: 0;
+}
+.list2.left-menu {
+    margin-top: 0px;
+} 
+
 .list2 li {
 	position: relative;
 	margin-bottom: 6px;

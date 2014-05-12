@@ -493,6 +493,9 @@ function appGetDirList($dir_ = null)
   
 function appGetFileList($dir_ = null)
   {
+  if(empty($dir_))
+    return;
+
   //Взяли список с диска
   $file_list = array();
   

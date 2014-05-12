@@ -57,6 +57,7 @@ abstract class Controller extends AppObject
   
   function __construct($mod)
     {
+    date_default_timezone_set('Europe/Moscow');
     //APP_DIRECTORY = dirname(__FILE__);
     //print_r('wwww');exit;
     //$this->start_debug_time = time();
@@ -78,7 +79,7 @@ abstract class Controller extends AppObject
     define('DB_DIR',APP_DIRECTORY.'/lib/DBConnector/');
     require_once(DB_DIR.'DBConnector.class.php');
     
-    define('SMARTY_DIR',APP_DIRECTORY.'/lib/Smarty/');
+    //define('SMARTY_DIR',APP_DIRECTORY.'/lib/Smarty/');
     require_once(SMARTY_DIR.'Smarty.class.php');
 
     define('SESSION_DIR',APP_DIRECTORY.'/lib/UserSession/');
@@ -292,7 +293,7 @@ abstract class Controller extends AppObject
     
     //Подключим стили
     //Стили ядра
-    appCssLoad('kernel', 'bootstrap');
+    //appCssLoad('kernel', 'bootstrap');
     appCssLoad('kernel'); 
      
     //Без аргументов подключится стиль текущей темы
@@ -336,8 +337,10 @@ abstract class Controller extends AppObject
     {
     $this->usesModel('configuration');
     $db_conf = $this->configuration->getModConfiguration('main');
-    $this->config = array_merge($this->config, $db_conf);
-    //appDebug($db_conf);exit;
+    if(!empty($db_conf))
+      {
+      $this->config = array_merge($this->config, $db_conf);
+      }
     unset($db_conf);
     }
     
@@ -540,10 +543,11 @@ abstract class Controller extends AppObject
     //$url_result = $this->GetCallingMethodName(3, true);
     $action = $this->action;//$url_result['function'];
     $args = '';
-    foreach($url_result['args'] as $value)
-      {
-      $args .= '|'.$value;
-      }
+    if(isset($url_result['args']) && $url_result['args'])
+      foreach($url_result['args'] as $value)
+        {
+        $args .= '|'.$value;
+        }
     return $this->modname.'|'.$this->type.'|'.$action.$args.'|ACCESS_LEVEL_'.$this->permissionLavel;
     }
     

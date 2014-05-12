@@ -125,17 +125,17 @@ function objectGetPermsLevel ($object, $ownerid=-1)
     {
     foreach ($groups_perms_list as $permission)
       {
-      if (($permission[gid]!=$gid) && ($permission[gid]!=-1))
+      if (($permission['group_permission_gid']!=$gid) && ($permission['group_permission_gid']!=-1))
         continue;
 
-      if ($permission[component]) 
-        $pattern="/^$permission[component]::$permission[pattern]/Ui";
+      if (isset($permission['component']) && $permission['component']) 
+        $pattern="/^$permission[component]::$permission[group_permission_pattern]/Ui";
       else 
-            $pattern="/^.*::$permission[pattern]/Ui";
+            $pattern="/^.*::$permission[group_permission_pattern]/Ui";
       if (preg_match ($pattern, $object))
         {
-        if ($permission[level] > $level) 
-          $level = $permission[level];
+        if ($permission['group_permission_level'] > $level) 
+          $level = $permission['group_permission_level'];
         break;
         }
       }

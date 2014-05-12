@@ -166,7 +166,7 @@ class UserSession
    */
   function userGid()
     {
-    if($_SESSION['user_gid'])
+    if(isset($_SESSION['user_gid']))
       return $_SESSION['user_gid'];
     return -1;
     }
