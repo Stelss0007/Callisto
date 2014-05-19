@@ -19,7 +19,7 @@
           </div>
         </div>
 
-        <table  width='100%' cellspacing=0 cellpadding=4 class="table table-striped table-bordered bootstrap-datatable datatable" data-source="/admin/articles/ajax_article_list">
+        <table  width='100%' cellspacing=0 cellpadding=4 class="table table-striped table-bordered bootstrap-datatable" data-source="/admin/articles/ajax_article_list">
           <colgroup>
             <col width='10'>
             <col width='10'>
@@ -59,7 +59,7 @@
             </tr>
           </thead>
           <tbody>
-            {*
+            
             {foreach from=$articles_list item=article}
               {cycle name="articles" values="even, odd" assign="class" print=false}
               <tr class='{$class}'>
@@ -81,7 +81,11 @@
                   </a>
                 </td>
                 <td>
-                  {$article.article_active}
+                  {if $article.article_active == 1}
+                    {#sys_yes#}
+                  {else}
+                    {#sys_no#}
+                  {/if}
                 </td>
                 <td>
                   {$article.article_add_time|date_format}
@@ -100,7 +104,7 @@
                 </td>
               </tr>
             {/foreach}
-            *}
+            
           </tbody>
         </table>
       </form>

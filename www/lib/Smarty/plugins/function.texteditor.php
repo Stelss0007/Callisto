@@ -43,6 +43,10 @@ function smarty_function_texteditor($params, &$smarty)
         // General options
         mode : "exact",
         
+        force_br_newlines : false,
+        convert_newlines_to_brs : true,
+        remove_linebreaks : false,    
+        
         elements : "'.$id.'",
         theme : "advanced",
         //resize: false,

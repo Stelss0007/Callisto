@@ -35,7 +35,7 @@ class articles extends Model
     {
     if(!is_numeric($id))
       return false;
-    
+   
     $this->update($this->table, $data, "id = '$id'");
     }
   }

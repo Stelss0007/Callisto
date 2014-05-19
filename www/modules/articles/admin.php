@@ -50,6 +50,7 @@ class AdminController extends Controller
    
       
     $article = $this->articles->getById($id);
+    
     if($article)
       {
       $this->assign($article);

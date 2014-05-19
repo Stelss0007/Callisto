@@ -13,7 +13,7 @@
             </div>
           </div>
 
-          <table class="table table-striped table-bordered bootstrap-datatable datatable" cellSpacing="1" cellPadding="4" width="100%">
+          <table class="table table-striped table-bordered bootstrap-datatable" cellSpacing="1" cellPadding="4" width="100%">
             <colgroup>
               <col width="10">
               <col width="20%">

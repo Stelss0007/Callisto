@@ -18,7 +18,7 @@
           </div>
         </div>
 
-        <table  width='100%' cellspacing=0 cellpadding=4 class="table table-striped table-bordered bootstrap-datatable datatable">
+        <table  width='100%' cellspacing=0 cellpadding=4 class="table table-striped table-bordered bootstrap-datatable">
           <colgroup>
             <col width='10'>
             <col width='10'>

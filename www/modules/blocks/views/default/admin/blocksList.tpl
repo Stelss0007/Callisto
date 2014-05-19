@@ -19,7 +19,7 @@
             </div>
           </div>
 
-          <table class="table table-striped table-bordered bootstrap-datatable datatable" cellSpacing="1" cellPadding="4" width="100%">
+          <table class="table table-striped table-bordered bootstrap-datatable" cellSpacing="1" cellPadding="4" width="100%">
             <colgroup>
               <col width='10'>
               <col width='200'>
@@ -112,7 +112,7 @@
             </div>
           </div>
 
-          <table class="table table-striped table-bordered bootstrap-datatable datatable" cellSpacing="1" cellPadding="4" width="100%">
+          <table class="table table-striped table-bordered bootstrap-datatable" cellSpacing="1" cellPadding="4" width="100%">
             <colgroup>
               <col width='10'>
               <col width='200'>
@@ -207,7 +207,7 @@
             </div>
           </div>
 
-          <table class="table table-striped table-bordered bootstrap-datatable datatable" cellSpacing="1" cellPadding="4" width="100%">
+          <table class="table table-striped table-bordered bootstrap-datatable" cellSpacing="1" cellPadding="4" width="100%">
             <colgroup>
               <col width='10'>
               <col width='200'>
@@ -304,7 +304,7 @@
             </div>
           </div>
 
-          <table class="table table-striped table-bordered bootstrap-datatable datatable" cellSpacing="1" cellPadding="4" width="100%">
+          <table class="table table-striped table-bordered bootstrap-datatable" cellSpacing="1" cellPadding="4" width="100%">
             <colgroup>
               <col width='10'>
               <col width='200'>
@@ -399,7 +399,7 @@
               <a class="btn btn-danger batch-delete-button table_actions_link" rel="delete" href="#"><i class="icon-trash icon-white"></i> {#sys_delete#}</a>
             </div>
           </div>
-          <table class="table table-striped table-bordered bootstrap-datatable datatable" cellSpacing="1" cellPadding="4" width="100%">
+          <table class="table table-striped table-bordered bootstrap-datatable" cellSpacing="1" cellPadding="4" width="100%">
             <colgroup>
               <col width='10'>
               <col width='200'>

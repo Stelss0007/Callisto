@@ -10,7 +10,7 @@
     </div>
     <div class="box-content">
 
-      <table width='100%' cellspacing=0 cellpadding=4 class="table table-striped table-bordered bootstrap-datatable datatable">
+      <table width='100%' cellspacing=0 cellpadding=4 class="table table-striped table-bordered bootstrap-datatable">
         <colgroup>
           <col width='340'>
           <col width='*'>

@@ -70,10 +70,10 @@ class DBConnector extends AppObject
       {
       foreach($value as $k=>$v)
         {
-        if (!get_magic_quotes_runtime())
-          {
-          $value[$k] = mysql_real_escape_string($value[$k]);
-          }
+//        if (!get_magic_quotes_runtime())
+//          {
+//          $value[$k] = mysql_real_escape_string($value[$k]);
+//          }
         if(!get_magic_quotes_gpc())
           {
           $value[$k] = addslashes($value[$k]);
@@ -84,16 +84,16 @@ class DBConnector extends AppObject
       }
     else
       {
-      if (!get_magic_quotes_runtime())
-        {
-        $value = mysql_real_escape_string($value);
-        }
+//      if (!get_magic_quotes_runtime())
+//        {
+//        $value = mysql_real_escape_string($value);
+//        }
       if(!get_magic_quotes_gpc())
         {
         $value = addslashes($value);
         }
 
-      $value = str_replace("\\r\\n",'<br>', $value);
+      //$value = str_replace("\\r\\n",'<br>', $value);
       }
 
     
@@ -309,6 +309,7 @@ class DBConnector extends AppObject
 
   function update($table, $array, $where = '1=1')
     {
+    //appDebug($array);exit;
     if(empty($where))
       $where = '1 = 1';
     $where = 'WHERE '.str_ireplace('where', '', $where);
@@ -336,7 +337,7 @@ class DBConnector extends AppObject
       $keys = rtrim($keys, ',');
 
       $sql = "UPDATE $table SET $keys $where";
-
+      //appDebug($sql);exit;
       $this->query($sql);
     }
     

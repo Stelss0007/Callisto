@@ -19,7 +19,7 @@
           </div>
         </div>
 
-        <table  width='100%' cellspacing=0 cellpadding=2 class="table table-striped table-bordered bootstrap-datatable datatable">
+        <table  width='100%' cellspacing=0 cellpadding=2 class="table table-striped table-bordered bootstrap-datatable">
           <thead style="">
             <tr>
               <th style="width: 10px;">
