@@ -28,7 +28,7 @@
           </colgroup>
           <thead>
             <tr>
-              <th>
+              <th style="width: 25px;">
                 <input type="checkbox" name="entities[]" class="td_entiies_group" value="">
               </th>
               <th>

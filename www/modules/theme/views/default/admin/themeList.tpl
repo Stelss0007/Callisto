@@ -16,7 +16,7 @@
           <thead>
             <tr>
               <th style="width: 30px;"></th>
-              <th style="width: 10px;">
+              <th style="width: 25px;">
                 <input type="checkbox" name="entities[]" class="td_entiies_group" value="">
               </th>
               <th>

@@ -21,7 +21,7 @@
         <table class="table table-striped table-bordered bootstrap-datatable" width='100%' cellspacing=0 cellpadding=4>
           <thead>
             <tr>
-              <th style="width: 10px;">
+              <th style="width: 25px;">
                 <input type="checkbox" name="entities[]" class="td_entiies_group" value="">
               </th>
               <th>

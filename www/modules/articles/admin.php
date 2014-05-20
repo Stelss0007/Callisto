@@ -10,7 +10,12 @@ class AdminController extends Controller
     $this->usesModel('articleCategory');
 
     $this->articles_list = $this->articles->article_list(true);
-    $this->article_category_list = $this->articleCategory->category_list(false);
+    
+    //Подготовим фильтры
+    $category_filter_list[0] = $this->t('all_category');
+    $category_filter_list    = array_merge($category_filter_list, $this->articleCategory->category_list(false));
+    
+    $this->article_category_list = $category_filter_list;
     
     $browsein[] =array('url'=>"/admin/main", 'displayname'=>'Dashboard');
     $browsein[] =array('url'=>'/admin/articles', 'displayname'=>'Articles'); 

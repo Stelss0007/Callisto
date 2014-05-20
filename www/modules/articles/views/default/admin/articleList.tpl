@@ -4,6 +4,19 @@
       <h2><i class="icon-user"></i> {#articles_header#}</h2>
     </div>
     <div class="box-content">
+      <div class="btn-group" style="float: right;">
+        <form method="GET" class="app-filter">
+          <select name="article_category_id"  data-rel="chosen">
+            {html_options options=$article_category_list selected=$article_category_id}
+          </select>
+          <select name="article_user_id" data-rel="chosen">
+            {html_options options=$article_user_list selected=$article_user_id}
+          </select>
+          <select name="article_status_id" data-rel="chosen">
+            {html_options options=$article_status_list selected=$article_status_id}
+          </select>
+        </form>
+      </div>
       <form action="/admin/articles/group_operation">
         <div class="btn-toolbar batch-actions-buttons">
           <div class="btn-group">
@@ -17,12 +30,13 @@
           <div class="btn-group delete-article">
             <a class="btn btn-danger batch-delete-button table_actions_link" rel="delete" href="#"><i class="icon-trash icon-white"></i> {#sys_delete#}</a>
           </div>
+
         </div>
 
         <table  width='100%' cellspacing=0 cellpadding=4 class="table table-striped table-bordered bootstrap-datatable" data-source="/admin/articles/ajax_article_list">
           <colgroup>
-            <col width='10'>
-            <col width='10'>
+            <col width='30'>
+            <col width='30'>
             <col width='*'>
             <col width='*'>
             <col width='*'>
@@ -32,7 +46,7 @@
           </colgroup>
           <thead>
             <tr>
-              <th>
+              <th style="width: 25px;">
                 <input type="checkbox" name="entities[]" class="td_entiies_group" value="">
               </th>
               <th>
