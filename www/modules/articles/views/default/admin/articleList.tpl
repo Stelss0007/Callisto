@@ -6,14 +6,14 @@
     <div class="box-content">
       <div class="btn-group" style="float: right;">
         <form method="GET" class="app-filter">
-          <select name="article_category_id"  data-rel="chosen">
+          <select name="filter[article_category_id]"  data-rel="chosen">
             {html_options options=$article_category_list selected=$article_category_id}
           </select>
-          <select name="article_user_id" data-rel="chosen">
+          <select name="filter[article_user_id]" data-rel="chosen">
             {html_options options=$article_user_list selected=$article_user_id}
           </select>
-          <select name="article_status_id" data-rel="chosen">
-            {html_options options=$article_status_list selected=$article_status_id}
+          <select name="filter[article_active]" data-rel="chosen">
+            {html_options options=$article_status_list selected=$article_active}
           </select>
         </form>
       </div>
@@ -122,6 +122,7 @@
           </tbody>
         </table>
       </form>
+      {pagination name=article_description text=$article_description}
     </div>
   </div><!--/span-->
 

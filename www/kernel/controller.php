@@ -355,6 +355,15 @@ abstract class Controller extends AppObject
   //////////////////////////////////////////////////////////////////////////////
   ////////////////////////////   TEMPLATES  ////////////////////////////////////
   //////////////////////////////////////////////////////////////////////////////
+  final public function paginate($model=false)
+    {
+    if(empty($model))
+      return;
+    
+    //appDebug($model->pagination);exit;
+    $this->assign('pagination', $model->pagination);
+    }
+    
   final public function isCached()
     {
     $tpl_dir = $this->tplFileName();

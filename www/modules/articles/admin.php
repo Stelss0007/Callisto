@@ -8,14 +8,29 @@ class AdminController extends Controller
     $this->viewCachedPage();
     
     $this->usesModel('articleCategory');
-
-    $this->articles_list = $this->articles->article_list(true);
+    $this->usesModel('users');
+    
+    $this->articles_list = $this->articles->article_list(true, $this->getInput('filter', array()));
+    $this->paginate($this->articles);
     
     //Подготовим фильтры
     $category_filter_list[0] = $this->t('all_category');
     $category_filter_list    = array_merge($category_filter_list, $this->articleCategory->category_list(false));
     
+    $user_filter_list[0] = $this->t('all_user');
+    $user_filter_list    = array_merge($user_filter_list, $this->users->user_list(false));
+    
+    $status_filter_list['-1']   = $this->t('all_status');
+    $status_filter_list['1']    = $this->t('sys_active');
+    $status_filter_list['0']    = $this->t('sys_no_active');
+        
     $this->article_category_list = $category_filter_list;
+    $this->article_user_list     = $user_filter_list;
+    $this->article_status_list   = $status_filter_list;
+    
+    $this->assign($this->getInput('filter', array()));
+    //\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+    
     
     $browsein[] =array('url'=>"/admin/main", 'displayname'=>'Dashboard');
     $browsein[] =array('url'=>'/admin/articles', 'displayname'=>'Articles'); 

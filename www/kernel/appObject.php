@@ -20,8 +20,9 @@ class AppObject
   public    $theme;
   public    $session;
   protected $libs = array();
-  public   $models = array();
+  public    $models = array();
   protected $modname;
+  public    $pagination = array();
   
  
   final public function GetCallingMethodName($position = null, $with_args = false)
@@ -34,7 +35,7 @@ class AppObject
       return $trace[$position]['function'];
     
     return array('function'=>$trace[$position]['function'], 'args' => $trace[$position]['args']);
-    print_r($trace);
+    appDebug($trace);
     }
     
   final public function allVarToTpl()

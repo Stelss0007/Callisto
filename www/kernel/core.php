@@ -185,6 +185,58 @@ function app_utf8_cp1251 (&$value)
 
 
 /********************?????????, ?????????, ?????? *******************/
+ 
+function appBuildHttpQuery($query)
+  {
+  $query_array = array();
+  foreach( $query as $key => $key_value )
+    {
+    $query_array[] =  $key . '=' . urlencode( $key_value );
+    }
+  return implode( '&', $query_array );
+  }  
+  
+function appConvertUrlQuery($query) 
+  { 
+  $query = parse_url($query, PHP_URL_QUERY);
+  $queryParts = explode('&', $query); 
+
+  $params = array(); 
+  foreach ($queryParts as $param) { 
+      $item = explode('=', $param); 
+      $params[$item[0]] = $item[1]; 
+  } 
+
+  return $params; 
+  } 
+  
+function appUpdateUrlQuery($query, $fields) 
+  {
+  if(empty($fields))
+    return $query;
+  
+  $current_fields = appConvertUrlQuery($query);
+  foreach($fields as $key=>$value)
+    {
+    $current_fields[$key] = $value;
+    }
+  $curr_url_params = parse_url(appCurPageURL());
+  return $curr_url_params['scheme'].'://'.$curr_url_params['host'].$curr_url_params['path'].'?'.appBuildHttpQuery($current_fields);
+  } 
+
+function appCurPageURL() 
+  {
+  $pageURL = 'http';
+  if ($_SERVER["HTTPS"] == "on") {$pageURL .= "s";}
+  $pageURL .= "://";
+  if ($_SERVER["SERVER_PORT"] != "80") {
+   $pageURL .= $_SERVER["SERVER_NAME"].":".$_SERVER["SERVER_PORT"].$_SERVER["REQUEST_URI"];
+  } else {
+   $pageURL .= $_SERVER["SERVER_NAME"].$_SERVER["REQUEST_URI"];
+  }
+  return $pageURL;
+  }
+
 function appShowMessage($url, $message='', $time=1)
   {
   global $ses_info;

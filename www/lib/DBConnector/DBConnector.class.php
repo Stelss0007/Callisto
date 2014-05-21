@@ -166,6 +166,11 @@ class DBConnector extends AppObject
     unset($result);
     }
 
+  final function count($table, $where='')
+    {
+    $result = $this->select($table, 'SQL_CACHE COUNT(*) AS total', $where);
+    return $result['total'];
+    }
     
   final function select($table, $column=array(), $where='', $multi = false, $join='', $field_is_index = false)
     {

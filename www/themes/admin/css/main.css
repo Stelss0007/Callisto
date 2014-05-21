@@ -5407,3 +5407,16 @@ a.badge:hover {
 .bootstrap-datatable {
   
 }
+
+.pagination {
+  clear: both;
+  position: relative;
+}
+.pagination-info {
+  float: left;
+  padding: 5px 0px;
+}
+
+.pagination ul {
+  float: right;
+}
