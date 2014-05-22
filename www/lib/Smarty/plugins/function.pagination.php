@@ -3,29 +3,8 @@
 /*
  * Smarty plugin
  *
- * $transition      - ��� �������� (1)
- * $tmb_bar         - ������� � ���������� (true)
- * $speed           - �������� ����� �������(5000����), ���� ���������� ���� ����������
- * $autoplay        - ��������� ������� 'false'
- * $height          - ������ ��������������� ��������, �� ��� ����������� � ������ $height/$weight = 1/2
- * $show            - ���� �������� �������� ���������
- * $href            - ������ ��� �������� ���� ��� ���� �� ��������
- * $descript        - ��������, ��������� � ������ ������ ���� ��� ��������� ��������
- * $name            - ���, id �������
- * $startOn         - ����� ������������� ��������(���������� � ����, �� ��������� ����)
+ * $show_paging_text  - флаг описания постранички (1), например "Страница (1/10):"
  *
- *                    ������ ������
- *
-  {jsGalery name='rus4' src='img1/1.jpg' descript='Htllo world!!!' href='http://google.ru' }
-  {jsGalery name='rus4' src='img1/2.jpg' descript='Hello rus!!!'}
-  {jsGalery name='rus4' src='img1/3.jpg'}
-  {jsGalery name='rus4' src='img1/4.jpg'}
-  {jsGalery name='rus4' src='img1/5.jpg'}
-  {jsGalery name='rus4' src='img1/6.jpg'}
-  {jsGalery name='rus4' src='img1/7.jpg'}
-  {jsGalery name='rus4' src='img1/8.jpg'}
-  {jsGalery name='rus4' src='img1/9.jpg'}
-  {jsGalery name='rus4' src='img1/10.jpg'}
 
   {jsGalery name='rus4' show=true autoplay='false'  transition='0' height=330 speed=3000}
  */
@@ -34,6 +13,11 @@ function smarty_function_pagination($params, &$smarty)
   {
   extract($params);
   extract($smarty->get_template_vars('pagination'));
+  
+  //Default values
+  if(!isset($show_paging_text)) $show_paging_text = 1;
+  if(!isset($paging_text)) $paging_text = "Страницы: (%%page%%/%%page_total%%)";
+  
 
   $url = appCurPageURL();
   $url = appUpdateUrlQuery($url, array('page' => ''));
@@ -47,7 +31,13 @@ function smarty_function_pagination($params, &$smarty)
 
 
   $result = '<div class="pagination">';
-  $result .= "<div class='pagination-info'><b>Страницы: ({$page}/{$page_total}) </b></div>";
+  
+  if($show_paging_text) 
+    {
+    //$result .= "<div class='pagination-info'><b>Страницы: ({$page}/{$page_total}) </b></div>";
+    $result .= "<div class='pagination-info'><b>".  appStrReplaceTemplate($paging_text, $smarty->get_template_vars('pagination'))." </b></div>";
+    }
+    
   $result .= "<ul class='pagination-items'>";
 
   if($page_total > 1)

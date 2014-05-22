@@ -38,24 +38,7 @@ class articles extends Model
     $limit['element_at_page'] = '3';
       
     $sql_limit = '';
-    if (!empty($limit))
-      {
-      $result_array['page'] = (int) $limit['page'];
-      $result_array['element_at_page'] = (int) $limit['element_at_page']; //Количество авторы на страницу
-      $result_array['element_start_num'] = (int) ($limit['page'] - 1) * $result_array['element_at_page']; //Номер авторы с которого начинается список
-      $sql_limit = "LIMIT $result_array[element_start_num], $result_array[element_at_page]";
-      $result_array['element_start_num']++;
-      
-      //Cчитаем суммарное число записей подпадающих под фильтр
-      $total = $this->count("`{$this->table}`", $where);
-      $result_array['element_total_count'] = $total;
-      $result_array['element_end_num'] = $result_array['element_start_num'] + $result_array['element_at_page'] - 1;
-      if ($result_array['element_end_num'] > $result_array['element_total_count']) 
-        $result_array['element_end_num'] = $result_array['element_total_count'];
-      $result_array['page_total'] = ceil($result_array['element_total_count'] / $result_array['element_at_page']);
-
-      $this->pagination = $result_array;
-      }
+    $this->preparePagination($where, $sql_limit);
     
     $result = array();
     $sql = " 

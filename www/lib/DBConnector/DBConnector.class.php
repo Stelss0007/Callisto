@@ -172,7 +172,7 @@ class DBConnector extends AppObject
     return $result['total'];
     }
     
-  final function select($table, $column=array(), $where='', $multi = false, $join='', $field_is_index = false)
+  final function select($table, $column=array(), $where='', $multi = false, $join='', $field_is_index = false, $limit=false, $order=false)
     {
     if(is_array($column))
       {
@@ -192,7 +192,31 @@ class DBConnector extends AppObject
               $join
               $where";
     
-    if (!$multi) $sql.= ' LIMIT 1';
+    if($order)
+      {
+      if(is_array($order))
+        {
+        $orderArray = $order;
+        $order ='';
+        foreach($orderArray as $key=>$value)
+          {
+          $order[] = "$key $value";
+          }
+        $order = implode(', ', $order);
+        }
+        
+      $sql.= 'ORDER BY '.str_ireplace('order by', '', $order);
+      }
+    
+    if (!$multi) 
+      {
+      $sql.= ' LIMIT 1';
+      }
+    elseif($limit)
+      {
+      $sql.= 'LIMIT '.str_ireplace('limit', '', $limit);
+      }
+    
 //echo $sql;
     $this->query($sql);
 

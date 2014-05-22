@@ -182,7 +182,23 @@ function app_utf8_cp1251 (&$value)
       array_walk($value,'app_utf8_cp1251');
   }
 
+function appStrReplaceTemplate($message, $values)
+  {
+  preg_match_all('/%%([0-9A-Za-z_]+)%%/', $message, $matches);
 
+  foreach($matches[1] as $match)
+    {
+    if(isset($values[$match]))
+      {
+      $message = str_replace('%%'.$match.'%%', $values[$match], $message);
+      }
+    else
+      {
+      $message = str_replace('%%'.$match.'%%', '', $message);
+      }
+    }
+  return $message;
+  }
 
 /********************?????????, ?????????, ?????? *******************/
  

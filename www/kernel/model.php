@@ -11,6 +11,7 @@ class Model extends DBConnector
   public $relations = array();
   
   private $used_relations = array();
+  public  $elementAtPage = 10;
   
   //////////////////////////////////////////////////////////////////////////////
   function __construct($guid=0)
@@ -789,6 +790,35 @@ class Model extends DBConnector
     $this->getRelations($result);
     return $result;
     }
+    
+  /**
+   * 
+   * @param array $conditions
+   * @param array $params
+   * @return array
+   * 
+   *     $params = array(
+   *                 'fields' => array('id', 'login'),
+   *                 'limit' => 4,
+   *                 'offset' => 0,
+   *                 'order' => 'id',
+   *                 'condition' => "id > :id1 and id < :id2", 
+   *                 'condition' => array('id'=>array('4', '8')), 
+   *                 'params' => array(':id1'=>5, ':id2'=>10)
+   *                 );
+   */  
+  final function getListPagination($conditions = array(), $params = array())
+    {
+    $condition = $this->prepareCondition($conditions, $params);
+    $where = "{$condition['join']} {$condition['where']} {$condition['group']} {$condition['order']}";
+
+    $this->preparePagination($where, $sql_limit);
+    $where .= $sql_limit;
+    
+    $result = $this->select($this->table.' as t', $condition['fields'], $where, true);
+    $this->getRelations($result);
+    return $result;
+    }
   final function getById($id)
     {
     $params['limit'] = 1;
@@ -1003,6 +1033,41 @@ class Model extends DBConnector
   function groupActionInstall($ids)
     {
     
+    }
+    
+  /**
+   * 
+   */
+  function preparePagination($where, &$sql_limit)
+    {
+    //Формируем строку лимитов для sql запроса
+    $limit['page'] = $this->getInput('page', 1);
+    $limit['element_at_page'] = $this->elementAtPage;
+      
+    if(!isset($sql_limit))
+      {
+      $sql_limit = '';
+      }
+      
+    if (!empty($limit))
+      {
+      $result_array['page'] = (int) $limit['page'];
+      $result_array['element_at_page'] = (int) $limit['element_at_page']; //Количество авторы на страницу
+      $result_array['element_start_num'] = (int) ($limit['page'] - 1) * $result_array['element_at_page']; //Номер авторы с которого начинается список
+      $sql_limit = "LIMIT {$result_array['element_start_num']}, {$result_array['element_at_page']}";
+      $result_array['element_start_num']++;
+      
+      //Cчитаем суммарное число записей подпадающих под фильтр
+      $total = $this->count("`{$this->table}`", $where);
+      $result_array['element_total_count'] = $total;
+      $result_array['element_end_num'] = $result_array['element_start_num'] + $result_array['element_at_page'] - 1;
+      if ($result_array['element_end_num'] > $result_array['element_total_count']) 
+        $result_array['element_end_num'] = $result_array['element_total_count'];
+      $result_array['page_total'] = ceil($result_array['element_total_count'] / $result_array['element_at_page']);
+
+      $this->pagination = $result_array;
+      }
+    return array($result_array['element_start_num'], $result_array['element_at_page']);
     }
   }
 
