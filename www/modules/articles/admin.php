@@ -11,7 +11,7 @@ class AdminController extends Controller
     $this->usesModel('users');
     
     $this->articles_list = $this->articles->article_list(true, $this->getInput('filter', array()));
-    $this->paginate($this->articles);
+    //$this->paginate($this->articles);
     
     //Подготовим фильтры
     $category_filter_list[0] = $this->t('all_category');

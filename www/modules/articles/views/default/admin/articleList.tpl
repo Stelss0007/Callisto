@@ -122,7 +122,7 @@
           </tbody>
         </table>
       </form>
-      {pagination name=article_description text=$article_description}
+      {pagination paging_element_count=7}
     </div>
   </div><!--/span-->
 

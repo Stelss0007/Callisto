@@ -1040,6 +1040,8 @@ class Model extends DBConnector
    */
   function preparePagination($where, &$sql_limit)
     {
+    global $mod_controller;
+    
     //Формируем строку лимитов для sql запроса
     $limit['page'] = $this->getInput('page', 1);
     $limit['element_at_page'] = $this->elementAtPage;
@@ -1066,6 +1068,7 @@ class Model extends DBConnector
       $result_array['page_total'] = ceil($result_array['element_total_count'] / $result_array['element_at_page']);
 
       $this->pagination = $result_array;
+      $mod_controller->paginate($this);
       }
     return array($result_array['element_start_num'], $result_array['element_at_page']);
     }
