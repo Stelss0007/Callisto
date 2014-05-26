@@ -15,11 +15,11 @@ class AdminController extends Controller
     
     //Подготовим фильтры
     $category_filter_list[0] = $this->t('all_category');
-    $category_filter_list    = array_merge($category_filter_list, $this->articleCategory->category_list(false));
+    $category_filter_list    = $category_filter_list + $this->articleCategory->category_list(false);
     
     $user_filter_list[0] = $this->t('all_user');
-    $user_filter_list    = array_merge($user_filter_list, $this->users->user_list(false));
-    
+    $user_filter_list    = $user_filter_list + $this->users->user_list(false);
+ 
     $status_filter_list['-1']   = $this->t('all_status');
     $status_filter_list['1']    = $this->t('sys_active');
     $status_filter_list['0']    = $this->t('sys_no_active');

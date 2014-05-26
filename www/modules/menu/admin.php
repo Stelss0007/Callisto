@@ -130,7 +130,7 @@ class AdminController extends Controller
     $this->redirect();
     }
     
-  function actionWctive($id)
+  function actionActive($id)
     {
     $this->getAccess(ACCESS_ADMIN);
     $this->menu->block_active = '1';

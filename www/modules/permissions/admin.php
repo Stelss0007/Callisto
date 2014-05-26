@@ -70,13 +70,13 @@ class AdminController extends Controller
     $this->redirect();
     }
       
-  function actionPermissionWeightUp($weight)
+  function actionWeightUp($weight)
     {  
     $this->permissions->weightUp($weight);
     $this->redirect();
     }
     
-  function actionPermissionWeightDown($weight)
+  function actionWeightDown($weight)
     {  
     $this->permissions->weightDown($weight);
     $this->redirect();
