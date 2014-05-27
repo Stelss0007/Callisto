@@ -144,6 +144,13 @@ class ErrorHandler
     
   function showErrors()
     {
+//    if(empty($appConfig['debug.enabled']))
+//      {
+//      header('HTTP/1.1 404 Page Not Found');
+//      echo 'Page Not Found!';
+//      die();
+//      }
+    
     header('HTTP/1.1 500 Internal Server Error');
     ?>
     <body style="background-color: #DDB000;">
@@ -163,7 +170,7 @@ class ErrorHandler
       <table width="100%" cellspacing="1">
         <tr>
           <td colspan="3" align="center">
-            <h1>Callisto Error Reporter</h1>
+            <h1>Callisto Error Reporting</h1>
           </td>
         </tr>
         <tr style="background-color: red; color: #fff;" class="thead">

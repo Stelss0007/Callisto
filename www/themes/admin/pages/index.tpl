@@ -3,8 +3,10 @@
         <meta charset="utf-8">
         <title>Administration</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="description" content="Charisma, a fully featured, responsive, HTML5, Bootstrap admin template.">
-        <meta name="author" content="Muhammad Usman">
+        
+        <meta name="description" content="{if $module_meta_description}{$module_meta_description}{else}{$config.site_seo_description}{/if}"/>
+        <meta name="keywords" content="{if $module_meta_keywords}{$module_meta_keywords}{else}{$config.site_seo_keywords}{/if}"/>
+        <meta name="robots" content="{if $module_meta_robots}{$module_meta_robots}{else}{$config.site_seo_robots}{/if}"/>
 
         <!-- The styles -->
         <link href="/themes/admin/css/main.css" rel="stylesheet">
@@ -63,13 +65,13 @@
                     <!-- user dropdown starts -->
                     <div class="btn-group pull-right" >
                         <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-                            <i class="icon-user"></i><span class="hidden-phone"> admin</span>
+                            <i class="icon-user"></i><span class="hidden-phone"> {$currentUserInfo.name}</span>
                             <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu">
                             <li><a href="#">Profile</a></li>
                             <li class="divider"></li>
-                            <li><a href="login.html">Logout</a></li>
+                            <li><a href="/admin/users/login">Logout</a></li>
                         </ul>
                     </div>
                     <!-- user dropdown ends -->
@@ -90,6 +92,7 @@
                         <ul class="nav nav-tabs nav-stacked main-menu">
                             <li class="nav-header hidden-tablet">Main</li>
                             <li><a class="ajax-link" href="/admin/main"><i class="icon-home"></i><span class="hidden-tablet"> Dashboard</span></a></li>
+                            <li><a class="ajax-link" href="/admin/configuration"><i class="icon-wrench"></i><span class="hidden-tablet"> Configuration</span></a></li>
                             <li><a class="ajax-link" href="/admin/groups"><i class="icon-user"></i><span class="hidden-tablet"> Groups</span></a></li>
                             <li><a class="ajax-link" href="/admin/users/users_list"><i class="icon-user"></i><span class="hidden-tablet"> Users</span></a></li>
                             <li><a class="ajax-link" href="/admin/permissions"><i class="icon-eye-open"></i><span class="hidden-tablet"> Permission</span></a></li>
@@ -101,7 +104,7 @@
                             <li><a class="ajax-link" href="/admin/articles"><i class="icon-file"></i><span class="hidden-tablet"> Articles</span></a></li>
 
 
-                            <li><a class="ajax-link" href="/admin/permissions"><i class="icon-off"></i><span class="hidden-tablet"> LogOut</span></a></li>
+                            <li><a class="ajax-link" href="/admin/users/login"><i class="icon-off"></i><span class="hidden-tablet"> LogOut</span></a></li>
                         </ul>
 
                     </div><!--/.well -->

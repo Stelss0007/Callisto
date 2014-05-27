@@ -125,6 +125,7 @@ abstract class Controller extends AppObject
     //$this->loadModVars('kernel');
     
     $this->setModConfig();
+    $this->setTplUserInfo();
     
     //$this->object_name = $this->getObjectName();
 
@@ -343,6 +344,14 @@ abstract class Controller extends AppObject
       }
     unset($db_conf);
     }
+  final function setTplUserInfo()
+    {
+    $currentUserInfo['currentUserInfo']['id']   = $this->session->userId();
+    $currentUserInfo['currentUserInfo']['name'] = $this->session->userName();
+    $currentUserInfo['currentUserInfo']['gid']  = $this->session->userGid();
+    $this->assign($currentUserInfo);
+    return $this;
+    }
     
   final function getInput($var, $default)
     {
@@ -435,8 +444,12 @@ abstract class Controller extends AppObject
     echo json_encode($obj);
     }
 
-  final public function viewPage()
+  final public function viewPage($page_template = null)
     {
+    if($page_template)
+      {
+      $this->page = $page_template; 
+      }
     $tpl_dir = $this->tplFileName();
     $this->allVarToTpl();
     $this->blockToTpl();
@@ -455,10 +468,10 @@ abstract class Controller extends AppObject
       {
       if($this->type == 'admin')
         {
-        $pageTplFile = $this->root_dir.'themes/admin/pages/index.tpl';
-        $this->tpls[] = '(Main Template)themes/admin/pages/index.tpl';
+        $pageTplFile = $this->root_dir.'themes/admin/pages/'.$this->page.'.tpl';
+        $this->tpls[] = '(Main Template)themes/admin/pages/'.$this->page.'.tpl';
         
-        $ObjectThemeName = 'themes|admin|pages|index';
+        $ObjectThemeName = 'themes|admin|pages|'.$this->page;
         }
       else
         {
@@ -618,7 +631,7 @@ abstract class Controller extends AppObject
     $this->usesModel('permissions');
     return $this->permissionLavel = $this->permissions->objectGetPermsLevel($object);
     }
-  final public function getAccess($access_type=ACCESS_READ)
+  final public function getAccess($access_type=ACCESS_READ, $admin = true)
     {
     $object = $this->getObjectName();
     
@@ -626,16 +639,23 @@ abstract class Controller extends AppObject
     if($this->permissions->getAccess($object, $access_type)==true)
       return true;
     
-    $this->notAccess();
+    $this->notAccess($access_type, $admin);
     return false;
     }
     
-  final public function notAccess($access_type=ACCESS_READ)
+  final public function notAccess($access_type=ACCESS_READ, $admin = false)
     {
     $logedin = $this->session->isLogin();
     if(empty($logedin))
       {
-      $this->showMessage($this->t('page_not_access_most_login'), '/users/login');
+      if($admin)
+        {
+        $this->showMessage($this->t('page_not_access_most_login'), '/admin/users/login');
+        }
+      else
+        {
+        $this->showMessage($this->t('page_not_access_most_login'), '/users/login');
+        }
       }
       
     $this->errors->setError($this->t('page_not_access'));

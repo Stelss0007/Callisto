@@ -7,7 +7,7 @@ class AdminController extends Controller
     {
     $this->groups_list = $this->groups->group_list(true);
     
-    $browsein[] =array('url'=>"/admin/main", 'displayname'=>'Dashboard');
+    $browsein[] =array('url'=>"/admin/main", 'displayname'=>$this->t('dashboard'));
     $browsein[] =array('url'=>'', 'displayname'=>'Groups');
     $this->assign('module_browsein', $browsein);
     
@@ -31,7 +31,7 @@ class AdminController extends Controller
       $this->redirect('/admin/groups/groups_list');
       }
     ////////////////////////////////////////////////////////////////////////////
-    $browsein[] =array('url'=>"/admin/main", 'displayname'=>'Dashboard');
+    $browsein[] =array('url'=>"/admin/main", 'displayname'=>$this->t('dashboard'));
     $browsein[] =array('url'=>'/admin/groups', 'displayname'=>'Groups');  
    
       

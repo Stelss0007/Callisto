@@ -36,7 +36,7 @@ class AdminController extends Controller
     $this->assign('config_body', $this->smarty->fetch($config_view, $ObjectName));
     
     $browsein   = array();
-    $browsein[] = array('url' => "/admin/main", 'displayname' => 'Dashboard');
+    $browsein[] = array('url' => "/admin/main", 'displayname' => $this->t('dashboard'));
     $browsein[] = array('url' => '', 'displayname' => 'Files');
 
     $this->module_browsein = $browsein;

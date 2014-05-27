@@ -1433,3 +1433,7 @@ padding-top: 10px;
     color: #999999;
     cursor: default;
 }
+
+.clear {
+  clear: both;
+}

@@ -5,6 +5,7 @@ class AdminController extends Controller
   
   function actionArticleList()
     {
+    $this->getAccess(ACCESS_READ);
     $this->viewCachedPage();
     
     $this->usesModel('articleCategory');
@@ -32,7 +33,7 @@ class AdminController extends Controller
     //\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
     
     
-    $browsein[] =array('url'=>"/admin/main", 'displayname'=>'Dashboard');
+    $browsein[] =array('url'=>"/admin/main", 'displayname'=>$this->t('dashboard'));
     $browsein[] =array('url'=>'/admin/articles', 'displayname'=>'Articles'); 
     
     $this->assign('module_browsein', $browsein);
@@ -42,6 +43,7 @@ class AdminController extends Controller
     
   function actionArticleManage($id=0)
     {
+    $this->getAccess(ACCESS_ADD);
     $data = $this->input_vars;
     $this->article_category_list = $this->articleCategory->category_list(false);
     //appDebug($data);exit;
@@ -65,7 +67,7 @@ class AdminController extends Controller
       $this->redirect('/admin/articles/article_list');
       }
     ////////////////////////////////////////////////////////////////////////////
-    $browsein[] =array('url'=>"/admin/main", 'displayname'=>'Dashboard');
+    $browsein[] =array('url'=>"/admin/main", 'displayname'=>$this->t('dashboard'));
     $browsein[] =array('url'=>'/admin/articles', 'displayname'=>'Articles');  
    
       
@@ -90,9 +92,10 @@ class AdminController extends Controller
     
   function actionCategoryList()
     {
+    $this->getAccess(ACCESS_READ);
     $this->categories_list = $this->articleCategory->getList();
     //appDebug($this->articleCategory->getList());exit;   
-    $browsein[] =array('url'=>"/admin/main", 'displayname'=>'Dashboard');
+    $browsein[] =array('url'=>"/admin/main", 'displayname'=>$this->t('dashboard'));
     $browsein[] =array('url'=>'/admin/articles', 'displayname'=>'Articles'); 
     $browsein[] =array('url'=>'/admin/articles/ctegory_list', 'displayname'=>'Categories'); 
     
@@ -103,6 +106,7 @@ class AdminController extends Controller
     
   function actionCategoryManage($id=0)
     {
+    $this->getAccess(ACCESS_ADD);
     $data = $this->input_vars;
     //appDebug($data);exit;
     $this->usesModel('articleCategory');
@@ -122,7 +126,7 @@ class AdminController extends Controller
       }
       
     ////////////////////////////////////////////////////////////////////////////
-    $browsein[] =array('url'=>"/admin/main", 'displayname'=>'Dashboard');
+    $browsein[] =array('url'=>"/admin/main", 'displayname'=>$this->t('dashboard'));
     $browsein[] =array('url'=>'/admin/articles', 'displayname'=>'Articles');  
     $browsein[] =array('url'=>'/admin/articles/category_list', 'displayname'=>'Categories');  
  
@@ -144,6 +148,7 @@ class AdminController extends Controller
     
   function actionCategoryGroupOperation()
     {
+    $this->getAccess(ACCESS_ADMIN);
     $data = $this->input_vars;
     
     $model_name = 'articleCategory';
@@ -178,6 +183,8 @@ class AdminController extends Controller
     
   function actionAjaxArticleList()
     {
+    $this->getAccess(ACCESS_READ);
+    
     $aColumns = array( 'id', 'article_title', 'article_category_id', 'article_user_id', 'article_active', 'article_add_time' );
     
     $offset  = $this->getInput('iDisplayStart', '0');

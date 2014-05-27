@@ -8,7 +8,7 @@
         <div class="btn-toolbar batch-actions-buttons">
           <div class="btn-group">
             <a href='/admin/permissions/manage' class='btn btn-success'><i class="icon icon-plus-sign icon-white"></i> {#sys_add#}</a>
-            <a href='/admin/permissions/config' class="btn btn-icon btn-star-o" title="{#sys_configuration#}"><i class="icon-wrench"></i> {#sys_configuration#}</a>
+            <a href='/admin/configuration/permissions' class="btn btn-icon btn-star-o" title="{#sys_configuration#}"><i class="icon-wrench"></i> {#sys_configuration#}</a>
             <a href='#' rel="activate" class="btn btn-icon btn-star-o " title="{#sys_activate#}"><i class="icon-play"></i> {#sys_activate#}</a>
             <a href='#' rel="deactivate" class="btn btn-icon btn-star-o " title="{#sys_deactivate#}"><i class="icon-pause"></i> {#sys_deactivate#}</a>
           </div>

@@ -2,10 +2,11 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <title>{$module_page_title}</title>
+    <title>{$site_name}::{$module_page_title}</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="description" content="{$module_meta_description}"/>
-    <meta name="keywords" lang="ru" content="{$module_meta_keywords}"/>
+    <meta name="description" content="{if $module_meta_description}{$module_meta_description}{else}{$config.site_seo_description}{/if}"/>
+    <meta name="keywords" content="{if $module_meta_keywords}{$module_meta_keywords}{else}{$config.site_seo_keywords}{/if}"/>
+    <meta name="robots" content="{if $module_meta_robots}{$module_meta_robots}{else}{$config.site_seo_robots}{/if}"/>
     {appJsLoad modname='kernel' scriptname='jQuery'}
     {appCssOutput cache=0}
     {appJsOutput}

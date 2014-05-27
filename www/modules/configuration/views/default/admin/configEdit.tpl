@@ -15,7 +15,6 @@
       <div class="box-content">
 
         <fieldset>
-          <br><br>
           {$config_body}
 
           <div class="form-actions">

@@ -159,6 +159,17 @@ class UserSession
       return $_SESSION['user_id'];
     return -1;
     }
+    
+  /**
+   * Get curent user Name (login)
+   * @return integer 
+   */
+  function userName()
+    {
+    if($_SESSION['user'])
+      return $_SESSION['user'];
+    return 'Unknown';
+    }
 
   /**
    * Get curent user group ID (if user non authorized then return -1)

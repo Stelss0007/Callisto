@@ -32,7 +32,7 @@ class IndexController extends Controller
     //\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
     
     
-    $browsein[] =array('url'=>"/admin/main", 'displayname'=>'Dashboard');
+    $browsein[] =array('url'=>"/admin/main", 'displayname'=>$this->t('dashboard'));
     $browsein[] =array('url'=>'/admin/articles', 'displayname'=>'Articles'); 
     
     $this->assign('module_browsein', $browsein);
@@ -67,7 +67,7 @@ class IndexController extends Controller
     $this->article_status_list   = $status_filter_list;
     
     
-    $browsein[] =array('url'=>"/admin/main", 'displayname'=>'Dashboard');
+    $browsein[] =array('url'=>"/admin/main", 'displayname'=>$this->t('dashboard'));
     $browsein[] =array('url'=>'/admin/articles', 'displayname'=>'Articles'); 
     
     $this->assign('module_browsein', $browsein);

@@ -18,13 +18,13 @@ class AdminController extends Controller
     }
   function actionUsersList()
     {
-    $this->getAccess(ACCESS_ADD);
+    $this->getAccess(ACCESS_READ);
     $this->usesModel('groups');
  
     $this->groups_list = $this->groups->group_list(false);
     $this->users_list = $this->users->user_list(true);
     
-    $browsein[] =array('url'=>"/admin/main", 'displayname'=>'Dashboard');
+    $browsein[] =array('url'=>"/admin/main", 'displayname'=>$this->t('dashboard'));
     $browsein[] =array('url'=>'', 'displayname'=>'Users');
     
     $this->assign('module_browsein', $browsein);
@@ -34,6 +34,7 @@ class AdminController extends Controller
     
   function actionManage($id=0)
     {
+    $this->getAccess(ACCESS_ADD);
     $data = $this->input_vars;
     
     if($data['submit'])
@@ -54,7 +55,7 @@ class AdminController extends Controller
       }
     ////////////////////////////////////////////////////////////////////////////
     
-    $browsein[] =array('url'=>"/admin/main", 'displayname'=>'Dashboard');
+    $browsein[] =array('url'=>"/admin/main", 'displayname'=>$this->t('dashboard'));
     $browsein[] =array('url'=>'/admin/users', 'displayname'=>'Users');  
    
     
@@ -79,6 +80,7 @@ class AdminController extends Controller
     
   function actionDelete($id=0)
     {
+    $this->getAccess(ACCESS_DELETE);
     if(empty($id))
       $this->errors->setError("ID of user is missing!");
     
@@ -88,6 +90,7 @@ class AdminController extends Controller
     
   function actionActivation($id=0)
     {
+    $this->getAccess(ACCESS_ADMIN);
     if(empty($id))
       $this->errors->setError("ID of user is missing!");
     
@@ -98,7 +101,7 @@ class AdminController extends Controller
     
   function actionLogin()
     {
-
+    //$this->getAccess(ACCESS_READ);
     $data = $this->input_vars;
     if($data['submit'])
       {
@@ -109,7 +112,7 @@ class AdminController extends Controller
         $this->redirect();
         }
       $this->showMessage($this->t('login_success'));
-      $this->redirect();
+      $this->redirect('/admin/main');
       }
       
     if($this->users->isLogin())
@@ -120,7 +123,7 @@ class AdminController extends Controller
       {
       $this->isLogin = false;
       }  
-    $this->viewPage();
+    $this->viewPage('login-page');
     }
     
   function actionLogout()

@@ -14,6 +14,9 @@ class AdminController extends Controller
   {
   function actionIndex()
     {
+    $browsein[] =array('url'=>"/admin/main", 'displayname'=>  $this->t('dashboard'));
+    $this->assign('module_browsein', $browsein);
+    
     $this->viewPage();
     }
   }

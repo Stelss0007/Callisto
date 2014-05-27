@@ -12,7 +12,7 @@ class AdminController extends Controller
    
     $this->assign('group', $this->groups->group_list());
     
-    $browsein[] =array('url'=>"/admin/main", 'displayname'=>'Dashboard');
+    $browsein[] =array('url'=>"/admin/main", 'displayname'=>$this->t('dashboard'));
     $browsein[] =array('url'=>'', 'displayname'=>'Permissions');
     $this->assign('module_browsein', $browsein);
     
@@ -40,7 +40,7 @@ class AdminController extends Controller
     $this->usesModel('groups');
     $this->assign('groups', $this->groups->group_list());
     
-    $browsein[] =array('url'=>"/admin/main", 'displayname'=>'Dashboard');
+    $browsein[] =array('url'=>"/admin/main", 'displayname'=>$this->t('dashboard'));
     $browsein[] =array('url'=>'/admin/permissions', 'displayname'=>'Permissions');  
   
     $this->levels = $this->permissions->permission_level();

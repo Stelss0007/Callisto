@@ -8,7 +8,7 @@ class AdminController extends Controller
   function actionFileList()
     {
     $browsein   = array();
-    $browsein[] = array('url' => "/admin/main", 'displayname' => 'Dashboard');
+    $browsein[] = array('url' => "/admin/main", 'displayname' => $this->t('dashboard'));
     $browsein[] = array('url' => '', 'displayname' => 'Files');
 
     $this->module_browsein = $browsein;

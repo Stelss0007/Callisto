@@ -23,6 +23,7 @@
     <div class="article-description">
         {$article.article_description|strip_tags|substr:0:800} 
     </div>
+    <div class="clear"></div>
   </div> 
 {/foreach}
 </div>

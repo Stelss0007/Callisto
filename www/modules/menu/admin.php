@@ -19,8 +19,8 @@ class AdminController extends Controller
 //    exit;
     
     $menu = $this->menu->getById($parent_id);
-
-    $browsein = $this->menu->parent_browsein($menu['menu_path']);
+    $browsein[] =array('url'=>"/admin/main", 'displayname'=>$this->t('dashboard'));
+    $browsein = array_merge($browsein, $this->menu->parent_browsein($menu['menu_path']));
     if($parent_id > 0)
       {
       $browsein[] =array('url'=>'', 'displayname'=>$menu['menu_title']);
@@ -47,7 +47,8 @@ class AdminController extends Controller
     $this->setReferer();
     
     $menu = $this->menu->getById($id);
-    $browsein = $this->menu->parent_browsein($menu['menu_path']);
+    $browsein[] =array('url'=>"/admin/main", 'displayname'=>$this->t('dashboard'));
+    $browsein = array_merge($browsein, $this->menu->parent_browsein($menu['menu_path']));
     $browsein[] =array('url'=>"/admin/menu/menu_list/{$menu['id']}", 'displayname'=>$menu['menu_title']);
     $browsein[] =array('url'=>'', 'displayname'=>'Edit');
  
@@ -65,7 +66,8 @@ class AdminController extends Controller
     $this->setReferer();
   
     $menu = $this->menu->getById($id);
-    $browsein = $this->menu->parent_browsein($menu['menu_path']);
+    $browsein[] =array('url'=>"/admin/main", 'displayname'=>$this->t('dashboard'));
+    $browsein = array_merge($browsein, $this->menu->parent_browsein($menu['menu_path']));
     if($id > 0)
       {
       $browsein[] =array('url'=>"/admin/menu/menu_list/{$menu['id']}", 'displayname'=>$menu['menu_title']);
