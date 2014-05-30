@@ -3,146 +3,143 @@
 {array_append name='yes_no' key='1' value='Да'}
 {array_append name='yes_no' key='0' value='Нет'}
 
-<form name="item_new_form" action="/admin/menu/manage" method="post">
-  <input type="hidden" name="id" value="{$id}">
-  <table class="outer" cellSpacing="1" cellPadding="4" width="100%">
-    <colgroup>
-      <col width="25%">
-      <col width="75%">
-    </colgroup>
-    
-    <thead>
-      <tr>
-        <th colSpan="2">Редактирование элемента</th>
-      </tr>
-    </thead>
-    
-    <tfoot>
-      <tr>
-        <td class="foot" colspan="2" align="center">
-          <input class="formButton" type="submit" value="Редактировать" name="submit">
-        </td>
-      </tr>
-    </tfoot>
+<form action="/admin/menu/manage" method="post" class="form-horizontal">
+  <input type="hidden" name='id' value="{$id}">
+  <div class="row-fluid">
+    <div class="box span12">
+      <div class="box-header well" data-original-title>
+        <h2><i class="icon-edit"></i>  {#menu_edit_element#}</h2>
+        <div class="box-icon">
+        </div>
+      </div>
+      <div class="box-content">
+        
+        <fieldset>
+           {* <legend>Manage form</legend>*}
+            <br><br>
+             <div class="control-group">
+              <label class="control-label" for="date01">{#menu_parent#}</label>
+              <div class="controls">
+                {* Формируем плоский масив для функции html_options *}
+                {array name='flat_itemslist'}
+                {array_append name='flat_itemslist' key='0' value='Корень'}
 
-    <tbody>
-      <tr>
-        <td class="head">Находиться в</td>
-        <td class="even">
-          {* Формируем плоский масив для функции html_options *}
-          {array name='flat_itemslist'}
-          {array_append name='flat_itemslist' key='0' value='Корень'}
+                {foreach item=item from=$items_list}
+                  {array_append name='flat_itemslist' key=$item.id value=$item.menu_title|escape|tree:$item.level}
+                {/foreach}
 
-          {foreach item=item from=$items_list}
-            {array_append name='flat_itemslist' key=$item.id value=$item.menu_title|escape|tree:$item.level}
-          {/foreach}
+                <select name=menu_parent_id  data-rel="chosen">
+                  {html_options options=$flat_itemslist selected=$menu_parent_id}
+                </select>
+              </div>
+             </div>
+              
+             <div class="control-group">
+              <label class="control-label" for="date01">{#menu_active#}</label>
+              <div class="controls">
+                 {html_radios name="menu_active" options=$yes_no checked=$menu_active separator=" "}
+              </div>
+             </div>
+              
+             <div class="control-group">
+              <label class="control-label" for="date01">{#menu_name#}</label>
+              <div class="controls">
+                 <input type="text" size="70" name="menu_title" style="width: 98%;" value="{$menu_title|escape}">
+              </div>
+             </div>
+              
+             <div class="control-group">
+              <label class="control-label" for="date01">Маска, где развернуты вложенные элементы</label>
+              <div class="controls">
+                <input type="text" size="70" name="menu_item_pattern" style="width: 98%;" value="{$menu_item_pattern}">
+              </div>
+             </div>
+              
+             <div class="control-group">
+              <label class="control-label" for="date01">{#menu_description#}</label>
+              <div class="controls">
+                 <textarea name="menu_description" rows="5" cols="70" style="width: 98%;">{$menu_description|escape}</textarea>
+              </div>
+             </div>
+              
+             <div class="control-group">
+              <label class="control-label" for="date01">{#menu_type#}</label>
+              <div class="controls type-select">
+                <label>
+                {if $menu_item_type==1}
+                  <input type="radio" value="1" name="menu_item_type" checked> Разделитель
+                {else}
+                  <input type="radio" value="1" name="menu_item_type"> Разделитель
+                {/if}
+                </label>
+                &nbsp;
+                &nbsp;
+                <label>
+                {if $menu_item_type==2}
+                  <input type="radio" value="2" name="menu_item_type" checked> Заголовок
+                {else}
+                  <input type="radio" value="2" name="menu_item_type"> Заголовок
+                {/if}
+                </label>
+                &nbsp;
+                &nbsp;
+                <label>
+                {if $menu_item_type==3}
+                  <input type="radio" value="3" name="menu_item_type" checked> Url
+                {else}
+                  <input type="radio" value="3" name="menu_item_type"> Url
+                  {/if}
+                </label>
+                &nbsp;
+                &nbsp;
+                <label>
+                {if $menu_item_type==4}
+                  <input type="radio" value="4" name="menu_item_type" checked> Html код
+                {else}
+                  <input type="radio" value="4" name="menu_item_type"> Html код
+                {/if}
+                </label>
+                
+                <div class="type-value">
+                  {if $menu_item_type==3}
+                    <input size="70" type="text"  name="menu_content3" id="menu_content3"  style="width: 98%;" value="{$menu_content|escape}">
+                  {else}
+                    <input size="70" type="text"  name="menu_content3" id="menu_content3"  style="width: 98%;" value="">
+                  {/if}
+               
+                  {if $menu_item_type==4}
+                    <textarea name="menu_content4" id="menu_content4" rows="5" style="width: 98%;" cols="70">{$menu_content|escape}</textarea>
+                  {else}
+                    <textarea name="menu_content4" id="menu_content4" rows="5" style="width: 98%;" cols="70"></textarea>
+                  {/if}
+                </div>
+              </div>
+             </div>
+           
+              
+            <div class="form-actions">
+              <button type="submit" class="btn btn-primary" name="submit" value="submit">{#sys_save#}</button>
+              <button type="reset" class="btn">Cancel</button>
+            </div>
+        
+        </fieldset>
+      </div>
+    </div><!--/span-->
 
-          <select name=menu_parent_id>
-            {html_options options=$flat_itemslist selected=$menu_parent_id}
-          </select>
-        </td>
-      </tr>
-
-      <tr>
-        <td class="head">Активна</td>
-        <td class="even">
-          {html_radios name="menu_active" options=$yes_no checked=$menu_active separator=" "}
-        </td>
-      </tr>
-
-      <tr>
-        <td class="head">Имя</td>
-        <td class="even">
-          <input size="70" name="menu_title" value="{$menu_title|escape}">
-        </td>
-      </tr>
-
-      <tr>
-        <td class="head">Маска, где развернуты вложенные элементы</td>
-        <td class="even">
-          <input size="70" name="menu_item_pattern" value="{$menu_item_pattern}">
-        </td>
-      </tr>      
-
-      <tr>
-        <td class="head">Описание</td>
-        <td class="even">
-          <textarea name="menu_description" rows="5" cols="70">{$menu_description|escape}</textarea>
-        </td>
-      </tr>
-
-      <tr>
-        <th>Тип : </th>
-        <th>Параметры : </th>
-      </tr>
-
-      <tr>
-        {if $menu_item_type==1}
-          <td class="head">
-            <input type="radio" value="1" name="menu_item_type" checked> Разделитель
-          </td>
-        {else}
-          <td class="head">
-            <input type="radio" value="1" name="menu_item_type"> Разделитель
-          </td>
-        {/if}
-        <td class="even">&nbsp</td>
-      </tr>
-
-      <tr>
-        {if $menu_item_type==2}
-          <td class="head">
-            <input type="radio" value="2" name="menu_item_type" checked> Заголовок
-          </td>
-        {else}
-          <td class="head">
-            <input type="radio" value="2" name="menu_item_type"> Заголовок
-          </td>
-        {/if}
-        <td class="even">&nbsp</td>
-      </tr>
-
-      {if $menu_item_type==3}
-        <tr>
-          <td class="head">
-            <input type="radio" value="3" name="menu_item_type" checked> Url
-          </td>
-          <td class="even">
-            <input size="70" name="menu_content3" value="{$menu_content|escape}">
-          </td>
-        </tr>
-      {else}
-        <tr>
-          <td class="head">
-            <input type="radio" value="3" name="menu_item_type"> Url
-          </td>
-          <td class="even">
-            <input size="70" name="menu_content3" value="">
-          </td>
-        </tr>
-      {/if}
-
-      {if $menu_item_type==4}
-        <tr>
-          <td class="head">
-            <input type="radio" value="4" name="menu_item_type" checked> Html код
-          </td>
-          <td class="even">
-            <textarea name="menu_content4" rows="5" cols="70">{$menu_content|escape}</textarea>
-          </td>
-        </tr>
-      {else}
-        <tr>
-          <td class="head">
-            <input type="radio" value="4" name="menu_item_type"> Html код
-          </td>
-          <td class="even">
-            <textarea name="menu_content4" rows="5" cols="70"></textarea>
-          </td>
-        </tr>
-      {/if}
-    <tbody>        
-    
-  </table>
+  </div><!--/row-->
 </form>
 {/strip}
+
+{literal}
+  <style>
+    .type-value input, .type-value textarea {
+      display: none;
+    }
+  </style>
+  <script>
+    $('.type-select input').change(function(){
+      $('.type-value').children().hide();
+      $('#menu_content'+$(this).val()).show();
+    });
+  </script>
+{/literal}
