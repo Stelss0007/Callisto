@@ -1115,26 +1115,44 @@ abstract class Controller extends AppObject
   //////////////////////////////////////////////////////////////////////////////
   ////////////////////////////   IMAGES     ////////////////////////////////////
   //////////////////////////////////////////////////////////////////////////////
+  /**
+   * Функция получения изображения с формы
+   * @param string $name Имя поля получаемого файла
+   * @return boolean
+   */
   final public function getImage($name = false)
     {
     if(empty($name))
       $this->errors->setError('FILE NAME CAN NOT BE NULL!');
-    
-    $result = $_FILES;
- 
+
     $img_type = array("image/gif", "image/jpeg", "image/png", "image/pjpeg");
 
     $result = $_FILES[$name];
     
+    if(empty($result) || $result['error'])
+      return false;
+    
     if(!in_array($result['type'], $img_type))
-       $this->errors->setError('FILE "'.$name.'" IS NOT!'); 
+       $this->errors->setError('FILE "'.$name.'" IS NOT EXIST!'); 
  
     $this->input_images = $result;
     return $result;
     }
     
-  final public function saveImage($id = null, $name = null)
+  /**
+   * Функция сохранения файла
+   * @param string $poatFileName Имя поля получаемого файла
+   * @param integer $id Ид обьекта к которому относится изображение
+   * @param string $newName Новое имя сохраняемого файла файла 
+   * @return string|boolean
+   */ 
+  final public function saveImage($poatFileName, $id = null, $newName = null)
     {
+    $this->getImage($poatFileName);
+    
+    if(empty($this->input_images))
+      return false;
+    
     if(empty($id))
       $this->errors->setError('OBJECT ID CAN NOT BE NULL!');
     if(!is_numeric($id))
@@ -1149,16 +1167,17 @@ abstract class Controller extends AppObject
     
     $path = "images/{$this->modname}/{$id8[7]}/{$id8[6]}/$id8/";
 
-    if (!mkdir($path, 0777, true)) 
-      {
-      $this->errors->setError('Failed to create folders...');
-      }
+    if(!is_dir($path))
+      if (!mkdir($path, 0777, true)) 
+        {
+        $this->errors->setError('Failed to create folders...');
+        }
       
     $ext = substr(strrchr($this->input_images['name'], '.'), 1);
     
-    $name = (empty($name)) ? $id8 : $name;
+    $newName = (empty($newName)) ? $id8 : $newName;
     
-    $dst = $path.$name.'.'.$ext;
+    $dst = $path.$newName.'.'.$ext;
     
     move_uploaded_file($this->input_images['tmp_name'], $dst);
     
@@ -1166,15 +1185,19 @@ abstract class Controller extends AppObject
     
     $img = new Image();
     
+    $result_files = array();
+    $result_files['original'] = $dst;
+    
     foreach($this->image_size as $value)
       {
       $img->load($dst);
       //$img->resize($value['width'], $value['height']);
       $img->resizeToWidth($value['width']);
-      $img->save($path.$name.'_w'.$value['width'].'.'.$ext);
+      $result_files[$value['width']] = $fname = $path.$newName.'_w'.$value['width'].'.'.$ext;
+      $img->save($fname);
       }
     
-    return $dst;
+    return $result_files;
     }
   
   final public function getImageSrc($id=null, $w=null, $name=null)

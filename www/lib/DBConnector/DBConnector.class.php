@@ -366,7 +366,7 @@ class DBConnector extends AppObject
       $keys = rtrim($keys, ',');
 
       $sql = "UPDATE $table SET $keys $where";
-      //appDebug($sql);exit;
+      //appDebug($sql);
       $this->query($sql);
     }
     

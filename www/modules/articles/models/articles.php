@@ -65,7 +65,7 @@ class articles extends Model
   
   function article_create($data)
     {
-    $this->insert($this->table, $data);
+    return $this->insert($this->table, $data);
     }
     
   function article_update($data, $id)

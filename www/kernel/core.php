@@ -9,6 +9,12 @@ appUsesLib('UserSession');
 
 function appDebug($value)
   {
+  appDebug($value);
+  exit;
+  }
+  
+function appDebugExit($value)
+  {
   echo "<pre>";
   print_r($value);
   echo "</pre>";
