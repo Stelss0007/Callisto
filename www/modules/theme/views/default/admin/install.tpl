@@ -2,7 +2,7 @@
 <div class="row-fluid">		
   <div class="box span12">
     <div class="box-header well" data-original-title>
-      <h2><i class="icon-picture"></i> {#themes_add_header#}</h2>
+      <h2><i class="icon-photo"></i> {#themes_add_header#}</h2>
     </div>
     <div class="box-content">
       <form action="/admin/theme/group_operation">

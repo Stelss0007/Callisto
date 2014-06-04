@@ -1,7 +1,7 @@
 <div class="row-fluid">		
   <div class="box span12">
     <div class="box-header well" data-original-title>
-      <h2><i class="icon-user"></i> {#groups_header#}</h2>
+      <h2><i class="icon-users"></i> {#groups_header#}</h2>
     </div>
     <div class="box-content">
       <form action="/admin/groups/group_operation">

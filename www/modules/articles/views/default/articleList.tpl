@@ -1,5 +1,5 @@
 {appCssLoad modname=articles}
-
+<i class="icon-comments"></i>hello
 <div class="article-list">
 {foreach from=$articles_list item=article}
   {cycle name="articles" values="even, odd" assign="class" print=false}

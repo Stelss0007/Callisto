@@ -96,15 +96,16 @@
                             <li class="nav-header hidden-tablet">Main</li>
                             <li><a class="ajax-link" href="/admin/main"><i class="icon-home"></i><span class="hidden-tablet"> Dashboard</span></a></li>
                             <li><a class="ajax-link" href="/admin/configuration"><i class="icon-wrench"></i><span class="hidden-tablet"> Configuration</span></a></li>
-                            <li><a class="ajax-link" href="/admin/groups"><i class="icon-user"></i><span class="hidden-tablet"> Groups</span></a></li>
+                            <li><a class="ajax-link" href="/admin/groups"><i class="icon-users"></i><span class="hidden-tablet"> Groups</span></a></li>
                             <li><a class="ajax-link" href="/admin/users/users_list"><i class="icon-user"></i><span class="hidden-tablet"> Users</span></a></li>
                             <li><a class="ajax-link" href="/admin/permissions"><i class="icon-eye-open"></i><span class="hidden-tablet"> Permission</span></a></li>
                             <li><a class="ajax-link" href="/admin/menu"><i class="icon-list"></i><span class="hidden-tablet"> Menu</span></a></li>
                             <li><a class="ajax-link" href="/admin/modules"><i class="icon-list-alt"></i><span class="hidden-tablet"> Modules</span></a></li>
                             <li><a class="ajax-link" href="/admin/blocks"><i class="icon-th"></i><span class="hidden-tablet"> Blocks</span></a></li>
-                            <li><a class="ajax-link" href="/admin/theme"><i class="icon-picture"></i><span class="hidden-tablet"> Themes</span></a></li>
+                            <li><a class="ajax-link" href="/admin/theme"><i class="icon-photo"></i><span class="hidden-tablet"> Themes</span></a></li>
                             <li><a class="ajax-link" href="/admin/files"><i class="icon-folder-close"></i><span class="hidden-tablet"> Files</span></a></li>
                             <li><a class="ajax-link" href="/admin/articles"><i class="icon-file"></i><span class="hidden-tablet"> Articles</span></a></li>
+                            <li><a class="ajax-link" href="/admin/help/icons"><i class="icon-info-circle"></i><span class="hidden-tablet"> Icons</span></a></li>
 
 
                             <li><a class="ajax-link" href="/admin/users/login"><i class="icon-off"></i><span class="hidden-tablet"> LogOut</span></a></li>

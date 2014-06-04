@@ -2,7 +2,7 @@
 class IndexController extends Controller
   {
 
-  function view_mod()
+  function actionView_mod()
     {
     //$this->errors->setError("Index not Exist!!!");
     $this->getAccess(ACCESS_READ);
@@ -10,7 +10,7 @@ class IndexController extends Controller
     $this->view();
     }
 
-  function view_page()
+  function actionView_page()
     {
     //$_SESSION['user_gid'] = -1;
 //    $this->debuger->debug("Очень простое сообщение на консоль");
@@ -39,13 +39,13 @@ class IndexController extends Controller
     }
 
   //Пример приема параметров через аргументы метода
-  function view_arg($a='1', $b=2, $c=4, $n='0')
+  function actionView_arg($a='1', $b=2, $c=4, $n='0')
     {
     echo $a.$b.$c.$n;
     }
     
   //Пример работы с доступом
-  function view_access()
+  function actionView_access()
     {
     //$this->errors->setError("Index not Exist!!!");
     $this->getAccess(ACCESS_READ);
@@ -54,32 +54,32 @@ class IndexController extends Controller
     }
    
   //Пример работы с доступом
-  function view_error()
+  function actionView_error()
     {
     $this->errors->setError("This is Error!!!");
     }  
     
   //Пример получения объекта по его ИД  
-  function view_object($guid=0)
+  function actionView_object($guid=0)
     {
     print_r($this->test->getObject($guid));
     $this->debuger->debug('Привет');
     }
   
   //Пример получения списка объектов  
-  function view_objects($offset=0)
+  function actionView_objects($offset=0)
     {
     print_r($this->test->getObjectsList(array('arg1'=>'1'), array('arg2'=>'asc'), $offset));
     }
   
   //Пример удаления объекта по его ИД
-  function delete_object($id=0)
+  function actionDelete_object($id=0)
     {
     $this->test->deleteObject($id);
     }
   
   //Пример обновления объекта по его ИД
-  function update_object($a='1', $b=2, $c=4, $n='0')
+  function actionUpdate_object($a='1', $b=2, $c=4, $n='0')
     {
     //echo $this->test->sum(6,8);
     
@@ -90,12 +90,12 @@ class IndexController extends Controller
     //echo $this->test2->getName($a);
     }
     
-  function add_object()
+  function actionAdd_object()
     {
     $this->view();
     }
     
-  function create_object()
+  function actionCreate_object()
     {
     $post = $this->getPostData(array('lastname'=>'required min(2) max(6)', 'firstname'=>'required min(2) max(6)'));
     $this->arrayToModel($this->test, $post);
@@ -109,7 +109,7 @@ class IndexController extends Controller
     $this->redirect("/test/view_object/".$id);
     }
     
-  function test_bug($a)
+  function actionTest_bug($a)
     {
     $this->a = $a;
     $this->c = 45;
@@ -121,7 +121,7 @@ class IndexController extends Controller
     }
     
   //Пример момещения данніх в сессию  
-  function set_session($a='hello')
+  function actionSet_session($a='hello')
     {
     $this->session->setVar('rus', $a);
     
@@ -129,46 +129,47 @@ class IndexController extends Controller
     }
     
   //Пример получения данных из сессии  
-  function get_session($default_val='this is default')
+  function actionGet_session($default_val='this is default')
     {
     echo $this->session->getVar('rus', $default_val);
     }
     
   //Пример пользовательского сообщения  
-  function view_message($default_val='this is message')
+  function actionView_message($default_val='this is message')
     {
     $this->showMessage($default_val, '/index.php?module=test&action=validForm');
     }
     
   //Пример получения текущего урла и предыдущего 
-  function view_urls()
+  function actionView_urls()
     {
     echo 'url = '.$this->URL.'<br>';
     echo 'prev_url = '.$this->prevURL.'<br>';
     }
    
   //Пример редиректа 
-  function view_redirect()
+  function actionView_redirect()
     {
     $this->redirect('/index.php?module=test&action=view_page');
     }
 
   //Пример работы формы пример отображения формы 
-  function validForm()
+  function actionValidForm()
     {
     echo stripslashes("KIOSQUE 31 L\'ESCALE BLEUE - Constitution de soci?t? : EURL");
     $this->view();
     }
 
   //Пример работы формы пример получения результатов, валидации данных  
-  function valid()
+  function actionValid()
     {
     print_r($this->getPostData(array('lastname'=>'required min(2) max(6)', 'email'=>'email')));
-    print_r($this->getPostData(array('lastname'=>'required min(2) max(6)')));
+    print_r($this->getPostData(array('lastname'=>'required min(1) max(10)')));
+    $this->view();
     }
     
   //Пример преобразования массива в поля объекта
-  function array_to_obj()
+  function actionArray_to_obj()
     {
     $test_array = array('name'=>'ruslan_test', 'telephone'=>'111112222');
     
@@ -179,13 +180,13 @@ class IndexController extends Controller
     $this->redirect('/index.php?module=test&action=array_to_obj_view&id='.$id);
     }
   //Пример преобразования массива в поля объекта
-  function array_to_obj_view($guid)
+  function actionArray_to_obj_view($guid)
     {
     print_r($this->test->getObject($guid));
     }
     
    //Пример преобразования массива в поля объекта
-  function view_debugs()
+  function actionView_debugs()
     {
     $this->a = 2;
     $this->b = 3;
@@ -200,25 +201,25 @@ class IndexController extends Controller
     
     $this->debugGetViewVars();
     }
-  function lib()
+  function actionLib()
     {
     $a = $this->usesLib('Image');
     $this->lib->Image->test1();
     $a->test();
     }
     
-  function youtube()
+  function actionYoutube()
     {
     $this->view();
     }
-  function youtube_result()
+  function actionYoutube_result()
     {
     print_r($_COOKIE);
     print_r($_POST);
     print_r($_FILES);
     }
     
-  function youtube_upload()
+  function actionYoutube_upload()
     {
     $target_url = $_POST['yt_upload_url'];//"https://uploads.gdata.youtube.com/action/FormDataUpload/AIwbFATEHzMjIEYmJl1DVdXgDbtEcmP42AYX-Y1VA9Md7wW5ATSi6uis3C8MZXCUsc3CcrzqkBMfTaikPw2hS-pxkIlLZL1NEA?nexturl=http%3A%2F%2Fcallisto.com%2Ftest%2Fyoutube%2F";
     $token = $_POST['yt_upload_token']; //'AIwbFATKcAOblRNxotDckF320VqUq2mHkBkDeMiljM7ZQn4TMCpywIPuvegQEZtjOnvDN9JBc7sVZ37cM0hkj6LnzB-GXnel7Vl2MpBULhUTP-dUCSKAYkp_v5pAQdIRv84LWoJYX3pkWfxEeZHJDwabc9WiGqfiX8C-0dNxh7u0ot9S235Fo8zNP7ndfpQ-SQMeeqpC0dlvbIDO3Mbe1vrSUef8TqYFAzC83jb0LmML3pEtYE9ianwRq-_JcI7IVXh4-cz5RCrU722lvhNx92wt254qnIOYdg';
@@ -245,12 +246,12 @@ class IndexController extends Controller
     }
   
 
-  function table()
+  function actionTable()
     {
     $this->viewPage();
     }
     
-  function table_ajax()
+  function actionTable_ajax()
     {
     $strRequest = file_get_contents('php://input');
     $Request = json_decode($strRequest);
@@ -263,13 +264,13 @@ class IndexController extends Controller
     }
     
     
-  function tessst($id='1', $a)
+  function actionTessst($id='1', $a)
     {
     echo $id. ' '. $a;
     }
     
     
-  function test_y()
+  function actionTest_y()
     {
     
     }

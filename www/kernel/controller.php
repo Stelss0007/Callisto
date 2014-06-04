@@ -955,7 +955,7 @@ abstract class Controller extends AppObject
     {
     define('VALIDATOR_DIR',APP_DIRECTORY.'/lib/validateForm/');
     require_once(VALIDATOR_DIR.'validateForm.class.php');
-    
+   
     $form = new validateForm($_POST);
 
     $resarray = array();
@@ -1009,7 +1009,9 @@ abstract class Controller extends AppObject
         }
         
       if($form->pass == true)
+        {
         $ok = true;
+        }
       else
         {
         $error_msg = $form->allErrors();

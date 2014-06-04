@@ -2,7 +2,7 @@
 {$sysMessage}
 </div>
 
-<form method="post" action='/index.php?module=test&action=valid'>
+<form method="post" action='/test/valid'>
   <table>
     <col style="text-align: right;">
     <col>

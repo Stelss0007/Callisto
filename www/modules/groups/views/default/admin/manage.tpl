@@ -4,7 +4,7 @@
   <div class="row-fluid">
     <div class="box span12">
       <div class="box-header well" data-original-title>
-        <h2><i class="icon-edit"></i>  {#groups_edit#}</h2>
+        <h2><i class="icon-users"></i>  {#groups_edit#}</h2>
         <div class="box-icon">
         </div>
       </div>
