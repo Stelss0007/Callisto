@@ -55,7 +55,10 @@ class validateForm
     $this->pass = false;
     $this->error[$item] .= $desc." "; // Append multiple error messages
     }
-
+  function errorList()
+    {
+    return $this->error;
+    }
   // Return the error
   function showError($item)
     {

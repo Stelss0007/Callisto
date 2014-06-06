@@ -948,6 +948,15 @@ class Model extends DBConnector
     return true;
     }
     
+  final function validate()
+    {
+    define('VALIDATOR_DIR',APP_DIRECTORY.'/lib/validateForm/');
+    require_once(VALIDATOR_DIR.'validateForm.class.php');
+   
+    $form = new validateForm($_POST);
+    }
+    
+    
   final function beforDelete()
     {
     return true;

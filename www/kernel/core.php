@@ -10,7 +10,6 @@ appUsesLib('UserSession');
 function appDebug($value)
   {
   appDebug($value);
-  exit;
   }
   
 function appDebugExit($value)
@@ -18,6 +17,7 @@ function appDebugExit($value)
   echo "<pre>";
   print_r($value);
   echo "</pre>";
+  exit;
   }
   
 function isAjax()

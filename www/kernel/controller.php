@@ -1037,6 +1037,58 @@ abstract class Controller extends AppObject
 			return $resarray;
     }
 
+  function validate($validateData, $validateRules)
+    {
+    //Если нет правил для валидации знач возвращаем TRUE (Валидация прошла)
+    if(empty($validateRules))
+      return true;
+    
+    define('VALIDATOR_DIR',APP_DIRECTORY.'/lib/validateForm/');
+    require_once(VALIDATOR_DIR.'validateForm.class.php');
+   
+    $form = new validateForm($validateData);
+    
+    foreach($validateRules as $validateField=>$validateRule)
+      {
+      //Delete spaces
+      $validateRule = trim($validateRule);
+      //explode by space
+      $validators  = explode(' ', $validateRule);
+      
+      foreach($validators as $validator)
+        {
+        $validator_clean = preg_replace ("/[^a-z]/ui","", $validator);
+        
+        if(method_exists($form, $validator_clean))
+          {
+          if(preg_match("/min\((.*)\)/sim", $validator, $matches))
+            {
+            $form->min($matches[1],$validateField);
+            }
+          elseif(preg_match("/max\((.*)\)/sim", $validator, $matches))
+            {
+            $form->max($matches[1], $validateField);
+            }
+          else
+            {
+            $form->$validator($validateField);
+            }
+          }
+        }
+      }
+      
+    if($form->pass == true)
+      {
+      return true;
+      }
+    else
+      {
+      $error_msg = $form->errorList();
+      //appDebugExit($error_msg);
+      $this->showMessage($error_msg, '', $form->input);
+      return false;
+      }
+    }
   
   
   //////////////////////////////////////////////////////////////////////////////

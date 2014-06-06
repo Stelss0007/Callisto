@@ -455,6 +455,7 @@
 .icon-question-circle:before {
   content: "\f059";
 }
+.icon-info-sign:before,
 .icon-info-circle:before {
   content: "\f05a";
 }

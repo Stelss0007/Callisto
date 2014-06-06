@@ -157,15 +157,17 @@ class IndexController extends Controller
   function actionValidForm()
     {
     echo stripslashes("KIOSQUE 31 L\'ESCALE BLEUE - Constitution de soci?t? : EURL");
-    $this->view();
+    $this->viewPage();
     }
 
   //Пример работы формы пример получения результатов, валидации данных  
   function actionValid()
     {
-    print_r($this->getPostData(array('lastname'=>'required min(2) max(6)', 'email'=>'email')));
-    print_r($this->getPostData(array('lastname'=>'required min(1) max(10)')));
-    $this->view();
+//    print_r($this->getPostData(array('lastname'=>'required min(2) max(6)', 'email'=>'email')));
+//    print_r($this->getPostData(array('lastname'=>'required min(1) max(10)')));
+    //appDebugExit($this->input_vars);
+    $this->validate($this->input_vars , array('lastname'=>'required min(2) max(6)', 'email'=>'email'));
+    $this->redirect();
     }
     
   //Пример преобразования массива в поля объекта
