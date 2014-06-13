@@ -156,7 +156,6 @@ class IndexController extends Controller
   //Пример работы формы пример отображения формы 
   function actionValidForm()
     {
-    echo stripslashes("KIOSQUE 31 L\'ESCALE BLEUE - Constitution de soci?t? : EURL");
     $this->viewPage();
     }
 

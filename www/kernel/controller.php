@@ -1083,8 +1083,14 @@ abstract class Controller extends AppObject
       }
     else
       {
-      $error_msg = $form->errorList();
-      //appDebugExit($error_msg);
+      $errors = $form->errorList();
+      
+      $error_msg = '<ul>';
+      foreach($errors as $error)
+        {
+        $error_msg .= '<li>'.$error.'</li>';
+        }
+      $error_msg .= '</ul>'; 
       $this->showMessage($error_msg, '', $form->input);
       return false;
       }
