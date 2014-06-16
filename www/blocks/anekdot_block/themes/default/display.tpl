@@ -1,3 +1,3 @@
 {strip}
-{$anekdot|wordwrap:25:'<br>'}
+{$anekdot}
 {/strip}

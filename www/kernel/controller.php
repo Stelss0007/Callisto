@@ -28,6 +28,7 @@ abstract class Controller extends AppObject
   
   public $URL;
   public $prevURL;
+  public $referer;
 
   protected $lib;
 
@@ -131,6 +132,7 @@ abstract class Controller extends AppObject
 
     //??????? ??? ????????? ? ??????? ?????????? ? ???????? input_vars
     $this->input_vars = $_REQUEST;
+    $this->referer = $_SERVER['HTTP_REFERER'];
     //?????? ??? ?????? ? ???????? ???????
     unset ($this->input_vars['module']);
     unset ($this->input_vars['action']);
@@ -1109,7 +1111,7 @@ abstract class Controller extends AppObject
   //Add all blocks to tpl
   final public function blockToTpl()
     {
-    Block::blockShowAll($this->smarty, $this->object_name, $this->current_theme);
+    Block::blockShowAll($this->smarty, $this->object_name, $this->current_theme, $this->modname);
     //$this->smarty->assign('blocks', $this->block, false);
     }
   

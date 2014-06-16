@@ -170,7 +170,8 @@ class Router
     
     $fullURL = parse_url($_SERVER["REQUEST_URI"]);
     
-    if($fullURL['path'] == '/' || $fullURL['path'] == '' || $fullURL['path'] == '/index.php')
+//    if($fullURL['path'] == '/' || $fullURL['path'] == '' || $fullURL['path'] == '/index.php')
+    if($fullURL['path'] == '/index.php')
       {
       $get_data =  $_GET;
       $mod = $get_data['module'];
@@ -246,6 +247,11 @@ class Router
       }
     else
       {
+      if(empty($mod))
+        {
+        $mod = 'main';
+        }
+        
       if(!file_exists("modules/$mod/index.php"))
         {
         trigger_error ("Module '".$mod."' or module controller 'IndexController' not exist", E_USER_ERROR);

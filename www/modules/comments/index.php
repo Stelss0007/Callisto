@@ -1,0 +1,56 @@
+<?php
+class IndexController extends Controller
+  {
+  public $defaultAction = 'article_list';
+  
+  public function actionCommentList()
+    {
+    $this->viewCachedPage();
+    
+    $this->usesModel('articleCategory');
+    $this->usesModel('users');
+    
+    $this->articles_list = $this->articles->article_list(true, array('article_active'=>1));
+    //$this->paginate($this->articles);
+    
+    //Подготовим фильтры
+    $category_filter_list[0] = $this->t('sys_unknown');
+    $category_filter_list    = $category_filter_list + $this->articleCategory->category_list(false);
+    
+    $user_filter_list[0] = $this->t('sys_unknown');
+    $user_filter_list    = $user_filter_list + $this->users->user_list(false);
+ 
+    $status_filter_list['-1']   = $this->t('all_status');
+    $status_filter_list['1']    = $this->t('sys_active');
+    $status_filter_list['0']    = $this->t('sys_no_active');
+        
+    $this->article_category_list = $category_filter_list;
+    $this->article_user_list     = $user_filter_list;
+    $this->article_status_list   = $status_filter_list;
+    
+    $this->assign($this->getInput('filter', array()));
+    //\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+    
+    
+    $browsein[] =array('url'=>"/", 'displayname'=>$this->t('dashboard'));
+    $browsein[] =array('url'=>'/articles', 'displayname'=>'Comments'); 
+    
+    $this->assign('module_browsein', $browsein);
+    
+    $this->viewPage();
+    }
+    
+  public function actionCommentAdd()
+    {
+    $data = $this->input_vars; 
+    $this->arrayToModel($this->comments, $data);
+    
+    $this->comments->comment_user_id = $this->session->userId();
+    $this->comments->comment_addtime = time();
+    $this->comments->comment_modtime = time();
+    
+    $id = $this->comments->save();
+    
+    $this->showMessage($this->t('comments_added'), $this->referer.'#comment_'.$id);
+    }
+  }

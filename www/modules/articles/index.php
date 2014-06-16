@@ -14,10 +14,10 @@ class IndexController extends Controller
     //$this->paginate($this->articles);
     
     //Подготовим фильтры
-    $category_filter_list[0] = $this->t('all_category');
+    $category_filter_list[0] = $this->t('sys_unknown');
     $category_filter_list    = $category_filter_list + $this->articleCategory->category_list(false);
     
-    $user_filter_list[0] = $this->t('all_user');
+    $user_filter_list[0] = $this->t('sys_unknown');
     $user_filter_list    = $user_filter_list + $this->users->user_list(false);
  
     $status_filter_list['-1']   = $this->t('all_status');
@@ -32,8 +32,8 @@ class IndexController extends Controller
     //\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
     
     
-    $browsein[] =array('url'=>"/admin/main", 'displayname'=>$this->t('dashboard'));
-    $browsein[] =array('url'=>'/admin/articles', 'displayname'=>'Articles'); 
+    $browsein[] =array('url'=>"/", 'displayname'=>$this->t('dashboard'));
+    $browsein[] =array('url'=>'/articles', 'displayname'=>'Articles'); 
     
     $this->assign('module_browsein', $browsein);
     
@@ -48,14 +48,15 @@ class IndexController extends Controller
     $this->usesModel('articleCategory');
     $this->usesModel('users');
     
-    $this->article= $this->articles->getById($id);
+    $article = $this->articles->getById($id);
+    $this->article = $article;
     //$this->paginate($this->articles);
     
     //Подготовим фильтры
-    $category_filter_list[0] = $this->t('all_category');
+    $category_filter_list[0] = $this->t('sys_unknown');
     $category_filter_list    = $category_filter_list + $this->articleCategory->category_list(false);
     
-    $user_filter_list[0] = $this->t('all_user');
+    $user_filter_list[0] = $this->t('sys_unknown');
     $user_filter_list    = $user_filter_list + $this->users->user_list(false);
  
     $status_filter_list['-1']   = $this->t('all_status');
@@ -67,8 +68,9 @@ class IndexController extends Controller
     $this->article_status_list   = $status_filter_list;
     
     
-    $browsein[] =array('url'=>"/admin/main", 'displayname'=>$this->t('dashboard'));
-    $browsein[] =array('url'=>'/admin/articles', 'displayname'=>'Articles'); 
+    $browsein[] =array('url'=>"/", 'displayname'=>$this->t('dashboard'));
+    $browsein[] =array('url'=>'/articles', 'displayname'=>'Articles'); 
+    $browsein[] =array('url'=>'/articles', 'displayname'=>$article['article_title']); 
     
     $this->assign('module_browsein', $browsein);
     

@@ -42,7 +42,8 @@ function showAppMessage(message)
       $('#appMessage_msg_text').html($('#appMessageText').val()+close_btn).attr('class', 'alert alert-'+$('#appMessageType').val());
       }
     
-    $('#appMessage_conteiner').stop().show().animate({"opacity": "1"}, "fast").delay(3000).stop().animate({"opacity": "0"}, "slow", function(){$(this).hide()});
+//    $('#appMessage_conteiner').stop().show().animate({"opacity": "1"}, "fast").delay(3000).stop().animate({"opacity": "0"}, "slow", function(){$(this).hide()});
+    $('#appMessage_conteiner').stop().show().animate({"opacity": "1"}, "fast").delay(3000).stop();
     $('#appMessage_msg_text').on('click', function() {
         $('#appMessage_conteiner').stop().animate({"opacity": "0"}, "fast");
      });

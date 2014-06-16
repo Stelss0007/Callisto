@@ -71,7 +71,7 @@ class Block extends AppObject
     /************************** Блоки  *******************************/
   //Соберем все блоки и приготовим к отображению по своим местам
 
-  public static function blockShowAll(&$myTpl, &$object, $theme)
+  public static function blockShowAll(&$myTpl, &$object, $theme, $modname)
     {
     $db=DBConnector::getInstance();
     $ses_info=UserSession::getInstance();
@@ -97,6 +97,7 @@ class Block extends AppObject
 
       //В информацию о блоке добавляем - module_object
       $item['module_object'] = $object;
+      $item['module_name'] = $modname;
       $item['theme'] = $theme;
 
       //Выполним код блока и вернем результат

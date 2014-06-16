@@ -41,7 +41,7 @@
 
 		toolbarButton:	'<a class="sceditor-button sceditor-button-{name}" data-sceditor-command="{name}" unselectable="on"><div unselectable="on">{dispName}</div></a>',
 
-		emoticon:	'<img src="/public/images/{url}" data-sceditor-emoticon="{key}" alt="{key}" title="{tooltip}" />',
+		emoticon:	'<img src="{url}" data-sceditor-emoticon="{key}" alt="{key}" title="{tooltip}" />',
 
 		fontOpt:	'<a class="sceditor-font-option" href="#" data-font="{font}"><font face="{font}">{font}</font></a>',
 
@@ -3700,7 +3700,7 @@
 					$.each(emoticons, function(code, emoticon) {
 						$line.append(
 							$('<img />').attr({
-								src: emoticon.url || '/public/images/'+emoticon,
+								src: emoticon.url || emoticon,
 								alt: code,
 								title: emoticon.tooltip || code
 							}).click(function() {
@@ -5361,43 +5361,43 @@
 		emoticonsRoot: '',
 		emoticons: {
 			dropdown: {
-				':)': 'emoticons/smile.png',
-				':angel:': 'emoticons/angel.png',
-				':angry:': 'emoticons/angry.png',
-				'8-)': 'emoticons/cool.png',
-				":'(": 'emoticons/cwy.png',
-				':ermm:': 'emoticons/ermm.png',
-				':D': 'emoticons/grin.png',
-				'<3': 'emoticons/heart.png',
-				':(': 'emoticons/sad.png',
-				':O': 'emoticons/shocked.png',
-				':P': 'emoticons/tongue.png',
-				';)': 'emoticons/wink.png'
+				':)': '/public/images/emoticons/smile.png',
+				':angel:': '/public/images/emoticons/angel.png',
+				':angry:': '/public/images/emoticons/angry.png',
+				'8-)': '/public/images/emoticons/cool.png',
+				":'(": '/public/images/emoticons/cwy.png',
+				':ermm:': '/public/images/emoticons/ermm.png',
+				':D': '/public/images/emoticons/grin.png',
+				'<3': '/public/images/emoticons/heart.png',
+				':(': '/public/images/emoticons/sad.png',
+				':O': '/public/images/emoticons/shocked.png',
+				':P': '/public/images/emoticons/tongue.png',
+				';)': '/public/images/emoticons/wink.png'
 			},
 			more: {
-				':alien:': 'emoticons/alien.png',
-				':blink:': 'emoticons/blink.png',
-				':blush:': 'emoticons/blush.png',
-				':cheerful:': 'emoticons/cheerful.png',
-				':devil:': 'emoticons/devil.png',
-				':dizzy:': 'emoticons/dizzy.png',
-				':getlost:': 'emoticons/getlost.png',
-				':happy:': 'emoticons/happy.png',
-				':kissing:': 'emoticons/kissing.png',
-				':ninja:': 'emoticons/ninja.png',
-				':pinch:': 'emoticons/pinch.png',
-				':pouty:': 'emoticons/pouty.png',
-				':sick:': 'emoticons/sick.png',
-				':sideways:': 'emoticons/sideways.png',
-				':silly:': 'emoticons/silly.png',
-				':sleeping:': 'emoticons/sleeping.png',
-				':unsure:': 'emoticons/unsure.png',
-				':woot:': 'emoticons/w00t.png',
-				':wassat:': 'emoticons/wassat.png'
+				':alien:': '/public/images/emoticons/alien.png',
+				':blink:': '/public/images/emoticons/blink.png',
+				':blush:': '/public/images/emoticons/blush.png',
+				':cheerful:': '/public/images/emoticons/cheerful.png',
+				':devil:': '/public/images/emoticons/devil.png',
+				':dizzy:': '/public/images/emoticons/dizzy.png',
+				':getlost:': '/public/images/emoticons/getlost.png',
+				':happy:': '/public/images/emoticons/happy.png',
+				':kissing:': '/public/images/emoticons/kissing.png',
+				':ninja:': '/public/images/emoticons/ninja.png',
+				':pinch:': '/public/images/emoticons/pinch.png',
+				':pouty:': '/public/images/emoticons/pouty.png',
+				':sick:': '/public/images/emoticons/sick.png',
+				':sideways:': '/public/images/emoticons/sideways.png',
+				':silly:': '/public/images/emoticons/silly.png',
+				':sleeping:': '/public/images/emoticons/sleeping.png',
+				':unsure:': '/public/images/emoticons/unsure.png',
+				':woot:': '/public/images/emoticons/w00t.png',
+				':wassat:': '/public/images/emoticons/wassat.png'
 			},
 			hidden: {
-				':whistling:': 'emoticons/whistling.png',
-				':love:': 'emoticons/wub.png'
+				':whistling:': '/public/images/emoticons/whistling.png',
+				':love:': '/public/images/emoticons/wub.png'
 			}
 		},
 

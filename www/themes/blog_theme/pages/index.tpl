@@ -63,10 +63,37 @@
             <div id="templatemo_content_top"></div>
             <div id="templatemo_content">
               <span class="browsein">
-                {browsein date=$module_browsein|escape}
+                {browsein date = $module_browsein|escape}
               </span>
                 {$module_content}
+                
+                {if $blocks.center}
+                  {foreach item=block from=$blocks.center}
+                    <div class="sidebar_box">
+                      <h3>
+                        {$block.block_displayname|escape}
+                      </h3>
+                      <div class="">
+                          {$block.block_content}
+                      </div>
+                   </div>
+                  {/foreach}
+                {/if}
+                  
+                {if $blocks.bottom}
+                  {foreach item=block from=$blocks.bottom}
+                    <div class="sidebar_box">
+                      <h3>
+                        {$block.block_displayname|escape}
+                      </h3>
+                      <div class="">
+                          {$block.block_content}
+                      </div>
+                   </div>
+                  {/foreach}
+                {/if}
             </div> <!-- end of content -->
+            
             <div id="templatemo_content_bottom"></div>
           </div> <!-- end of content wrapper -->
 

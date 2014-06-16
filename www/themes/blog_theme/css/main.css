@@ -89,7 +89,7 @@ em { color: #fff; font-weight: 400 }
 	float: right;
 	width: 600px;
 	text-align: right;
-	padding-top: 30px;
+	padding-top: 10px;
 }
 
 #header_right a.button { display: inline-block; }
