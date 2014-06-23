@@ -260,6 +260,9 @@ function appBuildHttpQuery($query)
   $query_array = array();
   foreach( $query as $key => $key_value )
     {
+    if(empty($key))
+      continue;
+    
     $query_array[] =  $key . '=' . urlencode( $key_value );
     }
   return implode( '&', $query_array );
