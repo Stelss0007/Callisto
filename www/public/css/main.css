@@ -182,3 +182,16 @@ padding-top: 10px;
   clear: both;
 }
 
+
+#appMessage_conteiner .close {
+    display: block;
+    font-family: cursive;
+    font-size: 20px;
+    height: 10px;
+    position: absolute;
+    right: 15px;
+    text-decoration: none;
+    top: 4px;
+    width: 10px;
+}
+

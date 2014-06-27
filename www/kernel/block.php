@@ -187,10 +187,16 @@ class Block extends AppObject
       {
       $this->$name = $value;
       }
+      
     $this->vars[$name] = $value;
     return true;
     }  
    
+  final public function setBlockContent($name, $value)
+    {
+    $this->vars[$name] = $value;
+    }
+    
   final public function tplFileName($method, $debug=false)
     {
     $view_file_name = $method;
@@ -249,6 +255,7 @@ class Block extends AppObject
     {
 //    print_r($this->vars);
 //    echo serialize($this->vars);exit;
+//    
     $this->usesModel('blocks');
     $this->blocks->block_content = serialize($this->vars);
     $this->blocks->save($id);

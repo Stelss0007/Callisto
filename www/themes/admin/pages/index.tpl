@@ -51,6 +51,7 @@
         <p><strong>Hello</p>
         </div>
         *}
+      <div class="wrap">
         <!-- topbar starts -->
         <div class="navbar">
             <div class="navbar-inner">
@@ -159,7 +160,12 @@
             </footer>
 
         </div><!--/.fluid-container-->
-
+        
+      </div>
+                    
+                    
+                    
+                    
         <!-- external javascript
         ================================================== -->
         <!-- Placed at the end of the document so the pages load faster -->

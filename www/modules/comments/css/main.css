@@ -18,7 +18,18 @@ and open the template in the editor.
 .comments .comment .comment_user_info {
   float: left;
   margin-right: 10px;
+  text-align: center;
+  width: 90px;
+}
+.comments .comment .comment_user_info img {
+  width: 90px;
 }
 .comments .comment .comment_body {
-  float: left;
+/*  float: left;*/
+  margin-left: 100px;
+}
+
+.comments .comment .comment_title {
+  margin-bottom: 10px;
+  font-weight: bold;
 }
