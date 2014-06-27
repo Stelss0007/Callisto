@@ -7,6 +7,8 @@ $appConfig['debug.enabled'] = false;
 $appConfig['date_format'] = '%d.%m.%Y';
 $appConfig['time_format'] = '%H:%M';
 
+$appConfig['date_time_format'] = '%d.%m.%Y в %H:%M';
+
 //Параметры для форматирования даты поумолчанию в javascript (например в datepicker)
 $appConfig['date_format_js'] = 'dd.mm.yy';
 $appConfig['time_format_js'] = 'H:M';

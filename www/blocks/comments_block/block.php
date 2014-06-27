@@ -14,7 +14,7 @@ class comments_block extends Block
                                                         'fields'    => array('t.*', 'u.login'),
                                                         'condition' => array('comment_module_object'=>$blockinfo['module_object']),
                                                         'join'      => 'LEFT JOIN user u ON (u.id = t.comment_user_id)',
-                                                        'order'     => 'comment_addtime DESC'
+                                                        'order'     => 'comment_addtime ASC'
                                                         )
                                                   );
     return $this->view();
@@ -30,8 +30,9 @@ class comments_block extends Block
     
   function update(&$blockinfo)
     {
-    $this->menu_type = $this->input_vars['menu_type'];
-    $this->parent_id = $this->input_vars['parent_id'];
+    //echo $blockinfo['id'].' ';print_r($this->input_vars['toolbar']);exit;
+    //echo $this->toolbar;exit;
+    $this->setBlockContent('toolbar', $this->input_vars['toolbar']);
     $this->save($blockinfo['id']);
     }
   }
