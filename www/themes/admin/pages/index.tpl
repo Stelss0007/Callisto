@@ -70,9 +70,11 @@
                             <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a href="#">Profile</a></li>
+                            <li><a href="#"><i class="icon-user"></i> Profile</a></li>
+                            <li><a href="#"><i class="icon-envelope"></i> Messages</a></li>
+                            <li><a href="#"><i class="icon-cog"></i> Settings</a></li>
                             <li class="divider"></li>
-                            <li><a href="/admin/users/login">Logout</a></li>
+                            <li><a href="/admin/users/login"><i class="icon-power-off"></i> Logout</a></li>
                         </ul>
                     </div>
                     <!-- user dropdown ends -->

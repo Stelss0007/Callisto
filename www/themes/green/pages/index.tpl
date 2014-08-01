@@ -78,6 +78,14 @@
   
             {$module_content}
             
+            <div>
+              {if $blocks.bottom}
+                {foreach item=block from=$blocks.bottom}
+                    {$block.block_content}
+                {/foreach}
+              {/if}
+            </div>
+            
        </td>
       <td class="fblock">
 
