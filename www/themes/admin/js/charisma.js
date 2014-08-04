@@ -713,6 +713,10 @@ function docReady(){
   $('.app-filter select').on('change', function(){
     $(this).closest('form').submit();
   });
+  
+  
+  //Left Column Fix (Min height = height of content)
+  $('.main-menu-span').css({minHeight: $('#content').height()+20});
 }
 
 

@@ -228,7 +228,10 @@
 .icon-check:before {
   content: "\f00c";
 }
-.icon-times:before {
+.icon-times:before,
+.icon-close:before,
+.icon-remove:before
+{
   content: "\f00d";
 }
 .icon-search-plus:before {

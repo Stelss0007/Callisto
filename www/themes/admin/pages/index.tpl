@@ -51,6 +51,7 @@
         <p><strong>Hello</p>
         </div>
         *}
+        
       <div class="wrap">
         <!-- topbar starts -->
         <div class="navbar">
