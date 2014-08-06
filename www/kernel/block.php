@@ -123,7 +123,7 @@ class Block extends AppObject
           break;
         }
       }
-
+    //appDebugExit($result_blocks);
     //Загоняем в шаблон
     $myTpl->assign('blocks', $result_blocks);
     return true;
@@ -162,7 +162,7 @@ class Block extends AppObject
 
       if (!empty ($result['block_content']))
         {
-        $result['id'] = isset($blockinfo['id']) ? $blockinfo['id'] : 0;
+        $result['id'] = isset($block['id']) ? $block['id'] : 0;
         $result = array_merge ($block, $result);
         }
         

@@ -195,4 +195,26 @@ padding-top: 10px;
     width: 10px;
 }
 
+/* Редактирование блоков на страницах */
+.block-toolbar {
+  margin-bottom: -20px;
+  text-align: right;
+  padding-right: 10px;
+  position: relative;
+  z-index: 10;
+}
 
+.block-toolbar:hover {
+  cursor: move;
+}
+
+.block-placeholder {
+    border: 1px dashed black;
+    margin: 5px;
+    background-color: #dcdcdc;
+  }
+  
+  .block-item-admin-panel.ui-sortable-helper {
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+  }

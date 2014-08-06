@@ -35,7 +35,9 @@
                 {foreach item=block from=$blocks.top}
 
                   <li>
-                    {$block.block_content}
+                    {theme_block block=$block} 
+                      {$block.block_content}
+                    {/theme_block}
                   </li>
 
                 {/foreach}
@@ -55,16 +57,18 @@
             <span class='sbtitle'>Заголовок</span>
               {if $blocks.left}
                 {foreach item=block from=$blocks.left}
-                 <span id='mnu_title1' class='usermnutitle-g'>
-                  {$block.block_displayname|escape}
-                 </span>
-                 <div id='mnu_tblock3' class='usermnublock'>
-                  <span class='usermnudelim'></span>
-                  <div class="left_content">
-                    {$block.block_content}
-                  </div>
-                  <span class='usermnudelim'></span>
-                </div>
+                 {theme_block block=$block} 
+                    <span id='mnu_title1' class='usermnutitle-g'>
+                     {$block.block_displayname|escape}
+                    </span>
+                    <div id='mnu_tblock3' class='usermnublock'>
+                      <span class='usermnudelim'></span>
+                      <div class="left_content">
+                        {$block.block_content}
+                      </div>
+                      <span class='usermnudelim'></span>
+                    </div>
+                  {/theme_block} 
                 {/foreach}
               {/if}
 
@@ -81,7 +85,9 @@
             <div>
               {if $blocks.bottom}
                 {foreach item=block from=$blocks.bottom}
+                  {theme_block block=$block} 
                     {$block.block_content}
+                  {/theme_block} 
                 {/foreach}
               {/if}
             </div>
@@ -94,16 +100,18 @@
 
           {if $blocks.right}
             {foreach item=block from=$blocks.right}
-             <span id='mnu_title1' class='usermnutitle-g'>
-              {$block.block_displayname|escape}
-             </span>
-             <div id='mnu_tblock3' class='usermnublock'>
-              <span class='usermnudelim'></span>
-              <div class="left_content">
-                {$block.block_content}
-              </div>
-              <span class='usermnudelim'></span>
-            </div>
+              {theme_block block=$block} 
+                <span id='mnu_title1' class='usermnutitle-g'>
+                 {$block.block_displayname|escape}
+                </span>
+                <div id='mnu_tblock3' class='usermnublock'>
+                 <span class='usermnudelim'></span>
+                 <div class="left_content">
+                   {$block.block_content}
+                 </div>
+                 <span class='usermnudelim'></span>
+               </div>
+              {/theme_block} 
             {/foreach}
           {/if}
 

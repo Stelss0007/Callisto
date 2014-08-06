@@ -626,6 +626,33 @@ class Model extends DBConnector
       return true;
       }
     }
+    
+  function weightSet($id, $weightOld=0, $weightNew=0, $position='')
+    {
+    $MaxWeight = $this->weightMax();
+    if ($weightNew == $MaxWeight || $weightNew == 0 || $position == '')
+      return true;
+    
+    if($this->table != 'object')
+      {
+      if($weightOld > $weightNew)
+        {
+        $this->query("UPDATE {$this->table} SET {$this->table}_weight = {$this->table}_weight-1 WHERE {$this->table}_weight > $weightOld AND block_position = '$position'");
+        $this->query("UPDATE {$this->table} SET {$this->table}_weight = {$this->table}_weight+1 WHERE {$this->table}_weight <= $weightNew AND block_position = '$position'");
+        
+        $this->query("UPDATE {$this->table} SET {$this->table}_weight = $weightNew WHERE id = $id");
+        }
+      elseif($weightOld < $weightNew)
+        {
+        $this->query("UPDATE {$this->table} SET {$this->table}_weight = {$this->table}_weight-1 WHERE {$this->table}_weight > $weightOld AND block_position = '$position'");
+        $this->query("UPDATE {$this->table} SET {$this->table}_weight = {$this->table}_weight+1 WHERE {$this->table}_weight >= $weightNew AND block_position = '$position'");
+        
+        $this->query("UPDATE {$this->table} SET {$this->table}_weight = $weightNew WHERE id = $id");
+        }
+      return true;
+      }
+    }
+    
   
   ///////////////////////////// FINDING ///////////////////////////////////////
    

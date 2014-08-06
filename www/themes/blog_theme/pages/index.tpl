@@ -69,27 +69,31 @@
                 
                 {if $blocks.center}
                   {foreach item=block from=$blocks.center}
-                    <div class="sidebar_box">
-                      <h3>
-                        {$block.block_displayname|escape}
-                      </h3>
-                      <div class="">
-                          {$block.block_content}
-                      </div>
-                   </div>
+                    {theme_block block=$block} 
+                      <div class="sidebar_box">
+                        <h3>
+                          {$block.block_displayname|escape}
+                        </h3>
+                        <div class="">
+                            {$block.block_content}
+                        </div>
+                       </div>
+                    {/theme_block} 
                   {/foreach}
                 {/if}
                   
                 {if $blocks.bottom}
                   {foreach item=block from=$blocks.bottom}
-                    <div class="sidebar_box">
-                      <h3>
-                        {$block.block_displayname|escape}
-                      </h3>
-                      <div class="">
-                          {$block.block_content}
+                    {theme_block block=$block} 
+                      <div class="sidebar_box">
+                        <h3>
+                          {$block.block_displayname|escape}
+                        </h3>
+                        <div class="">
+                            {$block.block_content}
+                        </div>
                       </div>
-                   </div>
+                    {/theme_block} 
                   {/foreach}
                 {/if}
             </div> <!-- end of content -->
@@ -104,14 +108,16 @@
             {* Левая часть *}
               {if $blocks.left}
                 {foreach item=block from=$blocks.left}
-                  <div class="sidebar_box">
-                    <div class="sb_title">
-                      {$block.block_displayname|escape}
+                  {theme_block block=$block} 
+                    <div class="sidebar_box">
+                      <div class="sb_title">
+                        {$block.block_displayname|escape}
+                      </div>
+                      <div class="sb_content">
+                          {$block.block_content}
+                      </div>
                     </div>
-                    <div class="sb_content">
-                        {$block.block_content}
-                    </div>
-                 </div>
+                  {/theme_block} 
                 {/foreach}
               {/if}
             {* End левая часть*}
@@ -119,14 +125,16 @@
             {* Правая часть *}
               {if $blocks.right}
                 {foreach item=block from=$blocks.right}
-                  <div class="sidebar_box">
-                    <div class="sb_title">
-                      {$block.block_displayname|escape}
+                 {theme_block block=$block} 
+                    <div class="sidebar_box">
+                      <div class="sb_title">
+                        {$block.block_displayname|escape}
+                      </div>
+                      <div class="sb_content">
+                          {$block.block_content}
+                      </div>
                     </div>
-                    <div class="sb_content">
-                        {$block.block_content}
-                    </div>
-                 </div>
+                 {/theme_block} 
                 {/foreach}
               {/if}
             {* End правая часть*}

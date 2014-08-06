@@ -1,3 +1,5 @@
+$.getScript("/public/js/lang/rus.js");
+
 /*
  * Autosave form function
  * Example:
@@ -27,6 +29,8 @@
 //        });
 //    };
 //})(jQuery);
+
+
 
 function showAppMessage(message)
   {

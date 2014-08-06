@@ -294,10 +294,23 @@ abstract class Controller extends AppObject
     appJsLoad('kernel', 'jQuery');
     appJsLoad('kernel', 'main');
     
+    if($this->isAdmin())
+      {
+      appJsLoad('kernel', 'jQueryUI');
+      appJsLoad('kernel', 'admin');
+      
+      appCssLoad('kernel', 'bootstrap');
+      if($this->getViewType() != 'admin') 
+        {
+        appCssLoad('kernel', 'admin-theme');
+        }
+      }
+    
     //Подключим стили
     //Стили ядра
     //appCssLoad('kernel', 'bootstrap');
     appCssLoad('kernel'); 
+    appCssLoad('kernel', 'jQueryUI'); 
      
     //Без аргументов подключится стиль текущей темы
     appCssLoad();
@@ -307,6 +320,11 @@ abstract class Controller extends AppObject
   final public function setViewType($type = 'user')
     {
     $this->type = $type;
+    }
+    
+  final public function getViewType()
+    {
+    return $this->type;
     }
 
   final private function urlToCamelCase($string)
@@ -346,15 +364,40 @@ abstract class Controller extends AppObject
       }
     unset($db_conf);
     }
+    
+  /**
+   * Проверка пренадлежности пользователя к групе "Администраторы"
+   * @return boolean
+   */
+  final function isAdmin()
+    {
+    if($this->session->userGid() == 1)
+      {
+      return true;
+      }
+    return false;
+    }
+    
+  /**
+   * Определение информации о пользователе
+   * @return \Controller
+   */  
   final function setTplUserInfo()
     {
     $currentUserInfo['currentUserInfo']['id']   = $this->session->userId();
     $currentUserInfo['currentUserInfo']['name'] = $this->session->userName();
     $currentUserInfo['currentUserInfo']['gid']  = $this->session->userGid();
+    $currentUserInfo['currentUserInfo']['isAdmin']  = $this->isAdmin();
     $this->assign($currentUserInfo);
     return $this;
     }
-    
+  
+  /**
+   * Получение входящих параметров ($_REQUEST)
+   * @param string $var
+   * @param mixed $default
+   * @return mixed
+   */
   final function getInput($var, $default)
     {
     if(empty($var))
@@ -363,9 +406,16 @@ abstract class Controller extends AppObject
       }
     return isset($this->input_vars[$var]) ? $this->input_vars[$var] : $default;
     }
+    
   //////////////////////////////////////////////////////////////////////////////
   ////////////////////////////   TEMPLATES  ////////////////////////////////////
   //////////////////////////////////////////////////////////////////////////////
+  
+  /**
+   * Постраничка
+   * @param object $model
+   * @return type
+   */
   final public function paginate($model=false)
     {
     if(empty($model))
@@ -374,7 +424,11 @@ abstract class Controller extends AppObject
     //appDebug($model->pagination);exit;
     $this->assign('pagination', $model->pagination);
     }
-    
+  
+  /**
+   * Проверка существует ли кеш страниці
+   * @return bool
+   */
   final public function isCached()
     {
     $tpl_dir = $this->tplFileName();
@@ -968,7 +1022,6 @@ abstract class Controller extends AppObject
         {
         foreach($var as $key=>$value)
           {
-
           //Delete spaces
           $value = trim($value);
           //explode by space

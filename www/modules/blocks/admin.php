@@ -133,6 +133,14 @@ class AdminController extends Controller
     $this->redirect();
     }
     
+  function actionWeightSet($id, $weightOld, $weightNew, $block_position)
+    {
+    $this->getAccess(ACCESS_ADMIN);
+    $this->blocks->weightSet($id, $weightOld, $weightNew, $block_position);
+    echo 'OK';
+    //$this->redirect();
+    }
+    
   function actionActive($id)
     {
     $this->getAccess(ACCESS_ADMIN);
