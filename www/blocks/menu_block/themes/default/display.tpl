@@ -1,5 +1,4 @@
 {strip}
-
 <ul>
 {foreach from=$menu_list item=menu}
   <li>

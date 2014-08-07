@@ -39,7 +39,7 @@ function showAppMessage(message)
     var close_btn = '<a href="#" data-dismiss="alert" class="close" type="button">x</a>'; 
     if(message) 
       {
-      $('#appMessage_msg_text').html($('#appMessageText').val()+close_btn).attr('class', 'alert alert-'+$('#appMessageType').val());
+      $('#appMessage_msg_text').html(message + close_btn).attr('class', 'alert alert-'+$('#appMessageType').val());
       }
     else
       {

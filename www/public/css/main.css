@@ -12,7 +12,7 @@ html {
 	height: 100%;
 
 	/* Needed for iOS scrolling bug fix */
-	overflow: auto;
+/*	overflow: auto;*/
 	-webkit-overflow-scrolling: touch;
 }
 body {
@@ -21,7 +21,7 @@ body {
 	word-wrap: break-word;
 
 	/* Needed for iOS scrolling bug fix */
-	overflow: auto;
+/*	overflow: auto;*/
 }
 
 ul, ol {
@@ -217,4 +217,8 @@ padding-top: 10px;
   .block-item-admin-panel.ui-sortable-helper {
     background-color: white;
     box-shadow: 0 0 10px rgba(0,0,0,0.5);
+/*  
+    max-height: 300px;
+    overflow: hidden;
+*/
   }

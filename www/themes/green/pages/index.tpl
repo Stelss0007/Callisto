@@ -55,6 +55,7 @@
         <tr>
           <td class="fblock">
             <span class='sbtitle'>Заголовок</span>
+            <div>
               {if $blocks.left}
                 {foreach item=block from=$blocks.left}
                  {theme_block block=$block} 
@@ -71,7 +72,7 @@
                   {/theme_block} 
                 {/foreach}
               {/if}
-
+             </div>
           </td>
 
        <td class="contentmain">
@@ -97,7 +98,6 @@
 
         <span class="sbtitle">1111</span>
         <div class="usermenu">
-
           {if $blocks.right}
             {foreach item=block from=$blocks.right}
               {theme_block block=$block} 

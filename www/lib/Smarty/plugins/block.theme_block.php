@@ -22,7 +22,7 @@ function smarty_block_theme_block($params, $content,  &$smarty)
   return '<div class="block-item-admin-panel" data-position="'.$block['block_position'].'" data-weight="'.$block['block_weight'].'" data-id="'.$block['id'].'">'
           .'<div class="block-toolbar">'
             .'<a href="/admin/blocks/modify/'.$block['id'].'" class="block-edit" data-id="'.$block['id'].'"><span class="icon-cog"></span></a>'
-            .'<a href="#" class="block-delete" data-id="'.$block['id'].'"><span class="icon-trash"></span></a>'
+            .'<a href="/admin/blocks/delete/'.$block['id'].'" class="block-delete" data-id="'.$block['id'].'"><span class="icon-trash"></span></a>'
           .'</div>'
          .$content
          .'</div>'

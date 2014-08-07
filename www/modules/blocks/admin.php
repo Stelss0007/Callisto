@@ -107,7 +107,7 @@ class AdminController extends Controller
     $weight = $this->blocks->weightMax("block_position = '{$input_position}'");
     $weight++;
 
-    $info['weight'] = $weight;
+    $info['block_weight'] = $weight;
     $info['block_last_update'] = time();
     $info['block_position'] = $input_position;
     $info['block_pattern'] = '.*';
@@ -137,7 +137,7 @@ class AdminController extends Controller
     {
     $this->getAccess(ACCESS_ADMIN);
     $this->blocks->weightSet($id, $weightOld, $weightNew, $block_position);
-    echo 'OK';
+    echo $this->t('sys_saved');
     //$this->redirect();
     }
     
@@ -160,7 +160,10 @@ class AdminController extends Controller
   function actionDelete($id, $weight, $block_position)
     {
     $this->getAccess(ACCESS_ADMIN);
-    $this->blocks->weightDelete($weight ,"block_position = '$block_position'");
+    
+    $currentBlockInfo = $this->blocks->getById($id);
+    
+    $this->blocks->weightDelete($currentBlockInfo['block_weight'] ,"block_position = '{$currentBlockInfo['block_position']}'");
     $this->blocks->delete($id);
     $this->redirect();
     }
