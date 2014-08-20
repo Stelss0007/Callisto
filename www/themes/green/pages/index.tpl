@@ -10,6 +10,10 @@
     {appJsLoad modname='kernel' scriptname='jQuery'}
     {appCssOutput cache=0}
     {appJsOutput}
+    
+    {appLessLoad}
+    {appLessOutput}
+    
   </head>
   <body>
     <div id="main">

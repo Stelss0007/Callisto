@@ -720,6 +720,50 @@ function appCssLoad($modname='', $scriptname='main', $dir='')
   return true;
   }
 
+  
+function appLessLoad($modname='', $scriptname='main', $dir='')
+  {
+  global $lessLoaded;
+  global $lessLoadedHasModScript;
+  
+  if(empty($scriptname))
+    $scriptname = 'main';
+  
+  if (!empty($lessLoaded["$modname.$scriptname"])) 
+    return true;
+  
+  if($modname == 'kernel')
+    {
+    if($scriptname=='main' || $scriptname=='bootstrap')
+      {
+      $lessLoaded["$modname.$scriptname"] = "/public/less/$scriptname.less";
+      }
+    else
+      {
+      if(empty($dir))
+        {
+        $lessLoaded["$modname.$scriptname"] = "/public/less/$scriptname/$scriptname.less";
+        }
+      else
+        {
+        $lessLoaded["$modname.$dir.$scriptname"] = "/public/less/$dir/$scriptname.less";
+        }
+      }
+    }
+  elseif(empty($modname))
+    {
+    global $mod_controller;
+    $current_theme = $mod_controller->getThemeName();
+    $lessLoaded["theme.$current_theme.$scriptname"] = "/themes/$current_theme/less/$scriptname.less";
+    }
+  else
+    {
+    $lessLoadedHasModScript = 1;
+    $lessLoaded["$modname.$scriptname"] = "/modules/$modname/less/$scriptname.less";
+    }
+
+  return true;
+  }
 
 
 

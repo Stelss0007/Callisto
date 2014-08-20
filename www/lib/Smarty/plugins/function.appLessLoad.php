@@ -9,10 +9,8 @@
  * $scriptname             - �������� �������, ����������� main.css, ���� ������ kernel, �� /public/js/main.css
  * @return string
  */
-function smarty_function_appCssLoad($params, &$smarty)
+function smarty_function_appLessLoad($params, &$smarty)
 	{
-	appCssLoad($params['modname'], $params['scriptname'], $params['dir']);
+	appLessLoad($params['modname'], $params['scriptname'], $params['dir']);
 	}
 
-
-?>
