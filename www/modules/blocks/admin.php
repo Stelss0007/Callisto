@@ -251,8 +251,14 @@ class AdminController extends Controller
         }
       }
     /*TODO Доделать пересчет весов если изменилась позиция блока*/
-      
-    $this->showMessage('Изменеия сохранены', $this->input_vars['ref']);
+    if($this->input_vars['submit_exit'])  
+      {
+      $this->showMessage('Изменеия сохранены', $this->input_vars['ref']);
+      }
+    else
+      {
+      $this->showMessage('Изменеия сохранены', $this->referer);
+      }
     }
     
   function actionInfo($block_name, $position)

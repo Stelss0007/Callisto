@@ -5,6 +5,8 @@ class AdminController extends Controller
   
   function actionConfigEdit($module = 'main')
     {
+    $this->getAccess(ACCESS_ADMIN);
+    
     $config_view = $this->root_dir.'modules/'.$module.'/views/default/admin/config.tpl';
     $ObjectName = $module.'::views::default::admin::config';
     if(!file_exists($config_view))
@@ -45,6 +47,8 @@ class AdminController extends Controller
     
   function actionSaveConfiguration()
     {
+    $this->getAccess(ACCESS_ADMIN);
+    
     $params = $this->getInput('modconfig');
     //appDebug($params);exit;
     foreach($params as $module => $values)

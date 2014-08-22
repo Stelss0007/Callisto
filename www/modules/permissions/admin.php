@@ -5,6 +5,8 @@ class AdminController extends Controller
   
   function actionPermissionsList()
     {
+    $this->getAccess(ACCESS_ADMIN);
+    
     $this->usesModel('groups');
     
     $this->group_permission = $this->permissions->group_permissions_list();
@@ -21,6 +23,8 @@ class AdminController extends Controller
     
   function actionManage($id=0)
     {
+    $this->getAccess(ACCESS_ADMIN);
+    
     $data = $this->input_vars;
     //print_r($data);exit;
     if($data['submit'])
@@ -63,6 +67,8 @@ class AdminController extends Controller
     
   function actionDelete($id=0)
     {
+    $this->getAccess(ACCESS_ADMIN);
+    
     if(empty($id))
       $this->errors->setError("ID of Permission is missing!");
     
@@ -72,12 +78,16 @@ class AdminController extends Controller
       
   function actionWeightUp($weight)
     {  
+    $this->getAccess(ACCESS_ADMIN);
+    
     $this->permissions->weightUp($weight);
     $this->redirect();
     }
     
   function actionWeightDown($weight)
-    {  
+    { 
+    $this->getAccess(ACCESS_ADMIN);
+    
     $this->permissions->weightDown($weight);
     $this->redirect();
     }

@@ -63,6 +63,9 @@
              
             <div class="form-actions">
               <button type="submit" class="btn btn-primary" name="submit" value="submit">{#sys_save#}</button>
+              &nbsp;
+              <button type="submit" class="btn btn-primary" name="submit_exit" value="submit_exit">{#sys_save_exit#}</button>
+              &nbsp;
               <button type="reset" class="btn">Cancel</button>
             </div>
         

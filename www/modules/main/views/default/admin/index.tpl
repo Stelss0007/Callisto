@@ -32,6 +32,38 @@
 			<div class="row-fluid">
 				<div class="box span12">
 					<div class="box-header well">
+						<h2><i class="icon-history"></i> Cache</h2>
+					</div>
+					<div class="box-content">
+						<h1>Cache <small>{#cache_description#}</small></h1>
+            <p>
+              <b>Vars:</b> {$cache_size.cache_var_size|size_format}<br>
+              <b>Templates:</b> {$cache_size.cache_tpl_size|size_format}<br>
+              <b>Compilation:</b> {$cache_size.cache_cpl_size|size_format}<br>
+              <b>{#cache_all#}:</b> {$cache_size.cache_all|size_format}<br>
+            </p>
+            <p class="left">
+							<a href="/admin/main/clear_cache/all" class="btn btn-large btn-primary">
+                <i class="icon-eraser icon-white"></i> {#sys_delete_all#}
+              </a> 
+							<a href="/admin/main/clear_cache/vars" class="btn btn-large">
+                <i class="icon-eraser"></i> {#sys_delete_all_vars#}
+              </a>
+							<a href="/admin/main/clear_cache/templates" class="btn btn-large">
+                <i class="icon-eraser"></i> {#sys_delete_all_templates#}
+              </a>
+							<a href="/admin/main/clear_cache/compiles" class="btn btn-large">
+                <i class="icon-eraser"></i> {#sys_delete_all_compile#}
+              </a>
+						</p>
+						<div class="clearfix"></div>
+					</div>
+				</div>
+			</div>
+
+			<div class="row-fluid">
+				<div class="box span12">
+					<div class="box-header well">
 						<h2><i class="icon-info-sign"></i> Introduction</h2>
 						<div class="box-icon">
 							<a href="#" class="btn btn-setting btn-round"><i class="icon-cog"></i></a>
@@ -73,7 +105,7 @@
 						<div id="myTabContent" class="tab-content">
 							<div class="tab-pane active" id="info">
 								<h3>Charisma <small>a fully featued template</small></h3>
-								<p>Its a fully featured, responsive template for your admin panel. Its optimized for tablet and mobile phones. Scan the QR code below to view it in your mobile device.</p> <img alt="QR Code" class="charisma_qr center" src="img/qrcode136.png" />
+								<p>Its a fully featured, responsive template for your admin panel. Its optimized for tablet and mobile phones. Scan the QR code below to view it in your mobile device.</p> <img alt="QR Code" class="charisma_qr center" src="/themes/admin/img/qrcode136.png" />
 							</div>
 							<div class="tab-pane" id="custom">
 								<h3>Custom <small>small text</small></h3>

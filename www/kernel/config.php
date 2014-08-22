@@ -1,7 +1,7 @@
 <?php
 
 //Настройки отладки
-$appConfig['debug.enabled'] = false;
+$appConfig['debug.enabled'] = true;
 
 //Параметры для форматирования даты поумолчанию
 $appConfig['date_format'] = '%d.%m.%Y';
@@ -61,7 +61,7 @@ $appConfig['default.dir.perms'] = 0755;
  */
 
 //Включение кеширования шаблонов
-$appConfig['coretpl.caching'] = false;
+$appConfig['coretpl.caching'] = true;
 
 //Создавать поддиректории при организации кэшей.
 $appConfig['coretpl.use_sub_dirs'] = true;

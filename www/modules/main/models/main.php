@@ -12,5 +12,10 @@ class Main extends Model
    * @Index(type='integer')
    */
   var $table = 'main';
+  
+  function deleteVarCachedAll()
+    {
+    //appDirDelete('./cache/vars');
+    }
   }
 ?>

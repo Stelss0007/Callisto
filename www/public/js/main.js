@@ -1,4 +1,4 @@
-$.getScript("/public/js/lang/rus.js");
+//$.getScript("/public/js/lang/rus.js");
 
 /*
  * Autosave form function

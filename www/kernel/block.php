@@ -11,7 +11,6 @@
  */
 class Block extends AppObject
   {
-  
   //public $vars = array();
   public $smarty = null;
   public $block_id;
@@ -52,8 +51,8 @@ class Block extends AppObject
         if(!empty($value))
           {
           $this->$key = unserialize(stripslashes($value));
-          $block_content = unserialize(stripslashes($value));
-          foreach($block_content as $block_key => $block_value)
+          $this->block_content = unserialize(stripslashes($value));
+          foreach($this->block_content as $block_key => $block_value)
             {
             $this->$block_key = $block_value;
             }
@@ -191,7 +190,36 @@ class Block extends AppObject
     $this->vars[$name] = $value;
     return true;
     }  
-   
+  
+  final function assign($var_name = null, $var_value = '')
+    {
+    if(empty($var_name))
+      {
+      return true;
+      }
+    if(is_array($var_name))
+      {
+      $this->vars = array_merge($this->vars, $var_name);
+      }
+    else
+      {
+      $this->vars[$var_name] = $var_value;
+      }
+    }
+    
+  final public function getBlockContent($name='', $value='')
+    {
+    if(empty($name))
+      {
+      return $this->block_content;
+      }
+    if(empty($this->block_content) || empty($this->block_content[$name]))
+      {
+      return $value;
+      }
+    return $this->block_content[$name];
+    }
+    
   final public function setBlockContent($name, $value)
     {
     $this->vars[$name] = $value;

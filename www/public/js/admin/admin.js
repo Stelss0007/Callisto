@@ -4,7 +4,7 @@ $(document).ready(function(){
   var dialog = $('#dialog-box').dialog({
                   autoOpen: false,
                   position: { my: "center top", at: "center top"},
-                  width: 550,
+                  width: 750,
                   modal: true
                 });
     
@@ -62,4 +62,29 @@ $(document).ready(function(){
    $('.block-delete').click(function(){
      return confirm(message.app_confirm_delete);
    });
+   
+   $(window).keypress(function(event) {
+      if ((event.which == 115 && event.ctrlKey))
+        {
+        $("form input[name=submit]").click();
+        $("form button[name=submit]").click();
+        event.preventDefault();
+        }
+      return true;
+    });
 });
+
+
+//$(window).load(function(){loadPlugins()});
+
+
+function loadPlugins()
+  {
+  if(typeof tinyMCE == "undefined") 
+    {
+      $.getScript('/public/js/tinymce/tinymce.js', function() {
+      tinyMCE.init();
+      });
+    }
+  
+  }

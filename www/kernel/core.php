@@ -569,6 +569,7 @@ function appGetModuleList()
   {
   return appGetDirList('modules');
   }
+  
 function appGetModelList()
   {
   $modules = appGetModuleList();
@@ -760,6 +761,50 @@ function appLessLoad($modname='', $scriptname='main', $dir='')
     {
     $lessLoadedHasModScript = 1;
     $lessLoaded["$modname.$scriptname"] = "/modules/$modname/less/$scriptname.less";
+    }
+
+  return true;
+  }
+  
+function appSassLoad($modname='', $scriptname='main', $dir='')
+  {
+  global $sassLoaded;
+  global $sassLoadedHasModScript;
+  
+  if(empty($scriptname))
+    $scriptname = 'main';
+  
+  if (!empty($sassLoaded["$modname.$scriptname"])) 
+    return true;
+  
+  if($modname == 'kernel')
+    {
+    if($scriptname=='main' || $scriptname=='bootstrap')
+      {
+      $sassLoaded["$modname.$scriptname"] = "/public/sass/$scriptname.scss";
+      }
+    else
+      {
+      if(empty($dir))
+        {
+        $sassLoaded["$modname.$scriptname"] = "/public/sass/$scriptname/$scriptname.scss";
+        }
+      else
+        {
+        $sassLoaded["$modname.$dir.$scriptname"] = "/public/sass/$dir/$scriptname.scss";
+        }
+      }
+    }
+  elseif(empty($modname))
+    {
+    global $mod_controller;
+    $current_theme = $mod_controller->getThemeName();
+    $sassLoaded["theme.$current_theme.$scriptname"] = "/themes/$current_theme/sass/$scriptname.scss";
+    }
+  else
+    {
+    $sassLoadedHasModScript = 1;
+    $sassLoaded["$modname.$scriptname"] = "/modules/$modname/sass/$scriptname.scss";
     }
 
   return true;
@@ -1128,6 +1173,83 @@ function appVarDelCached($component, $cacheKey)
   return true;
   }
   
+  //////////////////////////////////////////////////////////////////////////////
+  ///////////////////////  FILE SYSTEM /////////////////////////////////////////
+  
+  
+  function appFolderSize($dir)
+    {
+    $count_size = 0;
+    $count      = 0;
+    $dir_array  = scandir($dir);
+    foreach($dir_array as $key => $filename)
+      {
+      if($filename != ".." && $filename != ".")
+        {
+        if(is_dir($dir . "/" . $filename))
+          {
+          $new_foldersize = appFolderSize($dir . "/" . $filename);
+          $count_size     = $count_size + $new_foldersize;
+          }
+        else if(is_file($dir . "/" . $filename))
+          {
+          $count_size = $count_size + filesize($dir . "/" . $filename);
+          $count++;
+          }
+        }
+      }
+    return $count_size;
+    }
+
+/**
+   * Удаление директории вместе с ее содержимым
+   * @param string $src Путь к директории
+   * @param boolean $src Путь к директории
+   * @return boolean $parretnRemove Флаг удаление родительской категории, тоесть если false удалиться только содержимое
+   */
+  function appDirDelete($src, $parretnRemove = false)
+    {
+    if(is_file($src))
+      {
+      return @unlink($src);
+      }
+    elseif(is_dir($src))
+      {
+      $scan = glob(rtrim($src,'/').'/*');
+       foreach($scan as $index=>$path)
+        {
+        appDirDelete($path, true);
+        }
+      if($parretnRemove)
+        {
+        return @rmdir($src);
+        }
+      return true;
+      }
+    }  
+ 
+ /**
+  * Удаление всех файлов в директории
+  * @param string $src Путь к директории
+  * @return boolean
+  */
+ function appFileDirDelete($src)
+   {
+   $files = glob($src); // get all file names
+   foreach($files as $file)
+     { // iterate files
+     if(is_file($file))
+       {
+       unlink($file); // delete file
+       }
+     }
+   return true;
+   }
+   
+   
+   
+ 
+
 function appTreeBuild($inArray, $start)
   {
   $result = array();

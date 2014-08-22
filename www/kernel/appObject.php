@@ -71,7 +71,9 @@ class AppObject
     
     //echo $modelname;
     //print_r(get_class_methods($this->$modelname));
-    $this->models[] = key($usedResult)." ({$usedResult[key($usedResult)]})";
+    if(!empty($usedResult) && is_array($usedResult))
+      $this->models[] = key($usedResult)." ({$usedResult[key($usedResult)]})";
+      
     return $this->$modelname;
     }
     
