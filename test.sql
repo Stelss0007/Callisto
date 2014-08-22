@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Хост: localhost
--- Время создания: Июн 16 2014 г., 18:02
+-- Время создания: Авг 22 2014 г., 17:01
 -- Версия сервера: 5.5.11
 -- Версия PHP: 5.3.6
 
@@ -115,20 +115,25 @@ CREATE TABLE IF NOT EXISTS `block` (
   KEY `block_position` (`block_position`),
   KEY `block_active` (`block_active`),
   KEY `block_lang` (`block_lang`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=53 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=66 ;
 
 --
 -- Дамп данных таблицы `block`
 --
 
 INSERT INTO `block` (`id`, `block_weight`, `block_name`, `block_displayname`, `block_pattern`, `block_content`, `block_position`, `block_active`, `block_lang`, `block_css_class`, `theme_id`) VALUES
-(37, 0, 'menu_block', 'Menu', '.*', NULL, 't', 0, '', NULL, 2),
-(30, 2, 'test_block', 'Test', '.*', '', 'r', 1, '', 'rus_css', 2),
-(32, 1, 'menu_block', 'Menu', '.*', 'a:4:{s:2:\\"id\\";s:2:\\"32\\";s:12:\\"block_weight\\";s:1:\\"0\\";s:9:\\"menu_type\\";s:1:\\"1\\";s:9:\\"parent_id\\";s:2:\\"95\\";}', 'r', 1, '', NULL, 3),
-(49, 1, 'menu_block', 'Menu', '.*', NULL, 'l', 0, '', NULL, 2),
-(50, 3, 'anekdot_block', 'Анекдот дня', '.*', NULL, 'l', 1, '', '', 2),
-(51, 0, 'menu_block', 'Menu', '.*', 'a:5:{s:2:"id";s:2:"51";s:12:"block_weight";s:1:"0";s:8:"theme_id";s:1:"2";s:9:"menu_type";s:1:"1";s:9:"parent_id";s:3:"102";}', 'l', 1, '', '', 2),
-(52, 0, 'comments_block', 'Коментарии', '.*view.*', 'a:5:{s:2:"id";s:2:"52";s:12:"block_weight";s:1:"0";s:8:"theme_id";s:1:"2";s:9:"menu_type";s:1:"1";s:9:"parent_id";s:1:"0";}', 'b', 1, '', '', 2);
+(37, 1, 'menu_block', 'Menu', '.*', NULL, 't', 0, '', NULL, 2),
+(32, 1, 'menu_block', 'Menu', '.*', 'a:5:{s:2:"id";s:2:"32";s:12:"block_weight";s:1:"2";s:9:"menu_type";s:1:"1";s:9:"parent_id";s:2:"95";s:8:"theme_id";s:1:"2";}', 'r', 1, '', '', 2),
+(50, 6, 'anekdot_block', 'Анекдот дня', '.*', NULL, 'l', 0, '', '', 2),
+(53, 4, 'anekdot_block', 'Анекдот дня', '.*', NULL, 'r', 1, '', '', 2),
+(52, 1, 'comments_block', 'Коментарии', '.*view.*', 'a:6:{s:2:"id";s:2:"52";s:12:"block_weight";s:1:"1";s:8:"theme_id";s:1:"2";s:9:"menu_type";s:1:"1";s:9:"parent_id";s:1:"0";s:7:"toolbar";s:133:"bold,italic,underline,strike,subscript,superscript|font,size,color,removeformat|code,quote|image,email,link,unlink|emoticon,date,time";}', 'b', 1, '', 'rus45645', 2),
+(62, 2, 'html_block', 'Мой Блок', '.*', 'a:4:{s:2:"id";s:2:"62";s:12:"block_weight";s:1:"2";s:8:"theme_id";s:1:"2";s:7:"content";s:1900:"<p><strong style="color: #000000; font-family: Arial, Helvetica, sans; font-size: 11px; font-style: normal; font-variant: normal; letter-spacing: normal; line-height: 14px; orphans: auto; text-align: justify; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;">Lorem Ipsum</strong><span style="color: #000000; font-family: Arial, Helvetica, sans; font-size: 11px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 14px; orphans: auto; text-align: justify; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; display: inline !important; float: none;"><span class="Apple-converted-space">&nbsp;</span>is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry''s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</span></p>\r\n<p><span style="color: #000000; font-family: Arial, Helvetica, sans; font-size: 11px; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: 14px; orphans: auto; text-align: justify; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; display: inline !important; float: none;"><iframe src="http://www.youtube.com/embed/CljGZk2wfaw" frameborder="0" width="203" height="175"></iframe></span></p>\r\n<p>&nbsp;</p>";}', 'l', 1, '', 'russ_class', 2),
+(55, 4, 'menu_block', 'Menu', '.*', NULL, 'l', 1, '', NULL, 2),
+(59, 5, 'menu_block', 'Menu', '.*', NULL, 'r', 1, '', NULL, 2),
+(61, 1, 'menu_block', 'Menu', '.*', 'a:5:{s:2:"id";s:2:"61";s:12:"block_weight";s:1:"4";s:8:"theme_id";s:1:"2";s:9:"menu_type";s:1:"1";s:9:"parent_id";s:3:"102";}', 'l', 1, '', '', 2),
+(63, 3, 'html_block', 'HTML block', '.*', 'a:4:{s:2:"id";s:2:"63";s:12:"block_weight";s:1:"5";s:8:"theme_id";s:1:"2";s:7:"content";s:178:"<p>Тестовый блок</p>\r\n<p><iframe src="http://www.youtube.com/embed/9Ut7sM0CjLw" frameborder="0" width="187" height="154"></iframe></p>\r\n<p>&nbsp;</p>\r\n<p>sdfsdfsd</p>";}', 'r', 1, '', '', 2),
+(64, 7, 'html_block', 'HTML block Rus', '.*', 'a:4:{s:2:"id";s:2:"64";s:12:"block_weight";s:1:"7";s:8:"theme_id";s:1:"2";s:7:"content";s:57:"<p>htyey&nbsp; rt y ey</p>\r\n<p><strong>tyeee</strong></p>";}', 'l', 1, '', 'rus-class', 2),
+(65, 8, 'menu_block', 'Menu', '.*', 'a:5:{s:2:"id";s:2:"65";s:12:"block_weight";s:1:"8";s:8:"theme_id";s:1:"2";s:9:"menu_type";s:1:"1";s:9:"parent_id";s:2:"89";}', 'l', 1, '', '', 2);
 
 -- --------------------------------------------------------
 
@@ -153,7 +158,7 @@ CREATE TABLE IF NOT EXISTS `comment` (
   KEY `coment_user_id` (`comment_user_id`),
   FULLTEXT KEY `comment_module` (`comment_module`),
   FULLTEXT KEY `comment_module_object` (`comment_module_object`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=14 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=52 ;
 
 --
 -- Дамп данных таблицы `comment`
@@ -172,7 +177,45 @@ INSERT INTO `comment` (`id`, `comment_addtime`, `comment_modtime`, `comment_acti
 (10, 0, 0, 0, 'Привет Рус', 3, 'articles', 0, 0, 'articles::user::view::21'),
 (11, 0, 0, 0, 'Привет еще раз', 3, 'articles', 0, 0, 'articles::user::view::21'),
 (12, 0, 0, 0, 'Привет еще раз', 3, 'articles', 0, 0, 'articles::user::view::21'),
-(13, 1402927016, 1402927016, 0, 'Ghbdtn', 3, 'articles', 0, 0, 'articles::user::view::21');
+(13, 1402927016, 1402927016, 0, 'Ghbdtn', 3, 'articles', 0, 0, 'articles::user::view::21'),
+(14, 1403008525, 1403008525, 0, '[i]пппвапвап вп вап[/i]', 3, 'articles', 0, 0, 'articles::user::view::21'),
+(15, 1403532761, 1403532761, 0, 'sdf f asdf', -1, 'articles', 0, 0, 'articles::user::view::1'),
+(16, 1403532773, 1403532773, 0, 'Hellllllloooooo\r\n', -1, 'articles', 0, 0, 'articles::user::view::1'),
+(17, 1403858628, 1403858628, 0, 'dfg df dfg dfs g', 3, 'articles', 0, 0, 'articles::user::view::20'),
+(18, 1403859177, 1403859177, 0, 'fgh  hfd hfd[sub]fhfdhfhdh[/sub]\r\n fdh ffdh f fgh f', 3, 'articles', 0, 0, 'articles::user::view::20'),
+(19, 1403859202, 1403859202, 0, '[i][b]hrthfdf f fd hfh fh \r\n[/b][/i]\r\n', 3, 'articles', 0, 0, 'articles::user::view::20'),
+(20, 1403859439, 1403859439, 0, 'j ghjghj hg ghj ghf ', 3, 'articles', 0, 0, 'articles::user::view::21'),
+(21, 1403859509, 1403859509, 0, 'yrty yre', 3, 'articles', 0, 0, 'articles::user::view::1'),
+(22, 1403861003, 1403861003, 0, 'vjvk  bh hjlhj hh hj hj', 3, 'articles', 0, 0, 'articles::user::view::21'),
+(23, 1403861192, 1403861192, 0, 'fdgsd', 3, 'articles', 0, 0, 'articles::user::view::21'),
+(24, 1403861282, 1403861282, 0, 'dfgdsgdsg', 3, 'articles', 0, 0, 'articles::user::view::21'),
+(25, 1403861320, 1403861320, 0, 'gdfgdf gdf gdfs ', 3, 'articles', 0, 0, 'articles::user::view::21'),
+(26, 1403861495, 1403861495, 0, 'gdf gdfg dsf g', 3, 'articles', 0, 0, 'articles::user::view::21'),
+(27, 1403861531, 1403861531, 0, 'fdgdg dfg dfg dfsg dfg dfg dfs', 3, 'articles', 0, 0, 'articles::user::view::21'),
+(28, 1403861941, 1403861941, 0, 'hfh hfd ', 3, 'articles', 0, 0, 'articles::user::view::21'),
+(29, 1403863608, 1403863608, 0, 'gsdfg dfg dfg d[u]gsdf dfg dg sdfg sd[/u]', 3, 'articles', 0, 0, 'articles::user::view::21'),
+(30, 1403863629, 1403863629, 0, 'bcxv bcvb  [b]cvb cv bcxv[u] cv c bcv bcv xc[font=Arial Black]  cx bxcvbcxbxcv b[/font][/u][/b] [sup]vvbvcxcvbx[/sup]', 3, 'articles', 0, 0, 'articles::user::view::21'),
+(31, 1403863648, 1403863648, 0, ':''(\r\n', 3, 'articles', 0, 0, 'articles::user::view::21'),
+(32, 1403867052, 1403867052, 0, '[font=Arial Black]xcvxcvxcvxcvxc[font=Comic Sans MS] xcvxcvxcvxcvxcv [s]fsdfdfdfdfsdf[color=#66cc66] dsfdfdfdf[/color][/s][color=#66cc66]sdfsdfsdfdf[/color][/font][/font] dgdfggfdgfd  gd[email=rrr@mail.ru]rrr@mail.ru[/email]  [url=http://vk.com]http://vk.com[/url][font=Arial Black][font=Comic Sans MS] :dizzy:\r\n2014-06-27\r\n14:03:52[/font][/font]\r\n[quote]erterter er erter[/quote]\r\n\r\n\r\n[code]erter ewweteter[/code]\r\n', 3, 'articles', 0, 0, 'articles::user::view::21'),
+(33, 1403868042, 1403868042, 0, 'rwer wer wer wer we ', 3, 'articles', 0, 0, 'articles::user::view::21'),
+(34, 1403871980, 1403871980, 0, '[img=300x200]http://www.unicomf.com.ua/images/stories/virtuemart/category/resized/nablyudenie[1]_350x359.jpg[/img]\r\n', 3, 'articles', 0, 0, 'articles::user::view::21'),
+(35, 1403878838, 1403878838, 0, ':)', 3, 'articles', 0, 0, 'articles::user::view::21'),
+(36, 1403878873, 1403878873, 0, '  :) ', 3, 'articles', 0, 0, 'articles::user::view::21'),
+(37, 1403879698, 1403879698, 0, 'Хелоо :sleeping: :angel: <3', 3, 'articles', 0, 0, 'articles::user::view::21'),
+(38, 1403879797, 1403879797, 0, '[code]рар ра р ав [/code]\r\n', 3, 'articles', 0, 0, 'articles::user::view::21'),
+(39, 1403879824, 1403879824, 0, '[u]апвра рап рав рап рапр ап рап   [/u][color=#cccc99]врапрап равр ав  [color=#3333cc]рапр аправр аапр вар ар[/color][/color]\r\n', 3, 'articles', 0, 0, 'articles::user::view::21'),
+(40, 1404197769, 1404197769, 0, ':angel: <3 :P [url=http://vk.com]Hello[/url]\r\n', 3, 'articles', 0, 0, 'articles::user::view::21'),
+(41, 1404199010, 1404199010, 0, 'eryweew', 3, 'articles', 0, 0, 'articles::user::view::21'),
+(42, 1404199034, 1404199034, 0, 'tet v trt  ewt ert etrt ert ert ert ert ert erwt erw', 3, 'articles', 0, 0, 'articles::user::view::21'),
+(43, 1404201169, 1404201169, 0, 'Привет', 3, 'articles', 0, 0, 'articles::user::view::21'),
+(44, 1404201339, 1404201339, 0, 'Тест', 3, 'articles', 0, 0, 'articles::user::view::21'),
+(45, 1404201413, 1404201413, 0, 'Тест 2\r\nкцукцйу ц еуке уке;)', 3, 'articles', 0, 0, 'articles::user::view::21'),
+(46, 1404201808, 1404201808, 0, '', 3, 'articles', 0, 0, 'articles::user::view::21'),
+(47, 1404201814, 1404201814, 0, '', 3, 'articles', 0, 0, 'articles::user::view::21'),
+(48, 1404201828, 1404201828, 0, '', 3, 'articles', 0, 0, 'articles::user::view::21'),
+(49, 1404202117, 1404202117, 0, '', -1, 'articles', 0, 0, 'articles::user::view::21'),
+(50, 1404203057, 1404203057, 0, '[b]ываываыв ыва вы аыв [/b]', -1, 'articles', 0, 0, 'articles::user::view::21'),
+(51, 1408630650, 1408630650, 0, 'fdgfdfgdsf', 3, 'articles', 0, 0, 'articles::user::view::21');
 
 -- --------------------------------------------------------
 
@@ -314,10 +357,10 @@ INSERT INTO `menu` (`id`, `menu_weight`, `menu_parent_id`, `menu_item_type`, `me
 (94, 1, 89, 3, 0, 'Menu', NULL, '/menu/', 0, '0::89'),
 (96, 1, 95, 3, 0, 'Test 1', NULL, '/users/', 0, '0::95'),
 (97, 2, 95, 3, 0, 'Test  2', NULL, '', 0, '0::95'),
-(98, 3, 0, 3, 0, 'Test  2', NULL, '', 0, '0'),
+(98, 5, 0, 3, 0, 'Test  2', NULL, '', 0, '0'),
 (100, 6, 89, 3, 0, 'Темы', 'Модуль для выбора темы сайта', '/theme/', 0, '0::89'),
-(102, 5, 0, 3, 3, 'Привет', NULL, '', 0, '0'),
-(89, 1, 0, 3, 6, 'Administration', NULL, '', 0, '0'),
+(102, 6, 0, 3, 3, 'Привет', NULL, '', 0, '0'),
+(89, 2, 0, 3, 6, 'Administration', NULL, '', 0, '0'),
 (90, 5, 89, 3, 0, 'Blocks', NULL, '/blocks/', 0, '0::89'),
 (91, 2, 89, 3, 0, 'Users', NULL, '/users/', 0, '0::89'),
 (104, 2, 102, 3, 0, 'Статьи', NULL, '/articles/', 1, '0::102'),
@@ -43387,8 +43430,8 @@ CREATE TABLE IF NOT EXISTS `theme` (
 --
 
 INSERT INTO `theme` (`id`, `theme_name`, `theme_description`, `active`, `theme_last_update`, `theme_title`, `theme_version`, `theme_author`) VALUES
-(47, 'blog_theme', 'Blog Theme', 1, 1396334203, 'Blog Theme', '1.0.0.1', 'Ruslan Atamas'),
-(17, 'green', 'Green Theme', 0, 1384270019, 'Green', '1.0.0.1', 'Ruslan Atamas'),
+(47, 'blog_theme', 'Blog Theme', 0, 1396334203, 'Blog Theme', '1.0.0.1', 'Ruslan Atamas'),
+(17, 'green', 'Green Theme', 1, 1384270019, 'Green', '1.0.0.1', 'Ruslan Atamas'),
 (48, 'blue', 'Blue Theme', 0, 1397476213, 'Blue', '1.0.0.1', 'Ruslan Atamas');
 
 -- --------------------------------------------------------
