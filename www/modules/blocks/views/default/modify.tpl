@@ -39,6 +39,14 @@
     </td>
   </tr>
   <tr>
+    <td width="20%" align="left" class="head">Отображаемое название:</td>
+    <td width="80%" align="left" class="even">
+      <div class="controls">
+        <input data-no-uniform="true" type="checkbox" name="block_active" {if $block_active}checked="checked"{/if} value="1" class="iphone-toggle">
+      </div>
+    </td>
+  </tr>
+  <tr>
     <td width="20%" align="left" class="head">Маска :</td>
     <td width="80%" align="left" class="even">
       <input type="text" name="block_pattern" size="50" value="{$block_pattern|escape}">

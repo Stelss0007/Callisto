@@ -35,7 +35,14 @@
                 <input type="text" name="block_displayname" size="50" value="{$block_displayname|escape}">
               </div>
              </div>
-             
+              
+             <div class="control-group">
+              <label class="control-label" for="date01">Активирован:</label>
+              <div class="controls">
+                <input data-no-uniform="true" type="checkbox" name="block_active" {if $block_active}checked="checked"{/if} value="1" class="iphone-toggle">
+              </div>
+             </div>
+          
              <div class="control-group">
               <label class="control-label" for="date01">Маска:</label>
               <div class="controls">

@@ -228,7 +228,11 @@ class AdminController extends Controller
     $position = $position["{$this->input_vars['block_position']}"];
     if(empty ($position)) 
       die ('Неизвестная позиция!');
-    
+
+    if(empty($this->input_vars['block_active']))
+      {
+      $this->input_vars['block_active'] = '0';
+      }
     $this->arrayToModel($this->blocks, $this->input_vars);
     $id = $this->blocks->save();
 
