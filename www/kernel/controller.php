@@ -1613,6 +1613,7 @@ abstract class Controller extends AppObject
     {
     $smartyTpl = new viewTpl();
     $smartyTpl->assign($variables);
+    rtrim($template, '.tpl');
     if(!file_exists($this->root_dir.'/mails/'.$template.'.tpl'))
       {
       $this->errors->setError("Mailer Error: '{$this->root_dir}/mails/{$template}.tpl' not exist!");
