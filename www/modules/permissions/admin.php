@@ -9,8 +9,8 @@ class AdminController extends Controller
     
     $this->usesModel('groups');
     
-    $this->group_permission = $this->permissions->group_permissions_list();
-    $this->levels = $this->permissions->permission_level();
+    $this->group_permission = $this->permissions->groupPermissionsList();
+    $this->levels = $this->permissions->permissionLevel();
    
     $this->assign('group', $this->groups->group_list());
     
@@ -31,11 +31,11 @@ class AdminController extends Controller
       {
       if($id)
         {
-        $this->permissions->group_permissions_update($data, $id);
+        $this->permissions->groupPermissionsUpdate($data, $id);
         }
       else
         {
-        $this->permissions->group_permissions_create($data);
+        $this->permissions->groupPermissionsCreate($data);
         }
       $this->redirect('/admin/permissions/permissions_list');
       }
@@ -47,8 +47,8 @@ class AdminController extends Controller
     $browsein[] =array('url'=>"/admin/main", 'displayname'=>$this->t('dashboard'));
     $browsein[] =array('url'=>'/admin/permissions', 'displayname'=>'Permissions');  
   
-    $this->levels = $this->permissions->permission_level();
-    $permission = $this->permissions->group_permission($id);
+    $this->levels = $this->permissions->permissionLevel();
+    $permission = $this->permissions->groupPermission($id);
     
     if($permission)
       {
@@ -72,7 +72,7 @@ class AdminController extends Controller
     if(empty($id))
       $this->errors->setError("ID of Permission is missing!");
     
-    $this->permissions->group_permission_delete($id);
+    $this->permissions->groupPermissionDelete($id);
     $this->redirect();
     }
       

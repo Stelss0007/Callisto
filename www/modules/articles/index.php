@@ -5,6 +5,9 @@ class IndexController extends Controller
   
   public function actionArticleList()
     {
+    //appCanEdit();
+    $this->sendEmailTemplate(array('stelss1986@gmail.com'), 'Test Subject', 'main');
+    
     $this->viewCachedPage();
     
     $this->usesModel('articleCategory');

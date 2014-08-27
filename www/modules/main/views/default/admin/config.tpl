@@ -19,6 +19,18 @@
 {array_append name='site_seo_robots_list' key='index, nofollow' value='index, nofollow'}
 {array_append name='site_seo_robots_list' key='noindex, nofollow' value='noindex, nofollow'}
 
+
+{array name='site_email_type'}
+{array_append name='site_email_type' key='phpmail' value='PHP Mail'}
+{array_append name='site_email_type' key='sendmail' value='Sendmail'}
+{array_append name='site_email_type' key='smtp' value='SMTP'}
+
+
+{array name='site_smtp_sec'}
+{array_append name='site_smtp_sec' key='' value='None'}
+{array_append name='site_smtp_sec' key='ssl' value='SSL'}
+{array_append name='site_smtp_sec' key='tsl' value='TSL'}
+
 <div class="accordion" id="accordion">
   
   <div class="panel panel-default">
@@ -159,7 +171,67 @@
     </div>
     <div id="group-mail" class="panel-collapse collapse">
       <div class="panel-body">
-        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+        <div class="control-group">
+          <label for="date01" class="control-label">{#mail_type#}</label>
+          <div class="controls">
+            <select data-rel="chosen_" name="modconfig[main][site_email_type]">
+              {html_options options=$site_email_type selected=$modconfig.main.site_email_type}
+            </select>
+          </div>
+        </div>
+            
+        <div class="control-group">
+          <label for="date01" class="control-label">{#mail_site_from#}</label>
+          <div class="controls">
+            <input type="text" name="modconfig[main][site_email_from]" value="{$modconfig.main.site_email_from}" style="width: 98%;">
+          </div>
+        </div>
+          
+        <div class="control-group">
+          <label for="date01" class="control-label">{#mail_site_sender#}</label>
+          <div class="controls">
+            <input type="text" name="modconfig[main][site_email_sender]" value="{$modconfig.main.site_email_sender}" style="width: 98%;">
+          </div>
+        </div>
+          
+        <div class="control-group">
+          <label for="date01" class="control-label">{#mail_smtp_server#}</label>
+          <div class="controls">
+            <input type="text" name="modconfig[main][site_email_smtp_server]" value="{$modconfig.main.site_email_smtp_server}" style="width: 98%;">
+          </div>
+        </div>
+          
+        <div class="control-group">
+          <label for="date01" class="control-label">{#mail_type#}</label>
+          <div class="controls">
+            <select data-rel="chosen_" name="modconfig[main][site_smtp_sec]">
+              {html_options options=$site_smtp_sec selected=$modconfig.main.site_smtp_sec}
+            </select>
+          </div>
+        </div>
+          
+        <div class="control-group">
+          <label for="date01" class="control-label">{#mail_smtp_port#}</label>
+          <div class="controls">
+            <input type="text" name="modconfig[main][site_email_smtp_port]" value="{$modconfig.main.site_email_smtp_port}" style="width: 98%;">
+          </div>
+        </div>
+          
+        <div class="control-group">
+          <label for="date01" class="control-label">{#mail_smtp_user#}</label>
+          <div class="controls">
+            <input type="text" name="modconfig[main][site_email_smtp_user]" value="{$modconfig.main.site_email_smtp_user}" style="width: 98%;">
+          </div>
+        </div>
+          
+        <div class="control-group">
+          <label for="date01" class="control-label">{#mail_smtp_password#}</label>
+          <div class="controls">
+            <input type="text" name="modconfig[main][site_email_smtp_password]" value="{$modconfig.main.site_email_smtp_password}" style="width: 98%;">
+          </div>
+        </div>
+          
+        
       </div>
     </div>
   </div>

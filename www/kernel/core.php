@@ -1,5 +1,7 @@
 <?php
 include_once 'kernel/constants.php';
+include_once './lib/PHPMailer/PHPMailerAutoload.php';
+
 
 appUsesLib('Smarty');
 appUsesLib('DBConnector');
@@ -38,7 +40,7 @@ function isAjax()
   return false;
   }
 
-$ses_info = new UserSession();
+$ses_info = UserSession::getInstance();
 /**
  * @desc ?????????????? ???????
  * @return bool
@@ -810,6 +812,12 @@ function appSassLoad($modname='', $scriptname='main', $dir='')
   return true;
   }
 
+  
+function appCanEdit($object)
+  {
+  $session_info = UserSession::getInstance();
+  appDebugExit($session_info->userId());
+  }
 
 
 
@@ -1320,5 +1328,75 @@ function appCreateTreeHTML($array, $curParent, $currLevel = 0, $prevLevel = -1)
       }
 
     }
-if ($currLevel == $prevLevel) echo " </li> </ul> ";
-}
+  if ($currLevel == $prevLevel) echo " </li> </ul> ";
+  }
+  
+  
+////////////////////////////////////////////////////////////////////////////////
+///////////////////////////// MAIL /////////////////////////////////////////////
+function appSendMail($to='stelss1986@gmail.com', $subject='System Message', $body='Hello')
+  {
+  $phpmailer = new PHPMailer();
+
+  $phpmailer->ClearAllRecipients();
+  $phpmailer->ClearAttachments();
+
+  // Set the from name and email
+  $phpmailer->From     = 'admin.site.com';
+  $phpmailer->FromName = 'Callisto';
+
+  // Set destination address
+  if(isset($to))
+    {
+    $phpmailer->AddAddress($to, $to_name);
+    }
+
+  // set bccs if exists
+  if($bcc && is_array($bcc))
+    {
+    foreach($bcc as $address)
+      $phpmailer->AddBCC($address);
+    }
+
+  $phpmailer->Subject = $subject;
+
+  if(!$html)
+    {
+    $phpmailer->CharSet = 'utf-8';
+    $phpmailer->IsHTML(false);
+    if($param && array_key_exists('altbody', $param))
+      {
+      $phpmailer->AltBody = $param['altbody'];
+      }
+
+    $trans_tbl           = get_html_translation_table(HTML_ENTITIES);
+    $trans_tbl[chr(146)] = '&rsquo;';
+    foreach($trans_tbl as $k => $v)
+      {
+      $ttr[$v] = utf8_encode($k);
+      }
+    $source = strtr($body, $ttr);
+    $body   = strip_tags($source);
+    }
+  else
+    {
+    $phpmailer->IsHTML(true);
+    }
+
+  $phpmailer->Body = $body;
+
+  if($files && is_array($files))
+    {
+    foreach($files as $file)
+      {
+      if(isset($file['path']))
+        $phpmailer->AddAttachment($file['path'], $file['name']);
+      }
+    }
+    
+  // use php's mail
+  $phpmailer->IsMail();
+  $return = $phpmailer->Send();
+  
+  return $return;
+  }
