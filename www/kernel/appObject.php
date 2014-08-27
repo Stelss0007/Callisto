@@ -78,6 +78,7 @@ class AppObject
   final public function usesModule($modulename=null, $autocreate=true)
     {
     $models = appUsesModule($modulename);
+
     if($autocreate)
       {
       foreach($models as $model=>$src)

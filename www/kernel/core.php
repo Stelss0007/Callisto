@@ -433,6 +433,8 @@ function appUsesModule($module_name)
   {
   global $appConfig;
 
+  //$module_name = strtolower($module_name);
+ 
   $mod_identy_type ='models_module';
   
   if(empty($module_name))
@@ -462,14 +464,15 @@ function appUsesModule($module_name)
       if(empty($models[$mod_identy_type][$module_name]))
         {
         $models = appGetModelList();
- //print_r($models);       
+     
         appVarSetCached('app', 'models', $models);
         }
+        
       if(empty($models[$mod_identy_type][$module_name]))
         return array();
       }
     }
- 
+
   foreach($models[$mod_identy_type][$module_name] as $src)
     {
     require_once ($src);
@@ -563,7 +566,7 @@ function appGetModuleSrc(array $mod)
   }
 function appGetModuleName(array $mod)
   {
-  return key($mod);
+  return (key($mod));
   }
 function appGetModuleList()
   {
