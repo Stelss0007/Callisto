@@ -51,6 +51,7 @@
         <p><strong>Hello</p>
         </div>
         *}
+        
       <div class="wrap">
         <!-- topbar starts -->
         <div class="navbar">
@@ -70,9 +71,11 @@
                             <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a href="#">Profile</a></li>
+                            <li><a href="#"><i class="icon-user"></i> Profile</a></li>
+                            <li><a href="#"><i class="icon-envelope"></i> Messages</a></li>
+                            <li><a href="#"><i class="icon-cog"></i> Settings</a></li>
                             <li class="divider"></li>
-                            <li><a href="/admin/users/login">Logout</a></li>
+                            <li><a href="/admin/users/login"><i class="icon-power-off"></i> Logout</a></li>
                         </ul>
                     </div>
                     <!-- user dropdown ends -->
@@ -155,8 +158,8 @@
             </div>
 
             <footer>
-                <p class="pull-left">&copy; <a href="http://usman.it" target="_blank">Muhammad Usman</a> 2012</p>
-                <p class="pull-right">Powered by: <a href="http://usman.it/free-responsive-admin-template">Charisma</a></p>
+                <p class="pull-left">&copy; <a href="http://callisto.org" target="_blank">Callisto</a> {$smarty.now|date_format:"%Y"}</p>
+                <p class="pull-right">Powered by: <a href="http://stelssoft.com">StelsSoft</a></p>
             </footer>
 
         </div><!--/.fluid-container-->

@@ -33,3 +33,13 @@ and open the template in the editor.
   margin-bottom: 10px;
   font-weight: bold;
 }
+
+.comment_label {
+ display: block; 
+ float: left;
+ min-width: 70px;
+}
+
+.comment_field {
+  margin: 5px 0;
+}

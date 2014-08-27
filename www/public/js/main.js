@@ -1,3 +1,5 @@
+//$.getScript("/public/js/lang/rus.js");
+
 /*
  * Autosave form function
  * Example:
@@ -28,6 +30,8 @@
 //    };
 //})(jQuery);
 
+
+
 function showAppMessage(message)
   {
   if($('#appMessage_').html() || message)
@@ -35,7 +39,7 @@ function showAppMessage(message)
     var close_btn = '<a href="#" data-dismiss="alert" class="close" type="button">x</a>'; 
     if(message) 
       {
-      $('#appMessage_msg_text').html($('#appMessageText').val()+close_btn).attr('class', 'alert alert-'+$('#appMessageType').val());
+      $('#appMessage_msg_text').html(message + close_btn).attr('class', 'alert alert-'+$('#appMessageType').val());
       }
     else
       {
@@ -54,8 +58,9 @@ function showAppMessage(message)
 
 $('document').ready(function(){
   $('body').prepend("<div id='appMessage_conteiner'><div class='alert alert-success' id='appMessage_msg_text'></div></div>");
-  $('#appMessage_msg_text').on('click', function() {
+  $('#appMessage_msg_text, #appMessage_msg_text .close').on('click', function() {
      $('#appMessage_conteiner').stop().animate({"opacity": "0"}, "fast");
+     return false;
   });
   showAppMessage();
 });

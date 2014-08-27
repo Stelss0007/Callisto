@@ -107,7 +107,7 @@ class AdminController extends Controller
     $weight = $this->blocks->weightMax("block_position = '{$input_position}'");
     $weight++;
 
-    $info['weight'] = $weight;
+    $info['block_weight'] = $weight;
     $info['block_last_update'] = time();
     $info['block_position'] = $input_position;
     $info['block_pattern'] = '.*';
@@ -133,6 +133,14 @@ class AdminController extends Controller
     $this->redirect();
     }
     
+  function actionWeightSet($id, $weightOld, $weightNew, $block_position)
+    {
+    $this->getAccess(ACCESS_ADMIN);
+    $this->blocks->weightSet($id, $weightOld, $weightNew, $block_position);
+    echo $this->t('sys_saved');
+    //$this->redirect();
+    }
+    
   function actionActive($id)
     {
     $this->getAccess(ACCESS_ADMIN);
@@ -152,7 +160,10 @@ class AdminController extends Controller
   function actionDelete($id, $weight, $block_position)
     {
     $this->getAccess(ACCESS_ADMIN);
-    $this->blocks->weightDelete($weight ,"block_position = '$block_position'");
+    
+    $currentBlockInfo = $this->blocks->getById($id);
+    
+    $this->blocks->weightDelete($currentBlockInfo['block_weight'] ,"block_position = '{$currentBlockInfo['block_position']}'");
     $this->blocks->delete($id);
     $this->redirect();
     }
@@ -217,7 +228,11 @@ class AdminController extends Controller
     $position = $position["{$this->input_vars['block_position']}"];
     if(empty ($position)) 
       die ('Неизвестная позиция!');
-    
+
+    if(empty($this->input_vars['block_active']))
+      {
+      $this->input_vars['block_active'] = '0';
+      }
     $this->arrayToModel($this->blocks, $this->input_vars);
     $id = $this->blocks->save();
 
@@ -240,8 +255,14 @@ class AdminController extends Controller
         }
       }
     /*TODO Доделать пересчет весов если изменилась позиция блока*/
-      
-    $this->showMessage('Изменеия сохранены', $this->input_vars['ref']);
+    if($this->input_vars['submit_exit'])  
+      {
+      $this->showMessage('Изменеия сохранены', $this->input_vars['ref']);
+      }
+    else
+      {
+      $this->showMessage('Изменеия сохранены', $this->referer);
+      }
     }
     
   function actionInfo($block_name, $position)

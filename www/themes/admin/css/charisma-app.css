@@ -184,7 +184,7 @@ float:right;
 clear:none;
 float:left;
 margin:0 2px;
-height: 18px;
+height: 15px;
 width:5px;
 margin-top: -1px;
 }
@@ -197,9 +197,6 @@ padding:10px;
 
 
 .btn-round{
-border-radius: 40px;
--webkit-border-radius: 40px;
--moz-border-radius: 40px;
 font-size:12px;
 padding-top:4px;
 }

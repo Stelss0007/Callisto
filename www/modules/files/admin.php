@@ -7,6 +7,8 @@ class AdminController extends Controller
 
   function actionFileList()
     {
+    $this->getAccess(ACCESS_ADMIN);
+    
     $browsein   = array();
     $browsein[] = array('url' => "/admin/main", 'displayname' => $this->t('dashboard'));
     $browsein[] = array('url' => '', 'displayname' => 'Files');
@@ -18,6 +20,8 @@ class AdminController extends Controller
 
   function actionGetList()
     {
+    $this->getAccess(ACCESS_ADMIN);
+    
     $opts = array(
         //'debug' => true,
         'roots' => array(

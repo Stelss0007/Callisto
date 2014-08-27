@@ -5,6 +5,7 @@ class AdminController extends Controller
   
   function actionMenuList($parent_id = 0)
     {
+    $this->getAccess(ACCESS_ADMIN);
 //    error_reporting(E_ERROR | E_WARNING | E_PARSE | E_NOTICE);
 //    
 //    $array[1] = 1000000;
@@ -35,6 +36,8 @@ class AdminController extends Controller
     
   function actionMenuTree()
     {
+    $this->getAccess(ACCESS_ADMIN);
+    
     $this->assign('parent_id', 0);
     $this->assign('menus', $this->menu->tree_items(0));
     $this->assign('module_browsein', $browsein);
@@ -44,6 +47,8 @@ class AdminController extends Controller
     
   function actionModify($id=0)
     {
+    $this->getAccess(ACCESS_ADMIN);
+    
     $this->setReferer();
     
     $menu = $this->menu->getById($id);
@@ -63,6 +68,8 @@ class AdminController extends Controller
     
   function actionCreate($id=0)
     {
+    $this->getAccess(ACCESS_ADMIN);
+    
     $this->setReferer();
   
     $menu = $this->menu->getById($id);
@@ -84,6 +91,8 @@ class AdminController extends Controller
     
   function actionManage($id=0)
     {
+    $this->getAccess(ACCESS_ADMIN);
+    
     $data = $this->input_vars;
 
     if($data['submit'])
@@ -105,6 +114,8 @@ class AdminController extends Controller
     
   function actionDelete($id=0)
     {
+    $this->getAccess(ACCESS_ADMIN);
+    
     if(empty($id))
       $this->errors->setError("ID of menu is missing!");
     

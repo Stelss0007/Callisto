@@ -5,6 +5,8 @@ class AdminController extends Controller
   
   function actionThemeList()
     {
+    $this->getAccess(ACCESS_ADMIN);
+    
     $browsein = array();
     $browsein[] = array ('url'=>'/admin/theme',
                         'displayname'=>'Темы');
@@ -70,6 +72,7 @@ class AdminController extends Controller
   function actionActivate($id)
     {
     $this->getAccess(ACCESS_ADMIN);
+    
     $this->theme->activate($id);
     $this->showMessage($this->t('theme_activated'), '/admin/theme');
     }
@@ -77,11 +80,14 @@ class AdminController extends Controller
   function actionDelete($id)
     {
     $this->getAccess(ACCESS_ADMIN);
+    
     $this->theme->delete($id);
     $this->showMessage($this->t('theme_deleted'), '/admin/theme');
     }
   function actionGetActive()
     {
+    $this->getAccess(ACCESS_ADMIN);
+    
     appDebug($this->theme->getActive());
     }
 

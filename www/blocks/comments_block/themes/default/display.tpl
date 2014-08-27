@@ -26,15 +26,26 @@
 {/if}
 </div>
 
-
-
 <h3>Добавить коментарий</h3>
-<div style="width: 100%; position: relative;">
+<div class="comment_add_block" style="width: 100%; position: relative;">
   <form action="/comments/comment_add" method="post">
     <input type="hidden" name="comment_module_object" value="{$module_object}">
     <input type="hidden" name="comment_module" value="{$module_name}">
+    
+    <div class="comment_field">
+      <label class="comment_label">{#comments_user_name#}:</label>
+      <input type="text" name="user_name" value="" required="true" >
+    </div>
+    <div class="comment_field">
+      <label class="comment_label">{#comments_user_email#}:</label>
+      <input type="email" name="user_email" value="" required="true" email>
+    </div>
+      
     {bbeditor name=comment_text toolbar=$toolbar}
-    <input type="submit" name="comment_submit" value="submit">
+    
+    <div class="comment_field">
+      <input type="submit" name="comment_submit" value="{#comments_submit#}">
+    </div>
     <br><br>
   </form>
 </div>

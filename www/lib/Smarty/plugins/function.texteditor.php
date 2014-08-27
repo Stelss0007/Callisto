@@ -27,6 +27,21 @@ function smarty_function_texteditor($params, &$smarty)
   
   echo "<textarea id='$id' name='$name' class='$class' style='height:{$height}px;width:{$width};'>" . htmlspecialchars($text, ENT_QUOTES) . "</textarea>";
   echo '<script>
+      if(typeof tinyMCE == "undefined") 
+        {
+//        $.getScript("/public/js/tinymce/tinymce.js", function() {
+//        
+//        });
+        
+        $.ajax({
+            async: false,
+            url: "/public/js/tinymce/tinymce.js",
+            dataType: "script"
+        });
+        }
+        
+
+        
     $(document).ready(function(){
             var tinyMCEPreInit = {
             suffix: "",

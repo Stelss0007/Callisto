@@ -51,6 +51,7 @@ class UserSession
     if(!isset($_SESSION))
       {
       session_start();
+      
       }
     }
   
@@ -155,7 +156,7 @@ class UserSession
    */
   function userId()
     {
-    if($_SESSION['user_id'])
+    if(!empty($_SESSION['user_id']))
       return $_SESSION['user_id'];
     return -1;
     }
@@ -166,7 +167,7 @@ class UserSession
    */
   function userName()
     {
-    if($_SESSION['user'])
+    if(!empty($_SESSION['user']))
       return $_SESSION['user'];
     return 'Unknown';
     }
@@ -177,7 +178,7 @@ class UserSession
    */
   function userGid()
     {
-    if(isset($_SESSION['user_gid']))
+    if(!empty($_SESSION['user_gid']))
       return $_SESSION['user_gid'];
     return -1;
     }

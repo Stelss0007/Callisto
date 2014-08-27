@@ -7,13 +7,13 @@ class Permissions extends Model
   {
   var $table = 'group_permission';
   
-  function group_permissions_list()
+  function groupPermissionsList()
     {
     $this->query("SELECT * FROM {$this->table} ORDER BY {$this->table}_weight");
     return $this->fetch_array();
     }
     
-  function group_permission($id)
+  function groupPermission($id)
     {
     if(!is_numeric($id))
       return false;
@@ -23,7 +23,7 @@ class Permissions extends Model
     return $permission[0];
     }
   
-  function permission_level($level=false)
+  function permissionLevel($level=false)
     {
     $levels = array();
     $levels[ACCESS_INVALID] = 'ACCESS INVALID';
@@ -41,13 +41,13 @@ class Permissions extends Model
     
     return $levels;
     }
-  function group_permissions_create($data)
+  function groupPermissionsCreate($data)
     {
     $data["{$this->table}_weight"] = $this->weightMax()+1;
     $this->insert($this->table, $data);
     }
     
-  function group_permissions_update($data, $id)
+  function groupPermissionsUpdate($data, $id)
     {
     if(!is_numeric($id))
       return false;
@@ -55,11 +55,11 @@ class Permissions extends Model
     $this->update($this->table, $data, "id = '$id'");
     }
     
-  function group_permission_delete($id)
+  function groupPermissionDelete($id)
     {
     if(!is_numeric($id))
       return false;
-    $group_permision = $this->group_permission($id);
+    $group_permision = $this->groupPermission($id);
     $this->weightDelete($group_permision["{$this->table}_weight"], $where);
     $this->query("DELETE FROM {$this->table} WHERE id='$id'");
     }

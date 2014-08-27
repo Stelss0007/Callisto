@@ -10,6 +10,13 @@
     {appJsLoad modname='kernel' scriptname='jQuery'}
     {appCssOutput cache=0}
     {appJsOutput}
+    
+    {appLessLoad}
+    {appLessOutput}
+    
+    {appSassLoad}
+    {appSassOutput}
+    
   </head>
   <body>
     <div id="main">
@@ -35,7 +42,9 @@
                 {foreach item=block from=$blocks.top}
 
                   <li>
-                    {$block.block_content}
+                    {theme_block block=$block} 
+                      {$block.block_content}
+                    {/theme_block}
                   </li>
 
                 {/foreach}
@@ -53,21 +62,24 @@
         <tr>
           <td class="fblock">
             <span class='sbtitle'>Заголовок</span>
+            <div>
               {if $blocks.left}
                 {foreach item=block from=$blocks.left}
-                 <span id='mnu_title1' class='usermnutitle-g'>
-                  {$block.block_displayname|escape}
-                 </span>
-                 <div id='mnu_tblock3' class='usermnublock'>
-                  <span class='usermnudelim'></span>
-                  <div class="left_content">
-                    {$block.block_content}
-                  </div>
-                  <span class='usermnudelim'></span>
-                </div>
+                 {theme_block block=$block} 
+                    <span id='mnu_title1' class='usermnutitle-g'>
+                     {$block.block_displayname|escape}
+                    </span>
+                    <div id='mnu_tblock3' class='usermnublock'>
+                      <span class='usermnudelim'></span>
+                      <div class="left_content">
+                        {$block.block_content}
+                      </div>
+                      <span class='usermnudelim'></span>
+                    </div>
+                  {/theme_block} 
                 {/foreach}
               {/if}
-
+             </div>
           </td>
 
        <td class="contentmain">
@@ -78,24 +90,35 @@
   
             {$module_content}
             
+            <div>
+              {if $blocks.bottom}
+                {foreach item=block from=$blocks.bottom}
+                  {theme_block block=$block} 
+                    {$block.block_content}
+                  {/theme_block} 
+                {/foreach}
+              {/if}
+            </div>
+            
        </td>
       <td class="fblock">
 
         <span class="sbtitle">1111</span>
         <div class="usermenu">
-
           {if $blocks.right}
             {foreach item=block from=$blocks.right}
-             <span id='mnu_title1' class='usermnutitle-g'>
-              {$block.block_displayname|escape}
-             </span>
-             <div id='mnu_tblock3' class='usermnublock'>
-              <span class='usermnudelim'></span>
-              <div class="left_content">
-                {$block.block_content}
-              </div>
-              <span class='usermnudelim'></span>
-            </div>
+              {theme_block block=$block} 
+                <span id='mnu_title1' class='usermnutitle-g'>
+                 {$block.block_displayname|escape}
+                </span>
+                <div id='mnu_tblock3' class='usermnublock'>
+                 <span class='usermnudelim'></span>
+                 <div class="left_content">
+                   {$block.block_content}
+                 </div>
+                 <span class='usermnudelim'></span>
+               </div>
+              {/theme_block} 
             {/foreach}
           {/if}
 

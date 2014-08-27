@@ -1,5 +1,7 @@
 <?php
 include_once 'kernel/constants.php';
+include_once './lib/PHPMailer/PHPMailerAutoload.php';
+
 
 appUsesLib('Smarty');
 appUsesLib('DBConnector');
@@ -38,7 +40,7 @@ function isAjax()
   return false;
   }
 
-$ses_info = new UserSession();
+$ses_info = UserSession::getInstance();
 /**
  * @desc ?????????????? ???????
  * @return bool
@@ -572,6 +574,7 @@ function appGetModuleList()
   {
   return appGetDirList('modules');
   }
+  
 function appGetModelList()
   {
   $modules = appGetModuleList();
@@ -723,7 +726,101 @@ function appCssLoad($modname='', $scriptname='main', $dir='')
   return true;
   }
 
+  
+function appLessLoad($modname='', $scriptname='main', $dir='')
+  {
+  global $lessLoaded;
+  global $lessLoadedHasModScript;
+  
+  if(empty($scriptname))
+    $scriptname = 'main';
+  
+  if (!empty($lessLoaded["$modname.$scriptname"])) 
+    return true;
+  
+  if($modname == 'kernel')
+    {
+    if($scriptname=='main' || $scriptname=='bootstrap')
+      {
+      $lessLoaded["$modname.$scriptname"] = "/public/less/$scriptname.less";
+      }
+    else
+      {
+      if(empty($dir))
+        {
+        $lessLoaded["$modname.$scriptname"] = "/public/less/$scriptname/$scriptname.less";
+        }
+      else
+        {
+        $lessLoaded["$modname.$dir.$scriptname"] = "/public/less/$dir/$scriptname.less";
+        }
+      }
+    }
+  elseif(empty($modname))
+    {
+    global $mod_controller;
+    $current_theme = $mod_controller->getThemeName();
+    $lessLoaded["theme.$current_theme.$scriptname"] = "/themes/$current_theme/less/$scriptname.less";
+    }
+  else
+    {
+    $lessLoadedHasModScript = 1;
+    $lessLoaded["$modname.$scriptname"] = "/modules/$modname/less/$scriptname.less";
+    }
 
+  return true;
+  }
+  
+function appSassLoad($modname='', $scriptname='main', $dir='')
+  {
+  global $sassLoaded;
+  global $sassLoadedHasModScript;
+  
+  if(empty($scriptname))
+    $scriptname = 'main';
+  
+  if (!empty($sassLoaded["$modname.$scriptname"])) 
+    return true;
+  
+  if($modname == 'kernel')
+    {
+    if($scriptname=='main' || $scriptname=='bootstrap')
+      {
+      $sassLoaded["$modname.$scriptname"] = "/public/sass/$scriptname.scss";
+      }
+    else
+      {
+      if(empty($dir))
+        {
+        $sassLoaded["$modname.$scriptname"] = "/public/sass/$scriptname/$scriptname.scss";
+        }
+      else
+        {
+        $sassLoaded["$modname.$dir.$scriptname"] = "/public/sass/$dir/$scriptname.scss";
+        }
+      }
+    }
+  elseif(empty($modname))
+    {
+    global $mod_controller;
+    $current_theme = $mod_controller->getThemeName();
+    $sassLoaded["theme.$current_theme.$scriptname"] = "/themes/$current_theme/sass/$scriptname.scss";
+    }
+  else
+    {
+    $sassLoadedHasModScript = 1;
+    $sassLoaded["$modname.$scriptname"] = "/modules/$modname/sass/$scriptname.scss";
+    }
+
+  return true;
+  }
+
+  
+function appCanEdit($object)
+  {
+  $session_info = UserSession::getInstance();
+  appDebugExit($session_info->userId());
+  }
 
 
 
@@ -1087,6 +1184,83 @@ function appVarDelCached($component, $cacheKey)
   return true;
   }
   
+  //////////////////////////////////////////////////////////////////////////////
+  ///////////////////////  FILE SYSTEM /////////////////////////////////////////
+  
+  
+  function appFolderSize($dir)
+    {
+    $count_size = 0;
+    $count      = 0;
+    $dir_array  = scandir($dir);
+    foreach($dir_array as $key => $filename)
+      {
+      if($filename != ".." && $filename != ".")
+        {
+        if(is_dir($dir . "/" . $filename))
+          {
+          $new_foldersize = appFolderSize($dir . "/" . $filename);
+          $count_size     = $count_size + $new_foldersize;
+          }
+        else if(is_file($dir . "/" . $filename))
+          {
+          $count_size = $count_size + filesize($dir . "/" . $filename);
+          $count++;
+          }
+        }
+      }
+    return $count_size;
+    }
+
+/**
+   * Удаление директории вместе с ее содержимым
+   * @param string $src Путь к директории
+   * @param boolean $src Путь к директории
+   * @return boolean $parretnRemove Флаг удаление родительской категории, тоесть если false удалиться только содержимое
+   */
+  function appDirDelete($src, $parretnRemove = false)
+    {
+    if(is_file($src))
+      {
+      return @unlink($src);
+      }
+    elseif(is_dir($src))
+      {
+      $scan = glob(rtrim($src,'/').'/*');
+       foreach($scan as $index=>$path)
+        {
+        appDirDelete($path, true);
+        }
+      if($parretnRemove)
+        {
+        return @rmdir($src);
+        }
+      return true;
+      }
+    }  
+ 
+ /**
+  * Удаление всех файлов в директории
+  * @param string $src Путь к директории
+  * @return boolean
+  */
+ function appFileDirDelete($src)
+   {
+   $files = glob($src); // get all file names
+   foreach($files as $file)
+     { // iterate files
+     if(is_file($file))
+       {
+       unlink($file); // delete file
+       }
+     }
+   return true;
+   }
+   
+   
+   
+ 
+
 function appTreeBuild($inArray, $start)
   {
   $result = array();
@@ -1157,5 +1331,75 @@ function appCreateTreeHTML($array, $curParent, $currLevel = 0, $prevLevel = -1)
       }
 
     }
-if ($currLevel == $prevLevel) echo " </li> </ul> ";
-}
+  if ($currLevel == $prevLevel) echo " </li> </ul> ";
+  }
+  
+  
+////////////////////////////////////////////////////////////////////////////////
+///////////////////////////// MAIL /////////////////////////////////////////////
+function appSendMail($to='stelss1986@gmail.com', $subject='System Message', $body='Hello')
+  {
+  $phpmailer = new PHPMailer();
+
+  $phpmailer->ClearAllRecipients();
+  $phpmailer->ClearAttachments();
+
+  // Set the from name and email
+  $phpmailer->From     = 'admin.site.com';
+  $phpmailer->FromName = 'Callisto';
+
+  // Set destination address
+  if(isset($to))
+    {
+    $phpmailer->AddAddress($to, $to_name);
+    }
+
+  // set bccs if exists
+  if($bcc && is_array($bcc))
+    {
+    foreach($bcc as $address)
+      $phpmailer->AddBCC($address);
+    }
+
+  $phpmailer->Subject = $subject;
+
+  if(!$html)
+    {
+    $phpmailer->CharSet = 'utf-8';
+    $phpmailer->IsHTML(false);
+    if($param && array_key_exists('altbody', $param))
+      {
+      $phpmailer->AltBody = $param['altbody'];
+      }
+
+    $trans_tbl           = get_html_translation_table(HTML_ENTITIES);
+    $trans_tbl[chr(146)] = '&rsquo;';
+    foreach($trans_tbl as $k => $v)
+      {
+      $ttr[$v] = utf8_encode($k);
+      }
+    $source = strtr($body, $ttr);
+    $body   = strip_tags($source);
+    }
+  else
+    {
+    $phpmailer->IsHTML(true);
+    }
+
+  $phpmailer->Body = $body;
+
+  if($files && is_array($files))
+    {
+    foreach($files as $file)
+      {
+      if(isset($file['path']))
+        $phpmailer->AddAttachment($file['path'], $file['name']);
+      }
+    }
+    
+  // use php's mail
+  $phpmailer->IsMail();
+  $return = $phpmailer->Send();
+  
+  return $return;
+  }

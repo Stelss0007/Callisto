@@ -132,7 +132,7 @@ abstract class Controller extends AppObject
 
     //??????? ??? ????????? ? ??????? ?????????? ? ???????? input_vars
     $this->input_vars = $_REQUEST;
-    $this->referer = $_SERVER['HTTP_REFERER'];
+    $this->referer = (isset($_SERVER['HTTP_REFERER'])) ? $_SERVER['HTTP_REFERER'] : '/';
     //?????? ??? ?????? ? ???????? ???????
     unset ($this->input_vars['module']);
     unset ($this->input_vars['action']);
@@ -294,10 +294,23 @@ abstract class Controller extends AppObject
     appJsLoad('kernel', 'jQuery');
     appJsLoad('kernel', 'main');
     
+    if($this->isAdmin())
+      {
+      appJsLoad('kernel', 'jQueryUI');
+      appJsLoad('kernel', 'admin');
+      
+      appCssLoad('kernel', 'bootstrap');
+      if($this->getViewType() != 'admin') 
+        {
+        appCssLoad('kernel', 'admin-theme');
+        }
+      }
+    
     //Подключим стили
     //Стили ядра
     //appCssLoad('kernel', 'bootstrap');
     appCssLoad('kernel'); 
+    appCssLoad('kernel', 'jQueryUI'); 
      
     //Без аргументов подключится стиль текущей темы
     appCssLoad();
@@ -307,6 +320,11 @@ abstract class Controller extends AppObject
   final public function setViewType($type = 'user')
     {
     $this->type = $type;
+    }
+    
+  final public function getViewType()
+    {
+    return $this->type;
     }
 
   final private function urlToCamelCase($string)
@@ -336,6 +354,21 @@ abstract class Controller extends AppObject
     global $appConfig;
     $this->config = &$appConfig;
     }
+  
+  final function getConfig($var)
+    {
+    return (isset($this->config[$var])) ? $this->config[$var] : false;
+    }
+    
+  final function getModConfig($modname='main', $var='')
+    {
+    //appDebugExit($this->config);
+    if(empty($var))
+      return (isset($this->config[$modname])) ? $this->config[$modname] : array();
+    
+    return (isset($this->config[$modname][$var])) ? $this->config[$modname][$var] : false;
+    }
+  
   final function setModConfig()
     {
     $this->usesModel('configuration');
@@ -346,15 +379,40 @@ abstract class Controller extends AppObject
       }
     unset($db_conf);
     }
+    
+  /**
+   * Проверка пренадлежности пользователя к групе "Администраторы"
+   * @return boolean
+   */
+  final function isAdmin()
+    {
+    if($this->session->userGid() == 1)
+      {
+      return true;
+      }
+    return false;
+    }
+    
+  /**
+   * Определение информации о пользователе
+   * @return \Controller
+   */  
   final function setTplUserInfo()
     {
     $currentUserInfo['currentUserInfo']['id']   = $this->session->userId();
     $currentUserInfo['currentUserInfo']['name'] = $this->session->userName();
     $currentUserInfo['currentUserInfo']['gid']  = $this->session->userGid();
+    $currentUserInfo['currentUserInfo']['isAdmin']  = $this->isAdmin();
     $this->assign($currentUserInfo);
     return $this;
     }
-    
+  
+  /**
+   * Получение входящих параметров ($_REQUEST)
+   * @param string $var
+   * @param mixed $default
+   * @return mixed
+   */
   final function getInput($var, $default)
     {
     if(empty($var))
@@ -363,9 +421,16 @@ abstract class Controller extends AppObject
       }
     return isset($this->input_vars[$var]) ? $this->input_vars[$var] : $default;
     }
+    
   //////////////////////////////////////////////////////////////////////////////
   ////////////////////////////   TEMPLATES  ////////////////////////////////////
   //////////////////////////////////////////////////////////////////////////////
+  
+  /**
+   * Постраничка
+   * @param object $model
+   * @return type
+   */
   final public function paginate($model=false)
     {
     if(empty($model))
@@ -374,7 +439,11 @@ abstract class Controller extends AppObject
     //appDebug($model->pagination);exit;
     $this->assign('pagination', $model->pagination);
     }
-    
+  
+  /**
+   * Проверка существует ли кеш страниці
+   * @return bool
+   */
   final public function isCached()
     {
     $tpl_dir = $this->tplFileName();
@@ -968,7 +1037,6 @@ abstract class Controller extends AppObject
         {
         foreach($var as $key=>$value)
           {
-
           //Delete spaces
           $value = trim($value);
           //explode by space
@@ -1428,6 +1496,130 @@ abstract class Controller extends AppObject
      
     $this->$model_name->activation($id);
     $this->redirect();
+    }
+    
+  public function sendEmail($to, $subject='', $body='', $files=array())
+    {
+    $html = true;
+
+    $phpmailer = new PHPMailer();
+    
+    $phpmailer->CharSet = 'utf-8';
+    $phpmailer->SMTPAuth = true;
+    $phpmailer->SMTPSecure = $this->getConfig('site_smtp_sec');
+    $phpmailer->ClearAllRecipients();
+    $phpmailer->ClearAttachments();
+    // Set the from name and email
+    $phpmailer->From     = $this->getConfig('site_email_from');
+    $phpmailer->FromName = $this->getConfig('site_email_sender');
+
+    // Set destination address
+    if(isset($to))
+      {
+      if(is_array($to))
+        {
+        foreach($to as $value)
+          {
+          $phpmailer->AddAddress($value);
+          }
+        }
+      else
+        {
+        $phpmailer->AddAddress($to);
+        }
+      }
+
+    // set bccs if exists
+//    if($bcc && is_array($bcc))
+//      {
+//      foreach($bcc as $address)
+//        $phpmailer->AddBCC($address);
+//      }
+
+    $phpmailer->Subject = $subject;
+
+    if(!$html)
+      {
+      $phpmailer->CharSet = 'utf-8';
+      $phpmailer->IsHTML(false);
+      if($param && array_key_exists('altbody', $param))
+        {
+        $phpmailer->AltBody = $param['altbody'];
+        }
+
+      $trans_tbl           = get_html_translation_table(HTML_ENTITIES);
+      $trans_tbl[chr(146)] = '&rsquo;';
+      foreach($trans_tbl as $k => $v)
+        {
+        $ttr[$v] = utf8_encode($k);
+        }
+      $source = strtr($body, $ttr);
+      $body   = strip_tags($source);
+      }
+    else
+      {
+      $phpmailer->IsHTML(true);
+      }
+
+    //$phpmailer->Body = $body;
+    $phpmailer->msgHTML($body, dirname(dirname(__FILE__)));
+
+    if($files && is_array($files))
+      {
+      foreach($files as $file)
+        {
+        if(isset($file['path']))
+          $phpmailer->AddAttachment($file['path'], $file['name']);
+        }
+      }
+
+    // use php's mail
+    switch($this->getConfig('site_email_type'))
+      {
+      case 'phpmail':
+        $phpmailer->IsMail();
+        break;
+      
+      case 'sendmail':
+        $phpmailer->isSendmail();
+        break;
+      
+      case 'smtp':
+        $phpmailer->isSMTP();
+        $phpmailer->Host = $this->getConfig('site_email_smtp_server');
+        //Set the SMTP port number - likely to be 25, 465 or 587
+        $phpmailer->Port = $this->getConfig('site_email_smtp_port');
+        //Whether to use SMTP authentication
+        $phpmailer->SMTPAuth = true;
+        //Username to use for SMTP authentication
+        $phpmailer->Username = $this->getConfig('site_email_smtp_user');
+        //Password to use for SMTP authentication
+        $phpmailer->Password = $this->getConfig('site_email_smtp_password');
+        break;
+
+      default:
+        $phpmailer->IsMail();
+        break;
+      }
+    
+
+    if (!$phpmailer->Send()) 
+      {
+      $this->errors->setError("Mailer Error: " . $phpmailer->ErrorInfo);
+      }
+    }
+    
+  public function sendEmailTemplate($to, $subject='', $template='main', $variables=array(), $files=array())
+    {
+    $smartyTpl = new viewTpl();
+    $smartyTpl->assign($variables);
+    rtrim($template, '.tpl');
+    if(!file_exists($this->root_dir.'/mails/'.$template.'.tpl'))
+      {
+      $this->errors->setError("Mailer Error: '{$this->root_dir}/mails/{$template}.tpl' not exist!");
+      }
+    
+    $this->sendEmail($to, $subject, $smartyTpl->fetch($this->root_dir.'/mails/'.$template.'.tpl'), $files);
     }
   }
 

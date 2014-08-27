@@ -22,15 +22,15 @@ class comments_block extends Block
     
   function modify(&$blockinfo)
     {
-    //Типы меню
     $this->usesModel('comments');
-    $this->menutypes_list = array (1=>'Всегда развернуто',2=>'Разварачиваюшееся');
+    //$this->assign('toolbar', $this->getBlockContent('toolbar', array()));
+    //$this->menutypes_list = array (1=>'Всегда развернуто',2=>'Разварачиваюшееся');
     return $this->view();
     }
     
   function update(&$blockinfo)
     {
-    //echo $blockinfo['id'].' ';print_r($this->input_vars['toolbar']);exit;
+    //echo $blockinfo['id'].' ';print_r($_REQUEST);exit;
     //echo $this->toolbar;exit;
     $this->setBlockContent('toolbar', $this->input_vars['toolbar']);
     $this->save($blockinfo['id']);

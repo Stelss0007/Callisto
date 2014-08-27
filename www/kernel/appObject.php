@@ -71,7 +71,9 @@ class AppObject
     
     //echo $modelname;
     //print_r(get_class_methods($this->$modelname));
-    $this->models[] = key($usedResult)." ({$usedResult[key($usedResult)]})";
+    if(!empty($usedResult) && is_array($usedResult))
+      $this->models[] = key($usedResult)." ({$usedResult[key($usedResult)]})";
+      
     return $this->$modelname;
     }
     
@@ -150,7 +152,8 @@ class AppObject
   //////////////////////////////////////////////////////////////////////////////
   final public function sessinInit()
     {
-    $this->session = & new UserSession;
+    $this->session = UserSession::getInstance();
+    //$this->session = & new UserSession;
     //print_r(get_class_methods($this->$modelname));
     }
 }

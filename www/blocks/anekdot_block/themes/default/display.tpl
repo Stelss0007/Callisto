@@ -1,3 +1,3 @@
 {strip}
-{$anekdot}
+  {$anekdot}
 {/strip}

@@ -49,7 +49,7 @@
                   <div class="control-group">
                     <label class="control-label" for="date01">{#articles_tags#}: </label>
                     <div class="controls">
-                      <select name="article_trags" multiple data-rel="chosen">
+                      <select name="article_tags" multiple data-rel="chosen">
                         {html_options options=$tags selected=$article_tags}
                       </select>
                     </div>

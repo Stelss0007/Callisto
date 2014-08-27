@@ -5,6 +5,8 @@ class AdminController extends Controller
   
   function actionGroupsList()
     {
+    $this->getAccess(ACCESS_ADMIN);
+    
     $this->groups_list = $this->groups->group_list(true);
     
     $browsein[] =array('url'=>"/admin/main", 'displayname'=>$this->t('dashboard'));
@@ -16,6 +18,8 @@ class AdminController extends Controller
     
   function actionManage($id=0)
     {
+    $this->getAccess(ACCESS_ADMIN);
+    
     $data = $this->input_vars;
 
     if($data['submit'])
@@ -53,6 +57,8 @@ class AdminController extends Controller
     
   function actionDelete($id=0)
     {
+    $this->getAccess(ACCESS_ADMIN);
+    
     if(empty($id))
       $this->errors->setError("ID of Group is missing!");
     

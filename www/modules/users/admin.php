@@ -14,11 +14,14 @@ class AdminController extends Controller
   {
   function actionIndex()
     {
+    $this->getAccess(ACCESS_ADMIN);
+    
     $this->redirect('/admin/users/users_list');
     }
   function actionUsersList()
     {
-    $this->getAccess(ACCESS_READ);
+    $this->getAccess(ACCESS_ADMIN);
+    
     $this->usesModel('groups');
  
     $this->groups_list = $this->groups->group_list(false);
@@ -81,6 +84,7 @@ class AdminController extends Controller
   function actionDelete($id=0)
     {
     $this->getAccess(ACCESS_DELETE);
+    
     if(empty($id))
       $this->errors->setError("ID of user is missing!");
     
@@ -91,6 +95,7 @@ class AdminController extends Controller
   function actionActivation($id=0)
     {
     $this->getAccess(ACCESS_ADMIN);
+    
     if(empty($id))
       $this->errors->setError("ID of user is missing!");
     
@@ -102,6 +107,7 @@ class AdminController extends Controller
   function actionLogin()
     {
     //$this->getAccess(ACCESS_READ);
+    
     $data = $this->input_vars;
     if($data['submit'])
       {
