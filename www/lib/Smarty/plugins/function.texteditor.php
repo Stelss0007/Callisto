@@ -81,15 +81,37 @@ function smarty_function_texteditor($params, &$smarty)
         theme_advanced_resizing : false,
 
         // Drop lists for link/image/media/template dialogs
-        template_external_list_url : "js/template_list.js",
-        external_link_list_url : "js/link_list.js",
-        external_image_list_url : "js/image_list.js",
-        media_external_list_url : "js/media_list.js",
+        template_external_list_url : "/js/template_list.js",
+        external_link_list_url : "/js/link_list.js",
+        external_image_list_url : "/js/image_list.js",
+        media_external_list_url : "/js/media_list.js",
+        
+        file_browser_callback : "elFinderBrowser" 
 
 });
 
 });
-        </script>';
+
+if(typeof (window.elFinderBrowser) != "function") {
+  function elFinderBrowser (field_name, url, type, win) {
+    var elfinder_url = "/admin/files/jsplugin";    // use an absolute path!
+    tinyMCE.activeEditor.windowManager.open({
+      file: elfinder_url,
+      title: "elFinder 2.0",
+      width: 900,  
+      height: 450,
+      resizable: "yes",
+      inline: "yes",    // This parameter only has an effect if you use the inlinepopups plugin!
+      popup_css: false, // Disable TinyMCE default popup CSS
+      close_previous: "no"
+    }, {
+      window: win,
+      input: field_name
+    });
+    return false;
+  }
+}
+</script>';
 	}
 
 ?>

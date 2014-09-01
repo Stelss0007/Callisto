@@ -47,6 +47,11 @@ class AdminController extends Controller
     $connector = new elFinderConnector(new elFinder($opts));
     $connector->run();
     }
+    
+  function actionJsplugin()
+    {
+    $this->view();
+    }
 
   }
 
