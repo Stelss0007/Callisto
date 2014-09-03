@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-	<head>
+  <head>
     {literal}
       <meta charset="utf-8">
       <title>elFinder 2.0</title>
@@ -10,7 +10,7 @@
       <script src="/public/js/jQuery/jQuery.js"></script>
       <script src="/public/js/jQueryUI/jQueryUI.js"></script>
       <script type="text/javascript" src="/public/js/tinymce/tiny_mce_popup.js"></script>
-      
+
       <!-- elFinder CSS (REQUIRED) -->
       <link href='/themes/admin/css/elfinder.min.css' rel='stylesheet'>
       <link href='/themes/admin/css/elfinder.theme.css' rel='stylesheet'>
@@ -27,14 +27,14 @@
           init: function() {
             // Here goes your code for setting your custom things onLoad.
           },
-          mySubmit: function (URL) {
+          mySubmit: function(URL) {
             var win = tinyMCEPopup.getWindowArg('window');
 
             // pass selected file path to TinyMCE
             win.document.getElementById(tinyMCEPopup.getWindowArg('input')).value = URL;
 
             // are we an image browser?
-            if (typeof(win.ImageDialog) != 'undefined') {
+            if (typeof (win.ImageDialog) != 'undefined') {
               // update image dimensions
               if (win.ImageDialog.getImageData) {
                 win.ImageDialog.getImageData();
@@ -50,28 +50,27 @@
         }
 
         tinyMCEPopup.onInit.add(FileBrowserDialogue.init, FileBrowserDialogue);
-        
-        
+
+
         // Documentation for client options:
         // https://github.com/Studio-42/elFinder/wiki/Client-configuration-options
         $(document).ready(function() {
-          	var elf = $('.file-manager').elfinder({
-              url : '/admin/files/get_list',  // connector URL (REQUIRED),
-              lang : 'ru',
-              getFileCallback: function(file) { // editor callback
-                FileBrowserDialogue.mySubmit(file); // pass selected file path to TinyMCE 
-              }
-            }).elfinder('instance');
-            
-            
-            
-        });
-    {/literal}
-		</script>
-	</head>
-	<body>
-		<!-- Element where elFinder will be created (REQUIRED) -->
-		<div class="file-manager"></div>
+          var elf = $('.file-manager').elfinder({
+            url: '/admin/files/get_list', // connector URL (REQUIRED),
+            lang: 'ru',
+            getFileCallback: function(file) { // editor callback
+              FileBrowserDialogue.mySubmit(file); // pass selected file path to TinyMCE 
+            }
+          }).elfinder('instance');
 
-	</body>
+
+
+        });
+      {/literal}
+    </script>
+  </head>
+  <body>
+    <!-- Element where elFinder will be created (REQUIRED) -->
+    <div class="file-manager"></div>
+  </body>
 </html>
