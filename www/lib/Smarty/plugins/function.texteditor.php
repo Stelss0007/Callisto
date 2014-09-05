@@ -102,7 +102,7 @@ if(typeof (window.elFinderBrowser) != "function") {
     var elfinder_url = "/admin/files/jsplugin";    // use an absolute path!
     tinyMCE.activeEditor.windowManager.open({
       file: elfinder_url,
-      title: "elFinder 2.0",
+      title: "",
       width: 900,  
       height: 450,
       resizable: "yes",

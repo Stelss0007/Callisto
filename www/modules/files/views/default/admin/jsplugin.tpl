@@ -3,7 +3,7 @@
   <head>
     {literal}
       <meta charset="utf-8">
-      <title>elFinder 2.0</title>
+      <title></title>
 
       <!-- jQuery and jQuery UI (REQUIRED) -->
       <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.23/themes/smoothness/jquery-ui.css">
