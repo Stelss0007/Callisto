@@ -16,6 +16,10 @@ function smarty_function_texteditor($params, &$smarty)
   static $bbeditor_num = 0;
   $bbeditor_num++;
   
+  $config = & $smarty->get_template_vars('config');
+  
+  $lang = substr($config['lang'], 0, 2);
+  
   if (empty ($name)) $name='texteditor_'.$bbeditor_num;
   if (empty ($id)) $id='texteditor_'.$bbeditor_num;
   if (empty ($class)) $class='texteditor_class';
@@ -51,12 +55,13 @@ function smarty_function_texteditor($params, &$smarty)
         tinyMCE.baseURL="/public/js/tinymce/";
         
         tinyMCE.init({
+            language: "'.$lang.'",
             relative_urls : true,
             relative_urls : "/public/js/tinymce/",
             remove_script_host : false,
             convert_urls : true,
-        // General options
-        mode : "exact",
+            // General options
+            mode : "exact",
         
         force_br_newlines : false,
         convert_newlines_to_brs : true,
@@ -97,7 +102,7 @@ if(typeof (window.elFinderBrowser) != "function") {
     var elfinder_url = "/admin/files/jsplugin";    // use an absolute path!
     tinyMCE.activeEditor.windowManager.open({
       file: elfinder_url,
-      title: "elFinder 2.0",
+      title: "",
       width: 900,  
       height: 450,
       resizable: "yes",
