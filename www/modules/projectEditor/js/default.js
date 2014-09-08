@@ -10,16 +10,17 @@ mime['ext-html'] = "text/html";
 
 function setCodeStyle(mime)
     {
+    alert(mime);  
     $('.CodeMirror').remove();  
     
-    CodeMirror.commands.autocomplete = function(cm) {
-        CodeMirror.simpleHint(cm, CodeMirror.javascriptHint);
-      }
+//    CodeMirror.commands.autocomplete = function(cm) {
+//        CodeMirror.simpleHint(cm, CodeMirror.javascriptHint);
+//      }
       
     editor = CodeMirror.fromTextArea(document.getElementById("codeEdit"), {
         lineNumbers: true,
         matchBrackets: true,
-        mode: mime,
+        mode: {name: mime, globalVars: true},
         indentUnit: 4,
         indentWithTabs: true,
         enterMode: "keep",
@@ -58,7 +59,7 @@ $(document).ready(function(){
     return false;
   });
   
-  setCodeStyle();
+  setCodeStyle('html');
   setTimeout(updatePreview, 300);
 });
 

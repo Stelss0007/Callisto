@@ -69,6 +69,8 @@ class projectEditor extends Model
             // File
             // Get extension (prepend 'ext-' to prevent invalid classes from extensions that begin with numbers)
             $ext = "ext-".substr($this_file, strrpos($this_file, ".") + 1);
+//            $link = str_replace("[link]", "$directory/".urlencode($this_file), $return_link);
+            $directory = str_replace(APP_DIRECTORY, '', $directory);
             $link = str_replace("[link]", "$directory/".urlencode($this_file), $return_link);
             $php_file_tree .= "<li class=\"pft-file ".strtolower($ext)."\"><a href=\"$link\">".htmlspecialchars($this_file)."</a></li>";
             }

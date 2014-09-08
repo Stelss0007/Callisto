@@ -6,26 +6,34 @@
 		<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 		
     
-    <link rel="stylesheet" href="/modules/projectEditor/css/codemirror.css">
-    <link rel="stylesheet" href="/modules/projectEditor/css/simple-hint.css">
+    <meta charset="utf-8"/>
+
+    <link rel=stylesheet href="/modules/projectEditor/js/lib/codemirror.css">
+    <link rel=stylesheet href="/modules/projectEditor/js/doc/docs.css">
+    <script src="/modules/projectEditor/js/lib/codemirror.js"></script>
+    <script src="/modules/projectEditor/js/mode/xml/xml.js"></script>
+    <script src="/modules/projectEditor/js/mode/javascript/javascript.js"></script>
+    <script src="/modules/projectEditor/js/mode/css/css.js"></script>
+    <script src="/modules/projectEditor/js/mode/htmlmixed/htmlmixed.js"></script>
+    <script src="/modules/projectEditor/js/addon/edit/matchbrackets.js"></script>
+    
+    {*HINTS autocomplate*}
+    <script src="/modules/projectEditor/js/addon/hint/show-hint.js"></script>
+    <script src="/modules/projectEditor/js/addon/hint/javascript-hint.js"></script>
+    
+
+{*    <script src="/modules/projectEditor/js/doc/activebookmark.js"></script>*}
+
+
     <link rel="stylesheet" href="/modules/projectEditor/css/jquery-ui.css">
       
-    <script src="/modules/projectEditor/js/codemirror.js"></script>
-    <script src="/modules/projectEditor/js/mode/xml.js"></script>
-    <script src="/modules/projectEditor/js/mode/javascript.js"></script>
-    <script src="/modules/projectEditor/js/mode/css.js"></script>
-    <script src="/modules/projectEditor/js/mode/clike.js"></script>
-    <script src="/modules/projectEditor/js/mode/php.js"></script>
-    
-    <script src="/modules/projectEditor/js/mode/simple-hint.js"></script>
-    <script src="/modules/projectEditor/js/mode/javascript-hint.js"></script>
     
     {literal}<style type="text/css">.CodeMirror {border-top: 1px solid black; border-bottom: 1px solid black; height: 100%}</style>{/literal}
 <!--    <link rel="stylesheet" href="/modules/projectEditor/css/docs.css">-->
     
     <script src="/modules/projectEditor/js/jquery.js" type="text/javascript"></script>
     <script src="/modules/projectEditor/js/jquery-ui.js" type="text/javascript"></script>
-		<script src="/modules/projectEditor/js/php_file_tree.js" type="text/javascript"></script>
+		<script src="/modules/projectEditor/js/php_file_tree_jquery.js" type="text/javascript"></script>
     <script src="/modules/projectEditor/js/default.js" type="text/javascript"></script>
     
     <link href="/modules/projectEditor/css/default.css" rel="stylesheet" type="text/css" media="screen" />
