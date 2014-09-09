@@ -1,7 +1,7 @@
 п»ї#Options -Indexes -Multiviews FollowSymLinks
 #Order allow,deny
 #Allow from all
-#Запрещаем попытки индексирования .ini, .cfg файлов т.к они у меня лежат в корне сайта и хранят настройки доступа к СУБД mySQL
+
 
 RewriteEngine   on
 #РќР° РЅРёР¶РµСЃР»РµРґСѓСЋС‰РёРµ РїР°РїРєРё РѕС‚ РєРѕСЂРЅСЏ СЃР°Р№С‚ mod_rewrite РЅРµ РґРµР№СЃС‚РІСѓРµС‚ С‚.Рµ РѕС‚РїСЂР°РІР»СЏРµС‚ Р·Р°РїСЂРѕСЃ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ РєР°Рє РµСЃС‚СЊ РїСЂСЏРјРѕ РІ РїР°РїРєСѓ
@@ -23,6 +23,8 @@ RewriteCond    %{REQUEST_URI}        !^/public
 RewriteCond    %{REQUEST_URI}        !^/modules/(.*)/js
 RewriteCond    %{REQUEST_URI}        !^/modules/(.*)/css
 RewriteCond    %{REQUEST_URI}        !^/modules/(.*)/img
+RewriteCond    %{REQUEST_URI}        !^editor.php
+RewriteCond    %{REQUEST_URI}        !^editor_2.php
 #Р’СЃРµ РѕСЃС‚Р°Р»СЊРЅРѕРµ РєСѓРґР° Р±С‹ РїРѕР»СЊР·РѕРІР°С‚РµР»СЊ РЅРµ РїРѕР»РµР· - РїРµСЂРµРЅР°РїСЂР°РІР»СЏРµС‚СЃСЏ РЅР° РЅР°С€ С„Р°Р№Р» redirect.php
 RewriteRule     ^(.*)$            index.php [PT]
 #Р—Р°РїСЂРµС‰Р°РµРј РґРѕСЃС‚СѓРї Рє С„Р°Р№Р»Р°Рј .ini Рё .cfg
