@@ -6,7 +6,10 @@ class IndexController extends Controller
   public function actionArticleList()
     {
     //appCanEdit();
-    $this->sendEmailTemplate(array('stelss1986@gmail.com'), 'Test Subject', 'main');
+    
+    //Send Email
+    //$this->sendEmailTemplate(array('stelss1986@gmail.com'), 'Test Subject', 'main');
+    //appDebugExit($this->getAccessLevel());
     
     $this->viewCachedPage();
     

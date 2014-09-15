@@ -13,6 +13,26 @@ function appDebug($value)
   {
   appDebug($value);
   }
+
+//Constant Functions
+function appGetAccessName($level=false)
+  {
+  $levels = array();
+  $levels[ACCESS_INVALID]   = 'ACCESS_INVALID';
+  $levels[ACCESS_NONE]      = 'ACCESS_NONE';
+  $levels[ACCESS_OVERVIEW]  = 'ACCESS_OVERVIEW';
+  $levels[ACCESS_READ]      = 'ACCESS_READ';
+  $levels[ACCESS_COMMENT]   = 'ACCESS_COMMENT';
+  $levels[ACCESS_ADD]       = 'ACCESS_ADD';
+  $levels[ACCESS_EDIT]      = 'ACCESS_EDIT';
+  $levels[ACCESS_DELETE]    = 'ACCESS_DELETE';
+  $levels[ACCESS_ADMIN]     = 'ACCESS_ADMIN';
+    
+  if($level !==false && $levels[$level])
+    return $levels[$level];
+    
+    return $levels;
+  }
   
 function appDebugExit($value)
   {

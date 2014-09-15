@@ -288,6 +288,8 @@ abstract class Controller extends AppObject
     $this->object_name = $this->getObjectName();
     $this->permissionLavel = $GLOBALS['permissionLavel'] = $this->getPermissionLavel($this->object_name);
     
+    $this->object_name = $this->object_name.'::permission::'.appGetAccessName($this->permissionLavel);
+    
     $this->smarty->assign('config', $this->config);
     
     //Подключим джаваскрипты
@@ -713,7 +715,7 @@ abstract class Controller extends AppObject
     $this->notAccess($access_type, $admin);
     return false;
     }
-    
+
   final public function notAccess($access_type=ACCESS_READ, $admin = false)
     {
     $logedin = $this->session->isLogin();
