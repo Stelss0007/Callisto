@@ -1,9 +1,8 @@
-﻿# SQL Manager 2010 for MySQL 4.5.0.9
+# SQL Manager 2010 for MySQL 4.5.0.9
 # ---------------------------------------
 # Host     : localhost
 # Port     : 3306
 # Database : test
-
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;

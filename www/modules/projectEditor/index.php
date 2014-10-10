@@ -12,7 +12,47 @@ class IndexController extends Controller
   function actionListFile()
     {
     $file = $this->getInput('file', '');
-    echo file_get_contents(APP_DIRECTORY.$file);
+    //"data:image/gif;base64,"
+
+    $fileType = mime_content_type(APP_DIRECTORY.$file);
+    
+    switch($fileType)
+      {
+      case 'image/gif':
+      case 'image/png':
+      case 'image/jpg':
+      case 'image/jpeg':
+      case 'image/ico':
+        echo "data:$fileType;base64,".base64_encode(file_get_contents(APP_DIRECTORY.$file));
+        break;
+
+      default:
+        echo file_get_contents(APP_DIRECTORY.$file);
+        break;
+      }
+    
+    }
+  function actionSaveFile()
+    {
+    $fileSrc = $this->getInput('fileSrc');
+    if(empty($fileSrc))
+      return false;
+    
+    $file = fopen(APP_DIRECTORY.$fileSrc, "w");
+    fwrite($file, $this->getInput('fileSource'));
+    fclose($file);
+    }
+    
+  function actionSaveProject()
+    {
+    $openTabs = $this->getInput('openTabs');
+        
+    appVarSetCached('projectEditor', 'openTabs', $openTabs);
+    }
+    
+  function actionOpenProject()
+    {
+    echo json_encode(appVarGetCached('projectEditor', 'openTabs'));
     }
   }
 ?>

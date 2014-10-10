@@ -1,5 +1,4 @@
 <?php
-
 //Настройки отладки
 $appConfig['debug.enabled'] = true;
 
