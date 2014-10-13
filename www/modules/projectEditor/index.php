@@ -54,5 +54,38 @@ class IndexController extends Controller
     {
     echo json_encode(appVarGetCached('projectEditor', 'openTabs'));
     }
+    
+  function actionCreateFolder()
+    {
+    $inputs = $this->getInput(array('currentFolder','newFolder'));
+    if(empty($inputs['currentFolder']) || empty($inputs['newFolder']))
+      return;
+    
+    mkdir(APP_DIRECTORY.$inputs['currentFolder'].'/'.$inputs['newFolder'], 0777, true);
+    echo 'OK';
+    }
+    
+  function actionCreateFile()
+    {
+    $inputs = $this->getInput(array('currentFolder','newFile'));
+    if(empty($inputs['currentFolder']) || empty($inputs['newFile']))
+      return;
+    
+    $newFile = fopen(APP_DIRECTORY.$inputs['currentFolder'].'/'.$inputs['newFile'], "w") or die("Unable to open file!");
+    //$txt = "";
+    //fwrite($newFile, $txt);
+    fclose($newFile);
+    echo 'OK';
+    }
+    
+  function actionRename()
+    {
+    $inputs = $this->getInput(array('currentObjectName','newObjectName'));
+    if(empty($inputs['currentObjectName']) || empty($inputs['newObjectName']))
+      return;
+    
+    rename(APP_DIRECTORY.$inputs['currentObjectName'], APP_DIRECTORY.$inputs['newObjectName']);
+    echo 'OK';
+    }
   }
 ?>

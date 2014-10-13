@@ -29,6 +29,19 @@ function saveProject()
     });
   }
 
+function doCMD(cmd, src)
+  {
+  switch (cmd)
+    {
+      case 'create_folder':
+        break;
+      case 'create_file':
+        break;
+      case 'rename':
+        break;
+    }
+  }
+
 function openProject()
   {
   var openDir = [];
@@ -230,20 +243,31 @@ $(document).ready(function(){
   
   
   
-      $(".php-file-tree").contextmenu({
-        delegate: ".hasmenu-dir, .hasmenu-file",
-        menu: [
-            {title: "Create", children: [
-                {title: "Folder", cmd: "create_folder"},
-                {title: "File", cmd: "create_file"}
-                ]},
-            {title: "Rename", cmd: "rename"},
-            {title: "Copy", cmd: "copy"},
-            {title: "Paste", cmd: "paste"}
-            ],
-        select: function(event, ui) {
-            alert("select " + ui.cmd + " on " + ui.target.text());
-        }
+  $(".php-file-tree").contextmenu({
+      delegate: ".hasmenu-dir, .hasmenu-file",
+      menu: [
+          {title: "Create", children: [
+              {title: "Folder", cmd: "create_folder"},
+              {title: "File", cmd: "create_file"}
+              ]},
+          {title: "Rename", cmd: "rename"},
+          {title: "Copy", cmd: "copy"},
+          {title: "Paste", cmd: "paste"}
+          ],
+      select: function(event, ui) {
+          var data_src = '';
+          var cmd = ui.cmd;
+          if(ui.target.attr('data-src'))
+            {
+            data_src = ui.target.attr('data-src');
+            }
+          else 
+            {
+            data_src = ui.target.parent().attr('data-src');
+            }
+
+          doCMD(cmd, data_src);
+      }
     });
   
   openProject();

@@ -415,13 +415,54 @@ abstract class Controller extends AppObject
    * @param mixed $default
    * @return mixed
    */
-  final function getInput($var, $default)
+  final function getInput($var, $default=null)
     {
-    if(empty($var))
+    if(is_array($var))
       {
-      return $this->input_vars;
+      $array_result = array();
+      foreach($var as $key => $value_key)
+        {
+        if(is_array($value_key))
+          {
+          $currentKey = key($value_key);
+          $array_result[$key] = $value_key;
+          continue;
+          }
+          
+        if(!is_int($key))
+          {
+          if(isset($this->input_vars[$key]))
+            {
+            $array_result[$key] = $this->input_vars[$key];
+            }
+          else
+            {
+            $array_result[$key] = $value_key;
+            }
+          }
+        elseif(isset($this->input_vars[$value_key]))
+          {
+          $array_result[$value_key] = $this->input_vars[$value_key];
+          }
+        elseif(is_array($default) && isset($default[$value_key]))
+          {
+          $array_result[$value_key] = $default[$value_key];
+          }
+        else
+          {
+          $array_result[$value_key] = null;
+          }
+        }
+      return $array_result;
       }
-    return isset($this->input_vars[$var]) ? $this->input_vars[$var] : $default;
+    else
+      {
+      if(empty($var))
+        {
+        return $this->input_vars;
+        }
+      return isset($this->input_vars[$var]) ? $this->input_vars[$var] : $default;
+      }
     }
     
   //////////////////////////////////////////////////////////////////////////////
