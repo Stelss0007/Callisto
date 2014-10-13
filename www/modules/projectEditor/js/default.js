@@ -31,15 +31,28 @@ function saveProject()
 
 function doCMD(cmd, src)
   {
+  var dataCMD={};
+  
   switch (cmd)
     {
       case 'create_folder':
+        
         break;
       case 'create_file':
         break;
       case 'rename':
+        
+        break;
+      default:
+        cmd = false;
         break;
     }
+  if(cmd) 
+    {
+    $.post('/projectEditor/saveProject', {openTabs: openTabs}, function(data) {
+      //console.log('ok');
+      });
+    } 
   }
 
 function openProject()
