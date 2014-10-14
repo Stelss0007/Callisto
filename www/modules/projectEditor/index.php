@@ -3,6 +3,10 @@ class IndexController extends Controller
   {
   public $defaultAction = 'ViewEditor';
 
+  function actionGetFileTree()
+    {
+    echo $this->projectEditor->php_file_tree(APP_DIRECTORY, '/projectEditor/list_file/?file=[link]');
+    }
   function actionViewEditor()
     {
     //$this->phpTree = $this->projectEditor->php_file_tree(APP_DIRECTORY, "?module=projectEditor&action=listFile&file=[link]");

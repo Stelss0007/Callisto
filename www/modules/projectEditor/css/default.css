@@ -109,6 +109,11 @@ body {
   .pft-directory ul
   {margin-left: -30px;}
   
+  .php-file-tree li a {
+    display: block;
+    width: 100%;
+  }
+  
 	/* You can add millions of these... */
 
 
@@ -226,4 +231,19 @@ a {
    
    .php-file-tree li:hover > a {
      color: #777;
+   }
+   #ui-id-1 {
+     z-index: 9999;
+   }
+   
+   .ui-dialog-titlebar {
+     background: #9C9B9B;
+   }
+   
+   #editor-dialog-form-wraper {
+     clear: both;
+   }
+   
+   #editor-dialog-form-wraper input{
+     width: 100%;
    }

@@ -1,6 +1,6 @@
 var editor =null;
 var delay;
-var tabCounter = 2, tabs, IDEtheme;
+var tabCounter = 2, tabs, IDEtheme, dialog;
 var mime = [];
 var openTabs = [];
 
@@ -10,6 +10,14 @@ mime['ext-js']  = "text/javascript";
 //mime['ext-tpl'] = "text/x-smarty";
 mime['ext-tpl'] = "application/x-httpd-php";
 mime['ext-html'] = "text/html";
+
+
+var movies = [
+                { Name: "The Red Violin", ReleaseYear: "1998" },
+                { Name: "Eyes Wide Shut", ReleaseYear: "1999" },
+                { Name: "The Inheritance", ReleaseYear: "1976" }
+              ];
+
 
 
 Array.prototype.remove = function(v) { this.splice(this.indexOf(v) == -1 ? this.length : this.indexOf(v), 1); }
@@ -29,30 +37,96 @@ function saveProject()
     });
   }
 
-function doCMD(cmd, src)
+function getFileTree()
+  {
+  $.post('/projectEditor/get_file_tree', {}, function(data) {
+      $('#fileTree').html(data);
+      fileTreeinit();
+      });
+  }
+
+function doCMDRequest(cmd, dataCMD, ui)
+  {
+  $.post('/projectEditor/' + cmd, dataCMD, function(data) {
+      dialog.dialog( "close" );
+      if(data == 'OK')
+        {
+        getFileTree();
+        }
+      else 
+        {
+        alert(data);
+        }
+
+      });
+  }
+function doCMD(ui)
   {
   var dataCMD={};
+  var cmd = ui.cmd;
+  if(ui.target.attr('data-src'))
+    {
+    src = ui.target.attr('data-src');
+    }
+  else 
+    {
+    src = ui.target.parent().attr('data-src');
+    }
   
   switch (cmd)
     {
       case 'create_folder':
+        dialog.dialog("option", "title", "New Folder");
+        dialog.dialog(
+            'option',
+            'buttons', {
+                "Create": function () {doCMDRequest(cmd, {currentFolder: $('#currentFolder').val(), newFolder: $('#newFolder').val()}, ui)},
+                "Cancel": function () { dialog.dialog( "close" ); }
+            }
+          );
+        var params = [{'curentFolder' : src }];
+        $("#dialog-content").html($("#addFolderDialog").tmpl(params));
+        $('#newFolder').focus()
+                       .mouseup(function(){$(this).select();})
+                       .select()
+                       .keyup(function () {
+                            var impt = $(this).val();
+                            $("#pathSrc").html(impt);
+                        });
+        ;
         
+        dialog.dialog( "open" );
         break;
+        
       case 'create_file':
+        dialog.dialog("option", "title", "New File");
+        dialog.dialog(
+            'option',
+            'buttons', {
+                "Create": function () {alert('ok')},
+                "Cancel": function () { dialog.dialog( "close" ); }
+            }
+          );
+        dialog.dialog( "open" );
         break;
-      case 'rename':
         
+      case 'rename':
+        dialog.dialog("option", "title", "Rename");
+        dialog.dialog(
+            'option',
+            'buttons', {
+                "Rename": function () {alert('ok')},
+                "Cancel": function () { dialog.dialog( "close" ); }
+            }
+          );
+        dialog.dialog( "open" );
         break;
+        
       default:
         cmd = false;
         break;
     }
-  if(cmd) 
-    {
-    $.post('/projectEditor/saveProject', {openTabs: openTabs}, function(data) {
-      //console.log('ok');
-      });
-    } 
+
   }
 
 function openProject()
@@ -267,21 +341,27 @@ $(document).ready(function(){
           {title: "Copy", cmd: "copy"},
           {title: "Paste", cmd: "paste"}
           ],
-      select: function(event, ui) {
-          var data_src = '';
-          var cmd = ui.cmd;
-          if(ui.target.attr('data-src'))
-            {
-            data_src = ui.target.attr('data-src');
-            }
-          else 
-            {
-            data_src = ui.target.parent().attr('data-src');
-            }
-
-          doCMD(cmd, data_src);
+      select: function(event, ui) {doCMD(ui);}
+    });
+    
+  dialog = $( "#editor-dialog-form-wraper" ).dialog({
+      autoOpen: false,
+      height: 200,
+      width: 550,
+      modal: true,
+      resizable: false,
+      buttons: {
+        "Create an account": function cmd(){alert('ok')},
+        Cancel: function() {
+          dialog.dialog( "close" );
+        }
+      },
+      close: function() {
+        //$("#editor-dialog-form-wraper form").reset();
+        //allFields.removeClass( "ui-state-error" );
       }
     });
+ 
   
   openProject();
   progresEnd();

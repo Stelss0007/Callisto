@@ -90,11 +90,48 @@
     
     <script src="/modules/projectEditor/js/jquery.js" type="text/javascript"></script>
     <script src="/modules/projectEditor/js/jquery-ui.js" type="text/javascript"></script>
+    <script src="/public/js/jsTemplate/jsTemplate.js" type="text/javascript"></script>
 		<script src="/modules/projectEditor/js/php_file_tree_jquery.js" type="text/javascript"></script>
     <script src="/modules/projectEditor/js/default.js" type="text/javascript"></script>
     <script src="/modules/projectEditor/js/context-menu/jquery.ui-contextmenu.min.js" type="text/javascript"></script>
     
     <link href="/modules/projectEditor/css/default.css" rel="stylesheet" type="text/css" media="screen" />
+    
+    
+    {* JavaScript Templates *}
+    {literal}
+      <script id="addFolderDialog" type="text/x-jquery-tmpl">
+        <div>
+          <table width='100%'>
+            <colgroup>
+              <col width='120'>
+              <col width='*'>
+            </colgroup>
+            
+            <tr>
+              <td>Folder Name:</td>
+              <td>
+                <input type='text' id='newFolder' name='newFolder' value='folder_name' placeholder='folder_name' width='100%' tabindex='1'>
+              </td>
+            </tr>
+            <tr>
+              <td>Parent Folder:</td>
+              <td>
+                <input type='text' id='currentFolder' name='currentFolder' disabled value='${curentFolder}' width='100%'>
+              </td>
+            </tr>
+            <tr>
+              <td>New Folder:</td>
+              <td>
+                ${curentFolder}/<span id='pathSrc'></span>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </script>
+      
+    {/literal}
+
 	</head>
 
 	<body>
@@ -151,7 +188,7 @@
     
       <tr>
         <td height="600" width="300" style="border: 1px solid #000;" valign="top">
-          <div style="width: 300px; height: 100%; overflow: scroll;">
+          <div style="width: 300px; height: 100%; overflow: scroll;" id='fileTree'>
             {$phpTree}
           </div>
         </td>
@@ -169,6 +206,13 @@
       </tr>
       
     </table>
+          
+    <div id="editor-dialog-form-wraper" title="">
+      <form id='editor-dialog-form'>
+        <div id="dialog-content">
+        </div>
+      </form>
+    </div>
 		
 	</body>
 	
