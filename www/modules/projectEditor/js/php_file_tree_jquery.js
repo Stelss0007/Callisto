@@ -17,7 +17,7 @@ function fileTreeinit()
     
     var nodeSRC = $(this).parent().attr('data-src');
     
-    if($.inArray(nodeSRC, openFileTreeNode))
+    if(jQuery.inArray(nodeSRC, openFileTreeNode)> -1)
       {
       openFileTreeNode.remove(nodeSRC);
       }
@@ -29,4 +29,11 @@ function fileTreeinit()
     
 		if( $(this).parent().attr('className') == "pft-directory" ) return false;
 	});
+  }
+
+function fileTreeOpen()
+  {
+  $.each(openFileTreeNode, function(index, value) { 
+    $('*[data-src="'+value+'"] > a').click();
+    });
   }

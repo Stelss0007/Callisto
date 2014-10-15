@@ -88,7 +88,16 @@ class IndexController extends Controller
     if(empty($inputs['currentObjectName']) || empty($inputs['newObjectName']))
       return;
     
-    rename(APP_DIRECTORY.$inputs['currentObjectName'], APP_DIRECTORY.$inputs['newObjectName']);
+    $parrentFolderArray = explode('/', $inputs['currentObjectName']);
+    unset($parrentFolderArray[count($parrentFolderArray)-1]);
+    
+    $inputs['newObjectName'] = implode('/', $parrentFolderArray) . '/' . $inputs['newObjectName'];
+    
+    if($inputs['currentObjectName'] != $inputs['newObjectName'])
+      {
+      rename(APP_DIRECTORY.$inputs['currentObjectName'], APP_DIRECTORY.$inputs['newObjectName']);
+      }
+      
     echo 'OK';
     }
   }

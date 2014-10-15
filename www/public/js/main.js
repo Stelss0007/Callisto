@@ -46,10 +46,13 @@ function showAppMessage(message)
       $('#appMessage_msg_text').html($('#appMessageText').val()+close_btn).attr('class', 'alert alert-'+$('#appMessageType').val());
       }
     
-    $('#appMessage_conteiner').stop().show().animate({"opacity": "1"}, "fast").delay(5000).stop().animate({"opacity": "0"}, "slow", function(){$(this).hide()});
+    $('#appMessage_conteiner').stop().fadeIn(400, function(){$(this).show().delay(5000).fadeOut(400, function(){$(this).hide()});});
+    //$('#appMessage_conteiner').stop().fadeIn(400).show().delay(5000).stop().animate({"opacity": "0"}, "slow", function(){$(this).hide()});
     //$('#appMessage_conteiner').stop().show().animate({"opacity": "1"}, "fast").delay(3000).stop();
+    
     $('#appMessage_msg_text').on('click', function() {
-        $('#appMessage_conteiner').stop().animate({"opacity": "0"}, "fast");
+        $('#appMessage_conteiner').stop().fadeOut("fast", function(){$(this).hide()});
+        //$('#appMessage_conteiner').stop().animate({"opacity": "0"}, "fast", function(){$(this).hide()});
      });
     //$('#appMessage_').remove();
     }
@@ -59,7 +62,8 @@ function showAppMessage(message)
 $('document').ready(function(){
   $('body').prepend("<div id='appMessage_conteiner'><div class='alert alert-success' id='appMessage_msg_text'></div></div>");
   $('#appMessage_msg_text, #appMessage_msg_text .close').on('click', function() {
-     $('#appMessage_conteiner').stop().animate({"opacity": "0"}, "fast");
+     $('#appMessage_conteiner').stop().fadeOut("fast");
+     //$('#appMessage_conteiner').stop().animate({"opacity": "0"}, "fast");
      return false;
   });
   showAppMessage();

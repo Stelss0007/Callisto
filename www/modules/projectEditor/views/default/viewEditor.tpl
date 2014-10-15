@@ -130,6 +130,66 @@
         </div>
       </script>
       
+      <script id="addFileDialog" type="text/x-jquery-tmpl">
+        <div>
+          <table width='100%'>
+            <colgroup>
+              <col width='120'>
+              <col width='*'>
+            </colgroup>
+            
+            <tr>
+              <td>File Name:</td>
+              <td>
+                <input type='text' id='newFile' name='newFile' value='file_name' placeholder='file_name' width='100%' tabindex='1'>
+              </td>
+            </tr>
+            <tr>
+              <td>Parent Folder:</td>
+              <td>
+                <input type='text' id='currentFolder' name='currentFolder' disabled value='${curentFolder}' width='100%'>
+              </td>
+            </tr>
+            <tr>
+              <td>New Folder:</td>
+              <td>
+                ${curentFolder}/<span id='pathSrc'></span>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </script>
+      
+      <script id="renameFileDialog" type="text/x-jquery-tmpl">
+        <div>
+          <table width='100%'>
+            <colgroup>
+              <col width='120'>
+              <col width='*'>
+            </colgroup>
+            
+            <tr>
+              <td>Name:</td>
+              <td>
+                <input type='text' id='newObjectName' name='newObjectName' value='${realName}' placeholder='Enter Name' width='100%' tabindex='1'>
+              </td>
+            </tr>
+            <tr style='display: none;'>
+              <td>Parent Folder:</td>
+              <td>
+                <input type='text' id='currentObjectName' name='currentObjectName' disabled value='${currentObjectName}' width='100%'>
+              </td>
+            </tr>
+            <tr>
+              <td>Full SRC:</td>
+              <td>
+                ${currentObjectName}/<span id='pathSrc'></span>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </script>
+      
     {/literal}
 
 	</head>

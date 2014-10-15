@@ -12,13 +12,6 @@ mime['ext-tpl'] = "application/x-httpd-php";
 mime['ext-html'] = "text/html";
 
 
-var movies = [
-                { Name: "The Red Violin", ReleaseYear: "1998" },
-                { Name: "Eyes Wide Shut", ReleaseYear: "1999" },
-                { Name: "The Inheritance", ReleaseYear: "1976" }
-              ];
-
-
 
 Array.prototype.remove = function(v) { this.splice(this.indexOf(v) == -1 ? this.length : this.indexOf(v), 1); }
 
@@ -42,11 +35,16 @@ function getFileTree()
   $.post('/projectEditor/get_file_tree', {}, function(data) {
       $('#fileTree').html(data);
       fileTreeinit();
+      fileTreeOpen();
+      initEditor();
+      initContextMenu();
       });
   }
 
 function doCMDRequest(cmd, dataCMD, ui)
   {
+  progresStart();
+  
   $.post('/projectEditor/' + cmd, dataCMD, function(data) {
       dialog.dialog( "close" );
       if(data == 'OK')
@@ -59,6 +57,7 @@ function doCMDRequest(cmd, dataCMD, ui)
         }
 
       });
+  progresEnd();
   }
 function doCMD(ui)
   {
@@ -103,10 +102,21 @@ function doCMD(ui)
         dialog.dialog(
             'option',
             'buttons', {
-                "Create": function () {alert('ok')},
+                "Create": function () {doCMDRequest(cmd, {currentFolder: $('#currentFolder').val(), newFile: $('#newFile').val()}, ui)},
                 "Cancel": function () { dialog.dialog( "close" ); }
             }
           );
+        var params = [{'curentFolder' : src }];
+        $("#dialog-content").html($("#addFileDialog").tmpl(params));
+        $('#newFile').focus()
+                       .mouseup(function(){$(this).select();})
+                       .select()
+                       .keyup(function () {
+                            var impt = $(this).val();
+                            $("#pathSrc").html(impt);
+                        });
+        ;
+        
         dialog.dialog( "open" );
         break;
         
@@ -115,10 +125,24 @@ function doCMD(ui)
         dialog.dialog(
             'option',
             'buttons', {
-                "Rename": function () {alert('ok')},
+                "Create": function () {doCMDRequest(cmd, {currentObjectName: $('#currentObjectName').val(), newObjectName: $('#newObjectName').val()}, ui)},
                 "Cancel": function () { dialog.dialog( "close" ); }
             }
           );
+  
+        var pathArr = src.split('/');
+        realName = pathArr[pathArr.length-1];
+        var params = [{'currentObjectName' : src, 'realName' : realName}];
+        $("#dialog-content").html($("#renameFileDialog").tmpl(params));
+        $('#newFile').focus()
+                       .mouseup(function(){$(this).select();})
+                       .select()
+                       .keyup(function () {
+                            var impt = $(this).val();
+                            $("#pathSrc").html(impt);
+                        });
+        ;
+        
         dialog.dialog( "open" );
         break;
         
@@ -258,31 +282,45 @@ function setCodeStyle(mime, element)
     setCodeStyle(mime, 'codeEdit-'+tabCounter);
  
     }
-      
-$(document).ready(function(){
-  selectTheme();
-  
-  $('.editor-text').height($(window).height() - $('.editor-menu').height() - $('#editor-tab-src').height() - 25 );
-  $('.editor-text').width($(window).width() - 300);
-  $('.editor-text').css('maxWidth', $(window).width() - 300);
-  
-  tabs = $( "#tabs" ).tabs({
-                            activate: function (e, ui) {
-                                        $('#editor-tab-src').html(ui.newTab.find('a').attr('title'));
-                                      }
+function initContextMenu()
+  {
+  $(".php-file-tree").contextmenu({
+      delegate: ".hasmenu-dir, .hasmenu-file",
+      menu: [
+          {title: "Create", children: [
+              {title: "Folder", cmd: "create_folder"},
+              {title: "File", cmd: "create_file"}
+              ]},
+          {title: "Rename", cmd: "rename"},
+          {title: "Copy", cmd: "copy"},
+          {title: "Paste", cmd: "paste"}
+          ],
+      select: function(event, ui) {doCMD(ui);}
     });
+  }
   
-  // close icon: removing the tab on click
-  tabs.delegate("span.ui-icon-close", "click", function() {
-    var $this = $(this);
-    var fileHref = $this.attr('data-file-src');
-    var panelId = $this.closest("li").remove().attr("aria-controls");
-    $("#" + panelId).remove();
-    openTabs.remove(fileHref);
-    tabs.tabs("refresh");
-    saveProject();
-  });
-  
+function initDialog()
+  {
+  dialog = $( "#editor-dialog-form-wraper" ).dialog({
+      autoOpen: false,
+      height: 200,
+      width: 550,
+      modal: true,
+      resizable: false,
+      buttons: {
+        "Create an account": function cmd(){alert('ok')},
+        Cancel: function() {
+          dialog.dialog( "close" );
+        }
+      },
+      close: function() {
+        //$("#editor-dialog-form-wraper form").reset();
+        //allFields.removeClass( "ui-state-error" );
+      }
+    });
+  }
+function initEditor()
+  {
   $('.pft-file a').click(function(){
     progresStart();
     
@@ -326,42 +364,39 @@ $(document).ready(function(){
     });
     
     return false;
+    });
+  }
+  
+  
+  
+$(document).ready(function(){
+  selectTheme();
+  
+  $('.editor-text').height($(window).height() - $('.editor-menu').height() - $('#editor-tab-src').height() - 25 );
+  $('.editor-text').width($(window).width() - 300);
+  $('.editor-text').css('maxWidth', $(window).width() - 300);
+  
+  tabs = $( "#tabs" ).tabs({
+                            activate: function (e, ui) {
+                                        $('#editor-tab-src').html(ui.newTab.find('a').attr('title'));
+                                      }
+    });
+  
+  // close icon: removing the tab on click
+  tabs.delegate("span.ui-icon-close", "click", function() {
+    var $this = $(this);
+    var fileHref = $this.attr('data-file-src');
+    var panelId = $this.closest("li").remove().attr("aria-controls");
+    $("#" + panelId).remove();
+    openTabs.remove(fileHref);
+    tabs.tabs("refresh");
+    saveProject();
   });
   
-  
-  
-  $(".php-file-tree").contextmenu({
-      delegate: ".hasmenu-dir, .hasmenu-file",
-      menu: [
-          {title: "Create", children: [
-              {title: "Folder", cmd: "create_folder"},
-              {title: "File", cmd: "create_file"}
-              ]},
-          {title: "Rename", cmd: "rename"},
-          {title: "Copy", cmd: "copy"},
-          {title: "Paste", cmd: "paste"}
-          ],
-      select: function(event, ui) {doCMD(ui);}
-    });
-    
-  dialog = $( "#editor-dialog-form-wraper" ).dialog({
-      autoOpen: false,
-      height: 200,
-      width: 550,
-      modal: true,
-      resizable: false,
-      buttons: {
-        "Create an account": function cmd(){alert('ok')},
-        Cancel: function() {
-          dialog.dialog( "close" );
-        }
-      },
-      close: function() {
-        //$("#editor-dialog-form-wraper form").reset();
-        //allFields.removeClass( "ui-state-error" );
-      }
-    });
- 
+
+  initEditor();
+  initContextMenu();
+  initDialog();
   
   openProject();
   progresEnd();
