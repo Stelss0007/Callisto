@@ -80,7 +80,7 @@ function smarty_function_jsGalery($params, &$smarty)
 
   if (empty($width)) $width = '100%';
 
-  sysJSLoad('jsGalery', array("jsGalery"), FALSE, FALSE, TRUE);
+  appJSLoad('jsGalery', array("jsGalery"), FALSE, FALSE, TRUE);
 
   $script = "<script>
               $(document).ready(

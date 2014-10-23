@@ -188,7 +188,7 @@ class Menu extends Model
     $this->query("SELECT * FROM $this->table ORDER BY {$this->table}_parent_id, {$this->table}_weight");
     $menus = $this->fetch_array();
       
-    return appTreeBuild(&$menus, $parent_id);
+    return appTreeBuild($menus, $parent_id);
     }
   }
 ?>

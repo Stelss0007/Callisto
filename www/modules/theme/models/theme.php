@@ -122,7 +122,7 @@ class Theme extends Model
     $info['theme_last_update']  = time();
 
    
-    $this->arrayToModel(&$this, $info);
+    $this->arrayToModel($this, $info);
      
     $id = $this->save();
     }

@@ -79,7 +79,7 @@ class Blocks extends Model
     $info['block_position'] = $input_position;
     $info['block_pattern'] = '.*';
    
-    $this->arrayToModel(&$this, $info);
+    $this->arrayToModel($this, $info);
     
     $this->save();
     }

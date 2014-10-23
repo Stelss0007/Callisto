@@ -669,7 +669,7 @@ function appGetFileList($dir_ = null)
   return $file_list;
   }
   
-function appJsLoad($modname='kernel', $scriptname='main')
+function appJsLoad($modname='kernel', $scriptname='main', $realscriptname='')
   {
   global $jsLoaded;
   global $jsLoadedHasModScript;
@@ -690,7 +690,14 @@ function appJsLoad($modname='kernel', $scriptname='main')
       }
     else
       {
-      $jsLoaded["$modname.$scriptname"] = "/public/js/$scriptname/$scriptname.js";
+      if(!empty($addscriptname))
+        {
+        $jsLoaded["$modname.$scriptname"] = "/public/js/$scriptname/$realscriptname.js";
+        }
+      else
+        {
+        $jsLoaded["$modname.$scriptname"] = "/public/js/$scriptname/$scriptname.js";
+        }
       }
     }
   else
@@ -1281,7 +1288,7 @@ function appVarDelCached($component, $cacheKey)
    
  
 
-function appTreeBuild($inArray, $start)
+function appTreeBuild(&$inArray, $start)
   {
   $result = array();
   $child_menu_list = array();
@@ -1290,13 +1297,13 @@ function appTreeBuild($inArray, $start)
       $child_menu_list[$menu['id']] = $menu;
       }
  
-  appCreateTree($child_menu_list, $start, 0, -1, &$result); 
+  appCreateTree($child_menu_list, $start, 0, -1, $result); 
   
   return $result;
   //exit;
   }
 
-function appCreateTree($array, $curParent, $currLevel = 0, $prevLevel = -1, $result) 
+function appCreateTree($array, $curParent, $currLevel = 0, $prevLevel = -1, &$result) 
   {
   foreach ($array as $categoryId => $category) 
     {
@@ -1311,7 +1318,7 @@ function appCreateTree($array, $curParent, $currLevel = 0, $prevLevel = -1, $res
 
       $currLevel++;
 
-      appCreateTree ($array, $categoryId, $currLevel, $prevLevel, &$result);
+      appCreateTree ($array, $categoryId, $currLevel, $prevLevel, $result);
 
       $currLevel--;
       }
