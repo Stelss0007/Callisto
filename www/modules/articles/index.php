@@ -5,6 +5,7 @@ class IndexController extends Controller
   
   public function actionArticleList()
     {
+    
     //appCanEdit();
     
     //Send Email
