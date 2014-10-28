@@ -38,7 +38,7 @@ class IndexController extends Controller
     $this->assign($this->getInput('filter', array()));
     //\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
     
-    
+  
     $browsein[] =array('url'=>"/", 'displayname'=>$this->t('dashboard'));
     $browsein[] =array('url'=>'/articles', 'displayname'=>'Articles'); 
     

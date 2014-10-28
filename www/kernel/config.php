@@ -1,6 +1,6 @@
 <?php
 //Настройки отладки
-$appConfig['debug.enabled'] = false;
+$appConfig['debug.enabled'] = true;
 
 //Параметры для форматирования даты поумолчанию
 $appConfig['date_format'] = '%d.%m.%Y';

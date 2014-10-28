@@ -55,9 +55,16 @@ abstract class Controller extends AppObject
                             array('width'=>'100', 'height'=>'100')
                             );
   
+  public  $gzip = true;
   
   function __construct($mod)
     {
+    if($this->gzip)
+      {
+      ob_start();
+      ob_implicit_flush(0);
+      }
+    
     date_default_timezone_set('Europe/Moscow');
     //APP_DIRECTORY = dirname(__FILE__);
     //print_r('wwww');exit;
@@ -600,6 +607,12 @@ abstract class Controller extends AppObject
       $this->smarty->caching = false;
       echo $this->smarty->fetch($pageTplFile);
       }
+      
+     if($this->gzip)
+      {
+      appGzippedOutput();
+      }
+      
     exit(); 
     }
   
