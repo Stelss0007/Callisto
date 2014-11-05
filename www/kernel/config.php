@@ -75,7 +75,7 @@ $appConfig['coretpl.cache_lifetime'] = 10800;
  * до тех пор, пока шаблон не будет перекомпилирован. Если caching и compile_check активированы, 
  * файлы кэша будут регенерированы при обновлении связанных с ним шаблонов или конфигурационных файлов.
  */
-$appConfig['coretpl.compile_check'] = true;
+$appConfig['coretpl.compile_check'] = false;
 
 //Всегда перекомпилировать шаблоны (только для отладки)
 /*
