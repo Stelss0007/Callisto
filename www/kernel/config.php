@@ -1,6 +1,6 @@
 <?php
 //Настройки отладки
-$appConfig['debug.enabled'] = true;
+$appConfig['debug.enabled'] = false;
 
 //Параметры для форматирования даты поумолчанию
 $appConfig['date_format'] = '%d.%m.%Y';
@@ -82,7 +82,7 @@ $appConfig['coretpl.compile_check'] = false;
  * Указывает Smarty (пере)компилировать шаблоны при каждом вызове. 
  * Этот параметр перекрывает действие $compile_check и по умолчанию не активирован. 
  */
-$appConfig['coretpl.force_compile'] = true;
+//$appConfig['coretpl.force_compile'] = true; //Переопределено в классе viewTpl (kernel/view.php), Если включен $appConfig['debug.enabled'] то этот параметр тоже включается
 
 
 
@@ -105,4 +105,6 @@ $appConfig['css.version'] = 10;
 //"js" Сообщение выводится с помощью всплывающего окна
 //"page" Сообщение выводится с помощью отдельной страницы (/themes/тема/messages/normal.tpl)
 $appConfig['Message.type'] = 'js';
+
+$appConfig['gzip'] = false;
 

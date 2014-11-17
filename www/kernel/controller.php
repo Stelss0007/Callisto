@@ -55,16 +55,9 @@ abstract class Controller extends AppObject
                             array('width'=>'100', 'height'=>'100')
                             );
   
-  public  $gzip = true;
   
   function __construct($mod)
     {
-    if($this->gzip)
-      {
-      ob_start();
-      ob_implicit_flush(0);
-      }
-    
     date_default_timezone_set('Europe/Moscow');
     //APP_DIRECTORY = dirname(__FILE__);
     //print_r('wwww');exit;
@@ -76,6 +69,13 @@ abstract class Controller extends AppObject
     $this->start_debug_time =$current_time[1] + $current_time[0];
     
     $this->setConfig();
+    
+    if($this->config['gzip'])
+      {
+      ob_start();
+      ob_implicit_flush(0);
+      }
+    
     //$coreConfig['debug.enabled']-Статус дебагера;  
     //Init Errors
     $this->errors =& ErrorHandler::getInstance();
@@ -102,7 +102,6 @@ abstract class Controller extends AppObject
     $this->modname = $mod;//strtolower(get_class($this));
 
     $this->module_dir = 'modules/'.$this->modname.'/';
-    
     if($this->config['debug.enabled'])
       {
       require_once(KERNEL_DIR.'debuger.php');
@@ -241,6 +240,12 @@ abstract class Controller extends AppObject
       
       $debuger->render();  
       }
+      
+    if($this->config['gzip'])
+      {
+      appGzippedOutput();
+      }
+    exit;
     }
     
   function __set($name, $value)
@@ -294,6 +299,11 @@ abstract class Controller extends AppObject
     $this->action = $action_name;
     $this->object_name = $this->getObjectName();
     $this->permissionLavel = $GLOBALS['permissionLavel'] = $this->getPermissionLavel($this->object_name);
+    
+    if($this->type == 'admin')
+      {
+      $this->smarty->force_compile = true;
+      }
     
     $this->object_name = $this->object_name.'::permission::'.appGetAccessName($this->permissionLavel);
     
@@ -544,6 +554,7 @@ abstract class Controller extends AppObject
     $this->allVarToTpl();
     $ObjectName = $this->getTplObjectName();
     echo $this->smarty->fetch($tpl_dir, $ObjectName);
+    $this->__destruct();
     }
     
   /**
@@ -607,13 +618,8 @@ abstract class Controller extends AppObject
       $this->smarty->caching = false;
       echo $this->smarty->fetch($pageTplFile);
       }
-      
-     if($this->gzip)
-      {
-      appGzippedOutput();
-      }
-      
-    exit(); 
+   
+    $this->__destruct(); 
     }
   
 
@@ -679,12 +685,12 @@ abstract class Controller extends AppObject
     //$url_result = $this->GetCallingMethodName(3, true);
     $action = $this->action;//$url_result['function'];
     $args = '';
-    foreach($this->input_vars as $value)
+    foreach($this->input_vars as $key => $value)
       {
-      $args .= '::'.$value;
+      $args .= '::'.$key.':'.$value;
       }
       
-    return $this->modname.'::'.$this->type.'::'.$action.$args;
+    return $this->modname.'::'.$this->type.'::'.$action.$args.'::ACCESS_LEVEL_'.$this->permissionLavel;;
     }
     
   final public function getTplObjectName()
@@ -692,11 +698,13 @@ abstract class Controller extends AppObject
     //$url_result = $this->GetCallingMethodName(3, true);
     $action = $this->action;//$url_result['function'];
     $args = '';
-    if(isset($url_result['args']) && $url_result['args'])
-      foreach($url_result['args'] as $value)
+    if($this->input_vars)
+      {
+      foreach($this->input_vars as $key => $value)
         {
-        $args .= '|'.$value;
+        $args .= '|'.$key.':'.$value;
         }
+      }
     return $this->modname.'|'.$this->type.'|'.$action.$args.'|ACCESS_LEVEL_'.$this->permissionLavel;
     }
     

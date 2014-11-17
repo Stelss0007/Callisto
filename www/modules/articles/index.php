@@ -12,6 +12,10 @@ class IndexController extends Controller
     //$this->sendEmailTemplate(array('stelss1986@gmail.com'), 'Test Subject', 'main');
     //appDebugExit($this->getAccessLevel());
     
+    $browsein[] =array('url'=>"/", 'displayname'=>$this->t('dashboard'));
+    $browsein[] =array('url'=>'/articles', 'displayname'=>'Articles'); 
+    $this->assign('module_browsein', $browsein);
+    
     $this->viewCachedPage();
     
     $this->usesModel('articleCategory');
@@ -38,18 +42,17 @@ class IndexController extends Controller
     $this->assign($this->getInput('filter', array()));
     //\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
     
-  
-    $browsein[] =array('url'=>"/", 'displayname'=>$this->t('dashboard'));
-    $browsein[] =array('url'=>'/articles', 'displayname'=>'Articles'); 
-    
-    $this->assign('module_browsein', $browsein);
-    
     $this->viewPage();
     }
     
   public function actionView($id)
     {
-    //echo appStrToUrl('Привет Мир . ля-ля-ля');exit;
+    $browsein[] =array('url'=>"/", 'displayname'=>$this->t('dashboard'));
+    $browsein[] =array('url'=>'/articles', 'displayname'=>'Articles'); 
+    //$browsein[] =array('url'=>'/articles', 'displayname'=>$article['article_title']); 
+    $browsein[] =array('url'=>'/articles', 'displayname'=>'Просмотр'); 
+    
+    $this->assign('module_browsein', $browsein);
     $this->viewCachedPage();
     
     $this->usesModel('articleCategory');
@@ -73,14 +76,7 @@ class IndexController extends Controller
     $this->article_category_list = $category_filter_list;
     $this->article_user_list     = $user_filter_list;
     $this->article_status_list   = $status_filter_list;
-    
-    
-    $browsein[] =array('url'=>"/", 'displayname'=>$this->t('dashboard'));
-    $browsein[] =array('url'=>'/articles', 'displayname'=>'Articles'); 
-    $browsein[] =array('url'=>'/articles', 'displayname'=>$article['article_title']); 
-    
-    $this->assign('module_browsein', $browsein);
-    
+
     $this->viewPage();
     }
   }

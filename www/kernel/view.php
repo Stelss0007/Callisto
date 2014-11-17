@@ -14,10 +14,12 @@ class viewTpl extends Smarty
     //???????? ??????????? ??????
     $this->Smarty();
     //????????? ???? ?????????? ???????????
-    $this->debugging = false;
+    $this->debugging = $appConfig['debug.enabled'];//false;
     $this->caching = $appConfig['coretpl.caching'];
     $this->use_sub_dirs = $appConfig['coretpl.use_sub_dirs'];
-    $this->force_compile = $appConfig['coretpl.force_compile'];
+    if($appConfig['debug.enabled'])
+      $this->force_compile = true;//$appConfig['coretpl.force_compile'];
+    
     $this->compile_check = $appConfig['coretpl.compile_check'];
     $this->template_dir = '';
     $this->config_dir='';
