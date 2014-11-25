@@ -13,6 +13,12 @@ function appDebug($value)
   {
   appDebug($value);
   }
+  
+function smarty_block_dynamic($param, $content, &$smarty) 
+  {
+  return $content;
+  }
+
 
 //Constant Functions
 function appGetAccessName($level=false)

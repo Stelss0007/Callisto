@@ -15,7 +15,7 @@ class IndexController extends Controller
     $browsein[] =array('url'=>"/", 'displayname'=>$this->t('dashboard'));
     $browsein[] =array('url'=>'/articles', 'displayname'=>'Articles'); 
     $this->assign('module_browsein', $browsein);
-    
+
     $this->viewCachedPage();
     
     $this->usesModel('articleCategory');

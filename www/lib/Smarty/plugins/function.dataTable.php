@@ -33,10 +33,12 @@
 function smarty_function_dataTable($params, &$smarty)
   {
   extract($params);
+
   
   appJSLoad('kernel', 'dataTables');
   appJSLoad('kernel', 'dataTables', 'jquery.dataTables');
   appCssLoad('kernel', 'dataTables');
+  
 
   $script = "<script>
               $(document).ready(
