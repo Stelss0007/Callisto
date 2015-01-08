@@ -716,7 +716,7 @@ function docReady(){
   
   
   //Left Column Fix (Min height = height of content)
-  $('.main-menu-span').css({minHeight: $('#content').height()+20});
+  //$('.main-menu-span').css({minHeight: $('#content').height()+20});
 }
 
 
