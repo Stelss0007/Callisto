@@ -33,6 +33,7 @@
 function smarty_function_dataTable($params, &$smarty)
   {
   extract($params);
+
   
   
   $smarty->appJSLoad('kernel', 'dataTables');
