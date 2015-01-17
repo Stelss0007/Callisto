@@ -11,6 +11,6 @@
  */
 function smarty_function_appLessLoad($params, &$smarty)
 	{
-	appLessLoad($params['modname'], $params['scriptname'], $params['dir']);
+	$smarty->appLessLoad($params['modname'], $params['scriptname'], $params['dir']);
 	}
 

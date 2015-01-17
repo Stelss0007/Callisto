@@ -11,7 +11,7 @@
  */
 function smarty_function_appCssLoad($params, &$smarty)
 	{
-	appCssLoad($params['modname'], $params['scriptname'], $params['dir']);
+	$smarty->appCssLoad($params['modname'], $params['scriptname'], $params['dir']);
 	}
 
 

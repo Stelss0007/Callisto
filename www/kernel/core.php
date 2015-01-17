@@ -13,6 +13,10 @@ function appDebug($value)
   {
   appDebug($value);
   }
+  
+function smarty_block_dynamic($param, $content, &$smarty) {
+    return $content;
+}  
 
 //Constant Functions
 function appGetAccessName($level=false)
@@ -720,7 +724,7 @@ function appJsLoad($modname='kernel', $scriptname='main', $realscriptname='')
       }
     else
       {
-      if(!empty($addscriptname))
+      if(!empty($realscriptname))
         {
         $jsLoaded["$modname.$scriptname"] = "/public/js/$scriptname/$realscriptname.js";
         }

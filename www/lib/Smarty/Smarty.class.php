@@ -687,7 +687,7 @@ class Smarty
      * @param string $function the name of the template function
      * @param string $function_impl the name of the PHP function to register
      */
-    function register_function($function, $function_impl, $cacheable=true, $cache_attrs=null)
+    function register_function($function, $function_impl, $cacheable=false, $cache_attrs=null)
     {
         $this->_plugins['function'][$function] =
             array($function_impl, null, null, false, $cacheable, $cache_attrs);

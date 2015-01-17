@@ -184,7 +184,7 @@ class ErrorHandler
             Line
           </td>
         </tr>
-        <?foreach($this->error_array as $verror):?>
+        <?php foreach($this->error_array as $verror):?>
         <tr class="tr_error">
           <td>
             <b>
@@ -198,9 +198,9 @@ class ErrorHandler
             <?=$verror['line'];?>
           </td>
         </tr>
-        <?endforeach;?>
+        <?php endforeach;?>
       
-        <?foreach($this->user_error_array as $verror):
+        <?php foreach($this->user_error_array as $verror):
           
           if(!empty($verror['message']) && $this->is_serial($verror['message']))
             $verror = unserialize($verror['message']);
@@ -218,10 +218,10 @@ class ErrorHandler
             <?=$verror['line'];?>
           </td>
         </tr>
-        <?endforeach;?>
+        <?php endforeach;?>
       </table>
     </body>
-    <?
+    <?php
     $this->error_array = null;
     $this->user_error_array = null;
     die();

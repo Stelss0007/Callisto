@@ -4,6 +4,7 @@
  */
 class viewTpl extends Smarty
   {
+  public $template_file;
   /**
    * Constructor
   **/
@@ -51,28 +52,17 @@ class viewTpl extends Smarty
   /**
    * Fetching
    **/
-//  function fetch ($tpl_file, $cache_id = null, $vars = null, $compile_id = null, $display = false)
-//    {
-////    if (!$tpl_file)
-////			coreException ('core_tpl->fetch', BAD_PARAM, "Tpl file name empty (\$coreObject = $cache_id)");
-//
-////    if ($cache_id)
-////      {//???? ? ??? ???????? ?? ????????, ??????? ??????????????
-////      $coreSecLevel = $this->get_template_vars('curuser_sec_level');
-////      if (!isset($coreSecLevel)) //???? ??????? ??????? ?? ??????? - ?????????? ????
-////        {
-////        //$coreSecLevel = coreSecGetLevel ($cache_id);
-////        $coreSecLevel = 1;
-////        $this->assign('curuser_sec_level', $coreSecLevel);
-////        }
-////      $this->assign('coreObject', $cache_id);
-////
-////      $cache_id = str_replace('::', '|', $cache_id);
-////      $cache_id.= "|$coreSecLevel";
-////      }
-////    $this->_core_tpl_vars = $vars;
-//    return (Smarty::fetch($tpl_file, $cache_id, $compile_id, $display));
-//    }
+  function fetch ($tpl_file, $cache_id = null, $compile_id = null, $display = false)
+    {
+    $this->template_file = $tpl_file;
+    
+    if($this->caching && $this->is_cached($tpl_file, $cache_id ))
+      {
+      $this->runCachedScripts();
+      }
+    
+    return (Smarty::fetch($tpl_file, $cache_id, $compile_id, $display));
+    }
 //  /**
 //   * ?????????? ?????????? ????????????? ? ?????????????? ????????
 //   **/
@@ -109,6 +99,100 @@ class viewTpl extends Smarty
 
     //echo $tpl_file.' '.$cache_id;
     return (Smarty::is_cached($tpl_file, $cache_id, $compile_id));
+    }
+   
+  function runCachedScripts()
+    {
+
+    //Run Cached JS
+    $tplScripts = appVarGetCached('templateScripts', 'appJsLoad');
+    if(!empty($tplScripts[$this->template_file]))
+      foreach($tplScripts[$this->template_file] as $script)
+        {
+        appJsLoad($script['modname'], $script['scriptname'], $script['realscriptname']);
+        }
+        
+    //Run Cached Css
+    $tplScripts = appVarGetCached('templateScripts', 'appCssLoad');
+    if(!empty($tplScripts[$this->template_file]))
+      foreach($tplScripts[$this->template_file] as $script)
+        {
+        appCssLoad($script['modname'], $script['scriptname'], $script['dir']);
+        }
+        
+    //Run Cached Less
+    $tplScripts = appVarGetCached('templateScripts', 'appLessLoad');
+    if(!empty($tplScripts[$this->template_file]))
+      foreach($tplScripts[$this->template_file] as $script)
+        {
+        appLessLoad($script['modname'], $script['scriptname'], $script['dir']);
+        }
+        
+    //Run Cached Less
+    $tplScripts = appVarGetCached('templateScripts', 'appSassLoad');
+    if(!empty($tplScripts[$this->template_file]))
+      foreach($tplScripts[$this->template_file] as $script)
+        {
+        appSassLoad($script['modname'], $script['scriptname'], $script['dir']);
+        }
+        
+    unset($tplScripts);   
+    }
+    
+  function appJsLoad($modname='kernel', $scriptname='main', $realscriptname='')
+    {
+    $tplScripts = appVarGetCached('templateScripts', 'appJsLoad');
+    $tplScripts[$this->template_file]["$modname.$scriptname.$realscriptname"] = array(
+                                                'modname'=>$modname,
+                                                'scriptname'=>$scriptname,
+                                                'realscriptname'=>$realscriptname
+                                                );
+        
+    appVarSetCached('templateScripts','appJsLoad', $tplScripts);
+    unset($tplScripts);
+    appJsLoad($modname, $scriptname, $realscriptname);
+    }
+    
+  function appCssLoad($modname='', $scriptname='main', $dir='')
+    {
+    $tplCss = appVarGetCached('templateScripts', 'appCssLoad');
+    $tplCss[$this->template_file]["$modname.$scriptname"] = array(
+                                            'modname'=>$modname,
+                                            'scriptname'=>$scriptname,
+                                            'dir'=>$dir
+                                            );
+        
+    appVarSetCached('templateScripts', 'appCssLoad', $tplCss);
+    unset($tplCss);
+    appCssLoad($modname, $scriptname, $dir);
+    }
+    
+  function appLessLoad($modname='', $scriptname='main', $dir='')
+    {
+    $tplCss = appVarGetCached('templateScripts', 'appLessLoad');
+    $tplCss[$this->template_file]["$modname.$scriptname"] = array(
+                                            'modname'=>$modname,
+                                            'scriptname'=>$scriptname,
+                                            'dir'=>$dir
+                                            );
+        
+    appVarSetCached('templateScripts', 'appLessLoad', $tplCss);
+    unset($tplCss);
+    appLessLoad($modname, $scriptname, $dir);
+    }
+    
+  function appSassLoad($modname='', $scriptname='main', $dir='')
+    {
+    $tplCss = appVarGetCached('templateScripts', 'appSassLoad');
+    $tplCss[$this->template_file]["$modname.$scriptname"] = array(
+                                            'modname'=>$modname,
+                                            'scriptname'=>$scriptname,
+                                            'dir'=>$dir
+                                            );
+        
+    appVarSetCached('templateScripts', 'appSassLoad', $tplCss);
+    unset($tplCss);
+    appSassLoad($modname, $scriptname, $dir);
     }
 
   }

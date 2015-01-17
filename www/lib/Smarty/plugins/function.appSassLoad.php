@@ -11,6 +11,6 @@
  */
 function smarty_function_appSassLoad($params, &$smarty)
 	{
-	appSassLoad($params['modname'], $params['scriptname'], $params['dir']);
+	$smarty->appSassLoad($params['modname'], $params['scriptname'], $params['dir']);
 	}
 
