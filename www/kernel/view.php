@@ -194,10 +194,5 @@ class viewTpl extends Smarty
     unset($tplCss);
     appSassLoad($modname, $scriptname, $dir);
     }
-
-  function appJsLoad()
-    {
-      
-    }
   }
 
