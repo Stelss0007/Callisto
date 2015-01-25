@@ -67,6 +67,13 @@ $('document').ready(function(){
      return false;
   });
   showAppMessage();
+  
+  
+    //file manager
+    var elf = $('.file-manager').elfinder({
+        url : '/admin/files/get_list',  // connector URL (REQUIRED),
+        lang : 'ru'
+    }).elfinder('instance');
 });
 
 
