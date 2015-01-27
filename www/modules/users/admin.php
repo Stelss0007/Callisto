@@ -107,11 +107,11 @@ class AdminController extends Controller
   function actionLogin()
     {
     //$this->getAccess(ACCESS_READ);
-    
     $data = $this->input_vars;
     if($data['submit'])
       {
       $login = $this->users->logIn($data['login'], $data['pass']);
+     
       if(empty($login))
         {
         $this->showMessage($this->t('no_user_pass'), null, null, MESSAGE_ERROR);

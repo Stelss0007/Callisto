@@ -56,7 +56,7 @@ function smarty_function_pagination($params, &$smarty)
     $result .= "<div class='pagination-info'><b>".  appStrReplaceTemplate($paging_text, $smarty->get_template_vars('pagination'))." </b></div>";
     }
     
-  $result .= "<ul class='pagination-items'>";
+  $result .= "<ul class='pagination-items pagination'>";
 
   if($page_total > 1)
     {

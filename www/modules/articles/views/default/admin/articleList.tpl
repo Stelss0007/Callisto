@@ -1,7 +1,7 @@
 <div class="row-fluid">		
   <div class="box span12">
     <div class="box-header well" data-original-title>
-      <h2><i class="icon-user"></i> <i class="glyphicon glyphicon-user"></i> {#articles_header#}</h2>
+      <h2><i class="icon-user"></i> {#articles_header#}</h2>
     </div>
     <div class="box-content">
       <div class="btn-group" style="float: right;">
