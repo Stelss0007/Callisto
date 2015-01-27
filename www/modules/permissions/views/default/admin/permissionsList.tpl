@@ -36,7 +36,7 @@
               <th>
                 {#permissions_access_type#}
               </th>
-              <th style="width: 75px;">
+              <th style="width: 85px;">
                 {#permissions_order#}
               </th>
               <th style="width: 85px;">

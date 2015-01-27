@@ -15,13 +15,21 @@
         <link rel="stylesheet" href="/themes/admin/css/font-icons/entypo/css/entypo.css">
         <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Noto+Sans:400,700,400italic">
         <link rel="stylesheet" href="/themes/admin/css/bootstrap.css">
+        
+        
+        
         <link rel="stylesheet" href="/themes/admin/css/neon-core.css">
         <link rel="stylesheet" href="/themes/admin/css/neon-theme.css">
         <link rel="stylesheet" href="/themes/admin/css/neon-forms.css">
+        
+        <link href='/themes/admin/css/elfinder.min.css' rel='stylesheet'>
+        <link href='/themes/admin/css/elfinder.theme.css' rel='stylesheet'>
+        
         <link rel="stylesheet" href="/themes/admin/css/custom.css">
+        
 
         <script src="/themes/admin/js/jquery-1.11.0.min.js"></script>
-
+        {appJsOutput}
         <!--[if lt IE 9]><script src="/themes/admin/js/ie8-responsive-file-warning.js"></script><![endif]-->
 
         <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -947,6 +955,8 @@
         <script src="/themes/admin/js/neon-chat.js"></script>
         <script src="/themes/admin/js/neon-custom.js"></script>
         <script src="/themes/admin/js/neon-demo.js"></script>
+        <script src="/themes/admin/js/neon-demo.js"></script>
+        <script src="/themes/admin/js/jquery.elfinder.min.js"></script>
 
     </body>
 </html>

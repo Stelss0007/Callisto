@@ -9053,3 +9053,125 @@ body.page-fade-only-init > .page-container {
 .well {
     padding: 0;
 }
+
+
+
+.dataTable {
+   margin-bottom: 0px;
+}
+
+.dataTables_filter {
+  text-align: right;
+}
+
+.dataTables_wrapper .row-fluid:last-child
+{
+  border-top: 1px solid #DDD;
+  padding: 12px 0 6px;
+  background-color: #eff3f8;
+  border-bottom: 1px solid #DDD;
+}
+
+.dataTables_wrapper .row-fluid:first-child {
+  padding: 12px 0 4px;
+  background-color: #eff3f8;
+}
+
+.dataTables_wrapper .row-fluid .dataTables_length,
+.dataTables_info 
+{
+  margin-left: 10px;
+}
+.dataTables_wrapper .row-fluid .dataTables_filter, 
+.dataTables_paginate
+{
+  margin-right: 10px;
+  text-align: right;
+}
+
+.dataTables_info {
+  line-height: 20px;
+  margin-top: 7px;
+}
+
+/*Messages*/
+#appMessage_conteiner
+{
+  position: fixed;
+  width: 100%;
+  display: none;
+  z-index: 10000;
+}
+
+#appMessage_msg_text .close
+{
+    font-family: cursive;
+    font-size: 18px;
+    right: 2px;
+    top: -4px;
+}
+#appMessage_msg_text
+{
+/*  margin: 0 5px;
+  color: #000;
+  font-size: 12px;
+  font-family: Arial;
+  text-align: center;
+  padding: 5px 7px;
+  background-color: #E2E281;
+  border: 2px solid #CD6300;
+  cursor: pointer;
+  background-repeat: no-repeat;
+  min-height: 36px;
+  background-position: 5px 5px;*/
+
+    background-repeat: no-repeat;
+    background-position: 10px 10px;
+    border-width: 2px;
+    margin: 0 2px;
+    min-height: 30px;
+    padding: 10px 7px;
+    text-align: center;
+}
+
+#appMessage_conteiner .alert-info
+{
+  background-image: url(/public/images/system/message/info.png);
+/*  background-color: #E2E281;
+  border: 2px solid #CD6300;*/
+}
+
+#appMessage_conteiner .alert-warning
+{
+  background-image: url(/public/images/system/message/warning.png);
+/*  background-color: #ffe45c;
+  border: 2px solid #CD6300;*/
+}
+
+#appMessage_conteiner .alert-error
+{
+  background-image: url(/public/images/system/message/error.png);
+/*  background-color: #D80015;
+  border: 2px solid #CD6300;
+  color: #fff;*/
+}
+
+
+/*
+.wrap{
+  height: auto !important;
+}
+.main-menu-span
+{
+  height:78% !important;
+  height:100%;
+  min-height:100%;
+  position:relative;
+}
+
+.main-menu-span {background-color: #f5f5f5;}
+*/
+
+.file-manager {
+  font-size: 17px;
+}
