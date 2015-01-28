@@ -17,9 +17,9 @@
         <fieldset>
            {* <legend>Manage form</legend>*}
             <br><br>
-             <div class="control-group">
-              <label class="control-label" for="date01">{#menu_parent#}</label>
-              <div class="controls">
+             <div class="form-group">
+              <label class="col-sm-3 control-label" for="date01">{#menu_parent#}</label>
+              <div class="controls col-sm-5">
                 {* Формируем плоский масив для функции html_options *}
                 {array name='flat_itemslist'}
                 {array_append name='flat_itemslist' key='0' value='Корень'}
@@ -34,36 +34,36 @@
               </div>
              </div>
               
-             <div class="control-group">
-              <label class="control-label" for="date01">{#menu_active#}</label>
-              <div class="controls">
+             <div class="form-group">
+              <label class="col-sm-3 control-label" for="date01">{#menu_active#}</label>
+              <div class="controls col-sm-5">
                  {html_radios name="menu_active" options=$yes_no checked=$menu_active separator=" "}
               </div>
              </div>
               
-             <div class="control-group">
-              <label class="control-label" for="date01">{#menu_name#}</label>
-              <div class="controls">
+             <div class="form-group">
+              <label class="col-sm-3 control-label" for="date01">{#menu_name#}</label>
+              <div class="controls col-sm-5">
                  <input type="text" size="70" name="menu_title" style="width: 98%;" value="{$menu_title|escape}">
               </div>
              </div>
               
-             <div class="control-group">
-              <label class="control-label" for="date01">Маска, где развернуты вложенные элементы</label>
-              <div class="controls">
+             <div class="form-group">
+              <label class="col-sm-3 control-label" for="date01">Маска, где развернуты вложенные элементы</label>
+              <div class="controls col-sm-5">
                 <input type="text" size="70" name="menu_item_pattern" style="width: 98%;" value="{$menu_item_pattern}">
               </div>
              </div>
               
-             <div class="control-group">
-              <label class="control-label" for="date01">{#menu_description#}</label>
-              <div class="controls">
+             <div class="form-group">
+              <label class="col-sm-3 control-label" for="date01">{#menu_description#}</label>
+              <div class="controls col-sm-5">
                  <textarea name="menu_description" rows="5" cols="70" style="width: 98%;">{$menu_description|escape}</textarea>
               </div>
              </div>
               
-             <div class="control-group">
-              <label class="control-label" for="date01">{#menu_type#}</label>
+             <div class="form-group">
+              <label class="col-sm-3 control-label" for="date01">{#menu_type#}</label>
               <div class="controls type-select">
                 <label>
                 {if $menu_item_type==1}

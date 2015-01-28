@@ -9175,3 +9175,24 @@ body.page-fade-only-init > .page-container {
 .file-manager {
   font-size: 17px;
 }
+
+.breadcrumb .divider {
+  display: inline-block;
+  margin: 1px 5px;
+}
+
+.box-header.well h2 {
+  margin: 10px;
+  font-size: 18px;
+}
+
+table.table.table-bordered > thead > tr > th, 
+table.table.table-bordered > thead > tr > td {
+  color: #747474;
+  font-weight: bold;
+  font-size: 1.1em;
+}
+
+.form-actions.col-sm-8{
+  text-align: right;
+}

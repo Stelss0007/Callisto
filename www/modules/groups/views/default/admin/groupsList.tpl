@@ -8,9 +8,9 @@
         <div class="btn-toolbar batch-actions-buttons">
           <div class="btn-group">
             <a href='/admin/groups/manage' class='btn btn-success'><i class="icon icon-plus-sign icon-white"></i> {#sys_add#}</a>
-            <a href='/admin/configuration/groups' class="btn btn-icon btn-star-o" title="{#sys_configuration#}"><i class="icon-wrench"></i> {#sys_configuration#}</a>
-            <a href='#' rel="activate" class="btn btn-icon btn-star-o disabled" title="{#sys_activate#}"><i class="icon-play"></i> {#sys_activate#}</a>
-            <a href='#' rel="deactivate" class="btn btn-icon btn-star-o disabled" title="{#sys_deactivate#}"><i class="icon-pause"></i> {#sys_deactivate#}</a>
+            <a href='/admin/configuration/groups' class="btn btn-default" title="{#sys_configuration#}"><i class="icon-cog"></i> {#sys_configuration#}</a>
+            <a href='#' rel="activate" class="btn btn-default disabled" title="{#sys_activate#}"><i class="icon-play"></i> {#sys_activate#}</a>
+            <a href='#' rel="deactivate" class="btn btn-default disabled" title="{#sys_deactivate#}"><i class="icon-pause"></i> {#sys_deactivate#}</a>
           </div>
 
           <div class="btn-group delete-group">

@@ -3,15 +3,15 @@
   <div class="row-fluid">		
     <div class="box span12">
       <div class="box-header well" data-original-title>
-        <h2><i class="icon-th"></i> Установленные блоки слева</h2>
+        <h2><i class="icon-layout"></i> Установленные блоки слева</h2>
       </div>
       <div class="box-content">
         <form action="/admin/blocks/group_operation">
           <div class="btn-toolbar batch-actions-buttons">
             <div class="btn-group">
               <a href='/admin/blocks/install/l' class='btn btn-success'><i class="icon icon-plus-sign icon-white"></i> {#sys_add#}</a>
-              <a href='#' rel="activate" class="btn btn-icon btn-star-o" title="{#sys_activate#}"><i class="icon-play"></i> {#sys_activate#}</a>
-              <a href='#' rel="deactivate" class="btn btn-icon btn-star-o" title="{#sys_deactivate#}"><i class="icon-pause"></i> {#sys_deactivate#}</a>
+              <a href='#' rel="activate" class="btn btn-default" title="{#sys_activate#}"><i class="icon-play"></i> {#sys_activate#}</a>
+              <a href='#' rel="deactivate" class="btn btn-default" title="{#sys_deactivate#}"><i class="icon-pause"></i> {#sys_deactivate#}</a>
             </div>
 
             <div class="btn-group delete-group">
@@ -96,15 +96,15 @@
   <div class="row-fluid">		
     <div class="box span12">
       <div class="box-header well" data-original-title>
-        <h2><i class="icon-th"></i> Установленные блоки справа</h2>
+        <h2><i class="icon-layout"></i> Установленные блоки справа</h2>
       </div>
       <div class="box-content">
         <form action="/admin/blocks/group_operation">
           <div class="btn-toolbar batch-actions-buttons">
             <div class="btn-group">
               <a href='/admin/blocks/install/r' class='btn btn-success'><i class="icon icon-plus-sign icon-white"></i> {#sys_add#}</a>
-              <a href='#' rel="activate" class="btn btn-icon btn-star-o" title="{#sys_activate#}"><i class="icon-play"></i> {#sys_activate#}</a>
-              <a href='#' rel="deactivate" class="btn btn-icon btn-star-o" title="{#sys_deactivate#}"><i class="icon-pause"></i> {#sys_deactivate#}</a>
+              <a href='#' rel="activate" class="btn btn-default" title="{#sys_activate#}"><i class="icon-play"></i> {#sys_activate#}</a>
+              <a href='#' rel="deactivate" class="btn btn-default" title="{#sys_deactivate#}"><i class="icon-pause"></i> {#sys_deactivate#}</a>
             </div>
 
             <div class="btn-group delete-group">
@@ -191,15 +191,15 @@
   <div class="row-fluid">		
     <div class="box span12">
       <div class="box-header well" data-original-title>
-        <h2><i class="icon-th"></i> Установленные блоки сверху</h2>
+        <h2><i class="icon-layout"></i> Установленные блоки сверху</h2>
       </div>
       <div class="box-content">
         <form action="/admin/blocks/group_operation">
           <div class="btn-toolbar batch-actions-buttons">
             <div class="btn-group">
               <a href='/admin/blocks/install/t' class='btn btn-success'><i class="icon icon-plus-sign icon-white"></i> {#sys_add#}</a>
-              <a href='#' rel="activate" class="btn btn-icon btn-star-o" title="{#sys_activate#}"><i class="icon-play"></i> {#sys_activate#}</a>
-              <a href='#' rel="deactivate" class="btn btn-icon btn-star-o" title="{#sys_deactivate#}"><i class="icon-pause"></i> {#sys_deactivate#}</a>
+              <a href='#' rel="activate" class="btn btn-default" title="{#sys_activate#}"><i class="icon-play"></i> {#sys_activate#}</a>
+              <a href='#' rel="deactivate" class="btn btn-default" title="{#sys_deactivate#}"><i class="icon-pause"></i> {#sys_deactivate#}</a>
             </div>
 
             <div class="btn-group delete-group">
@@ -288,15 +288,15 @@
   <div class="row-fluid">		
     <div class="box span12">
       <div class="box-header well" data-original-title>
-        <h2><i class="icon-th"></i> Установленные блоки снизу</h2>
+        <h2><i class="icon-layout"></i> Установленные блоки снизу</h2>
       </div>
       <div class="box-content">
         <form action="/admin/blocks/group_operation">
           <div class="btn-toolbar batch-actions-buttons">
             <div class="btn-group">
               <a href='/admin/blocks/install/b' class='btn btn-success'><i class="icon icon-plus-sign icon-white"></i> {#sys_add#}</a>
-              <a href='#' rel="activate" class="btn btn-icon btn-star-o" title="{#sys_activate#}"><i class="icon-play"></i> {#sys_activate#}</a>
-              <a href='#' rel="deactivate" class="btn btn-icon btn-star-o" title="{#sys_deactivate#}"><i class="icon-pause"></i> {#sys_deactivate#}</a>
+              <a href='#' rel="activate" class="btn btn-default" title="{#sys_activate#}"><i class="icon-play"></i> {#sys_activate#}</a>
+              <a href='#' rel="deactivate" class="btn btn-default" title="{#sys_deactivate#}"><i class="icon-pause"></i> {#sys_deactivate#}</a>
             </div>
 
             <div class="btn-group delete-group">
@@ -384,15 +384,15 @@
   <div class="row-fluid">		
     <div class="box span12">
       <div class="box-header well" data-original-title>
-        <h2><i class="icon-th"></i> Установленные блоки по центру</h2>
+        <h2><i class="icon-layout"></i> Установленные блоки по центру</h2>
       </div>
       <div class="box-content">
         <form action="/admin/blocks/group_operation">
           <div class="btn-toolbar batch-actions-buttons">
             <div class="btn-group">
               <a href='/admin/blocks/install/c' class='btn btn-success'><i class="icon icon-plus-sign icon-white"></i> {#sys_add#}</a>
-              <a href='#' rel="activate" class="btn btn-icon btn-star-o" title="{#sys_activate#}"><i class="icon-play"></i> {#sys_activate#}</a>
-              <a href='#' rel="deactivate" class="btn btn-icon btn-star-o" title="{#sys_deactivate#}"><i class="icon-pause"></i> {#sys_deactivate#}</a>
+              <a href='#' rel="activate" class="btn btn-default" title="{#sys_activate#}"><i class="icon-play"></i> {#sys_activate#}</a>
+              <a href='#' rel="deactivate" class="btn btn-default" title="{#sys_deactivate#}"><i class="icon-pause"></i> {#sys_deactivate#}</a>
             </div>
 
             <div class="btn-group delete-group">
