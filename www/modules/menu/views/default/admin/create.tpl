@@ -64,7 +64,7 @@
               
              <div class="form-group">
               <label class="col-sm-3 control-label" for="date01">{#menu_type#}</label>
-              <div class="controls type-select">
+              <div class="controls col-sm-5 type-select">
                 <label>
                 {if $menu_item_type==1}
                   <input type="radio" value="1" name="menu_item_type" checked> Разделитель
@@ -72,8 +72,7 @@
                   <input type="radio" value="1" name="menu_item_type"> Разделитель
                 {/if}
                 </label>
-                &nbsp;
-                &nbsp;
+                <br/>
                 <label>
                 {if $menu_item_type==2}
                   <input type="radio" value="2" name="menu_item_type" checked> Заголовок
@@ -81,8 +80,7 @@
                   <input type="radio" value="2" name="menu_item_type"> Заголовок
                 {/if}
                 </label>
-                &nbsp;
-                &nbsp;
+                <br/>
                 <label>
                 {if $menu_item_type==3}
                   <input type="radio" value="3" name="menu_item_type" checked> Url
@@ -90,9 +88,8 @@
                   <input type="radio" value="3" name="menu_item_type"> Url
                   {/if}
                 </label>
-                &nbsp;
-                &nbsp;
-                <label class="type-value">
+                <br/>
+                <label>
                 {if $menu_item_type==4}
                   <input type="radio" value="4" name="menu_item_type" checked> Html код
                 {else}
@@ -100,19 +97,20 @@
                 {/if}
                 </label>
                 
-                <div class="type-value col-sm-5">
+                <div class="type-value">
                   {if $menu_item_type==3}
                     <input size="70" type="text"  name="menu_content3" id="menu_content3" class="form-control" style="width: 98%;" value="{$menu_content|escape}">
                   {else}
                     <input size="70" type="text"  name="menu_content3" id="menu_content3" class="form-control" style="width: 98%;" value="">
                   {/if}
-               
+
                   {if $menu_item_type==4}
                     <textarea name="menu_content4" id="menu_content4" rows="5" class="form-control" style="width: 98%;" cols="70">{$menu_content|escape}</textarea>
                   {else}
                     <textarea name="menu_content4" id="menu_content4" rows="5" class="form-control" style="width: 98%;" cols="70"></textarea>
                   {/if}
                 </div>
+
               </div>
              </div>
            

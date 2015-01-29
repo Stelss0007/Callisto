@@ -28,8 +28,8 @@
                   {array_append name='flat_itemslist' key=$item.id value=$item.menu_title|escape|tree:$item.level}
                 {/foreach}
 
-                <select name=menu_parent_id  data-rel="chosen">
-                  {html_options options=$flat_itemslist selected=$menu_parent_id}
+                <select name=menu_parent_id  data-rel="chosen" class="form-control">
+                  {html_options options=$flat_itemslist selected=$menu_parent_id }
                 </select>
               </div>
              </div>
@@ -44,27 +44,27 @@
              <div class="form-group">
               <label class="col-sm-3 control-label" for="date01">{#menu_name#}</label>
               <div class="controls col-sm-5">
-                 <input type="text" size="70" name="menu_title" style="width: 98%;" value="{$menu_title|escape}">
+                 <input type="text" size="70" name="menu_title" style="" class="form-control" value="{$menu_title|escape}">
               </div>
              </div>
               
              <div class="form-group">
               <label class="col-sm-3 control-label" for="date01">Маска, где развернуты вложенные элементы</label>
               <div class="controls col-sm-5">
-                <input type="text" size="70" name="menu_item_pattern" style="width: 98%;" value="{$menu_item_pattern}">
+                <input type="text" size="70" name="menu_item_pattern" style="" class="form-control" value="{$menu_item_pattern}">
               </div>
              </div>
               
              <div class="form-group">
               <label class="col-sm-3 control-label" for="date01">{#menu_description#}</label>
               <div class="controls col-sm-5">
-                 <textarea name="menu_description" rows="5" cols="70" style="width: 98%;">{$menu_description|escape}</textarea>
+                 <textarea name="menu_description" rows="5" cols="70" style="" class="form-control">{$menu_description|escape}</textarea>
               </div>
              </div>
               
              <div class="form-group">
               <label class="col-sm-3 control-label" for="date01">{#menu_type#}</label>
-              <div class="controls type-select">
+              <div class="controls col-sm-5 type-select">
                 <label>
                 {if $menu_item_type==1}
                   <input type="radio" value="1" name="menu_item_type" checked> Разделитель
@@ -72,8 +72,7 @@
                   <input type="radio" value="1" name="menu_item_type"> Разделитель
                 {/if}
                 </label>
-                &nbsp;
-                &nbsp;
+                <br/>
                 <label>
                 {if $menu_item_type==2}
                   <input type="radio" value="2" name="menu_item_type" checked> Заголовок
@@ -81,8 +80,7 @@
                   <input type="radio" value="2" name="menu_item_type"> Заголовок
                 {/if}
                 </label>
-                &nbsp;
-                &nbsp;
+                <br/>
                 <label>
                 {if $menu_item_type==3}
                   <input type="radio" value="3" name="menu_item_type" checked> Url
@@ -90,8 +88,7 @@
                   <input type="radio" value="3" name="menu_item_type"> Url
                   {/if}
                 </label>
-                &nbsp;
-                &nbsp;
+                <br/>
                 <label>
                 {if $menu_item_type==4}
                   <input type="radio" value="4" name="menu_item_type" checked> Html код
@@ -102,22 +99,23 @@
                 
                 <div class="type-value">
                   {if $menu_item_type==3}
-                    <input size="70" type="text"  name="menu_content3" id="menu_content3"  style="width: 98%;" value="{$menu_content|escape}">
+                    <input size="70" type="text"  name="menu_content3" id="menu_content3" class="form-control" style="width: 98%;" value="{$menu_content|escape}">
                   {else}
-                    <input size="70" type="text"  name="menu_content3" id="menu_content3"  style="width: 98%;" value="">
+                    <input size="70" type="text"  name="menu_content3" id="menu_content3" class="form-control" style="width: 98%;" value="">
                   {/if}
-               
+
                   {if $menu_item_type==4}
-                    <textarea name="menu_content4" id="menu_content4" rows="5" style="width: 98%;" cols="70">{$menu_content|escape}</textarea>
+                    <textarea name="menu_content4" id="menu_content4" rows="5" class="form-control" style="width: 98%;" cols="70">{$menu_content|escape}</textarea>
                   {else}
-                    <textarea name="menu_content4" id="menu_content4" rows="5" style="width: 98%;" cols="70"></textarea>
+                    <textarea name="menu_content4" id="menu_content4" rows="5" class="form-control" style="width: 98%;" cols="70"></textarea>
                   {/if}
                 </div>
+
               </div>
              </div>
            
               
-            <div class="form-actions">
+            <div class="form-actions col-sm-8">
               <button type="submit" class="btn btn-primary" name="submit" value="submit">{#sys_save#}</button>
               <button type="reset" class="btn">Cancel</button>
             </div>

@@ -9196,3 +9196,7 @@ table.table.table-bordered > thead > tr > td {
 .form-actions.col-sm-8{
   text-align: right;
 }
+
+textarea.form-control {
+  min-height: 100px;
+}

@@ -15,60 +15,60 @@
         <fieldset>
            {* <legend>Manage form</legend>*}
             <br><br>
-             <div class="control-group">
-              <label class="control-label" for="date01">Название :</label>
-              <div class="controls">
-                <input type="text" name="block_css_class" disabled="disabled" size="50" value="{$block_name|escape}">
+             <div class="form-group">
+              <label class="col-sm-3 control-label" for="date01">Название :</label>
+              <div class="controls col-sm-5">
+                <input type="text" name="block_css_class" class="form-control" disabled="disabled" size="50" value="{$block_name|escape}">
               </div>
              </div>
               
-             <div class="control-group">
-              <label class="control-label" for="date01">ID:</label>
-              <div class="controls">
-                <input type="text" name="block_css_class" disabled="disabled" size="50" value="{$id}">
+             <div class="form-group">
+              <label class="col-sm-3 control-label" for="date01">ID:</label>
+              <div class="controls col-sm-5">
+                <input type="text" name="block_css_class" class="form-control" disabled="disabled" size="50" value="{$id}">
               </div>
              </div>
              
-             <div class="control-group">
-              <label class="control-label" for="date01">Отображаемое название:</label>
-              <div class="controls">
-                <input type="text" name="block_displayname" size="50" value="{$block_displayname|escape}">
+             <div class="form-group">
+              <label class="col-sm-3 control-label" for="date01">Отображаемое название:</label>
+              <div class="controls col-sm-5">
+                <input type="text" name="block_displayname" class="form-control" size="50" value="{$block_displayname|escape}">
               </div>
              </div>
               
-             <div class="control-group">
-              <label class="control-label" for="date01">Активирован:</label>
-              <div class="controls">
+             <div class="form-group">
+              <label class="col-sm-3 control-label" for="date01">Активирован:</label>
+              <div class="controls col-sm-5">
                 <input data-no-uniform="true" type="checkbox" name="block_active" {if $block_active}checked="checked"{/if} value="1" class="iphone-toggle">
               </div>
              </div>
           
-             <div class="control-group">
-              <label class="control-label" for="date01">Маска:</label>
-              <div class="controls">
-               <input type="text" name="block_pattern" size="50" value="{$block_pattern|escape}">
+             <div class="form-group">
+              <label class="col-sm-3 control-label" for="date01">Маска:</label>
+              <div class="controls col-sm-5">
+               <input type="text" name="block_pattern" class="form-control" size="50" value="{$block_pattern|escape}">
               </div>
              </div>
              
-             <div class="control-group">
-              <label class="control-label" for="date01">Положение:</label>
-              <div class="controls">
-                <select name='block_position'>
+             <div class="form-group">
+              <label class="col-sm-3 control-label" for="date01">Положение:</label>
+              <div class="controls col-sm-5">
+                <select name='block_position' class="form-control">
                   {html_options options=$positions selected=$block_position}
                 </select>
               </div>
              </div>
              
-             <div class="control-group">
-              <label class="control-label" for="date01">CSS класс:</label>
-              <div class="controls">
-                <input type="text" name="block_css_class" size="50" value="{$block_css_class|escape}">
+             <div class="form-group">
+              <label class="col-sm-3 control-label" for="date01">CSS класс:</label>
+              <div class="controls col-sm-5">
+                <input type="text" name="block_css_class" class="form-control" size="50" value="{$block_css_class|escape}">
               </div>
              </div>
               
             {$block_config_result}
              
-            <div class="form-actions">
+            <div class="form-actions col-sm-8">
               <button type="submit" class="btn btn-primary" name="submit" value="submit">{#sys_save#}</button>
               &nbsp;
               <button type="submit" class="btn btn-primary" name="submit_exit" value="submit_exit">{#sys_save_exit#}</button>
