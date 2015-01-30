@@ -70,10 +70,12 @@ $('document').ready(function(){
   
   
     //file manager
-    var elf = $('.file-manager').elfinder({
-        url : '/admin/files/get_list',  // connector URL (REQUIRED),
-        lang : 'ru'
-    }).elfinder('instance');
+    if(jQuery().elfinder) {
+      var elf = $('.file-manager').elfinder({
+          url : '/admin/files/get_list',  // connector URL (REQUIRED),
+          lang : 'ru'
+      }).elfinder('instance');
+    }
 });
 
 
