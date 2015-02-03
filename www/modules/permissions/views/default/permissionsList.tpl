@@ -14,7 +14,7 @@
     <th>
       {#permissions_access_type#}
     </th>
-    <th>
+    <th style="width: 185px;">
       {#permissions_order#}
     </th>
     <th style="width: 85px;">

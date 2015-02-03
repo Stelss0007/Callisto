@@ -13,21 +13,21 @@
         <fieldset>
            {* <legend>Manage form</legend>*}
             <br><br>
-             <div class="control-group">
-              <label class="control-label" for="date01">{#groups_title#}</label>
-              <div class="controls">
-                <input type="text" name='group_displayname' value='{$group_displayname}' style="width: 98%;">
+             <div class="form-group">
+              <label class="col-sm-3 control-label" for="date01">{#groups_title#}</label>
+              <div class="controls col-sm-5">
+                <input type="text" name='group_displayname' class="form-control" value='{$group_displayname}' style="width: 98%;">
               </div>
              </div>
               
-             <div class="control-group">
-              <label class="control-label" for="date01">{#groups_description#}</label>
-              <div class="controls">
-                <textarea name='group_description' style="width: 98%;">{$group_description}</textarea>
+             <div class="form-group">
+              <label class="col-sm-3 control-label" for="date01">{#groups_description#}</label>
+              <div class="controls col-sm-5">
+                <textarea name='group_description' class="form-control" style="width: 98%;">{$group_description}</textarea>
               </div>
              </div>
               
-            <div class="form-actions">
+            <div class="form-actions col-sm-8">
               <button type="submit" class="btn btn-primary" name="submit" value="submit">{#groups_save#}</button>
               <button type="reset" class="btn">Cancel</button>
             </div>

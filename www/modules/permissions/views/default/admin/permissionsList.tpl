@@ -1,16 +1,16 @@
 <div class="row-fluid">		
   <div class="box span12">
     <div class="box-header well" data-original-title>
-      <h2><i class="icon-eye-open"></i> {#permissions_header#}</h2>
+      <h2><i class="icon-key"></i> {#permissions_header#}</h2>
     </div>
     <div class="box-content">
       <form action="/admin/permissions/group_operation">
         <div class="btn-toolbar batch-actions-buttons">
           <div class="btn-group">
             <a href='/admin/permissions/manage' class='btn btn-success'><i class="icon icon-plus-sign icon-white"></i> {#sys_add#}</a>
-            <a href='/admin/configuration/permissions' class="btn btn-icon btn-star-o" title="{#sys_configuration#}"><i class="icon-wrench"></i> {#sys_configuration#}</a>
-            <a href='#' rel="activate" class="btn btn-icon btn-star-o " title="{#sys_activate#}"><i class="icon-play"></i> {#sys_activate#}</a>
-            <a href='#' rel="deactivate" class="btn btn-icon btn-star-o " title="{#sys_deactivate#}"><i class="icon-pause"></i> {#sys_deactivate#}</a>
+            <a href='/admin/configuration/permissions' class="btn btn-default" title="{#sys_configuration#}"><i class="icon-cog"></i> {#sys_configuration#}</a>
+            <a href='#' rel="activate" class="btn btn-default" title="{#sys_activate#}"><i class="icon-play"></i> {#sys_activate#}</a>
+            <a href='#' rel="deactivate" class="btn btn-default" title="{#sys_deactivate#}"><i class="icon-pause"></i> {#sys_deactivate#}</a>
           </div>
 
           <div class="btn-group delete-group">
@@ -36,7 +36,7 @@
               <th>
                 {#permissions_access_type#}
               </th>
-              <th style="width: 75px;">
+              <th style="width: 85px;">
                 {#permissions_order#}
               </th>
               <th style="width: 85px;">

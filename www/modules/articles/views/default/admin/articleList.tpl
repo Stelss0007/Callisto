@@ -1,18 +1,18 @@
 <div class="row-fluid">		
   <div class="box span12">
     <div class="box-header well" data-original-title>
-      <h2><i class="icon-user"></i> {#articles_header#}</h2>
+      <h2><i class="icon-doc-text"></i> {#articles_header#}</h2>
     </div>
     <div class="box-content">
       <div class="btn-group" style="float: right;">
         <form method="GET" class="app-filter">
-          <select name="filter[article_category_id]"  data-rel="chosen">
+          <select name="filter[article_category_id]" class="form-control"  data-rel="chosen">
             {html_options options=$article_category_list selected=$article_category_id}
           </select>
-          <select name="filter[article_user_id]" data-rel="chosen">
+          <select name="filter[article_user_id]" class="form-control" data-rel="chosen">
             {html_options options=$article_user_list selected=$article_user_id}
           </select>
-          <select name="filter[article_active]" data-rel="chosen">
+          <select name="filter[article_active]" class="form-control " data-rel="chosen">
             {html_options options=$article_status_list selected=$article_active}
           </select>
         </form>
@@ -21,10 +21,10 @@
         <div class="btn-toolbar batch-actions-buttons">
           <div class="btn-group">
             <a href='/admin/articles/article_manage' class='btn btn-success'><i class="icon icon-plus-sign icon-white"></i> {#sys_add#}</a>
-            <a href='/admin/articles/category_list' class="btn btn-icon btn-star-o" title="{#sys_configuration#}"><i class="icon-book"></i> {#sys_categories#}</a>
-            <a href='/admin/configuration/articles' class="btn btn-icon btn-star-o" title="{#sys_configuration#}"><i class="icon-wrench"></i> {#sys_configuration#}</a>
-            <a href='#' rel="activate" class="btn btn-icon btn-star-o" title="{#sys_activate#}"><i class="icon-play"></i> {#sys_activate#}</a>
-            <a href='#' rel="deactivate" class="btn btn-icon btn-star-o" title="{#sys_deactivate#}"><i class="icon-pause"></i> {#sys_deactivate#}</a>
+            <a href='/admin/articles/category_list' class="btn btn-default" title="{#sys_configuration#}"><i class="icon-book"></i> {#sys_categories#}</a>
+            <a href='/admin/configuration/articles' class="btn btn-default" title="{#sys_configuration#}"><i class="icon-cog"></i> {#sys_configuration#}</a>
+            <a href='#' rel="activate" class="btn btn-default" title="{#sys_activate#}"><i class="icon-play"></i> {#sys_activate#}</a>
+            <a href='#' rel="deactivate" class="btn btn-default" title="{#sys_deactivate#}"><i class="icon-pause"></i> {#sys_deactivate#}</a>
           </div>
 
           <div class="btn-group delete-article">

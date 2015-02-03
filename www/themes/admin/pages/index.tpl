@@ -11,7 +11,8 @@
         <title>Neon | Dashboard</title>
 
 
-        <link rel="stylesheet" href="/themes/admin/js/jquery-ui/css/no-theme/jquery-ui-1.10.3.custom.min.css">
+       {* <link rel="stylesheet" href="/themes/admin/js/jquery-ui/css/no-theme/jquery-ui-1.10.3.custom.min.css">*}
+        <link href="/themes/admin/css/jquery-ui-1.8.21.custom.css" rel="stylesheet">
         <link rel="stylesheet" href="/themes/admin/css/font-icons/entypo/css/entypo.css">
         <link rel="stylesheet" href="/themes/admin/css/bootstrap.css">
         <link rel="stylesheet" href="/themes/admin/css/neon-core.css">
@@ -30,7 +31,7 @@
         <![endif]-->
     </head>
     
-    <body class="page-body">
+    <body class="page-body" style="min-height: 100%">
         <div class="page-container"><!-- add class "sidebar-collapsed" to close sidebar by default, "chat-visible" to make chat appear always -->	
             <div class="sidebar-menu">
                 <header class="logo-env">
@@ -69,20 +70,20 @@
                     </li>
                     
                     <li><a class="ajax-link" href="/admin/main"><i class="icon-home"></i><span class="hidden-tablet"> Dashboard</span></a></li>
-                    <li><a class="ajax-link" href="/admin/configuration"><i class="icon-wrench"></i><span class="hidden-tablet"> Configuration</span></a></li>
+                    <li><a class="ajax-link" href="/admin/configuration"><i class="icon-cog"></i><span class="hidden-tablet"> Configuration</span></a></li>
                     <li><a class="ajax-link" href="/admin/groups"><i class="icon-users"></i><span class="hidden-tablet"> Groups</span></a></li>
                     <li><a class="ajax-link" href="/admin/users/users_list"><i class="icon-user"></i><span class="hidden-tablet"> Users</span></a></li>
-                    <li><a class="ajax-link" href="/admin/permissions"><i class="icon-eye-open"></i><span class="hidden-tablet"> Permission</span></a></li>
+                    <li><a class="ajax-link" href="/admin/permissions"><i class="icon-key"></i><span class="hidden-tablet"> Permission</span></a></li>
                     <li><a class="ajax-link" href="/admin/menu"><i class="icon-list"></i><span class="hidden-tablet"> Menu</span></a></li>
-                    <li><a class="ajax-link" href="/admin/modules"><i class="icon-list-alt"></i><span class="hidden-tablet"> Modules</span></a></li>
-                    <li><a class="ajax-link" href="/admin/blocks"><i class="icon-th"></i><span class="hidden-tablet"> Blocks</span></a></li>
-                    <li><a class="ajax-link" href="/admin/theme"><i class="icon-photo"></i><span class="hidden-tablet"> Themes</span></a></li>
-                    <li><a class="ajax-link" href="/admin/files"><i class="icon-folder-close"></i><span class="hidden-tablet"> Files</span></a></li>
-                    <li><a class="ajax-link" href="/admin/articles"><i class="icon-file"></i><span class="hidden-tablet"> Articles</span></a></li>
-                    <li><a class="ajax-link" href="/admin/help/icons"><i class="icon-info-circle"></i><span class="hidden-tablet"> Icons</span></a></li>
+                    <li><a class="ajax-link" href="/admin/modules"><i class="icon-database"></i><span class="hidden-tablet"> Modules</span></a></li>
+                    <li><a class="ajax-link" href="/admin/blocks"><i class="icon-layout"></i><span class="hidden-tablet"> Blocks</span></a></li>
+                    <li><a class="ajax-link" href="/admin/theme"><i class="icon-brush"></i><span class="hidden-tablet"> Themes</span></a></li>
+                    <li><a class="ajax-link" href="/admin/files"><i class="icon-folder"></i><span class="hidden-tablet"> Files</span></a></li>
+                    <li><a class="ajax-link" href="/admin/articles"><i class="icon-doc-text"></i><span class="hidden-tablet"> Articles</span></a></li>
+                    <li><a class="ajax-link" href="/admin/help/icons"><i class="icon-info"></i><span class="hidden-tablet"> Icons</span></a></li>
 
 
-                    <li><a class="ajax-link" href="/admin/users/login"><i class="icon-off"></i><span class="hidden-tablet"> LogOut</span></a></li>
+                    <li><a class="ajax-link" href="/admin/users/login"><i class="icon-logout"></i><span class="hidden-tablet"> LogOut</span></a></li>
                 </ul>
 
             </div>	
@@ -491,6 +492,13 @@
                 </div>
                 
                 <hr />
+                
+                <div>
+                    <div class="breadcrumb">
+                        <i class="icon-home"></i>
+                        {browsein date=$module_browsein|escape delimiter='<span class="divider">/</span>'}
+                    </div>
+                </div>
                 
                 <div class="row">
                     <div class="col-sm-12">
@@ -939,6 +947,8 @@
         <script src="/themes/admin/js/neon-chat.js"></script>
         <script src="/themes/admin/js/neon-custom.js"></script>
         <script src="/themes/admin/js/neon-demo.js"></script>
+        <script src="/themes/admin/js/neon-demo.js"></script>
+        <script src="/themes/admin/js/jquery.elfinder.min.js"></script>
 
     </body>
 </html>

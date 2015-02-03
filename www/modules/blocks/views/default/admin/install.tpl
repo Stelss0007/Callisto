@@ -2,14 +2,14 @@
   <div class="row-fluid">		
     <div class="box span12">
       <div class="box-header well" data-original-title>
-        <h2><i class="icon-th"></i> Доступные блоки</h2>
+        <h2><i class="icon-layout"></i> Доступные блоки</h2>
       </div>
       <div class="box-content">
         <form action="/admin/blocks/group_operation">
           <input type="hidden" name="position" value="{$position}">
           <div class="btn-toolbar batch-actions-buttons">
             <div class="btn-group">
-              <a href='#' rel="install" class='btn btn-success'><i class="icon icon-download-alt icon-white"></i> {#sys_install#}</a>
+              <a href='#' rel="install" class='btn btn-success'><i class="icon icon-download icon-white"></i> {#sys_install#}</a>
             </div>
           </div>
 
@@ -51,8 +51,8 @@
                     <div class="btn-group">
                       {array name='url_vars'}
                       {array_append name='url_vars' key='block_name' value=$block.block_name}
-                      <a href="/admin/blocks/info/{$block.block_name}/{$position}" class="btn"><i class="icon icon-info-sign"></i></a>
-                      <a href="/admin/blocks/add/{$position}/{$block.block_name}" class="btn"><i class="icon icon-download-alt"></i></a>
+                      <a href="/admin/blocks/info/{$block.block_name}/{$position}" class="btn"><i class="icon icon-info-circled"></i></a>
+                      <a href="/admin/blocks/add/{$position}/{$block.block_name}" class="btn"><i class="icon icon-download"></i></a>
                     </div>
                   </td>
                 </tr>

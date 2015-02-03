@@ -2,7 +2,7 @@
   <div class="row-fluid">
     <div class="box span12">
       <div data-original-title="" class="box-header well">
-        <h2><i class="icon-edit"></i>  
+        <h2><i class="icon-cog"></i>  
           {if $module_name == 'main'}
             {#main_config#}
           {else}

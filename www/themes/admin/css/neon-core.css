@@ -9091,39 +9091,6 @@ body.page-fade-only-init > .page-container {
 }
 
 
-
-/*pgination*/
-.pagination {
-  clear: both;
-  position: relative;
-}
-.pagination-info {
-  float: left;
-  padding: 5px 0px;
-}
-
-.pagination ul {
-  float: right;
-}
-
-
-
-
-#content {
-  margin-top: 18px;
-}
-#top-menu, .navbar {
-  margin-bottom: 0;
-}
-
-.sidebar-nav {
-    border-radius: 0;
-    box-shadow: 3px 3px 8px rgba(189, 189, 189, 0.4);
-    margin-bottom: 0;
-    min-height: 0;
-    padding: 0;
-}
-
 /*
 .wrap{
   height: auto !important;
@@ -9138,3 +9105,32 @@ body.page-fade-only-init > .page-container {
 
 .main-menu-span {background-color: #f5f5f5;}
 */
+
+.file-manager {
+  font-size: 17px;
+}
+
+.breadcrumb .divider {
+  display: inline-block;
+  margin: 1px 5px;
+}
+
+.box-header.well h2 {
+  margin: 10px;
+  font-size: 18px;
+}
+
+table.table.table-bordered > thead > tr > th, 
+table.table.table-bordered > thead > tr > td {
+  color: #747474;
+  font-weight: bold;
+  font-size: 1.1em;
+}
+
+.form-actions.col-sm-8{
+  text-align: right;
+}
+
+textarea.form-control {
+  min-height: 100px;
+}

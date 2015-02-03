@@ -14,58 +14,58 @@
           <fieldset>
            {* <legend>Manage form</legend>*}
             <br><br>
-            <div class="control-group">
-              <label class="control-label" for="date01">{#user_login#}</label>
-              <div class="controls">
-                <input type="text" name='login' size='40' value='{$login}'>
+            <div class="form-group">
+              <label class="col-sm-3 control-label" for="date01">{#user_login#}</label>
+              <div class="controls col-sm-5">
+                <input type="text" name='login' class="form-control" size='40' value='{$login}'>
               </div>
             </div>
 
-            <div class="control-group">
-              <label class="control-label" for="date01">{#user_pass#}</label>
-              <div class="controls">
-                <input type="password" name='pass' size='40' value=''>
+            <div class="form-group">
+              <label class="col-sm-3 control-label" for="date01">{#user_pass#}</label>
+              <div class="controls col-sm-5">
+                <input type="password"  name='pass' class="form-control" size='40' value=''>
               </div>
             </div>
 
-            <div class="control-group">
-              <label class="control-label" for="date01">{#user_group#}</label>
-              <div class="controls">
-                {html_options name=gid options=$groups_list selected=$gid}
+            <div class="form-group">
+              <label class="col-sm-3 control-label" for="date01">{#user_group#}</label>
+              <div class="controls col-sm-5">
+                  {html_options name=gid options=$groups_list selected=$gid class='form-control'}
               </div>
             </div>
 
-            <div class="control-group">
-              <label class="control-label" for="date01">{#user_email#}</label>
-              <div class="controls">
-                <input type="text" name='mail' size='40' value='{$mail}'>
+            <div class="form-group">
+              <label class="col-sm-3 control-label" for="date01">{#user_email#}</label>
+              <div class="controls col-sm-5">
+                <input type="text" name='mail' class="form-control" size='40' value='{$mail}'>
               </div>
             </div>
 
-            <div class="control-group">
-              <label class="control-label" for="date01">{#user_fio#}</label>
-              <div class="controls">
-                <input type="text" name='displayname' size='40' value='{$displayname}'>
+            <div class="form-group">
+              <label class="col-sm-3 control-label" for="date01">{#user_fio#}</label>
+              <div class="controls col-sm-5">
+                <input type="text" name='displayname' class="form-control" size='40' value='{$displayname}'>
               </div>
             </div>
 
-            <div class="control-group">
-              <label class="control-label" for="date01">{#user_active#}</label>
-              <div class="controls">
+            <div class="form-group">
+              <label class="col-sm-3 control-label" for="date01">{#user_active#}</label>
+              <div class="controls col-sm-5">
                 {html_radios name=active options=$yes_no checked=$active separator=" "}
               </div>
             </div>
 
-            <div class="control-group">
-              <label class="control-label" for="fileInput">File input</label>
-              <div class="controls">
+            <div class="form-group">
+              <label class="col-sm-3 control-label" for="fileInput">File input</label>
+              <div class="controls col-sm-5">
                 <input class="input-file uniform_on" id="fileInput" type="file">
               </div>
             </div>          
 
-            <div class="form-actions">
+            <div class="form-actions col-sm-8">
               <button type="submit" class="btn btn-primary" name="submit" value="true">{#sys_save#}</button>
-              <button type="reset" class="btn">Cancel</button>
+              <button type="reset" class="btn btn-default">Cancel</button>
             </div>
           </fieldset>
  
