@@ -391,7 +391,17 @@ class Model extends DBConnector
     else
       {
       $this->beforDelete($id);
-      $this->query("DELETE FROM {$this->table} WHERE id = '%d'", $id);
+      if(is_array($id))
+          {
+          $this->prepareValue($id);
+          $id = implode("','", $id);
+          $this->query("DELETE FROM {$this->table} WHERE id IN ('%d')", $id);
+          }
+      else
+          {
+          $this->query("DELETE FROM {$this->table} WHERE id = '%d'", $id);
+          }
+      
       $this->afterDelete($id);
       }
     }
