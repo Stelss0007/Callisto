@@ -956,7 +956,7 @@
         <script src="/themes/admin/js/neon-chat.js"></script>
         <script src="/themes/admin/js/neon-custom.js"></script>
         <script src="/themes/admin/js/neon-demo.js"></script>
-        <script src="/themes/admin/js/neon-demo.js"></script>
+        <script src="/themes/admin/js/main.js"></script>
         <script src="/themes/admin/js/jquery.elfinder.min.js"></script>
 
     </body>

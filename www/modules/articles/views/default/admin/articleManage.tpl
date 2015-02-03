@@ -22,9 +22,15 @@
 
           <div class="box-content">
             <ul id="myTab" class="nav nav-tabs">
-              <li class="active"><a href="#info">{#articles_article#}</a></li>
-              <li><a href="#custom">{#articles_public_params#}</a></li>
-              <li><a href="#messages">{#articles_seo#}</a></li>
+              <li class="active">
+                <a href="#info" aria-controls="profile" role="tab" data-toggle="tab">{#articles_article#}</a>
+              </li>
+              <li>
+                <a href="#custom" aria-controls="profile" role="tab" data-toggle="tab">{#articles_public_params#}</a>
+              </li>
+              <li>
+                <a href="#messages" aria-controls="profile" role="tab" data-toggle="tab">{#articles_seo#}</a>
+              </li>
             </ul>
 
             <div class="tab-content" id="myTabContent">
