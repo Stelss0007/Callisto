@@ -492,7 +492,7 @@
                             </li>
                             <li class="sep"></li>
                             <li>
-                                <a href="extra-login.html">
+                                <a href="/admin/users/logout">
                                     Log Out <i class="icon-logout right"></i>
                                 </a>
                             </li>
