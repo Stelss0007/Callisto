@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" style="min-height: 100%">
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -21,6 +21,7 @@
         <link rel="stylesheet" href="/themes/admin/css/custom.css">
 
         <script src="/themes/admin/js/jquery-1.11.0.min.js"></script>
+        <script src="http://code.jquery.com/jquery-migrate-1.0.0.js"></script>
 
         <!--[if lt IE 9]><script src="/themes/admin/js/ie8-responsive-file-warning.js"></script><![endif]-->
 
@@ -29,10 +30,11 @@
                 <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
                 <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
+        {appJsOutput}
     </head>
     
     <body class="page-body" style="min-height: 100%">
-        <div class="page-container"><!-- add class "sidebar-collapsed" to close sidebar by default, "chat-visible" to make chat appear always -->	
+        <div class="page-container" style="min-height: 100%"><!-- add class "sidebar-collapsed" to close sidebar by default, "chat-visible" to make chat appear always -->	
             <div class="sidebar-menu">
                 <header class="logo-env">
                     <!-- logo -->
