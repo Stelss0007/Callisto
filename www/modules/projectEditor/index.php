@@ -101,4 +101,4 @@ class IndexController extends Controller
     echo 'OK';
     }
   }
-?>
+

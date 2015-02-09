@@ -1542,3 +1542,39 @@ if(!function_exists('mime_content_type')) {
         }
     }
 }
+
+function appRoundSize($size)
+    {
+    $i=0;
+    $iec = array("B", "Kb", "Mb", "Gb", "Tb");
+    while (($size/1024)>1) {
+        $size=$size/1024;
+        $i++;}
+    return(round($size,1)." ".$iec[$i]);
+    }
+
+
+function appGetServerLoad() 
+    {
+    $load = 0;
+     if (stristr(PHP_OS, 'win')) 
+        {
+        ob_start();
+        passthru('typeperf -sc 1 "\processor(_total)\% processor time"',$status);
+        $content = ob_get_contents();
+        ob_end_clean();
+        if ($status === 0) 
+            {
+            if (preg_match("/\,\"([0-9]+\.[0-9]+)\"/", $content, $sys_load)) 
+                {
+                $load = $sys_load[0];
+                }
+            }
+        } 
+    else 
+        {
+        $sys_load = sys_getloadavg();
+        $load = $sys_load[0];
+        }
+    return (int) $load;
+    }
