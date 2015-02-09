@@ -171,7 +171,7 @@ body {
   line-height: 18px;
   color: #333333;
   background-color: #ffffff;
-  min-width: 1450px;
+/*  min-width: 1450px;*/
   
 }
 
@@ -4475,8 +4475,8 @@ a.badge:hover {
 {
     font-family: cursive;
     font-size: 18px;
-    right: 2px;
-    top: -4px;
+    right: 10px;
+    top: -2px;
 }
 #appMessage_msg_text
 {

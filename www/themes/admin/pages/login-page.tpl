@@ -18,10 +18,16 @@
   {appCssOutput cache=0}
   {literal}
     <style type="text/css">
-      body {
+      html, body {
         background: #eee !important;	
+        width: 100%;
+        max-width: 100%;
       }
 
+      #appMessage_conteiner {
+        top: 2px;
+      }
+      
       .wrapper {	
         margin-top: 80px;
         margin-bottom: 80px;

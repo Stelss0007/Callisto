@@ -29,6 +29,24 @@ class AdminController extends Controller
     $this->assign('cache_size', $cache);
     $this->assign('module_browsein', $browsein);
     
+    //Server Info
+    $serverInfo['OS'] = php_uname();
+    $serverInfo['Apache'] = apache_get_version();
+    $serverInfo['PHP'] = phpversion();
+    $serverInfo['memory']['used'] = appRoundSize(memory_get_usage());
+    $serverInfo['mysql'] = mysql_get_client_info();
+    
+    $serverInfo['disk']['free_byte'] = disk_free_space(__DIR__);
+    $serverInfo['disk']['used_byte'] = disk_total_space(__DIR__);
+    $serverInfo['disk']['used_percent'] = sprintf('%.2f',($serverInfo['disk']['free_byte'] / $serverInfo['disk']['used_byte']) * 100);
+    $serverInfo['disk']['free'] = appRoundSize(disk_free_space(__DIR__));
+    $serverInfo['disk']['used'] = appRoundSize(disk_total_space(__DIR__));
+
+    $this->assign('serverInfo', $serverInfo);
+    
+//    print_r($serverInfo);
+//    exit;
+    
     $this->viewPage();
     }
     
