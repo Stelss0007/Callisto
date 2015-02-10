@@ -19,6 +19,9 @@
         <link rel="stylesheet" href="/themes/admin/css/neon-theme.css">
         <link rel="stylesheet" href="/themes/admin/css/neon-forms.css">
         <link rel="stylesheet" href="/themes/admin/css/custom.css">
+        
+        <link href='/themes/admin/css/elfinder.min.css' rel='stylesheet'>
+        <link href='/themes/admin/css/elfinder.theme.css' rel='stylesheet'>
 
         <script src="/themes/admin/js/jquery-1.11.0.min.js"></script>
         <script src="http://code.jquery.com/jquery-migrate-1.0.0.js"></script>
