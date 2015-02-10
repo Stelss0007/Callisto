@@ -124,7 +124,7 @@
 
             <thead>
               <tr align="middle">
-                <th>
+                <th style="width: 25px;">
                   <input type="checkbox" name="entities[]" class="td_entiies_group" value="">
                 </th>
                 <th class="head" nowrap>Отображаемое имя</th>
@@ -219,7 +219,7 @@
 
             <thead>
               <tr align="middle">
-                <th>
+                <th style="width: 25px;">
                   <input type="checkbox" name="entities[]" class="td_entiies_group" value="">
                 </th>
                 <th class="head" nowrap>Отображаемое имя</th>
@@ -316,7 +316,7 @@
 
             <thead>
               <tr align="middle">
-                <th>
+                <th style="width: 25px;">
                   <input type="checkbox" name="entities[]" class="td_entiies_group" value="">
                 </th>
                 <th class="head" nowrap>Отображаемое имя</th>
@@ -411,7 +411,7 @@
 
             <thead>
               <tr align="middle">
-                <th>
+                <th style="width: 25px;">
                   <input type="checkbox" name="entities[]" class="td_entiies_group" value="">
                 </th>
                 <th class="head" nowrap>Отображаемое имя</th>

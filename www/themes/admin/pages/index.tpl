@@ -931,9 +931,24 @@
                     });
                 });
             </script>
+
         {/literal}
 
-
+        <script>
+             var language = "{$lang}";
+             var
+                     sys_confirm_group_delete = "{#sys_confirm_group_delete#}",
+                     sys_confirm_group_activate = "{#sys_confirm_group_activate#}",
+                     sys_confirm_group_deactivate = "{#sys_confirm_group_deactivate#}",
+                     sys_confirm_group_install = "{#sys_confirm_group_install#}",
+                     sys_confirm_group_not_selected = "{#sys_confirm_group_not_selected#}",
+                     sys_confirm_delete = "{#sys_confirm_delete#}"
+                     ;
+             var date_format = "{$config.date_format_js}",
+                     time_format = "{$config.time_format_js}"
+                     ;
+         </script>
+          
         <link rel="stylesheet" href="/themes/admin/js/jvectormap/jquery-jvectormap-1.2.2.css">
         <link rel="stylesheet" href="/themes/admin/js/rickshaw/rickshaw.min.css">
 
@@ -957,6 +972,7 @@
         <script src="/themes/admin/js/neon-demo.js"></script>
         <script src="/themes/admin/js/main.js"></script>
         <script src="/themes/admin/js/jquery.elfinder.min.js"></script>
+        <script src="/themes/admin/js/bootbox.min.js"></script>
 
     </body>
 </html>
