@@ -28,7 +28,6 @@
         
         <link rel="stylesheet" href="/themes/admin/css/custom.css">
         
-
         <script src="/themes/admin/js/jquery-1.11.0.min.js"></script>
         {appJsOutput}
         <!--[if lt IE 9]><script src="/themes/admin/js/ie8-responsive-file-warning.js"></script><![endif]-->
