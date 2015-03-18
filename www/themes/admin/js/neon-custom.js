@@ -38,7 +38,7 @@ var public_vars = public_vars || {};
 			public_vars.isRightSidebar = true;
 		}
 		
-		
+		fit_main_content_height();
 		
 		
 		// Sidebar Menu Setup
@@ -1528,6 +1528,9 @@ function fit_main_content_height()
 		public_vars.$sidebarMenu.css('min-height', doc_height);
 		public_vars.$chat.css('min-height', doc_height);
 		
+//    public_vars.$sidebarMenu.css('position', 'absolute');
+//    public_vars.$mainContent.css('position', 'relative');
+    
 		if(typeof fit_mail_container_height != 'undefined')
 			fit_mail_container_height();
 		

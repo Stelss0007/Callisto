@@ -5,7 +5,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta name="description" content="Neon Admin Panel" />
+        <meta name="description" content="Callisto Admin" />
         <meta name="author" content="" />
 
         <title>Neon | Dashboard</title>
@@ -14,14 +14,11 @@
        {* <link rel="stylesheet" href="/themes/admin/js/jquery-ui/css/no-theme/jquery-ui-1.10.3.custom.min.css">*}
         <link href="/themes/admin/css/jquery-ui-1.8.21.custom.css" rel="stylesheet">
         <link rel="stylesheet" href="/themes/admin/css/font-icons/entypo/css/entypo.css">
-        <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Noto+Sans:400,700,400italic">
+        {*<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Noto+Sans:400,700,400italic">*}
         <link rel="stylesheet" href="/themes/admin/css/bootstrap.css">
-        
-        
-        
+           
         <link rel="stylesheet" href="/themes/admin/css/neon-core.css">
-        <link rel="stylesheet" href="/themes/admin/css/neon-theme.css">
-        <link rel="stylesheet" href="/themes/admin/css/neon-forms.css">
+       {* <link rel="stylesheet" href="/themes/admin/css/neon-forms.css">*}
         
         <link href='/themes/admin/css/elfinder.min.css' rel='stylesheet'>
         <link href='/themes/admin/css/elfinder.theme.css' rel='stylesheet'>
@@ -39,9 +36,9 @@
         <![endif]-->
     </head>
     
-    <body class="page-body" style="min-height: 100%">
-        <div class="page-container"><!-- add class "sidebar-collapsed" to close sidebar by default, "chat-visible" to make chat appear always -->	
-            <div class="sidebar-menu">
+    <body class="page-body " style="min-height: 100%">
+        <div class="page-container" style="min-height: 100%;"><!-- add class "sidebar-collapsed" to close sidebar by default, "chat-visible" to make chat appear always -->	
+            <div class="sidebar-menu" style="min-height: 100%;">
                 <header class="logo-env">
                     <!-- logo -->
                     <div class="logo">
@@ -95,7 +92,7 @@
                 </ul>
 
             </div>	
-            <div class="main-content">
+            <div class="main-content" style="min-height: 100%;">
 
                 <div class="row">
                     <!-- Profile Info and Notifications -->
@@ -634,6 +631,7 @@
                     <span class="time">08:27</span>
                 </li>
             </ul>	
+            <div class="clearfix"></div>
         </div>
 
         <!-- Sample Modal (Default skin) -->
