@@ -20,3 +20,11 @@ html, body {
 /*    height: 100%;*/
     min-height: 100%;
 }
+
+.table .btn i {
+    opacity: 0.7;
+}
+
+.table .btn:hover i {
+    opacity: 1;
+}

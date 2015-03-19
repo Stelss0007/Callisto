@@ -2765,7 +2765,7 @@ input[type="button"].btn-block {
 }
 .page-container .sidebar-menu {
   position: absolute;
-  position: fixed;
+/*  position: fixed;*/
   width: 280px;
   top: 0;
   left: 0;
