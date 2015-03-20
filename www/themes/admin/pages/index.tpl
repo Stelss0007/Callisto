@@ -9,7 +9,34 @@
         <meta name="author" content="" />
 
         <title>Neon | Dashboard</title>
+        {literal}
+          <style>
+            .pace {
+                -webkit-pointer-events: none;
+                pointer-events: none;
 
+                -webkit-user-select: none;
+                -moz-user-select: none;
+                user-select: none;
+              }
+
+              .pace-inactive {
+                display: none;
+              }
+
+              .pace .pace-progress {
+                background: #29d;
+                position: fixed;
+                z-index: 2000;
+                top: 0;
+                right: 100%;
+                width: 100%;
+                height: 4px;
+              }
+          </style>
+        {/literal}
+        
+        <script src="/themes/admin/js/pace.min.js"></script>
 
        {*<link rel="stylesheet" href="/themes/admin/js/jquery-ui/css/no-theme/jquery-ui-1.10.3.custom.min.css">*}
        {*<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Noto+Sans:400,700,400italic">*}
@@ -37,7 +64,7 @@
     </head>
     
     <body class="page-body " style="min-height: 100%">
-        <div class="page-container" style="min-height: 100%;"><!-- add class "sidebar-collapsed" to close sidebar by default, "chat-visible" to make chat appear always -->	
+        <div class="page-container body-hide" style="min-height: 100%;"><!-- add class "sidebar-collapsed" to close sidebar by default, "chat-visible" to make chat appear always -->	
             <div class="sidebar-menu" style="min-height: 100%;">
                 <header class="logo-env">
                     <!-- logo -->

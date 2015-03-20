@@ -1536,6 +1536,8 @@ function fit_main_content_height()
 		
 		if(typeof fit_calendar_container_height != 'undefined')
 			fit_calendar_container_height();
+    
+    $('body, html').css('height', 'auto');
 	}
 }
 

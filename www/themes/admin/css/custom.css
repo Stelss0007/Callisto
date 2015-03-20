@@ -5,7 +5,7 @@
 */
 
 html, body {
-  position: relative;
+/*  position: relative;*/
   height:100%;
 }
 
@@ -27,4 +27,35 @@ html, body {
 
 .table .btn:hover i {
     opacity: 1;
+}
+
+.modal-backdrop {
+  z-index: 9000;
+}
+
+.modal {
+  z-index: 9001;
+}
+
+
+.page-container {
+  pacity: 0.8;
+}
+
+.body-hide {
+  opacity: 0.8;
+  
+  -webkit-transition: 0.3s;
+  -moz-transition: 0.3s;
+  -o-transition: 0.3s;
+  transition: 0.3s;
+}
+
+.body-show {
+  opacity: 1;
+  
+  -webkit-transition: 0.3s;
+  -moz-transition: 0.3s;
+  -o-transition: 0.3s;
+  transition: 0.3s;
 }
