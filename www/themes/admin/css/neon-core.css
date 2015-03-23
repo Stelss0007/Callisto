@@ -5690,12 +5690,14 @@ img.full-width {
   visibility: hidden;
 }
 body {
+/*  
   -webkit-perspective: 800px;
   -moz-perspective: 800px;
   perspective: 800px;
   -webkit-perspective: 800;
   -moz-perspective: 800;
   perspective: 800;
+*/
 }
 .tabs-vertical-env {
   margin-bottom: 20px;

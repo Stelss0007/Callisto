@@ -543,6 +543,7 @@
                     &copy; 2014 <strong>Neon</strong> Admin Theme by <a href="http://laborator.co" target="_blank">Laborator</a>
 
                 </footer>	
+
             </div>
 
 
@@ -726,7 +727,7 @@
                 </div>
             </div>
         </div>
-
+ 
 
         {literal}
             <script type="text/javascript">
@@ -998,6 +999,7 @@
         <script src="/themes/admin/js/main.js"></script>
         <script src="/themes/admin/js/jquery.elfinder.min.js"></script>
         <script src="/themes/admin/js/bootbox.min.js"></script>
-
+        <div class="clearfix clear"></div>
+        <a href="#" class="scrollup"></a>
     </body>
 </html>
