@@ -9123,6 +9123,10 @@ body.page-fade-only-init > .page-container {
   font-size: 18px;
 }
 
+.bootstrap-datatable {
+  font-size: 12px;
+}
+
 table.table.table-bordered > thead > tr > th, 
 table.table.table-bordered > thead > tr > td {
   color: #747474;
@@ -9137,3 +9141,11 @@ table.table.table-bordered > thead > tr > td {
 textarea.form-control {
   min-height: 100px;
 }
+<<<<<<< HEAD
+=======
+
+.form-control.inline {
+  width: auto;
+  display: inline-block;
+}
+>>>>>>> 272d6b3cad6826c12f446576d99eda46f41d0385

@@ -22,7 +22,13 @@
         
         <link href='/themes/admin/css/elfinder.min.css' rel='stylesheet'>
         <link href='/themes/admin/css/elfinder.theme.css' rel='stylesheet'>
+<<<<<<< HEAD
 
+=======
+        
+        <link rel="stylesheet" href="/themes/admin/css/custom.css">
+        
+>>>>>>> 272d6b3cad6826c12f446576d99eda46f41d0385
         <script src="/themes/admin/js/jquery-1.11.0.min.js"></script>
         <script src="http://code.jquery.com/jquery-migrate-1.0.0.js"></script>
 
@@ -928,9 +934,24 @@
                     });
                 });
             </script>
+
         {/literal}
 
-
+        <script>
+             var language = "{$lang}";
+             var
+                     sys_confirm_group_delete = "{#sys_confirm_group_delete#}",
+                     sys_confirm_group_activate = "{#sys_confirm_group_activate#}",
+                     sys_confirm_group_deactivate = "{#sys_confirm_group_deactivate#}",
+                     sys_confirm_group_install = "{#sys_confirm_group_install#}",
+                     sys_confirm_group_not_selected = "{#sys_confirm_group_not_selected#}",
+                     sys_confirm_delete = "{#sys_confirm_delete#}"
+                     ;
+             var date_format = "{$config.date_format_js}",
+                     time_format = "{$config.time_format_js}"
+                     ;
+         </script>
+          
         <link rel="stylesheet" href="/themes/admin/js/jvectormap/jquery-jvectormap-1.2.2.css">
         <link rel="stylesheet" href="/themes/admin/js/rickshaw/rickshaw.min.css">
 
@@ -954,6 +975,7 @@
         <script src="/themes/admin/js/neon-demo.js"></script>
         <script src="/themes/admin/js/main.js"></script>
         <script src="/themes/admin/js/jquery.elfinder.min.js"></script>
+        <script src="/themes/admin/js/bootbox.min.js"></script>
 
     </body>
 </html>

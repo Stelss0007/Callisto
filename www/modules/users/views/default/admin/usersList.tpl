@@ -94,7 +94,7 @@
                       <a href='/admin/users/activation/{$user.id}' onclick="return confirm('{#user_enabled#}?')" title='{#user_enabled#}' class="btn btn-icon btn-play"><i class="icon-play"></i></a>
                       {/if}
                     <a href='/admin/users/manage/{$user.id}' title='{#user_edit#}' class=" btn btn-icon btn-edit"><i class="icon-edit"></i></a>
-                    <a href='/admin/users/delete/{$user.id}' title='{#user_delete#}' onclick="return confirm('{#user_delete#}?')" class="btn btn-icon btn-delete"><i class="icon-trash"></i></a>
+                    <a href='/admin/users/delete/{$user.id}' title='{#user_delete#}' class="btn btn-icon btn-delete"><i class="icon-trash"></i></a>
                   </div>
                 </td>
               </tr>
