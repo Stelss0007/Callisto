@@ -5,30 +5,53 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta name="description" content="Neon Admin Panel" />
+        <meta name="description" content="Callisto Admin" />
         <meta name="author" content="" />
 
         <title>Neon | Dashboard</title>
+        {literal}
+          <style>
+            .pace {
+                -webkit-pointer-events: none;
+                pointer-events: none;
 
+                -webkit-user-select: none;
+                -moz-user-select: none;
+                user-select: none;
+              }
 
-       {* <link rel="stylesheet" href="/themes/admin/js/jquery-ui/css/no-theme/jquery-ui-1.10.3.custom.min.css">*}
+              .pace-inactive {
+                display: none;
+              }
+
+              .pace .pace-progress {
+                background: #29d;
+                position: fixed;
+                z-index: 2000;
+                top: 0;
+                right: 100%;
+                width: 100%;
+                height: 4px;
+              }
+          </style>
+        {/literal}
+        
+        <script src="/themes/admin/js/pace.min.js"></script>
+
+       {*<link rel="stylesheet" href="/themes/admin/js/jquery-ui/css/no-theme/jquery-ui-1.10.3.custom.min.css">*}
+       {*<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Noto+Sans:400,700,400italic">*}
         <link href="/themes/admin/css/jquery-ui-1.8.21.custom.css" rel="stylesheet">
         <link rel="stylesheet" href="/themes/admin/css/font-icons/entypo/css/entypo.css">
+
         <link rel="stylesheet" href="/themes/admin/css/bootstrap.css">
+           
         <link rel="stylesheet" href="/themes/admin/css/neon-core.css">
-        <link rel="stylesheet" href="/themes/admin/css/neon-theme.css">
-        <link rel="stylesheet" href="/themes/admin/css/neon-forms.css">
-        <link rel="stylesheet" href="/themes/admin/css/custom.css">
         
         <link href='/themes/admin/css/elfinder.min.css' rel='stylesheet'>
         <link href='/themes/admin/css/elfinder.theme.css' rel='stylesheet'>
-<<<<<<< HEAD
-
-=======
         
         <link rel="stylesheet" href="/themes/admin/css/custom.css">
         
->>>>>>> 272d6b3cad6826c12f446576d99eda46f41d0385
         <script src="/themes/admin/js/jquery-1.11.0.min.js"></script>
         <script src="http://code.jquery.com/jquery-migrate-1.0.0.js"></script>
 
@@ -42,9 +65,9 @@
         {appJsOutput}
     </head>
     
-    <body class="page-body" style="min-height: 100%">
-        <div class="page-container" style="min-height: 100%"><!-- add class "sidebar-collapsed" to close sidebar by default, "chat-visible" to make chat appear always -->	
-            <div class="sidebar-menu">
+    <body class="page-body " style="min-height: 100%">
+        <div class="page-container body-hide" style="min-height: 100%;"><!-- add class "sidebar-collapsed" to close sidebar by default, "chat-visible" to make chat appear always -->	
+            <div class="sidebar-menu" style="min-height: 100%;">
                 <header class="logo-env">
                     <!-- logo -->
                     <div class="logo">
@@ -98,7 +121,7 @@
                 </ul>
 
             </div>	
-            <div class="main-content">
+            <div class="main-content" style="min-height: 100%;">
 
                 <div class="row">
                     <!-- Profile Info and Notifications -->
@@ -522,6 +545,7 @@
                     &copy; 2014 <strong>Neon</strong> Admin Theme by <a href="http://laborator.co" target="_blank">Laborator</a>
 
                 </footer>	
+
             </div>
 
 
@@ -637,6 +661,7 @@
                     <span class="time">08:27</span>
                 </li>
             </ul>	
+            <div class="clearfix"></div>
         </div>
 
         <!-- Sample Modal (Default skin) -->
@@ -704,7 +729,7 @@
                 </div>
             </div>
         </div>
-
+ 
 
         {literal}
             <script type="text/javascript">
@@ -976,6 +1001,7 @@
         <script src="/themes/admin/js/main.js"></script>
         <script src="/themes/admin/js/jquery.elfinder.min.js"></script>
         <script src="/themes/admin/js/bootbox.min.js"></script>
-
+        <div class="clearfix clear"></div>
+        <a href="#" class="scrollup"></a>
     </body>
 </html>

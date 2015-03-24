@@ -5,7 +5,7 @@
   -moz-box-sizing: border-box;
   box-sizing: border-box;
 }
-html, body, page-body {
+html, body, .page-body, .page-container, .sidebar-menu  {
   min-height: 100%;
 }
 html {
@@ -2732,7 +2732,7 @@ input[type="button"].btn-block {
   margin: 0.1em 0;
 }
 .page-container {
-  position: absolute;
+  position: fixed;
   position: relative;
   left: 0;
   right: 0;
@@ -2741,6 +2741,15 @@ input[type="button"].btn-block {
   padding-left: 280px;
   width: 100%;
 }
+
+.sidebar-menu, .sidebar-menu li {
+  background: #303641;
+/*  
+  overflow-y: scroll;
+  height: 100%;
+*/
+}
+
 .page-container:before,
 .page-container:after {
   content: " ";
@@ -2756,6 +2765,7 @@ input[type="button"].btn-block {
 }
 .page-container .sidebar-menu {
   position: absolute;
+/*  position: fixed;*/
   width: 280px;
   top: 0;
   left: 0;
@@ -5680,12 +5690,14 @@ img.full-width {
   visibility: hidden;
 }
 body {
+/*  
   -webkit-perspective: 800px;
   -moz-perspective: 800px;
   perspective: 800px;
   -webkit-perspective: 800;
   -moz-perspective: 800;
   perspective: 800;
+*/
 }
 .tabs-vertical-env {
   margin-bottom: 20px;
@@ -9035,6 +9047,7 @@ body.page-fade-only-init > .page-container {
 #appMessage_conteiner
 {
   position: fixed;
+  top: 2px;
   width: 100%;
   display: none;
   z-index: 10000;
