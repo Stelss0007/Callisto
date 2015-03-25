@@ -379,3 +379,13 @@
     </div>
 
 </div>
+
+<script src="/themes/admin/js/jquery.sparkline.min.js"></script>
+<script src="/themes/admin/js/jvectormap/jquery-jvectormap-1.2.2.min.js"></script>
+<script src="/themes/admin/js/jvectormap/jquery-jvectormap-europe-merc-en.js"></script>
+<script src="/themes/admin/js/rickshaw/vendor/d3.v3.js"></script>
+<script src="/themes/admin/js/rickshaw/rickshaw.min.js"></script>
+<script src="/themes/admin/js/raphael-min.js"></script>
+<script src="/themes/admin/js/morris.min.js"></script>
+<script src="/themes/admin/js/toastr.js"></script>
+{appJsLoad modname=main}
