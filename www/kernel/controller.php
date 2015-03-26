@@ -544,7 +544,11 @@ abstract class Controller extends AppObject
     $ObjectName = $this->getTplObjectName();
   
     if(!$this->smarty->is_cached($tpl_dir, $ObjectName))
-      return false;
+        {
+        $this->usesModel('statistic');
+        $this->statistic->setLog();
+        return false;
+        }
     
     $this->viewPage();
     }
@@ -619,7 +623,9 @@ abstract class Controller extends AppObject
       $this->smarty->caching = false;
       echo $this->smarty->fetch($pageTplFile);
       }
-   
+    $this->usesModel('statistic');
+    $this->statistic->setLog();
+      
     $this->__destruct(); 
     }
   
