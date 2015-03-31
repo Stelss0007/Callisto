@@ -1578,3 +1578,44 @@ function appGetServerLoad()
         }
     return (int) $load;
     }
+    
+function appRobotList()
+    {
+    return [
+            'Google' => 'Google',
+            'msnbot' => 'MSN',
+            'Rambler' => 'Rambler',
+            'Yahoo' => 'Yahoo',
+            'AbachoBOT' => 'AbachoBOT',
+            'accoona' => 'Accoona',
+            'AcoiRobot' => 'AcoiRobot',
+            'ASPSeek' => 'ASPSeek',
+            'CrocCrawler' => 'CrocCrawler',
+            'Dumbot' => 'Dumbot',
+            'FAST-WebCrawler' => 'FAST-WebCrawler',
+            'GeonaBot' => 'GeonaBot',
+            'Gigabot' => 'Gigabot',
+            'Lycos' => 'Lycos spider',
+            'MSRBOT' => 'MSRBOT',
+            'Scooter' => 'Altavista robot',
+            'AltaVista' => 'Altavista robot',
+            'IDBot' => 'ID-Search Bot',
+            'eStyle' => 'eStyle Bot',
+            'Scrubby' => 'Scrubby robot'
+            ];
+    }
+    
+function appUserIsRobot()
+    {
+    $crawlers = appRobotList();
+
+    foreach ($crawlers as $key => $value)
+        {
+        if (stristr($_SERVER['HTTP_USER_AGENT'], $key))
+            {
+            return($value);
+            }
+        }
+ 
+    return false;
+    }

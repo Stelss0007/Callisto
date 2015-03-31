@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <title>{$module_page_title}</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=windows-1251" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="description" content="{$module_meta_description}"/>
     <meta name="keywords" lang="ru" content="{$module_meta_keywords}"/>
     {appJsLoad modname='kernel' scriptname='jQuery'}
@@ -105,7 +105,7 @@
 
             <div class="sidebar_box_wrapper">
               
-            {* Левая часть *}
+            {* Р›РµРІР°СЏ С‡Р°СЃС‚СЊ *}
               {if $blocks.left}
                 {foreach item=block from=$blocks.left}
                   {theme_block block=$block} 
@@ -120,9 +120,9 @@
                   {/theme_block} 
                 {/foreach}
               {/if}
-            {* End левая часть*}
+            {* End Р»РµРІР°СЏ С‡Р°СЃС‚СЊ*}
             
-            {* Правая часть *}
+            {* РџСЂР°РІР°СЏ С‡Р°СЃС‚СЊ *}
               {if $blocks.right}
                 {foreach item=block from=$blocks.right}
                  {theme_block block=$block} 
@@ -137,7 +137,7 @@
                  {/theme_block} 
                 {/foreach}
               {/if}
-            {* End правая часть*}
+            {* End РїСЂР°РІР°СЏ С‡Р°СЃС‚СЊ*}
             
             
             <div class="templatemo_cleaner"></div>            
@@ -163,7 +163,7 @@
         </div> <!-- end of main -->
 
         <div id="templatemo_footer">
-          Copyright © 2048 <a href="#">Your Company Name</a> | 
+          Copyright В© 2048 <a href="#">Your Company Name</a> | 
           Designed by <a href="http://www.templatemo.com" target="_parent">Free CSS Templates</a> | 
           Validate <a href="http://validator.w3.org/check?uri=referer">XHTML</a> &amp; 
           <a href="http://jigsaw.w3.org/css-validator/check/referer">CSS</a>

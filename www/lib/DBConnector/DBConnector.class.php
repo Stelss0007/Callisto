@@ -164,6 +164,8 @@ class DBConnector extends AppObject
       }
     $this->QueryResult = $result;
     unset($result);
+    
+    return $this;
     }
 
   final function count($table, $where='')
@@ -239,7 +241,7 @@ class DBConnector extends AppObject
     
   function fetch_row()
     {
-    return mysql_fetch_array($this->QueryResult);
+    return mysql_fetch_array($this->QueryResult, 1);
     }
 
   function fetch_array($type=1, $field_is_index = false)
@@ -370,6 +372,18 @@ class DBConnector extends AppObject
       $this->query($sql);
     }
     
+    
+  function one()
+      {
+      $result = $this->fetch_row();
+      return $result;
+      }
+      
+  function all()
+      {
+      return $this->fetch_array();
+      }
+      
   function __destruct() 
     {
     if(isset($this->QueryResult) && !empty($this->QueryResult))

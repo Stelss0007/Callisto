@@ -3,6 +3,18 @@ class Statistic extends Model
   {
   var $table = '`statistic`';
   
+  public function getIpInfo($ip)
+      {
+      if(!is_int($ip)) 
+        {
+        $ip = ip2long($ip);
+        }
+   
+      return $this->query("SELECT * FROM ip2location
+                           WHERE  $ip >= ip2location.`ip_from` AND $ip <= ip2location.`ip_to`")
+                  ->one();
+      }
+  
   public function setLog() 
     {
     $offset = 0;
@@ -16,6 +28,9 @@ class Statistic extends Model
     $user = $_SERVER['HTTP_USER_AGENT'];
     $req = $_SERVER['REQUEST_URI'];
     $ip = null;
+    $country = null;
+    $city = null;
+    $region = null;
     
     if ($ip = $_SERVER['HTTP_X_FORWARDED_FOR'])
         {
@@ -53,6 +68,17 @@ class Statistic extends Model
       setcookie("userhash", $userhash, 0x6FFFFFFF);
     }
    
+    $ipInfo = $this->getIpInfo($ip);
+    //$ipInfo = $this->getIpInfo('78.137.4.100');
+
+    if(isset($ipInfo) && !empty($ipInfo))
+        {
+        $country = $ipInfo['country_code'];
+        $region = $ipInfo['region_name'];
+        $city = $ipInfo['city_name'];
+        }
+    
+    $robot = appUserIsRobot();  
     
     $this->timestamp = $currentTime;
     $this->userhash = $userhash;
@@ -66,6 +92,11 @@ class Statistic extends Model
     $this->lang = $lang;
     $this->user = $user;
     $this->req = $req;
+    $this->robot = $robot;
+    $this->country = $country;
+    $this->region = $region;
+    $this->city = $city;
+    
     $this->save();
     }
   }
