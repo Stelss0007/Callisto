@@ -89,28 +89,28 @@
                     <!-- Search Bar -->
                     <li id="search">
                         <form method="get" action="">
-                            <input type="text" name="q" class="search-input" placeholder="Search something..."/>
+                            <input type="text" name="q" class="search-input" placeholder="{#theme_menu_search_something#}"/>
                             <button type="submit">
                                 <i class="icon-search"></i>
                             </button>
                         </form>
                     </li>
                     
-                    <li><a class="ajax-link" href="/admin/main"><i class="icon-home"></i><span class="hidden-tablet"> Dashboard</span></a></li>
-                    <li><a class="ajax-link" href="/admin/configuration"><i class="icon-cog"></i><span class="hidden-tablet"> Configuration</span></a></li>
-                    <li><a class="ajax-link" href="/admin/groups"><i class="icon-users"></i><span class="hidden-tablet"> Groups</span></a></li>
-                    <li><a class="ajax-link" href="/admin/users/users_list"><i class="icon-user"></i><span class="hidden-tablet"> Users</span></a></li>
-                    <li><a class="ajax-link" href="/admin/permissions"><i class="icon-key"></i><span class="hidden-tablet"> Permission</span></a></li>
-                    <li><a class="ajax-link" href="/admin/menu"><i class="icon-list"></i><span class="hidden-tablet"> Menu</span></a></li>
-                    <li><a class="ajax-link" href="/admin/modules"><i class="icon-database"></i><span class="hidden-tablet"> Modules</span></a></li>
-                    <li><a class="ajax-link" href="/admin/blocks"><i class="icon-layout"></i><span class="hidden-tablet"> Blocks</span></a></li>
-                    <li><a class="ajax-link" href="/admin/theme"><i class="icon-brush"></i><span class="hidden-tablet"> Themes</span></a></li>
-                    <li><a class="ajax-link" href="/admin/files"><i class="icon-folder"></i><span class="hidden-tablet"> Files</span></a></li>
-                    <li><a class="ajax-link" href="/admin/articles"><i class="icon-doc-text"></i><span class="hidden-tablet"> Articles</span></a></li>
-                    <li><a class="ajax-link" href="/admin/help/icons"><i class="icon-info"></i><span class="hidden-tablet"> Icons</span></a></li>
+                    <li><a class="ajax-link" href="/admin/main"><i class="icon-home"></i><span class="hidden-tablet"> {#theme_menu_dashboard#}</span></a></li>
+                    <li><a class="ajax-link" href="/admin/configuration"><i class="icon-cog"></i><span class="hidden-tablet"> {#theme_menu_configuration#}</span></a></li>
+                    <li><a class="ajax-link" href="/admin/groups"><i class="icon-users"></i><span class="hidden-tablet"> {#theme_menu_groups#}</span></a></li>
+                    <li><a class="ajax-link" href="/admin/users/users_list"><i class="icon-user"></i><span class="hidden-tablet"> {#theme_menu_users#}</span></a></li>
+                    <li><a class="ajax-link" href="/admin/permissions"><i class="icon-key"></i><span class="hidden-tablet"> {#theme_menu_permissions#}</span></a></li>
+                    <li><a class="ajax-link" href="/admin/menu"><i class="icon-list"></i><span class="hidden-tablet"> {#theme_menu_menu#}</span></a></li>
+                    <li><a class="ajax-link" href="/admin/modules"><i class="icon-database"></i><span class="hidden-tablet"> {#theme_menu_modules#}</span></a></li>
+                    <li><a class="ajax-link" href="/admin/blocks"><i class="icon-layout"></i><span class="hidden-tablet"> {#theme_menu_blocks#}</span></a></li>
+                    <li><a class="ajax-link" href="/admin/theme"><i class="icon-brush"></i><span class="hidden-tablet"> {#theme_menu_themes#}</span></a></li>
+                    <li><a class="ajax-link" href="/admin/files"><i class="icon-folder"></i><span class="hidden-tablet"> {#theme_menu_files#}</span></a></li>
+                    <li><a class="ajax-link" href="/admin/articles"><i class="icon-doc-text"></i><span class="hidden-tablet"> {#theme_menu_articles#}</span></a></li>
+                    <li><a class="ajax-link" href="/admin/help/icons"><i class="icon-info"></i><span class="hidden-tablet"> {#theme_menu_icons#}</span></a></li>
 
 
-                    <li><a class="ajax-link" href="/admin/users/login"><i class="icon-logout"></i><span class="hidden-tablet"> LogOut</span></a></li>
+                    <li><a class="ajax-link" href="/admin/users/login"><i class="icon-logout"></i><span class="hidden-tablet"> {#theme_menu_logout#}</span></a></li>
                 </ul>
 
             </div>	
@@ -460,17 +460,11 @@
                         <ul class="list-inline links-list pull-right">
                             <!-- Language Selector -->			
                             <li class="dropdown language-selector">
-                                Language: &nbsp;
+                                {#theme_language_list#}: &nbsp;
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-close-others="true">
                                     <img src="/themes/admin/images/flag-uk.png" />
                                 </a>
-                                <ul class="dropdown-menu pull-right">
-                                    <li>
-                                        <a href="#">
-                                            <img src="/themes/admin/images/flag-de.png" />
-                                            <span>Deutsch</span>
-                                        </a>
-                                    </li>
+                                <ul class="dropdown-menu lang-menu pull-right">
                                     <li class="active">
                                         <a href="#">
                                             <img src="/themes/admin/images/flag-uk.png" />
@@ -479,16 +473,29 @@
                                     </li>
                                     <li>
                                         <a href="#">
-                                            <img src="/themes/admin/images/flag-fr.png" />
-                                            <span>François</span>
+                                            <img src="/themes/admin/images/flag-ru.png" />
+                                            <span>Russian</span>
                                         </a>
                                     </li>
                                     <li>
                                         <a href="#">
-                                            <img src="/themes/admin/images/flag-al.png" />
-                                            <span>Shqip</span>
+                                            <img src="/themes/admin/images/flag-ua.png" />
+                                            <span>Ukrainian</span>
                                         </a>
                                     </li>
+                                    <li>
+                                        <a href="#">
+                                            <img src="/themes/admin/images/flag-de.png" />
+                                            <span>Deutsch</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <img src="/themes/admin/images/flag-fr.png" />
+                                            <span>François</span>
+                                        </a>
+                                    </li>
+                                   
                                     <li>
                                         <a href="#">
                                             <img src="/themes/admin/images/flag-es.png" />

@@ -608,12 +608,16 @@ abstract class Controller extends AppObject
         $pageTplFile = $this->root_dir.'themes/admin/pages/'.$this->page.'.tpl';
         $this->tpls[] = '(Main Template)themes/admin/pages/'.$this->page.'.tpl';
         
+        $this->loadThemeLang('admin');
+        
         $ObjectThemeName = 'themes|admin|pages|'.$this->page;
         }
       else
         {
         $pageTplFile = $this->root_dir."themes/".$this->current_theme.'/pages/'.$this->page.'.tpl';
         $this->tpls[] = '(Main Template)'."themes/".$this->current_theme.'/pages/'.$this->page.'.tpl';
+        
+        $this->loadThemeLang($this->current_theme);
         
         $ObjectThemeName = 'themes|'.$this->current_theme.'|pages|'.$this->page.'';
         }
@@ -745,6 +749,19 @@ abstract class Controller extends AppObject
     elseif (($this->lang !=$this->lang_default) && file_exists("blocks/$blockName/lang/$this->lang_default/lang.conf"))
       {
       $this->smarty->config_load("blocks/$blockName/lang/$this->lang_default/lang.conf");
+      }
+    return true;
+    }
+    
+  function loadThemeLang($themeName)
+    {
+    if (file_exists ("themes/$themeName/lang/$this->lang/lang.conf"))
+      {
+      $this->smarty->config_load("themes/$themeName/lang/$this->lang/lang.conf");
+      }
+    elseif (($this->lang !=$this->lang_default) && file_exists("themes/$themeName/lang/$this->lang_default/lang.conf"))
+      {
+      $this->smarty->config_load("themes/$themeName/lang/$this->lang_default/lang.conf");
       }
     return true;
     }

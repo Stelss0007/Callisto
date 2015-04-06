@@ -39,11 +39,11 @@ html, body {
 
 
 .page-container {
-  pacity: 0.8;
+  pacity: 0.9;
 }
 
 .body-hide {
-  opacity: 0.8;
+  opacity: 0.9;
   
   -webkit-transition: 0.3s;
   -moz-transition: 0.3s;
@@ -84,4 +84,8 @@ html, body {
   font-size: 29px;
   font-family: "entypo";
   content: '\e882';
+}
+
+.lang-menu img {
+    width: 20px;
 }
