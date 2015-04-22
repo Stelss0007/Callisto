@@ -461,7 +461,7 @@
                             <!-- Language Selector -->			
                             <li class="dropdown language-selector">
                                 {#theme_language_list#}: &nbsp;
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-close-others="true">
+                                <a href="#" class="dropdown-toggle lang-menu" data-toggle="dropdown" data-close-others="true">
                                     <img src="/themes/admin/images/flag-uk.png" />
                                 </a>
                                 <ul class="dropdown-menu lang-menu pull-right">
@@ -509,7 +509,7 @@
                             <li class="sep"></li>
                             <li>
                                 <a href="/admin/users/logout">
-                                    Log Out <i class="icon-logout right"></i>
+                                    {#theme_menu_logout#} <i class="icon-logout right"></i>
                                 </a>
                             </li>
                         </ul>

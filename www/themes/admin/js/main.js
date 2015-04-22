@@ -12,12 +12,18 @@
         if($(this).attr('checked') == 'checked') {
           $(this).closest('table').find('.td_entities').prop('checked', true);
           $(this).closest('table').find('.td_entities').parent().addClass('checked');
+          $(this).closest('table').find("tr").toggleClass("highlight", this.checked);
         }
         else {
           $(this).closest('table').find('.td_entities').prop('checked', false);
           $(this).closest('table').find('.td_entities').parent().removeClass('checked');
+          $(this).closest('table').find("tr").toggleClass("highlight", this.checked);
         }
       });
+      
+      $(":checkbox").change(function() {
+            $(this).closest("tr").toggleClass("highlight", this.checked);
+       });
       
       //list panel
       $(".btn-toolbar a").on('click', function(event){
