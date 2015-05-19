@@ -71,10 +71,28 @@ $('document').ready(function(){
   
     //file manager
     if(jQuery().elfinder) {
-      var elf = $('.file-manager').elfinder({
-          url : '/admin/files/get_list',  // connector URL (REQUIRED),
-          lang : 'ru'
-      }).elfinder('instance');
+        var screenHeight = $(window).height();
+        var contentHeight = $('.main-content').height();
+        
+        var delta = contentHeight ;
+
+        var fileManagerHeight = screenHeight - delta - 40;
+        
+        var elf = $('.file-manager').elfinder({
+            url : '/admin/files/get_list',  // connector URL (REQUIRED),
+            lang : 'ru',
+            height: fileManagerHeight
+        }).elfinder('instance');
+      
+//        $(window).resize(function(){
+//            var screenHeight = $(window).height();
+//
+//            var fileManagerHeight = screenHeight - delta - 40;
+//            
+//            if( elf.options.height != fileManagerHeight ){
+//                  elf.resize('auto', fileManagerHeight);
+//            }
+//         });
     }
     
     

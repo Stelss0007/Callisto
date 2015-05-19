@@ -31,7 +31,7 @@ img { border: none; }
 
 h1, h2, h3, h4, h5, h6 { color: #252525; font-weight: normal }
 h1 { font-size: 34px; margin: 0 0 30px 0; padding: 5px;  }
-h2 { font-size: 24px; margin: 0 0 30px 0; padding: 5px 0 5px 35px; background: url(../images/h2.png) no-repeat top left }
+h2 { font-size: 24px; margin: 0 0 30px 0;/* padding: 5px 0 5px 35px; background: url(../images/h2.png) no-repeat top left*/ }
 h3 { font-size: 21px; margin: 0 0 15px; padding: 0; }
 h4 { font-size: 18px; margin: 0 0 15px; padding: 0; }
 h5 { font-size: 16px; margin: 0 0 10px; padding: 0; color: #9d764b; }
