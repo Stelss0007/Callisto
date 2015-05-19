@@ -4,3 +4,5 @@
 /www/themes/bootstrap_1/img/gallery/.tmb/
 /www/themes/admin/img/gallery/.tmb/
 /nbproject
+
+/www/modules/statistic/ip2location_data.sql
