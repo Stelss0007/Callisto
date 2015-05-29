@@ -89,3 +89,24 @@ html, body {
 .lang-menu img {
     width: 20px;
 }
+
+.accordion .panel {
+    margin-bottom: 5px;
+}
+
+.accordion .panel-title {
+    float: none;
+    padding: 0px;
+} 
+
+.accordion .panel-title a {
+    width: 100%;
+    display: block;
+    padding: 10px 15px;
+}
+
+
+
+a, a:hover, a:active, a:focus {
+  outline: 0;
+}

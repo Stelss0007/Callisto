@@ -1,5 +1,5 @@
 <?php
-$info['module_name'] = 'permissiion_module';
+$info['module_name'] = 'permissiion';
 $info['module_type'] = 'module';
 $info['module_displayname'] = 'Доступы';
 $info['module_version'] = '0.1.1';

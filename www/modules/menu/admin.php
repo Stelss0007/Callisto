@@ -20,6 +20,11 @@ class AdminController extends Controller
 //    exit;
     
     $menu = $this->menu->getById($parent_id);
+    
+    if(empty($menu['menu_path'])) {
+        $menu['menu_path'] = [];
+    }
+    
     $browsein[] =array('url'=>"/admin/main", 'displayname'=>$this->t('dashboard'));
     $browsein = array_merge($browsein, $this->menu->parent_browsein($menu['menu_path']));
     if($parent_id > 0)

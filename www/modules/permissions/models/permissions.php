@@ -10,7 +10,7 @@ class Permissions extends Model
   function groupPermissionsList()
     {
     $this->query("SELECT * FROM {$this->table} ORDER BY {$this->table}_weight");
-    return $this->fetch_array();
+    return $this->fetchArray();
     }
     
   function groupPermission($id)
@@ -19,7 +19,7 @@ class Permissions extends Model
       return false;
     
     $this->query("SELECT * FROM {$this->table} WHERE id='$id'");
-    $permission =  $this->fetch_array();
+    $permission =  $this->fetchArray();
     return $permission[0];
     }
   

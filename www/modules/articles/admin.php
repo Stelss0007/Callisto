@@ -11,7 +11,7 @@ class AdminController extends Controller
     $this->usesModel('articleCategory');
     $this->usesModel('users');
     
-    $this->articles_list = $this->articles->article_list(true, $this->getInput('filter', array()));
+    $this->articles_list = $this->articles->articleList(true, $this->getInput('filter', []));
        //$this->paginate($this->articles);
     
     //Подготовим фильтры
@@ -55,19 +55,19 @@ class AdminController extends Controller
       
       if($id)
         {
-        $this->articles->article_update($data, $id);
+        $this->articles->articleUpdate($data, $id);
         }
       else
         {
         $data['article_user_id']    = $this->session->userId();
-        $id = $this->articles->article_create($data);
+        $id = $this->articles->articleCreate($data);
         }
       
       //Upload Image and Update article image field  
       if($dataImage['article_image'] = $this->saveImage('post_image', $id))
         {
         $dataImage['article_image'] = serialize( $dataImage['article_image']);
-        $this->articles->article_update($dataImage, $id);
+        $this->articles->articleUpdate($dataImage, $id);
         }
       
       $this->deleteCache();

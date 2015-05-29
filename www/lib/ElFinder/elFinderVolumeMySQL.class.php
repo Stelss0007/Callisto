@@ -106,7 +106,7 @@ class elFinderVolumeMySQL extends elFinderVolumeDriver {
 		$this->db->set_charset('utf8');
 
 		if ($res = $this->db->query('SHOW TABLES')) {
-			while ($row = $res->fetch_array()) {
+			while ($row = $res->fetchArray()) {
 				if ($row[0] == $this->options['files_table']) {
 					$this->tbf = $this->options['files_table'];
 					break;

@@ -133,7 +133,7 @@ class AppObject
     
   public function getInput($input_var, $default = false)
     {
-    if($_REQUEST[$input_var])
+    if(!empty($_REQUEST[$input_var]))
       {
       return $_REQUEST[$input_var];
       }

@@ -75,7 +75,7 @@ class Block extends AppObject
     $db=DBConnector::getInstance();
     $ses_info=UserSession::getInstance();
     $db->query("SELECT * FROM block WHERE block_active = '1' ORDER BY block_position, block_weight");
-    $db_block_list = $db->fetch_array();
+    $db_block_list = $db->fetchArray();
   //  echo 'Результат значений:<br><pre>';
   //  print_r($object);
   //  echo '</pre>';

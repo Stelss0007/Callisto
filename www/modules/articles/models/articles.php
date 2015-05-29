@@ -4,7 +4,7 @@ class articles extends Model
   {
   var $table = 'article';
   
-  function article_list($full=false, $filter = array(), $limit = false, $sort = '')
+  function articleList($full=false, $filter = array(), $limit = false, $sort = '')
     {
     $where = '';
     if($filter)
@@ -50,7 +50,7 @@ class articles extends Model
             ";
     //appDebug($sql);exit;
     $this->query($sql);
-    $articles = $this->fetch_array();
+    $articles = $this->fetchArray();
    
     if($full)
       return $articles;
@@ -63,12 +63,12 @@ class articles extends Model
     return $result;
     }
   
-  function article_create($data)
+  function articleCreate($data)
     {
     return $this->insert($this->table, $data);
     }
     
-  function article_update($data, $id)
+  function articleUpdate($data, $id)
     {
     if(!is_numeric($id))
       return false;

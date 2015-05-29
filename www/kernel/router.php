@@ -10,10 +10,10 @@ class Router
   function __construct($routesPath = 'config-router.php')
     {
     // Получаем конфигурацию из файла.
-    $this->includeRotes();
+    $this->includeRoutes();
     }
 
-  function includeRotes()
+  function includeRoutes()
     {
     $dir_handler = opendir('modules');
     while ($dir = readdir($dir_handler))

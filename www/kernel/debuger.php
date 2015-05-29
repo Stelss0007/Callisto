@@ -197,7 +197,7 @@ class Debuger
     
   function debugAddDir($obj)
     {
-    app_cp1251_utf8($obj);
+    appCp1251Utf8($obj);
     $object = json_encode($obj);
     
     $this->debug_private_messages .=   'console.dir('.$object.');'.NL;

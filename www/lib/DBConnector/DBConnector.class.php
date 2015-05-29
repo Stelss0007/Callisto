@@ -27,7 +27,6 @@ class DBConnector extends AppObject
   function connect()
     {
     //echo "pass=".$this->Password;exit;
-    global $DBType;
     if ($this->Link_ID == 0)
       {
         
@@ -59,9 +58,9 @@ class DBConnector extends AppObject
       }
     }
     
-  function disconect()
+  function disconnect()
     {
-    //mysql_close();
+    mysql_close();
     }
 
   function prepareValue($value)
@@ -138,6 +137,17 @@ class DBConnector extends AppObject
     
     if(!empty($appConfig['debug.enabled']))
       {
+        
+      if(mysql_error())
+        {
+        echo 'Ошибка запроса:<br><pre>';
+        echo '<b>'.$valid_sql.'</b>'.'<br><br>';
+        echo '<font color="red">';
+        print_r(mysql_error());
+        echo '</font>';
+        echo '</pre>';
+        exit;
+        }  
       // То же, что и в 1 части
       $current_time = microtime();
       $current_time = explode(" ",$current_time);
@@ -148,20 +158,15 @@ class DBConnector extends AppObject
      
       $debug = Debuger::getInstance();
       
-      $debug->mysql[] = array('query'=>  trim(preg_replace('!\s+!', ' ', $valid_sql)), 'exec_time'=>$result_time, 'result_count'=>mysql_num_rows($result));
+      $debug->mysql[] = [
+                            'query'=>  trim(preg_replace('!\s+!', ' ', $valid_sql)), 
+                            'exec_time'=>$result_time, 
+                            'result_count' => (!is_bool($result)) ? mysql_num_rows($result) : 0
+                        ];
       //print_r($debug->mysql);
       }
     
-    if(mysql_error())
-      {
-      echo 'Ошибка запроса:<br><pre>';
-      echo '<b>'.$valid_sql.'</b>'.'<br><br>';
-      echo '<font color="red">';
-      print_r(mysql_error());
-      echo '</font>';
-      echo '</pre>';
-      exit;
-      }
+
     $this->QueryResult = $result;
     unset($result);
     
@@ -225,26 +230,26 @@ class DBConnector extends AppObject
     //RESULT
     if (!$multi)
       {
-      return $this->fetch_row();
+      return $this->fetchRow();
       }
     else //Много записей возвращаем как массив масивов
       {
-      return $this->fetch_array(1, $field_is_index);
+      return $this->fetchArray(1, $field_is_index);
       }
     }
   
   
-  function fetch_object()
+  function fetchObject()
     {
     return mysql_fetch_object($this->QueryResult);
     }
     
-  function fetch_row()
+  function fetchRow()
     {
     return mysql_fetch_array($this->QueryResult, 1);
     }
 
-  function fetch_array($type=1, $field_is_index = false)
+  function fetchArray($type=1, $field_is_index = false)
     {
     $result = array();
     while ($row = mysql_fetch_array($this->QueryResult, $type))
@@ -262,7 +267,7 @@ class DBConnector extends AppObject
     return $result;
     }
 
-  function num_rows()
+  function numRows()
     {
     return mysql_num_rows($this->QueryResult);
     }
@@ -278,7 +283,7 @@ class DBConnector extends AppObject
     
     $sql = 'SHOW COLUMNS FROM '.$table;
     $this->query($sql);
-    $result = $this->fetch_array();
+    $result = $this->fetchArray();
     
     $columns = array();
     foreach ($result as $value)
@@ -375,13 +380,13 @@ class DBConnector extends AppObject
     
   function one()
       {
-      $result = $this->fetch_row();
+      $result = $this->fetchRow();
       return $result;
       }
       
   function all()
       {
-      return $this->fetch_array();
+      return $this->fetchArray();
       }
       
   function __destruct() 

@@ -12,7 +12,7 @@ class articleCategory extends Model
                   SELECT * FROM `{$this->table}`  
                   ORDER BY article_category_title
                 ");
-    $articles = $this->fetch_array();
+    $articles = $this->fetchArray();
    
     if($full)
       return $articles;

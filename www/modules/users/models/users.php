@@ -22,7 +22,7 @@ class users extends Model
     {
     $result = array();
     $this->query("SELECT * FROM user ORDER BY login");
-    $users = $this->fetch_array();
+    $users = $this->fetchArray();
     if($full)
       return $users;
     
@@ -44,7 +44,7 @@ class users extends Model
       return false;
     
     $this->query("SELECT * FROM user WHERE id='$id'");
-    $user =  $this->fetch_array();
+    $user =  $this->fetchArray();
     return $user[0];
     }
     
@@ -102,7 +102,7 @@ class users extends Model
     {
     $pass = md5($pass);
     $this->query("SELECT * FROM user WHERE login='%s' AND pass='%s' AND active = '1'", $login, $pass);
-    $user =  $this->fetch_array();
+    $user =  $this->fetchArray();
     
     if(empty($user))
       return false;

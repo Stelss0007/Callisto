@@ -41,4 +41,28 @@ class AdminController extends Controller
     
     $this->viewPage();  
     }
+    
+    function actionInfo($module_name, $position)
+        {
+        if(!file_exists ("modules/$module_name/info.php"))
+          {
+          $this->showMessage('Module '.$module_name.' not found or info.php are missing', $this->input_vars['ref']);
+          }
+
+
+        include_once "modules/$module_name/info.php";
+        $this->assign('module_info', $info);
+
+        $browsein = array();
+        $browsein[] = array ('url'=>'/admin/main',
+                            'displayname'=>'Dasboard');
+        $browsein[] = array ('url'=>'/admin/modules/',
+                            'displayname'=>'Модули');
+        $browsein[] = array ('url'=>'/admin/modules/',
+                            'displayname'=>'Информация о модуле "'.$info['module_displayname'].'"');
+
+        $this->module_browsein = $browsein;
+
+        $this->viewPage();
+        }
   }

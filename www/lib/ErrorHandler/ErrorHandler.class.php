@@ -153,6 +153,9 @@ class ErrorHandler
     
     header('HTTP/1.1 500 Internal Server Error');
     ?>
+    <head>
+        <meta charset="UTF-8">
+    </head>
     <body style="background-color: #DDB000;">
       <style>
         .thead td

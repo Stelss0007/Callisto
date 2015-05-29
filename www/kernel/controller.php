@@ -84,18 +84,21 @@ abstract class Controller extends AppObject
     
     define('LIB_DIR',APP_DIRECTORY.'/lib/');
     
-    define('DB_DIR',APP_DIRECTORY.'/lib/DBConnector/');
-    require_once(DB_DIR.'DBConnector.class.php');
+    //define('DB_DIR',APP_DIRECTORY.'/lib/DBConnector/');
+    //require(DB_DIR.'DBConnector.class.php');
+    appUsesLib('DBConnector');
     
     //define('SMARTY_DIR',APP_DIRECTORY.'/lib/Smarty/');
-    require_once(SMARTY_DIR.'Smarty.class.php');
+    //require(SMARTY_DIR.'Smarty.class.php');
+    appUsesLib('Smarty');
 
-    define('SESSION_DIR',APP_DIRECTORY.'/lib/UserSession/');
-    require_once(SESSION_DIR.'UserSession.class.php');
+    //define('SESSION_DIR',APP_DIRECTORY.'/lib/UserSession/');
+    //require(SESSION_DIR.'UserSession.class.php');
+    appUsesLib('UserSession');
     
     define('KERNEL_DIR',APP_DIRECTORY.'/kernel/');
-    require_once(KERNEL_DIR.'block.php');
-    require_once(KERNEL_DIR.'view.php');
+    require(KERNEL_DIR.'block.php');
+    require(KERNEL_DIR.'view.php');
 
     $this->type = 'user';
 
@@ -104,7 +107,7 @@ abstract class Controller extends AppObject
     $this->module_dir = 'modules/'.$this->modname.'/';
     if($this->config['debug.enabled'])
       {
-      require_once(KERNEL_DIR.'debuger.php');
+      require(KERNEL_DIR.'debuger.php');
       
       $this->debuger = & Debuger::getInstance();
       $this->debuger->startRenderPage();
@@ -157,6 +160,9 @@ abstract class Controller extends AppObject
     if($this->config['debug.enabled'] && !isAjax())
       {
         
+      $DB = DBConnector::getInstance();
+      $DB->disconnect();
+              
       $current_time = microtime();
       $current_time = explode(" ",$current_time);
       $end_debug_time = $current_time[1] + $current_time[0];
@@ -559,7 +565,12 @@ abstract class Controller extends AppObject
     $this->allVarToTpl();
     $ObjectName = $this->getTplObjectName();
     echo $this->smarty->fetch($tpl_dir, $ObjectName);
-    $this->__destruct();
+    
+    //$this->__destruct();
+    if(!$this->config['debug.enabled']) 
+        {
+        $this->__destruct();
+        }
     }
     
   /**
@@ -577,7 +588,7 @@ abstract class Controller extends AppObject
   final public function viewJSON()
     {
     $obj =  $this->vars;
-    app_cp1251_utf8($obj);
+    appCp1251Utf8($obj);
     echo json_encode($obj);
     }
 
@@ -629,8 +640,12 @@ abstract class Controller extends AppObject
       }
     $this->usesModel('statistic');
     $this->statistic->setLog();
-      
-    $this->__destruct(); 
+    
+    if(!$this->config['debug.enabled']) 
+        {
+        $this->__destruct();
+        }
+     
     }
   
 
@@ -1112,8 +1127,9 @@ abstract class Controller extends AppObject
   //////////////////////////////////////////////////////////////////////////////
   final public function getPostData()
     {
-    define('VALIDATOR_DIR',APP_DIRECTORY.'/lib/validateForm/');
-    require_once(VALIDATOR_DIR.'validateForm.class.php');
+//    define('VALIDATOR_DIR',APP_DIRECTORY.'/lib/validateForm/');
+//    require(VALIDATOR_DIR.'validateForm.class.php');
+    appUsesLib('validateForm');
    
     $form = new validateForm($_POST);
 
@@ -1201,8 +1217,9 @@ abstract class Controller extends AppObject
     if(empty($validateRules))
       return true;
     
-    define('VALIDATOR_DIR',APP_DIRECTORY.'/lib/validateForm/');
-    require_once(VALIDATOR_DIR.'validateForm.class.php');
+//    define('VALIDATOR_DIR',APP_DIRECTORY.'/lib/validateForm/');
+//    require(VALIDATOR_DIR.'validateForm.class.php');
+    appUsesLib('validateForm');
    
     $form = new validateForm($validateData);
     
@@ -1399,7 +1416,8 @@ abstract class Controller extends AppObject
     
     move_uploaded_file($this->input_images['tmp_name'], $dst);
     
-    require_once LIB_DIR.'Image/Image.class.php';
+    //require LIB_DIR.'Image/Image.class.php';
+    appUsesLib('Image');
     
     $img = new Image();
     

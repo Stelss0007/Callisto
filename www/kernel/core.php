@@ -267,7 +267,7 @@ function appCleanInputArray()
  * @desc Strip slashes ????????????? ? coreVarCleanFromInput
  * @return misc
  */
-function appStripslashes (&$value)
+function appStripslashes(&$value)
   {
   if(!is_array($value))
     $value = stripslashes($value);
@@ -275,20 +275,20 @@ function appStripslashes (&$value)
       array_walk($value,'coreStripslashes');
   }
   
-function app_cp1251_utf8 (&$value)
+function appCp1251Utf8(&$value)
   {
   if(!is_array($value))
     $value = iconv('cp1251', 'utf-8', $value);
     else
-      array_walk($value,'core_cp1251_utf8');
+      array_walk($value,'appCp1251Utf8');
   }
   
-function app_utf8_cp1251 (&$value)
+function appUtf8Cp1251(&$value)
   {
   if(!is_array($value))
     $value = iconv('utf-8', 'cp1251', $value);
     else
-      array_walk($value,'app_utf8_cp1251');
+      array_walk($value,'appUtf8Cp1251');
   }
 
 function appStrReplaceTemplate($message, $values)
@@ -681,11 +681,15 @@ function appGetFileList($dir_ = null)
     return;
 
   //Взяли список с диска
-  $file_list = array();
+  $file_list = [];
   
   if(empty($dir_))
     return $file_list;
 
+  if(!file_exists($dir_) && !is_dir($dir_)) {
+       return $file_list;
+  }
+  
   $dir_handler = opendir($dir_);
   while ($dir = readdir($dir_handler))
     {
@@ -931,7 +935,7 @@ function appBlockShowAll(&$myTpl, &$object)
   $db=DBConnector::getInstance();
   $ses_info=UserSession::getInstance();
   $db->query("SELECT * FROM blocks WHERE block_active = '1' ORDER BY block_position, block_weight");
-  $db_block_list = $db->fetch_array();
+  $db_block_list = $db->fetchArray();
 //  echo '????????? ????????:<br><pre>';
 //  print_r($object);
 //  echo '</pre>';
@@ -1024,7 +1028,7 @@ function appWeightMax($table, $where='')
   {
   $db=DBConnector::getInstance();
   $db->query("SELECT MAX(weight) as max FROM $table $where");
-  $result = $db->fetch_array();
+  $result = $db->fetchArray();
   $maxweight = $result[0]['max'];
   return $maxweight;
   }
@@ -1044,7 +1048,7 @@ function appWeightUp($table, $weight, $where='')
   $db=DBConnector::getInstance();
   $next_weight = $weight--;
   $db->query("SELECT * FROM $table WHERE weight IN ('$weight', '$next_weight') $where ORDER BY weight LIMIT 2");
-  $dbresult = $db->fetch_array();
+  $dbresult = $db->fetchArray();
  
   //????????????
   $dbresult[0][weight]++;
@@ -1072,7 +1076,7 @@ function appWeightDown($table, $weight, $where='')
   $db=DBConnector::getInstance();
   $next_weight = $weight++;
   $db->query("SELECT * FROM $table WHERE weight IN ('$weight', '$next_weight') $where ORDER BY weight LIMIT 2");
-  $dbresult = $db->fetch_array();
+  $dbresult = $db->fetchArray();
 
   //????????????
   $dbresult[0][weight]++;

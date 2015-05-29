@@ -9,7 +9,7 @@ class Statistic extends Model
         {
         $ip = ip2long($ip);
         }
-   
+      return false;
       return $this->query("SELECT * FROM ip2location
                            WHERE  $ip >= ip2location.`ip_from` AND $ip <= ip2location.`ip_to`")
                   ->one();
@@ -23,7 +23,7 @@ class Statistic extends Model
     $day = date("D",$t);
     $dt = date("Ymd",$t);
     $tm = date("H:i",$t);
-    $refer = $_SERVER['HTTP_REFERER'];
+    $refer = (isset($_SERVER['HTTP_REFERER'])) ? $_SERVER['HTTP_REFERER'] : '';
     $lang = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
     $user = $_SERVER['HTTP_USER_AGENT'];
     $req = $_SERVER['REQUEST_URI'];
@@ -32,7 +32,7 @@ class Statistic extends Model
     $city = null;
     $region = null;
     
-    if ($ip = $_SERVER['HTTP_X_FORWARDED_FOR'])
+    if (isset($_SERVER['HTTP_X_FORWARDED_FOR']) && $ip = $_SERVER['HTTP_X_FORWARDED_FOR'])
         {
         if (!stristr($_SERVER['HTTP_X_FORWARDED_FOR'], $_SERVER['REMOTE_ADDR']) and !empty($_SERVER['HTTP_X_FORWARDED_FOR'])) 
            $ip .= ", ".$_SERVER['REMOTE_ADDR']; 

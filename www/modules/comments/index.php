@@ -10,7 +10,7 @@ class IndexController extends Controller
     $this->usesModel('articleCategory');
     $this->usesModel('users');
     
-    $this->articles_list = $this->articles->article_list(true, array('article_active'=>1));
+    $this->articles_list = $this->articles->articleList(true, array('article_active'=>1));
     //$this->paginate($this->articles);
     
     //Подготовим фильтры

@@ -50,7 +50,7 @@ class comments extends Model
             ";
     //appDebug($sql);exit;
     $this->query($sql);
-    $comments = $this->fetch_array();
+    $comments = $this->fetchArray();
    
     if($full)
       return $comments;

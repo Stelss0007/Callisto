@@ -71,10 +71,10 @@
                       {array name='url_vars'}
                       {array_append name='url_vars' key='id' value=$block.id}
                       {if $block.block_active}
-                        <a href="/admin/blocks/deactive/{$block.id}" class="btn btn-icon btn-pause" title="{#sys_disabled#}"><i class="icon-pause"></i></a>
+                        <a href="/admin/blocks/deactive/{$block.id}" class="btn btn-icon btn-pause" title="{#sys_deactivate#}"><i class="icon-pause"></i></a>
                         <a href="/admin/blocks/modify/{$block.id}" class="btn btn-icon btn-edit" title="{#sys_edit#}"><i class="icon-edit"></i></a>
                         {else}
-                        <a href="/admin/blocks/active/{$block.id}" class="btn btn-icon btn-play" title="{#sys_enabled#}"><i class="icon-play"></i></a>
+                        <a href="/admin/blocks/active/{$block.id}" class="btn btn-icon btn-play" title="{#sys_activate#}"><i class="icon-play"></i></a>
                         <a href="/admin/blocks/modify/{$block.id}" class="btn btn-icon btn-edit" title="{#sys_edit#}"><i class="icon-edit"></i></a>
                         <a href="/admin/blocks/delete/{$block.id}/{$block.block_weight}/{$block.block_position}" class="btn btn-icon btn-delete" title="{#sys_delete#}"><i class="icon-trash"></i></a>
                         {/if}
@@ -166,10 +166,10 @@
                       {array name='url_vars'}
                       {array_append name='url_vars' key='id' value=$block.id}
                       {if $block.block_active}
-                        <a href="/admin/blocks/deactive/{$block.id}" class="btn btn-icon btn-pause" title="{#sys_disabled#}"><i class="icon-pause"></i></a>
+                        <a href="/admin/blocks/deactive/{$block.id}" class="btn btn-icon btn-pause" title="{#sys_deactivate#}"><i class="icon-pause"></i></a>
                         <a href="/admin/blocks/modify/{$block.id}" class="btn btn-icon btn-edit" title="{#sys_edit#}"><i class="icon-edit"></i></a>
                         {else}
-                        <a href="/admin/blocks/active/{$block.id}" class="btn btn-icon btn-play" title="{#sys_enabled#}"><i class="icon-play"></i></a>
+                        <a href="/admin/blocks/active/{$block.id}" class="btn btn-icon btn-play" title="{#sys_activate#}"><i class="icon-play"></i></a>
                         <a href="/admin/blocks/modify/{$block.id}" class="btn btn-icon btn-edit" title="{#sys_edit#}"><i class="icon-edit"></i></a>
                         <a href="/admin/blocks/delete/{$block.id}/{$block.block_weight}/{$block.block_position}" class="btn btn-icon btn-delete" title="{#sys_delete#}"><i class="icon-trash"></i></a>
                         {/if}
@@ -260,10 +260,10 @@
                       {array name='url_vars'}
                       {array_append name='url_vars' key='id' value=$block.id}
                       {if $block.block_active}
-                        <a href="/admin/blocks/deactive/{$block.id}" class="btn btn-icon btn-pause" title="{#sys_disabled#}"><i class="icon-pause"></i></a>
+                        <a href="/admin/blocks/deactive/{$block.id}" class="btn btn-icon btn-pause" title="{#sys_deactivate#}"><i class="icon-pause"></i></a>
                         <a href="/admin/blocks/modify/{$block.id}" class="btn btn-icon btn-edit" title="{#sys_edit#}"><i class="icon-edit"></i></a>
                         {else}
-                        <a href="/admin/blocks/active/{$block.id}" class="btn btn-icon btn-play" title="{#sys_enabled#}"><i class="icon-play"></i></a>
+                        <a href="/admin/blocks/active/{$block.id}" class="btn btn-icon btn-play" title="{#sys_activate#}"><i class="icon-play"></i></a>
                         <a href="/admin/blocks/modify/{$block.id}" class="btn btn-icon btn-edit" title="{#sys_edit#}"><i class="icon-edit"></i></a>
                         <a href="/admin/blocks/delete/{$block.id}/{$block.block_weight}/{$block.block_position}" class="btn btn-icon btn-delete" title="{#sys_delete#}"><i class="icon-trash"></i></a>
                         {/if}
@@ -358,10 +358,10 @@
                       {array name='url_vars'}
                       {array_append name='url_vars' key='id' value=$block.id}
                       {if $block.block_active}
-                        <a href="/admin/blocks/deactive/{$block.id}" class="btn btn-icon btn-pause" title="{#sys_disabled#}"><i class="icon-pause"></i></a>
+                        <a href="/admin/blocks/deactive/{$block.id}" class="btn btn-icon btn-pause" title="{#sys_deactivate#}"><i class="icon-pause"></i></a>
                         <a href="/admin/blocks/modify/{$block.id}" class="btn btn-icon btn-edit" title="{#sys_edit#}"><i class="icon-edit"></i></a>
                         {else}
-                        <a href="/admin/blocks/active/{$block.id}" class="btn btn-icon btn-play" title="{#sys_enabled#}"><i class="icon-play"></i></a>
+                        <a href="/admin/blocks/active/{$block.id}" class="btn btn-icon btn-play" title="{#sys_activate#}"><i class="icon-play"></i></a>
                         <a href="/admin/blocks/modify/{$block.id}" class="btn btn-icon btn-edit" title="{#sys_edit#}"><i class="icon-edit"></i></a>
                         <a href="/admin/blocks/delete/{$block.id}/{$block.block_weight}/{$block.block_position}" class="btn btn-icon btn-delete" title="{#sys_delete#}"><i class="icon-trash"></i></a>
                         {/if}
@@ -452,10 +452,10 @@
                       {array name='url_vars'}
                       {array_append name='url_vars' key='id' value=$block.id}
                       {if $block.block_active}
-                        <a href="/admin/blocks/deactive/{$block.id}" class="btn btn-icon btn-pause" title="{#sys_disabled#}"><i class="icon-pause"></i></a>
+                        <a href="/admin/blocks/deactive/{$block.id}" class="btn btn-icon btn-pause" title="{#sys_deactivate#}"><i class="icon-pause"></i></a>
                         <a href="/admin/blocks/modify/{$block.id}" class="btn btn-icon btn-edit" title="{#sys_edit#}"><i class="icon-edit"></i></a>
                         {else}
-                        <a href="/admin/blocks/active/{$block.id}" class="btn btn-icon btn-play" title="{#sys_enabled#}"><i class="icon-play"></i></a>
+                        <a href="/admin/blocks/active/{$block.id}" class="btn btn-icon btn-play" title="{#sys_activate#}"><i class="icon-play"></i></a>
                         <a href="/admin/blocks/modify/{$block.id}" class="btn btn-icon btn-edit" title="{#sys_edit#}"><i class="icon-edit"></i></a>
                         <a href="/admin/blocks/delete/{$block.id}/{$block.block_weight}/{$block.block_position}" class="btn btn-icon btn-delete" title="{#sys_delete#}"><i class="icon-trash"></i></a>
                         {/if}

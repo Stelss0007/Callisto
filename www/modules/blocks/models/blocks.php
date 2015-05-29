@@ -10,9 +10,14 @@ class Blocks extends Model
   function block_list()
     {
     $this->query("SELECT * FROM block ORDER BY block_position, {$this->table}_weight");
-    $blocks= $this->fetch_array();
+    $blocks= $this->fetchArray();
 
-    $blocks_list = array();
+    $blocks_list = [];
+    $blocks_list['blocks_list_l'] = [];
+    $blocks_list['blocks_list_r'] = [];
+    $blocks_list['blocks_list_t'] = [];
+    $blocks_list['blocks_list_b'] = [];
+    $blocks_list['blocks_list_c'] = [];
 
     foreach($blocks as $block)
       {

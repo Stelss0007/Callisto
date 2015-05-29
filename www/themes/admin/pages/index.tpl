@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" style="min-height: 100%">
     <head>
+        <link rel="shortcut icon" href="/public/favicon.png" type="image/png" />
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
@@ -36,7 +37,7 @@
           </style>
         {/literal}
         
-        <script src="/themes/admin/js/pace.min.js"></script>
+        <script src="/themes/admin/js/pace.min.js"></script> 
         
         <link href="/themes/admin/css/jquery-ui-1.8.21.custom.css" rel="stylesheet">
         <link rel="stylesheet" href="/themes/admin/css/font-icons/entypo/css/entypo.css">
@@ -64,7 +65,7 @@
                 <header class="logo-env">
                     <!-- logo -->
                     <div class="logo">
-                        <a href="/admin/">
+                        <a href="/admin/" style="font-size: 29px; text-shadow: 0px 0px 3px #ccc; font-family: cursive;">
                            Callisto
                         </a>
                     </div>
@@ -560,9 +561,8 @@
       *}
         <!-- Bottom Scripts -->
     
-<script src="/themes/admin/js/gsap/main-gsap.js"></script>
-
-<script src="/themes/admin/js/joinable.js"></script>
+    <script src="/themes/admin/js/gsap/main-gsap.js"></script>
+    <script src="/themes/admin/js/joinable.js"></script>
     
 {*
 <script src="/themes/admin/js/jquery-ui/js/jquery-ui-1.10.3.minimal.min.js"></script>
@@ -572,14 +572,16 @@
 {*      
 <script src="/themes/admin/js/joinable.js"></script>
 *}
-<script src="/themes/admin/js/neon-api.js"></script>
-<script src="/themes/admin/js/neon-custom.js"></script>
+
+        <script src="/themes/admin/js/neon-api.js"></script>
+        <script src="/themes/admin/js/neon-custom.js"></script>
 
         <script src="/themes/admin/js/neon-demo.js"></script>
         
         <script src="/themes/admin/js/main.js"></script>
         <script src="/themes/admin/js/jquery.elfinder.min.js"></script>
         <script src="/themes/admin/js/bootbox.min.js"></script>
+        
         <div class="clearfix clear"></div>
         <a href="#" class="scrollup"></a>
     </body>

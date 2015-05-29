@@ -11,7 +11,7 @@ class Groups extends Model
     {
     $result = array();
     $this->query("SELECT * FROM `group` ORDER BY group_displayname");
-    $groups = $this->fetch_array();
+    $groups = $this->fetchArray();
    
     if($full)
       return $groups;
@@ -30,7 +30,7 @@ class Groups extends Model
       return false;
     
     $this->query("SELECT * FROM `group` WHERE id='$id'");
-    $group =  $this->fetch_array();
+    $group =  $this->fetchArray();
     return $group[0];
     }
     

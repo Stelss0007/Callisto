@@ -11,7 +11,7 @@ class Menu extends Model
     {
 
     $this->query("SELECT * FROM $this->table WHERE menu_parent_id = '%d' ORDER BY menu_weight", $parent_id);
-    $menu = $this->fetch_array();
+    $menu = $this->fetchArray();
     
     return $menu;
     }
@@ -27,7 +27,7 @@ class Menu extends Model
       $this->query($sql);
       }
       
-    $parrents = $this->fetch_array();
+    $parrents = $this->fetchArray();
     
     return $parrents;
     }
@@ -43,7 +43,7 @@ class Menu extends Model
       $this->query($sql);
       }
       
-    $parrents = $this->fetch_array();
+    $parrents = $this->fetchArray();
     $browsein[] = array('url'=>'/admin/menu/menu_list/', 'displayname'=>'Menu');
     foreach($parrents as $value)
       {
@@ -186,7 +186,7 @@ class Menu extends Model
   function tree_items($parent_id = 0, $active = true)
     {
     $this->query("SELECT * FROM $this->table ORDER BY {$this->table}_parent_id, {$this->table}_weight");
-    $menus = $this->fetch_array();
+    $menus = $this->fetchArray();
       
     return appTreeBuild($menus, $parent_id);
     }

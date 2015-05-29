@@ -46,8 +46,7 @@ class Model extends DBConnector
   //////////////////////////////////////////////////////////////////////////////
   function __destruct() 
     {
-    $this->disconect();
-    
+    //$this->disconnect();
     }
   
   //////////////////////////////////////////////////////////////////////////////
@@ -85,7 +84,7 @@ class Model extends DBConnector
             LEFT JOIN object_type t ON (t.id = o.type)
             WHERE o.guid = '%d'";
     $this->query($sql, $guid);
-    $res_main = $this->fetch_array();
+    $res_main = $this->fetchArray();
     
     //Выведим все поля и значения принадлежащие объекту 
     $sql = "SELECT SQL_CACHE f.`field`, 
@@ -95,7 +94,7 @@ class Model extends DBConnector
             WHERE v.`guid` = '%d'";
     
     $this->query($sql, $guid);
-    $res_fields= $this->fetch_array();
+    $res_fields= $this->fetchArray();
     
     $result = array();
     
@@ -197,7 +196,7 @@ class Model extends DBConnector
             LIMIT %d, %d";
     
     $this->query($sql, $offset, $limit);
-    $objects_result = $this->fetch_array();
+    $objects_result = $this->fetchArray();
     
     
     $guids = array();
@@ -219,7 +218,7 @@ class Model extends DBConnector
             WHERE v.guid IN ('$guids_str') ORDER BY FIELD(v.`guid`, '$guids_str')";
     
     $this->query($sql);
-    $objects_result = $this->fetch_array();
+    $objects_result = $this->fetchArray();
 
     $object_list =array();
     
@@ -414,7 +413,7 @@ class Model extends DBConnector
     $type_id = 0;
     
     $this->query("SELECT SQL_CACHE id FROM object_type WHERE type='%s'", $type);
-    $result = $this->fetch_array();    
+    $result = $this->fetchArray();    
     
     if(!empty($result[0]))
       return $result[0]['id'];
@@ -430,7 +429,7 @@ class Model extends DBConnector
     $field_id = 0;
     
     $this->query("SELECT SQL_CACHE id FROM object_field WHERE field = '%s'", $field);
-    $result = $this->fetch_array();    
+    $result = $this->fetchArray();    
     
     if(!empty($result[0]))
       return $result[0]['id'];
@@ -538,7 +537,7 @@ class Model extends DBConnector
       return $cached_columns[$table];
     
     $this->query('SHOW COLUMNS FROM '.$table);
-    $columns = $this->fetch_array();
+    $columns = $this->fetchArray();
     
     $result = array();
     foreach($columns as $value)
@@ -558,7 +557,7 @@ class Model extends DBConnector
       if(!empty($where))
         $where = ' WHERE '.$where;
       $this->query("SELECT MAX({$this->table}_weight) as max FROM {$this->table}".$where);
-      $result = $this->fetch_array();
+      $result = $this->fetchArray();
       $maxweight = $result[0]['max'];
       return $maxweight;
       }
@@ -595,7 +594,7 @@ class Model extends DBConnector
       
       $next_weight = $weight--;
       $this->query("SELECT * FROM {$this->table} WHERE {$this->table}_weight IN ('$weight', '$next_weight') $where ORDER BY {$this->table}_weight LIMIT 2");
-      $dbresult = $this->fetch_array();
+      $dbresult = $this->fetchArray();
 
       //????????????
       $dbresult[0]["{$this->table}_weight"]++;
@@ -624,7 +623,7 @@ class Model extends DBConnector
       
       $next_weight = $weight++;
       $this->query("SELECT * FROM {$this->table} WHERE {$this->table}_weight IN ('$weight', '$next_weight') $where ORDER BY {$this->table}_weight LIMIT 2");
-      $dbresult = $this->fetch_array();
+      $dbresult = $this->fetchArray();
 
       //????????????
       $dbresult[0]["{$this->table}_weight"]++;
@@ -690,7 +689,7 @@ class Model extends DBConnector
       $result['fields'] =array();
       }
       
-    if($conditions['condition']&& !empty($conditions['condition']))
+    if(isset($conditions['condition']) && !empty($conditions['condition']))
       {
       //If array of condition
       if(is_array($conditions['condition']))
@@ -987,8 +986,9 @@ class Model extends DBConnector
     
   final function validate()
     {
-    define('VALIDATOR_DIR',APP_DIRECTORY.'/lib/validateForm/');
-    require_once(VALIDATOR_DIR.'validateForm.class.php');
+//    define('VALIDATOR_DIR',APP_DIRECTORY.'/lib/validateForm/');
+//    require_once(VALIDATOR_DIR.'validateForm.class.php');
+    appUsesLib('validateForm');
    
     $form = new validateForm($_POST);
     }
