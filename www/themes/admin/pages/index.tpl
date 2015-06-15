@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+{strip}
 <html lang="en" style="min-height: 100%">
     <head>
         <link rel="shortcut icon" href="/public/favicon.png" type="image/png" />
@@ -59,8 +60,8 @@
         {appJsOutput}
     </head>
     
-    <body class="page-body " style="min-height: 100%">
-        <div class="page-container body-hide" style="min-height: 100%;"><!-- add class "sidebar-collapsed" to close sidebar by default, "chat-visible" to make chat appear always -->	
+    <body class="page-body" style="min-height: 100%">
+        <div class="page-container body-hide_" style="min-height: 100%;"><!-- add class "sidebar-collapsed" to close sidebar by default, "chat-visible" to make chat appear always -->	
             <div class="sidebar-menu" style="min-height: 100%;">
                 <header class="logo-env">
                     <!-- logo -->
@@ -586,3 +587,4 @@
         <a href="#" class="scrollup"></a>
     </body>
 </html>
+{/strip}

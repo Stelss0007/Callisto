@@ -1,6 +1,8 @@
 /*
    Animation example, for spinners
 */
+
+/*
 .animate-spin {
   -moz-animation: spin 2s infinite linear;
   -o-animation: spin 2s infinite linear;
@@ -83,3 +85,4 @@
     transform: rotate(359deg);
   }
 }
+*/

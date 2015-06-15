@@ -1,0 +1,10 @@
+.my_scope .some_color {
+  color: red;
+}
+.my_scope .some_color .inner_block {
+  text-decoration: underline;
+}
+.my_scope .bold {
+  font-weight: bold;
+  color: blue;
+}

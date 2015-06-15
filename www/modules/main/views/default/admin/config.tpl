@@ -47,35 +47,35 @@
         <div class="control-group">
           <label for="date01" class="control-label">{#site_name#}</label>
           <div class="controls">
-            <input type="text" name="modconfig[main][site_name]" value="{$modconfig.main.site_name}" style="width: 98%;">
+            <input type="text" name="modconfig[main][site_name]" value="{$modconfig.main.site_name}" class="form-control" style="width: 98%;">
           </div>
         </div>
           
         <div class="control-group">
           <label for="date01" class="control-label">{#site_slogan#}</label>
           <div class="controls">
-            <input type="text" name="modconfig[main][site_slogan]" value="{$modconfig.main.site_slogan}" style="width: 98%;">
+            <input type="text" name="modconfig[main][site_slogan]" value="{$modconfig.main.site_slogan}" class="form-control"  style="width: 98%;">
           </div>
         </div>
           
         <div class="control-group">
           <label for="date01" class="control-label">{#site_description#}</label>
           <div class="controls">
-            <textarea style="width: 98%;" name="modconfig[main][site_description]">{$modconfig.main.site_description}</textarea>
+            <textarea style="width: 98%;" name="modconfig[main][site_description]" class="form-control" >{$modconfig.main.site_description}</textarea>
           </div>
         </div>
           
         <div class="control-group">
           <label for="date01" class="control-label">{#site_footer#}</label>
           <div class="controls">
-            <input type="text" name="modconfig[main][site_footer]" value="{$modconfig.main.site_footer}" style="width: 98%;">
+            <input type="text" name="modconfig[main][site_footer]" value="{$modconfig.main.site_footer}" class="form-control"  style="width: 98%;">
           </div>
         </div>
 
         <div class="control-group">
           <label for="date01" class="control-label">{#site_dateformat#}</label>
           <div class="controls">
-             <select data-rel="chosen_" name="modconfig[main][site_dateformat]">
+             <select data-rel="chosen_" name="modconfig[main][site_dateformat]" class="form-control" >
               {html_options options=$site_dateformat_list selected=$modconfig.main.site_dateformat}
              </select>
           </div>
@@ -84,7 +84,7 @@
         <div class="control-group">
           <label for="date01" class="control-label">{#site_timeformat#}</label>
           <div class="controls">
-            <select data-rel="chosen_" name="modconfig[main][site_timeformat]">
+            <select data-rel="chosen_" name="modconfig[main][site_timeformat]" class="form-control" >
               {html_options options=$site_timeformat_list selected=$modconfig.main.site_timeformat}
             </select>
           </div>
@@ -102,14 +102,14 @@
         <div class="control-group">
           <label for="date01" class="control-label">{#site_offline_message#}</label>
           <div class="controls">
-            <textarea style="width: 98%;" name="modconfig[main][site_offline_message]">{$modconfig.main.site_offline_message|default:'Сайт закрыт на техническое обслуживание.<br /> Пожалуйста, зайдите позже.'}</textarea>
+            <textarea style="width: 98%;" name="modconfig[main][site_offline_message]" class="form-control" >{$modconfig.main.site_offline_message|default:'Сайт закрыт на техническое обслуживание.<br /> Пожалуйста, зайдите позже.'}</textarea>
           </div>
         </div>
               
         <div class="control-group">
           <label for="date01" class="control-label">{#site_list_lenght#}</label>
           <div class="controls">
-            <select data-rel="chosen_" name="modconfig[main][site_list_lenght]">
+            <select data-rel="chosen_" name="modconfig[main][site_list_lenght]" class="form-control" >
               {html_options options=$site_list_lenght_list selected=$modconfig.main.site_list_lenght}
             </select>
           </div>
@@ -135,21 +135,21 @@
           <div class="control-group">
             <label for="date01" class="control-label">{#site_seo_description#}</label>
             <div class="controls">
-              <textarea style="width: 98%;" name="modconfig[main][site_seo_description]">{$modconfig.main.site_seo_description}</textarea>
+              <textarea style="width: 98%;" name="modconfig[main][site_seo_description]" class="form-control" >{$modconfig.main.site_seo_description}</textarea>
             </div>
           </div>
             
           <div class="control-group">
             <label for="date01" class="control-label">{#site_seo_keywords#}</label>
             <div class="controls">
-              <textarea style="width: 98%;" name="modconfig[main][site_seo_keywords]">{$modconfig.main.site_seo_keywords}</textarea>
+              <textarea style="width: 98%;" name="modconfig[main][site_seo_keywords]" class="form-control" >{$modconfig.main.site_seo_keywords}</textarea>
             </div>
           </div>
             
           <div class="control-group">
             <label for="date01" class="control-label">{#site_seo_robots#}</label>
             <div class="controls">
-             <select data-rel="chosen_" name="modconfig[main][site_seo_robots]">
+             <select data-rel="chosen_" name="modconfig[main][site_seo_robots]" class="form-control" >
               {html_options options=$site_seo_robots_list selected=$modconfig.main.site_seo_robots}
              </select>
             </div>
@@ -174,7 +174,7 @@
         <div class="control-group">
           <label for="date01" class="control-label">{#mail_type#}</label>
           <div class="controls">
-            <select data-rel="chosen_" name="modconfig[main][site_email_type]">
+            <select data-rel="chosen_" name="modconfig[main][site_email_type]" class="form-control" >
               {html_options options=$site_email_type selected=$modconfig.main.site_email_type}
             </select>
           </div>
@@ -183,28 +183,28 @@
         <div class="control-group">
           <label for="date01" class="control-label">{#mail_site_from#}</label>
           <div class="controls">
-            <input type="text" name="modconfig[main][site_email_from]" value="{$modconfig.main.site_email_from}" style="width: 98%;">
+            <input type="text" name="modconfig[main][site_email_from]" value="{$modconfig.main.site_email_from}" class="form-control" style="width: 98%;">
           </div>
         </div>
           
         <div class="control-group">
           <label for="date01" class="control-label">{#mail_site_sender#}</label>
           <div class="controls">
-            <input type="text" name="modconfig[main][site_email_sender]" value="{$modconfig.main.site_email_sender}" style="width: 98%;">
+            <input type="text" name="modconfig[main][site_email_sender]" value="{$modconfig.main.site_email_sender}" class="form-control" style="width: 98%;">
           </div>
         </div>
           
         <div class="control-group">
           <label for="date01" class="control-label">{#mail_smtp_server#}</label>
           <div class="controls">
-            <input type="text" name="modconfig[main][site_email_smtp_server]" value="{$modconfig.main.site_email_smtp_server}" style="width: 98%;">
+            <input type="text" name="modconfig[main][site_email_smtp_server]" value="{$modconfig.main.site_email_smtp_server}" class="form-control" style="width: 98%;">
           </div>
         </div>
           
         <div class="control-group">
           <label for="date01" class="control-label">{#mail_type#}</label>
           <div class="controls">
-            <select data-rel="chosen_" name="modconfig[main][site_smtp_sec]">
+            <select data-rel="chosen_" name="modconfig[main][site_smtp_sec]" class="form-control" >
               {html_options options=$site_smtp_sec selected=$modconfig.main.site_smtp_sec}
             </select>
           </div>
@@ -213,21 +213,21 @@
         <div class="control-group">
           <label for="date01" class="control-label">{#mail_smtp_port#}</label>
           <div class="controls">
-            <input type="text" name="modconfig[main][site_email_smtp_port]" value="{$modconfig.main.site_email_smtp_port}" style="width: 98%;">
+            <input type="text" name="modconfig[main][site_email_smtp_port]" value="{$modconfig.main.site_email_smtp_port}" class="form-control" style="width: 98%;">
           </div>
         </div>
           
         <div class="control-group">
           <label for="date01" class="control-label">{#mail_smtp_user#}</label>
           <div class="controls">
-            <input type="text" name="modconfig[main][site_email_smtp_user]" value="{$modconfig.main.site_email_smtp_user}" style="width: 98%;">
+            <input type="text" name="modconfig[main][site_email_smtp_user]" value="{$modconfig.main.site_email_smtp_user}" class="form-control" style="width: 98%;">
           </div>
         </div>
           
         <div class="control-group">
           <label for="date01" class="control-label">{#mail_smtp_password#}</label>
           <div class="controls">
-            <input type="text" name="modconfig[main][site_email_smtp_password]" value="{$modconfig.main.site_email_smtp_password}" style="width: 98%;">
+            <input type="text" name="modconfig[main][site_email_smtp_password]" value="{$modconfig.main.site_email_smtp_password}" class="form-control" style="width: 98%;">
           </div>
         </div>
           

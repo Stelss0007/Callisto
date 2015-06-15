@@ -52,13 +52,13 @@ class Statistic extends Model
     $a = explode(", ",$ip); 
     $real_ip = $a[count($a)-1];
     
-    if (!empty($proxy)) 
-        $host = gethostbyaddr($proxy); 
-    elseif 
-        ($host = gethostbyaddr($ip));
-    elseif 
-        ($host = gethostbyaddr($real_ip)) ; 
-    else 
+//    if (!empty($proxy)) 
+//        $host = gethostbyaddr($proxy); 
+//    elseif 
+//        ($host = gethostbyaddr($ip));
+//    elseif 
+//        ($host = gethostbyaddr($real_ip)) ; 
+//    else 
         $host = $ip;
 
     $userhash = $_COOKIE["userhash"]; // Узнаём, что за пользователь

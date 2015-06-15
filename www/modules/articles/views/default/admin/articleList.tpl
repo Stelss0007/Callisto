@@ -1,3 +1,4 @@
+{strip}
 <div class="row-fluid">		
   <div class="box span12">
     <div class="box-header well" data-original-title>
@@ -127,3 +128,4 @@
   </div><!--/span-->
 
 </div><!--/row-->
+{/strip}

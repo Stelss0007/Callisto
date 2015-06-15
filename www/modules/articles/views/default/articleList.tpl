@@ -1,3 +1,4 @@
+{strip}
 {appCssLoad modname=articles}
 <div class="article-list">
 {foreach from=$articles_list item=article}
@@ -29,5 +30,5 @@
 <div>
   {pagination paging_element_count=7}
 </div>
-  1111111
 {dataTable}
+{/strip}

@@ -1,6 +1,6 @@
 <?php
 //Настройки отладки
-$appConfig['debug.enabled'] = true;
+$appConfig['debug.enabled'] = false;
 
 //Параметры для форматирования даты поумолчанию
 $appConfig['date_format'] = '%d.%m.%Y';
@@ -105,7 +105,8 @@ $appConfig['css.version'] = 10;
 //Тип сообщений ("js", "page")
 //"js" Сообщение выводится с помощью всплывающего окна
 //"page" Сообщение выводится с помощью отдельной страницы (/themes/тема/messages/normal.tpl)
+$appConfig['Message.type'] = 'page';
 $appConfig['Message.type'] = 'js';
 
-$appConfig['gzip'] = false;
+$appConfig['gzip'] = true;
 
