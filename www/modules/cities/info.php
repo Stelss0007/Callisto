@@ -1,9 +1,9 @@
 <?php
-$info['module_name'] = 'cities';
+$info['module_name'] = 'countries';
 $info['module_type'] = 'system';
-$info['module_displayname'] = 'Города';
+$info['module_displayname'] = 'Страны';
 $info['module_version'] = '0.0.1';
-$info['module_description'] = 'Модуль управления городами';
+$info['module_description'] = 'Модуль управления странами';
 $info['module_credits'] = '';
 $info['module_changelog'] = '';
 $info['module_license'] = '';

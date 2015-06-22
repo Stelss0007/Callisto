@@ -6,12 +6,12 @@ class AdminController extends Controller
   function actionCountryList($parent_id = 0)
     {
     $this->getAccess(ACCESS_ADMIN);
-    $this->assign('countries', $this->countries->getList());
+    $this->assign('cities', $this->cities->getList());
     
     $browsein =  [
                     ['url'=>"/admin/main", 'displayname'=>$this->t('dashboard')],
-                    ['url'=>"/admin/main/countries", 'displayname'=>$this->t('countries')],
-                    //['url'=>"/admin/main/countries", 'displayname'=>'ffff']
+                    ['url'=>"/admin/main/cities", 'displayname'=>$this->t('cities')],
+                    //['url'=>"/admin/main/cities", 'displayname'=>'ffff']
                  ];
 
     $this->assign('module_browsein', $browsein);
@@ -22,15 +22,15 @@ class AdminController extends Controller
   function actionModify($id)
     {
     $this->getAccess(ACCESS_ADMIN);
-    $country = $this->countries->getById($id);
+    $country = $this->cities->getById($id);
     $this->assign('id', $id);
     $this->assign('country', $country);
     
     $browsein =  [
                     ['url'=>"/admin/main", 'displayname'=>$this->t('dashboard')],
-                    ['url'=>"/admin/countries", 'displayname'=>$this->t('countries')],
-                    ['url'=>"/admin/countries/modify", 'displayname'=>$country['name_ru'] . ' Редактирование'],
-                    //['url'=>"/admin/main/countries", 'displayname'=>'ffff']
+                    ['url'=>"/admin/cities", 'displayname'=>$this->t('cities')],
+                    ['url'=>"/admin/cities/modify", 'displayname'=>$country['name_ru'] . ' Редактирование'],
+                    //['url'=>"/admin/main/cities", 'displayname'=>'ffff']
                  ];
 
     $this->assign('module_browsein', $browsein);
@@ -48,20 +48,20 @@ class AdminController extends Controller
       {
       $post['updated_at']   = time();
       
-      $this->arrayToModel($this->countries, $post);
+      $this->arrayToModel($this->cities, $post);
       
       if($id)
         {
-        $this->countries->save($id);
+        $this->cities->save($id);
         }
       else
         {
-        $this->countries->created_at = time();  
-        $this->countries->save();
+        $this->cities->created_at = time();  
+        $this->cities->save();
         }
       
       $this->deleteCache();
-      $this->redirect('/admin/countries');
+      $this->redirect('/admin/cities');
       }
     }
     
@@ -73,7 +73,7 @@ class AdminController extends Controller
     if(empty($id))
       $this->errors->setError("ID of menu is missing!");
    
-    $this->countries->delete($id);
+    $this->cities->delete($id);
     $this->showMessage('Элемент меню успешно удален!');
     $this->redirect();
     }
