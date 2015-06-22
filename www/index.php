@@ -9,6 +9,7 @@ include 'kernel/globals.php';
 include 'kernel/config.php';
 include 'kernel/appObject.php';
 include 'kernel/core.php';
+include 'kernel/Request.php';
 include 'kernel/router.php';
 include 'kernel/controller.php';
 include 'kernel/model.php';
