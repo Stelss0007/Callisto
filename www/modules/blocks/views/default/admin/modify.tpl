@@ -53,7 +53,7 @@
              <div class="form-group">
               <label class="col-sm-3 control-label" for="date01">Положение:</label>
               <div class="controls col-sm-5">
-                <select name='block_position' class="form-control">
+                <select name='block_position' class="form-control selectpicker">
                   {html_options options=$positions selected=$block_position}
                 </select>
               </div>

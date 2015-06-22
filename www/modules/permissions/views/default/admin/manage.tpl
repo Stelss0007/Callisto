@@ -14,7 +14,7 @@
             <div class="form-group">
               <label class="col-sm-3 control-label" for="date01">Группа</label>
               <div class="controls col-sm-5">
-                {html_options name=group_permission_gid options=$groups selected=$group_permission_gid class="form-control"}
+                {html_options name=group_permission_gid options=$groups selected=$group_permission_gid class="form-control selectpicker"}
               </div>
             </div>
             
@@ -28,7 +28,7 @@
             <div class="form-group">
               <label class="col-sm-3 control-label" for="date01">Уровень доступа</label>
               <div class="controls col-sm-5">
-                {html_options name=group_permission_level options=$levels selected=$group_permission_level class="form-control"}
+                {html_options name=group_permission_level options=$levels selected=$group_permission_level class="form-control selectpicker"}
               </div>
             </div>
             

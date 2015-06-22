@@ -9,7 +9,6 @@ class Menu extends Model
   
   function menu_list($parent_id = 0)
     {
-
     $this->query("SELECT * FROM $this->table WHERE menu_parent_id = '%d' ORDER BY menu_weight", $parent_id);
     $menu = $this->fetchArray();
     

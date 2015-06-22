@@ -46,6 +46,8 @@
         <link rel="stylesheet" href="/themes/admin/css/neon-core.css">
         <link href='/themes/admin/css/elfinder.min.css' rel='stylesheet'>
         <link href='/themes/admin/css/elfinder.theme.css' rel='stylesheet'>
+        <link rel="stylesheet" href="/themes/admin/js/bootstrap-select/css/bootstrap-select.min.css">
+        <link rel="stylesheet" href="/themes/admin/js/bootstrap-switch/css/bootstrap-switch.min.css">
         <link rel="stylesheet" href="/themes/admin/css/custom.css">
         
         <script src="/themes/admin/js/jquery-1.11.0.min.js"></script>
@@ -99,11 +101,11 @@
                     </li>
                     
                     <li><a class="ajax-link" href="/admin/main"><i class="icon-home"></i><span class="hidden-tablet"> {#theme_menu_dashboard#}</span></a></li>
-                    <li><a class="ajax-link" href="/admin/configuration"><i class="icon-cog"></i><span class="hidden-tablet"> {#theme_menu_configuration#}</span></a></li>
+                    <li><a class="ajax-link" href="/admin/configuration/main"><i class="icon-cog"></i><span class="hidden-tablet"> {#theme_menu_configuration#}</span></a></li>
                     <li><a class="ajax-link" href="/admin/groups"><i class="icon-users"></i><span class="hidden-tablet"> {#theme_menu_groups#}</span></a></li>
                     <li><a class="ajax-link" href="/admin/users/users_list"><i class="icon-user"></i><span class="hidden-tablet"> {#theme_menu_users#}</span></a></li>
                     <li><a class="ajax-link" href="/admin/permissions"><i class="icon-key"></i><span class="hidden-tablet"> {#theme_menu_permissions#}</span></a></li>
-                    <li><a class="ajax-link" href="/admin/menu"><i class="icon-list"></i><span class="hidden-tablet"> {#theme_menu_menu#}</span></a></li>
+                    <li><a class="ajax-link" href="/admin/menu/menu_list/0"><i class="icon-list"></i><span class="hidden-tablet"> {#theme_menu_menu#}</span></a></li>
                     <li><a class="ajax-link" href="/admin/modules"><i class="icon-database"></i><span class="hidden-tablet"> {#theme_menu_modules#}</span></a></li>
                     <li><a class="ajax-link" href="/admin/blocks"><i class="icon-layout"></i><span class="hidden-tablet"> {#theme_menu_blocks#}</span></a></li>
                     <li><a class="ajax-link" href="/admin/theme"><i class="icon-brush"></i><span class="hidden-tablet"> {#theme_menu_themes#}</span></a></li>
@@ -582,6 +584,8 @@
         <script src="/themes/admin/js/main.js"></script>
         <script src="/themes/admin/js/jquery.elfinder.min.js"></script>
         <script src="/themes/admin/js/bootbox.min.js"></script>
+        <script src="/themes/admin/js/bootstrap-select/js/bootstrap-select.min.js"></script>
+        <script src="/themes/admin/js/bootstrap-switch/js/bootstrap-switch.min.js"></script>
         
         <div class="clearfix clear"></div>
         <a href="#" class="scrollup"></a>

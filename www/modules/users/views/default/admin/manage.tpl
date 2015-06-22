@@ -31,7 +31,7 @@
             <div class="form-group">
               <label class="col-sm-3 control-label" for="date01">{#user_group#}</label>
               <div class="controls col-sm-5">
-                  {html_options name=gid options=$groups_list selected=$gid class='form-control'}
+                  {html_options name=gid options=$groups_list selected=$gid class='form-control selectpicker'}
               </div>
             </div>
 

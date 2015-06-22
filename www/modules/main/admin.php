@@ -31,7 +31,7 @@ class AdminController extends Controller
     
     //Server Info
     $serverInfo['OS'] = php_uname();
-    $serverInfo['Apache'] = apache_get_version();
+    $serverInfo['Apache'] = '2.4';//apache_get_version();
     $serverInfo['PHP'] = phpversion();
     $serverInfo['memory']['used'] = appRoundSize(memory_get_usage());
     $serverInfo['mysql'] = mysql_get_client_info();

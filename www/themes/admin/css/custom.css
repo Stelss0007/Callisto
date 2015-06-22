@@ -9,10 +9,35 @@ html, body {
   height:100%;
 }
 
+/*
+a:focus,
+button:focus,
+input:focus
+{ 
+    outline: none; 
+}
+:focus, :active {
+    outline: 0;
+    border: 0;
+}
+button::-moz-focus-inner {
+  border: 0;
+}
+
+:focus {outline:none;}
+::-moz-focus-inner {border:0;}
+*/
+
 .table {
   width: 100%;
   margin-bottom: 17px;
   margin-top: 10px;
+}
+
+.table tbody tr:hover td,
+.table tbody tr:hover th
+{
+    background-color: #ebebeb !important;
 }
 
 .page-container {
@@ -110,4 +135,21 @@ html, body {
 
 a, a:hover, a:active, a:focus {
   outline: 0;
+}
+
+.bootstrap-select .btn-default {
+    background-color: #fff;
+}
+
+.inline {
+    display: inline-block !important;
+    width: auto;
+}
+
+.bootstrap-select.inline {
+    width: auto !important;
+}
+
+.form-control:focus {
+   outline: #818da2;
 }

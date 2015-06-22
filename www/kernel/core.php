@@ -11,7 +11,9 @@ appUsesLib('UserSession');
 
 function appDebug($value)
   {
-  appDebug($value);
+  echo '<pre>';
+  var_dump($value);
+  echo '</pre>';
   }
   
 function smarty_block_dynamic($param, $content, &$smarty) {

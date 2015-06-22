@@ -7,6 +7,10 @@
   $(document).ready(function(){
       $('#myTab').tab();
       
+      $(".switch").bootstrapSwitch({
+            size: 'mini'
+        });
+      
       //group checkbox
       $(".td_entiies_group").on('click', function(){
         if($(this).attr('checked') == 'checked') {
