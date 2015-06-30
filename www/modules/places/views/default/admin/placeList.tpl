@@ -1,15 +1,15 @@
 <div class="row-fluid sortable">		
   <div class="box span12">
     <div class="box-header well" data-original-title>
-      <h2><i class="icon-database"></i> {#country_header#}</h2>
+      <h2><i class="icon-database"></i> {#place_header#}</h2>
     </div>
     <div class="box-content">
 
-    <form action="/admin/countries/group_operation">
+    <form action="/admin/places/group_operation">
       <div class="btn-toolbar batch-actions-buttons">
         <div class="btn-group">
-          <a href='/admin/countries/create{if $parent_id}/{$parent_id}{/if}' class='btn btn-success'><i class="icon icon-plus-sign icon-white"></i> {#sys_add#}</a>
-          <a href='/admin/configuration/countries' class="btn btn-default" title="{#sys_configuration#}"><i class="icon-cog"></i> {#sys_configuration#}</a>
+          <a href='/admin/places/create{if $parent_id}/{$parent_id}{/if}' class='btn btn-success'><i class="icon icon-plus-sign icon-white"></i> {#sys_add#}</a>
+          <a href='/admin/configuration/places' class="btn btn-default" title="{#sys_configuration#}"><i class="icon-cog"></i> {#sys_configuration#}</a>
           <a href='#' rel="activate" class="btn btn-default" title="{#sys_activate#}"><i class="icon-play"></i> {#sys_activate#}</a>
           <a href='#' rel="deactivate" class="btn btn-default" title="{#sys_deactivate#}"><i class="icon-pause"></i> {#sys_deactivate#}</a>
         </div>
@@ -37,71 +37,49 @@
                 <input type="checkbox" name="entities[]" class="td_entiies_group" value="">
             </th>
             <th>
-              {#countries_title#} RU
+              {#places_title#} RU
             </th>
             <th>
-              {#countries_title#} EN
+              {#places_title#} EN
             </th>
             <th>
-              {#countries_code#}
+              {#places_country#}
             </th>
             <th>
-              {#countries_capital#} RU
+              {#places_city#}
             </th>
+
             <th>
-              {#countries_capital#} EN
-            </th>
-            <th>
-              {#countries_continent#}
-            </th>
-            <th>
-              {#countries_areaInSqKm#}
-            </th>
-            <th>
-              {#countries_population#}
-            </th>
-            <th>
-              
+               
             </th>
           </tr>
         </thead>
         <tbody>
-          {foreach from=$countries item=countries name=country}
-            {cycle name="countries" values="even,odd" assign="class" print=false}
+          {foreach from=$places item=places name=city}
+            {cycle name="places" values="even,odd" assign="class" print=false}
             <tr class='{$class}'>
               <th>
-                  <input type="checkbox" name="entities[]" class="td_entities" value="{$countries.id}">
+                  <input type="checkbox" name="entities[]" class="td_entities" value="{$places.id}">
               </th>
               
               <td>
-                {$countries.name_ru}
+                {$places.name_ru}
               </td>
               <td>
-                {$countries.name_en}
+                {$places.name_en}
+              </td>
+              
+              <td>
+                {$countries[$places.country_id]}
               </td>
               <td>
-                {$countries.code}
+                {$places.city_ru}
               </td>
-              <td>
-                {$countries.capital_ru}
-              </td>
-              <td>
-                {$countries.capital_en}
-              </td>
-              <td>
-                {$countries.continent}
-              </td>
-              <td>
-                {$countries.areaInSqKm}
-              </td>
-              <td>
-                {$countries.population}
-              </td>
-             
+
               <td>
                 <div class="btn-group">
-                  <a href='/admin/countries/modify/{$countries.id}' title="{#sys_edit#}" class="btn btn-icon"><i class="icon-edit"></i></a>
-                  <a href='/admin/countries/delete/{$countries.id}' title="{#sys_delete#}" class="btn btn-icon btn-delete" onclick="return confirm('{#sys_confirm_delete#}');"><i class="icon-trash"></i></a>
+                  <a href='/admin/places/modify/{$places.id}' title="{#sys_edit#}" class="btn btn-icon"><i class="icon-edit"></i></a>
+                  <a href='/admin/places/delete/{$places.id}' title="{#sys_delete#}" class="btn btn-icon btn-delete" onclick="return confirm('{#sys_confirm_delete#}');"><i class="icon-trash"></i></a>
                 </div>
               </td>
             </tr>

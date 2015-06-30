@@ -71,6 +71,13 @@
             <input type="text" name="modconfig[main][site_footer]" value="{$modconfig.main.site_footer}" class="form-control"  >
           </div>
         </div>
+          
+        <div class="form-group">
+          <label for="date01" class="col-sm-3 control-label">{#site_email#}</label>
+          <div class="controls col-sm-5">
+            <input type="text" name="modconfig[main][site_email]" value="{$modconfig.main.site_email}" class="form-control"  >
+          </div>
+        </div>
 
         <div class="form-group">
           <label for="date01" class="col-sm-3 control-label">{#site_dateformat#}</label>
@@ -120,6 +127,48 @@
   </div>
   
   
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" data-parent="#accordion" href="#group-user">
+          {#config_group_user#}
+        </a>
+      </h4>
+    </div>
+    <div id="group-user" class="panel-collapse collapse">
+      <div class="panel-body">
+        <div class="panel-body">
+          
+          <div class="form-group">
+            <label for="date01" class="col-sm-3 control-label">{#user_anyone_can_register#}</label>
+            <div class="controls col-sm-5">
+                <input type="checkbox" name="modconfig[main][user_anyone_can_register]" style="width: 20px;" class="form-control" value="{$modconfig.main.user_anyone_can_register}">
+            </div>
+          </div>
+            
+          <div class="form-group">
+            <label for="date01" class="col-sm-3 control-label">{#user_default_group#}</label>
+            <div class="controls col-sm-5">
+             <select data-rel="chosen_" name="modconfig[main][user_default_group]" class="form-control selectpicker" >
+              {html_options options=$site_seo_robots_list selected=$modconfig.main.user_default_group}
+             </select>
+            </div>
+          </div>
+            
+          <div class="form-group">
+            <label for="date01" class="col-sm-3 control-label">{#user_new_confirm#}</label>
+            <div class="controls col-sm-5">
+             <select data-rel="chosen_" name="modconfig[main][user_new_confirm]" class="form-control selectpicker" >
+              {html_options options=$site_seo_robots_list selected=$modconfig.main.user_new_confirm}
+             </select>
+            </div>
+          </div>
+            
+      </div>
+      </div>
+    </div>
+  </div>
+             
   <div class="panel panel-default">
     <div class="panel-heading">
       <h4 class="panel-title">

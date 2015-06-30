@@ -16,7 +16,7 @@ class AdminController extends Controller
     
     //Подготовим фильтры
     $category_filter_list[0] = $this->t('all_category');
-    $category_filter_list    = $category_filter_list + $this->articleCategory->category_list(false);
+    $category_filter_list    = $category_filter_list + $this->articleCategory->categoryList(false);
     
     $user_filter_list[0] = $this->t('all_user');
     $user_filter_list    = $user_filter_list + $this->users->user_list(false);
@@ -45,7 +45,7 @@ class AdminController extends Controller
     {
     $this->getAccess(ACCESS_ADD);
     $data = $this->input_vars;
-    $this->article_category_list = $this->articleCategory->category_list(false);
+    $this->article_category_list = $this->articleCategory->categoryList(false);
     //appDebug($data);exit;
     if($data['submit'])
       {
@@ -122,11 +122,11 @@ class AdminController extends Controller
       {
       if($id)
         {
-        $this->articleCategory->category_update($data, $id);
+        $this->articleCategory->categoryUpdate($data, $id);
         }
       else
         {
-        $this->articleCategory->category_create($data);
+        $this->articleCategory->categoryСreate($data);
         }
         
       $this->deleteCache();
@@ -204,7 +204,7 @@ class AdminController extends Controller
     $sIndexColumn = "id";
     
     $this->usesModel('articleCategory');
-    $article_category_list = $this->articleCategory->category_list(false);
+    $article_category_list = $this->articleCategory->categoryList(false);
     
     $conditions = array(
                         'join'   => "LEFT JOIN {$this->articles->getModelTable('users')} u ON (u.id=t.article_user_id)",

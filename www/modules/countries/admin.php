@@ -19,6 +19,25 @@ class AdminController extends Controller
     $this->viewPage();
     }
     
+  function actionCreate()
+    {
+    $this->getAccess(ACCESS_ADMIN);
+    $country = $this->countries->getById(0);
+    $this->assign('id', 0);
+    $this->assign('country', $country);
+    
+    $browsein =  [
+                    ['url'=>"/admin/main", 'displayname'=>$this->t('dashboard')],
+                    ['url'=>"/admin/countries", 'displayname'=>$this->t('countries')],
+                    ['url'=>"/admin/countries/create", 'displayname'=>'Создание'],
+                    //['url'=>"/admin/main/countries", 'displayname'=>'ffff']
+                 ];
+
+    $this->assign('module_browsein', $browsein);
+    
+    $this->viewPage();
+    }
+    
   function actionModify($id)
     {
     $this->getAccess(ACCESS_ADMIN);

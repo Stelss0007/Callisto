@@ -24,7 +24,7 @@
           <col width='20'>
           <col width='340'>
           <col width='*'>
-            <col width='100'>
+            <col width='120'>
         </colgroup>
         <thead>
           <tr>
@@ -65,6 +65,7 @@
              
               <td>
                 <div class="btn-group">
+                  <a href='/admin/{$module.module_name}' title="{#sys_view#}" class="btn btn-icon"><i class="icon-cog"></i></a>
                   <a href='/admin/modules/info/{$module.module_name}' title="{#sys_edit#}" class="btn btn-icon"><i class="icon-info-circled"></i></a>
                   <a href='/admin/modules/info/{$module.module_name}' title="{#sys_install#}" class="btn btn-icon"><i class="icon-install"></i></a>
                   <a href='/admin/modules/delete/{$module.id}' title="{#sys_delete#}" class="btn btn-icon btn-delete" onclick="return confirm('{#sys_confirm_delete#}');"><i class="icon-trash"></i></a>

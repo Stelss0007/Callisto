@@ -11,6 +11,6 @@
  *
  * @author Ruslan
  */
-class Countries extends Model {
-    public $table = 'countries';
+class Places extends Model {
+    public $table = 'places';
 }

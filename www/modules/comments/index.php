@@ -15,7 +15,7 @@ class IndexController extends Controller
     
     //Подготовим фильтры
     $category_filter_list[0] = $this->t('sys_unknown');
-    $category_filter_list    = $category_filter_list + $this->articleCategory->category_list(false);
+    $category_filter_list    = $category_filter_list + $this->articleCategory->categoryList(false);
     
     $user_filter_list[0] = $this->t('sys_unknown');
     $user_filter_list    = $user_filter_list + $this->users->user_list(false);

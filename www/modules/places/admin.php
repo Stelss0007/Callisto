@@ -1,9 +1,9 @@
 <?php
 class AdminController extends Controller
   {
-  public $defaultAction = 'cityList';
+  public $defaultAction = 'placeList';
   
-  function actionCityList($parent_id = 0)
+  function actionPlaceList($parent_id = 0)
     {
     $this->getAccess(ACCESS_ADMIN);
     
@@ -16,12 +16,12 @@ class AdminController extends Controller
     }
     
     $this->assign('countries', $countryList);
-    $this->assign('cities', $this->cities->getList());
+    $this->assign('places', $this->places->getList());
     
     $browsein =  [
                     ['url'=>"/admin/main", 'displayname'=>$this->t('dashboard')],
-                    ['url'=>"/admin/main/cities", 'displayname'=>$this->t('cities')],
-                    //['url'=>"/admin/main/cities", 'displayname'=>'ffff']
+                    ['url'=>"/admin/main/places", 'displayname'=>$this->t('places')],
+                    //['url'=>"/admin/main/places", 'displayname'=>'ffff']
                  ];
 
     $this->assign('module_browsein', $browsein);
@@ -32,7 +32,7 @@ class AdminController extends Controller
   function actionCreate()
     {
     $this->getAccess(ACCESS_ADMIN);
-    $city = $this->cities->getById(0);
+    $place = $this->places->getById(0);
     
     $this->usesModel('countries');
     $countries = $this->countries->getList(['fields'=>['id', 'name_ru']]);
@@ -43,13 +43,13 @@ class AdminController extends Controller
     }
     
     $this->assign('id', 0);
-    $this->assign('city', $city);
+    $this->assign('place', $place);
     $this->assign('countries', $countryList);
     
     $browsein =  [
                     ['url'=>"/admin/main", 'displayname'=>$this->t('dashboard')],
-                    ['url'=>"/admin/cities", 'displayname'=>$this->t('cities')],
-                    ['url'=>"/admin/cities/create", 'displayname'=>'Создание'],
+                    ['url'=>"/admin/places", 'displayname'=>$this->t('places')],
+                    ['url'=>"/admin/places/create", 'displayname'=>'Создание'],
                     //['url'=>"/admin/main/countries", 'displayname'=>'ffff']
                  ];
 
@@ -61,7 +61,7 @@ class AdminController extends Controller
   function actionModify($id)
     {
     $this->getAccess(ACCESS_ADMIN);
-    $city = $this->cities->getById($id);
+    $place = $this->places->getById($id);
     
     $this->usesModel('countries');
     $countries = $this->countries->getList();
@@ -72,14 +72,14 @@ class AdminController extends Controller
     }
     
     $this->assign('id', $id);
-    $this->assign('city', $city);
+    $this->assign('place', $place);
     $this->assign('countries', $countryList);
     
     $browsein =  [
                     ['url'=>"/admin/main", 'displayname'=>$this->t('dashboard')],
-                    ['url'=>"/admin/cities", 'displayname'=>$this->t('cities')],
-                    ['url'=>"/admin/cities/modify", 'displayname'=>$city['name_ru'] . ' Редактирование'],
-                    //['url'=>"/admin/main/cities", 'displayname'=>'ffff']
+                    ['url'=>"/admin/places", 'displayname'=>$this->t('places')],
+                    ['url'=>"/admin/places/modify", 'displayname'=>$place['name_ru'] . ' Редактирование'],
+                    //['url'=>"/admin/main/places", 'displayname'=>'ffff']
                  ];
 
     $this->assign('module_browsein', $browsein);
@@ -97,20 +97,20 @@ class AdminController extends Controller
       {
       $post['updated_at']   = time();
       
-      $this->arrayToModel($this->cities, $post);
+      $this->arrayToModel($this->places, $post);
       
       if($id)
         {
-        $this->cities->save($id);
+        $this->places->save($id);
         }
       else
         {
-        $this->cities->created_at = time();  
-        $this->cities->save();
+        $this->places->created_at = time();  
+        $this->places->save();
         }
       
       $this->deleteCache();
-      $this->redirect('/admin/cities');
+      $this->redirect('/admin/places');
       }
     }
     
@@ -122,7 +122,7 @@ class AdminController extends Controller
     if(empty($id))
       $this->errors->setError("ID of menu is missing!");
    
-    $this->cities->delete($id);
+    $this->places->delete($id);
     $this->showMessage('Элемент меню успешно удален!');
     $this->redirect();
     }

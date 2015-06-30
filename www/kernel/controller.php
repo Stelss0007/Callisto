@@ -656,6 +656,7 @@ abstract class Controller extends AppObject
       {
       if(file_exists($this->root_dir.$this->module_dir.'views/default/admin/'.$view_file_name.'.tpl'))
         {
+        $this->smarty->assign('viewDir', $this->root_dir.$this->module_dir.'views/default/admin/');  
         $this->tpls[] = '(Original Module TPL) '.$this->module_dir.'themes/default/admin/'.$view_file_name.'.tpl';
         return $this->root_dir.$this->module_dir.'views/default/admin/'.$view_file_name.'.tpl';
         }
@@ -679,11 +680,13 @@ abstract class Controller extends AppObject
       {
       if(file_exists($this->root_dir.'themes/'.$this->current_theme.'/'.$this->module_dir.$view_file_name.'.tpl'))
         {
+        $this->smarty->assign('viewDir', $this->root_dir.'themes/'.$this->current_theme.'/'.$this->module_dir);   
         $this->tpls[] = '(Overridden by Theme) '.'themes/'.$this->current_theme.'/'.$this->module_dir.$view_file_name.'.tpl';
         return $this->root_dir.'themes/'.$this->current_theme.'/'.$this->module_dir.$view_file_name.'.tpl';
         }
       elseif(file_exists($this->root_dir.$this->module_dir.'views/default/'.$view_file_name.'.tpl'))
         {
+        $this->smarty->assign('viewDir', $this->root_dir.$this->module_dir.'views/default/'); 
         $this->tpls[] = '(Original Module TPL) '.$this->module_dir.'themes/default/'.$view_file_name.'.tpl';
         return $this->root_dir.$this->module_dir.'views/default/'.$view_file_name.'.tpl';
         }

@@ -1,5 +1,5 @@
 {appJsLoad modname='kernel' scriptname='tinymce'} 
-<form action="/admin/countries/update" method="post" class="form-horizontal" enctype="multipart/form-data">
+<form action="/admin/cities/update" method="post" class="form-horizontal" enctype="multipart/form-data">
     <input type="hidden" name='id' value="{$id}">
     <div class="row-fluid">
         <div class="box span12">
@@ -13,114 +13,82 @@
                     <div class="form-group">
                         <label class="col-sm-1 control-label">{#sys_title#} RU</label>
                         <div class="controls col-sm-11">
-                            <input type="text" name='name_ru' class="form-control" value='{$country.name_ru}'>
+                            <input type="text" name='name_ru' class="form-control" value='{$city.name_ru}'>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-1 control-label">{#sys_title#} EN</label>
                         <div class="controls col-sm-11">
-                            <input type="text" name='name_en' class="form-control" value='{$country.name_en}'>
+                            <input type="text" name='name_en' class="form-control" value='{$city.name_en}'>
+                        </div>
+                    </div>
+       
+                    <div class="form-group">
+                        <label class="col-sm-1 control-label">{#cities_code#}</label>
+                        <div class="controls col-sm-11">
+                            <input type="text" name='code' class="form-control" value='{$city.code}'>
                         </div>
                     </div>
                         
                     <div class="form-group">
-                        <label class="col-sm-1 control-label">{#countries_capital#} RU</label>
+                        <label class="col-sm-1 control-label">{#cities_country#}</label>
                         <div class="controls col-sm-11">
-                            <input type="text" name='capital_ru' class="form-control" value='{$country.capital_ru}'>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-1 control-label">{#countries_capital#} EN</label>
-                        <div class="controls col-sm-11">
-                            <input type="text" name='capital_en' class="form-control" value='{$country.capital_en}'>
+                            <select name="country_id" class="form-control selectpicker" data-live-search="true">
+                                {html_options options=$countries selected=$city.country_id}
+                            </select>
                         </div>
                     </div>
                         
                     <div class="form-group">
-                        <label class="col-sm-1 control-label">{#countries_code#}</label>
+                        <label class="col-sm-1 control-label">{#cities_areaInSqKm#}</label>
                         <div class="controls col-sm-11">
-                            <input type="text" name='code' class="form-control" value='{$country.code}'>
+                            <input type="text" name='areaInSqKm' class="form-control" value='{$city.areaInSqKm}'>
                         </div>
                     </div>
                         
                     <div class="form-group">
-                        <label class="col-sm-1 control-label">{#countries_currency_code#}</label>
+                        <label class="col-sm-1 control-label">{#cities_population#}</label>
                         <div class="controls col-sm-11">
-                            <input type="text" name='currency_code' class="form-control" value='{$country.currency_code}'>
-                        </div>
-                    </div>
-                        
-                    <div class="form-group">
-                        <label class="col-sm-1 control-label">{#countries_continent#}</label>
-                        <div class="controls col-sm-11">
-                            <input type="text" name='continent' class="form-control" value='{$country.continent}'>
-                        </div>
-                    </div>
-                        
-                    <div class="form-group">
-                        <label class="col-sm-1 control-label">{#countries_iso_numeric#}</label>
-                        <div class="controls col-sm-11">
-                            <input type="text" name='iso_numeric' class="form-control" value='{$country.iso_numeric}'>
-                        </div>
-                    </div>
-                        
-                    <div class="form-group">
-                        <label class="col-sm-1 control-label">{#countries_geonameId#}</label>
-                        <div class="controls col-sm-11">
-                            <input type="text" name='geonameId' class="form-control" value='{$country.geonameId}'>
-                        </div>
-                    </div>
-                        
-                    <div class="form-group">
-                        <label class="col-sm-1 control-label">{#countries_areaInSqKm#}</label>
-                        <div class="controls col-sm-11">
-                            <input type="text" name='areaInSqKm' class="form-control" value='{$country.areaInSqKm}'>
-                        </div>
-                    </div>
-                        
-                    <div class="form-group">
-                        <label class="col-sm-1 control-label">{#countries_population#}</label>
-                        <div class="controls col-sm-11">
-                            <input type="text" name='population' class="form-control" value='{$country.population}'>
+                            <input type="text" name='population' class="form-control" value='{$city.population}'>
                         </div>
                     </div>
                     
                     <div class="form-group">
-                        <label class="col-sm-1 control-label">{#countries_description#} RU: </label>
+                        <label class="col-sm-1 control-label">{#cities_description#} RU: </label>
                         <div class="controls col-sm-12">
-                            {texteditor name=description_ru text=$country.description_ru}
+                            {texteditor name=description_ru text=$city.description_ru}
                         </div>
                     </div>
                         
                     <div class="form-group">
-                        <label class="col-sm-1 control-label">{#countries_description#} EN: </label>
+                        <label class="col-sm-1 control-label">{#cities_description#} EN: </label>
                         <div class="controls col-sm-12">
-                            {texteditor name=description_en text=$country.description_en}
+                            {texteditor name=description_en text=$city.description_en}
                         </div>
                     </div>
                         
                     <div class="form-group">
-                        <label class="col-sm-1 control-label">{#countries_north#}</label>
+                        <label class="col-sm-1 control-label">{#cities_north#}</label>
                         <div class="controls col-sm-11">
-                            <input type="text" name='north' class="form-control" value='{$country.north}'>
+                            <input type="text" name='north' class="form-control" value='{$city.north}'>
                         </div>
                     </div>    
                     <div class="form-group">
-                        <label class="col-sm-1 control-label">{#countries_south#}</label>
+                        <label class="col-sm-1 control-label">{#cities_south#}</label>
                         <div class="controls col-sm-11">
-                            <input type="text" name='south' class="form-control" value='{$country.south}'>
+                            <input type="text" name='south' class="form-control" value='{$city.south}'>
                         </div>
                     </div>    
                     <div class="form-group">
-                        <label class="col-sm-1 control-label">{#countries_east#}</label>
+                        <label class="col-sm-1 control-label">{#cities_east#}</label>
                         <div class="controls col-sm-11">
-                            <input type="text" name='east' class="form-control" value='{$country.east}'>
+                            <input type="text" name='east' class="form-control" value='{$city.east}'>
                         </div>
                     </div>    
                     <div class="form-group">
-                        <label class="col-sm-1 control-label">{#countries_west#}</label>
+                        <label class="col-sm-1 control-label">{#cities_west#}</label>
                         <div class="controls col-sm-11">
-                            <input type="text" name='west' class="form-control" value='{$country.west}'>
+                            <input type="text" name='west' class="form-control" value='{$city.west}'>
                         </div>
                     </div>    
                         

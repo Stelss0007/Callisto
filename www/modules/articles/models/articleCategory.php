@@ -4,7 +4,7 @@ class articleCategory extends Model
   {
   var $table = 'article_category';
   
-  function category_list($full=false)
+  function categoryList($full=false)
     {
     
     $result = array();
@@ -25,12 +25,12 @@ class articleCategory extends Model
     return $result;
     }
   
-  function category_create($data)
+  function categoryСreate($data)
     {
     $this->insert($this->table, $data);
     }
     
-  function category_update($data, $id)
+  function categoryUpdate($data, $id)
     {
     if(!is_numeric($id))
       return false;
