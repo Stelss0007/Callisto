@@ -275,6 +275,11 @@ class IndexController extends Controller
     {
     
     }
+    
+  function actionNamespace()
+    {
+      $article = new \app\modules\articles\Articles();
+    }
 
   }
 ?>

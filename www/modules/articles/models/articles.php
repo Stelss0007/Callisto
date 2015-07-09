@@ -1,4 +1,5 @@
 <?php
+//namespace app\modules\articles\models;
 
 class articles extends Model
   {
