@@ -14,6 +14,27 @@ include 'kernel/router.php';
 include 'kernel/controller.php';
 include 'kernel/model.php';
 
+
+include 'kernel/db/SQLBuilder.php';
+
+$query = new SQLBuilder();
+echo $query->from('articles')
+        ->select(['name', 'id', 'description'])
+        ->select('name, oredr')
+        ->leftJoin('table1', 'table1.id = table2.id AND table1.id = :name')
+        ->params([':id'=>10, 'name' => "%Ruslan '%"])
+        ->params([':id2'=>10, 'name2' => "Ruslan '"])
+        ->orderBy(['name' => 'DESC'])
+        ->groupBy(['description', 'name'])
+        //->where('a=b')
+        ->andWhere('b=:id')
+        ->andWhere('b2=:id')
+        ->orWhere('b2=:id')
+        ->andWhere('b3=:id')
+        ->andWhere('b4=:id')
+        ->getSQLString();
+exit;
+
 $router = new Router();
 $router->run();
 
