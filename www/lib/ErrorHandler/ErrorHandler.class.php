@@ -1,4 +1,5 @@
 <?php
+
 class ErrorHandler
   {
   static $instance;
@@ -7,7 +8,9 @@ class ErrorHandler
   var $notice_array = array();
   var $warning_array = array();
   var $user_error_array = array();
+  var $backTrace = [];
   
+
   public static function getInstance()
    {
      if (empty(self::$instance))
@@ -20,17 +23,18 @@ class ErrorHandler
   public function __construct()
     {
     error_reporting(0);
+
     // регистрация ошибок
-    set_error_handler(array($this, 'OtherErrorCatcher'));
+    set_error_handler(array($this, 'otherErrorCatcher'));
 
     // перехват критических ошибок
-    register_shutdown_function(array($this, 'FatalErrorCatcher'));
+    register_shutdown_function(array($this, 'fatalErrorCatcher'));
 
     // создание буфера вывода
     ob_start();
     }
 
-  public function OtherErrorCatcher($errno, $errstr, $errfile, $errline)
+  public function otherErrorCatcher($errno, $errstr, $errfile, $errline)
     {
     // контроль ошибок:
     // - записать в лог
@@ -39,6 +43,7 @@ class ErrorHandler
     case E_USER_ERROR:
       //echo "array('type' => $errno, 'message' => $errstr, 'file' => $errfile, 'line' => $errline);";
         $this->user_error_array[] = array('type' => $errno, 'message' => $errstr, 'file' => $errfile, 'line' => $errline);
+        $this->backTrace = debug_backtrace();
         $this->__destruct();
         //тут лучше сформировать пиьсмо и отправить администратору сайты
         break;
@@ -64,7 +69,7 @@ class ErrorHandler
     return true;
     }
 
-  public function FatalErrorCatcher()
+  public function fatalErrorCatcher()
     {
     $error = error_get_last();
 
@@ -74,6 +79,7 @@ class ErrorHandler
       if ($error['type'] == E_ERROR || $error['type'] == E_PARSE || $error['type'] == E_COMPILE_ERROR || $error['type'] == E_CORE_ERROR)
         {
         $this->error_array[] = $error;
+        $this->backTrace = debug_backtrace();
         ob_end_clean(); // сбросить буфер, завершить работу буфера
         $this->__destruct();
         // контроль критических ошибок:
@@ -84,6 +90,7 @@ class ErrorHandler
       else
         {
         $this->user_error_array[] = $error;
+        $this->backTrace = debug_backtrace();
         ob_end_flush(); // вывод буфера, завершить работу буфера
         $this->__destruct();
         }
@@ -117,7 +124,7 @@ class ErrorHandler
       $this->showWarnings();
       }
     }
-  function is_serial($s) 
+  function isSerial($s) 
     {
     if( stristr($s, '{' ) != false &&
         stristr($s, '}' ) != false &&
@@ -136,7 +143,6 @@ class ErrorHandler
     {
     $callee = debug_backtrace();
     $callee = $callee[0];
-
     $error_array = array('message'=>$error_message, 'file'=>$callee['file'], 'line'=>$callee['line']);
     $error_array = serialize($error_array);
     trigger_error($error_array, E_USER_ERROR);
@@ -150,7 +156,8 @@ class ErrorHandler
 //      echo 'Page Not Found!';
 //      die();
 //      }
-    
+    global $backTrace;
+     
     header('HTTP/1.1 500 Internal Server Error');
     ?>
     <head>
@@ -202,10 +209,10 @@ class ErrorHandler
           </td>
         </tr>
         <?php endforeach;?>
-      
+    
         <?php foreach($this->user_error_array as $verror):
           
-          if(!empty($verror['message']) && $this->is_serial($verror['message']))
+          if(!empty($verror['message']) && $this->isSerial($verror['message']))
             $verror = unserialize($verror['message']);
         ?>
         <tr class="tr_error">
@@ -223,6 +230,7 @@ class ErrorHandler
         </tr>
         <?php endforeach;?>
       </table>
+      <pre><?php debug_print_backtrace(); ?></pre>
     </body>
     <?php
     $this->error_array = null;

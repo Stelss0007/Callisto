@@ -110,3 +110,6 @@ $appConfig['Message.type'] = 'js';
 
 $appConfig['gzip'] = true;
 
+
+return $appConfig;
+

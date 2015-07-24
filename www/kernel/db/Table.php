@@ -13,497 +13,295 @@
  */
 
 namespace app\db\ActiveRecord;
-/**
- * Manages reading and writing to a database table.
- *
- * This class manages a database table and is used by the Model class for
- * reading and writing to its database table. There is one instance of Table
- * for every table you have a model for.
- *
- * @package ActiveRecord
- */
-class Table
+use ReflectionClass;
+
+class Table extends SQLBuilder
 {
-	private static $cache = array();
-	public $class;
-	public $conn;
-	public $pk;
-	public $last_sql;
-	// Name/value pairs of columns in this table
-	public $columns = array();
-	/**
-	 * Name of the table.
-	 */
-	public $table;
-	/**
-	 * Name of the database (optional)
-	 */
-	public $dbName;
-	/**
-	 * Name of the sequence for this table (optional). Defaults to {$table}_seq
-	 */
-	public $sequence;
-	/**
-	 * Whether to cache individual models or not (not to be confused with caching of table schemas).
-	 */
-	public $cacheIndividualModel;
-	/**
-	 * Expiration period for model caching.
-	 */
-	public $cacheModelExpire;
-	/**
-	 * A instance of CallBack for this model/table
-	 * @static
-	 * @var object ActiveRecord\CallBack
-	 */
-	public $callback;
-	/**
-	 * List of relationships for this table.
-	 */
-	private $relationships = array();
-	public static function load($model_class_name)
+    public $tableName;
+    public $class;
+    public $conn;
+    public $pk;
+    public $last_sql;
+    // Name/value pairs of columns in this table
+    public $columns = [];
+    public static $cache = [];
+    
+    protected $className;
+    
+    private $localRelations = [];
+    private $relationsArray = [];
+    
+    public static function load($modelClassName)
+        {
+        return new Table($modelClassName);
+        // $this->class = new ReflectionClass($model_class_name);
+        if (!isset(self::$cache[$modelClassName]))
+            {
+            self::$cache[$modelClassName] = new Table($modelClassName);
+            //self::$cache[$model_class_name]->setAssociations();
+            }
+        return self::$cache[$modelClassName];
+        }
+        
+    public function __construct($className)
 	{
-		if (!isset(self::$cache[$model_class_name]))
-		{
-			/* do not place set_assoc in constructor..it will lead to infinite loop due to
-			   relationships requesting the model's table, but the cache hasn't been set yet */
-			self::$cache[$model_class_name] = new Table($model_class_name);
-			self::$cache[$model_class_name]->setAssociations();
-		}
-		return self::$cache[$model_class_name];
+//        $this->class = Reflections::instance()->add($class_name)->get($class_name);
+//        $this->reestablishСonnection(false);
+//        $this->setTableName();
+//        $this->getMetaData();
+//        $this->setPrimaryKey();
+//        $this->setSequenceName();
+//        $this->setDelegates();
+//        $this->setCache();
+//        $this->setSettersAndGetters();
+//        $this->callback = new CallBack($class_name);
+//        $this->callback->register('before_save', function(Model $model) { $model->set_timestamps(); }, array('prepend' => true));
+//        $this->callback->register('after_save', function(Model $model) { $model->reset_dirty(); }, array('prepend' => true));
+        $this->className = $className;
+        $this->tableName = self::getTableNameByClassName($className);
+        //$this->setFields();
+        parent::__construct($this->tableName);
 	}
-	public static function clearСache($model_class_name=null)
-	{
-		if ($model_class_name && array_key_exists($model_class_name,self::$cache))
-			unset(self::$cache[$model_class_name]);
-		else
-			self::$cache = array();
-	}
-	public function __construct($class_name)
-	{
-		$this->class = Reflections::instance()->add($class_name)->get($class_name);
-		$this->reestablishСonnection(false);
-		$this->setTableName();
-		$this->getMetaData();
-		$this->setPrimaryKey();
-		$this->setSequenceName();
-		$this->setDelegates();
-		$this->setCache();
-		$this->setSettersAndGetters();
-		$this->callback = new CallBack($class_name);
-		$this->callback->register('before_save', function(Model $model) { $model->set_timestamps(); }, array('prepend' => true));
-		$this->callback->register('after_save', function(Model $model) { $model->reset_dirty(); }, array('prepend' => true));
-	}
-	public function reestablishСonnection($close=true)
-	{
-		// if connection name property is null the connection manager will use the default connection
-		$connection = $this->class->getStaticPropertyValue('connection',null);
-		if ($close)
-		{
-			ConnectionManager::drop_connection($connection);
-			static::clearСache();
-		}
-		return ($this->conn = ConnectionManager::get_connection($connection));
-	}
-	public function createJoins($joins)
-	{
-		if (!is_array($joins))
-			return $joins;
-		$ret = $space = '';
-		$existing_tables = array();
-		foreach ($joins as $value)
-		{
-			$ret .= $space;
-			if (stripos($value,'JOIN ') === false)
-			{
-				if (array_key_exists($value, $this->relationships))
-				{
-					$rel = $this->getRelationship($value);
-					// if there is more than 1 join for a given table we need to alias the table names
-					if (array_key_exists($rel->class_name, $existing_tables))
-					{
-						$alias = $value;
-						$existing_tables[$rel->class_name]++;
-					}
-					else
-					{
-						$existing_tables[$rel->class_name] = true;
-						$alias = null;
-					}
-					$ret .= $rel->construct_inner_join_sql($this, false, $alias);
-				}
-				else
-					throw new RelationshipException("Relationship named $value has not been declared for class: {$this->class->getName()}");
-			}
-			else
-				$ret .= $value;
-			$space = ' ';
-		}
-		return $ret;
-	}
-	public function optionsToSql($options)
-	{
-		$table = array_key_exists('from', $options) ? $options['from'] : $this->getFullyQualifiedTableName();
-		$sql = new SQLBuilder($this->conn, $table);
-		if (array_key_exists('joins',$options))
-		{
-			$sql->joins($this->createJoins($options['joins']));
-			// by default, an inner join will not fetch the fields from the joined table
-			if (!array_key_exists('select', $options))
-				$options['select'] = $this->getFullyQualifiedTableName() . '.*';
-		}
-		if (array_key_exists('select',$options))
-			$sql->select($options['select']);
-		if (array_key_exists('conditions',$options))
-		{
-			if (!is_hash($options['conditions']))
-			{
-				if (is_string($options['conditions']))
-					$options['conditions'] = array($options['conditions']);
-				call_user_func_array(array($sql,'where'),$options['conditions']);
-			}
-			else
-			{
-				if (!empty($options['mapped_names']))
-					$options['conditions'] = $this->mapNames($options['conditions'],$options['mapped_names']);
-				$sql->where($options['conditions']);
-			}
-		}
-		if (array_key_exists('order',$options))
-			$sql->order($options['order']);
-		if (array_key_exists('limit',$options))
-			$sql->limit($options['limit']);
-		if (array_key_exists('offset',$options))
-			$sql->offset($options['offset']);
-		if (array_key_exists('group',$options))
-			$sql->group($options['group']);
-		if (array_key_exists('having',$options))
-			$sql->having($options['having']);
-		return $sql;
-	}
-	public function find($options)
-	{
-		$sql = $this->optionsToSql($options);
-		$readonly = (array_key_exists('readonly',$options) && $options['readonly']) ? true : false;
-		$eager_load = array_key_exists('include',$options) ? $options['include'] : null;
-		return $this->findBySql($sql->to_s(),$sql->get_where_values(), $readonly, $eager_load);
-	}
-	public function cacheKeyForModel($pk)
-	{
-		if (is_array($pk))
-		{
-			$pk = implode('-', $pk);
-		}
-		return $this->class->name . '-' . $pk;
-	}
-	public function findBySql($sql, $values=null, $readonly=false, $includes=null)
-	{
-		$this->last_sql = $sql;
-		$collect_attrs_for_includes = is_null($includes) ? false : true;
-		$list = $attrs = array();
-		$sth = $this->conn->query($sql,$this->processData($values));
-		$self = $this;
-		while (($row = $sth->fetch()))
-		{
-			$cb = function() use ($row, $self)
-			{
-				return new $self->class->name($row, false, true, false);
-			};
-			if ($this->cacheIndividualModel)
-			{
-				$key = $this->cacheKeyForModel(array_intersect_key($row, array_flip($this->pk)));
-				$model = Cache::get($key, $cb, $this->cacheModelExpire);
-			}
-			else
-			{
-				$model = $cb();
-			}
-			if ($readonly)
-				$model->readonly();
-			if ($collect_attrs_for_includes)
-				$attrs[] = $model->attributes();
-			$list[] = $model;
-		}
-		if ($collect_attrs_for_includes && !empty($list))
-			$this->executeEagerLoad($list, $attrs, $includes);
-		return $list;
-	}
-	/**
-	 * Executes an eager load of a given named relationship for this table.
-	 *
-	 * @param $models array found modesl for this table
-	 * @param $attrs array of attrs from $models
-	 * @param $includes array eager load directives
-	 * @return void
-	 */
-	private function executeEagerLoad($models=array(), $attrs=array(), $includes=array())
-	{
-		if (!is_array($includes))
-			$includes = array($includes);
-		foreach ($includes as $index => $name)
-		{
-			// nested include
-			if (is_array($name))
-			{
-				$nested_includes = count($name) > 0 ? $name : $name[0];
-				$name = $index;
-			}
-			else
-				$nested_includes = array();
-			$rel = $this->getRelationship($name, true);
-			$rel->load_eagerly($models, $attrs, $nested_includes, $this);
-		}
-	}
-	public function getColumnByInflectedName($inflected_name)
-	{
-		foreach ($this->columns as $raw_name => $column)
-		{
-			if ($column->inflected_name == $inflected_name)
-				return $column;
-		}
-		return null;
-	}
-	public function getFullyQualifiedTableName($quote_name=true)
-	{
-		$table = $quote_name ? $this->conn->quote_name($this->table) : $this->table;
-		if ($this->dbName)
-			$table = $this->conn->quote_name($this->dbName) . ".$table";
-		return $table;
-	}
-	/**
-	 * Retrieve a relationship object for this table. Strict as true will throw an error
-	 * if the relationship name does not exist.
-	 *
-	 * @param $name string name of Relationship
-	 * @param $strict bool
-	 * @throws RelationshipException
-	 * @return HasOne|HasMany|BelongsTo Relationship or null
-	 */
-	public function getRelationship($name, $strict=false)
-	{
-		if ($this->hasRelationship($name))
-			return $this->relationships[$name];
-		if ($strict)
-			throw new RelationshipException("Relationship named $name has not been declared for class: {$this->class->getName()}");
-		return null;
-	}
-	/**
-	 * Does a given relationship exist?
-	 *
-	 * @param $name string name of Relationship
-	 * @return bool
-	 */
-	public function hasRelationship($name)
-	{
-		return array_key_exists($name, $this->relationships);
-	}
-	public function insert(&$data, $pk=null, $sequence_name=null)
-	{
-		$data = $this->processData($data);
-		$sql = new SQLBuilder($this->conn,$this->getFullyQualifiedTableName());
-		$sql->insert($data,$pk,$sequence_name);
-		$values = array_values($data);
-		return $this->conn->query(($this->last_sql = $sql->to_s()),$values);
-	}
-	public function update(&$data, $where)
-	{
-		$data = $this->processData($data);
-		$sql = new SQLBuilder($this->conn,$this->getFullyQualifiedTableName());
-		$sql->update($data)->where($where);
-		$values = $sql->bind_values();
-		return $this->conn->query(($this->last_sql = $sql->to_s()),$values);
-	}
-	public function delete($data)
-	{
-		$data = $this->processData($data);
-		$sql = new SQLBuilder($this->conn,$this->getFullyQualifiedTableName());
-		$sql->delete($data);
-		$values = $sql->bind_values();
-		return $this->conn->query(($this->last_sql = $sql->to_s()),$values);
-	}
-	/**
-	 * Add a relationship.
-	 *
-	 * @param Relationship $relationship a Relationship object
-	 */
-	private function addRelationship($relationship)
-	{
-		$this->relationships[$relationship->attribute_name] = $relationship;
-	}
-	private function getMetaData()
-	{
-		// as more adapters are added probably want to do this a better way
-		// than using instanceof but gud enuff for now
-		$quote_name = !($this->conn instanceof PgsqlAdapter);
-		$table_name = $this->getFullyQualifiedTableName($quote_name);
-		$conn = $this->conn;
-		$this->columns = Cache::get("get_meta_data-$table_name", function() use ($conn, $table_name) { return $conn->columns($table_name); });
-	}
-	/**
-	 * Replaces any aliases used in a hash based condition.
-	 *
-	 * @param $hash array A hash
-	 * @param $map array Hash of used_name => real_name
-	 * @return array Array with any aliases replaced with their read field name
-	 */
-	private function mapNames(&$hash, &$map)
-	{
-		$ret = array();
-		foreach ($hash as $name => &$value)
-		{
-			if (array_key_exists($name,$map))
-				$name = $map[$name];
-			$ret[$name] = $value;
-		}
-		return $ret;
-	}
-	private function &processData($hash)
-	{
-		if (!$hash)
-			return $hash;
-		foreach ($hash as $name => &$value)
-		{
-			if ($value instanceof \DateTime)
-			{
-				if (isset($this->columns[$name]) && $this->columns[$name]->type == Column::DATE)
-					$hash[$name] = $this->conn->date_to_string($value);
-				else
-					$hash[$name] = $this->conn->datetime_to_string($value);
-			}
-			else
-				$hash[$name] = $value;
-		}
-		return $hash;
-	}
-	private function setPrimaryKey()
-	{
-		if (($pk = $this->class->getStaticPropertyValue('pk',null)) || ($pk = $this->class->getStaticPropertyValue('primary_key',null)))
-			$this->pk = is_array($pk) ? $pk : array($pk);
-		else
-		{
-			$this->pk = array();
-			foreach ($this->columns as $c)
-			{
-				if ($c->pk)
-					$this->pk[] = $c->inflected_name;
-			}
-		}
-	}
-	private function setTableName()
-	{
-		if (($table = $this->class->getStaticPropertyValue('table',null)) || ($table = $this->class->getStaticPropertyValue('table_name',null)))
-			$this->table = $table;
-		else
-		{
-			// infer table name from the class name
-			$this->table = Inflector::instance()->tableize($this->class->getName());
-			// strip namespaces from the table name if any
-			$parts = explode('\\',$this->table);
-			$this->table = $parts[count($parts)-1];
-		}
-		if (($db = $this->class->getStaticPropertyValue('db',null)) || ($db = $this->class->getStaticPropertyValue('db_name',null)))
-			$this->dbName = $db;
-	}
-	private function setCache()
-	{
-		if (!Cache::$adapter)
-			return;
-		$model_class_name = $this->class->name;
-		$this->cacheIndividualModel = $model_class_name::$cache;
-		if (property_exists($model_class_name, 'cache_expire') && isset($model_class_name::$cache_expire))
-		{
-			$this->cacheModelExpire =  $model_class_name::$cache_expire;
-		}
-		else
-		{
-			$this->cacheModelExpire = Cache::$options['expire'];
-		}
-	}
-	private function setSequenceName()
-	{
-		if (!$this->conn->supports_sequences())
-			return;
-		if (!($this->sequence = $this->class->getStaticPropertyValue('sequence')))
-			$this->sequence = $this->conn->get_sequence_name($this->table,$this->pk[0]);
-	}
-	private function setAssociations()
-	{
-		require_once __DIR__ . '/Relationship.php';
-		$namespace = $this->class->getNamespaceName();
-		foreach ($this->class->getStaticProperties() as $name => $definitions)
-		{
-			if (!$definitions)# || !is_array($definitions))
-				continue;
-			foreach (wrap_strings_in_arrays($definitions) as $definition)
-			{
-				$relationship = null;
-				$definition += compact('namespace');
-				switch ($name)
-				{
-					case 'has_many':
-						$relationship = new HasMany($definition);
-						break;
-					case 'has_one':
-						$relationship = new HasOne($definition);
-						break;
-					case 'belongs_to':
-						$relationship = new BelongsTo($definition);
-						break;
-					case 'has_and_belongs_to_many':
-						$relationship = new HasAndBelongsToMany($definition);
-						break;
-				}
-				if ($relationship)
-					$this->addRelationship($relationship);
-			}
-		}
-	}
-	/**
-	 * Rebuild the delegates array into format that we can more easily work with in Model.
-	 * Will end up consisting of array of:
-	 *
-	 * array('delegate' => array('field1','field2',...),
-	 *       'to'       => 'delegate_to_relationship',
-	 *       'prefix'	=> 'prefix')
-	 */
-	private function setDelegates()
-	{
-		$delegates = $this->class->getStaticPropertyValue('delegate',array());
-		$new = array();
-		if (!array_key_exists('processed', $delegates))
-			$delegates['processed'] = false;
-		if (!empty($delegates) && !$delegates['processed'])
-		{
-			foreach ($delegates as &$delegate)
-			{
-				if (!is_array($delegate) || !isset($delegate['to']))
-					continue;
-				if (!isset($delegate['prefix']))
-					$delegate['prefix'] = null;
-				$new_delegate = array(
-					'to'		=> $delegate['to'],
-					'prefix'	=> $delegate['prefix'],
-					'delegate'	=> array());
-				foreach ($delegate as $name => $value)
-				{
-					if (is_numeric($name))
-						$new_delegate['delegate'][] = $value;
-				}
-				$new[] = $new_delegate;
-			}
-			$new['processed'] = true;
-			$this->class->setStaticPropertyValue('delegate',$new);
-		}
-	}
-	/**
-	 * @deprecated Model.php now checks for get|set_ methods via method_exists so there is no need for declaring static g|setters.
-	 */
-	private function setSettersAndGetters()
-	{
-		$getters = $this->class->getStaticPropertyValue('getters', array());
-		$setters = $this->class->getStaticPropertyValue('setters', array());
-		if (!empty($getters) || !empty($setters))
-			trigger_error('static::$getters and static::$setters are deprecated. Please define your setters and getters by declaring methods in your model prefixed with get_ or set_. See
-			http://www.phpactiverecord.org/projects/main/wiki/Utilities#attribute-setters and http://www.phpactiverecord.org/projects/main/wiki/Utilities#attribute-getters on how to make use of this option.', E_USER_DEPRECATED);
-	}
+        
+    public function setPrimaryKey()
+        {
+        
+        }
+        
+    public function setRelation($type, $rule)
+        {
+        $this->localRelations[$type] = $rule;
+        }
+        
+    public function hasRelation()
+        {
+        return !empty($this->localRelations);
+        }
+        
+    public static function getTableNameByClassName($className)
+        {
+        $tableName = $className;
+        $parts = explode('\\',$tableName);
+        $tableName = $parts[count($parts)-1];
+        return strtolower($tableName);
+        }   
+        
+    function setFields()
+        {
+        $fields = $this->getFields();
+        if($fields)
+            {
+            foreach($fields as $field)
+                {
+                $this->columns[$field] = true;
+                }
+            }
+        }
+    function getFields($table=null)
+        {
+        global $appConfig;
+        
+        if(empty($table))
+            {
+            $table = $this->tableName;
+            }
+
+        if(\Cache::isCached('dbTableFields', $table) && !$appConfig['debug.enabled'])
+          {
+          return \Cache::getCached('dbTableFields', $table);
+          }
+
+        $sql = 'SHOW COLUMNS FROM '.$table;
+        $sqlBuilder = new SQLBuilder();
+        $result = $sqlBuilder->executeQuery($sql,[],'array');
+
+        $columns = array();
+        foreach ($result as $value)
+          {
+          $columns[] = $value['Field'];
+          }
+        \Cache::setCached('dbTableFields', $table, $columns);
+
+        return $columns;
+        }
+    
+    private function clearDataByTableFields($data) 
+        {
+        $this->setFields(); 
+     
+        if(empty($data))
+            {
+            return [];
+            }
+        foreach ($data as $key => $value)
+            {
+            if(!isset($this->columns[$key]))
+                {
+                unset($data[$key]);
+                }
+            }
+            
+        return $data;
+        }
+        
+    public function insertData($data)
+        {
+        if(!isset($data['created_at']) && empty($data['created_at']))
+            {
+            $data['created_at'] = time();
+            }
+        if(!isset($data['updated_at'])  && empty($data['updated_at']))
+            {
+            $data['updated_at'] = time();
+            }
+            
+        $data = $this->clearDataByTableFields($data);
+        
+        if(empty($data))
+            {
+            return false;
+            }
+            
+        return $this->insert($this->tableName, $data);
+        }
+        
+    public function updateData($data=[], $condition=[])
+        {
+        if(!isset($data['updated_at']) && empty($data['updated_at']))
+            {
+            $data['updated_at'] = time();
+            }
+            
+        $data = $this->clearDataByTableFields($data);
+        if(empty($data) || empty($condition))
+            {
+            return false;
+            }
+            
+        return $this->update($this->tableName, $data, $condition);
+        }
+        
+    public function deleteData($condition, $params=[])
+        {
+        return $this->delete($this->tableName, $condition, $params);
+        }
+    
+    public function getValuesOfFieldByArray($arrayOfObject, $field)
+        {
+        if(empty($arrayOfObject) || empty($field) || !isset($arrayOfObject[0]->attributes[$field]))
+            {
+            return [];
+            }
+        $result = [];
+     
+        foreach($arrayOfObject as $object)
+            {
+            $result[] = $object->attributes[$field];
+            }
+        return $result;
+        }
+        
+    public function with($withRelations=[])
+        {
+        $withRelations = (array) $withRelations;
+        $this->relationsArray = $withRelations;
+        
+        if(empty($withRelations))
+            {
+            return $this;
+            }
+            
+        $calssName = $this->className;
+        
+        if($withRelations[0] == 'all')
+            {
+            $this->localRelations = $calssName::$relations;
+            }
+            
+        
+        
+        foreach($calssName::$relations as $relationType => $relationRules)
+            {
+            if($relationType != 'hasMany' && $relationType != 'hasOne')
+                continue;
+            
+            foreach($relationRules as $relationField => $relation)
+                {
+                if(!in_array($relationField, $withRelations))
+                    {
+                    continue;
+                    }
+                    
+                $this->setRelation($relationType, [$relationField => $relation]);
+                }
+            }
+            
+        return $this; 
+        }
+        
+    private function allWithRelations()
+        {
+        $parentResult = parent::all();
+        
+        foreach($this->localRelations as $relationType => $relationRules)
+            {
+            if($relationType != 'hasMany' && $relationType != 'hasOne')
+                continue;
+  
+            foreach($relationRules as $relationField => $relation)
+                {
+                $relationClass = $relation[0];
+                $currentClass = $this->className;
+                $foreignKey = (isset($relation[1])) ? $relation[1] : $currentClass::getStaticTableName().'_id';
+                $localKey = (isset($relation[2])) ? $relation[2] : 'id';
+                
+
+                $localKeys = $this->getValuesOfFieldByArray($parentResult, $localKey);
+                $relationFields = $relationClass::find()->where([$foreignKey => $localKeys])->with($this->relationsArray)->all();
+                
+                foreach($parentResult as $key=>$object)
+                    {
+                    $tempObjects = null;
+                    foreach($relationFields as $relationObject)
+                        {
+                        if($relationObject->$foreignKey == $object->$localKey)
+                            {
+                            if($relationType == 'hasOne')
+                                {
+                                $tempObjects = $relationObject;
+                                break;
+                                }
+                            else
+                                {
+                                $tempObjects[] = $relationObject;
+                                }
+                            }
+                        }
+                    $parentResult[$key]->$relationField = $tempObjects;
+                    }
+                }
+            }
+        return $parentResult;
+        }
+        
+    public function one() {
+        if($this->hasRelation())
+            {
+            return parent::one()->with($this->relationsArray);
+            }
+                
+        return parent::one();
+        }
+  
+    public function all() 
+        {
+        if(!$this->hasRelation())
+            {
+            return parent::all();
+            }
+
+        return $this->allWithRelations();
+        }
+        
+
 }

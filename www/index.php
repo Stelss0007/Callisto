@@ -14,27 +14,107 @@ include 'kernel/router.php';
 include 'kernel/controller.php';
 include 'kernel/model.php';
 
+//$router = new Router();
+//$router->run();
 
+ini_set('display_errors',"1");
+error_reporting(E_ALL);
+
+include 'kernel/Exceptions.php';
+include 'kernel/Validator.php';
 include 'kernel/db/SQLBuilder.php';
+include 'kernel/db/Model.php';
+include 'kernel/db/Table.php';
+include 'kernel/Cache.php';
 
-$query = new SQLBuilder();
-echo $query->from('articles')
-        ->select(['name', 'id', 'description'])
-        ->select('name, oredr')
-        ->leftJoin('table1', 'table1.id = table2.id AND table1.id = :name')
-        ->params([':id'=>10, 'name' => "%Ruslan '%"])
-        ->params([':id2'=>10, 'name2' => "Ruslan '"])
-        ->orderBy(['name' => 'DESC'])
-        ->groupBy(['description', 'name'])
-        //->where('a=b')
-        ->andWhere('b=:id')
-        ->andWhere('b2=:id')
-        ->orWhere('b2=:id')
-        ->andWhere('b3=:id')
-        ->andWhere('b4=:id')
-        ->getSQLString();
+//$query = new SQLBuilder();
+//$result = $query->from('article')
+//        ->select(['article_title', 'id', 'article_description'])
+//        ->andWhere(['like'=>['name1'=>'%rus', 'name2'=>'bad']])
+//        ->andWhere(['id'=>'10', 'LIKE'=>['name'=>'rus']])
+//        ->andWhere(['id'=>['10','20','30']])
+//        ->andWhere(['name'=>'ruslan'])
+//        ->getSQLString();
+//print_r($result);
+
+
+
+require('kernel/debuger.php');
+$debuger = \Debuger::getInstance();
+$debuger->startRenderPage();
+
+class Test2 extends \app\db\ActiveRecord\Model1
+{
+    static $relations = [
+        'hasMany' => [
+            'testField' => ['\Test3']
+        ]
+    ];
+}
+
+class Test3 extends \app\db\ActiveRecord\Model
+{
+    
+}
+
+
+class Test extends \app\db\ActiveRecord\Model
+{
+    static $validators = [
+        ['description', 'date'=>'Y/m/d', 'min'=>10]
+    ];
+    
+    static $relations = [
+        'hasMany' => [
+            'testField' => ['\Test2']
+        ]
+    ];
+
+
+    public function testing()
+        {
+        echo ' 2222222222 ';
+        }
+}
+
+//$model = new Test();
+
+//print_r(Test::find()->all());
+//if(!$article = Test::find(15))
+//    $article = new Test();//Article::find(1);
+//$article->name = 4444;
+//$article->save();
+
+
+//$article = Test::find(1)->with('testField');
+//$articles = Test::find()->with('testField')->all();
+//print_r($articles);
+
+appDebug(Test::findAll());
+
+//$article->description = '2010/14/10';
+//if(!$article->save())
+//    {
+//    print_r($article->validateGetErrors());
+//    }
+
+//$articles = Test::find()->all();
+//print_r($articles);
+
+//print_r(Test::findOne(['id'=>'2']));
+
+//foreach ($articles as $article)
+//    {
+//    echo $article->name;
+//    $article->description = 'Updated 2';
+//    $article->save();
+//    print_r($article->description);
+//    //$article->save();
+//    //$article->test();
+//    }
+$debuger->endRenderPage();
+$debuger->render(); 
 exit;
 
-$router = new Router();
-$router->run();
+
 

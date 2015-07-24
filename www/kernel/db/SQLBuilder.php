@@ -11,17 +11,20 @@
  *
  * @author Ruslan
  */
+namespace app\db\ActiveRecord;
+use mysqli;
+
 class SQLBuilder {
     
     private $connection;
-    private $mysqli;
+    private $mysqli = null;
     private $operation = 'SELECT';
     private $table = [];
     private $select = [];
     private $joins = [];
     private $order = [];
     private $limit = 1000;
-    private $offset = 1;
+    private $offset = 0;
     private $group = [];
     private $having = [];
     private $update = [];
@@ -33,14 +36,22 @@ class SQLBuilder {
     private $sequence = [];
     private $config = [];
     private $sqlString = '';
+    private $resultArrayByField = null;
     
-    function    __construct($table = '')
+    protected $className = 'stdClass';
+    
+    function  __construct($table = '')
         {
         $this->setConfig();
         $this->connect();
-        $this->table = $table;
+        $this->table[] = $table;
         
         return $this;
+        }
+        
+    function __destruct() 
+        {
+        $this->mysqli->close();
         }
     
     final private function setConfig()
@@ -52,9 +63,9 @@ class SQLBuilder {
     private function connect() 
         {
         $this->mysqli = new mysqli($this->config['DB.Host'], $this->config['DB.UserName'], $this->config['DB.Password'], $this->config['DB.Name']);
-        if ($mysqli->connect_error) 
+        if ($this->mysqli->connect_error) 
             {
-            die('Connect Error (' . $mysqli->connect_errno . ') ' . $mysqli->connect_error);
+            die('Connect Error (' . $this->mysqli->connect_errno . ') ' . $this->mysqli->connect_error);
             }
         }
     
@@ -130,7 +141,7 @@ class SQLBuilder {
         {
         $joinCondition = trim($joinCondition);
         $joinCondition = ltrim($joinCondition, 'ON');
-        $this->joins[] = $joinType.' '.$tableName.' ON '.$joinCondition;
+        $this->joins[] = $joinType.' '.$tableName.' ON ('.$joinCondition.')';
         
         $this->params($params);
         return $this;
@@ -201,7 +212,13 @@ class SQLBuilder {
         
     public function where($condition, $params=[])
         {
-       $this->where = ['', $condition];
+        if(empty($condition))
+            {
+            return $this;
+            }
+            
+        $this->where = [];
+        $this->where[] = ['', $condition];
         
         $this->params($params);
         return $this;
@@ -247,14 +264,14 @@ class SQLBuilder {
         $this->select = [$selectExpression];
         $this->limit = null;
         $this->offset = null;
-        
-        $command = $this->createCommand();
 
+        $result = $this->one();
+        
         $this->select = $select;
         $this->limit = $limit;
         $this->offset = $offset;
         
-        return $this->one();
+        return ($result) ? $result->$selectExpression : null;
         }
         
     public function count($q = '*')
@@ -290,7 +307,7 @@ class SQLBuilder {
                 {
                 if(!get_magic_quotes_gpc())
                   {
-                  $value[$k] = addslashes($value[$k]);
+                  $value[$k] = $this->mysqli->real_escape_string($value[$k]);
                   }
 
                 $value[$k] = str_replace("\\r\\n",'<br>', $value[$k]);
@@ -300,7 +317,7 @@ class SQLBuilder {
             {
             if(!get_magic_quotes_gpc())
               {
-              $value = addslashes($value);
+              $value = $this->mysqli->real_escape_string($value);
               }
             }
         return $value;
@@ -329,24 +346,34 @@ class SQLBuilder {
         return $params;
         }
         
-    public function prepareSQL($sql, $params) {
-        foreach ($params as $name => $val) 
+    public function prepareSQL($sql) {
+        $params = $this->prepareParams($this->params);
+        
+        if($params)
             {
-            $name = ltrim($name, ':');
-            $sql = str_replace(":$name", "'" . $val . "'", $sql);
+            foreach ($params as $name => $val) 
+                {
+                $name = ltrim($name, ':');
+                $sql = str_replace(":$name", "'" . $val . "'", $sql);
+                }
             }
+            
         return $sql;
     }
     
-    public function getSQLString()
+    public function getSQLString($prepareSQLParams = true)
         {
         $this->createCommand();
+        if($prepareSQLParams)
+            {
+            return $this->prepareSQL($this->sqlString);
+            }
         return $this->sqlString;
         }
         
     private function buildJoin()
         {
-        
+        return implode($this->joins, ' ');
         }
         
     private function buildWhere()
@@ -356,45 +383,302 @@ class SQLBuilder {
         $where = '';
         foreach ($this->where as $key => $whereValue) 
             {
-            $where .= ' '.$whereValue[0].' ('.$whereValue[1].') '; 
+            $condition = $whereValue[1];
+            if(is_array($condition))
+                {
+                $conditionStr = '';
+                foreach($condition as $key1 => $value1)
+                    {
+                    if($key1 == 'LIKE' || $key1 == 'like')
+                        {
+                        foreach($value1 as $key2 => $value2)
+                            {
+                            if(stripos($value1, '%') === false)
+                                {
+                                $value2 = '%'.$value2.'%';
+                                }
+                            $conditionStr .= " AND $key2 LIKE '$value2' ";
+                            }
+                        }
+                    else
+                        {
+                        if(is_array($value1))
+                            {
+                            $conditionStr .= " AND $key1 IN ('".implode("', '", $value1)."') ";
+                            }
+                        else
+                            {
+                            $conditionStr .= " AND $key1 = '$value1' ";
+                            }
+                        }
+                    }
+                $condition = ltrim($conditionStr, ' AND ');
+                }
+            $where .= ' '.$whereValue[0].' ('.$condition.') '; 
             }
         return $where;
+        }
+        
+    private function buildSelect()
+        {
+        $select = implode($this->select, ', ');
+        $from   = implode($this->table, ', ');
+        $join   = implode($this->joins, ' ');
+        $order  = implode($this->order, ', ');
+        $group  = implode($this->group, ', ');
+        $where  = $this->buildWhere();
+
+        $this->sqlString .= ($select)   ? ' '.$select   : ' * ';
+        $this->sqlString .= ($from)     ? ' FROM '.$from     : '';
+        $this->sqlString .= ($join)     ? ' '.$join     : '';
+        $this->sqlString .= ($where)    ? ' WHERE '.$where     : '';
+        $this->sqlString .= ($group)    ? ' GROUP BY '.$group    : '';
+        $this->sqlString .= ($order)    ? ' OREDR BY '.$order    : '';
+        $this->sqlString .= ($this->limit)    ? ' LIMIT '.$this->limit : '';
+        $this->sqlString .= ($this->offset)    ? ' OFFSET '.$this->offset : '';
+        }
+        
+    private function buildInsert()
+        {
+        $table   = implode($this->table, ', ');
+         
+        $keys = '';
+        $values = '';
+
+        foreach($this->data as $key=>$value)
+            {
+            if ($value === '')
+                {
+                continue;
+                }
+
+            $keys .= $key.',';
+
+            $value = $this->prepareValue($value);
+
+            $values .=  "'".$value."',";
+            }
+          
+        $values = rtrim($values, ',');
+        $keys = rtrim($keys, ',');
+
+        $this->sqlString = "INSERT INTO $table ($keys) VALUES ($values)";
+        }
+        
+    private function buildUpdate()
+        {
+        $table   = implode($this->table, ', ');
+         
+        $keys = '';
+        $values = '';
+
+        foreach($this->data as $key=>$value)
+            {
+            if ($value === '')
+                {
+                continue;
+                }
+
+            $keys .= $key.',';
+
+            $value = $this->prepareValue($value);
+
+            $values .=  " $key = '$value',";
+            }
+          
+        $values = rtrim($values, ',');
+        $keys = rtrim($keys, ',');
+        
+        $where  = $this->buildWhere();
+
+        $this->sqlString = "UPDATE $table SET $values";
+        $this->sqlString .= ($where) ? ' WHERE '.$where : ' ';
+        }
+        
+    private function buildDelete()
+        {
+        $table   = implode($this->table, ', ');
+        
+        $where  = $this->buildWhere();
+
+        $this->sqlString = "DELETE FROM $table";
+        $this->sqlString .= ($where) ? ' WHERE '.$where : ' ';
         }
         
     private function createCommand()
         {
         $this->sqlString = $this->operation;
-        
-        $params = $this->prepareParams($this->params);
-      
+
         switch ($this->operation) {
             case 'SELECT':
-                
-                $select = implode($this->select, ', ');
-                $from   = implode($this->table, ', ');
-                $join   = implode($this->joins, ' ');
-                $order  = implode($this->order, ', ');
-                $group  = implode($this->group, ', ');
-                $where  = $this->buildWhere();
-                
-                $this->sqlString .= ($select)   ? ' '.$select   : ' * ';
-                $this->sqlString .= ($from)     ? ' FROM '.$from     : '';
-                $this->sqlString .= ($join)     ? ' '.$join     : '';
-                $this->sqlString .= ($where)    ? ' WHERE '.$where     : '';
-                $this->sqlString .= ($group)    ? ' GROUP BY '.$group    : '';
-                $this->sqlString .= ($order)    ? ' OREDR BY '.$order    : '';
-                $this->sqlString .= ($this->limit)    ? ' LIMIT '.$this->limit : '';
-                $this->sqlString .= ($this->offset)    ? ' OFFSET '.$this->offset : '';
+                $this->buildSelect();
+                break;
+            case 'INSERT':
+                $this->buildInsert();
+                break;
+            case 'UPDATE':
+                $this->buildUpdate();
+                break;
+            case 'DELETE':
+                $this->buildDelete();
                 break;
 
             default:
                 break;
         }
         
-        $this->sqlString = $this->prepareSQL($this->sqlString, $params);
-        
         return $this;
-        
-        
         }
+        
+    public function resultArrayByField($field=null)
+        {
+        $this->resultArrayByField = $field;
+        return $this;
+        }
+        
+    public function executeQuery($sql = null, $params=[], $fetchType='object')
+        {
+        if(!$sql) {
+            $sql = $this->sqlString;
+        }
+        $this->params($params);
+        
+        $sql = $this->prepareSQL($sql);
+
+        \Debuger::start();
+        $mysqlResult = $this->mysqli->query($sql);
+        \Debuger::end();
+        \Debuger::logMySQL($sql, $mysqlResult);
+ 
+        if($this->mysqli->error)
+            {
+            if(!empty($this->config['debug.enabled']))
+                {
+                echo $this->mysqli->error. ' QUERY: '. $sql;
+                exit;
+                }
+            else
+                {
+                echo 'SQL Error';
+                }
+            }
+        if($this->operation == 'INSERT')
+            {
+            return $this->mysqli->insert_id;
+            }
+            
+        if($this->operation == 'UPDATE' || $this->operation == 'DELETE')
+            {
+            return true;
+            }
+            
+        $values = [];
+        switch ($fetchType)
+            {
+            case 'object':
+                if($this->resultArrayByField)
+                    {
+                    $field = $this->resultArrayByField;
+                    while($obj = $mysqlResult->fetch_object($this->className)) 
+                        {
+                        $values[$obj->$field] = $obj;
+                        }
+                    }
+                else
+                    {
+                     while($obj = $mysqlResult->fetch_object($this->className)) 
+                        {
+                        $values[] = $obj;
+                        }
+                    }
+                break;
+            case 'array':
+                while($obj = $mysqlResult->fetch_assoc()) 
+                    {
+                    $values[] = $obj;
+                    }
+                break;
+            }
+       
+        $this->operation = 'SELECT';
+        
+        /* Освобождаем память */ 
+        $mysqlResult->close(); 
+      
+        return $values;
+        }
+        
+    public function all()
+        {
+        $this->createCommand();
+        return $this->executeQuery();
+        }
+        
+    public function one()
+        {
+        $limit = $this->limit;
+        $offset = $this->offset;
+        
+        $this->limit = 1;
+        $this->offset = 0;
+        
+        $this->createCommand();
+        $result = $this->executeQuery();
+        
+        $this->limit = $limit;
+        $this->offset = $offset;
+        
+        return ($result) ? $result[0] : null;
+        }
+        
+    public function getArray($param=null) 
+        {
+        $this->createCommand();
+        return $this->executeQuery(null, [], 'array');
+        }
+        
+    public function insert($table, $data)
+        {
+        $this->operation = 'INSERT';
+        $this->table = [];
+        $this->table[] = $table;
+        
+        $this->data = $data;
+        $this->createCommand();
+        
+        return $this->executeQuery();
+        }
+        
+    public function update($table, $data, $condition)
+        {
+        $this->operation = 'UPDATE';
+        $this->table = [];
+        $this->table[] = $table;
+        
+        $this->where($condition);
+        
+        $this->data = $data;
+        $this->createCommand();
+        
+        return $this->executeQuery();
+        }
+        
+    public function delete($table, $condition=[], $params=[])
+        {
+        $this->operation = 'DELETE';
+        $this->table = [];
+        $this->table[] = $table;
+        
+        $this->where($condition);
+        
+        $this->params($params);
+        
+        $this->createCommand();
+        
+        return $this->executeQuery();
+        }
+        
+        
+   
+
 }
