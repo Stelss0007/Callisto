@@ -8,15 +8,73 @@ class Debuger
   public $debug_private_messages = '';
   
   static $instance;
+  
+  static $startTime;
+  static $endTime;
+  static $workTime;
 
-  public static function getInstance()
-   {
-     if (empty(self::$instance))
-      {
-      self::$instance = new self;
-      }
-     return self::$instance;
-   }
+  public static function debugMode()
+    {
+    if(static::$instance)
+        {
+        return true;
+        }
+        
+    return false;
+    }
+    
+  public static function start()
+    {
+    if(!self::debugMode())
+        return;
+    
+    // Считываем текущее время
+    $currentTime = microtime();
+    // Отделяем секунды от миллисекунд
+    $currentTime = explode(" ",$currentTime);
+    // Складываем секунды и миллисекунды
+    self::$startTime = $currentTime[1] + $currentTime[0];
+    }
+    
+  public static function end()
+    {
+    if(!self::debugMode())
+        return;
+    
+    // Считываем текущее время
+    $currentTime = microtime();
+    // Отделяем секунды от миллисекунд
+    $currentTime = explode(" ",$currentTime);
+    // Складываем секунды и миллисекунды
+    self::$endTime = $currentTime[1] + $currentTime[0];
+    
+    self::$workTime = self::$endTime - self::$startTime;
+    }
+    
+    public static function logMySQL($sgl, $result)
+        {
+        if(!self::debugMode())
+            return;
+        
+        $debug = static::$instance;
+        $debug->mysql[] = [
+                            'query'=>  trim(preg_replace('!\s+!', ' ', $sgl)), 
+                            'exec_time'=>self::$workTime, 
+                            'result_count' => (!is_bool($result)) ? mysqli_num_rows($result) : 0
+                        ];
+        }
+        
+        
+        
+
+    public static function getInstance()
+       {
+         if (empty(self::$instance))
+          {
+          self::$instance = new self;
+          }
+         return self::$instance;
+       }
    
   function __construct()
     {
@@ -205,11 +263,30 @@ class Debuger
     
   function render()
     {
+    $this->renderMySQL();
+    
     echo '<script type="text/javascript">'.NL;
     echo $this->debug_private_messages;
     echo '</script>'.NL;
     }
-    
+   
+  function renderMySQL()
+    {
+    $mysql_querys = array();
+    $mysql_query_count = 0;
+    $mysql_query_time = 0;
+  
+    foreach($this->mysql as $key=>$value)
+        {
+        $key_sufix = $key +1;
+        $mysql_querys['query_'.$key_sufix] = $value;
+        $mysql_query_count++;
+        $mysql_query_time += $value['exec_time'];
+        }
+    $this->debugAddCreateGroup("MySQL ($mysql_query_count) $mysql_query_time sec");
+    $this->debugAddDir($mysql_querys);
+    $this->debugAddEndGroup();
+    }
   function startRenderPage()
     {
     if(isAjax())
