@@ -22,13 +22,15 @@ class ErrorHandler
 
   public function __construct()
     {
-    error_reporting(0);
+    ini_set('display_errors',"1");
+    error_reporting(E_ALL);
 
     // регистрация ошибок
-    set_error_handler(array($this, 'otherErrorCatcher'));
+    set_error_handler([$this, 'otherErrorCatcher']);
+    set_exception_handler([$this, 'exeptionCatcher']);
 
     // перехват критических ошибок
-    register_shutdown_function(array($this, 'fatalErrorCatcher'));
+    register_shutdown_function([$this, 'fatalErrorCatcher']);
 
     // создание буфера вывода
     ob_start();
@@ -43,7 +45,6 @@ class ErrorHandler
     case E_USER_ERROR:
       //echo "array('type' => $errno, 'message' => $errstr, 'file' => $errfile, 'line' => $errline);";
         $this->user_error_array[] = array('type' => $errno, 'message' => $errstr, 'file' => $errfile, 'line' => $errline);
-        $this->backTrace = debug_backtrace();
         $this->__destruct();
         //тут лучше сформировать пиьсмо и отправить администратору сайты
         break;
@@ -73,13 +74,11 @@ class ErrorHandler
     {
     $error = error_get_last();
 
-
     if (isset($error))
       {
       if ($error['type'] == E_ERROR || $error['type'] == E_PARSE || $error['type'] == E_COMPILE_ERROR || $error['type'] == E_CORE_ERROR)
         {
         $this->error_array[] = $error;
-        $this->backTrace = debug_backtrace();
         ob_end_clean(); // сбросить буфер, завершить работу буфера
         $this->__destruct();
         // контроль критических ошибок:
@@ -90,7 +89,6 @@ class ErrorHandler
       else
         {
         $this->user_error_array[] = $error;
-        $this->backTrace = debug_backtrace();
         ob_end_flush(); // вывод буфера, завершить работу буфера
         $this->__destruct();
         }
@@ -109,14 +107,14 @@ class ErrorHandler
       {
       ob_end_clean();
       $this->showErrors();
-      exit;
+      //exit;
       }
       
     if (isset($this->user_error_array) && !empty($this->user_error_array))
      {
       ob_end_clean();  
       $this->showErrors();
-      exit;
+      //exit;
       }
       
     if(!empty($this->notice_array))
@@ -148,16 +146,57 @@ class ErrorHandler
     trigger_error($error_array, E_USER_ERROR);
     }
     
+    
+  public function renderCallStackItem($file, $line, $class, $method, $args, $index)
+    {
+        $lines = [];
+        $begin = $end = 0;
+        if ($file !== null && $line !== null) {
+            $line--; // adjust line number from one-based to zero-based
+            $lines = @file($file);
+            if ($line < 0 || $lines === false || ($lineCount = count($lines)) < $line + 1) {
+                return '';
+            }
+
+            $half = (int) (($index == 1 ? $this->maxSourceLines : $this->maxTraceSourceLines) / 2);
+            $begin = $line - $half > 0 ? $line - $half : 0;
+            $end = $line + $half < $lineCount ? $line + $half : $lineCount - 1;
+        }
+
+//        return $this->renderFile($this->callStackItemView, [
+//            'file' => $file,
+//            'line' => $line,
+//            'class' => $class,
+//            'method' => $method,
+//            'index' => $index,
+//            'lines' => $lines,
+//            'begin' => $begin,
+//            'end' => $end,
+//            'args' => $args,
+//        ]);
+    }
+  function exeptionCatcher($exception)
+    {
+    $this->error_array[] = [
+        'message' => $exception->getMessage(),
+        'file' => $exception->getFile(),
+        'line' => $exception->getLine(),
+        'trace' => $exception->getTrace(),
+      ];
+    
+    ob_end_clean(); // сбросить буфер, завершить работу буфера
+    $this->__destruct();
+    }
+    
   function showErrors()
     {
-//    if(empty($appConfig['debug.enabled']))
-//      {
-//      header('HTTP/1.1 404 Page Not Found');
-//      echo 'Page Not Found!';
-//      die();
-//      }
-    global $backTrace;
-     
+    global $appConfig;
+    if(empty($appConfig['debug.enabled']))
+      {
+      header('HTTP/1.1 404 Page Not Found');
+      echo 'Page Not Found!';
+      die();
+      }
     header('HTTP/1.1 500 Internal Server Error');
     ?>
     <head>
@@ -229,8 +268,13 @@ class ErrorHandler
           </td>
         </tr>
         <?php endforeach;?>
+        
+        <?php //echo  $handler->renderCallStackItem($exception->getFile(), $exception->getLine(), null, null, [], 1) ?>
+        <?php for ($i = 0, $trace = $exception->getTrace(), $length = count($trace); $i < $length; ++$i): ?>
+                <?php echo  $handler->renderCallStackItem(@$trace[$i]['file'] ?: null, @$trace[$i]['line'] ?: null,
+                    @$trace[$i]['class'] ?: null, @$trace[$i]['function'] ?: null, $trace[$i]['args'], $i + 2) ?>
+        <?php endfor; ?>
       </table>
-      <pre><?php debug_print_backtrace(); ?></pre>
     </body>
     <?php
     $this->error_array = null;

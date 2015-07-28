@@ -1,9 +1,11 @@
 <?php
-date_default_timezone_set('America/New_York');
-define('APP_DIRECTORY', dirname(__FILE__));
 
+include 'kernel/Exceptions.php';
 include 'lib/ErrorHandler/ErrorHandler.class.php';
 $errors = ErrorHandler::getInstance();
+
+date_default_timezone_set('America/New_York');
+define('APP_DIRECTORY', dirname(__FILE__));
 
 include 'kernel/globals.php';
 include 'kernel/config.php';
@@ -17,10 +19,9 @@ include 'kernel/model.php';
 //$router = new Router();
 //$router->run();
 
-ini_set('display_errors',"1");
-error_reporting(E_ALL);
+//    ini_set('display_errors',"1");
+//    error_reporting(E_ALL);
 
-include 'kernel/Exceptions.php';
 include 'kernel/Validator.php';
 include 'kernel/db/SQLBuilder.php';
 include 'kernel/db/Model.php';
@@ -43,7 +44,7 @@ require('kernel/debuger.php');
 $debuger = \Debuger::getInstance();
 $debuger->startRenderPage();
 
-class Test2 extends \app\db\ActiveRecord\Model1
+class Test2 extends \app\db\ActiveRecord\Model
 {
     static $relations = [
         'hasMany' => [
@@ -54,7 +55,7 @@ class Test2 extends \app\db\ActiveRecord\Model1
 
 class Test3 extends \app\db\ActiveRecord\Model
 {
-    
+
 }
 
 
@@ -63,7 +64,7 @@ class Test extends \app\db\ActiveRecord\Model
     static $validators = [
         ['description', 'date'=>'Y/m/d', 'min'=>10]
     ];
-    
+
     static $relations = [
         'hasMany' => [
             'testField' => ['\Test2']
@@ -112,8 +113,10 @@ appDebug(Test::findAll());
 //    //$article->save();
 //    //$article->test();
 //    }
+throw new ErrorException('wwwww');
 $debuger->endRenderPage();
 $debuger->render(); 
+    
 exit;
 
 
