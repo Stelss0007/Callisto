@@ -1,5 +1,4 @@
 <?php
-
 include 'kernel/Exceptions.php';
 include 'lib/ErrorHandler/ErrorHandler.class.php';
 $errors = ErrorHandler::getInstance();
@@ -16,17 +15,19 @@ include 'kernel/router.php';
 include 'kernel/controller.php';
 include 'kernel/model.php';
 
-//$router = new Router();
-//$router->run();
-
-//    ini_set('display_errors',"1");
-//    error_reporting(E_ALL);
-
 include 'kernel/Validator.php';
 include 'kernel/db/SQLBuilder.php';
 include 'kernel/db/Model.php';
 include 'kernel/db/Table.php';
 include 'kernel/Cache.php';
+
+$router = new Router();
+$router->run();
+
+//    ini_set('display_errors',"1");
+//    error_reporting(E_ALL);
+
+
 
 //$query = new SQLBuilder();
 //$result = $query->from('article')
@@ -40,43 +41,43 @@ include 'kernel/Cache.php';
 
 
 
-require('kernel/debuger.php');
-$debuger = \Debuger::getInstance();
-$debuger->startRenderPage();
-
-class Test2 extends \app\db\ActiveRecord\Model
-{
-    static $relations = [
-        'hasMany' => [
-            'testField' => ['\Test3']
-        ]
-    ];
-}
-
-class Test3 extends \app\db\ActiveRecord\Model
-{
-
-}
-
-
-class Test extends \app\db\ActiveRecord\Model
-{
-    static $validators = [
-        ['description', 'date'=>'Y/m/d', 'min'=>10]
-    ];
-
-    static $relations = [
-        'hasMany' => [
-            'testField' => ['\Test2']
-        ]
-    ];
-
-
-    public function testing()
-        {
-        echo ' 2222222222 ';
-        }
-}
+//require('kernel/debuger.php');
+//$debuger = \Debuger::getInstance();
+//$debuger->startRenderPage();
+//
+//class Test2 extends \app\db\ActiveRecord\Model
+//{
+//    static $relations = [
+//        'hasMany' => [
+//            'testField' => ['\Test3']
+//        ]
+//    ];
+//}
+//
+//class Test3 extends \app\db\ActiveRecord\Model
+//{
+//
+//}
+//
+//
+//class Test extends \app\db\ActiveRecord\Model
+//{
+//    static $validators = [
+//        ['description', 'date'=>'Y/m/d', 'min'=>10]
+//    ];
+//
+//    static $relations = [
+//        'hasMany' => [
+//            'testField' => ['\Test2']
+//        ]
+//    ];
+//
+//
+//    public function testing()
+//        {
+//        echo ' 2222222222 ';
+//        }
+//}
 
 //$model = new Test();
 
@@ -91,7 +92,7 @@ class Test extends \app\db\ActiveRecord\Model
 //$articles = Test::find()->with('testField')->all();
 //print_r($articles);
 
-appDebug(Test::findAll());
+//appDebug(Test::findAll());
 
 //$article->description = '2010/14/10';
 //if(!$article->save())
@@ -113,9 +114,9 @@ appDebug(Test::findAll());
 //    //$article->save();
 //    //$article->test();
 //    }
-throw new ErrorException('wwwww');
-$debuger->endRenderPage();
-$debuger->render(); 
+//throw new ErrorException('wwwww');
+//$debuger->endRenderPage();
+//$debuger->render(); 
     
 exit;
 

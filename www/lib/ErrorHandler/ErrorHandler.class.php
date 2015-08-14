@@ -270,10 +270,10 @@ class ErrorHandler
         <?php endforeach;?>
         
         <?php //echo  $handler->renderCallStackItem($exception->getFile(), $exception->getLine(), null, null, [], 1) ?>
-        <?php for ($i = 0, $trace = $exception->getTrace(), $length = count($trace); $i < $length; ++$i): ?>
+        <?php /*for ($i = 0, $trace = $exception->getTrace(), $length = count($trace); $i < $length; ++$i): ?>
                 <?php echo  $handler->renderCallStackItem(@$trace[$i]['file'] ?: null, @$trace[$i]['line'] ?: null,
                     @$trace[$i]['class'] ?: null, @$trace[$i]['function'] ?: null, $trace[$i]['args'], $i + 2) ?>
-        <?php endfor; ?>
+        <?php endfor;*/ ?>
       </table>
     </body>
     <?php
