@@ -21,8 +21,21 @@ include 'kernel/db/Model.php';
 include 'kernel/db/Table.php';
 include 'kernel/Cache.php';
 
+spl_autoload_register(function ($class) {
+    $class = explode('\\', $class);
+
+    if(!isset($class[0]) || $class[0] != 'app') {
+        return;
+    }
+    unset($class[0]);
+    $class = implode('/', $class);    
+    include $class.'.php';
+});
+
+
 $router = new Router();
 $router->run();
+
 
 //    ini_set('display_errors',"1");
 //    error_reporting(E_ALL);
@@ -43,8 +56,8 @@ $router->run();
 
 //require('kernel/debuger.php');
 //$debuger = \Debuger::getInstance();
-//$debuger->startRenderPage();
-//
+////$debuger->startRenderPage();
+////
 //class Test2 extends \app\db\ActiveRecord\Model
 //{
 //    static $relations = [
@@ -53,13 +66,13 @@ $router->run();
 //        ]
 //    ];
 //}
-//
+////
 //class Test3 extends \app\db\ActiveRecord\Model
 //{
 //
 //}
-//
-//
+////
+////
 //class Test extends \app\db\ActiveRecord\Model
 //{
 //    static $validators = [
@@ -78,19 +91,19 @@ $router->run();
 //        echo ' 2222222222 ';
 //        }
 //}
-
-//$model = new Test();
-
-//print_r(Test::find()->all());
-//if(!$article = Test::find(15))
-//    $article = new Test();//Article::find(1);
-//$article->name = 4444;
-//$article->save();
-
-
+//
+////$model = new Test();
+//
+////print_r(Test::find()->all());
+////if(!$article = Test::find(15))
+////    $article = new Test();//Article::find(1);
+////$article->name = 4444;
+////$article->save();
+//
+//
 //$article = Test::find(1)->with('testField');
 //$articles = Test::find()->with('testField')->all();
-//print_r($articles);
+//print_r($articles);exit;
 
 //appDebug(Test::findAll());
 

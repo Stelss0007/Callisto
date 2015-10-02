@@ -58,7 +58,8 @@ class Table extends SQLBuilder
 //        $this->callback->register('before_save', function(Model $model) { $model->set_timestamps(); }, array('prepend' => true));
 //        $this->callback->register('after_save', function(Model $model) { $model->reset_dirty(); }, array('prepend' => true));
         $this->className = $className;
-        $this->tableName = self::getTableNameByClassName($className);
+        //echo $className::getStaticTableName();exit;
+        $this->tableName = $className::getStaticTableName();//self::getTableNameByClassName($className);
         //$this->setFields();
         parent::__construct($this->tableName);
 	}

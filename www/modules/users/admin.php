@@ -23,9 +23,9 @@ class AdminController extends Controller
     $this->getAccess(ACCESS_ADMIN);
     
     $this->usesModel('groups');
- 
+    //print_r(app\modules\users\models\users::findAll()); exit;
     $this->groups_list = $this->groups->group_list(false);
-    $this->users_list = $this->users->user_list(true);
+    $this->users_list = $this->users->userList(true);
     
     $browsein[] =array('url'=>"/admin/main", 'displayname'=>$this->t('dashboard'));
     $browsein[] =array('url'=>'', 'displayname'=>'Users');
@@ -47,11 +47,11 @@ class AdminController extends Controller
         if(empty($data['pass']))
           unset($data['pass']);
 
-        $this->users->user_update($data, $id);
+        $this->users->userUpdate($data, $id);
         }
       else
         {
-        $this->users->user_create($data);
+        $this->users->userCreate($data);
         }
    
       $this->redirect('/admin/users/users_list');
@@ -88,7 +88,7 @@ class AdminController extends Controller
     if(empty($id))
       $this->errors->setError("ID of user is missing!");
     
-    $this->users->user_delete($id);
+    $this->users->userDelete($id);
     $this->redirect();
     }
     
@@ -99,7 +99,7 @@ class AdminController extends Controller
     if(empty($id))
       $this->errors->setError("ID of user is missing!");
     
-    $this->users->user_activation($id);
+    $this->users->userActivation($id);
     $this->redirect();
     }
     

@@ -88,7 +88,7 @@ class AppObject
         $this->$model = & new $model($model);
         $this->$model->type = 'user';
 
-        $this->$model->session = & $this->session;
+        //$this->$model->session = & $this->session;
 
         //echo $modelname;
         //print_r(get_class_methods($this->$modelname));

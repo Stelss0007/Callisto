@@ -29,7 +29,7 @@ class IndexController extends Controller
     $category_filter_list    = $category_filter_list + $this->articleCategory->categoryList(false);
     
     $user_filter_list[0] = $this->t('sys_unknown');
-    $user_filter_list    = $user_filter_list + $this->users->user_list(false);
+    $user_filter_list    = $user_filter_list + $this->users->userList(false);
  
     $status_filter_list['-1']   = $this->t('all_status');
     $status_filter_list['1']    = $this->t('sys_active');
@@ -71,7 +71,7 @@ class IndexController extends Controller
     $category_filter_list    = $category_filter_list + $this->articleCategory->categoryList(false);
     
     $user_filter_list[0] = $this->t('sys_unknown');
-    $user_filter_list    = $user_filter_list + $this->users->user_list(false);
+    $user_filter_list    = $user_filter_list + $this->users->userList(false);
  
     $status_filter_list['-1']   = $this->t('all_status');
     $status_filter_list['1']    = $this->t('sys_active');
@@ -113,7 +113,7 @@ class IndexController extends Controller
     $category_filter_list    = $category_filter_list + $this->articleCategory->categoryList(false);
     
     $user_filter_list[0] = $this->t('sys_unknown');
-    $user_filter_list    = $user_filter_list + $this->users->user_list(false);
+    $user_filter_list    = $user_filter_list + $this->users->userList(false);
  
     $status_filter_list['-1']   = $this->t('all_status');
     $status_filter_list['1']    = $this->t('sys_active');
@@ -151,7 +151,7 @@ class IndexController extends Controller
     $category_filter_list    = $category_filter_list + $this->articleCategory->categoryList(false);
     
     $user_filter_list[0] = $this->t('sys_unknown');
-    $user_filter_list    = $user_filter_list + $this->users->user_list(false);
+    $user_filter_list    = $user_filter_list + $this->users->userList(false);
  
     $status_filter_list['-1']   = $this->t('all_status');
     $status_filter_list['1']    = $this->t('sys_active');

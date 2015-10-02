@@ -102,9 +102,9 @@
       });
       
       //hide/show body contrnt (opacity)
-      window.onbeforeunload = function(){
-        $('.page-container').removeClass('body-show').addClass('body-hide');
-      };
+//      window.onbeforeunload = function(){
+//        $('.page-container').removeClass('body-show').addClass('body-hide');
+//      };
       $('.page-container').removeClass('body-hide').addClass('body-show');
   }); 
   

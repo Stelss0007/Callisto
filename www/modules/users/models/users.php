@@ -1,35 +1,42 @@
 <?php
+//namespace app\modules\users\models;
 /** 
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  * @Table('111') 
  */
-class users extends Model
+//class users extends Model
+class Users extends \app\db\ActiveRecord\Model
   {
   /**
    *
    * @Column(type='string', default='1', primaryKey = true) 
    * @Index(type='integer')
    */
-  var $table = 'user';
+  public static $tableName = 'user';
+  
+  private $session = null;
   
   /**
    * @id
    * @param type $full
    * @return type 
    */
-  function user_list($full=false)
+  function userList($full=false)
     {
     $result = array();
-    $this->query("SELECT * FROM user ORDER BY login");
-    $users = $this->fetchArray();
+    //$this->query("SELECT * FROM user ORDER BY login");
+    //$users = $this->fetchArray();
+    $users = self::findAll();
+    
     if($full)
       return $users;
     
     foreach ($users as $user)
       {
-      $result[$user['id']] = $user['login'];
+      $result[$user->id] = $user->login;
       }
+ 
     return $result;
     }
     
@@ -48,7 +55,7 @@ class users extends Model
     return $user[0];
     }
     
-  function user_create($data)
+  function userCreate($data)
     {
     if($data['pass'])
       $data['pass'] = md5($data['pass']);
@@ -56,7 +63,7 @@ class users extends Model
     $this->insert($this->table, $data);
     }
     
-  function user_update($data, $id)
+  function userUpdate($data, $id)
     {
     if(!is_numeric($id))
       return false;
@@ -66,7 +73,7 @@ class users extends Model
     $this->update($this->table, $data, "id = '$id'");
     }
     
-  function user_delete($id)
+  function userDelete($id)
     {
     if(!is_numeric($id))
       return false;
@@ -74,7 +81,7 @@ class users extends Model
     $this->query("DELETE FROM user WHERE id='$id'");
     }
     
-  function user_activation($id)
+  function userActivation($id)
     {
     if(!is_numeric($id))
       return false;
@@ -82,7 +89,7 @@ class users extends Model
     $this->query("UPDATE user SET active = IF(active ='1','0','1') WHERE id='$id'");
     }
     
-  function user_group_active($ids)
+  function userGroupActive($ids)
     {
     if(empty($ids))
       return false;
@@ -90,7 +97,7 @@ class users extends Model
     $this->query("UPDATE user SET active = '1' WHERE id in ('$ids')");
     }
     
-  function user_group_deactive($ids)
+  function userGroupDeactive($ids)
     {
     if(empty($ids))
       return false;

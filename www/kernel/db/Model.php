@@ -113,9 +113,9 @@ class Model
     
     public static function getStaticTableName()
         {
-        if(!empty(self::$tableName)) 
+        if(!empty(static::$tableName)) 
             {
-            return self::$tableName;
+            return static::$tableName;
             }
             
         $parts = explode('\\', self::getClassName());
@@ -125,9 +125,9 @@ class Model
         
     public function getTableName()
         {
-        if(!empty(self::$tableName)) 
+        if(!empty(static::$tableName)) 
             {
-            return self::$tableName;
+            return static::$tableName;
             }
         
         $tableName = get_class($this);
@@ -139,9 +139,9 @@ class Model
         
     public function getPrimaryKey()
         {
-        if(!empty(self::$primaryKey)) 
+        if(!empty(static::$primaryKey)) 
             {
-            return self::$primaryKey;
+            return static::$primaryKey;
             }
         
         return null;
@@ -150,18 +150,18 @@ class Model
     public function setAttributesByArray(array &$attributes, $guardAttributes)
         {
         $exceptions = array();
-        $attrAccessible = !empty(self::$attrAccessible);
-        $attrProtected = !empty(self::$attrProtected);
+        $attrAccessible = !empty(static::$attrAccessible);
+        $attrProtected = !empty(static::$attrProtected);
      
         foreach ($attributes as $name => $value)
             {
             if ($guardAttributes)
                 {
-                if ($attrAccessible && !in_array($name,self::$attrAccessible))
+                if ($attrAccessible && !in_array($name,static::$attrAccessible))
                     {
                     continue;
                     }
-                if ($attrProtected && in_array($name,self::$attrProtected))
+                if ($attrProtected && in_array($name,static::$attrProtected))
                     {
                     continue;
                     }
@@ -234,14 +234,14 @@ class Model
             throw new Exception('param `primaryKeyValue` is not integer!');
             }
             
-        return static::table()->where([self::$primaryKey => $primaryKeyValue])->one();
+        return static::table()->where([static::$primaryKey => $primaryKeyValue])->one();
         }
     
     final public static function findOne($condition, $params=[])
         {
         if(is_int($condition))
             {
-            $condition = [self::$primaryKey => $condition];
+            $condition = [static::$primaryKey => $condition];
             }
         return static::table()->where($condition)->params($params)->with('all')->one();
         }
@@ -275,7 +275,7 @@ class Model
             }
             
         $this->beforCreate();    
-        $result = self::table()->insertData($this->attributes);
+        $result = static::table()->insertData($this->attributes);
         $this->afterSave();
         
         return $result;
@@ -289,7 +289,7 @@ class Model
             }
             
         $this->beforUpdate();
-        $result = self::table()->updateData($this->attributes, [self::$primaryKey => $this->attributes[self::$primaryKey]]);
+        $result = static::table()->updateData($this->attributes, [static::$primaryKey => $this->attributes[static::$primaryKey]]);
         $this->afterUpdate();
         
         return $result;
@@ -299,7 +299,7 @@ class Model
         {
         $this->beforSave();
         $result = false;
-        if(isset($this->attributes[self::$primaryKey])) 
+        if(isset($this->attributes[static::$primaryKey])) 
             {
             $result = $this->update();
             }
@@ -314,12 +314,12 @@ class Model
     final public function delete()
         {
         $this->beforDelete();
-        if(!isset($this->attributes[self::$primaryKey])) 
+        if(!isset($this->attributes[static::$primaryKey])) 
             {
             return false;
             }
             
-        $result = self::table()->deleteData([self::$primaryKey => $this->attributes[self::$primaryKey]]);
+        $result = static::table()->deleteData([static::$primaryKey => $this->attributes[static::$primaryKey]]);
         
         $this->afterDelete();
         
@@ -330,7 +330,7 @@ class Model
         {
         if(is_int($condition))
             {
-            $condition = [self::$primaryKey => $condition];
+            $condition = [static::$primaryKey => $condition];
             }
         return static::table()->where($condition)->params($params)->delete();
         }

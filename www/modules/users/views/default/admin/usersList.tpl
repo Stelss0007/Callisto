@@ -1,3 +1,4 @@
+{debug}
 <div class="row-fluid">		
   <div class="box span12">
     <div class="box-header well" data-original-title>
@@ -56,45 +57,45 @@
               {cycle name="users" values="even,odd" assign="class" print=false}
               <tr class='{$class}'>
                 <th>
-                  <input type="checkbox" name="entities[]" class="td_entities" value="{$user.id}">
+                  <input type="checkbox" name="entities[]" class="td_entities" value="{$user->id}">
                 </th>
                 <td>
-                  {$user.id}
+                  {$user->id}
                 </td>
 
                 <td>
-                  {$user.login}
+                  {$user->login}
                 </td>
 
                 <td>
-                  {$user.displayname}
+                  {$user->displayname}
                 </td>
 
                 <td>
-                  {$user.mail}
+                  {$user->mail}
                 </td>
 
                 <td>
-                  {$groups_list[$user.gid]}
+                  {*$groups_list[$user.gid]*}
                 </td>
 
                 <td>
-                  {$user.addtime|date_format:'%d.%m.%Y'}
+                  {$user->addtime|date_format:'%d.%m.%Y'}
                 </td>
 
                 <td>
-                  {$user.last_visit|date_format:'%d.%m.%Y %H:%M'}
+                  {$user->last_visit|date_format:'%d.%m.%Y %H:%M'}
                 </td>
 
                 <td>
                   <div class="btn-group">
-                    {if $user.active}
-                      <a href='/admin/users/activation/{$user.id}' onclick="return confirm('{#user_disabled#}?')" title='{#user_disabled#}' class="btn btn-icon btn-pause"><i class="icon-pause"></i></a>
+                    {if $user->active}
+                      <a href='/admin/users/activation/{$user->id}' onclick="return confirm('{#user_disabled#}?')" title='{#user_disabled#}' class="btn btn-icon btn-pause"><i class="icon-pause"></i></a>
                       {else}
-                      <a href='/admin/users/activation/{$user.id}' onclick="return confirm('{#user_enabled#}?')" title='{#user_enabled#}' class="btn btn-icon btn-play"><i class="icon-play"></i></a>
+                      <a href='/admin/users/activation/{$user->id}' onclick="return confirm('{#user_enabled#}?')" title='{#user_enabled#}' class="btn btn-icon btn-play"><i class="icon-play"></i></a>
                       {/if}
-                    <a href='/admin/users/manage/{$user.id}' title='{#user_edit#}' class=" btn btn-icon btn-edit"><i class="icon-edit"></i></a>
-                    <a href='/admin/users/delete/{$user.id}' title='{#user_delete#}' class="btn btn-icon btn-delete"><i class="icon-trash"></i></a>
+                    <a href='/admin/users/manage/{$user->id}' title='{#user_edit#}' class=" btn btn-icon btn-edit"><i class="icon-edit"></i></a>
+                    <a href='/admin/users/delete/{$user->id}' title='{#user_delete#}' class="btn btn-icon btn-delete"><i class="icon-trash"></i></a>
                   </div>
                 </td>
               </tr>

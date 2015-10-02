@@ -73,7 +73,7 @@ class projectEditor extends Model
 //            $link = str_replace("[link]", "$directory/".urlencode($this_file), $return_link);
             $directory = str_replace(APP_DIRECTORY, '', $directory);
             $link = str_replace("[link]", "$directory/".urlencode($this_file), $return_link);
-            $php_file_tree .= "<li class=\"pft-file ".strtolower($ext)." file-tree-".str_replace('.', '_', $this_file)." hasmenu-file\" data-src='$directory/$this_file'><a href=\"$link\" class='".strtolower($ext)."'>".htmlspecialchars($this_file)."</a></li>";
+            $php_file_tree .= "<li class=\"pft-file ".strtolower($ext)." file-tree-".str_replace('.', '_', $this_file)." hasmenu-file\" data-src='$directory/$this_file'><a href=\"/admin$link\" class='".strtolower($ext)."'>".htmlspecialchars($this_file)."</a></li>";
             }
           }
         }
