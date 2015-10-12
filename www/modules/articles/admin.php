@@ -9,8 +9,7 @@ class AdminController extends Controller
     $this->viewCachedPage();
     
     $this->usesModel('articleCategory');
-    $this->usesModel('users');
-    
+        
     $this->articles_list = $this->articles->articleList(true, $this->getInput('filter', []));
        //$this->paginate($this->articles);
     
@@ -19,7 +18,7 @@ class AdminController extends Controller
     $category_filter_list    = $category_filter_list + $this->articleCategory->categoryList(false);
     
     $user_filter_list[0] = $this->t('all_user');
-    $user_filter_list    = $user_filter_list + $this->users->userList(false);
+    $user_filter_list    = $user_filter_list + \app\modules\users\models\Users::userList(false);
  
     $status_filter_list['-1']   = $this->t('all_status');
     $status_filter_list['1']    = $this->t('sys_active');
@@ -44,7 +43,7 @@ class AdminController extends Controller
   function actionArticleManage($id=0)
     {
     $this->getAccess(ACCESS_ADD);
-    $data = $this->input_vars;
+    $data = $this->inputVars;
     $this->article_category_list = $this->articleCategory->categoryList(false);
     //appDebug($data);exit;
     if($data['submit'])
@@ -115,7 +114,7 @@ class AdminController extends Controller
   function actionCategoryManage($id=0)
     {
     $this->getAccess(ACCESS_ADD);
-    $data = $this->input_vars;
+    $data = $this->inputVars;
     //appDebug($data);exit;
     $this->usesModel('articleCategory');
     if($data['submit'])
@@ -157,7 +156,7 @@ class AdminController extends Controller
   function actionCategoryGroupOperation()
     {
     $this->getAccess(ACCESS_ADMIN);
-    $data = $this->input_vars;
+    $data = $this->inputVars;
     
     $model_name = 'articleCategory';
     

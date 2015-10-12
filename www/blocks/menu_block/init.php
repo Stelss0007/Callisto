@@ -32,7 +32,7 @@ function menu_block_add($blockinfo)
 function menu_block_delete($blockinfo)
   {
   $sysTpl = new sysTpl;
-  $sysTpl->clear_cache(null, "menu_block::display::$blockinfo[id]");
+  $sysTpl->clearCache(null, "menu_block::display::$blockinfo[id]");
   return true;
   }
 
@@ -44,7 +44,7 @@ function menu_block_activate($blockinfo)
 function menu_block_deactivate($blockinfo)
   {
   $sysTpl = new sysTpl;
-  $sysTpl->clear_cache(null, "menu_block::display::$blockinfo[id]");
+  $sysTpl->clearCache(null, "menu_block::display::$blockinfo[id]");
   return true;
   }
 
@@ -87,7 +87,7 @@ function menu_block_update($blockinfo)
   sysBlockSetVar ($blockinfo['id'], 'menu_type', $menu_type);
   //Чистим кеш
   $sysTpl = new sysTpl;
-  $sysTpl->clear_cache(null, "menu_block::display::$blockinfo[id]");
+  $sysTpl->clearCache(null, "menu_block::display::$blockinfo[id]");
   }
 
 ?>

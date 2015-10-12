@@ -16,7 +16,7 @@ abstract class Controller extends AppObject
   protected $object_name;
   protected $type;
   protected $action;
-  public    $input_vars = array();
+  public    $inputVars = array();
   protected $input_vars_clear = array();
   private   $lang;
   private   $lang_default = 'rus';
@@ -121,7 +121,8 @@ abstract class Controller extends AppObject
 
     //?????? ????????? ????? ?????????????
     $this->smarty = new viewTpl();
-    $this->smarty->register_block('dynamic', 'smarty_block_dynamic', false);
+//    $this->smarty->register_block('dynamic', 'smarty_block_dynamic', false);
+    //$this->smarty->registerPlugin('dynamic', 'smarty_block_dynamic', false);
     //??????? ???? ???????????
 //    $this->current_theme = 'green';
     $this->setTheme();
@@ -141,14 +142,14 @@ abstract class Controller extends AppObject
     //$this->object_name = $this->getObjectName();
 
     //??????? ??? ????????? ? ??????? ?????????? ? ???????? input_vars
-    $this->input_vars = $_REQUEST;
+    $this->inputVars = $_REQUEST;
     $this->referer = (isset($_SERVER['HTTP_REFERER'])) ? $_SERVER['HTTP_REFERER'] : '/';
     //?????? ??? ?????? ? ???????? ???????
-    unset ($this->input_vars['module']);
-    unset ($this->input_vars['action']);
-    unset ($this->input_vars['type']);
+    unset ($this->inputVars['module']);
+    unset ($this->inputVars['action']);
+    unset ($this->inputVars['type']);
     //unset ($this->input_vars['submit']);
-    unset ($this->input_vars['PHPSESSID']);
+    unset ($this->inputVars['PHPSESSID']);
     
     $this->getCurrentURL();
     
@@ -218,8 +219,8 @@ abstract class Controller extends AppObject
         $debuger->debugAddDir($mysql_querys);
       $debuger->debugAddEndGroup();
       
-      $debuger->debugAddCreateGroup("Input Vars (".sizeof($this->input_vars).")");
-        $debuger->debugAddDir($this->input_vars);
+      $debuger->debugAddCreateGroup("Input Vars (".sizeof($this->inputVars).")");
+        $debuger->debugAddDir($this->inputVars);
       $debuger->debugAddEndGroup();
       
       $debuger->debugAddCreateGroup("Template Vars (".sizeof($this->vars).")");
@@ -275,6 +276,10 @@ abstract class Controller extends AppObject
     if(is_array($var_name))
       {
       $this->vars = array_merge($this->vars, $var_name);
+      }
+    elseif(is_object($var_name)) 
+      {
+      $this->vars[get_class($var_name)] = & $var_name;
       }
     else
       {
@@ -341,7 +346,7 @@ abstract class Controller extends AppObject
     //Без аргументов подключится стиль текущей темы
     appCssLoad();
     
-    call_user_method_array('action'.$action_name, $this, $this->input_vars);
+    call_user_method_array('action'.$action_name, $this, $this->inputVars);
     }
   final public function setViewType($type = 'user')
     {
@@ -359,8 +364,7 @@ abstract class Controller extends AppObject
     }
   final public function setTheme()
     {
-    $this->usesModel('theme');
-    $this->current_theme = $this->theme->getActiveName();
+    $this->current_theme = \app\modules\theme\models\Theme::getActiveName();
     }
   final public function getThemeName()
     {
@@ -397,8 +401,8 @@ abstract class Controller extends AppObject
   
   final function setModConfig()
     {
-    $this->usesModel('configuration');
-    $db_conf = $this->configuration->getModConfiguration('main');
+    
+    $db_conf = \app\modules\configuration\models\Configuration::getModConfiguration('main');
     if(!empty($db_conf))
       {
       $this->config = array_merge($this->config, $db_conf);
@@ -455,18 +459,18 @@ abstract class Controller extends AppObject
           
         if(!is_int($key))
           {
-          if(isset($this->input_vars[$key]))
+          if(isset($this->inputVars[$key]))
             {
-            $array_result[$key] = $this->input_vars[$key];
+            $array_result[$key] = $this->inputVars[$key];
             }
           else
             {
             $array_result[$key] = $value_key;
             }
           }
-        elseif(isset($this->input_vars[$value_key]))
+        elseif(isset($this->inputVars[$value_key]))
           {
-          $array_result[$value_key] = $this->input_vars[$value_key];
+          $array_result[$value_key] = $this->inputVars[$value_key];
           }
         elseif(is_array($default) && isset($default[$value_key]))
           {
@@ -483,9 +487,9 @@ abstract class Controller extends AppObject
       {
       if(empty($var))
         {
-        return $this->input_vars;
+        return $this->inputVars;
         }
-      return isset($this->input_vars[$var]) ? $this->input_vars[$var] : $default;
+      return isset($this->inputVars[$var]) ? $this->inputVars[$var] : $default;
       }
     }
     
@@ -516,7 +520,8 @@ abstract class Controller extends AppObject
     $tpl_dir = $this->tplFileName();
     $ObjectName = $this->getTplObjectName();
     
-    return $this->smarty->is_cached($tpl_dir, $ObjectName);
+//    return $this->smarty->is_cached($tpl_dir, $ObjectName);
+    return $this->smarty->isCached($tpl_dir, $ObjectName);
     }
     
   final public function deleteCache($ObjectName = false)
@@ -529,7 +534,7 @@ abstract class Controller extends AppObject
     if(empty($ObjectName)) 
       return;
     
-    return $this->smarty->clear_cache(null, $ObjectName);
+    return $this->smarty->clearCache(null, $ObjectName);
     }
     
   final public function viewCached()
@@ -537,7 +542,8 @@ abstract class Controller extends AppObject
     $tpl_dir = $this->tplFileName();
     $ObjectName = $this->getTplObjectName();
     
-    if(!$this->smarty->is_cached($tpl_dir, $ObjectName))
+//    if(!$this->smarty->is_cached($tpl_dir, $ObjectName))
+    if(!$this->smarty->isCached($tpl_dir, $ObjectName))
       return false;
     
     echo $this->smarty->fetch($tpl_dir, $ObjectName);
@@ -549,7 +555,8 @@ abstract class Controller extends AppObject
     $tpl_dir = $this->tplFileName();
     $ObjectName = $this->getTplObjectName();
   
-    if(!$this->smarty->is_cached($tpl_dir, $ObjectName))
+//    if(!$this->smarty->is_cached($tpl_dir, $ObjectName))
+    if(!$this->smarty->isCached($tpl_dir, $ObjectName))
         {
         $this->usesModel('statistic');
         $this->statistic->setLog();
@@ -580,7 +587,7 @@ abstract class Controller extends AppObject
    */
   final public function t($const)
     {
-    $result = $this->smarty->get_config_vars($const);
+    $result = $this->smarty->getConfigVars($const);
     if($result) return ''.$result;
     return '';
     }
@@ -714,7 +721,7 @@ abstract class Controller extends AppObject
     //$url_result = $this->GetCallingMethodName(3, true);
     $action = $this->action;//$url_result['function'];
     $args = '';
-    foreach($this->input_vars as $key => $value)
+    foreach($this->inputVars as $key => $value)
       {
       $args .= '::'.$key.':'.$value;
       }
@@ -727,9 +734,9 @@ abstract class Controller extends AppObject
     //$url_result = $this->GetCallingMethodName(3, true);
     $action = $this->action;//$url_result['function'];
     $args = '';
-    if($this->input_vars)
+    if($this->inputVars)
       {
-      foreach($this->input_vars as $key => $value)
+      foreach($this->inputVars as $key => $value)
         {
         $args .= '|'.$key.':'.$value;
         }
@@ -749,11 +756,11 @@ abstract class Controller extends AppObject
     {
     if (file_exists ("lang/$this->lang/lang.conf"))
       {
-      $this->smarty->config_load("lang/$this->lang/lang.conf");
+      $this->smarty->configLoad("lang/$this->lang/lang.conf");
       }
     elseif (($this->lang !=$this->lang_default) && file_exists("lang/$this->lang_default/lang.conf"))
       {
-      $this->smarty->config_load("lang/$this->lang_default/lang.conf");
+      $this->smarty->configLoad("lang/$this->lang_default/lang.conf");
       }
     return true;
     }
@@ -762,11 +769,11 @@ abstract class Controller extends AppObject
     {
     if (file_exists ("blocks/$blockName/lang/$this->lang/lang.conf"))
       {
-      $this->smarty->config_load("blocks/$blockName/lang/$this->lang/lang.conf");
+      $this->smarty->configLoad("blocks/$blockName/lang/$this->lang/lang.conf");
       }
     elseif (($this->lang !=$this->lang_default) && file_exists("blocks/$blockName/lang/$this->lang_default/lang.conf"))
       {
-      $this->smarty->config_load("blocks/$blockName/lang/$this->lang_default/lang.conf");
+      $this->smarty->configLoad("blocks/$blockName/lang/$this->lang_default/lang.conf");
       }
     return true;
     }
@@ -775,11 +782,11 @@ abstract class Controller extends AppObject
     {
     if (file_exists ("themes/$themeName/lang/$this->lang/lang.conf"))
       {
-      $this->smarty->config_load("themes/$themeName/lang/$this->lang/lang.conf");
+      $this->smarty->configLoad("themes/$themeName/lang/$this->lang/lang.conf");
       }
     elseif (($this->lang !=$this->lang_default) && file_exists("themes/$themeName/lang/$this->lang_default/lang.conf"))
       {
-      $this->smarty->config_load("themes/$themeName/lang/$this->lang_default/lang.conf");
+      $this->smarty->configLoad("themes/$themeName/lang/$this->lang_default/lang.conf");
       }
     return true;
     }
@@ -788,11 +795,11 @@ abstract class Controller extends AppObject
     {
     if(file_exists ("modules/$moduleName/lang/$this->lang/lang.conf"))
       {
-      $this->smarty->config_load("modules/$moduleName/lang/$this->lang/lang.conf");
+      $this->smarty->configLoad("modules/$moduleName/lang/$this->lang/lang.conf");
       }
     elseif(($this->lang !=$this->lang_default) && file_exists("modules/$moduleName/lang/$this->lang_default/lang.conf"))
       {
-      $this->smarty->config_load("modules/$moduleName/lang/$this->lang_default/lang.conf");
+      $this->smarty->configLoad("modules/$moduleName/lang/$this->lang_default/lang.conf");
       }
     return true;
     }
@@ -805,15 +812,15 @@ abstract class Controller extends AppObject
     if(empty($object))
       $object = $this->getObjectName();
     
-    $this->usesModel('permissions');
-    return $this->permissionLavel = $this->permissions->objectGetPermsLevel($object);
+    //$this->usesModel('permissions');
+    return $this->permissionLavel = app\modules\permissions\models\Permissions::objectGetPermsLevel($object);
     }
   final public function getAccess($access_type=ACCESS_READ, $admin = true)
     {
     $object = $this->getObjectName();
     
-    $this->usesModel('permissions');
-    if($this->permissions->getAccess($object, $access_type)==true)
+    //$this->usesModel('permissions');
+    if(app\modules\permissions\models\Permissions::getAccess($object, $access_type)==true)
       return true;
     
     $this->notAccess($access_type, $admin);
@@ -1554,29 +1561,31 @@ abstract class Controller extends AppObject
     
   public function actionGroupOperation()
     {
-    $data = $this->input_vars;
+    $data = $this->inputVars;
     
-    $model_name = $this->modname;
+    $modelName = $this->modname;
+    
+    $class = "\\app\\modules\\{$modelName}\\models\\".ucfirst($modelName);
     
     switch($data['action_name'])
       {
       case 'delete':
-        $this->$model_name->groupActionDelete($data['entities']);
+        $class::groupActionDelete($data['entities']);
         $this->showMessage($this->t('sys_elements_is_removed'));
         break;
         
       case 'activate':
-        $this->$model_name->groupActionActivate($data['entities']);
+        $class::groupActionActivate($data['entities']);
         $this->showMessage($this->t('sys_elements_is_actived'));
         break;
       
       case 'deactivate':
-        $this->$model_name->groupActionDeactivate($data['entities']);
+        $class::groupActionDeactivate($data['entities']);
         $this->showMessage($this->t('sys_elements_is_deactived'));
         break;
       
       case 'install':
-        $this->$model_name->groupActionInstall($data['entities']);
+        $class::groupActionInstall($data['entities']);
         $this->showMessage($this->t('sys_elements_is_installed'));
         break;
 
@@ -1584,14 +1593,18 @@ abstract class Controller extends AppObject
         break;
       }
     }
+    
   public function actionDelete($id)
     {
     if(empty($id))
       $this->errors->setError("ID of object is missing!");
     
     $model_name = $this->modname;
+    $class = "\\app\\modules\\{$modelName}\\models\\".ucfirst($modelName);
     
-    $this->$model_name->delete($id);
+    $object = $class::find($id);
+    $object->delete($id);
+    
     $this->showMessage($this->t('sys_element_is_removed'));
     $this->redirect();
     }
@@ -1602,8 +1615,11 @@ abstract class Controller extends AppObject
       $this->errors->setError("ID of user is missing!");
     
     $model_name = $this->modname;
-     
-    $this->$model_name->activation($id);
+    $class = "\\app\\modules\\{$modelName}\\models\\".ucfirst($modelName);
+    
+    $object = $class::find($id);
+    $object->activation();
+
     $this->redirect();
     }
     

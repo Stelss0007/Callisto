@@ -157,11 +157,11 @@ class Model
             {
             if ($guardAttributes)
                 {
-                if ($attrAccessible && !in_array($name,static::$attrAccessible))
+                if ($attrAccessible && !in_array($name, static::$attrAccessible))
                     {
                     continue;
                     }
-                if ($attrProtected && in_array($name,static::$attrProtected))
+                if ($attrProtected && in_array($name, static::$attrProtected))
                     {
                     continue;
                     }
@@ -221,18 +221,18 @@ class Model
         return Table::load(get_called_class());
 	}    
         
-    public static function find($primaryKeyValue=0)
+    public static function find($primaryKeyValue=null)
         {
         
-        if(empty($primaryKeyValue))
+        if($primaryKeyValue === null)
             {
             return static::table();        
             }
-        
-        if(!is_int($primaryKeyValue)) 
-            {
-            throw new Exception('param `primaryKeyValue` is not integer!');
-            }
+       
+//        if(!is_int($primaryKeyValue)) 
+//            {
+//            throw new Exception('param `primaryKeyValue` is not integer!');
+//            }
             
         return static::table()->where([static::$primaryKey => $primaryKeyValue])->one();
         }
@@ -295,11 +295,30 @@ class Model
         return $result;
         }
         
+    /**
+     * Update all data
+     * @param array $date  Array field=>value
+     * @param arra $condition Array field=>value
+     * @return boolean
+     */    
+    final public function updateAll($data = [], $condition = [])
+        {
+        if(empty($data))
+            {
+            return false;
+            }
+
+        $result = static::table()->updateData($data, $condition);
+        
+        return $result;
+        }
+        
     final public function save($validate = true)
         {
         $this->beforSave();
         $result = false;
-        if(isset($this->attributes[static::$primaryKey])) 
+
+        if(isset($this->attributes[static::$primaryKey]) && !empty($this->attributes[static::$primaryKey])) 
             {
             $result = $this->update();
             }
@@ -326,13 +345,13 @@ class Model
         return $result;
         }
         
-    final public static function deleteAll($condition, $params)
+    final public static function deleteAll($condition, $params=[])
         {
         if(is_int($condition))
             {
             $condition = [static::$primaryKey => $condition];
             }
-        return static::table()->where($condition)->params($params)->delete();
+        return static::table()->deleteData($condition, $params);
         }
         
     final public function with($withRelations=[])
@@ -367,6 +386,177 @@ class Model
             }
             
         return $this;    
+        }
+        
+   
+        
+    public static function activation($id)
+        {
+        if(empty($id))
+            {
+            return false;
+            }
+         
+        if(static::table()->hasField('active'))
+            {
+            $obj = static::table()->where([static::$primaryKey => $id])->one();
+            if($obj)
+                {
+                $obj->active = ($obj->active) ? '0' : '1';
+                $obj->save();
+                return true;
+                }
+            }
+            return false;
+        }
+        
+    public static function activate($id = null)
+        {
+        if(empty($id))
+            {
+            return false;
+            }
+         
+        if(static::table()->hasField('active'))
+            {
+            $obj = static::table()->where([static::$primaryKey => $id])->one();
+            if($obj)
+                {
+                $obj->active = '1';
+                $obj->save();
+                return true;
+                }
+            }
+            return false;
+        }
+        
+    public static function deactivate($id = null)
+        {
+        if(empty($id))
+            {
+            return false;
+            }
+        
+        if(static::table()->hasField('active'))
+            {
+            $obj = static::table()->where([static::$primaryKey => $id])->one();
+            if($obj)
+                {
+                $obj->active = '0';
+                $obj->save();
+                return true;
+                }
+            }
+            return false;
+        }
+        
+    public static function groupActionActivate($ids)
+        {
+        if(empty($ids))
+          return false;
+        
+        if(static::table()->hasField('active'))
+            {
+            $result = static::table()->updateData(['active'=>1], [static::$primaryKey => $ids]);
+            }
+        }
+        
+    public static function groupActionDeactivate($ids)
+        {
+        if(empty($ids))
+          return false;
+        
+        if(static::table()->hasField('active'))
+            {
+            $result = static::table()->updateData(['active'=>0], [static::$primaryKey => $ids]);
+            }
+        }
+        
+    public static function groupActionDelete($ids)
+        {
+        if(empty($ids))
+          return false;
+
+        return static::table()->deleteData([static::$primaryKey => $ids]);
+        }
+        
+        
+    public static function weightMax($condition = []) 
+        {
+        $maxWeightObj = static::find()
+                ->orderBy(['weight' => 'DESC']);
+        
+        if($condition)
+            {
+            $maxWeightObj = $maxWeightObj->where();
+            }
+        
+        $maxWeightObj = $maxWeightObj->one();
+        
+        return $maxWeightObj->weight;
+        }
+        
+    public function weightUp($condition = []) 
+        {
+        if($this->weight < 2)
+            {
+            return false;
+            }
+            
+        $this->weight = $this->weight - 1;
+        
+        $condition['weight'] = $this->weight;
+        
+        $prevObj = $this->findOne($condition);
+        $prevObj->weight = $prevObj->weight + 1;
+        $prevObj->save();
+        
+        $this->save();
+        
+        return true;
+        }
+        
+    public function weightDown($condition = []) 
+        {
+        if($this->weight >= $this->weightMax())
+            {
+            return false;
+            }
+            
+        $this->weight = $this->weight + 1;
+        
+        $condition['weight'] = $this->weight;
+        
+        $prevObj = $this->findOne($condition);
+        $prevObj->weight = $prevObj->weight - 1;
+        $prevObj->save();
+        
+        $this->save();
+        
+        return true;
+        }
+        
+    public function weightSet($weightNew = 0, $condition = [])
+        {
+        if ($weightNew == 0)
+            {
+            return false;
+            }
+            
+        $this->updateAll(['weight'=>static::$tableName.'.weight-1'], ['>' => ['weight'=> $this->weight]] + $condition);
+        $this->updateAll(['weight'=>static::$tableName.'.weight+1'], ['>=' => ['weight'=> $weightNew]] + $condition);
+        
+        $this->weight = $weightNew;
+        $this->save();
+    
+        return true;
+        }
+        
+    public function weightDelete($condition = [])
+        {
+        $this->updateAll(['weight'=>static::$tableName.'.weight-1'], ['>' => ['weight'=> $this->weight]] + $condition);
+
+        return true;
         }
         
     /* Befor/After Functions */

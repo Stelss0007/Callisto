@@ -28,6 +28,16 @@ spl_autoload_register(function ($class) {
         return;
     }
     unset($class[0]);
+
+    if($class[1] == 'lib') {
+        $class = implode('/', $class);
+        $class = $class.'.class.php';
+        echo $class; 
+        exit;
+        include $class;
+        return true;
+    }
+    
     $class = implode('/', $class);    
     include $class.'.php';
 });

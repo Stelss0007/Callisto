@@ -125,6 +125,11 @@ class Table extends SQLBuilder
 
         return $columns;
         }
+        
+    public function hasField($field)
+        {
+        return in_array($field, $this->getFields(), true);
+        }
     
     private function clearDataByTableFields($data) 
         {
@@ -174,11 +179,12 @@ class Table extends SQLBuilder
             }
             
         $data = $this->clearDataByTableFields($data);
+       
         if(empty($data) || empty($condition))
             {
             return false;
             }
-            
+          
         return $this->update($this->tableName, $data, $condition);
         }
         
@@ -303,6 +309,6 @@ class Table extends SQLBuilder
 
         return $this->allWithRelations();
         }
-        
+   
 
 }

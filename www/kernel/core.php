@@ -66,7 +66,7 @@ function isAjax()
   return false;
   }
 
-$ses_info = UserSession::getInstance();
+$ses_info = app\lib\UserSession\UserSession::getInstance();
 /**
  * @desc ?????????????? ???????
  * @return bool

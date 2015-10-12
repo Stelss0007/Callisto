@@ -51,19 +51,19 @@
           event.preventDefault();
           switch($this.attr('rel')){
             case 'delete':
-              message += sys_confirm_group_delete
+              message += sys_confirm_group_delete;
               break;
             case 'activate':
-              message += sys_confirm_group_activate
+              message += sys_confirm_group_activate;
               break;
             case 'deactivate':
-              message += sys_confirm_group_deactivate
+              message += sys_confirm_group_deactivate;
               break;
             case 'install':
-              message += sys_confirm_group_install
+              message += sys_confirm_group_install;
               break;
             default:
-              message += sys_confirm
+              message += sys_confirm;
           }
           bootbox.confirm(message, function(result) {
             if(result) {

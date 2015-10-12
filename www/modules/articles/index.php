@@ -19,17 +19,17 @@ class IndexController extends Controller
     $this->viewCachedPage();
     
     $this->usesModel('articleCategory');
-    $this->usesModel('users');
-    
+    //$this->usesModel('users');
+  
     $this->articles_list = $this->articles->articleList(true, array('article_active'=>1));
     //$this->paginate($this->articles);
-    
+  
     //Подготовим фильтры
     $category_filter_list[0] = $this->t('sys_unknown');
     $category_filter_list    = $category_filter_list + $this->articleCategory->categoryList(false);
     
     $user_filter_list[0] = $this->t('sys_unknown');
-    $user_filter_list    = $user_filter_list + $this->users->userList(false);
+    $user_filter_list    = $user_filter_list + app\modules\users\models\Users::userList(false);
  
     $status_filter_list['-1']   = $this->t('all_status');
     $status_filter_list['1']    = $this->t('sys_active');
@@ -140,7 +140,7 @@ class IndexController extends Controller
     $this->viewCachedPage();
     
     $this->usesModel('articleCategory');
-    $this->usesModel('users');
+    //$this->usesModel('users');
     
     $article = $this->articles->getById($id);
     $this->article = $article;
@@ -151,7 +151,7 @@ class IndexController extends Controller
     $category_filter_list    = $category_filter_list + $this->articleCategory->categoryList(false);
     
     $user_filter_list[0] = $this->t('sys_unknown');
-    $user_filter_list    = $user_filter_list + $this->users->userList(false);
+    $user_filter_list    = $user_filter_list + app\modules\users\models\Users::userList(false);
  
     $status_filter_list['-1']   = $this->t('all_status');
     $status_filter_list['1']    = $this->t('sys_active');

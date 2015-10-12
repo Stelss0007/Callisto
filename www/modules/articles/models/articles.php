@@ -33,18 +33,18 @@ class articles extends Model
         $where = 'WHERE '.$filter_str;
         }
       }
-      
+     
     //Формируем строку лимитов для sql запроса
     $limit['page'] = $this->getInput('page', 1);
     $limit['element_at_page'] = '3';
-      
+   
     $sql_limit = '';
     $this->preparePagination($where, $sql_limit);
     
     $result = array();
     $sql = " 
               SELECT a.*, u.login FROM `{$this->table}` a 
-              LEFT JOIN {$this->getModelTable('users')} u ON (u.id=a.article_user_id)
+              LEFT JOIN ".app\modules\users\models\Users::$tableName." u ON (u.id=a.article_user_id)
               $where
               ORDER BY article_add_time
               $sql_limit

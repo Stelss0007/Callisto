@@ -1,4 +1,3 @@
-{debug}
 <div class="row-fluid">		
   <div class="box span12">
     <div class="box-header well" data-original-title>
@@ -76,7 +75,7 @@
                 </td>
 
                 <td>
-                  {*$groups_list[$user.gid]*}
+                  {$groups_list[$user->gid]}
                 </td>
 
                 <td>

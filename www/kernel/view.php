@@ -13,9 +13,10 @@ class viewTpl extends Smarty
     global $appConfig;
 
     //???????? ??????????? ??????
-    $this->Smarty();
+    //$this->Smarty();
+    parent::__construct();
     //????????? ???? ?????????? ???????????
-    $this->debugging = $appConfig['debug.enabled'];//false;
+    $this->debugging = false;//$appConfig['debug.enabled'];//false;
     $this->caching = $appConfig['coretpl.caching'];
     $this->use_sub_dirs = $appConfig['coretpl.use_sub_dirs'];
     if($appConfig['debug.enabled'])
@@ -49,20 +50,26 @@ class viewTpl extends Smarty
 
 
     }
+    
+    
+    
   /**
    * Fetching
    **/
-  function fetch ($tpl_file, $cache_id = null, $compile_id = null, $display = false)
-    {
-    $this->template_file = $tpl_file;
-    
-    if($this->caching && $this->is_cached($tpl_file, $cache_id ))
-      {
-      $this->runCachedScripts();
-      }
-    
-    return (Smarty::fetch($tpl_file, $cache_id, $compile_id, $display));
-    }
+//  function fetch ($tpl_file, $cache_id = null, $compile_id = null, $display = false)
+//    {
+//    $this->template_file = $tpl_file;
+//    
+////    if($this->caching && $this->is_cached($tpl_file, $cache_id ))
+//    if($this->caching && $this->isCached($tpl_file, $cache_id ))
+//      {
+//      $this->runCachedScripts();
+//      }
+//    
+//    return (Smarty::fetch($tpl_file, $cache_id, $compile_id, $display));
+//    }
+
+   
 //  /**
 //   * ?????????? ?????????? ????????????? ? ?????????????? ????????
 //   **/
@@ -85,7 +92,7 @@ class viewTpl extends Smarty
   /**
    * clear_cache
   **/
-  function clear_cache ($tpl_file = null, $cache_id = null, $compile_id = null, $exp_time = null)
+  function clearCache ($tpl_file = null, $cache_id = null, $compile_id = null, $exp_time = null)
     {
     $cache_id = str_replace('::', '|', $cache_id);
     return (Smarty::clear_cache($tpl_file, $cache_id, $compile_id, $exp_time));
@@ -93,12 +100,14 @@ class viewTpl extends Smarty
   /**
    * is_cached
    **/
-  function is_cached ($tpl_file, $cache_id = null, $compile_id = null)
+  function isCached ($tpl_file, $cache_id = null, $compile_id = null)
     {
-    if (!$tpl_file) appException ('core_tpl->is_cached', BAD_PARAM, "Tpl file name empty");
+//    if (!$tpl_file) appException ('core_tpl->is_cached', BAD_PARAM, "Tpl file name empty");
+    if (!$tpl_file) appException ('core_tpl->isCached', BAD_PARAM, "Tpl file name empty");
 
     //echo $tpl_file.' '.$cache_id;
-    return (Smarty::is_cached($tpl_file, $cache_id, $compile_id));
+//    return (Smarty::is_cached($tpl_file, $cache_id, $compile_id));
+    return (Smarty::isCached($tpl_file, $cache_id, $compile_id));
     }
    
   function runCachedScripts()

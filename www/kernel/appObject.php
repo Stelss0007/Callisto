@@ -51,6 +51,18 @@ class AppObject
   //////////////////////////////////////////////////////////////////////////////
   final public function usesModel($modulename=null, $autocreate=true)
     {
+  
+    switch ($modulename) {
+        case 'Users':
+        case 'Groups':
+        case 'Permissions':
+        case 'Configuration':
+        case 'Theme':
+        case 'Blocks':
+            return;
+            break;
+    }
+      
     //echo $this->modname;exit;
     $modelname = (!empty($modulename)) ? $modulename : $this->modname; 
     $modulename = (!empty($modulename)) ? $modulename : $this->modname; 
@@ -62,12 +74,11 @@ class AppObject
     
     if(!$autocreate)
       return new $className($className);
-  
-    //$this->$modelname = & new $className($className);
+
     $this->$modelname = & new $className($className);
-    $this->$modelname->type = 'user';//$modulename;
-    
-    $this->$modelname->session = & $this->session;
+    $this->$modelname->type = $modulename;
+
+    //$this->$modelname->session = & $this->session;
     
     //echo $modelname;
     //print_r(get_class_methods($this->$modelname));
@@ -85,6 +96,18 @@ class AppObject
       {
       foreach($models as $model=>$src)
         {
+       
+        switch ($model) {
+            case 'Users':
+            case 'Groups':
+            case 'Permissions':
+            case 'Configuration':
+            case 'Theme':
+            case 'Blocks':
+                return;
+                break;
+        }
+        
         $this->$model = & new $model($model);
         $this->$model->type = 'user';
 
@@ -137,8 +160,8 @@ class AppObject
       {
       return $_REQUEST[$input_var];
       }
-      
-    return $this->session->getVar($input_var, $default);
+    $session =  app\lib\UserSession\UserSession::getInstance();  
+    return $session->getVar($input_var, $default);
     }
     
   public function setInput($input_var, $value='')
@@ -152,7 +175,7 @@ class AppObject
   //////////////////////////////////////////////////////////////////////////////
   final public function sessinInit()
     {
-    $this->session = UserSession::getInstance();
+    $this->session = app\lib\UserSession\UserSession::getInstance();
     //$this->session = & new UserSession;
     //print_r(get_class_methods($this->$modelname));
     }

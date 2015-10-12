@@ -42,7 +42,7 @@ class IndexController extends Controller
     
   public function actionCommentAdd()
     {
-    $data = $this->input_vars; 
+    $data = $this->inputVars; 
     $this->arrayToModel($this->comments, $data);
     
     $this->comments->comment_user_id = $this->session->userId();

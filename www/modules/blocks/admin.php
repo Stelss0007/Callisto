@@ -1,4 +1,6 @@
 <?php
+use app\modules\blocks\models\Blocks;
+
 class AdminController extends Controller
   {
   public $defaultAction = 'blocks_list';
@@ -7,7 +9,7 @@ class AdminController extends Controller
     {
     $this->getAccess(ACCESS_ADMIN);
   
-    $blocks = $this->blocks->block_list();
+    $blocks = Blocks::blockList();
    
     $this->blocks_list_l = $blocks['blocks_list_l'];
     $this->blocks_list_r = $blocks['blocks_list_r'];
@@ -15,13 +17,11 @@ class AdminController extends Controller
     $this->blocks_list_b = $blocks['blocks_list_b'];
     $this->blocks_list_c = $blocks['blocks_list_c'];
     
-    $browsein = array();
-    $browsein[] = array ('url'=>'/admin/main',
-                        'displayname'=>'Dasboard');
-    $browsein[] = array ('url'=>'/admin/blocks',
-                        'displayname'=>'Блоки');
+    $browsein = [];
+    $browsein[] = ['url'=>'/admin/main', 'displayname'=>'Dasboard'];
+    $browsein[] = ['url'=>'/admin/blocks', 'displayname'=>'Блоки'];
        
-    $this->module_browsein = $browsein;
+    $this->assign('module_browsein', $browsein);
     
     $this->viewPage();
     }
@@ -63,18 +63,15 @@ class AdminController extends Controller
       }
     closedir($dir_handler);
     
-    $this->blocks_list_all = $block_list_all;
-    $this->position = $input_position;
+    $this->assign('blocks_list_all', $block_list_all);
+    $this->assign('position', $input_position);
     
-    $browsein = array();
-    $browsein[] = array ('url'=>'/admin/main',
-                        'displayname'=>'Dasboard');
-    $browsein[] = array ('url'=>'/admin/blocks',
-                        'displayname'=>'Блоки');
-    $browsein[] = array ('url'=>'/admin/blocks/install',
-                        'displayname'=>'Добавление блока "'.$position.'"');
+    $browsein = [];
+    $browsein[] = ['url'=>'/admin/main', 'displayname'=>'Dasboard'];
+    $browsein[] = ['url'=>'/admin/blocks', 'displayname'=>'Блоки'];
+    $browsein[] = ['url'=>'/admin/blocks/install', 'displayname'=>'Добавление блока "'.$position.'"'];
     
-    $this->module_browsein = $browsein;
+    $this->assign('module_browsein', $browsein);
     
     $this->viewPage();
     }
@@ -119,24 +116,33 @@ class AdminController extends Controller
     $this->showMessage('Элемент добавлен', '/admin/blocks');
     }
     
-  function actionWeightUp($weight,$block_position)
+  function actionWeightUp($id)
     {
     $this->getAccess(ACCESS_ADMIN);
-    $this->blocks->weightUp($weight, "block_position = '$block_position'");
+    
+    $block = Blocks::find($id);
+    $block->weightUp(['position'=>$block->position]);
+    
     $this->redirect();
     }
     
-  function actionWeightDown($weight,$block_position)
+  function actionWeightDown($id)
     {
     $this->getAccess(ACCESS_ADMIN);
-    $this->blocks->weightDown($weight ,"block_position = '$block_position'");
+    
+    $block = Blocks::find($id);
+    $block->weightDown(['position'=>$block->position]);
+    
     $this->redirect();
     }
     
   function actionWeightSet($id, $weightOld, $weightNew, $block_position)
     {
     $this->getAccess(ACCESS_ADMIN);
-    $this->blocks->weightSet($id, $weightOld, $weightNew, $block_position);
+    
+    $block = Blocks::find($id);
+    $block->weightSet($weightNew, ['position' => $block_position]);
+
     echo $this->t('sys_saved');
     //$this->redirect();
     }
@@ -144,16 +150,18 @@ class AdminController extends Controller
   function actionActive($id)
     {
     $this->getAccess(ACCESS_ADMIN);
-    $this->blocks->block_active = '1';
-    $this->blocks->save($id);
+    
+    Blocks::activate($id);
+
     $this->redirect();
     }
     
   function actionDeactive($id)
     {
     $this->getAccess(ACCESS_ADMIN);
-    $this->blocks->block_active = '0';
-    $this->blocks->save($id);
+    
+    Blocks::deactivate($id);
+    
     $this->redirect();
     }
     
@@ -161,10 +169,10 @@ class AdminController extends Controller
     {
     $this->getAccess(ACCESS_ADMIN);
     
-    $currentBlockInfo = $this->blocks->getById($id);
-    
-    $this->blocks->weightDelete($currentBlockInfo['block_weight'] ,"block_position = '{$currentBlockInfo['block_position']}'");
-    $this->blocks->delete($id);
+    $block = Blocks::find($id);
+    $block->weightDelete(['position' => $block_position]);
+    $block->delete();
+
     $this->redirect();
     }
     
@@ -179,39 +187,36 @@ class AdminController extends Controller
     $position['c']='Поцентру';
 
 
-    $block = $this->blocks->getById($id);
+    $block = Blocks::find($id);
     
-    $this->positions = $position;
-    $this->ref = $_SERVER['HTTP_REFERER'];
+    $this->assign('positions', $position);
+    $this->assign('ref', $_SERVER['HTTP_REFERER']);
 
     //Получим доп настройки блока, передав ему управление
-    $block_file='blocks/'.$block['block_name'].'/block.php';
+    $block_file='blocks/'.$block->name.'/block.php';
     if (file_exists ($block_file))
       {
       include_once($block_file);
-      $block_obj = new $block['block_name']($block);
-      $block_obj->block_name = $block['block_name'];
+      $block_obj = new $block->name($block);
+      $block_obj->name = $block->name;
 //      $block_modify_fn = $blocks_list[0]['block_name'].'_modify';
       $block_modify_fn = 'modify';
       if (method_exists($block_obj, $block_modify_fn))
         {
         $block_config_result = $block_obj->$block_modify_fn($block);
-        $this->block_config_result = $block_config_result['block_content'];
+        $this->assign('block_config_result', $block_config_result['block_content']);
         }
       }
 
-    $this->assign($block);
+    $this->assign('block', $block);
 
     //BrowseIn
-    $browsein = array();
-    $browsein[] = array ('url'=>'/admin/main',
-                        'displayname'=>'Dasboard');
-    $browsein[] = array ('url'=>'/admin/blocks/',
-                        'displayname'=>'Блоки');
-    $browsein[] = array ('url'=>'/admin/blocks/',
-                        'displayname'=>'Редактирование блока "'.$block['block_name'].'"');
+    $browsein = [];
+    $browsein[] = ['url'=>'/admin/main', 'displayname'=>'Dasboard'];
+    $browsein[] = ['url'=>'/admin/blocks/', 'displayname'=>'Блоки'];
+    $browsein[] = ['url'=>'/admin/blocks/', 'displayname'=>'Редактирование блока "'.$block->name.'"'];
 
-    $this->module_browsein = $browsein;
+    $this->assign('module_browsein', $browsein);
     $this->viewPage();
     }
     
@@ -225,39 +230,39 @@ class AdminController extends Controller
     $position['b']='Снизу';
     $position['c']='Поцентру';
 
-    $position = $position["{$this->input_vars['block_position']}"];
+    $position = $position["{$this->inputVars['position']}"];
     if(empty ($position)) 
       die ('Неизвестная позиция!');
 
-    if(empty($this->input_vars['block_active']))
+    if(empty($this->inputVars['active']))
       {
-      $this->input_vars['block_active'] = '0';
+      $this->inputVars['active'] = '0';
       }
-    $this->arrayToModel($this->blocks, $this->input_vars);
-    $id = $this->blocks->save();
+    $block = Blocks::find($this->inputVars['id']);  
+    $block->setAttributesByArray($this->inputVars);
+    $block->save();
 
-    $block = $this->blocks->getById($id);
 
     //Обновим доп настройки блока, передав ему управление
-    $block_file='blocks/'.$block['block_name'].'/block.php';
+    $block_file='blocks/'.$block->name.'/block.php';
     
     if (file_exists ($block_file))
       {
       include_once($block_file);
-      $block_obj = new $block['block_name']($block);
-      $block_obj->block_name = $block['block_name'];
+      $block_obj = new $block->name($block);
+      $block_obj->name = $block->name;
 //      $block_modify_fn = $blocks_list[0]['block_name'].'_modify';
       $block_modify_fn = 'update';
       if (method_exists($block_obj, $block_modify_fn))
         {
-        $block_obj->input_vars = $this->input_vars;
+        $block_obj->input_vars = $this->inputVars;
         $block_config_result = $block_obj->$block_modify_fn($block);
         }
       }
     /*TODO Доделать пересчет весов если изменилась позиция блока*/
-    if($this->input_vars['submit_exit'])  
+    if($this->inputVars['submit_exit'])  
       {
-      $this->showMessage('Изменеия сохранены', $this->input_vars['ref']);
+      $this->showMessage('Изменеия сохранены', $this->inputVars['ref']);
       }
     else
       {
@@ -269,7 +274,7 @@ class AdminController extends Controller
     {
     if(!file_exists ("blocks/$block_name/info.php"))
       {
-      $this->showMessage('Блок не найден', $this->input_vars['ref']);
+      $this->showMessage('Блок не найден', $this->inputVars['ref']);
       }
       
     $position_['l']='Слева';

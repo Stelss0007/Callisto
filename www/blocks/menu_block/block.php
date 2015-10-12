@@ -4,7 +4,7 @@ class menu_block extends Block
   function display(&$blockinfo)
     {
     //$this->viewCached();
-    $config = unserialize(stripcslashes($blockinfo['block_content']));
+    $config = unserialize(stripcslashes($blockinfo->content));
     $this->usesModel('menu');
     $this->menu_list = $this->menu->getList(array(
                                                   'condition'=>array('menu_parent_id'=>$config['parent_id']),

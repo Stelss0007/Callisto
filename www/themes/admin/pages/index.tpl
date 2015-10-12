@@ -122,14 +122,14 @@
                 {if $blocks.top}
                     {foreach item=block from=$blocks.top}
                       <div>
-                          {$block.block_content}
+                          {$block.content}
                       </div>
                     {/foreach}
                 {/if}
                 <div>
                     <div class="breadcrumb">
                         <i class="icon-home"></i>
-                        {browsein date=$module_browsein|escape delimiter='<span class="divider">/</span>'}
+                        {browsein data=$module_browsein delimiter='<span class="divider">/</span>'}
                     </div>
                 </div>
                 
@@ -152,11 +152,12 @@
              var language = "{$lang}";
              var
                      sys_confirm_group_delete = "{#sys_confirm_group_delete#}",
-                     sys_confirm_group_activate = "{#sys_confirm_group_activate#}",
-                     sys_confirm_group_deactivate = "{#sys_confirm_group_deactivate#}",
+                     sys_confirm_group_activate = "11{#sys_confirm_group_activate#}",
+                     sys_confirm_group_deactivate = "111{#sys_confirm_group_deactivate#}",
                      sys_confirm_group_install = "{#sys_confirm_group_install#}",
                      sys_confirm_group_not_selected = "{#sys_confirm_group_not_selected#}",
-                     sys_confirm_delete = "{#sys_confirm_delete#}"
+                     sys_confirm_delete = "{#sys_confirm_delete#}",
+                     sys_confirm_group_delete = "{#sys_confirm_group_delete#}"
                      ;
              var date_format = "{$config.date_format_js}",
                      time_format = "{$config.time_format_js}"

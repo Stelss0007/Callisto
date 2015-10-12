@@ -3,7 +3,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
+use app\modules\blocks\models\Blocks;
 /**
  * Description of block
  *
@@ -13,21 +13,21 @@ class Block extends AppObject
   {
   //public $vars = array();
   public $smarty = null;
-  public $block_id;
-  public $block_name;
-  public $block_displayname;
-  public $block_pattern;
-  public $block_content;
-  public $block_position;
-  public $block_active;
-  public $block_refresh;
-  public $block_last_update;
-  public $block_lang;
-  public $block_css_class;
+  public $id;
+  public $name;
+  public $displayname;
+  public $pattern;
+  public $content;
+  public $position;
+  public $active;
+  public $refresh;
+  public $last_update;
+  public $lang;
+  public $css_class;
   public $module_object;
   public $input_vars;
   
-  public $block_object;
+  public $object;
   public $root_dir;
   //public $theme;
   
@@ -35,34 +35,32 @@ class Block extends AppObject
   public $lib;
   //public $libs = array();
   protected $modname;
-  
-  private $lang;
   private $lang_default = 'rus';
 
-  function __construct($block_info) 
+  function __construct($blockInfo) 
     {
     global $appConfig;
     $this->root_dir = APP_DIRECTORY.'/';
-    foreach($block_info as $key=>$value)
+    foreach($blockInfo as $key=>$value)
       {
       $this->$key = $value;
-      if($key == 'block_content')
+      if($key == 'content')
         {
         if(!empty($value))
           {
           $this->$key = unserialize(stripslashes($value));
-          $this->block_content = unserialize(stripslashes($value));
-          foreach($this->block_content as $block_key => $block_value)
+          $this->content = unserialize(stripslashes($value));
+          foreach($this->content as $blockKey => $blockValue)
             {
-            $this->$block_key = $block_value;
+            $this->$blockKey = $blockValue;
             }
           }
         }
       }
-    $this->block_object = $this->block_name.'|display|'.$this->block_id;
+    $this->object = $this->name.'|display|'.$this->id;
     require_once(SMARTY_DIR.'Smarty.class.php');
     $this->smarty = new viewTpl();
-    $this->smarty->assign($block_info);
+    $this->smarty->assign($blockInfo);
     
     //Установим язык
     $this->setLang($appConfig['lang']);
@@ -72,105 +70,115 @@ class Block extends AppObject
 
   public static function blockShowAll(&$myTpl, &$object, $theme, $modname)
     {
-    $db=DBConnector::getInstance();
-    $ses_info=UserSession::getInstance();
-    $db->query("SELECT * FROM block WHERE block_active = '1' ORDER BY block_position, block_weight");
-    $db_block_list = $db->fetchArray();
-  //  echo 'Результат значений:<br><pre>';
-  //  print_r($object);
-  //  echo '</pre>';
-  //  exit;
+    
+    $dbBlockList = app\modules\blocks\models\Blocks::find()
+            ->where(['active' => '1'])
+            ->orderBy(['position', 'weight'])
+            ->all()
+    ;
+  
+    $resultBlocks = array ();
+    $resultBlocks['left']=array ();
+    $resultBlocks['right']=array ();
+    $resultBlocks['top']=array ();
+    $resultBlocks['bottom']=array ();
+    $resultBlocks['center']=array ();
+    
 
-    $result_blocks = array ();
-    $result_blocks['left']=array ();
-    $result_blocks['right']=array ();
-    $result_blocks['top']=array ();
-    $result_blocks['bottom']=array ();
-    $result_blocks['center']=array ();
-
-    foreach($db_block_list as $item)
+    foreach($dbBlockList as $item)
       {
       //Проверим подходит ли этот блок данному объекту
-      $pattern='/'.$item['block_pattern'].'/iU';
+      $pattern='/'.$item->pattern.'/iU';
       if (!preg_match ($pattern, $object)) continue;
 
       //В информацию о блоке добавляем - module_object
-      $item['module_object'] = $object;
-      $item['module_name'] = $modname;
-      $item['theme'] = $theme;
+      $item->module_object = $object;
+      $item->module_name = $modname;
+      $item->theme = $theme;
 
       //Выполним код блока и вернем результат
-      $block_content = self::blockRun($item);
-
+      $blockContent = self::blockRun($item);
+      
       //В зависимости от положения
-      switch ($item['block_position'])
+      switch ($item->position)
         {
         case 'l'://Левые блоки
-          array_push ($result_blocks['left'], $block_content);
+          array_push ($resultBlocks['left'], $blockContent);
           break;
         case 'r':
-          array_push ($result_blocks['right'], $block_content);
+          array_push ($resultBlocks['right'], $blockContent);
           break;
         case 't':
-          array_push ($result_blocks['top'], $block_content);
+          array_push ($resultBlocks['top'], $blockContent);
           break;
         case 'b':
-          array_push ($result_blocks['bottom'], $block_content);
+          array_push ($resultBlocks['bottom'], $blockContent);
           break;
         case 'c':
-          array_push ($result_blocks['center'], $block_content);
+          array_push ($resultBlocks['center'], $blockContent);
           break;
         }
       }
-    //appDebugExit($result_blocks);
+
     //Загоняем в шаблон
-    $myTpl->assign('blocks', $result_blocks);
+    $myTpl->assign('blocks', $resultBlocks);
     return true;
     }
 
   public static function blockRun($block)
     {
+    $blockName = $block->name;
     $result = array ();
-    if(!isset($block['block_name']))
+    if(empty($blockName))
+      {
       return $result;
-    
-    $$block['block_name'] = null;
+      }
+
+    $$blockName = null;
     //Подключим файл блока, если он есть, если нет вернем ошибку
-    $fname = "blocks/{$block['block_name']}/block.php";
-    
+    $fname = "blocks/{$blockName}/block.php";
+  
     if (file_exists($fname))
       {
       include_once ($fname);
-      
-      $$block['block_name'] = new $block['block_name']($block);
-      $$block['block_name']->loadBlockLang($block['block_name']);
+     
+      $$blockName = new $blockName($block);
+      $$blockName->loadBlockLang($blockName);
+      $$blockName->name = $blockName;
       }
     else
       {
-      $result['block_displayname'] = 'Блок не найден';
-      $result['block_content'] = 'Блок не найден';
+      $result['displayname'] = 'Блок не найден';
+      $result['content'] = 'Блок не найден';
       return $result;
       }
     //Ищем функцию отображения результатов работы блока
     $blockfunc = "display";
 
-    if (method_exists($$block['block_name'], $blockfunc))
+    if (method_exists($$blockName, $blockfunc))
       {
       
-      $result = $$block['block_name']->$blockfunc($block);
-
-      if (!empty ($result['block_content']))
+      $result = $$blockName->$blockfunc($block);
+      if (!empty ($result['content']))
         {
-        $result['id'] = isset($block['id']) ? $block['id'] : 0;
-        $result = array_merge ($block, $result);
+        $result['id'] = $block->id;
+        $result['displayname'] = $block->displayname;
+        $result['position'] = $block->position;
+        $result['weight'] = $block->weight;
+        $result['active'] = $block->active;
+        $result['name'] = $block->name;
+        $result['css_class'] = $block->css_class;
+        $result['theme_id'] = $block->theme_id;
+        $result['pattern'] = $block->pattern;
+        //$result = array_merge ($block, $result);
         }
         
       return $result;
       }
     else
       {
-      $result['block_displayname'] = 'Блок не найден';
-      $result['block_content'] = 'Блок не найден';
+      $result['displayname'] = 'Блок не найден';
+      $result['content'] = 'Блок не найден';
       return $result;
       }
 
@@ -211,13 +219,13 @@ class Block extends AppObject
     {
     if(empty($name))
       {
-      return $this->block_content;
+      return $this->content;
       }
-    if(empty($this->block_content) || empty($this->block_content[$name]))
+    if(empty($this->content) || empty($this->content[$name]))
       {
       return $value;
       }
-    return $this->block_content[$name];
+    return $this->content[$name];
     }
     
   final public function setBlockContent($name, $value)
@@ -228,25 +236,25 @@ class Block extends AppObject
   final public function tplFileName($method, $debug=false)
     {
     $view_file_name = $method;
-    if(file_exists($this->root_dir.'themes/'.$this->theme.'/blocks/'.$this->block_name.'/'.$method.'.tpl'))
+    if(file_exists($this->root_dir.'themes/'.$this->theme.'/blocks/'.$this->name.'/'.$method.'.tpl'))
       {
       //$this->tpls[] = '(Overridden by Theme) '.'themes/'.$this->theme.'/'.$this->module_dir.$view_file_name.'.tpl';
-      return $this->root_dir.'themes/'.$this->theme.'/blocks/'.$this->block_name.'/'.$method.'.tpl';
+      return $this->root_dir.'themes/'.$this->theme.'/blocks/'.$this->name.'/'.$method.'.tpl';
       }
-    elseif(file_exists($this->root_dir.'blocks/'.$this->block_name.'/themes/default/'.$method.'.tpl'))
+    elseif(file_exists($this->root_dir.'blocks/'.$this->name.'/themes/default/'.$method.'.tpl'))
       {
       //$this->tpls[] = '(Original Module TPL) '.$this->module_dir.'themes/default/'.$view_file_name.'.tpl';
-      return $this->root_dir.'blocks/'.$this->block_name.'/themes/default/'.$method.'.tpl';
+      return $this->root_dir.'blocks/'.$this->name.'/themes/default/'.$method.'.tpl';
       }
     elseif(!empty($debug))
       {
       //$this->tpls[] = '(TPL file is not exist!) '.$this->module_dir.'themes/default/'.$view_file_name.'.tpl';
-      return 'TPL file is not exist! '.$this->root_dir.'blocks/'.$this->block_name.'/themes/default/'.$method.'.tpl <br> You most created tpl file <b>"'.$method.'.tpl"</b> for block <b>'.$this->block_name.'</b><br>';
+      return 'TPL file is not exist! '.$this->root_dir.'blocks/'.$this->name.'/themes/default/'.$method.'.tpl <br> You most created tpl file <b>"'.$method.'.tpl"</b> for block <b>'.$this->block_name.'</b><br>';
       }
     else
       {
       //$this->tpls[] = '(TPL file is not exist!) '.$this->module_dir.'themes/default/'.$view_file_name.'.tpl';
-      echo 'TPL file is not exist! '.$this->root_dir.'blocks/'.$this->block_name.'/themes/default/'.$method.'.tpl <br> You most created tpl file <b>"'.$method.'.tpl"</b> for block <b>'.$this->block_name.'</b><br>';
+      echo 'TPL file is not exist! '.$this->root_dir.'blocks/'.$this->name.'/themes/default/'.$method.'.tpl <br> You most created tpl file <b>"'.$method.'.tpl"</b> for block <b>'.$this->block_name.'</b><br>';
       echo "Values for TPL:<br>";
       echo "<pre>";
       print_r($this->vars);
@@ -261,11 +269,12 @@ class Block extends AppObject
     $method = $this->GetCallingMethodName(2); 
     $tpl_dir = $this->tplFileName($method);
     
-    if(!$this->smarty->is_cached($tpl_dir, $ObjectName))
+//    if(!$this->smarty->is_cached($tpl_dir, $ObjectName))
+    if(!$this->smarty->isCached($tpl_dir, $ObjectName))
       return true;
     
-    $ObjectName = $this->block_object = $this->block_name.'|'.$method.'|'.$this->block_id;
-    $result['block_content'] = $this->smarty->fetch($tpl_dir, $ObjectName);
+    $ObjectName = $this->block_object = $this->name.'|'.$method.'|'.$this->id;
+    $result['content'] = $this->smarty->fetch($tpl_dir, $ObjectName);
     return $result;
     }
     
@@ -274,19 +283,21 @@ class Block extends AppObject
     $method = $this->GetCallingMethodName(2); 
     $tpl_dir = $this->tplFileName($method);
     $this->allVarToTpl();
-    $ObjectName = $this->block_object = $this->block_name.'|'.$method.'|'.$this->block_id;
-    $result['block_content'] = $this->smarty->fetch($tpl_dir, $ObjectName);
+    $ObjectName = $this->block_object = $this->name.'|'.$method.'|'.$this->id;
+    $result['content'] = $this->smarty->fetch($tpl_dir, $ObjectName);
     return $result;
     }
     
   final public function save($id)
     {
-//    print_r($this->vars);
-//    echo serialize($this->vars);exit;
-//    
-    $this->usesModel('blocks');
-    $this->blocks->block_content = serialize($this->vars);
-    $this->blocks->save($id);
+    $block = Blocks::find($id);
+    if($this->vars['attributes']) {
+        $block->content = serialize($this->vars['attributes']);
+    } else {
+        $block->content = serialize($this->vars);
+    }
+        
+    $block->save();
     }
 
   function setLang($lang='rus')
@@ -298,11 +309,11 @@ class Block extends AppObject
     {
     if (file_exists ("blocks/$blockName/lang/$this->lang/lang.conf"))
       {
-      $this->smarty->config_load("blocks/$blockName/lang/$this->lang/lang.conf");
+      $this->smarty->configLoad("blocks/$blockName/lang/$this->lang/lang.conf");
       }
     elseif (($this->lang !=$this->lang_default) && file_exists("blocks/$blockName/lang/$this->lang_default/lang.conf"))
       {
-      $this->smarty->config_load("blocks/$blockName/lang/$this->lang_default/lang.conf");
+      $this->smarty->configLoad("blocks/$blockName/lang/$this->lang_default/lang.conf");
       }
     return true;
     }

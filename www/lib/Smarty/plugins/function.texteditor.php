@@ -16,7 +16,7 @@ function smarty_function_texteditor($params, &$smarty)
   static $bbeditor_num = 0;
   $bbeditor_num++;
   
-  $config = & $smarty->get_template_vars('config');
+  $config = & $smarty->getTemplateVars('config');
   
   $lang = substr($config['lang'], 0, 2);
   

@@ -72,10 +72,10 @@
                     {theme_block block=$block} 
                       <div class="sidebar_box">
                         <h3>
-                          {$block.block_displayname|escape}
+                          {$block.displayname|escape}
                         </h3>
                         <div class="">
-                            {$block.block_content}
+                            {$block.content}
                         </div>
                        </div>
                     {/theme_block} 
@@ -87,10 +87,10 @@
                     {theme_block block=$block} 
                       <div class="sidebar_box">
                         <h3>
-                          {$block.block_displayname|escape}
+                          {$block.displayname|escape}
                         </h3>
                         <div class="">
-                            {$block.block_content}
+                            {$block.content}
                         </div>
                       </div>
                     {/theme_block} 
@@ -111,10 +111,10 @@
                   {theme_block block=$block} 
                     <div class="sidebar_box">
                       <div class="sb_title">
-                        {$block.block_displayname|escape}
+                        {$block.displayname|escape}
                       </div>
                       <div class="sb_content">
-                          {$block.block_content}
+                          {$block.content}
                       </div>
                     </div>
                   {/theme_block} 
@@ -128,10 +128,10 @@
                  {theme_block block=$block} 
                     <div class="sidebar_box">
                       <div class="sb_title">
-                        {$block.block_displayname|escape}
+                        {$block.displayname|escape}
                       </div>
                       <div class="sb_content">
-                          {$block.block_content}
+                          {$block.content}
                       </div>
                     </div>
                  {/theme_block} 

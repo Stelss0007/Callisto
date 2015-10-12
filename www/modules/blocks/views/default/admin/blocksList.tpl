@@ -47,20 +47,20 @@
 
                 <tr align="middle">
                   <th style="width: 20px;">
-                    <input type="checkbox" name="entities[]" class="td_entities" value="{$block.id}">
+                    <input type="checkbox" name="entities[]" class="td_entities" value="{$block->id}">
                   </th>
-                  <td class="{$class}" align="left">{$block.block_displayname|escape}</td>
-                  <td class="{$class}" align="left">{$block.block_name|escape}</td>
-                  <td class="{$class}" align="left">{$block.block_pattern|escape}</td>
+                  <td class="{$class}" align="left">{$block->displayname|escape}</td>
+                  <td class="{$class}" align="left">{$block->name|escape}</td>
+                  <td class="{$class}" align="left">{$block->pattern|escape}</td>
 
                   {* Weight *}
                   <td class="{$class}" align="center" nowrap style="width: 90px;">
                     <div class="btn-group" style="text-align: center;">
                       {if !$smarty.foreach.fblock_l.first}
-                        <a href="/admin/blocks/weight_up/{$block.block_weight}/{$block.block_position}" class="btn btn-icon btn-up" title="{#sys_up#}"><i class="icon-arrow-up"></i></a>
+                        <a href="/admin/blocks/weight_up/{$block->id}" class="btn btn-icon btn-up" title="{#sys_up#}"><i class="icon-arrow-up"></i></a>
                       {/if}
                       {if !$smarty.foreach.fblock_l.last}
-                        <a href="/admin/blocks/weight_down/{$block.block_weight}/{$block.block_position}" class="btn btn-icon btn-down" title="{#sys_down#}"><i class="icon-arrow-down"></i></a>
+                        <a href="/admin/blocks/weight_down/{$block->id}" class="btn btn-icon btn-down" title="{#sys_down#}"><i class="icon-arrow-down"></i></a>
                       {/if}
                     </div>
                   </td>
@@ -69,14 +69,14 @@
                     <div class="btn-group">
                       {* Действия над блоком *}
                       {array name='url_vars'}
-                      {array_append name='url_vars' key='id' value=$block.id}
-                      {if $block.block_active}
-                        <a href="/admin/blocks/deactive/{$block.id}" class="btn btn-icon btn-pause" title="{#sys_deactivate#}"><i class="icon-pause"></i></a>
-                        <a href="/admin/blocks/modify/{$block.id}" class="btn btn-icon btn-edit" title="{#sys_edit#}"><i class="icon-edit"></i></a>
+                      {array_append name='url_vars' key='id' value=$block->id}
+                      {if $block->active}
+                        <a href="/admin/blocks/deactive/{$block->id}" class="btn btn-icon btn-pause" title="{#sys_deactivate#}"><i class="icon-pause"></i></a>
+                        <a href="/admin/blocks/modify/{$block->id}" class="btn btn-icon btn-edit" title="{#sys_edit#}"><i class="icon-edit"></i></a>
                         {else}
-                        <a href="/admin/blocks/active/{$block.id}" class="btn btn-icon btn-play" title="{#sys_activate#}"><i class="icon-play"></i></a>
-                        <a href="/admin/blocks/modify/{$block.id}" class="btn btn-icon btn-edit" title="{#sys_edit#}"><i class="icon-edit"></i></a>
-                        <a href="/admin/blocks/delete/{$block.id}/{$block.block_weight}/{$block.block_position}" class="btn btn-icon btn-delete" title="{#sys_delete#}"><i class="icon-trash"></i></a>
+                        <a href="/admin/blocks/active/{$block->id}" class="btn btn-icon btn-play" title="{#sys_activate#}"><i class="icon-play"></i></a>
+                        <a href="/admin/blocks/modify/{$block->id}" class="btn btn-icon btn-edit" title="{#sys_edit#}"><i class="icon-edit"></i></a>
+                        <a href="/admin/blocks/delete/{$block->id}/{$block->weight}/{$block->position}" class="btn btn-icon btn-delete" title="{#sys_delete#}"><i class="icon-trash"></i></a>
                         {/if}
                     </div>
                   </td>
@@ -140,22 +140,22 @@
 
                 <tr align="middle">
                   <th style="width: 20px;">
-                    <input type="checkbox" name="entities[]" class="td_entities" value="{$block.id}">
+                    <input type="checkbox" name="entities[]" class="td_entities" value="{$block->id}">
                   </th>
-                  <td class="{$class}" align="left">{$block.block_displayname|escape}</td>
-                  <td class="{$class}" align="left">{$block.block_name|escape}</td>
-                  <td class="{$class}" align="left">{$block.block_pattern|escape}</td>
+                  <td class="{$class}" align="left">{$block->displayname|escape}</td>
+                  <td class="{$class}" align="left">{$block->name|escape}</td>
+                  <td class="{$class}" align="left">{$block->pattern|escape}</td>
 
                   {* Weight *}
                   <td class="{$class}" align="center" nowrap style="width: 90px;">
                     <div class="btn-group" style="text-align: center;">
                       {if !$smarty.foreach.fblock_r.first}
-                        <a href="/admin/blocks/weight_up/{$block.block_weight}/{$block.block_position}" class="btn btn-icon btn-up" title="{#sys_up#}"><i class="icon-arrow-up"></i></a>
+                        <a href="/admin/blocks/weight_up/{$block->id}" class="btn btn-icon btn-up" title="{#sys_up#}"><i class="icon-arrow-up"></i></a>
                       {/if}
                       {if !$smarty.foreach.fblock_r.first && !$smarty.foreach.fblock_r.last}
                       {/if}
                       {if !$smarty.foreach.fblock_r.last}
-                        <a href="/admin/blocks/weight_down/{$block.block_weight}/{$block.block_position}" class="btn btn-icon btn-down" title="{#sys_down#}"><i class="icon-arrow-down"></i></a>
+                        <a href="/admin/blocks/weight_down/{$block->id}" class="btn btn-icon btn-down" title="{#sys_down#}"><i class="icon-arrow-down"></i></a>
                         {/if}
                     </div>
                   </td>
@@ -164,14 +164,14 @@
                     <div class="btn-group">
                       {* Действия над блоком *}
                       {array name='url_vars'}
-                      {array_append name='url_vars' key='id' value=$block.id}
-                      {if $block.block_active}
-                        <a href="/admin/blocks/deactive/{$block.id}" class="btn btn-icon btn-pause" title="{#sys_deactivate#}"><i class="icon-pause"></i></a>
-                        <a href="/admin/blocks/modify/{$block.id}" class="btn btn-icon btn-edit" title="{#sys_edit#}"><i class="icon-edit"></i></a>
+                      {array_append name='url_vars' key='id' value=$block->id}
+                      {if $block->active}
+                        <a href="/admin/blocks/deactive/{$block->id}" class="btn btn-icon btn-pause" title="{#sys_deactivate#}"><i class="icon-pause"></i></a>
+                        <a href="/admin/blocks/modify/{$block->id}" class="btn btn-icon btn-edit" title="{#sys_edit#}"><i class="icon-edit"></i></a>
                         {else}
-                        <a href="/admin/blocks/active/{$block.id}" class="btn btn-icon btn-play" title="{#sys_activate#}"><i class="icon-play"></i></a>
-                        <a href="/admin/blocks/modify/{$block.id}" class="btn btn-icon btn-edit" title="{#sys_edit#}"><i class="icon-edit"></i></a>
-                        <a href="/admin/blocks/delete/{$block.id}/{$block.block_weight}/{$block.block_position}" class="btn btn-icon btn-delete" title="{#sys_delete#}"><i class="icon-trash"></i></a>
+                        <a href="/admin/blocks/active/{$block->id}" class="btn btn-icon btn-play" title="{#sys_activate#}"><i class="icon-play"></i></a>
+                        <a href="/admin/blocks/modify/{$block->id}" class="btn btn-icon btn-edit" title="{#sys_edit#}"><i class="icon-edit"></i></a>
+                        <a href="/admin/blocks/delete/{$block->id}/{$block->weight}/{$block->position}" class="btn btn-icon btn-delete" title="{#sys_delete#}"><i class="icon-trash"></i></a>
                         {/if}
                     </div>
                   </td>
@@ -236,20 +236,20 @@
 
                 <tr align="middle">
                   <th style="width: 20px;">
-                    <input type="checkbox" name="entities[]" class="td_entities" value="{$block.id}">
+                    <input type="checkbox" name="entities[]" class="td_entities" value="{$block->id}">
                   </th>
-                  <td class="{$class}" align="left">{$block.block_displayname|escape}</td>
-                  <td class="{$class}" align="left">{$block.block_name|escape}</td>
-                  <td class="{$class}" align="left">{$block.block_pattern|escape}</td>
+                  <td class="{$class}" align="left">{$block->displayname|escape}</td>
+                  <td class="{$class}" align="left">{$block->name|escape}</td>
+                  <td class="{$class}" align="left">{$block->pattern|escape}</td>
 
                   {* Weight *}
                   <td class="{$class}" align="center" nowrap style="width: 90px;">
                     <div class="btn-group" style="text-align: center;">
                       {if !$smarty.foreach.fblock_t.first}
-                        <a href="/admin/blocks/weight_up/{$block.block_weight}/{$block.block_position}" class="btn btn-icon btn-up" title="{#sys_up#}"><i class="icon-arrow-up"></i></a>
+                        <a href="/admin/blocks/weight_up/{$block->id}" class="btn btn-icon btn-up" title="{#sys_up#}"><i class="icon-arrow-up"></i></a>
                       {/if}
                       {if !$smarty.foreach.fblock_t.last}
-                        <a href="/admin/blocks/weight_down/{$block.block_weight}/{$block.block_position}" class="btn btn-icon btn-down" title="{#sys_down#}"><i class="icon-arrow-down"></i></a>
+                        <a href="/admin/blocks/weight_down/{$block->id}" class="btn btn-icon btn-down" title="{#sys_down#}"><i class="icon-arrow-down"></i></a>
                       {/if}
                     </div>
                   </td>
@@ -258,14 +258,14 @@
                     <div class="btn-group">
                       {* Действия над блоком *}
                       {array name='url_vars'}
-                      {array_append name='url_vars' key='id' value=$block.id}
-                      {if $block.block_active}
-                        <a href="/admin/blocks/deactive/{$block.id}" class="btn btn-icon btn-pause" title="{#sys_deactivate#}"><i class="icon-pause"></i></a>
-                        <a href="/admin/blocks/modify/{$block.id}" class="btn btn-icon btn-edit" title="{#sys_edit#}"><i class="icon-edit"></i></a>
+                      {array_append name='url_vars' key='id' value=$block->id}
+                      {if $block->active}
+                        <a href="/admin/blocks/deactive/{$block->id}" class="btn btn-icon btn-pause" title="{#sys_deactivate#}"><i class="icon-pause"></i></a>
+                        <a href="/admin/blocks/modify/{$block->id}" class="btn btn-icon btn-edit" title="{#sys_edit#}"><i class="icon-edit"></i></a>
                         {else}
-                        <a href="/admin/blocks/active/{$block.id}" class="btn btn-icon btn-play" title="{#sys_activate#}"><i class="icon-play"></i></a>
-                        <a href="/admin/blocks/modify/{$block.id}" class="btn btn-icon btn-edit" title="{#sys_edit#}"><i class="icon-edit"></i></a>
-                        <a href="/admin/blocks/delete/{$block.id}/{$block.block_weight}/{$block.block_position}" class="btn btn-icon btn-delete" title="{#sys_delete#}"><i class="icon-trash"></i></a>
+                        <a href="/admin/blocks/active/{$block->id}" class="btn btn-icon btn-play" title="{#sys_activate#}"><i class="icon-play"></i></a>
+                        <a href="/admin/blocks/modify/{$block->id}" class="btn btn-icon btn-edit" title="{#sys_edit#}"><i class="icon-edit"></i></a>
+                        <a href="/admin/blocks/delete/{$block->id}/{$block->weight}/{$block->position}" class="btn btn-icon btn-delete" title="{#sys_delete#}"><i class="icon-trash"></i></a>
                         {/if}
                     </div>
                   </td>
@@ -333,21 +333,21 @@
 
                 <tr align="middle">
                   <th style="width: 20px;">
-                    <input type="checkbox" name="entities[]" class="td_entities" value="{$block.id}">
+                    <input type="checkbox" name="entities[]" class="td_entities" value="{$block->id}">
                   </th>
-                  <td class="{$class}" align="left">{$block.block_displayname|escape}</td>
-                  <td class="{$class}" align="left">{$block.block_name|escape}</td>
-                  <td class="{$class}" align="left">{$block.block_pattern|escape}</td>
+                  <td class="{$class}" align="left">{$block->displayname|escape}</td>
+                  <td class="{$class}" align="left">{$block->name|escape}</td>
+                  <td class="{$class}" align="left">{$block->pattern|escape}</td>
 
                   {* Weight *}
                   <td class="{$class}" align="center" nowrap style="width: 90px;">
                     <div class="btn-group" style="text-align: center;">
                       {if !$smarty.foreach.fblock_b.first}
-                        <a href="/admin/blocks/weight_up/{$block.block_weight}/{$block.block_position}" class="btn btn-icon btn-up" title="{#sys_up#}"><i class="icon-arrow-up"></i></a>
+                        <a href="/admin/blocks/weight_up/{$block->id}" class="btn btn-icon btn-up" title="{#sys_up#}"><i class="icon-arrow-up"></i></a>
                       {/if}
 
                       {if !$smarty.foreach.fblock_r.last}
-                        <a href="/admin/blocks/weight_down/{$block.block_weight}/{$block.block_position}" class="btn btn-icon btn-down" title="{#sys_down#}"><i class="icon-arrow-down"></i></a>
+                        <a href="/admin/blocks/weight_down/{$block->id}" class="btn btn-icon btn-down" title="{#sys_down#}"><i class="icon-arrow-down"></i></a>
                       {/if}
                     </div>
                   </td>
@@ -356,14 +356,14 @@
                     <div class="btn-group">
                       {* Действия над блоком *}
                       {array name='url_vars'}
-                      {array_append name='url_vars' key='id' value=$block.id}
-                      {if $block.block_active}
-                        <a href="/admin/blocks/deactive/{$block.id}" class="btn btn-icon btn-pause" title="{#sys_deactivate#}"><i class="icon-pause"></i></a>
-                        <a href="/admin/blocks/modify/{$block.id}" class="btn btn-icon btn-edit" title="{#sys_edit#}"><i class="icon-edit"></i></a>
+                      {array_append name='url_vars' key='id' value=$block->id}
+                      {if $block->active}
+                        <a href="/admin/blocks/deactive/{$block->id}" class="btn btn-icon btn-pause" title="{#sys_deactivate#}"><i class="icon-pause"></i></a>
+                        <a href="/admin/blocks/modify/{$block->id}" class="btn btn-icon btn-edit" title="{#sys_edit#}"><i class="icon-edit"></i></a>
                         {else}
-                        <a href="/admin/blocks/active/{$block.id}" class="btn btn-icon btn-play" title="{#sys_activate#}"><i class="icon-play"></i></a>
-                        <a href="/admin/blocks/modify/{$block.id}" class="btn btn-icon btn-edit" title="{#sys_edit#}"><i class="icon-edit"></i></a>
-                        <a href="/admin/blocks/delete/{$block.id}/{$block.block_weight}/{$block.block_position}" class="btn btn-icon btn-delete" title="{#sys_delete#}"><i class="icon-trash"></i></a>
+                        <a href="/admin/blocks/active/{$block->id}" class="btn btn-icon btn-play" title="{#sys_activate#}"><i class="icon-play"></i></a>
+                        <a href="/admin/blocks/modify/{$block->id}" class="btn btn-icon btn-edit" title="{#sys_edit#}"><i class="icon-edit"></i></a>
+                        <a href="/admin/blocks/delete/{$block->id}/{$block->weight}/{$block->position}" class="btn btn-icon btn-delete" title="{#sys_delete#}"><i class="icon-trash"></i></a>
                         {/if}
                     </div>
                   </td>
@@ -427,21 +427,21 @@
 
                 <tr align="middle">
                   <th style="width: 20px;">
-                    <input type="checkbox" name="entities[]" class="td_entities" value="{$block.id}">
+                    <input type="checkbox" name="entities[]" class="td_entities" value="{$block->id}">
                   </th>
-                  <td class="{$class}" align="left">{$block.block_displayname|escape}</td>
-                  <td class="{$class}" align="left">{$block.block_name|escape}</td>
-                  <td class="{$class}" align="left">{$block.block_pattern|escape}</td>
+                  <td class="{$class}" align="left">{$block->displayname|escape}</td>
+                  <td class="{$class}" align="left">{$block->name|escape}</td>
+                  <td class="{$class}" align="left">{$block->pattern|escape}</td>
 
                   {* Weight *}
                   <td class="{$class}" align="center" nowrap style="width: 90px;">
                     <div class="btn-group" style="text-align: center;">
                       {if !$smarty.foreach.fblock_c.first}
-                        <a href="/admin/blocks/weight_up/{$block.block_weight}/{$block.block_position}" class="btn btn-icon btn-up" title="{#sys_up#}"><i class="icon-arrow-up"></i></a>
+                        <a href="/admin/blocks/weight_up/{$block->id}" class="btn btn-icon btn-up" title="{#sys_up#}"><i class="icon-arrow-up"></i></a>
                       {/if}
 
                       {if !$smarty.foreach.fblock_c.last}
-                        <a href="/admin/blocks/weight_down/{$block.block_weight}/{$block.block_position}" class="btn btn-icon btn-down" title="{#sys_down#}"><i class="icon-arrow-down"></i></a>
+                        <a href="/admin/blocks/weight_down/{$block->id}" class="btn btn-icon btn-down" title="{#sys_down#}"><i class="icon-arrow-down"></i></a>
                       {/if}
                     </div>
                   </td>
@@ -450,14 +450,14 @@
                     <div class="btn-group">
                       {* Действия над блоком *}
                       {array name='url_vars'}
-                      {array_append name='url_vars' key='id' value=$block.id}
-                      {if $block.block_active}
-                        <a href="/admin/blocks/deactive/{$block.id}" class="btn btn-icon btn-pause" title="{#sys_deactivate#}"><i class="icon-pause"></i></a>
-                        <a href="/admin/blocks/modify/{$block.id}" class="btn btn-icon btn-edit" title="{#sys_edit#}"><i class="icon-edit"></i></a>
+                      {array_append name='url_vars' key='id' value=$block->id}
+                      {if $block->active}
+                        <a href="/admin/blocks/deactive/{$block->id}" class="btn btn-icon btn-pause" title="{#sys_deactivate#}"><i class="icon-pause"></i></a>
+                        <a href="/admin/blocks/modify/{$block->id}" class="btn btn-icon btn-edit" title="{#sys_edit#}"><i class="icon-edit"></i></a>
                         {else}
-                        <a href="/admin/blocks/active/{$block.id}" class="btn btn-icon btn-play" title="{#sys_activate#}"><i class="icon-play"></i></a>
-                        <a href="/admin/blocks/modify/{$block.id}" class="btn btn-icon btn-edit" title="{#sys_edit#}"><i class="icon-edit"></i></a>
-                        <a href="/admin/blocks/delete/{$block.id}/{$block.block_weight}/{$block.block_position}" class="btn btn-icon btn-delete" title="{#sys_delete#}"><i class="icon-trash"></i></a>
+                        <a href="/admin/blocks/active/{$block->id}" class="btn btn-icon btn-play" title="{#sys_activate#}"><i class="icon-play"></i></a>
+                        <a href="/admin/blocks/modify/{$block->id}" class="btn btn-icon btn-edit" title="{#sys_edit#}"><i class="icon-edit"></i></a>
+                        <a href="/admin/blocks/delete/{$block->id}/{$block->weight}/{$block->position}" class="btn btn-icon btn-delete" title="{#sys_delete#}"><i class="icon-trash"></i></a>
                         {/if}
                     </div>
                   </td>

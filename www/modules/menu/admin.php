@@ -98,7 +98,7 @@ class AdminController extends Controller
     {
     $this->getAccess(ACCESS_ADMIN);
     
-    $data = $this->input_vars;
+    $data = $this->inputVars;
 
     if($data['submit'])
       {

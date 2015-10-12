@@ -3,7 +3,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
+namespace app\lib\UserSession;
 /**
  * Description of UserSession
  *
@@ -51,7 +51,6 @@ class UserSession
     if(!isset($_SESSION))
       {
       session_start();
-      
       }
     }
   
@@ -86,14 +85,14 @@ class UserSession
 
    /**
     * Create session / Authorize user 
-    * @param array $array array('login(user_name)', 'id(user_id)', 'gid(user group id)')
+    * @param array $user array('login(user_name)', 'id(user_id)', 'gid(user group id)')
     * @return boolean 
     */ 
-   function userLogin($array)
+   function userLogin($user)
     {
-    $this->user_name = $_SESSION['user'] = $array['login'];
-    $this->user_id = $_SESSION['user_id'] = $array['id'];
-    $this->user_gid = $_SESSION['user_gid'] = $array['gid'];
+    $this->user_name = $_SESSION['user'] = $user->login;
+    $this->user_id = $_SESSION['user_id'] = $user->id;
+    $this->user_gid = $_SESSION['user_gid'] = $user->gid;
     return true;
     }
 

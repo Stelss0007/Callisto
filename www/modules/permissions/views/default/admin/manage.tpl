@@ -1,6 +1,6 @@
    
 <form action="" method="post" class="form-horizontal">
-  <input type="hidden" name='id' value="{$id}">
+  <input type="hidden" name='id' value="{$permission->id}">
   <div class="row-fluid">
     <div class="box span12">
       <div class="box-header well" data-original-title>
@@ -14,28 +14,28 @@
             <div class="form-group">
               <label class="col-sm-3 control-label" for="date01">Группа</label>
               <div class="controls col-sm-5">
-                {html_options name=group_permission_gid options=$groups selected=$group_permission_gid class="form-control selectpicker"}
+                {html_options name=gid options=$groups selected=$permission->gid class="form-control selectpicker"}
               </div>
             </div>
             
             <div class="form-group">
               <label class="col-sm-3 control-label" for="date01">Объект</label>
               <div class="controls col-sm-5">
-                 <input type="text" name='group_permission_pattern' value='{$group_permission_pattern}' class="form-control"  style="">
+                 <input type="text" name='pattern' value='{$permission->pattern}' class="form-control"  style="">
               </div>
             </div>
             
             <div class="form-group">
               <label class="col-sm-3 control-label" for="date01">Уровень доступа</label>
               <div class="controls col-sm-5">
-                {html_options name=group_permission_level options=$levels selected=$group_permission_level class="form-control selectpicker"}
+                {html_options name=level options=$levels selected=$permission->level class="form-control selectpicker"}
               </div>
             </div>
             
             <div class="form-group">
               <label class="col-sm-3 control-label" for="date01">Описание</label>
               <div class="controls col-sm-5">
-                <textarea name='group_permission_description' style="" class="form-control">{$group_permission_description}</textarea>
+                <textarea name='description' style="" class="form-control">{$permission->description}</textarea>
               </div>
             </div>
               

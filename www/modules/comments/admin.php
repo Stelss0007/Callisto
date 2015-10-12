@@ -44,7 +44,7 @@ class AdminController extends Controller
   function actionCommentManage($id=0)
     {
     $this->getAccess(ACCESS_ADD);
-    $data = $this->input_vars;
+    $data = $this->inputVars;
     $this->article_category_list = $this->articleCategory->categoryList(false);
     //appDebug($data);exit;
     if($data['submit'])
@@ -115,7 +115,7 @@ class AdminController extends Controller
   function actionCategoryManage($id=0)
     {
     $this->getAccess(ACCESS_ADD);
-    $data = $this->input_vars;
+    $data = $this->inputVars;
     //appDebug($data);exit;
     $this->usesModel('articleCategory');
     if($data['submit'])
@@ -157,7 +157,7 @@ class AdminController extends Controller
   function actionCategoryGroupOperation()
     {
     $this->getAccess(ACCESS_ADMIN);
-    $data = $this->input_vars;
+    $data = $this->inputVars;
     
     $model_name = 'articleCategory';
     

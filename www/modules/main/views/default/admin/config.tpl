@@ -1,7 +1,7 @@
 {* да нет *}
 {array name='yes_no'}
-{array_append name='yes_no' key='1' value=Да}
-{array_append name='yes_no' key='0' value=Нет}
+{array_append name='yes_no' key='1' value='Да'}
+{array_append name='yes_no' key='0' value='Нет'}
 
 {array name='site_list_lenght_list'}
 {array_append name='site_list_lenght_list' key='5' value=5}

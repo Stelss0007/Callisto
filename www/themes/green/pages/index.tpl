@@ -16,7 +16,7 @@
     
     {appSassLoad}
     {appSassOutput}
-    
+  {debug}  
   </head>
   <body>
     <div id="main">
@@ -43,7 +43,7 @@
 
                   <li>
                     {theme_block block=$block} 
-                      {$block.block_content}
+                      {$block.content}
                     {/theme_block}
                   </li>
 
@@ -67,12 +67,12 @@
                 {foreach item=block from=$blocks.left}
                  {theme_block block=$block} 
                     <span id='mnu_title1' class='usermnutitle-g'>
-                     {$block.block_displayname|escape}
+                     {$block.displayname|escape}
                     </span>
                     <div id='mnu_tblock3' class='usermnublock'>
                       <span class='usermnudelim'></span>
                       <div class="left_content">
-                        {$block.block_content}
+                        {$block.content}
                       </div>
                       <span class='usermnudelim'></span>
                     </div>
@@ -85,7 +85,7 @@
        <td class="contentmain">
       
             <h2 class="browsein">
-              {browsein date=$module_browsein|escape}
+              {browsein data=$module_browsein}
             </h2>
   
             {$module_content}
@@ -94,7 +94,7 @@
               {if $blocks.bottom}
                 {foreach item=block from=$blocks.bottom}
                   {theme_block block=$block} 
-                    {$block.block_content}
+                    {$block.content}
                   {/theme_block} 
                 {/foreach}
               {/if}
@@ -109,12 +109,12 @@
             {foreach item=block from=$blocks.right}
               {theme_block block=$block} 
                 <span id='mnu_title1' class='usermnutitle-g'>
-                 {$block.block_displayname|escape}
+                 {$block.displayname|escape}
                 </span>
                 <div id='mnu_tblock3' class='usermnublock'>
                  <span class='usermnudelim'></span>
                  <div class="left_content">
-                   {$block.block_content}
+                   {$block.content}
                  </div>
                  <span class='usermnudelim'></span>
                </div>

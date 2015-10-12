@@ -107,9 +107,9 @@
                     {foreach item=block from=$blocks.left}
                       <div class="left_content">
                         <span id='mnu_title1' class='usermnutitle-g'>
-                          {$block.block_displayname|escape}
+                          {$block.displayname|escape}
                         </span>
-                        {$block.block_content}
+                        {$block.content}
                       </div>
                     {/foreach}
                    {/if}

@@ -46,7 +46,7 @@ class AdminController extends Controller
         {
         if(!file_exists ("modules/$module_name/info.php"))
           {
-          $this->showMessage('Module '.$module_name.' not found or info.php are missing', $this->input_vars['ref']);
+          $this->showMessage('Module '.$module_name.' not found or info.php are missing', $this->inputVars['ref']);
           }
 
 

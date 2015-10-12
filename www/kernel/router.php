@@ -115,7 +115,7 @@ class Router
         global $mod_controller;
         $mod_controller = $module;
 
-        $module->input_vars = array_merge($parameters, $module->input_vars);
+        $module->inputVars = array_merge($parameters, $module->inputVars);
 
 //        if(empty($_REQUEST['type']))
 //          $module->type = 'user';
@@ -268,7 +268,7 @@ class Router
     $router_vars['module'] = $mod; 
     $router_vars['action'] = $action; 
     
-    $module->input_vars = array_merge($parameters, $module->input_vars);
+    $module->inputVars = array_merge($parameters, $module->inputVars);
     
     if($type)
       {

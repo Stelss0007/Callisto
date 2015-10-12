@@ -1,6 +1,6 @@
        
 <form action="/admin/groups/manage" method="post" class="form-horizontal">
-  <input type="hidden" name='id' value="{$id}">
+  <input type="hidden" name='id' value="{$group->id}">
   <div class="row-fluid">
     <div class="box span12">
       <div class="box-header well" data-original-title>
@@ -16,14 +16,14 @@
              <div class="form-group">
               <label class="col-sm-3 control-label" for="date01">{#groups_title#}</label>
               <div class="controls col-sm-5">
-                <input type="text" name='group_displayname' class="form-control" value='{$group_displayname}' style="width: 98%;">
+                <input type="text" name='group_displayname' class="form-control" value='{$group->group_displayname}' style="width: 98%;">
               </div>
              </div>
               
              <div class="form-group">
               <label class="col-sm-3 control-label" for="date01">{#groups_description#}</label>
               <div class="controls col-sm-5">
-                <textarea name='group_description' class="form-control" style="width: 98%;">{$group_description}</textarea>
+                <textarea name='group_description' class="form-control" style="width: 98%;">{$group->group_description}</textarea>
               </div>
              </div>
               

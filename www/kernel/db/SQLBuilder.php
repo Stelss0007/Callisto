@@ -37,6 +37,8 @@ class SQLBuilder {
     private $config = [];
     private $sqlString = '';
     private $resultArrayByField = null;
+    private $sqlOperand = ['<', '>', '<=', '>=', '!=', '<>', 'like',  'not', 'is', 'is not'];
+    
     
     protected $className = 'stdClass';
     
@@ -68,7 +70,18 @@ class SQLBuilder {
             die('Connect Error (' . $this->mysqli->connect_errno . ') ' . $this->mysqli->connect_error);
             }
         }
-    
+    private function isTableFieldOperand($key, $value)
+        {
+        foreach($this->table as $table) 
+            {
+            $fieldFullName = $table.'.'.$key;
+            if(strpos($value, $fieldFullName) !== false)
+                {
+                return true;
+                }
+            }
+        return false;
+        }
     //Build methods
     /**
      * Query Fields 
@@ -389,15 +402,26 @@ class SQLBuilder {
                 $conditionStr = '';
                 foreach($condition as $key1 => $value1)
                     {
-                    if($key1 == 'LIKE' || $key1 == 'like')
+                    $key1 = strtolower($key1);
+                    if(in_array($key1, $this->sqlOperand)) 
                         {
-                        foreach($value1 as $key2 => $value2)
+                        if($key1 == 'like')
                             {
-                            if(stripos($value1, '%') === false)
+                            foreach($value1 as $key2 => $value2)
                                 {
-                                $value2 = '%'.$value2.'%';
+                                if(stripos($value1, '%') === false)
+                                    {
+                                    $value2 = '%'.$value2.'%';
+                                    }
+                                $conditionStr .= " AND $key2 LIKE '$value2' ";
                                 }
-                            $conditionStr .= " AND $key2 LIKE '$value2' ";
+                            }
+                        else 
+                            {
+                            foreach($value1 as $key2 => $value2)
+                                {
+                                $conditionStr .= " AND $key2 $key1 $value2";
+                                }
                             }
                         }
                     else
@@ -433,7 +457,7 @@ class SQLBuilder {
         $this->sqlString .= ($join)     ? ' '.$join     : '';
         $this->sqlString .= ($where)    ? ' WHERE '.$where     : '';
         $this->sqlString .= ($group)    ? ' GROUP BY '.$group    : '';
-        $this->sqlString .= ($order)    ? ' OREDR BY '.$order    : '';
+        $this->sqlString .= ($order)    ? ' ORDER BY '.$order    : '';
         $this->sqlString .= ($this->limit)    ? ' LIMIT '.$this->limit : '';
         $this->sqlString .= ($this->offset)    ? ' OFFSET '.$this->offset : '';
         }
@@ -483,7 +507,14 @@ class SQLBuilder {
 
             $value = $this->prepareValue($value);
 
-            $values .=  " $key = '$value',";
+            if($this->isTableFieldOperand($key, $value))
+                {
+                $values .=  " $key = $value,";
+                }
+            else
+                {
+                $values .=  " $key = '$value',";
+                }
             }
           
         $values = rtrim($values, ',');
@@ -569,10 +600,19 @@ class SQLBuilder {
             
         if($this->operation == 'UPDATE' || $this->operation == 'DELETE')
             {
+            //appDebug($sql);
             return true;
             }
             
         $values = [];
+        
+        
+        if($mysqlResult->num_rows === 0)
+            {
+            $mysqlResult->close(); 
+            return null;
+            }
+    
         switch ($fetchType)
             {
             case 'object':
@@ -592,6 +632,7 @@ class SQLBuilder {
                         }
                     }
                 break;
+                
             case 'array':
                 while($obj = $mysqlResult->fetch_assoc()) 
                     {

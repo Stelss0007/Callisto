@@ -20,7 +20,7 @@
  */
 function smarty_function_includeTemplate($tag_attrs, &$smarty)
 {
-    $path = $smarty->get_template_vars('viewDir');
+    $path = $smarty->getTemplateVars('viewDir');
 
     $tag_attrs['file'] = trim($tag_attrs['file'], "'");     
 

@@ -1,9 +1,8 @@
 {array name='yes_no'}
-{array_append name='yes_no' key='1' value=Да}
-{array_append name='yes_no' key='0' value=Нет}
-
+{array_append name='yes_no' key='1' value='Да'}
+{array_append name='yes_no' key='0' value='Нет'}
 <form action="/admin/users/manage" method="post" class="form-horizontal">
-  <input type="hidden" name='id' value="{$id}">
+  <input type="hidden" name='id' value="{$user->id}">
   <div class="row-fluid">
     <div class="box span12">
       <div class="box-header well" data-original-title>
@@ -17,7 +16,7 @@
             <div class="form-group">
               <label class="col-sm-3 control-label" for="date01">{#user_login#}</label>
               <div class="controls col-sm-5">
-                <input type="text" name='login' class="form-control" size='40' value='{$login}'>
+                <input type="text" name='login' class="form-control" size='40' value='{$user->login}'>
               </div>
             </div>
 
@@ -31,28 +30,28 @@
             <div class="form-group">
               <label class="col-sm-3 control-label" for="date01">{#user_group#}</label>
               <div class="controls col-sm-5">
-                  {html_options name=gid options=$groups_list selected=$gid class='form-control selectpicker'}
+                  {html_options name=gid options=$groups_list selected=$user->gid class='form-control selectpicker'}
               </div>
             </div>
 
             <div class="form-group">
               <label class="col-sm-3 control-label" for="date01">{#user_email#}</label>
               <div class="controls col-sm-5">
-                <input type="text" name='mail' class="form-control" size='40' value='{$mail}'>
+                <input type="text" name='mail' class="form-control" size='40' value='{$user->mail}'>
               </div>
             </div>
 
             <div class="form-group">
               <label class="col-sm-3 control-label" for="date01">{#user_fio#}</label>
               <div class="controls col-sm-5">
-                <input type="text" name='displayname' class="form-control" size='40' value='{$displayname}'>
+                <input type="text" name='displayname' class="form-control" size='40' value='{$user->displayname}'>
               </div>
             </div>
 
             <div class="form-group">
               <label class="col-sm-3 control-label" for="date01">{#user_active#}</label>
               <div class="controls col-sm-5">
-                {html_radios name=active options=$yes_no checked=$active separator=" "}
+                {html_radios name=active options=$yes_no checked=$user->active separator=" "}
               </div>
             </div>
 

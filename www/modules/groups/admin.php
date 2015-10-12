@@ -1,4 +1,6 @@
 <?php
+use app\modules\groups\models\Groups;
+
 class AdminController extends Controller
   {
   public $defaultAction = 'groups_list';
@@ -7,7 +9,7 @@ class AdminController extends Controller
     {
     $this->getAccess(ACCESS_ADMIN);
     
-    $this->groups_list = $this->groups->group_list(true);
+    $this->groups_list = Groups::groupList(true);
     
     $browsein[] =array('url'=>"/admin/main", 'displayname'=>$this->t('dashboard'));
     $browsein[] =array('url'=>'', 'displayname'=>'Groups');
@@ -20,18 +22,22 @@ class AdminController extends Controller
     {
     $this->getAccess(ACCESS_ADMIN);
     
-    $data = $this->input_vars;
+    $data = $this->inputVars;
 
     if($data['submit'])
       {
       if($id)
         {
-        $this->groups->group_update($data, $id);
+        $group = Groups::find($id);
         }
       else
         {
-        $this->groups->group_create($data);
+        $group = new Groups();
         }
+        
+      $group->setAttributesByArray($data);
+      $group->save();
+      
       $this->redirect('/admin/groups/groups_list');
       }
     ////////////////////////////////////////////////////////////////////////////
@@ -39,10 +45,11 @@ class AdminController extends Controller
     $browsein[] =array('url'=>'/admin/groups', 'displayname'=>'Groups');  
    
       
-    $group = $this->groups->getById($id);
+    $group = Groups::find($id);
+    
     if($group)
       {
-      $this->assign($group);
+      $this->assign('group', $group);
       $browsein[] =array('url'=>'', 'displayname'=>'Edit');
       }
     else
@@ -62,37 +69,10 @@ class AdminController extends Controller
     if(empty($id))
       $this->errors->setError("ID of Group is missing!");
     
-    $this->groups->group_delete($id);
+    $group = Groups::find($id);
+    $group->delete();
+    
     $this->redirect();
-    }
-    
-//  function groupOperation()
-//    {
-//    $data = $this->input_vars;
-// 
-//    switch($data['action_name'])
-//      {
-//      case 'delete':
-//        foreach($data['entities'] as $id)
-//          {
-//          $this->groups->group_delete($id);
-//          }
-//        $this->showMessage("Элементы успешно удалены");
-//        break;
-//      case 'activate':
-//          $this->groups->user_group_active($data['entities']);
-//          $this->showMessage("Элементы успешно удалены");
-//        break;
-//
-//      default:
-//        break;
-//      }
-//    }
-    
-  function actionTest()
-    {
-    $element = $this->groups->getByIdOrderByGroup_Displayname("'1', '3'");
-    print_r($element);
     }
   }
 

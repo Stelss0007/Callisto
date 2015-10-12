@@ -165,7 +165,7 @@ class IndexController extends Controller
 //    print_r($this->getPostData(array('lastname'=>'required min(2) max(6)', 'email'=>'email')));
 //    print_r($this->getPostData(array('lastname'=>'required min(1) max(10)')));
     //appDebugExit($this->input_vars);
-    $this->validate($this->input_vars , array('lastname'=>'required min(2) max(6)', 'email'=>'email'));
+    $this->validate($this->inputVars , array('lastname'=>'required min(2) max(6)', 'email'=>'email'));
     $this->redirect();
     }
     
