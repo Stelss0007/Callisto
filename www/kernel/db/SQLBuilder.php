@@ -569,17 +569,30 @@ class SQLBuilder {
         
     public function executeQuery($sql = null, $params=[], $fetchType='object')
         {
+        global $appConfig;
+  
+        $mysqlResult = null;
+      
         if(!$sql) {
             $sql = $this->sqlString;
         }
         $this->params($params);
         
         $sql = $this->prepareSQL($sql);
-
-        \Debuger::start();
-        $mysqlResult = $this->mysqli->query($sql);
-        \Debuger::end();
-        \Debuger::logMySQL($sql, $mysqlResult);
+        
+        
+        if($appConfig['debug.enabled'])
+            {
+            \Debuger::start();
+            $mysqlResult = $this->mysqli->query($sql);
+            \Debuger::end();
+            \Debuger::logMySQL($sql, $mysqlResult);
+            }
+        else
+            {
+            $mysqlResult = $this->mysqli->query($sql);
+            }
+        
  
         if($this->mysqli->error)
             {

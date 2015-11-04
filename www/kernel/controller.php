@@ -161,8 +161,8 @@ abstract class Controller extends AppObject
     if($this->config['debug.enabled'] && !isAjax())
       {
         
-      $DB = DBConnector::getInstance();
-      $DB->disconnect();
+//      $DB = DBConnector::getInstance();
+//      $DB->disconnect();
               
       $current_time = microtime();
       $current_time = explode(" ",$current_time);
@@ -517,49 +517,51 @@ abstract class Controller extends AppObject
    */
   final public function isCached()
     {
-    $tpl_dir = $this->tplFileName();
-    $ObjectName = $this->getTplObjectName();
+    $tplDir = $this->tplFileName();
+    $objectName = $this->getTplObjectName();
     
-//    return $this->smarty->is_cached($tpl_dir, $ObjectName);
-    return $this->smarty->isCached($tpl_dir, $ObjectName);
+//    return $this->smarty->is_cached($tplDir, $objectName);
+    return $this->smarty->isCached($tplDir, $objectName);
     }
     
-  final public function deleteCache($ObjectName = false)
+  final public function deleteCache($objectName = false)
     {
-    //$tpl_dir = $this->tplFileName();
+    //$tplDir = $this->tplFileName();
     
-    if(empty($ObjectName))
-      $ObjectName = $this->modname.'|'.$this->type;
+    if(empty($objectName))
+      $objectName = $this->modname.'|'.$this->type;
  
-    if(empty($ObjectName)) 
+    if(empty($objectName)) 
       return;
     
-    return $this->smarty->clearCache(null, $ObjectName);
+    return $this->smarty->clearCache(null, $objectName);
     }
     
   final public function viewCached()
     {
-    $tpl_dir = $this->tplFileName();
-    $ObjectName = $this->getTplObjectName();
+    $tplDir = $this->tplFileName();
+    $objectName = $this->getTplObjectName();
     
-//    if(!$this->smarty->is_cached($tpl_dir, $ObjectName))
-    if(!$this->smarty->isCached($tpl_dir, $ObjectName))
-      return false;
+//    if(!$this->smarty->is_cached($tplDir, $objectName))
+    if(!$this->smarty->isCached($tplDir, $objectName))
+        {
+        return false;
+        }
     
-    echo $this->smarty->fetch($tpl_dir, $ObjectName);
+    echo $this->smarty->fetch($tplDir, $objectName);
     exit;
     }
     
   final public function viewCachedPage()
     {
-    $tpl_dir = $this->tplFileName();
-    $ObjectName = $this->getTplObjectName();
-  
-//    if(!$this->smarty->is_cached($tpl_dir, $ObjectName))
-    if(!$this->smarty->isCached($tpl_dir, $ObjectName))
+    $tplDir = $this->tplFileName();
+    $objectName = $this->getTplObjectName();
+
+//    if(!$this->smarty->is_cached($tplDir, $objectName))
+    if(!$this->smarty->isCached($tplDir, $objectName))
         {
-        $this->usesModel('statistic');
-        $this->statistic->setLog();
+//        $this->usesModel('statistic');
+//        $this->statistic->setLog();
         return false;
         }
     
@@ -568,10 +570,10 @@ abstract class Controller extends AppObject
     
   final public function view()
     {
-    $tpl_dir = $this->tplFileName();
+    $tplDir = $this->tplFileName();
     $this->allVarToTpl();
-    $ObjectName = $this->getTplObjectName();
-    echo $this->smarty->fetch($tpl_dir, $ObjectName);
+    $objectName = $this->getTplObjectName();
+    echo $this->smarty->fetch($tplDir, $objectName);
     
     //$this->__destruct();
     if(!$this->config['debug.enabled']) 
@@ -605,13 +607,13 @@ abstract class Controller extends AppObject
       {
       $this->page = $page_template; 
       }
-    $tpl_dir = $this->tplFileName();
+    $tplDir = $this->tplFileName();
     $this->allVarToTpl();
     $this->blockToTpl();
-    $ObjectName = $this->getTplObjectName();
-    
+    $objectName = $this->getTplObjectName();
+   
     //Прикрепим меседж в тело.
-    $modContent = $this->message.$this->smarty->fetch($tpl_dir, $ObjectName);
+    $modContent = $this->message.$this->smarty->fetch($tplDir, $objectName);
    
     //Если это запрос через AJAX, то выводим только результат работы модуля
     if(isAjax())

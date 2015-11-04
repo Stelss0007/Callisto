@@ -17,7 +17,7 @@ class IndexController extends Controller
     $this->assign('module_browsein', $browsein);
 
     $this->viewCachedPage();
-    
+ //echo '2222';exit;   
     $this->usesModel('articleCategory');
     //$this->usesModel('users');
   

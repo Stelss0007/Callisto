@@ -16,7 +16,7 @@
     
     {appSassLoad}
     {appSassOutput}
-  {debug}  
+ 
   </head>
   <body>
     <div id="main">
