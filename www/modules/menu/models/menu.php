@@ -1,73 +1,65 @@
 <?php
+namespace app\modules\menu\models;
+
 /* 
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-class Menu extends Model
+class Menu extends \app\db\ActiveRecord\Model
   {
-  var $table = 'menu';
+  public static $tableName = 'menu';
   
-  function menu_list($parent_id = 0)
+  public static function menuList($parentId = 0)
     {
-    $this->query("SELECT * FROM $this->table WHERE menu_parent_id = '%d' ORDER BY menu_weight", $parent_id);
-    $menu = $this->fetchArray();
+    $menus = self::find()
+              ->orderBy(['weight'])
+              ->where(['menu_parent_id' => $parentId])
+              ->all()
+            ;  
     
-    return $menu;
+    return $menus;
     }
     
-  function getParents($path = null)
+  public static function getParents($path = null)
     {
-    $parrent_is = str_replace("::", "', '", $path);
-    $parrent_order= str_replace("::", ", ", $path);
+    $parrentIs = str_replace("::", "', '", $path);
+    $parrentOrder= str_replace("::", ", ", $path);
     
-    if($parrent_is)
+    if(!$parrentIs)
       {
-      $sql = "SELECT * FROM $this->table  WHERE id IN ('$parrent_is') ORDER BY FIELD(id, $parrent_order)";
-      $this->query($sql);
+      return [];
       }
       
-    $parrents = $this->fetchArray();
+    $parrents = self::executeQuery("SELECT * FROM ".self::$tableName." WHERE id IN ('$parrentIs') ORDER BY FIELD(id, $parrentOrder)");
     
     return $parrents;
     }
     
-  function parent_browsein($path = null)
+  public static function parentBrowsein($path = null)
     {
-    $parrent_is = str_replace("::", "', '", $path);
-    $parrent_order= str_replace("::", ", ", $path);
+    $parrentIs = str_replace("::", "', '", $path);
+    $parrentOrder= str_replace("::", ", ", $path);
     
-    if($parrent_is)
+    if(!$parrentIs)
       {
-      $sql = "SELECT * FROM $this->table  WHERE id IN ('$parrent_is') ORDER BY FIELD(id, $parrent_order)";
-      $this->query($sql);
+      return [];
       }
       
-    $parrents = $this->fetchArray();
-    $browsein[] = array('url'=>'/admin/menu/menu_list/', 'displayname'=>'Menu');
+    $parrents = self::executeQuery("SELECT * FROM ".self::$tableName." WHERE id IN ('$parrentIs') ORDER BY FIELD(id, $parrentOrder)");
+
+    $browsein[] = ['url'=>'/admin/menu/menu_list/', 'displayname'=>'Menu'];
     foreach($parrents as $value)
       {
-      $browsein[] = array('url'=>'/admin/menu/menu_list/'.$value['id'], 'displayname'=>$value['menu_title']);
+      $browsein[] = ['url'=>'/admin/menu/menu_list/'.$value->id, 'displayname'=>$value->menu_title];
       }
     
     return $browsein;
     }
  
     
-  function hasSubitemById($id)
+  public static function hasSubitemById($id)
     {
-    $menu = $this->getById($id);
-    if($this->subitemCount($id))
-      {
-      return true;
-      }
-    else
-      {
-      return false;
-      }
-    }
-  function hasSubitem($parent_id)
-    {
-    if($this->subitemCount($parent_id))
+    if(self::subitemCount($id))
       {
       return true;
       }
@@ -77,117 +69,172 @@ class Menu extends Model
       }
     }
     
-  function subitemCount($parent_id)
+  public static function hasSubitem($parent_id)
     {
-    $params = array('condition'=>array('menu_parent_id'=>$parent_id));
-    return $this->getCount($params);
+    if(self::subitemCount($parent_id))
+      {
+      return true;
+      }
+    else
+      {
+      return false;
+      }
     }
     
-  function updateSubitemCounter($id)
+  public static function subitemCount($parent_id)
     {
-    $data['menu_subitem_counter'] = $this->subitemCount($id);
-    $this->update($this->table, $data, "id = '$id'");
+    return self::find()
+            ->where(['menu_parent_id'=>$parent_id])
+            ->count()
+            ;
+    }
+    
+  public static function updateSubitemCounter($id)
+    {
+    $menuItem = self::find($id);
+    $menuItem->menu_subitem_counter = self::subitemCount($id);
+    $menuItem->save();
     }
  
-  function isChild($parent_id = 0, $element_id = 0)
+  public static function isChild($parentId = 0, $elementId = 0)
     {
-    if(empty($parent_id)) $parent_id =0;
-    if(empty($element_id)) $element_id =0;
-    
-    $conditions = array(
-                       'condition'  => "(menu_parent_id = :pid OR menu_path LIKE '%:::pid::%') AND id = :id",
-                       'params' => array(':pid'=>$element_id, ':id'=>$parent_id)
-                       );
-    return ($this->getList($conditions)) ? true : false;
+    if(empty($parentId)) $parentId = 0;
+    if(empty($elementId)) $elementId = 0;
+
+    return ($parrents = self::executeQuery("SELECT * FROM ".self::$tableName." WHERE (menu_parent_id = :pid OR menu_path LIKE '%:::$elementId::%') AND id = :id", [':pid'=>$elementId, ':id'=>$parentId])) ? true : false;
     }
     
-  function menuCreate($data)
+  public static function menuCreate($data)
     {
     //Получим полный путь родителей
     if(!isset($data['menu_parent_id']))
       $data['menu_parent_id'] = '0';
     
-    $parent = $this->getById($data['menu_parent_id']);
+    $parent = self::find($data['menu_parent_id']);
     if($parent)
       {
-      $data['menu_path'] = ($parent['menu_path']) ? $parent['menu_path'].'::'.$data['menu_parent_id'] : '0'.'::'.$data['menu_parent_id'];
+      $data['menu_path'] = ($parent->menu_path) ? $parent->menu_path.'::'.$data['menu_parent_id'] : '0'.'::'.$data['menu_parent_id'];
       }
     else
       {
       $data['menu_path'] = '0';
       }
 
-    $weight = $this->weightMax("menu_parent_id = '{$data['menu_parent_id']}'");
+    $weight = self::weightMax(['menu_parent_id' => $data['menu_parent_id']]);
     $weight++;
-    $data['menu_weight'] = $weight;
+    $data['weight'] = $weight;
       
-    $this->insert($this->table, $data);
+    $menuNew = new self($data);
+    $menuNew->save();
     
     if($parent)
       {
-      $this->updateSubitemCounter($data['menu_parent_id']);
+      self::updateSubitemCounter($data['menu_parent_id']);
       }
     }
     
-  function menuUpdate($data, $id)
+  public static function menuUpdate($data, $id)
     {
     if(!is_numeric($id))
       return false;
     
     //Сведенья до момента редактирования
-    $old_data = $this->getById($id);
+    $oldData = self::find($id);
     
     
     //Получим полный путь родителей
     if(!isset($data['menu_parent_id']))
       $data['menu_parent_id'] = '0';
     
-    $parent = $this->getById($data['menu_parent_id']);
+    $parent = self::find($data['menu_parent_id']);
   
-    if($this->isChild($parent['id'], $id))
-      $this->errors->setError('Нельзя вложить элемент в дочерний элемент!');
+    if(self::isChild($parent->id, $id))
+        {
+        throw new \Exception('Нельзя вложить элемент в дочерний элемент!');
+        }
     
     if($parent)
       {
-      $data['menu_path'] = ($parent['menu_path']) ? $parent['menu_path'].'::'.$data['menu_parent_id'] : '0'.'::'.$data['menu_parent_id'];
+      $data['menu_path'] = ($parent->menu_path) ? $parent->menu_path.'::'.$data['menu_parent_id'] : '0'.'::'.$data['menu_parent_id'];
       }
     else
       {
       $data['menu_path'] = '0';
       }
-        
-    $this->update($this->table, $data, "id = '$id'");
+     
+    $oldData->setAttributesByArray($data);
+    $oldData->save();
     
-    if($old_data['menu_path'] != $data['menu_path'])
+    if($oldData->menu_path != $data['menu_path'])
       {
-      $sql = "UPDATE {$this->table} SET menu_path = REPLACE(menu_path, '{$old_data['menu_path']}::{$id}', '{$data['menu_path']}::{$id}') WHERE menu_path LIKE '{$old_data['menu_path']}::{$id}%'";
-      $this->query($sql);
+      self::executeQuery("UPDATE ".self::$tableName." SET menu_path = REPLACE(menu_path, '{$oldData['menu_path']}::{$id}', '{$data['menu_path']}::{$id}') WHERE menu_path LIKE '{$oldData['menu_path']}::{$id}%'");
 
-      $this->updateSubitemCounter($old_data['menu_parent_id']);
+      self::updateSubitemCounter($oldData['menu_parent_id']);
       }
       
     if($parent)
       {
-      $this->updateSubitemCounter($data['menu_parent_id']);
+      self::updateSubitemCounter($data['menu_parent_id']);
       }
     }
     
-  function menu_delete($id)
+  public static function menuDelete($id)
     {
     if(!is_numeric($id))
       return false;
 
-    $menu = $this->getById($id);
-    $this->query("DELETE FROM $this->table WHERE id='$id'");
-    $this->updateSubitemCounter($menu['menu_parent_id']);
+    $menu = self::find($id);
+    $menu->delete();
+    self::updateSubitemCounter($menu->menu_parent_id);
+    
     }
     
-  function tree_items($parent_id = 0, $active = true)
+  public static function treeItems($parentId = 0, $active = true)
     {
-    $this->query("SELECT * FROM $this->table ORDER BY {$this->table}_parent_id, {$this->table}_weight");
-    $menus = $this->fetchArray();
+    $menus = self::find()
+             ->orderBy('menu_parent_id, weight')
+             ->all()
+             ;
       
-    return appTreeBuild($menus, $parent_id);
+    return self::appTreeBuild($menus, $parentId);
     }
+    
+  public static function appTreeBuild(&$inArray, $start)
+      {
+      $result = array();
+      $childMenuList = array();
+      foreach($inArray as $key=>$menu)
+          {
+          $childMenuList[$menu->id] = $menu;
+          }
+
+      self::appCreateTree($childMenuList, $start, 0, -1, $result); 
+
+      return $result;
+      //exit;
+      }
+
+   public static function appCreateTree($array, $curParent, $currLevel = 0, $prevLevel = -1, &$result) 
+        {
+        foreach ($array as $categoryId => $category) 
+          {
+          if ($curParent == $category->menu_parent_id) 
+            {
+            $category->level = $currLevel;
+            $result[$categoryId] = $category;
+            if ($currLevel > $prevLevel) 
+              { 
+              $prevLevel = $currLevel;
+              }
+
+            $currLevel++;
+
+            self::appCreateTree ($array, $categoryId, $currLevel, $prevLevel, $result);
+
+            $currLevel--;
+            }
+
+          }
+        }
   }
-?>
+

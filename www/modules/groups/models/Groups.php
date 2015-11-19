@@ -24,35 +24,4 @@ class Groups extends \app\db\ActiveRecord\Model
     return $result;
     }
     
-  public static function groupView($id)
-    {
-    if(!is_numeric($id))
-      return false;
-    
-    
-    $group = $this->find($id);
-    return $group;
-    }
-    
-  function groupCreate($data)
-    {
-    $this->insert($this->table, $data);
-    }
-    
-  function group_update($data, $id)
-    {
-    if(!is_numeric($id))
-      return false;
-    
-    $this->update($this->table, $data, "id = '$id'");
-    }
-    
-  function group_delete($id)
-    {
-    if(!is_numeric($id))
-      return false;
-
-    $this->query("DELETE FROM `group` WHERE id='$id'");
-    }
   }
-

@@ -33,6 +33,6 @@ class comments_block extends Block
     //echo $blockinfo['id'].' ';print_r($_REQUEST);exit;
     //echo $this->toolbar;exit;
     $this->setBlockContent('toolbar', $this->input_vars['toolbar']);
-    $this->save($blockinfo['id']);
+    $this->save($blockinfo->id);
     }
   }

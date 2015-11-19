@@ -59,8 +59,8 @@ class AppObject
         case 'Configuration':
         case 'Theme':
         case 'Blocks':
+        case 'Menu':
             return;
-            break;
     }
       
     //echo $this->modname;exit;
@@ -104,6 +104,7 @@ class AppObject
             case 'Configuration':
             case 'Theme':
             case 'Blocks':
+            case 'Menu':
                 return;
                 break;
         }

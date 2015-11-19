@@ -54,35 +54,35 @@
             {cycle name="menu" values="even,odd" assign="class" print=false}
             <tr class='{$class}'>
               <th>
-                  <input type="checkbox" name="entities[]" class="td_entities" value="{$menu.id}">
+                  <input type="checkbox" name="entities[]" class="td_entities" value="{$menu->id}">
               </th>
               <td>
-                {$menu.id}
+                {$menu->id}
               </td>
               <td>
-                <a href="/admin/menu/menu_list/{$menu.id}">{$menu.menu_title}{if $menu.menu_subitem_counter > 0}&nbsp;({$menu.menu_subitem_counter}){/if}</a>
+                <a href="/admin/menu/menu_list/{$menu->id}">{$menu->menu_title}{if $menu->menu_subitem_counter > 0}&nbsp;({$menu->menu_subitem_counter}){/if}</a>
               </td>
 
               <td>
-                <a href="{$menu.menu_content}">{$menu.menu_content}</a>
+                <a href="{$menu->menu_content}">{$menu->menu_content}</a>
               </td>
               <td style="text-align: center;">
                 <div class="btn-group">
                   {if !$smarty.foreach.menu_.first}
-                    <a href="/admin/menu/weight_up/{$menu.menu_weight}/{$menu.menu_parent_id}" class="btn btn-icon btn-up" title="{#sys_up#}"><i class="icon-arrow-up"></i></a>
+                    <a href="/admin/menu/weight_up/{$menu->id}/{$menu->menu_parent_id}" class="btn btn-icon btn-up" title="{#sys_up#}"><i class="icon-arrow-up"></i></a>
                   {/if}
                   {if !$smarty.foreach.menu_.first && !$smarty.foreach.menu_.last}
 
                   {/if}
                   {if !$smarty.foreach.menu_.last}
-                    <a href="/admin/menu/weight_down/{$menu.menu_weight}/{$menu.menu_parent_id}" class="btn btn-icon btn-down" title="{#sys_down#}"><i class="icon-arrow-down"></i></a>
+                    <a href="/admin/menu/weight_down/{$menu->id}/{$menu->menu_parent_id}" class="btn btn-icon btn-down" title="{#sys_down#}"><i class="icon-arrow-down"></i></a>
                   {/if}
                 </div>
               </td>
               <td>
                 <div class="btn-group">
-                  <a href='/admin/menu/modify/{$menu.id}' title="{#sys_edit#}" class="btn btn-icon btn-edit"><i class="icon-edit"></i></a>
-                  <a href='/admin/menu/delete/{$menu.id}' title="{#sys_delete#}" class="btn btn-icon btn-delete" onclick="return confirm('{#sys_confirm_delete#}');"><i class="icon-trash"></i></a>
+                  <a href='/admin/menu/modify/{$menu->id}' title="{#sys_edit#}" class="btn btn-icon btn-edit"><i class="icon-edit"></i></a>
+                  <a href='/admin/menu/delete/{$menu->id}' title="{#sys_delete#}" class="btn btn-icon btn-delete" onclick="return confirm('{#sys_confirm_delete#}');"><i class="icon-trash"></i></a>
                 </div>
               </td>
             </tr>

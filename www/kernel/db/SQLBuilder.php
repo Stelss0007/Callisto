@@ -69,6 +69,7 @@ class SQLBuilder {
             {
             die('Connect Error (' . $this->mysqli->connect_errno . ') ' . $this->mysqli->connect_error);
             }
+        $this->mysqli->set_charset("utf8");
         }
     private function isTableFieldOperand($key, $value)
         {
@@ -99,7 +100,7 @@ class SQLBuilder {
             }
         return $this;
         }
-        
+
     public function from($data)
         {
         if(is_array($data)) 

@@ -219,8 +219,18 @@ class Model
     public static function table()
 	{
         return Table::load(get_called_class());
-	}    
+	}   
         
+    public static function executeQuery($sql = null, $params=[], $fetchType='object')
+        {
+        if(!$sql)
+            {
+            throw new Exception('First param \'$sql\' is required!');
+            }
+        return static::table()->executeQuery($sql, $params, $fetchType);
+        }
+
+
     public static function find($primaryKeyValue=null)
         {
         
@@ -488,7 +498,7 @@ class Model
         
         if($condition)
             {
-            $maxWeightObj = $maxWeightObj->where();
+            $maxWeightObj = $maxWeightObj->where($condition);
             }
         
         $maxWeightObj = $maxWeightObj->one();

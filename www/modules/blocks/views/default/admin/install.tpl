@@ -41,18 +41,18 @@
                 {cycle name="allblc" values="even,odd" assign="class" print=false}
                 <tr align="middle">
                   <th style="width: 20px;">
-                    <input type="checkbox" name="entities[]" class="td_entities" value="{$block.block_name}">
+                    <input type="checkbox" name="entities[]" class="td_entities" value="{$block.name}">
                   </th>
-                  <td class="{$class}" align="left">{$block.block_displayname|escape}</td>
-                  <td class="{$class}" align="left">{$block.block_name|escape}</td>
-                  <td class="{$class}" align="left">{$block.block_description|escape}</td>
+                  <td class="{$class}" align="left">{$block.displayname|escape}</td>
+                  <td class="{$class}" align="left">{$block.name|escape}</td>
+                  <td class="{$class}" align="left">{$block.description|escape}</td>
                   <td class="{$class}">{$block.block_version|escape}</td>
                   <td class="{$class}">
                     <div class="btn-group">
                       {array name='url_vars'}
-                      {array_append name='url_vars' key='block_name' value=$block.block_name}
-                      <a href="/admin/blocks/info/{$block.block_name}/{$position}" class="btn"><i class="icon icon-info-circled"></i></a>
-                      <a href="/admin/blocks/add/{$position}/{$block.block_name}" class="btn"><i class="icon icon-download"></i></a>
+                      {array_append name='url_vars' key='name' value=$block.name}
+                      <a href="/admin/blocks/info/{$block.name}/{$position}" class="btn"><i class="icon icon-info-circled"></i></a>
+                      <a href="/admin/blocks/add/{$position}/{$block.name}" class="btn"><i class="icon icon-download"></i></a>
                     </div>
                   </td>
                 </tr>

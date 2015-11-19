@@ -101,17 +101,16 @@ class AdminController extends Controller
     include("blocks/$block_name/info.php");
     $info['name'] = $block_name;
     
-    $weight = $this->blocks->weightMax("block_position = '{$input_position}'");
+    $weight = Blocks::weightMax(['position'=>$input_position]);
     $weight++;
 
-    $info['block_weight'] = $weight;
-    $info['block_last_update'] = time();
-    $info['block_position'] = $input_position;
-    $info['block_pattern'] = '.*';
+    $info['weight'] = $weight;
+    $info['last_update'] = time();
+    $info['position'] = $input_position;
+    $info['pattern'] = '.*';
    
-    $this->arrayToModel($this->blocks, $info);
-    
-    $id = $this->blocks->save();
+    $block = new Blocks($info);
+    $block->save();
     
     $this->showMessage('Элемент добавлен', '/admin/blocks');
     }
@@ -201,10 +200,11 @@ class AdminController extends Controller
       $block_obj->name = $block->name;
 //      $block_modify_fn = $blocks_list[0]['block_name'].'_modify';
       $block_modify_fn = 'modify';
+      
       if (method_exists($block_obj, $block_modify_fn))
         {
         $block_config_result = $block_obj->$block_modify_fn($block);
-        $this->assign('block_config_result', $block_config_result['block_content']);
+        $this->assign('block_config_result', $block_config_result['content']);
         }
       }
 

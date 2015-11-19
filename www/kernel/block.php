@@ -29,7 +29,7 @@ class Block extends AppObject
   
   public $object;
   public $root_dir;
-  //public $theme;
+  public static $localTheme;
   
   //public $session;
   public $lib;
@@ -70,6 +70,7 @@ class Block extends AppObject
 
   public static function blockShowAll(&$myTpl, &$object, $theme, $modname)
     {
+    self::$localTheme = $theme;
     
     $dbBlockList = app\modules\blocks\models\Blocks::find()
             ->where(['active' => '1'])
@@ -236,6 +237,7 @@ class Block extends AppObject
   final public function tplFileName($method, $debug=false)
     {
     $view_file_name = $method;
+    $this->theme = self::$localTheme;
     if(file_exists($this->root_dir.'themes/'.$this->theme.'/blocks/'.$this->name.'/'.$method.'.tpl'))
       {
       //$this->tpls[] = '(Overridden by Theme) '.'themes/'.$this->theme.'/'.$this->module_dir.$view_file_name.'.tpl';
@@ -292,8 +294,10 @@ class Block extends AppObject
     {
     $block = Blocks::find($id);
     if($this->vars['attributes']) {
+        $this->vars['attributes']['content'] = '';
         $block->content = serialize($this->vars['attributes']);
     } else {
+        $this->vars['content'] = '';
         $block->content = serialize($this->vars);
     }
         

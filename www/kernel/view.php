@@ -16,21 +16,22 @@ class viewTpl extends Smarty
     //$this->Smarty();
     
     //????????? ???? ?????????? ???????????
-    $this->debugging = $appConfig['debug.enabled'];
     $this->use_sub_dirs = $appConfig['coretpl.use_sub_dirs'];
     $this->cache_lifetime = $appConfig['coretpl.cache_lifetime'];
     if($appConfig['debug.enabled'])
-        {  
+        { 
+        //$this->debugging = $appConfig['debug.enabled'];
+        $this->setCaching(Smarty::CACHING_LIFETIME_CURRENT);
         $this->force_compile = true;//$appConfig['coretpl.force_compile'];
         }
     else 
         {
-        $this->setCaching($appConfig['coretpl.cache_lifetime']);
-        //$this->setCaching(Smarty::CACHING_LIFETIME_CURRENT);
-        $this->setCompileCheck(false);    
+        $this->setCaching(Smarty::CACHING_LIFETIME_CURRENT);
+        $this->setCacheLifetime($appConfig['coretpl.cache_lifetime']);
+        $this->setCompileCheck($appConfig['coretpl.force_compile']);    
         }
     
-    $this->compile_check = $appConfig['coretpl.compile_check'];
+    //$this->compile_check = $appConfig['coretpl.compile_check'];
     $this->template_dir = '';
     $this->config_dir='';
     $this->cache_dir = 'cache/content';
@@ -66,8 +67,8 @@ class viewTpl extends Smarty
    **/
   function fetch ($template = null, $cache_id = null)
     {
-    $this->setCaching($this->cache_lifetime);
-    $this->template_file = $template;
+    //$this->setCaching(3600);
+    //$this->template_file = $template;
  
 //    if($this->caching && $this->is_cached($tpl_file, $cache_id ))
     if($this->caching && $this->isCached($template, $cache_id ))
@@ -109,15 +110,9 @@ class viewTpl extends Smarty
   /**
    * is_cached
    **/
-  function isCached ($template = null, $cache_id = null)
+  function isCached ($template = null, $cache_id = null, $compile_id = null, $parent = null)
     {
-
-    echo $template.' '.$cache_id.' ';
-    var_dump(parent::isCached($template));
-    echo '<br>';
-    
-//    return (Smarty::is_cached($tpl_file, $cache_id, $compile_id));
-    return (parent::isCached($template, $cache_id));
+    return (parent::isCached($template, $cache_id, $compile_id, $parent));
     }
    
   function runCachedScripts()
