@@ -1,8 +1,15 @@
 <?php
+namespace app\modules\comments\models;
+//use app\modules\users\models\Users;
 
-class comments extends Model
+class Comments extends \app\db\ActiveRecord\Model
   {
-  var $table = 'comment';
+  public static $tableName = 'comment';
+  public static $relations = [
+        'hasOne' => [
+            'user' => ['app\modules\users\models\Users', 'id', 'comment_user_id'],
+        ],
+  ];
   
   function comment_list($full=false, $filter = array(), $limit = false, $sort = '')
     {

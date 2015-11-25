@@ -1,4 +1,6 @@
 $(document).ready(function(){
+  sortable();
+  dragable()
   $('body').append('<div id="dialog-box" title="&nbsp;"></div>');
   
   var dialog = $('#dialog-box').dialog({
@@ -10,38 +12,63 @@ $(document).ready(function(){
     
     
   //admin blocks sortable
-  $(".block-item-admin-panel").parent().sortable({
-      //connectWith: ".column",
-      handle: ".block-toolbar",
-      cancel: ".portlet-toggle",
-      placeholder: "block-placeholder ui-corner-all",
-      items: '.block-item-admin-panel',
-      start: function(e, ui){
-        ui.placeholder.height(ui.item.height());
-      },
-      update: function (event, ui) {
-                //db id of the item sorted
-                var position_block = ui.item.attr('data-position');
-                var positionOld = ui.item.attr('data-weight');
-                var positionNew = ui.item.index() + 1;
-                var id = ui.item.attr('data-id');
+  function sortable() {
+    $(".block-item-admin-panel").parent()
+    .sortable({
+        //connectWith: ".column",
+        handle: ".block-toolbar",
+        cancel: ".portlet-toggle",
+        placeholder: "block-placeholder ui-corner-all",
+        items: '.block-item-admin-panel',
+        revert: true,
+        connectWith: ".ui-sortable",
+        start: function(e, ui){
+          ui.placeholder.height(ui.item.height());
+        },
+        receive: function(evt, ui) {
+//          ui.item.remove();
+//          dragable();
+        },
+        update: function (event, ui) {
+                  //db id of the item sorted
+                  var position_block = ui.item.attr('data-position');
+                  var positionOld = ui.item.attr('data-weight');
+                  var positionNew = ui.item.index() + 1;
+                  var id = ui.item.attr('data-id');
 
-                $.ajax('/admin/blocks/weightSet/'+id+'/'+positionOld+'/'+positionNew+'/'+position_block, {
-                    cache: false,
-                    success: function(html){
-                      showAppMessage(html);
-                    }
-                 });
-                 
-                $(".block-item-admin-panel").each(function(){
-                  var $this = $(this);
-                  $this.attr('data-weight', $this.index() + 1);
-                });
-                
-                ui.item.attr('data-weight', positionNew);
-                //make ajax call
-            }
-    });
+                  $.ajax('/admin/blocks/weightSet/'+id+'/'+positionOld+'/'+positionNew+'/'+position_block, {
+                      cache: false,
+                      success: function(html){
+                        showAppMessage(html);
+                      }
+                   });
+
+                  $(".block-item-admin-panel").each(function(){
+                    var $this = $(this);
+                    $this.attr('data-weight', $this.index() + 1);
+                  });
+
+                  ui.item.attr('data-weight', positionNew);
+                  //make ajax call
+              }
+      });
+  }
+ 
+function dragable(){    
+//    $(".block-item-admin-panel")
+//      .draggable({
+//          helper: "clone",
+//          connectToSortable: ".ui-sortable",
+//          revert: "invalid",
+//    //      start: function(e, ui) {
+//    //        ui.placeholder.height(ui.item.height());
+//    //      }
+//
+//            stop: function (event, ui) {
+//                dragable();
+//            }
+//        });
+}
    
    $('.block-edit').click(function(){
      

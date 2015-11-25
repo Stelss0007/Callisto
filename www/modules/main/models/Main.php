@@ -4,18 +4,15 @@
  * and open the template in the editor.
  * @Table('111') 
  */
-class Main extends Model
-  {
+namespace app\modules\main\models;
+
+class Main extends \app\db\ActiveRecord\Model
+    {
   /**
    *
    * @Column(type='string', default='1', primaryKey = true) 
    * @Index(type='integer')
    */
-  var $table = 'main';
-  
-  function deleteVarCachedAll()
-    {
-    //appDirDelete('./cache/vars');
+    public static $tableName = '`main`';
     }
-  }
-?>
+

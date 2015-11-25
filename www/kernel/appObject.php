@@ -51,7 +51,7 @@ class AppObject
   //////////////////////////////////////////////////////////////////////////////
   final public function usesModel($modulename=null, $autocreate=true)
     {
-  
+
     switch ($modulename) {
         case 'Users':
         case 'Groups':
@@ -60,6 +60,9 @@ class AppObject
         case 'Theme':
         case 'Blocks':
         case 'Menu':
+        case 'Main':
+        case 'Comments':
+        case 'comments':
             return;
     }
       
@@ -105,6 +108,8 @@ class AppObject
             case 'Theme':
             case 'Blocks':
             case 'Menu':
+            case 'Main':
+            case 'Comments':
                 return;
                 break;
         }

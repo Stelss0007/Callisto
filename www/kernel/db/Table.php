@@ -261,7 +261,6 @@ class Table extends SQLBuilder
                 $currentClass = $this->className;
                 $foreignKey = (isset($relation[1])) ? $relation[1] : $currentClass::getStaticTableName().'_id';
                 $localKey = (isset($relation[2])) ? $relation[2] : 'id';
-                
 
                 $localKeys = $this->getValuesOfFieldByArray($parentResult, $localKey);
                 $relationFields = $relationClass::find()->where([$foreignKey => $localKeys])->with($this->relationsArray)->all();

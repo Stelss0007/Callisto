@@ -346,7 +346,7 @@
                         <a href="/admin/blocks/weight_up/{$block->id}" class="btn btn-icon btn-up" title="{#sys_up#}"><i class="icon-arrow-up"></i></a>
                       {/if}
 
-                      {if !$smarty.foreach.fblock_r.last}
+                      {if !$smarty.foreach.fblock_b.last}
                         <a href="/admin/blocks/weight_down/{$block->id}" class="btn btn-icon btn-down" title="{#sys_down#}"><i class="icon-arrow-down"></i></a>
                       {/if}
                     </div>

@@ -62,7 +62,7 @@
         <tr>
           <td class="fblock">
             <span class='sbtitle'>Заголовок</span>
-            <div>
+            <div class="ui-sortable">
               {if $blocks.left}
                 {foreach item=block from=$blocks.left}
                  {theme_block block=$block} 
@@ -94,6 +94,7 @@
               {if $blocks.bottom}
                 {foreach item=block from=$blocks.bottom}
                   {theme_block block=$block} 
+                    <h3>{$block.displayname|escape}</h3>
                     {$block.content}
                   {/theme_block} 
                 {/foreach}
@@ -104,7 +105,7 @@
       <td class="fblock">
 
         <span class="sbtitle">1111</span>
-        <div class="usermenu">
+        <div class="usermenu ui-sortable">
           {if $blocks.right}
             {foreach item=block from=$blocks.right}
               {theme_block block=$block} 

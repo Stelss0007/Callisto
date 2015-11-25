@@ -1,4 +1,6 @@
 <?php
+use app\modules\comments\models\Comments;
+
 class IndexController extends Controller
   {
   public $defaultAction = 'article_list';
@@ -43,13 +45,13 @@ class IndexController extends Controller
   public function actionCommentAdd()
     {
     $data = $this->inputVars; 
-    $this->arrayToModel($this->comments, $data);
+
+    $comment = new Comments($data);
+    $comment->comment_user_id = $this->session->userId();
+    $comment->comment_addtime = time();
+    $comment->comment_modtime = time();
     
-    $this->comments->comment_user_id = $this->session->userId();
-    $this->comments->comment_addtime = time();
-    $this->comments->comment_modtime = time();
-    
-    $id = $this->comments->save();
+    $id = $comment->save();
     
     $this->showMessage($this->t('comments_added'), $this->referer.'#comment_'.$id);
     }

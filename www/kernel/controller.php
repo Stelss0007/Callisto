@@ -718,7 +718,7 @@ abstract class Controller extends AppObject
 
     }
    
-  final public function getObjectName()
+  final public function getObjectName($realObjectName = false)
     {
     //$url_result = $this->GetCallingMethodName(3, true);
     $action = $this->action;//$url_result['function'];
@@ -727,8 +727,13 @@ abstract class Controller extends AppObject
       {
       $args .= '::'.$key.':'.$value;
       }
-      
-    return $this->modname.'::'.$this->type.'::'.$action.$args.'::ACCESS_LEVEL_'.$this->permissionLavel;;
+    //Only object name without permissions markers  
+    if($realObjectName)
+        {
+        return $this->modname.'::'.$this->type.'::'.$action.$args;
+        }
+        
+    return $this->modname.'::'.$this->type.'::'.$action.$args.'::ACCESS_LEVEL_'.$this->permissionLavel;
     }
     
   final public function getTplObjectName()
@@ -1296,7 +1301,7 @@ abstract class Controller extends AppObject
   //Add all blocks to tpl
   final public function blockToTpl()
     {
-    Block::blockShowAll($this->smarty, $this->object_name, $this->current_theme, $this->modname);
+    Block::blockShowAll($this->smarty, $this->getObjectName(true), $this->current_theme, $this->modname);
     //$this->smarty->assign('blocks', $this->block, false);
     }
   

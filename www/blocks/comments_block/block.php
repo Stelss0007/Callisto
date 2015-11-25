@@ -1,4 +1,6 @@
 <?php
+use app\modules\comments\models\Comments;
+
 class comments_block extends Block
   {
   function display(&$blockinfo)
@@ -6,17 +8,19 @@ class comments_block extends Block
     //$this->viewCached();
     $config = unserialize(stripcslashes($blockinfo->content));
     $this->usesModel('comments');
+    //appDebugExit($blockinfo); 
+    $this->assign('module_object', $blockinfo->module_object);
+    $this->assign('module_name', $blockinfo->module_name);
     
-    $this->module_object = $blockinfo->module_object;
-    $this->module_name = $blockinfo->module_name;
-    
-    $this->comment_list = $this->comments->getList(array(
-                                                        'fields'    => array('t.*', 'u.login'),
-                                                        'condition' => array('comment_module_object'=>$blockinfo->module_object),
-                                                        'join'      => 'LEFT JOIN user u ON (u.id = t.comment_user_id)',
-                                                        'order'     => 'comment_addtime ASC'
-                                                        )
-                                                  );
+    $commentList = Comments::find()
+                    ->where(['comment_module_object' => $blockinfo->module_object])
+                    ->orderBy(['comment_addtime' => 'asc'])
+                    ->with('all')
+                    ->all()
+                   ;
+
+    $this->assign('commentList', $commentList);
+
     return $this->view();
     }
     

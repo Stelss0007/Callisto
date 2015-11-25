@@ -30,5 +30,4 @@
 <div>
   {pagination paging_element_count=7}
 </div>
-{dataTable}
 {/strip}
