@@ -217,10 +217,16 @@ padding-top: 10px;
   .block-item-admin-panel.ui-sortable-helper {
     background-color: white;
     box-shadow: 0 0 10px rgba(0,0,0,0.5);
-/*  
-    max-height: 300px;
+  
+    max-height: 200px;
+    max-width: 200px;
     overflow: hidden;
-*/
+    
+    -moz-transition: max-height 2s ease;
+    -webkit-transition: max-height 2s ease;
+    -o-transition: max-height 2s ease;
+    transition: max-height 2s ease;
+
   }
 
   
