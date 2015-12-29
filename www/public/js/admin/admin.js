@@ -1,6 +1,6 @@
 $(document).ready(function(){
   sortable();
-  dragable()
+
   $('body').append('<div id="dialog-box" title="&nbsp;"></div>');
   
   var dialog = $('#dialog-box').dialog({
@@ -9,11 +9,21 @@ $(document).ready(function(){
                   width: 750,
                   modal: true
                 });
-    
+                
+   var lastSortableReady = '';
+   
+   var blockPositionsKey = [];
+   blockPositionsKey['left']    = 'l';
+   blockPositionsKey['right']   = 'r';
+   blockPositionsKey['top']     = 't';
+   blockPositionsKey['bottom']  = 'b';
+   blockPositionsKey['center']  = 'c';
+
     
   //admin blocks sortable
   function sortable() {
-    $(".block-item-admin-panel").parent()
+    //$(".block-item-admin-panel").parent()
+    $("*[data-block-list-position]")
     .sortable({
         //connectWith: ".column",
         handle: ".block-toolbar",
@@ -35,8 +45,16 @@ $(document).ready(function(){
                   var positionOld = ui.item.attr('data-weight');
                   var positionNew = ui.item.index() + 1;
                   var id = ui.item.attr('data-id');
-
-                  $.ajax('/admin/blocks/weightSet/'+id+'/'+positionOld+'/'+positionNew+'/'+position_block, {
+                  var newPosition = ui.item.parent().attr('data-block-list-position');
+                  var newPositionKey = blockPositionsKey[newPosition];
+                  
+                  if(lastSortableReady === id+'/'+positionOld+'/'+positionNew+'/'+newPositionKey) {
+                      return true;
+                  }
+                  
+                  lastSortableReady = id+'/'+positionOld+'/'+positionNew+'/'+newPositionKey;
+                  
+                  $.ajax('/admin/blocks/weightSet/'+id+'/'+positionOld+'/'+positionNew+'/'+newPositionKey, {
                       cache: false,
                       success: function(html){
                         showAppMessage(html);
@@ -48,27 +66,46 @@ $(document).ready(function(){
                     $this.attr('data-weight', $this.index() + 1);
                   });
 
+
+                  //Преобразования вида блока
+                  var blockContainer = ui.item.find('.app-block-admin-conteiner');
+                  var blockContent   = blockContainer.find('.app-block-content');
+                  var blockTitle     = blockContainer.find('.app-block-name');
+                  
+                  blockContent = blockContent.is('input') ? blockContent.val() : blockContent.html();
+                  blockTitle   = blockTitle.is('input') ? blockTitle.val() : blockTitle.html();
+                  
+                  var newTemplate =  ui.item.parent().find('.app-block-template').clone();
+                  
+                  var templateBlockTitle = newTemplate.find('.app-block-name');
+                  var templateBlockContent = newTemplate.find('.app-block-content');
+                  
+                  if(templateBlockTitle.is('input'))
+                    {
+                    templateBlockTitle.val(blockTitle); 
+                    }
+                  else
+                    {
+                    templateBlockTitle.html(blockTitle); 
+                    }
+                    
+                  if(templateBlockContent.is('input'))
+                    {
+                    templateBlockContent.val(blockContent); 
+                    }
+                  else
+                    {
+                    templateBlockContent.html(blockContent); 
+                    }
+                  
+                  blockContainer.html(newTemplate.html());
+                  
                   ui.item.attr('data-weight', positionNew);
                   //make ajax call
               }
       });
   }
- 
-function dragable(){    
-//    $(".block-item-admin-panel")
-//      .draggable({
-//          helper: "clone",
-//          connectToSortable: ".ui-sortable",
-//          revert: "invalid",
-//    //      start: function(e, ui) {
-//    //        ui.placeholder.height(ui.item.height());
-//    //      }
-//
-//            stop: function (event, ui) {
-//                dragable();
-//            }
-//        });
-}
+
    
    $('.block-edit').click(function(){
      

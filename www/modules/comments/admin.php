@@ -1,7 +1,7 @@
 <?php
 class AdminController extends Controller
   {
-  public $defaultAction = 'article_list';
+  public $defaultAction = 'comment_list';
   
   function actionCommentList()
     {

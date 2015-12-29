@@ -24,8 +24,10 @@ function smarty_block_theme_block($params, $content, $smarty, &$repeat)
                 .'<div class="block-toolbar">'
                   .'<a href="/admin/blocks/modify/'.$block['id'].'" class="block-edit" data-id="'.$block['id'].'"><span class="icon-cog"></span></a>'
                   .'<a href="/admin/blocks/delete/'.$block['id'].'" class="block-delete" data-id="'.$block['id'].'"><span class="icon-trash"></span></a>'
-                .'</div>'
+               .'</div>'
+               .'<div class="app-block-admin-conteiner">'
                .$content
+               .'</div>'
                .'</div>'
                ;
         return $contentAdmin;

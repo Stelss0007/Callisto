@@ -65,4 +65,9 @@ class AdminController extends Controller
 
         $this->viewPage();
         }
+        
+    function actionCreate()
+        {
+        $this->viewPage();
+        }
   }

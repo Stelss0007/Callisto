@@ -135,12 +135,19 @@ class AdminController extends Controller
     $this->redirect();
     }
     
-  function actionWeightSet($id, $weightOld, $weightNew, $block_position)
+  function actionWeightSet($id, $weightOld, $weightNew, $blockPosition)
     {
     $this->getAccess(ACCESS_ADMIN);
     
     $block = Blocks::find($id);
-    $block->weightSet($weightNew, ['position' => $block_position]);
+    
+    if($block->position != $blockPosition) {
+        $block->weightDelete(['position' => $block->position]);
+        $block->position = $blockPosition;
+        $block->save();
+    }
+    
+    $block->weightSet($weightNew, ['position' => $block->position]);
 
     echo $this->t('sys_saved');
     //$this->redirect();

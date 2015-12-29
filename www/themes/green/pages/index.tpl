@@ -37,19 +37,27 @@
         </tr>
         <tr>
           <td colspan='3'>
-            <ul class='mainmenu'>
+            <div class='mainmenu' data-block-list-position="top">
+              <!-- Block Template --> 
+              <div class="app-block-template">
+                    <input type="hidden" class="app-block-name" value="">  
+                    <div class="app-block-content">
+                    </div>
+              </div>
+              <!-- Block Template End --> 
+
               {if $blocks.top}
                 {foreach item=block from=$blocks.top}
-
-                  <li>
                     {theme_block block=$block} 
-                      {$block.content}
+                        <input type="hidden" class="app-block-name" value="{$block.displayname|escape}">  
+                        <div class="app-block-content">
+                          {$block.content}
+                        </div>
                     {/theme_block}
-                  </li>
-
                 {/foreach}
               {/if}
-            </ul>
+
+            </div>
           </td>
           <td valign='top'>
             
@@ -62,16 +70,28 @@
         <tr>
           <td class="fblock">
             <span class='sbtitle'>Заголовок</span>
-            <div class="ui-sortable">
+            <div data-block-list-position="left">
+              <!-- Block Template --> 
+              <div class="app-block-template">
+                    <span id='mnu_title1' class='usermnutitle-g app-block-name'>
+                    </span>
+                    <div id='mnu_tblock3' class='usermnublock'>
+                      <span class='usermnudelim'></span>
+                      <div class="left_content app-block-content">
+                      </div>
+                      <span class='usermnudelim'></span>
+                    </div>
+              </div>
+              <!-- Block Template End -->    
               {if $blocks.left}
                 {foreach item=block from=$blocks.left}
                  {theme_block block=$block} 
-                    <span id='mnu_title1' class='usermnutitle-g'>
+                    <span id='mnu_title1' class='usermnutitle-g app-block-name'>
                      {$block.displayname|escape}
                     </span>
                     <div id='mnu_tblock3' class='usermnublock'>
                       <span class='usermnudelim'></span>
-                      <div class="left_content">
+                      <div class="left_content app-block-content">
                         {$block.content}
                       </div>
                       <span class='usermnudelim'></span>
@@ -90,12 +110,21 @@
   
             {$module_content}
             
-            <div>
+            <div data-block-list-position="bottom">
+              <!-- Block Template --> 
+              <div class="app-block-template">
+                    <h3 class="app-block-name"></h3>
+                    <div class="app-block-content">
+                    </div>
+              </div>
+              <!-- Block Template End -->  
               {if $blocks.bottom}
                 {foreach item=block from=$blocks.bottom}
                   {theme_block block=$block} 
-                    <h3>{$block.displayname|escape}</h3>
-                    {$block.content}
+                    <h3 class="app-block-name">{$block.displayname|escape}</h3>
+                    <div class="app-block-content">
+                        {$block.content}
+                    </div>
                   {/theme_block} 
                 {/foreach}
               {/if}
@@ -105,16 +134,28 @@
       <td class="fblock">
 
         <span class="sbtitle">1111</span>
-        <div class="usermenu ui-sortable">
+        <div class="usermenu" data-block-list-position="right">
+          <!-- Block Template --> 
+          <div class="app-block-template">
+                <span id='mnu_title1' class='usermnutitle-g app-block-name'>
+                </span>
+                <div id='mnu_tblock3' class='usermnublock'>
+                  <span class='usermnudelim'></span>
+                  <div class="left_content app-block-content">
+                  </div>
+                  <span class='usermnudelim'></span>
+                </div>
+          </div>
+          <!-- Block Template End -->  
           {if $blocks.right}
             {foreach item=block from=$blocks.right}
               {theme_block block=$block} 
-                <span id='mnu_title1' class='usermnutitle-g'>
+                <span id='mnu_title1' class='usermnutitle-g app-block-name'>
                  {$block.displayname|escape}
                 </span>
                 <div id='mnu_tblock3' class='usermnublock'>
                  <span class='usermnudelim'></span>
-                 <div class="left_content">
+                 <div class="left_content app-block-content">
                    {$block.content}
                  </div>
                  <span class='usermnudelim'></span>
