@@ -11,53 +11,60 @@
                         {* <legend>Manage form</legend>*}
                         <br><br>
                         <div class="form-group">
-                            <label class="col-sm-3 control-label" for="date01">{#user_login#}</label>
+                            <label class="col-sm-3 control-label" for="date01">{#module_name#}</label>
                             <div class="controls col-sm-5">
                                 <input type="text" name='login' class="form-control" size='40' value='{$user->login}'>
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <label class="col-sm-3 control-label" for="date01">{#user_pass#}</label>
-                            <div class="controls col-sm-5">
-                                <input type="password"  name='pass' class="form-control" size='40' value=''>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label" for="date01">{#user_group#}</label>
+                            <label class="col-sm-3 control-label" for="date01">{#module_type#}</label>
                             <div class="controls col-sm-5">
                                 {html_options name=gid options=$groups_list selected=$user->gid class='form-control selectpicker'}
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <label class="col-sm-3 control-label" for="date01">{#user_email#}</label>
+                            <label class="col-sm-3 control-label" for="date01">{#module_displayname#}</label>
+                            <div class="controls col-sm-5">
+                                <input type="text" name='login' class="form-control" size='40' value='{$user->login}'>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label" for="date01">{#module_version#}</label>
+                            <div class="controls col-sm-5">
+                                <input type="text" name='mail' class="form-control" size='40' value='{$user->mail|default:'1.0.0'}'>
+                            </div>
+                        </div>
+                            
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label" for="date01">{#module_author#}</label>
                             <div class="controls col-sm-5">
                                 <input type="text" name='mail' class="form-control" size='40' value='{$user->mail}'>
                             </div>
                         </div>
-
+                            
                         <div class="form-group">
-                            <label class="col-sm-3 control-label" for="date01">{#user_fio#}</label>
+                            <label class="col-sm-3 control-label" for="date01">{#module_contact#}</label>
                             <div class="controls col-sm-5">
-                                <input type="text" name='displayname' class="form-control" size='40' value='{$user->displayname}'>
+                                <input type="text" name='mail' class="form-control" size='40' value='{$user->mail}'>
                             </div>
                         </div>
-
+                            
                         <div class="form-group">
-                            <label class="col-sm-3 control-label" for="date01">{#user_active#}</label>
+                            <label class="col-sm-3 control-label" for="date01">{#module_description#}</label>
                             <div class="controls col-sm-5">
-                                {html_radios name=active options=$yes_no checked=$user->active separator=" "}
+                                <textarea class="form-control">{$user->mail}</textarea>
                             </div>
                         </div>
-
+                            
                         <div class="form-group">
-                            <label class="col-sm-3 control-label" for="fileInput">File input</label>
+                            <label class="col-sm-3 control-label" for="date01">{#module_changelog#}</label>
                             <div class="controls col-sm-5">
-                                <input class="input-file uniform_on" id="fileInput" type="file">
+                                <textarea class="form-control">{$user->mail}</textarea>
                             </div>
-                        </div>          
+                        </div>
 
                         <div class="form-actions col-sm-8">
                             <button type="submit" class="btn btn-primary" name="submit" value="true">{#sys_save#}</button>
