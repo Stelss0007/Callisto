@@ -612,7 +612,7 @@ class SQLBuilder {
             return $this->mysqli->insert_id;
             }
             
-        if($this->operation == 'UPDATE' || $this->operation == 'DELETE')
+        if($this->operation == 'UPDATE' || $this->operation == 'DELETE' || is_bool($mysqlResult))
             {
             //appDebug($sql);
             return true;
@@ -620,9 +620,10 @@ class SQLBuilder {
             
         $values = [];
         
-        
+      
         if($mysqlResult->num_rows === 0)
             {
+            $mysqlResult->free();
             $mysqlResult->close(); 
             return null;
             }
@@ -658,6 +659,7 @@ class SQLBuilder {
         $this->operation = 'SELECT';
         
         /* Освобождаем память */ 
+        $mysqlResult->free();
         $mysqlResult->close(); 
       
         return $values;

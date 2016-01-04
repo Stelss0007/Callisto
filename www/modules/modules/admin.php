@@ -66,6 +66,19 @@ class AdminController extends Controller
         $this->viewPage();
         }
         
+        
+    function actionInstall($moduleName)
+        {
+        if(!file_exists ("modules/$moduleName/install.php"))
+          {
+          $this->showMessage('Module '.$moduleName.' not found or install.php are missing', $this->inputVars['ref']);
+          }
+        include_once "modules/$moduleName/install.php";
+        
+        $moduleInstall = new \Install();
+        $moduleInstall->up();
+        
+        }
     function actionCreate()
         {
         $this->viewPage();

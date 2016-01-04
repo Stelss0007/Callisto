@@ -19,6 +19,7 @@ include 'kernel/Validator.php';
 include 'kernel/db/SQLBuilder.php';
 include 'kernel/db/Model.php';
 include 'kernel/db/Table.php';
+include 'kernel/db/Structure.php';
 include 'kernel/Cache.php';
 
 spl_autoload_register(function ($class) {

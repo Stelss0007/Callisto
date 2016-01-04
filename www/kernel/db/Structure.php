@@ -1,25 +1,26 @@
 <?php
 namespace app\db\ActiveRecord;
+use app\db\ActiveRecord\SQLBuilder;
 
 /**
  * Description of Structure
  *
  * @author Ruslan Atamas
  */
-class Structure extends SQLBuilder {
-    private $fieldTypes = [
+class Structure  {
+    private static $fieldTypes = [
         //
-        'TINYINT'   => ['size', 'unsigned', 'notNull', 'comment', 'default', 'autoincrement', 'unique'],            // -128 to 127 / 0 to 255
-        'SMALLINT'  => ['size', 'unsigned', 'notNull', 'comment', 'default', 'autoincrement', 'unique'],            // -32768 to 32767  / 0 to 65535
-        'MEDIUMINT' => ['size', 'unsigned', 'notNull', 'comment', 'default', 'autoincrement', 'unique'],            // -8388608 to 8388607 / 0 to 16777215
-        'INT'       => ['size', 'unsigned', 'notNull', 'comment', 'default', 'autoincrement', 'unique'],            // -2147483648 to 2147483647 / 0 to 4294967295
-        'INTEGER'   => ['size', 'unsigned', 'notNull', 'comment', 'default', 'autoincrement', 'unique'],            // -2147483648 to 2147483647 / 0 to 4294967295
-        'BIGINT'    => ['size', 'unsigned', 'notNull', 'comment', 'default', 'autoincrement', 'unique'],            // -9223372036854775808 to 9223372036854775807 / 0 to 18446744073709551615
+        'TINYINT'   => ['size'=>'4', 'unsigned', 'notNull', 'comment', 'default', 'autoincrement', 'unique'],            // -128 to 127 / 0 to 255
+        'SMALLINT'  => ['size'=>'6', 'unsigned', 'notNull', 'comment', 'default', 'autoincrement', 'unique'],            // -32768 to 32767  / 0 to 65535
+        'MEDIUMINT' => ['size'=>'9', 'unsigned', 'notNull', 'comment', 'default', 'autoincrement', 'unique'],            // -8388608 to 8388607 / 0 to 16777215
+        'INT'       => ['size'=>'11', 'unsigned', 'notNull', 'comment', 'default', 'autoincrement', 'unique'],            // -2147483648 to 2147483647 / 0 to 4294967295
+        'INTEGER'   => ['size'=>'11', 'unsigned', 'notNull', 'comment', 'default', 'autoincrement', 'unique'],            // -2147483648 to 2147483647 / 0 to 4294967295
+        'BIGINT'    => ['size'=>'20', 'unsigned', 'notNull', 'comment', 'default', 'autoincrement', 'unique'],            // -9223372036854775808 to 9223372036854775807 / 0 to 18446744073709551615
         
-        'FLOAT'     => ['size', 'unsigned', 'notNull', 'comment', 'default', 'decimals', 'unique'],                
-        'DOUBLE'    => ['size', 'unsigned', 'notNull', 'comment', 'default', 'decimals', 'unique'],               
-        'DECIMAL'   => ['size', 'unsigned', 'notNull', 'comment', 'default', 'decimals', 'unique'],              
-        'DEC'       => ['size', 'unsigned', 'notNull', 'comment', 'default', 'decimals', 'unique'],    
+        'FLOAT'     => ['size'=>'9', 'unsigned', 'notNull', 'comment', 'default', 'decimals', 'unique'],                
+        'DOUBLE'    => ['size'=>'15', 'unsigned', 'notNull', 'comment', 'default', 'decimals', 'unique'],               
+        'DECIMAL'   => ['size'=>'11', 'unsigned', 'notNull', 'comment', 'default', 'decimals', 'unique'],              
+        'DEC'       => ['size'=>'11', 'unsigned', 'notNull', 'comment', 'default', 'decimals', 'unique'],    
         
         'DATE'      => ['notNull', 'comment', 'default', 'unique'],
         'DATETIME'  => ['notNull', 'comment', 'default', 'unique'],
@@ -27,8 +28,8 @@ class Structure extends SQLBuilder {
         'TIME'      => ['notNull', 'comment', 'default', 'unique'],
         'YEAR'      => ['notNull', 'comment', 'default', 'unique'],
         
-        'CHAR'      => ['size', 'notNull', 'comment', 'default', 'unique'],
-        'VARCHAR'   => ['size', 'notNull', 'comment', 'default', 'unique'],
+        'CHAR'      => ['size'=>'20', 'notNull', 'comment', 'default', 'unique'],
+        'VARCHAR'   => ['size'=>'20', 'notNull', 'comment', 'default', 'unique'],
         'TINYTEXT'  => ['notNull', 'comment'],
         'TEXT'      => ['notNull', 'comment'],  
         'MEDIUMTEXT'=> ['notNull', 'comment'],
@@ -39,11 +40,11 @@ class Structure extends SQLBuilder {
         'MEDIUMBLOB'=> ['notNull', 'comment'],
         'LONGBLOB'  => ['notNull', 'comment'],
         
-        'ENUM'      => ['notNull', 'comment', 'values'],
-        'SET'       => ['notNull', 'comment', 'values'],
+        'ENUM'      => ['values', 'notNull', 'default', 'comment'],
+        'SET'       => ['values', 'notNull', 'default', 'comment'],
         
     ];
-    private $fieldProperties = [
+    private static $fieldProperties = [
                                     'type'      => 'INTEGER',
                                     'size'      => '11',
                                     'notNull'   => false,
@@ -57,7 +58,7 @@ class Structure extends SQLBuilder {
                                     'primary' => false
                                 ];
     
-    private $defaultID = ['id' => [
+    private static $defaultID = ['id' => [
                                     'type' => 'INTEGER',
                                     'size' => '11',
                                     'notNull' => false,
@@ -66,26 +67,36 @@ class Structure extends SQLBuilder {
                                     'comment' => '',
                                     'autoincrement' => true,
                                     'unique' => true,
-                                    'primary' => true
+                                    'primary' => true,
+                                    'autoincrement' => true,
                                 ]
                         ];
     
-    private function prepareField($fieldName, $fieldOptions = [])
+    private static function prepareField($fieldName, $fieldOptions = [])
         {
         if(empty($fieldOptions) || !isset($fieldOptions['type']) || empty($fieldOptions['type']))
             {
             throw new Exception('Unknown field type for field "'.$fieldName.'"');
             }
-        if(!isset($this->fieldTypes[$fieldOptions['type']]))
+        if(!isset(self::$fieldTypes[$fieldOptions['type']]))
             {
             throw new Exception('Unknown field type "'.$fieldOptions['type'].'" for field "'.$fieldName.'"');
             }
             
-        $availableOptions = $this->fieldTypes[$fieldOptions['type']];
-        
-        $options = $fieldOptions['type'];
-        foreach($availableOptions as $option)
+        $availableOptions = self::$fieldTypes[$fieldOptions['type']];
+    
+        $options = "`$fieldName` ".$fieldOptions['type'];
+  
+        foreach($availableOptions as $key => $option)
             {
+            if($key === 'size')
+                {
+                $size = ($fieldOptions['size']) ?  $fieldOptions['size'] : $option;
+                $options .= "({$size})";
+                continue;
+                }
+            
+            
             if(!isset($fieldOptions[$option]))
                 {
                 continue;
@@ -94,7 +105,6 @@ class Structure extends SQLBuilder {
             switch ($option)
                 {
                 case 'size':
-                    $options .= "({$fieldOptions[$option]})";
                     break;
 
                 case 'notNull':
@@ -106,7 +116,14 @@ class Structure extends SQLBuilder {
                     break;
                 
                 case 'default':
-                    $options .= ($fieldOptions[$option]) ? " DEFAULT '".$fieldOptions[$option]."'" : '';
+                    if($fieldOptions[$option] == 'NULL') 
+                        {
+                        $options .= ' DEFAULT NULL';
+                        }
+                    else
+                        {
+                        $options .= (isset($fieldOptions[$option])) ? " DEFAULT '".$fieldOptions[$option]."'" : '';
+                        }
                     break;
                 
                 case 'comment':
@@ -116,12 +133,16 @@ class Structure extends SQLBuilder {
                 case 'autoincrement':
                     $options .= ($fieldOptions[$option]) ? " AUTO_INCREMENT" : '';
                     break;
+                
+                case 'values':
+                    $options .= ($fieldOptions[$option]) ? "('".implode("','", $fieldOptions[$option])."')" : '';
+                    break;
                 }
             }
-
+        return $options;
         }
         
-    private function prepareFieldsString($fields=[])
+    private static function prepareFieldsString($fields=[])
         {
         $result = '';
         
@@ -132,44 +153,112 @@ class Structure extends SQLBuilder {
         
         if(empty($fields['id']))
             {
-            $fields['id'] = [
+            $fields = ['id' => [
                 'type' => 'INTEGER',
                 'size' => '11',
                 'notNull' => false,
-                'unsigned' => false,
+                'unsigned' => true,
                 'default' => 'NULL',
-                'comment' => 'NULL',
-                ];
+                'comment' => '',
+                'autoincrement' => true,
+                ]] + $fields;
             }
-            
+      
+        $fieldsStr = '';
         foreach($fields as $fieldName => $fieldOptions)
             {
-            $result = $this->prepareField($fieldName, $fieldOptions);
+            $fieldsStr .= self::prepareField($fieldName, $fieldOptions) . ', ';
             }
+            
+        return $fieldsStr;
         }
         
-    public function createTable($tableName, $fields = [], $primaryKeys = ['id'])
+    public static function createTable($tableName, $fields = [], $primaryKeys = ['id'])
         {
+        $fieldsStr = self::prepareFieldsString($fields);
+        $primaryKeysStr = implode('`,', $primaryKeys);
         
-        
-        $tableQuery = "CREATE TABLE `$tableName` ()";
-        $this->executeQuery($tableQuery);
+        $tableQuery = "CREATE TABLE `$tableName` ($fieldsStr PRIMARY KEY(`$primaryKeysStr`) );";
+//        appDebugExit($tableQuery);    
+        self::execute($tableQuery);
         return true;
         }
-    
-    public function install() 
+
+        
+    public static function deleteTable($tableName)
         {
-        return true;
-        }
-    
-    public function uninstall()
-        {
+        $tableQuery = "DROP TABLE IF EXISTS `$tableName`;";
+        
+        self::execute($tableQuery);
         return true;
         }
         
-    public function data() 
+    public static function createIndex($tableName, $fields = null, $type=null)
         {
+        if(!$tableName)
+            {
+            throw new Exception("Param 'TableName' can't be empty!");
+            }
+        if(!$fields)
+            {
+            throw new Exception("Param 'Fields' can't be empty!");
+            }
+        
+        if(is_array($fields)) 
+            {
+            $fieldsStr = implode(', ', $fields); 
+            $indexName = implode('_', $fields);
+            }
+        else
+            {
+            $fieldsStr = $indexName = $fields;
+            }
+            
+        $tableQuery = "CREATE {$type} INDEX $indexName ON `$tableName` ($fieldsStr);";
+        
+        self::execute($tableQuery);
         return true;
         }
         
+    public static function fillData($tableName, $data)
+        {
+        if(!$tableName)
+            {
+            throw new Exception("Param 'TableName' can't be empty!");
+            }
+        if(!$data)
+            {
+            throw new Exception("Param 'data' can't be empty!");
+            }
+            
+        $keys = '';
+        $values = '';
+        
+        foreach($data as $key=>$value)
+            {
+            if ($value === '')
+                {
+                continue;
+                }
+
+            $keys .= $key.',';
+
+            $value = $this->prepareValue($value);
+
+            $values .=  "'".$value."',";
+            }
+          
+        $values = rtrim($values, ',');
+        $keys = rtrim($keys, ',');
+
+        $sql = "INSERT INTO $tableName ($keys) VALUES ($values)";
+        
+        self::execute($sql);
+        }
+
+    private static function execute($sql)
+        {
+        $sqlBuilder =  new SQLBuilder();
+        return $sqlBuilder->executeQuery($sql);
+        }
 }
