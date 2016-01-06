@@ -177,6 +177,7 @@ class ErrorHandler
     }
   function exeptionCatcher($exception)
     {
+    //var_dump($exception->getTrace());exit;
     $this->error_array[] = [
         'message' => $exception->getMessage(),
         'file' => $exception->getFile(),
@@ -204,6 +205,9 @@ class ErrorHandler
     </head>
     <body style="background-color: #DDB000;">
       <style>
+        .hidden {
+            display: none;
+        }
         .thead td
         {
           padding: 10px;
@@ -214,8 +218,44 @@ class ErrorHandler
         {
           border-bottom: 1px solid red;
           padding: 5px;
+          vertical-align: top;
+        }
+        
+        #trace-table tr td {
+            font-family: sans-serif;
+            vertical-align: top;
+            padding: 10px;
+        }
+        
+        #trace-table tr:hover td {
+            background-color: #B99300;
+        } 
+        
+        #trace-table tr td .params {
+            font-weight: 100; 
+            color: #333;
+        }
+        
+        .arg-detail {
+            font-weight: bolder;
+            cursor: pointer;
+        }
+        .arg-detail:hover {
+            text-decoration: underline;
+            color: #000;
+        }
+        .global-var {
+            font-weight: bold;
+            font-size: 16px;
         }
       </style>
+      <script type="text/javascript">
+          function showArgument(param1, param2) {
+              var w = window.open('','_blank','width=450,height=430,resizable=1');
+              var paramDetail = document.getElementById('param_detail_'+param1+'_'+param2);
+              w.document.body.innerHTML = paramDetail.innerHTML;
+          }
+      </script>
       <table width="100%" cellspacing="1">
         <tr>
           <td colspan="3" align="center">
@@ -268,6 +308,87 @@ class ErrorHandler
           </td>
         </tr>
         <?php endforeach;?>
+        <tr>
+            <td colspan="3">
+                <br><br>
+                <table width="100%" id="trace-table">
+                <?php
+                //Trace error
+                if($this->error_array[0]['trace']):
+                    $currentTraceFile = '';
+                    foreach($this->error_array[0]['trace'] as $key => $traceValue):
+                        $currentTraceFile = (isset($traceValue['file'])) ? $traceValue['file'] : $currentTraceFile;
+                ?>
+                    <tr>
+                        <td>
+                            <?php echo $key + 1;?>.
+                        </td>
+                        <td>
+                            in <?php echo $currentTraceFile?> 
+                            - 
+                            <b>
+                            <?php 
+                                if($traceValue['class']) echo $traceValue['class']; 
+                                if($traceValue['type']) echo $traceValue['type'];
+                                if($traceValue['function']) echo $traceValue['function'].'(<span class="params">';
+                                
+                                if($traceValue['args'])
+                                    {
+                                    $argsCount = sizeof($traceValue['args']);
+                                    foreach ($traceValue['args'] as $key2=>$arg) 
+                                        {
+                                        if(is_string($arg))
+                                            {
+                                            echo "'$arg'";
+                                            }
+                                        elseif(is_object($arg))
+                                            {
+                                            echo '<span class="arg-detail" onClick="showArgument('.$key.','.$key2.');">'.get_class($arg).'</span>';
+                                            echo '<div class="hidden" id="param_detail_'.$key.'_'.$key2.'"><pre>';
+                                            var_dump($arg);
+                                            echo '</pre></div>';
+                                            }
+                                        elseif(is_array($arg))
+                                            {
+                                            echo '<span class="arg-detail" onClick="showArgument('.$key.','.$key2.');">Array('.sizeof($arg).')</span>';
+                                            echo '<div class="hidden" id="param_detail_'.$key.'_'.$key2.'"><pre>';
+                                            var_dump($arg);
+                                            echo '</pre></div>';
+                                            }
+                                        elseif(is_bool($arg))
+                                            {
+                                            echo 'Bool(';  echo ($arg) ? 'TRUE' : 'FALSE' ; ')';
+                                            }
+                                        else
+                                            {
+                                            echo $arg;
+                                            }
+                                            
+                                        if($key2 + 1 < $argsCount)
+                                            {
+                                            echo ', ';
+                                            }
+                                        }
+                                    }
+                                
+                                echo '</span>);';
+                            ?>
+                            </b>
+                        </td>
+                        <td style="width: 70px;">
+                            at line 
+                        </td>
+                        <td>
+                            <?php echo $traceValue['line']?>
+                        </td>
+                    </tr>
+                <?php
+                    endforeach;
+                endif;
+                ?>
+                </table>
+            </td>
+        <tr>
         
         <?php //echo  $handler->renderCallStackItem($exception->getFile(), $exception->getLine(), null, null, [], 1) ?>
         <?php /*for ($i = 0, $trace = $exception->getTrace(), $length = count($trace); $i < $length; ++$i): ?>
@@ -275,6 +396,12 @@ class ErrorHandler
                     @$trace[$i]['class'] ?: null, @$trace[$i]['function'] ?: null, $trace[$i]['args'], $i + 2) ?>
         <?php endfor;*/ ?>
       </table>
+      <hr>
+      <div class="global-vars">
+          <pre><span class="global-var">$_POST</span> = <?php print_r($_POST)?></pre>
+          <pre><span class="global-var">$_SERVER</span> = <?php print_r($_SERVER)?><pre>
+          <pre><span class="global-var">$_COOKIE</span> = <?php print_r($_COOKIE)?><pre>
+      </div>
     </body>
     <?php
     $this->error_array = null;

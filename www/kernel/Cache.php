@@ -33,7 +33,7 @@ class Cache
         if ($appConfig['Var.caching'] == 'disk')
           {
           $cacheKey_crc = (string)abs (crc32 ($cacheKey));
-          $dir_way = './cache/vars/'.$cacheKey_crc[0].'/'.$cacheKey_crc[1].'/';
+          $dir_way = './cache/vars/' . $component . '/'. $cacheKey_crc[0].'/'.$cacheKey_crc[1].'/';
           if (!file_exists($dir_way)) 
             {  
             mkdir($dir_way, $appConfig['default.dir.perms'], true);
@@ -91,7 +91,7 @@ class Cache
         if ($appConfig['Var.caching'] == 'disk')
           {
           $cacheKey_crc = (string)abs(crc32($cacheKey));
-          $file_way = './cache/vars/' . $cacheKey_crc[0] . '/' . $cacheKey_crc[1] . '/' . $cacheKey;
+          $file_way = './cache/vars/' . $component . '/'. $cacheKey_crc[0] . '/' . $cacheKey_crc[1] . '/' . $cacheKey;
           if (file_exists($file_way))
             {  
             $appConfig['appVar_cache'][$cacheKey] = unserialize(file_get_contents($file_way));
@@ -164,7 +164,7 @@ class Cache
         if ($appConfig['Var.caching'] == 'disk')
           {
           $cacheKey_crc = (string)abs(crc32($cacheKey));
-          $file_way = './cache/vars/' . $cacheKey_crc[0] . '/' . $cacheKey_crc[1] . '/' . $cacheKey;
+          $file_way = './cache/vars/' . $component . '/'. $cacheKey_crc[0] . '/' . $cacheKey_crc[1] . '/' . $cacheKey;
           @unlink($file_way);
           }
         elseif ($appConfig['Var.caching'] == 'xcache')
@@ -180,5 +180,11 @@ class Cache
           apc_delete('appVar_' . $cacheKey);
           }
         return true;
+        }
+        
+    public static function deleteModuleAllCached($module)
+        {
+        appDirDelete('./cache/content/'.$module);
+        appDirDelete('./cache/vars/'.$module);
         }
 }

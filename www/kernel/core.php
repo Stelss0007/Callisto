@@ -20,6 +20,11 @@ function smarty_block_dynamic($param, $content, &$smarty) {
     return $content;
 }  
 
+function appIsAssoc($array)
+{
+    return array_keys($array) !== range(0, count($array) - 1);
+}
+
 //Constant Functions
 function appGetAccessName($level=false)
   {
@@ -1133,7 +1138,7 @@ function appVarSetCached($component, $cacheKey, $value=null, $ttl=null)
   if ($appConfig['Var.caching'] == 'disk')
     {
     $cacheKey_crc = (string)abs (crc32 ($cacheKey));
-    $dir_way = './cache/vars/'.$cacheKey_crc[0].'/'.$cacheKey_crc[1].'/';
+    $dir_way = './cache/vars/' . $component . '/'. $cacheKey_crc[0].'/'.$cacheKey_crc[1].'/';
     if (!file_exists($dir_way)) 
       mkdir($dir_way, $appConfig['default.dir.perms'], true);
     
@@ -1177,7 +1182,7 @@ function appVarGetCached($component, $cacheKey)
   if ($appConfig['Var.caching'] == 'disk')
     {
     $cacheKey_crc = (string)abs(crc32($cacheKey));
-    $file_way = './cache/vars/' . $cacheKey_crc[0] . '/' . $cacheKey_crc[1] . '/' . $cacheKey;
+    $file_way = './cache/vars/' . $component . '/'. $cacheKey_crc[0] . '/' . $cacheKey_crc[1] . '/' . $cacheKey;
     if (file_exists($file_way))
       $appConfig['appVar_cache'][$cacheKey] = unserialize(file_get_contents($file_way));
 		    else return;
@@ -1233,7 +1238,7 @@ function appVarDelCached($component, $cacheKey)
   if ($appConfig['Var.caching'] == 'disk')
     {
     $cacheKey_crc = (string)abs(crc32($cacheKey));
-    $file_way = './cache/vars/' . $cacheKey_crc[0] . '/' . $cacheKey_crc[1] . '/' . $cacheKey;
+    $file_way = './cache/vars/' . $component . '/' . $cacheKey_crc[0] . '/' . $cacheKey_crc[1] . '/' . $cacheKey;
     @unlink($file_way);
     }
   elseif ($appConfig['Var.caching'] == 'xcache')
@@ -1247,6 +1252,31 @@ function appVarDelCached($component, $cacheKey)
   elseif ($appConfig['Var.caching'] == 'apc')
     {
     apc_delete('appVar_' . $cacheKey);
+    }
+  return true;
+  }
+  
+function appVarsDelCached($component)
+  {
+  global $appConfig;
+  
+  //В зависимости от типа уничтожаем информацию в кеше
+  if ($appConfig['Var.caching'] == 'disk')
+    {
+    $file_way = './cache/vars/' . $component;
+    @unlink($file_way);
+    }
+  elseif ($appConfig['Var.caching'] == 'xcache')
+    {
+    //xcache_unset('appVar_' . $cacheKey);
+    }
+  elseif ($appConfig['Var.caching'] == 'eaccelerator')
+    {
+    //eaccelerator_rm('appVar_' . $cacheKey);
+    }
+  elseif ($appConfig['Var.caching'] == 'apc')
+    {
+    //apc_delete('appVar_' . $cacheKey);
     }
   return true;
   }

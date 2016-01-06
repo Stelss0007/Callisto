@@ -173,12 +173,14 @@ class Structure  {
         return $fieldsStr;
         }
         
-    public static function createTable($tableName, $fields = [], $primaryKeys = ['id'])
+    public static function createTable($tableName, $fields = [], $primaryKeys = ['id'], $tableType=null)
         {
         $fieldsStr = self::prepareFieldsString($fields);
         $primaryKeysStr = implode('`,', $primaryKeys);
         
-        $tableQuery = "CREATE TABLE `$tableName` ($fieldsStr PRIMARY KEY(`$primaryKeysStr`) );";
+        $engine = ($tableType) ? ' ENGINE='.$tableType : '';
+        
+        $tableQuery = "CREATE TABLE `$tableName` ($fieldsStr PRIMARY KEY(`$primaryKeysStr`) ) $engine;";
 //        appDebugExit($tableQuery);    
         self::execute($tableQuery);
         return true;
@@ -197,11 +199,11 @@ class Structure  {
         {
         if(!$tableName)
             {
-            throw new Exception("Param 'TableName' can't be empty!");
+            throw new \Exception("Param 'TableName' can't be empty!");
             }
         if(!$fields)
             {
-            throw new Exception("Param 'Fields' can't be empty!");
+            throw new \Exception("Param 'Fields' can't be empty!");
             }
         
         if(is_array($fields)) 
@@ -224,38 +226,65 @@ class Structure  {
         {
         if(!$tableName)
             {
-            throw new Exception("Param 'TableName' can't be empty!");
+            throw new \Exception("Param 'TableName' can't be empty!");
             }
         if(!$data)
             {
-            throw new Exception("Param 'data' can't be empty!");
+            throw new \Exception("Param 'data' can't be empty!");
             }
             
         $keys = '';
         $values = '';
         
-        foreach($data as $key=>$value)
+        if(appIsAssoc($data))
             {
-            if ($value === '')
+            foreach($data as $key=>$value)
                 {
-                continue;
+                $keys .= '`'.$key.'`,';
+
+                $value = self::prepareValue($value);
+
+                $values .=  "'".$value."',";
                 }
 
-            $keys .= $key.',';
+            $values = rtrim($values, ',');
+            $keys = rtrim($keys, ',');
 
-            $value = $this->prepareValue($value);
-
-            $values .=  "'".$value."',";
+            $sql = "INSERT INTO `$tableName` ($keys) VALUES ($values)";
             }
-          
-        $values = rtrim($values, ',');
-        $keys = rtrim($keys, ',');
+        else
+            {
+            foreach($data as $key=>$dataRow)
+                {
+                $keys = '';
+                $values .= '(';
+                foreach($dataRow as $key2=>$value)
+                    {
+                    $keys .= '`'.$key2.'`,';
 
-        $sql = "INSERT INTO $tableName ($keys) VALUES ($values)";
-        
+                    $value = self::prepareValue($value);
+
+                    $values .=  "'".$value."',";
+                    }
+                $values = rtrim($values, ',');
+                $values .= '),';
+                }
+                
+            $values = rtrim($values, ',');
+            $keys = rtrim($keys, ',');
+
+            $sql = "INSERT INTO `$tableName` ($keys) VALUES $values";
+            }
+
         self::execute($sql);
         }
 
+    private static function prepareValue($value)
+        {
+        $sqlBuilder =  new SQLBuilder();
+        return $sqlBuilder->prepareValue($value);
+        }
+        
     private static function execute($sql)
         {
         $sqlBuilder =  new SQLBuilder();

@@ -15,7 +15,7 @@ class Groups extends \app\db\ActiveRecord\Model
     $result = array();
     foreach ($groups as $group)
       {
-      $result[$group->id] = $group->group_displayname;
+      $result[$group->id] = $group->name;
       }
  
     return $result;

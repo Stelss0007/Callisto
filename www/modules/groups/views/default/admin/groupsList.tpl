@@ -57,11 +57,11 @@
                   {$group->id}
                 </td>
                 <td>
-                  {$group->group_displayname}
+                  {$group->name}
                 </td>
 
                 <td>
-                  {$group->group_description}
+                  {$group->description}
                 </td>
 
                 <td style="text-align: center;">

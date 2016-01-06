@@ -4,6 +4,8 @@ class AdminController extends Controller
   {
   public function actionIndex() 
     {
+    $this->getAccess(ACCESS_ADMIN);
+    
     $browsein = array();
     $browsein[] = array ('url'=>'/admin/main',
                         'displayname'=>'Главное меню');
@@ -44,6 +46,8 @@ class AdminController extends Controller
     
     function actionInfo($module_name, $position)
         {
+        $this->getAccess(ACCESS_ADMIN);
+        
         if(!file_exists ("modules/$module_name/info.php"))
           {
           $this->showMessage('Module '.$module_name.' not found or info.php are missing', $this->inputVars['ref']);
@@ -69,6 +73,8 @@ class AdminController extends Controller
         
     function actionInstall($moduleName)
         {
+        $this->getAccess(ACCESS_ADMIN);
+        
         if(!file_exists ("modules/$moduleName/install.php"))
           {
           $this->showMessage('Module '.$moduleName.' not found or install.php are missing', $this->inputVars['ref']);
@@ -78,9 +84,13 @@ class AdminController extends Controller
         $moduleInstall = new \Install();
         $moduleInstall->up();
         
+        $this->showMessage('Module "'.$moduleName.'" was installed');
+        $this->redirect();
         }
     function actionCreate()
         {
+        $this->getAccess(ACCESS_ADMIN);
+        
         $this->viewPage();
         }
   }

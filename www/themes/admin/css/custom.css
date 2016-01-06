@@ -153,3 +153,7 @@ a, a:hover, a:active, a:focus {
 .form-control:focus {
    outline: #818da2;
 }
+
+.sidebar-collapsed #search {
+    display: none;
+}

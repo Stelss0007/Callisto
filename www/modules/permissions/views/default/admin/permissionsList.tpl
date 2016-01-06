@@ -79,7 +79,7 @@
                 <td>
                   <div class="btn-group">
                     <a href='/admin/permissions/manage/{$permission->id}' class="btn btn-icon btn-edit" title="{#sys_edit#}"><i class="icon-edit"></i></a>
-                    <a href='/admin/permissions/delete/{$permission->id}' class="btn btn-icon btn-delete" title="{#sys_delete#}" onclick="return confirm('{#sys_confirm_delete#}');"><i class="icon-trash"></i></a>
+                    <a href='/admin/permissions/delete/{$permission->id}' class="btn btn-icon btn-delete" title="{#sys_delete#}"><i class="icon-trash"></i></a>
                   </div>
                 </td>
               </tr>

@@ -152,3 +152,44 @@ function loadPlugins()
     }
   
   }
+
+
+var Cookies = function() {
+    
+    this.get = function(cookieName) {
+        var results = document.cookie.match ( '(^|;) ?' + cookieName + '=([^;]*)(;|$)' );
+ 
+        if ( results )
+          return ( unescape ( results[2] ) );
+        else
+          return null;
+    };
+    
+    this.set = function(name, value, expYear, expMonth, expDay, path, domain, secure){
+        var cookie_string = name + "=" + escape ( value );
+ 
+        if (expYear){
+            var expires = new Date ( expYear, expMonth, expDay );
+            cookie_string += "; expires=" + expires.toGMTString();
+        }
+
+        if (path)
+            cookie_string += "; path=" + escape ( path );
+        else
+            cookie_string += "; path=/";
+
+        if (domain)
+            cookie_string += "; domain=" + escape ( domain );
+
+        if (secure)
+            cookie_string += "; secure";
+
+        document.cookie = cookie_string;
+    };
+    
+    this.delete = function(cookieName){
+        var cookieDate = new Date ( );  // Текущая дата и время
+        cookieDate.setTime ( cookieDate.getTime() - 1 );
+        document.cookie = cookieName += "=; expires=" + cookieDate.toGMTString();
+    };
+};

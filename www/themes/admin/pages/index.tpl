@@ -63,7 +63,7 @@
     </head>
     
     <body class="page-body" style="min-height: 100%">
-        <div class="page-container body-hide_" style="min-height: 100%;"><!-- add class "sidebar-collapsed" to close sidebar by default, "chat-visible" to make chat appear always -->	
+        <div class="page-container body-hide_ {if $smarty.cookies['sidebar-collapsed'] eq 1}sidebar-collapsed{/if}" style="min-height: 100%;"><!-- add class "sidebar-collapsed" to close sidebar by default, "chat-visible" to make chat appear always -->	
             <div class="sidebar-menu" style="min-height: 100%;">
                 <header class="logo-env">
                     <!-- logo -->
@@ -74,7 +74,7 @@
                     </div>
                     <!-- logo collapse icon -->
                     <div class="sidebar-collapse">
-                        <a href="#" class="sidebar-collapse-icon with-animation"><!-- add class "with-animation" if you want sidebar to have animation during expanding/collapsing transition -->
+                        <a href="#" class="sidebar-collapse-icon "><!-- add class "with-animation" if you want sidebar to have animation during expanding/collapsing transition -->
                             <i class="icon-menu"></i>
                         </a>
                     </div>

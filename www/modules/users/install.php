@@ -11,13 +11,16 @@ use app\db\ActiveRecord\Structure;
  *
  * @author Ruslan
  */
-class Install {
-    private $tableName = 'user2';
+class Install 
+    {
+    private $tableName = 'user';
     
-    public function up() {
+    public function up() 
+        {
         //Uninstall module befor install
         $this->down();
         
+        //Create Table with fields
         Structure::createTable($this->tableName, [
             'gid'           => [
                                 'type'=>'INTEGER',
@@ -44,20 +47,26 @@ class Install {
              'displayname'  => ['type'=>'VARCHAR', 'size'=>'50'],
         ]);
         
+        //Create Indexes
         Structure::createIndex($this->tableName, 'pass');
         Structure::createIndex($this->tableName, 'login');
         Structure::createIndex($this->tableName, ['login', 'pass']);
         
+        //Fill default data to DB table
         $data = [
             ['gid'=>'1', 'login'=>'admin', 'pass'=>md5('admin'), 'active'=>'1', 'addtime'=>time(), 'mail'=>'stelss1986@gmail.com', 'displayname'=>'Administrator']
         ];
         
-        Structure::fillData($data);
+        Structure::fillData($this->tableName, $data);
         
         return true;
-    }
+        }
     
-    public function down() {
+    public function down() 
+        {
+        //Drop Tables
         Structure::deleteTable($this->tableName);
+        //Remove Module Cache
+        Cache::deleteModuleAllCached('users');
+        }
     }
-}

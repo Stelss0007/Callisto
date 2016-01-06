@@ -31,7 +31,7 @@ class AdminController extends Controller
     $dateformat_list['d.m.y'] = date("d.m.y", time());
     $dateformat_list['d M Y'] = date("d M Y", time());
     $dateformat_list['d F Y'] = date("d F Y", time());
-    
+ 
     $this->smarty->assign('site_timeformat_list', $timeformat_list);
     $this->smarty->assign('site_dateformat_list', $dateformat_list);
     $this->assign('module_name', $module);
