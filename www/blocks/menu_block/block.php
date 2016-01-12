@@ -23,8 +23,7 @@ class menu_block extends Block
     $this->assign('menu_type', $content['menu_type']);
     $this->assign('parent_id', $content['parent_id']);
     
-    $this->usesModel('menu');
-    $this->items_list =  $this->menu->treeItems(0);
+    $this->items_list =  Menu::treeItems(0);
     $this->menutypes_list = array (1=>'Всегда развернуто',2=>'Разварачиваюшееся');
     return $this->view();
     }

@@ -624,7 +624,7 @@ class SQLBuilder {
         if($mysqlResult->num_rows === 0)
             {
             $mysqlResult->free();
-            $mysqlResult->close(); 
+            $this->mysqli->close(); 
             return null;
             }
     
@@ -660,7 +660,7 @@ class SQLBuilder {
         
         /* Освобождаем память */ 
         $mysqlResult->free();
-        $mysqlResult->close(); 
+        $this->mysqli->close(); 
       
         return $values;
         }

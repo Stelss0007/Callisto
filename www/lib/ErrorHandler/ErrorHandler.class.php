@@ -24,7 +24,7 @@ class ErrorHandler
     {
     ini_set('display_errors',"1");
     error_reporting(E_ALL);
-
+//    print_r(debug_backtrace());exit;
     // регистрация ошибок
     set_error_handler([$this, 'otherErrorCatcher']);
     set_exception_handler([$this, 'exeptionCatcher']);
@@ -78,6 +78,10 @@ class ErrorHandler
       {
       if ($error['type'] == E_ERROR || $error['type'] == E_PARSE || $error['type'] == E_COMPILE_ERROR || $error['type'] == E_CORE_ERROR)
         {
+        $trace = debug_backtrace();
+       
+        array_shift($trace);
+        $error['trace']  = $trace;
         $this->error_array[] = $error;
         ob_end_clean(); // сбросить буфер, завершить работу буфера
         $this->__destruct();

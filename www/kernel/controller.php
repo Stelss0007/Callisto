@@ -647,8 +647,10 @@ abstract class Controller extends AppObject
       $this->smarty->caching = false;
       echo $this->smarty->fetch($pageTplFile);
       }
-    $this->usesModel('statistic');
-    $this->statistic->setLog();
+      
+    //Uncomment if statistic was finished   
+//    $this->usesModel('statistic');
+//    $this->statistic->setLog();
     
     if(!$this->config['debug.enabled']) 
         {
