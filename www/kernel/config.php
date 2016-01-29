@@ -61,6 +61,8 @@ $appConfig['default.dir.perms'] = 0755;
 
 //Включение кеширования шаблонов
 $appConfig['coretpl.caching'] = true;
+//Кешировать шаблоны ('file', 'mysql', 'memcache', 'apc')
+$appConfig['coretpl.caching_type'] = 'file';
 
 //Создавать поддиректории при организации кэшей.
 $appConfig['coretpl.use_sub_dirs'] = true;

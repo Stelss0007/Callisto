@@ -105,10 +105,10 @@ abstract class Controller extends AppObject
     $this->modname = $mod;//strtolower(get_class($this));
 
     $this->module_dir = 'modules/'.$this->modname.'/';
-    if($this->config['debug.enabled'])
+    
+    require(KERNEL_DIR.'debuger.php');
+    if($this->config['debug.enabled'] && !appIsAjax() && $this->type != 'api')
       {
-      require(KERNEL_DIR.'debuger.php');
-      
       $this->debuger = & Debuger::getInstance();
       $this->debuger->startRenderPage();
       }
@@ -158,7 +158,7 @@ abstract class Controller extends AppObject
     
   function __destruct()
     {
-    if($this->config['debug.enabled'] && !isAjax())
+    if($this->config['debug.enabled'] && !appIsAjax() && $this->type != 'api')
       {
         
 //      $DB = DBConnector::getInstance();
@@ -346,7 +346,7 @@ abstract class Controller extends AppObject
     //Без аргументов подключится стиль текущей темы
     appCssLoad();
     
-    call_user_method_array('action'.$action_name, $this, $this->inputVars);
+    return call_user_method_array('action'.$action_name, $this, $this->inputVars);
     }
   final public function setViewType($type = 'user')
     {
@@ -616,7 +616,7 @@ abstract class Controller extends AppObject
     $modContent = $this->message.$this->smarty->fetch($tplDir, $objectName);
    
     //Если это запрос через AJAX, то выводим только результат работы модуля
-    if(isAjax())
+    if(appIsAjax())
       {
       echo $modContent;
       exit;

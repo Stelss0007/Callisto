@@ -16,6 +16,7 @@ class viewTpl extends Smarty
     //$this->Smarty();
     
     //????????? ???? ?????????? ???????????
+    $this->caching_type = $appConfig['coretpl.caching_type'];
     $this->use_sub_dirs = $appConfig['coretpl.use_sub_dirs'];
     $this->cache_lifetime = $appConfig['coretpl.cache_lifetime'];
     if($appConfig['debug.enabled'])

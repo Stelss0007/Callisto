@@ -164,7 +164,7 @@ class Router
 
   function run()
     {
-    global $router_vars;
+    global $routerVars;
     
     $this->runModuleRoutes();
     
@@ -226,6 +226,12 @@ class Router
           exit;
           }
         }
+      elseif($mod == 'api')
+        {
+        $type = 'api';
+        $mod = array_shift($segments); 
+        }
+        
       // Второй — действие.
       $action = str_replace($this->fileExt, '', array_shift($segments));
       
@@ -234,8 +240,10 @@ class Router
       // Остальные сегменты — параметры.
       $parameters = $segments;
       }
+      
+   $routerVars['type'] = $type; 
 
-    if($type)
+    if($type === 'admin')
       {
       if(!file_exists("modules/$mod/admin.php"))
         {
@@ -244,6 +252,16 @@ class Router
       include_once "modules/$mod/admin.php";
       $module = new AdminController($mod);
       $module->controllerName = 'AdminController';
+      }
+    elseif($type === 'api')
+      {
+      if(!file_exists("modules/$mod/api.php"))
+        {
+        trigger_error ("Module '".$mod."' or module controller 'APIController' not exist", E_USER_ERROR);
+        }
+      include_once "modules/$mod/api.php";
+      $module = new APIController($mod);
+      $module->controllerName = 'APIController';
       }
     else
       {
@@ -264,9 +282,9 @@ class Router
     global $mod_controller;
     $mod_controller = $module;
     
-    $router_vars['type'] = $type; 
-    $router_vars['module'] = $mod; 
-    $router_vars['action'] = $action; 
+
+    $routerVars['module'] = $mod; 
+    $routerVars['action'] = $action; 
     
     $module->inputVars = array_merge($parameters, $module->inputVars);
     
@@ -280,9 +298,16 @@ class Router
       }
     else
       {
-      $module->type = ($_REQUEST['type'] == 'user' || $_REQUEST['type'] == 'admin'  || $_REQUEST['type'] == 'ajax') ? $_REQUEST['type'] : 'user';
+      $module->type = ($_REQUEST['type'] == 'user' || $_REQUEST['type'] == 'admin'  || $_REQUEST['type'] == 'api') ? $_REQUEST['type'] : 'user';
       }
     
+    if($type == 'api')
+        {
+        header('Access-Control-Allow-Origin: ' . $_SERVER['HTTP_ORIGIN']);
+        echo json_encode($module->action($action));
+        exit;
+        }
+        
     $module->action($action);
 
     exit; 

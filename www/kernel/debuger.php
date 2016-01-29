@@ -78,7 +78,7 @@ class Debuger
    
   function __construct()
     {
-    if(isAjax())
+    if(appIsAjax())
       return;
     
     if (!defined("LOG")) define("LOG", 1);
@@ -289,14 +289,14 @@ class Debuger
     }
   function startRenderPage()
     {
-    if(isAjax())
+    if(appIsAjax())
       return;
     
     echo '<script type="text/javascript">'.NL.' var startRenderPage = new Date().getTime();'.NL.'</script>'.NL;
     }
   function endRenderPage()
     {
-    if(isAjax())
+    if(appIsAjax())
       return;
     
     echo '<script type="text/javascript">'.NL.' window.onload = function() { var endRenderPage = new Date().getTime(); var timeRenderPage = (endRenderPage - startRenderPage)/1000; console.log("Time Render Page "+timeRenderPage+" sec")}'.NL.'</script>'.NL;

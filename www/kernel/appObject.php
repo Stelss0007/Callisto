@@ -63,6 +63,7 @@ class AppObject
         case 'Main':
         case 'Comments':
         case 'comments':
+        case 'payments':
             return;
     }
       
@@ -110,6 +111,7 @@ class AppObject
             case 'Menu':
             case 'Main':
             case 'Comments':
+            case 'UserBankInfo':
                 return;
                 break;
         }
