@@ -53,6 +53,8 @@ class Model
 
     private $validateErrors = [];
     
+    public  $elementAtPage = 10;
+    
     public static function getClassName()
         {
         return get_called_class();
@@ -567,6 +569,38 @@ class Model
         $this->updateAll(['weight'=>static::$tableName.'.weight-1'], ['>' => ['weight'=> $this->weight]] + $condition);
 
         return true;
+        }
+        
+    function preparePagination()
+        {
+        global $mod_controller;
+
+        //Формируем строку лимитов для sql запроса
+        $limit['page'] = $mod_controller->getInput('page', 1);
+        $limit['element_at_page'] = $this->elementAtPage;
+
+        if (!empty($limit))
+          {
+          $result_array['page'] = (int) $limit['page'];
+          $result_array['element_at_page'] = (int) $limit['element_at_page']; //Количество елементов на страницу
+          $result_array['element_start_num'] = (int) ($limit['page'] - 1) * $result_array['element_at_page']; //Номер елемента с которого начинается список
+          $result_array['element_start_num']++;
+
+          //Cчитаем суммарное число записей подпадающих под фильтр
+          $total = static::count();
+          $result_array['element_total_count'] = $total;
+          $result_array['element_end_num'] = $result_array['element_start_num'] + $result_array['element_at_page'] - 1;
+          if ($result_array['element_end_num'] > $result_array['element_total_count']) 
+            $result_array['element_end_num'] = $result_array['element_total_count'];
+          $result_array['page_total'] = ceil($result_array['element_total_count'] / $result_array['element_at_page']);
+
+          $this->pagination = $result_array;
+          $mod_controller->paginate($this);
+          }
+        
+        
+        
+        return array($result_array['element_start_num'], $result_array['element_at_page']);
         }
         
     /* Befor/After Functions */

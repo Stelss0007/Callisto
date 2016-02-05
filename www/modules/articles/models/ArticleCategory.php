@@ -1,25 +1,26 @@
 <?php
+namespace app\modules\articles\models;
 
-class articleCategory extends Model
+class articleCategory extends \app\db\ActiveRecord\Model
   {
-  var $table = 'article_category';
+  public static $tableName = 'article_category';
   
-  function categoryList($full=false)
+  public static function getList($full=false)
     {
     
     $result = array();
-    $this->query(" 
-                  SELECT * FROM `{$this->table}`  
-                  ORDER BY article_category_title
-                ");
-    $articles = $this->fetchArray();
+    
+    $articles = self::find()
+                ->orderBy('article_category_title')
+                ->all()
+            ;
    
     if($full)
       return $articles;
     
     foreach ($articles as $article)
       {
-      $result[$article['id']] = $article['article_category_title'];
+      $result[$article->id] = $article->article_category_title;
       }
 
     return $result;

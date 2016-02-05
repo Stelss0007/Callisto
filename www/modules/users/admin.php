@@ -26,7 +26,7 @@ class AdminController extends Controller
     //$this->usesModel('groups');
     //print_r(app\modules\users\models\users::findAll()); exit;
     $this->groups_list = app\modules\groups\models\Groups::groupList(false);
-    $this->users_list = Users::userList(true);
+    $this->users_list = Users::getList(true);
  //print_r(app\modules\groups\models\Groups::groupList(false));exit;   
     $browsein[] =array('url'=>"/admin/main", 'displayname'=>$this->t('dashboard'));
     $browsein[] =array('url'=>'', 'displayname'=>'Users');

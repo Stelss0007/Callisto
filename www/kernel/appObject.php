@@ -64,6 +64,7 @@ class AppObject
         case 'Comments':
         case 'comments':
         case 'payments':
+        case 'Modules':
             return;
     }
       
@@ -79,7 +80,7 @@ class AppObject
     if(!$autocreate)
       return new $className($className);
 
-    $this->$modelname = & new $className($className);
+    $this->$modelname = new $className($className);
     $this->$modelname->type = $modulename;
 
     //$this->$modelname->session = & $this->session;
@@ -112,11 +113,14 @@ class AppObject
             case 'Main':
             case 'Comments':
             case 'UserBankInfo':
+            case 'Modules':
+            case 'Articles':
+            case 'ArticleCategory':
                 return;
                 break;
         }
         
-        $this->$model = & new $model($model);
+        $this->$model = new $model($model);
         $this->$model->type = 'user';
 
         //$this->$model->session = & $this->session;
@@ -152,7 +156,7 @@ class AppObject
     
     $this->libs[] = $className.' ('.$file_src.')';
 
-    $obj = & new $className();
+    $obj = new $className();
     
     if(empty($autocreate))
       return $obj;

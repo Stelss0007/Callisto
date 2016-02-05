@@ -1,4 +1,5 @@
 <?php
+use app\modules\modules\models\Modules;
 
 class AdminController extends Controller
   {
@@ -11,12 +12,11 @@ class AdminController extends Controller
                         'displayname'=>'Главное меню');
     $browsein[] = array ('url'=>'/admin/modules',
                         'displayname'=>'Модули');
- 
     
     $this->module_browsein = $browsein;
     
     
-    $instaledModules = $this->modules->getList();
+    $instaledModules = Modules::findAll();
     
     $module_list_all = array();
     $dir_handler = opendir('modules');

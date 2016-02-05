@@ -22,7 +22,7 @@ class Users extends \app\db\ActiveRecord\Model
    * @param type $full
    * @return type 
    */
-  public static function userList($full=false)
+  public static function getList($full=false)
     {
     $users = self::findAll();
     

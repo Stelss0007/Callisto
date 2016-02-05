@@ -1,4 +1,7 @@
 <?php
+use app\modules\articles\models\Articles;
+use app\modules\articles\models\ArticleCategory;
+
 class AdminController extends Controller
   {
   public $defaultAction = 'article_list';
@@ -8,17 +11,16 @@ class AdminController extends Controller
     $this->getAccess(ACCESS_READ);
     $this->viewCachedPage();
     
-    $this->usesModel('articleCategory');
-        
-    $this->articles_list = $this->articles->articleList(true, $this->getInput('filter', []));
-       //$this->paginate($this->articles);
+            
+    $this->articles_list = Articles::getList(true, $this->getInput('filter', []));
+        //$this->paginate($this->articles);
     
     //Подготовим фильтры
     $category_filter_list[0] = $this->t('all_category');
-    $category_filter_list    = $category_filter_list + $this->articleCategory->categoryList(false);
+    $category_filter_list    = $category_filter_list + ArticleCategory::getList(false);
     
     $user_filter_list[0] = $this->t('all_user');
-    $user_filter_list    = $user_filter_list + \app\modules\users\models\Users::userList(false);
+    $user_filter_list    = $user_filter_list + \app\modules\users\models\Users::getList(false);
  
     $status_filter_list['-1']   = $this->t('all_status');
     $status_filter_list['1']    = $this->t('sys_active');
