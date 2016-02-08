@@ -35,7 +35,7 @@ class AdminController extends Controller
     
     
     $browsein[] =array('url'=>"/admin/main", 'displayname'=>$this->t('dashboard'));
-    $browsein[] =array('url'=>'/admin/articles', 'displayname'=>'Articles'); 
+    $browsein[] =array('url'=>'/admin/articles', 'displayname'=>$this->t('articles_header')); 
     
     $this->assign('module_browsein', $browsein);
     
@@ -45,9 +45,9 @@ class AdminController extends Controller
   function actionArticleManage($id=0)
     {
     $this->getAccess(ACCESS_ADD);
-    $data = $this->inputVars;
-    $this->article_category_list = $this->articleCategory->categoryList(false);
-    //appDebug($data);exit;
+    $data = $this->getInput();
+    $this->article_category_list = ArticleCategory::getList(false);
+    
     if($data['submit'])
       {
       $data['article_add_time']   = strtotime($data['article_add_time']);
@@ -56,19 +56,23 @@ class AdminController extends Controller
       
       if($id)
         {
-        $this->articles->articleUpdate($data, $id);
+        $article = Articles::find($id);
+        
         }
       else
         {
         $data['article_user_id']    = $this->session->userId();
-        $id = $this->articles->articleCreate($data);
+        $article = new Articles();
         }
+        
+      $article->setAttributesByArray($data);
+      $article->save();
       
       //Upload Image and Update article image field  
       if($dataImage['article_image'] = $this->saveImage('post_image', $id))
         {
-        $dataImage['article_image'] = serialize( $dataImage['article_image']);
-        $this->articles->articleUpdate($dataImage, $id);
+        $article->article_image = serialize( $dataImage['article_image']);
+        $article->save();
         }
       
       $this->deleteCache();
@@ -76,23 +80,23 @@ class AdminController extends Controller
       }
     ////////////////////////////////////////////////////////////////////////////
     $browsein[] =array('url'=>"/admin/main", 'displayname'=>$this->t('dashboard'));
-    $browsein[] =array('url'=>'/admin/articles', 'displayname'=>'Articles');  
+    $browsein[] =array('url'=>'/admin/articles', 'displayname'=>$this->t('articles_header'));  
    
       
-    $article = $this->articles->getById($id);
-    $article['article_image'] = unserialize($article['article_image']);
-    
-    if($article)
+    $article = Articles::find($id);
+    $article->article_image = unserialize($article->article_image);
+    //appDebugExit($article->attributes);  
+    if($article->attributes)
       {
-      $this->assign($article);
-      $browsein[] =array('url'=>'', 'displayname'=>'Edit');
+      $this->assign($article->attributes);
+      $browsein[] =array('url'=>'', 'displayname'=>$this->t('sys_edit'));
       }
     else
       {
-      $article['article_start_time'] = $article['article_add_time'] = time();
+      $article->article_start_time = $article->article_add_time = time();
       $this->assign($article);
       
-      $browsein[] =array('url'=>'', 'displayname'=>'Add');
+      $browsein[] =array('url'=>'', 'displayname'=>$this->t('sys_add'));
       }
     
     $this->assign('module_browsein', $browsein);
@@ -102,11 +106,11 @@ class AdminController extends Controller
   function actionCategoryList()
     {
     $this->getAccess(ACCESS_READ);
-    $this->categories_list = $this->articleCategory->getList();
-    //appDebug($this->articleCategory->getList());exit;   
+    $this->assign('categories_list', ArticleCategory::getList(true));
+  
     $browsein[] =array('url'=>"/admin/main", 'displayname'=>$this->t('dashboard'));
-    $browsein[] =array('url'=>'/admin/articles', 'displayname'=>'Articles'); 
-    $browsein[] =array('url'=>'/admin/articles/ctegory_list', 'displayname'=>'Categories'); 
+    $browsein[] =array('url'=>'/admin/articles', 'displayname'=>$this->t('articles_header')); 
+    $browsein[] =array('url'=>'/admin/articles/ctegory_list', 'displayname'=>$this->t('categorys_header')); 
     
     $this->assign('module_browsein', $browsein);
     
@@ -116,9 +120,8 @@ class AdminController extends Controller
   function actionCategoryManage($id=0)
     {
     $this->getAccess(ACCESS_ADD);
-    $data = $this->inputVars;
-    //appDebug($data);exit;
-    $this->usesModel('articleCategory');
+    $data = $this->getInput();
+
     if($data['submit'])
       {
       if($id)
@@ -136,19 +139,19 @@ class AdminController extends Controller
       
     ////////////////////////////////////////////////////////////////////////////
     $browsein[] =array('url'=>"/admin/main", 'displayname'=>$this->t('dashboard'));
-    $browsein[] =array('url'=>'/admin/articles', 'displayname'=>'Articles');  
-    $browsein[] =array('url'=>'/admin/articles/category_list', 'displayname'=>'Categories');  
+    $browsein[] =array('url'=>'/admin/articles', 'displayname'=>$this->t('articles_header'));  
+    $browsein[] =array('url'=>'/admin/articles/category_list', 'displayname'=>$this->t('categorys_header'));  
  
       
-    $article = $this->articleCategory->getById($id);
+    $article = ArticleCategory::find($id);
     if($article)
       {
-      $this->assign($article);
-      $browsein[] =array('url'=>'', 'displayname'=>'Edit');
+      $this->assign($article->attributes);
+      $browsein[] =array('url'=>'', 'displayname'=>$this->t('sys_edit'));
       }
     else
       {
-      $browsein[] =array('url'=>'', 'displayname'=>'Add');
+      $browsein[] =array('url'=>'', 'displayname'=>$this->t('sys_add'));
       }
     
     $this->assign('module_browsein', $browsein);
@@ -194,7 +197,7 @@ class AdminController extends Controller
     {
     $this->getAccess(ACCESS_READ);
     
-    $aColumns = array( 'id', 'article_title', 'article_category_id', 'article_user_id', 'article_active', 'article_add_time' );
+    $aColumns = array( 'id', 'article_title', 'article_category_id', 'article_user_id', 'active', 'article_add_time' );
     
     $offset  = $this->getInput('iDisplayStart', '0');
     $limit   = $this->getInput('iDisplayLength', '0');
@@ -227,7 +230,7 @@ class AdminController extends Controller
                   $value['active'],
                   $value['article_add_time'],
                   ''
-                  .(($value['article_active']) ? "<a href='/admin/articles/activation/{$value['id']}' onclick=\"return confirm('".$this->t('sys_confirm_deactivate')."')\" title='".$this->t('sys_disabled')."' class=\"btn btn-icon btn-pause\"><i class=\"icon-pause\"></i></a>" : 
+                  .(($value['active']) ? "<a href='/admin/articles/activation/{$value['id']}' onclick=\"return confirm('".$this->t('sys_confirm_deactivate')."')\" title='".$this->t('sys_disabled')."' class=\"btn btn-icon btn-pause\"><i class=\"icon-pause\"></i></a>" : 
                   "<a href='/admin/articles/activation/{$value['id']}' onclick=\"return confirm('".$this->t('sys_confirm_activate')."')\" title='".$this->t('sys_enabled')."' class=\"btn btn-icon btn-play\"><i class=\"icon-play\"></i></a>")
                   . "<a href='/admin/articles/article_manage/{$value['id']}' title='{$this->t('sys_edit')}' class='btn btn-icon btn-edit'><i class='icon-edit'></i></a>"
                   . "<a href='/admin/articles/delete/{$value['id']}' title='".$this->t('sys_delete')."' class='btn btn-icon btn-delete'><i class='icon-trash'></i></a>"

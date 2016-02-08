@@ -581,7 +581,7 @@ class SQLBuilder {
         
         $sql = $this->prepareSQL($sql);
         
-        
+     
         if($appConfig['debug.enabled'])
             {
             \Debuger::start();
@@ -735,7 +735,41 @@ class SQLBuilder {
         return $this->executeQuery();
         }
         
+    public function pagination()
+        {
+        global $mod_controller;
+
+        //Формируем строку лимитов для sql запроса
+        $calssName = $this->className;
+        $limit['page'] = $mod_controller->getInput('page', 1);
+        $limit['element_at_page'] = $calssName::$elementAtPage;
+
+        if (!empty($limit))
+          {
+          $result_array['page'] = (int) $limit['page'];
+          $result_array['element_at_page'] = (int) $limit['element_at_page']; //Количество елементов на страницу
+          $result_array['element_start_num'] = (int) ($limit['page'] - 1) * $result_array['element_at_page']; //Номер елемента с которого начинается список
+          $result_array['element_start_num']++;
+
+          //Cчитаем суммарное число записей подпадающих под фильтр
+          $total = $this->count();
+          $result_array['element_total_count'] = $total;
+          $result_array['element_end_num'] = $result_array['element_start_num'] + $result_array['element_at_page'] - 1;
+          if ($result_array['element_end_num'] > $result_array['element_total_count']) 
+            $result_array['element_end_num'] = $result_array['element_total_count'];
+          $result_array['page_total'] = ceil($result_array['element_total_count'] / $result_array['element_at_page']);
+
+          $mod_controller->paginate($result_array);
+          }
         
+        //appDebugExit($result_array); 
+        $this->limit($result_array['element_at_page']); 
+        $this->offset($result_array['element_start_num']); 
+        $this->connect();
+        
+        //return array($result_array['element_start_num'], $result_array['element_at_page']);
+        return $this;
+        }    
    
 
 }

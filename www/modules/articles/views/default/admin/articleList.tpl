@@ -96,7 +96,7 @@
                   </a>
                 </td>
                 <td>
-                  {if $article->article_active == 1}
+                  {if $article->active == 1}
                     {#sys_yes#}
                   {else}
                     {#sys_no#}
@@ -108,7 +108,7 @@
 
                 <td style="text-align: center;">
                   <div class="btn-group">
-                    {if $article->article_active}
+                    {if $article->active}
                       <a href='/admin/articles/activation/{$article->id}' onclick="return confirm('{#sys_confirm_deactivate#}')" title='{#sys_disabled#}' class="btn btn-icon btn-pause"><i class="icon-pause"></i></a>
                     {else}
                       <a href='/admin/articles/activation/{$article->id}' onclick="return confirm('{#sys_confirm_activate#}')" title='{#sys_enabled#}' class="btn btn-icon btn-play"><i class="icon-play"></i></a>

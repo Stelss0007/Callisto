@@ -9,7 +9,7 @@ class AdminController extends Controller
     {
     $this->getAccess(ACCESS_ADMIN);
     
-    $config_view = $this->root_dir.'modules/'.$module.'/views/default/admin/config.tpl';
+    $config_view = $this->rootDir.'modules/'.$module.'/views/default/admin/config.tpl';
     $ObjectName = $module.'::views::default::admin::config';
     if(!file_exists($config_view))
       {

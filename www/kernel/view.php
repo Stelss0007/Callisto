@@ -106,7 +106,7 @@ class viewTpl extends Smarty
   function clearCache ($tpl_file = null, $cache_id = null, $compile_id = null, $exp_time = null)
     {
     $cache_id = str_replace('::', '|', $cache_id);
-    return (Smarty::clear_cache($tpl_file, $cache_id, $compile_id, $exp_time));
+    return (Smarty::clearCache($tpl_file, $cache_id, $compile_id, $exp_time));
     }
   /**
    * is_cached

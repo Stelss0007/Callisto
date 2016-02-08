@@ -55,7 +55,7 @@
                                     <label class="col-sm-2 control-label" for="date01">{#articles_state#}: </label>
                                     <div class="controls col-sm-10">
                                         <div>
-                                            <input type="checkbox" name="article_active" {if $article_active}checked="checked"{/if} value="1" class="switch" data-size="mini">
+                                            <input type="checkbox" name="active" {if $active}checked="checked"{/if} value="1" class="switch" data-size="mini">
                                         </div>
                                     </div>
                                 </div>

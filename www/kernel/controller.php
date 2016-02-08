@@ -3,25 +3,25 @@
 abstract class Controller extends AppObject
   {
   private   $message = '';
-  private   $start_debug_time = 0;
+  private   $startDebugTime = 0;
   public    $defaultAction = '';
   protected $errors;
   protected $registry;
   protected $smarty;
-  protected $module_dir;
-  public    $root_dir;
-  public    $current_theme;
+  protected $moduleDir;
+  public    $rootDir;
+  public    $currentTheme;
   protected $vars = array();
   protected $modname;
-  protected $object_name;
+  protected $objectName;
   protected $type;
   protected $action;
   public    $inputVars = array();
-  protected $input_vars_clear = array();
+  protected $inputVarsClear = array();
   private   $lang;
-  private   $lang_default = 'rus';
+  private   $langDefault = 'rus';
   public    $config = null;
-  private   $mod_vars = array();
+  private   $modVars = array();
   public    $controllerName = 'IndexController';
   
   public    $permissionLavel = 0;
@@ -46,10 +46,10 @@ abstract class Controller extends AppObject
   protected $tpls = array();
   
   // FILES 
-  public $input_files; 
-  public $input_images;
+  public $inputFiles; 
+  public $inputImages;
   
-  public $image_size = array(
+  public $imageSize=  array(
                             array('width'=>'640', 'height'=>'480'),
                             array('width'=>'320', 'height'=>'150'),
                             array('width'=>'100', 'height'=>'100')
@@ -66,7 +66,7 @@ abstract class Controller extends AppObject
     // Отделяем секунды от миллисекунд
     $current_time = explode(" ",$current_time);
     // Складываем секунды и миллисекунды
-    $this->start_debug_time =$current_time[1] + $current_time[0];
+    $this->startDebugTime =$current_time[1] + $current_time[0];
     
     $this->setConfig();
     
@@ -80,7 +80,7 @@ abstract class Controller extends AppObject
     //Init Errors
     $this->errors =& ErrorHandler::getInstance();
     
-    $this->root_dir = APP_DIRECTORY.'/';
+    $this->rootDir = APP_DIRECTORY.'/';
     
     define('LIB_DIR',APP_DIRECTORY.'/lib/');
     
@@ -104,7 +104,7 @@ abstract class Controller extends AppObject
 
     $this->modname = $mod;//strtolower(get_class($this));
 
-    $this->module_dir = 'modules/'.$this->modname.'/';
+    $this->moduleDir = 'modules/'.$this->modname.'/';
     
     require(KERNEL_DIR.'debuger.php');
     if($this->config['debug.enabled'] && !appIsAjax() && $this->type != 'api')
@@ -168,7 +168,7 @@ abstract class Controller extends AppObject
       $current_time = explode(" ",$current_time);
       $end_debug_time = $current_time[1] + $current_time[0];
       
-      $debug_time = $end_debug_time - $this->start_debug_time;
+      $debug_time = $end_debug_time - $this->startDebugTime;
       
       $debuger = Debuger::getInstance();
       
@@ -190,8 +190,8 @@ abstract class Controller extends AppObject
       $debuger->debugAddCreateGroup("Callisto Debug Detail");
         $debuger->debugAdd('Controller: '.$this->modname, null, INFO);
         $debuger->debugAdd('Action: '.$this->action, null, INFO);
-        $debuger->debugAdd('Object Name: '.$this->object_name, null, INFO);
-        $debuger->debugAdd('Theme: '.$this->current_theme, null, INFO);
+        $debuger->debugAdd('Object Name: '.$this->objectName, null, INFO);
+        $debuger->debugAdd('Theme: '.$this->currentTheme, null, INFO);
         //
         $debuger->debugAddCreateGroup("Uses Tpls (".sizeof($this->tpls).")");
         if($this->tpls)
@@ -267,57 +267,57 @@ abstract class Controller extends AppObject
     return true;
     }
     
-  final function assign($var_name = null, $var_value = '')
+  final function assign($varName = null, $varValue = '')
     {
-    if(empty($var_name))
+    if(empty($varName))
       {
       return true;
       }
-    if(is_array($var_name))
+    if(is_array($varName))
       {
-      $this->vars = array_merge($this->vars, $var_name);
+      $this->vars = array_merge($this->vars, $varName);
       }
-    elseif(is_object($var_name)) 
+    elseif(is_object($varName)) 
       {
-      $this->vars[get_class($var_name)] = & $var_name;
+      $this->vars[get_class($varName)] = $varName;
       }
     else
       {
-      $this->vars[$var_name] = $var_value;
+      $this->vars[$varName] = $varValue;
       }
     
     }
     
-  final public function action($action_name)
+  final public function action($actionName)
     {
-    if(empty($action_name) || $action_name == 'index')
+    if(empty($actionName) || $actionName == 'index')
       {
       if(!empty($this->defaultAction))
         {
-        $action_name = $this->defaultAction;
+        $actionName = $this->defaultAction;
         }
       else
         {
-        $action_name = 'index';
+        $actionName = 'index';
         }
       }
 
     //Заменим - и _ на Большие буквы, тоесть приобразуем урл в Камелкейсподобный вид  
-    $action_name = $this->urlToCamelCase($action_name);
+    $actionName = $this->urlToCamelCase($actionName);
       
-    if(!method_exists($this, 'action'.$action_name))
-      $this->errors->setError('Action "'.$action_name.'" is not exist in this module "'.$this->modname.'", conroller "'.$this->controllerName.'"');
+    if(!method_exists($this, 'action'.$actionName))
+      $this->errors->setError('Action "'.$actionName.'" is not exist in this module "'.$this->modname.'", conroller "'.$this->controllerName.'"');
     
-    $this->action = $action_name;
-    $this->object_name = $this->getObjectName();
-    $this->permissionLavel = $GLOBALS['permissionLavel'] = $this->getPermissionLavel($this->object_name);
+    $this->action = $actionName;
+    $this->objectName = $this->getObjectName();
+    $this->permissionLavel = $GLOBALS['permissionLavel'] = $this->getPermissionLavel($this->objectName);
     
     if($this->type == 'admin')
       {
       $this->smarty->force_compile = true;
       }
     
-    $this->object_name = $this->object_name.'::permission::'.appGetAccessName($this->permissionLavel);
+    $this->objectName = $this->objectName.'::permission::'.appGetAccessName($this->permissionLavel);
     
     $this->smarty->assign('config', $this->config);
     
@@ -346,7 +346,7 @@ abstract class Controller extends AppObject
     //Без аргументов подключится стиль текущей темы
     appCssLoad();
     
-    return call_user_method_array('action'.$action_name, $this, $this->inputVars);
+    return call_user_method_array('action'.$actionName, $this, $this->inputVars);
     }
   final public function setViewType($type = 'user')
     {
@@ -364,11 +364,11 @@ abstract class Controller extends AppObject
     }
   final public function setTheme()
     {
-    $this->current_theme = \app\modules\theme\models\Theme::getActiveName();
+    $this->currentTheme = \app\modules\theme\models\Theme::getActiveName();
     }
   final public function getThemeName()
     {
-    return $this->current_theme;
+    return $this->currentTheme;
     }
   final public function getModName()
     {
@@ -448,12 +448,12 @@ abstract class Controller extends AppObject
     if(is_array($var))
       {
       $array_result = array();
-      foreach($var as $key => $value_key)
+      foreach($var as $key => $valueKey)
         {
-        if(is_array($value_key))
+        if(is_array($valueKey))
           {
-          $currentKey = key($value_key);
-          $array_result[$key] = $value_key;
+          $currentKey = key($valueKey);
+          $array_result[$key] = $valueKey;
           continue;
           }
           
@@ -465,20 +465,20 @@ abstract class Controller extends AppObject
             }
           else
             {
-            $array_result[$key] = $value_key;
+            $array_result[$key] = $valueKey;
             }
           }
-        elseif(isset($this->inputVars[$value_key]))
+        elseif(isset($this->inputVars[$valueKey]))
           {
-          $array_result[$value_key] = $this->inputVars[$value_key];
+          $array_result[$valueKey] = $this->inputVars[$valueKey];
           }
-        elseif(is_array($default) && isset($default[$value_key]))
+        elseif(is_array($default) && isset($default[$valueKey]))
           {
-          $array_result[$value_key] = $default[$value_key];
+          $array_result[$valueKey] = $default[$valueKey];
           }
         else
           {
-          $array_result[$value_key] = null;
+          $array_result[$valueKey] = null;
           }
         }
       return $array_result;
@@ -502,13 +502,13 @@ abstract class Controller extends AppObject
    * @param object $model
    * @return type
    */
-  final public function paginate($model=false)
+  final public function paginate($pagination=false)
     {
-    if(empty($model))
+    if(empty($pagination))
       return;
     
     //appDebug($model->pagination);exit;
-    $this->assign('pagination', $model->pagination);
+    $this->assign('pagination', $pagination);
     }
   
   /**
@@ -625,7 +625,7 @@ abstract class Controller extends AppObject
       {
       if($this->type == 'admin')
         {
-        $pageTplFile = $this->root_dir.'themes/admin/pages/'.$this->page.'.tpl';
+        $pageTplFile = $this->rootDir.'themes/admin/pages/'.$this->page.'.tpl';
         $this->tpls[] = '(Main Template)themes/admin/pages/'.$this->page.'.tpl';
         
         $this->loadThemeLang('admin');
@@ -634,12 +634,12 @@ abstract class Controller extends AppObject
         }
       else
         {
-        $pageTplFile = $this->root_dir."themes/".$this->current_theme.'/pages/'.$this->page.'.tpl';
-        $this->tpls[] = '(Main Template)'."themes/".$this->current_theme.'/pages/'.$this->page.'.tpl';
+        $pageTplFile = $this->rootDir."themes/".$this->currentTheme.'/pages/'.$this->page.'.tpl';
+        $this->tpls[] = '(Main Template)'."themes/".$this->currentTheme.'/pages/'.$this->page.'.tpl';
         
-        $this->loadThemeLang($this->current_theme);
+        $this->loadThemeLang($this->currentTheme);
         
-        $ObjectThemeName = 'themes|'.$this->current_theme.'|pages|'.$this->page.'';
+        $ObjectThemeName = 'themes|'.$this->currentTheme.'|pages|'.$this->page.'';
         }
 
       $this->smarty->assign('module_content', $modContent);
@@ -665,21 +665,21 @@ abstract class Controller extends AppObject
     $view_file_name = $this->action;
     if($this->type == 'admin')
       {
-      if(file_exists($this->root_dir.$this->module_dir.'views/default/admin/'.$view_file_name.'.tpl'))
+      if(file_exists($this->rootDir.$this->moduleDir.'views/default/admin/'.$view_file_name.'.tpl'))
         {
-        $this->smarty->assign('viewDir', $this->root_dir.$this->module_dir.'views/default/admin/');  
-        $this->tpls[] = '(Original Module TPL) '.$this->module_dir.'themes/default/admin/'.$view_file_name.'.tpl';
-        return $this->root_dir.$this->module_dir.'views/default/admin/'.$view_file_name.'.tpl';
+        $this->smarty->assign('viewDir', $this->rootDir.$this->moduleDir.'views/default/admin/');  
+        $this->tpls[] = '(Original Module TPL) '.$this->moduleDir.'themes/default/admin/'.$view_file_name.'.tpl';
+        return $this->rootDir.$this->moduleDir.'views/default/admin/'.$view_file_name.'.tpl';
         }
       elseif(!empty($debug))
         {
-        $this->tpls[] = '(TPL file is not exist!) '.$this->module_dir.'views/default/admin/'.$view_file_name.'.tpl';
-        return 'TPL file is not exist! '.$this->root_dir.$this->module_dir.'views/default/admin/'.$view_file_name.'.tpl <br> You most created tpl file <b>"'.$view_file_name.'.tpl"</b> for module <b>'.$this->modname.'</b><br>';
+        $this->tpls[] = '(TPL file is not exist!) '.$this->moduleDir.'views/default/admin/'.$view_file_name.'.tpl';
+        return 'TPL file is not exist! '.$this->rootDir.$this->moduleDir.'views/default/admin/'.$view_file_name.'.tpl <br> You most created tpl file <b>"'.$view_file_name.'.tpl"</b> for module <b>'.$this->modname.'</b><br>';
         }
       else
         {
-        $this->tpls[] = '(TPL file is not exist!) '.$this->module_dir.'views/default/admin/'.$view_file_name.'.tpl';
-        echo 'TPL file is not exist! '.$this->root_dir.$this->module_dir.'views/default/admin/'.$view_file_name.'.tpl <br> You most created tpl file <b>"'.$view_file_name.'.tpl"</b> for module <b>'.$this->modname.'</b><br>';
+        $this->tpls[] = '(TPL file is not exist!) '.$this->moduleDir.'views/default/admin/'.$view_file_name.'.tpl';
+        echo 'TPL file is not exist! '.$this->rootDir.$this->moduleDir.'views/default/admin/'.$view_file_name.'.tpl <br> You most created tpl file <b>"'.$view_file_name.'.tpl"</b> for module <b>'.$this->modname.'</b><br>';
         echo "Values for TPL:<br>";
         echo "<pre>";
         print_r($this->vars);
@@ -689,27 +689,27 @@ abstract class Controller extends AppObject
       }
     else
       {
-      if(file_exists($this->root_dir.'themes/'.$this->current_theme.'/'.$this->module_dir.$view_file_name.'.tpl'))
+      if(file_exists($this->rootDir.'themes/'.$this->currentTheme.'/'.$this->moduleDir.$view_file_name.'.tpl'))
         {
-        $this->smarty->assign('viewDir', $this->root_dir.'themes/'.$this->current_theme.'/'.$this->module_dir);   
-        $this->tpls[] = '(Overridden by Theme) '.'themes/'.$this->current_theme.'/'.$this->module_dir.$view_file_name.'.tpl';
-        return $this->root_dir.'themes/'.$this->current_theme.'/'.$this->module_dir.$view_file_name.'.tpl';
+        $this->smarty->assign('viewDir', $this->rootDir.'themes/'.$this->currentTheme.'/'.$this->moduleDir);   
+        $this->tpls[] = '(Overridden by Theme) '.'themes/'.$this->currentTheme.'/'.$this->moduleDir.$view_file_name.'.tpl';
+        return $this->rootDir.'themes/'.$this->currentTheme.'/'.$this->moduleDir.$view_file_name.'.tpl';
         }
-      elseif(file_exists($this->root_dir.$this->module_dir.'views/default/'.$view_file_name.'.tpl'))
+      elseif(file_exists($this->rootDir.$this->moduleDir.'views/default/'.$view_file_name.'.tpl'))
         {
-        $this->smarty->assign('viewDir', $this->root_dir.$this->module_dir.'views/default/'); 
-        $this->tpls[] = '(Original Module TPL) '.$this->module_dir.'themes/default/'.$view_file_name.'.tpl';
-        return $this->root_dir.$this->module_dir.'views/default/'.$view_file_name.'.tpl';
+        $this->smarty->assign('viewDir', $this->rootDir.$this->moduleDir.'views/default/'); 
+        $this->tpls[] = '(Original Module TPL) '.$this->moduleDir.'themes/default/'.$view_file_name.'.tpl';
+        return $this->rootDir.$this->moduleDir.'views/default/'.$view_file_name.'.tpl';
         }
       elseif(!empty($debug))
         {
-        $this->tpls[] = '(TPL file is not exist!) '.$this->module_dir.'views/default/'.$view_file_name.'.tpl';
-        return 'TPL file is not exist! '.$this->root_dir.$this->module_dir.'views/default/'.$view_file_name.'.tpl <br> You most created tpl file <b>"'.$view_file_name.'.tpl"</b> for module <b>'.$this->modname.'</b><br>';
+        $this->tpls[] = '(TPL file is not exist!) '.$this->moduleDir.'views/default/'.$view_file_name.'.tpl';
+        return 'TPL file is not exist! '.$this->rootDir.$this->moduleDir.'views/default/'.$view_file_name.'.tpl <br> You most created tpl file <b>"'.$view_file_name.'.tpl"</b> for module <b>'.$this->modname.'</b><br>';
         }
       else
         {
-        $this->tpls[] = '(TPL file is not exist!) '.$this->module_dir.'views/default/'.$view_file_name.'.tpl';
-        echo 'TPL file is not exist! '.$this->root_dir.$this->module_dir.'views/default/'.$view_file_name.'.tpl <br> You most created tpl file <b>"'.$view_file_name.'.tpl"</b> for module <b>'.$this->modname.'</b><br>';
+        $this->tpls[] = '(TPL file is not exist!) '.$this->moduleDir.'views/default/'.$view_file_name.'.tpl';
+        echo 'TPL file is not exist! '.$this->rootDir.$this->moduleDir.'views/default/'.$view_file_name.'.tpl <br> You most created tpl file <b>"'.$view_file_name.'.tpl"</b> for module <b>'.$this->modname.'</b><br>';
         echo "Values for TPL:<br>";
         echo "<pre>";
         print_r($this->vars);
@@ -767,9 +767,9 @@ abstract class Controller extends AppObject
       {
       $this->smarty->configLoad("lang/$this->lang/lang.conf");
       }
-    elseif (($this->lang !=$this->lang_default) && file_exists("lang/$this->lang_default/lang.conf"))
+    elseif (($this->lang !=$this->langDefault) && file_exists("lang/$this->langDefault/lang.conf"))
       {
-      $this->smarty->configLoad("lang/$this->lang_default/lang.conf");
+      $this->smarty->configLoad("lang/$this->langDefault/lang.conf");
       }
     return true;
     }
@@ -780,9 +780,9 @@ abstract class Controller extends AppObject
       {
       $this->smarty->configLoad("blocks/$blockName/lang/$this->lang/lang.conf");
       }
-    elseif (($this->lang !=$this->lang_default) && file_exists("blocks/$blockName/lang/$this->lang_default/lang.conf"))
+    elseif (($this->lang !=$this->langDefault) && file_exists("blocks/$blockName/lang/$this->langDefault/lang.conf"))
       {
-      $this->smarty->configLoad("blocks/$blockName/lang/$this->lang_default/lang.conf");
+      $this->smarty->configLoad("blocks/$blockName/lang/$this->langDefault/lang.conf");
       }
     return true;
     }
@@ -793,9 +793,9 @@ abstract class Controller extends AppObject
       {
       $this->smarty->configLoad("themes/$themeName/lang/$this->lang/lang.conf");
       }
-    elseif (($this->lang !=$this->lang_default) && file_exists("themes/$themeName/lang/$this->lang_default/lang.conf"))
+    elseif (($this->lang !=$this->langDefault) && file_exists("themes/$themeName/lang/$this->langDefault/lang.conf"))
       {
-      $this->smarty->configLoad("themes/$themeName/lang/$this->lang_default/lang.conf");
+      $this->smarty->configLoad("themes/$themeName/lang/$this->langDefault/lang.conf");
       }
     return true;
     }
@@ -806,9 +806,9 @@ abstract class Controller extends AppObject
       {
       $this->smarty->configLoad("modules/$moduleName/lang/$this->lang/lang.conf");
       }
-    elseif(($this->lang !=$this->lang_default) && file_exists("modules/$moduleName/lang/$this->lang_default/lang.conf"))
+    elseif(($this->lang !=$this->langDefault) && file_exists("modules/$moduleName/lang/$this->langDefault/lang.conf"))
       {
-      $this->smarty->configLoad("modules/$moduleName/lang/$this->lang_default/lang.conf");
+      $this->smarty->configLoad("modules/$moduleName/lang/$this->langDefault/lang.conf");
       }
     return true;
     }
@@ -1303,7 +1303,7 @@ abstract class Controller extends AppObject
   //Add all blocks to tpl
   final public function blockToTpl()
     {
-    Block::blockShowAll($this->smarty, $this->getObjectName(true), $this->current_theme, $this->modname);
+    Block::blockShowAll($this->smarty, $this->getObjectName(true), $this->currentTheme, $this->modname);
     //$this->smarty->assign('blocks', $this->block, false);
     }
   
@@ -1331,7 +1331,7 @@ abstract class Controller extends AppObject
     if(!empty($name))
       $result = $_FILES[$name];
 
-    $this->input_files = $result;
+    $this->inputFiles = $result;
     return $result;
     }
     
@@ -1342,7 +1342,7 @@ abstract class Controller extends AppObject
     if(!is_numeric($id))
       $this->errors->setError('OBJECT ID CAN BE INTEGER!');
     
-    $type = $this->input_files['type'];
+    $type = $this->inputFiles['type'];
     
     $temp = explode('/', $type);
     $path_files_type = $temp[0].'s';
@@ -1356,13 +1356,13 @@ abstract class Controller extends AppObject
       $this->errors->setError('Failed to create folders...');
       }
       
-    $ext = substr(strrchr($this->input_files['name'], '.'), 1);
+    $ext = substr(strrchr($this->inputFiles['name'], '.'), 1);
     
     $name = (empty($name)) ? $id8 : $name;
     
     $dst = $path.$name.'.'.$ext;
     
-    move_uploaded_file($this->input_files['tmp_name'], $dst);
+    move_uploaded_file($this->inputFiles['tmp_name'], $dst);
     return $dst;
     }
  
@@ -1389,7 +1389,7 @@ abstract class Controller extends AppObject
     if(!in_array($result['type'], $img_type))
        $this->errors->setError('FILE "'.$name.'" IS NOT EXIST!'); 
  
-    $this->input_images = $result;
+    $this->inputImages = $result;
     return $result;
     }
     
@@ -1404,7 +1404,7 @@ abstract class Controller extends AppObject
     {
     $this->getImage($poatFileName);
     
-    if(empty($this->input_images))
+    if(empty($this->inputImages))
       return false;
     
     if(empty($id))
@@ -1412,7 +1412,7 @@ abstract class Controller extends AppObject
     if(!is_numeric($id))
       $this->errors->setError('OBJECT ID CAN BE INTEGER!');
     
-    $type = $this->input_images['type'];
+    $type = $this->inputImages['type'];
     
     $temp = explode('/', $type);
     $path_files_type = $temp[0].'s';
@@ -1427,13 +1427,13 @@ abstract class Controller extends AppObject
         $this->errors->setError('Failed to create folders...');
         }
       
-    $ext = substr(strrchr($this->input_images['name'], '.'), 1);
+    $ext = substr(strrchr($this->inputImages['name'], '.'), 1);
     
     $newName = (empty($newName)) ? $id8 : $newName;
     
     $dst = $path.$newName.'.'.$ext;
     
-    move_uploaded_file($this->input_images['tmp_name'], $dst);
+    move_uploaded_file($this->inputImages['tmp_name'], $dst);
     
     //require LIB_DIR.'Image/Image.class.php';
     appUsesLib('Image');
@@ -1443,7 +1443,7 @@ abstract class Controller extends AppObject
     $result_files = array();
     $result_files['original'] = $dst;
     
-    foreach($this->image_size as $value)
+    foreach($this->imageSize as $value)
       {
       $img->load($dst);
       //$img->resize($value['width'], $value['height']);
@@ -1623,11 +1623,11 @@ abstract class Controller extends AppObject
     if(empty($id))
       $this->errors->setError("ID of user is missing!");
     
-    $model_name = $this->modname;
+    $modelName = $this->modname;
     $class = "\\app\\modules\\{$modelName}\\models\\".ucfirst($modelName);
-    
+  
     $object = $class::find($id);
-    $object->activation();
+    $object->activation($id);
 
     $this->redirect();
     }
@@ -1748,12 +1748,12 @@ abstract class Controller extends AppObject
     $smartyTpl = new viewTpl();
     $smartyTpl->assign($variables);
     rtrim($template, '.tpl');
-    if(!file_exists($this->root_dir.'/mails/'.$template.'.tpl'))
+    if(!file_exists($this->rootDir.'/mails/'.$template.'.tpl'))
       {
-      $this->errors->setError("Mailer Error: '{$this->root_dir}/mails/{$template}.tpl' not exist!");
+      $this->errors->setError("Mailer Error: '{$this->rootDir}/mails/{$template}.tpl' not exist!");
       }
     
-    $this->sendEmail($to, $subject, $smartyTpl->fetch($this->root_dir.'/mails/'.$template.'.tpl'), $files);
+    $this->sendEmail($to, $subject, $smartyTpl->fetch($this->rootDir.'/mails/'.$template.'.tpl'), $files);
     }
   }
 

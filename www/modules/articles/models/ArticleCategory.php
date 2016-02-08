@@ -10,15 +10,15 @@ class articleCategory extends \app\db\ActiveRecord\Model
     
     $result = array();
     
-    $articles = self::find()
+    $categories = self::find()
                 ->orderBy('article_category_title')
                 ->all()
             ;
-   
+  
     if($full)
-      return $articles;
+      return $categories;
     
-    foreach ($articles as $article)
+    foreach ($categories as $article)
       {
       $result[$article->id] = $article->article_category_title;
       }

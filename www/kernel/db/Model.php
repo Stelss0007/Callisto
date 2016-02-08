@@ -53,7 +53,8 @@ class Model
 
     private $validateErrors = [];
     
-    public  $elementAtPage = 10;
+    public static  $elementAtPage = 10;
+    public static  $pagination = null;
     
     public static function getClassName()
         {
@@ -263,6 +264,11 @@ class Model
         return static::table()->where($condition)->params($params)->with('all')->all();
         }
         
+    final public static function findPaginationAll($condition=[], $params=[])
+        {
+        return static::table()->where($condition)->params($params)->with('all')->pagination()->all();
+        }
+        
     final public function validate()
         {
         if(\Validator::validateModel($this) == true)
@@ -288,6 +294,7 @@ class Model
             
         $this->beforCreate();    
         $result = static::table()->insertData($this->attributes);
+        $this->attributes[static::$primaryKey] = $result;
         $this->afterSave();
         
         return $result;
@@ -408,9 +415,10 @@ class Model
             {
             return false;
             }
-         
+        
         if(static::table()->hasField('active'))
             {
+            
             $obj = static::table()->where([static::$primaryKey => $id])->one();
             if($obj)
                 {
@@ -570,39 +578,9 @@ class Model
 
         return true;
         }
-        
-    function preparePagination()
-        {
-        global $mod_controller;
-
-        //Формируем строку лимитов для sql запроса
-        $limit['page'] = $mod_controller->getInput('page', 1);
-        $limit['element_at_page'] = $this->elementAtPage;
-
-        if (!empty($limit))
-          {
-          $result_array['page'] = (int) $limit['page'];
-          $result_array['element_at_page'] = (int) $limit['element_at_page']; //Количество елементов на страницу
-          $result_array['element_start_num'] = (int) ($limit['page'] - 1) * $result_array['element_at_page']; //Номер елемента с которого начинается список
-          $result_array['element_start_num']++;
-
-          //Cчитаем суммарное число записей подпадающих под фильтр
-          $total = static::count();
-          $result_array['element_total_count'] = $total;
-          $result_array['element_end_num'] = $result_array['element_start_num'] + $result_array['element_at_page'] - 1;
-          if ($result_array['element_end_num'] > $result_array['element_total_count']) 
-            $result_array['element_end_num'] = $result_array['element_total_count'];
-          $result_array['page_total'] = ceil($result_array['element_total_count'] / $result_array['element_at_page']);
-
-          $this->pagination = $result_array;
-          $mod_controller->paginate($this);
-          }
-        
-        
-        
-        return array($result_array['element_start_num'], $result_array['element_at_page']);
-        }
-        
+    
+    
+          
     /* Befor/After Functions */
         
     public function beforDelete()
