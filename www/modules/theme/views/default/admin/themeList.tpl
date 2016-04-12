@@ -16,7 +16,7 @@
           <thead>
             <tr>
               <th style="width: 30px;"></th>
-              <th style="width: 25px;">
+              <th style="width: 40px;">
                 <input type="checkbox" name="entities[]" class="td_entiies_group" value="">
               </th>
               <th>
@@ -45,15 +45,15 @@
               <tr class='{$class}'>
                 <td>
                   {if $theme->active != '1'}
-                    <a href='/admin/theme/activate/{$theme->id}' class="btn-icon btn-star-o" title="{#sys_activate#}"><i class="icon-star-empty"></i></a>
+                    <a href='/admin/theme/activate/{$theme->id}' class="btn-icon btn-star-o theme-activation-star" title="{#sys_activate#}"><i class="icon-star-empty"></i></a>
                     {else}
-                    <span class="btn-icon icon-star" style="color: #E57C00; text-shadow: 1px 1px 1px #ccc;"></span>
+                    <span class="btn-icon icon-star theme-activation-star" style="color: #E57C00; text-shadow: 1px 1px 1px #ccc;"></span>
                   {/if}
                   &nbsp;
                 </td>
-                <th>
+                <td>
                   <input type="checkbox" name="entities[]" class="td_entities" value="{$theme->id}">
-                </th>
+                </td>
                 <td>
                   {$theme->theme_title}&nbsp;
                 </td>

@@ -10,6 +10,8 @@ class AdminController extends Controller
     $this->getAccess(ACCESS_ADMIN);
     
     $browsein = [];
+    $browsein[] = ['url'=>'/admin/main',
+                        'displayname'=>'Главное меню'];
     $browsein[] = ['url'=>'/admin/theme', 'displayname'=>'Темы'];
     
     $this->assign('module_browsein',$browsein);
@@ -27,6 +29,7 @@ class AdminController extends Controller
     $this->assign(themes_list_all, Theme::fileSystemListActual());
         
     $browsein = [
+                    ['url'=>'/admin/main', 'displayname'=>'Главное меню'],
                     ['url'=>'/admin/theme', 'displayname'=>'Темы'],
                     ['url'=>'/admin/theme/install', 'displayname'=>'Установка темы']
                 ];

@@ -24,7 +24,7 @@
           <col width='20'>
           <col width='340'>
           <col width='*'>
-            <col width='120'>
+            <col width='135'>
         </colgroup>
         <thead>
           <tr>

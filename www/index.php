@@ -1,4 +1,5 @@
 <?php
+//phpinfo();exit;
 include 'kernel/Exceptions.php';
 include 'lib/ErrorHandler/ErrorHandler.class.php';
 $errors = ErrorHandler::getInstance();

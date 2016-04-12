@@ -28,6 +28,31 @@ button::-moz-focus-inner {
 ::-moz-focus-inner {border:0;}
 */
 
+.btn {
+    font-size: 14px;
+}
+
+.table .btn-group {
+    margin-top: -5px;
+    margin-bottom: -5px;
+}
+
+.table .btn {
+/*    border: 1px solid #e1e1e1;*/
+    line-height: 16px;
+    height: 30px;
+    min-width: 30px;
+}
+
+.table tbody tr:hover .btn {
+     border: 1px solid #D6D6D6;
+}
+
+.table .btn i {
+    top: 5px;
+    right: 5px;
+}
+
 .table {
   width: 100%;
   margin-bottom: 17px;
@@ -38,6 +63,7 @@ button::-moz-focus-inner {
 .table tbody tr:hover th
 {
     background-color: #ebebeb !important;
+    border-color: #D6D6D6; 
 }
 
 .page-container {
@@ -156,4 +182,8 @@ a, a:hover, a:active, a:focus {
 
 .sidebar-collapsed #search {
     display: none;
+}
+
+.theme-activation-star {
+    font-size: 16px;
 }
