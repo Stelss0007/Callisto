@@ -1,0 +1,31 @@
+{
+    "name": "stelssoft/callisto-app-basic",
+    "description": "Callisto Basic Project Template",
+    "keywords": ["callisto", "framework", "basic", "project template"],
+    "homepage": "http://www.callisto.com/",
+    "type": "project",
+    "license": "BSD-3-Clause",
+    "support": {
+        "issues": "https://github.com/yiisoft/yii2/issues?state=open",
+        "forum": "http://www.yiiframework.com/forum/",
+        "wiki": "http://www.yiiframework.com/wiki/",
+        "irc": "irc://irc.freenode.net/yii",
+        "source": "https://github.com/yiisoft/yii2"
+    },
+    "minimum-stability": "stable",
+    "require": {
+        "php": ">=5.4.0",
+        "symfony/process": "^2.8"
+    },
+    "require-dev": {
+        
+    },
+    "config": {
+        "process-timeout": 1800
+    },
+    "scripts": {
+        "post-create-project-cmd": [
+            
+        ]
+    }
+}
