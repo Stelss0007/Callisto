@@ -9064,6 +9064,12 @@ body.page-fade-only-init > .page-container {
     right: 2px;
     top: -4px;
 }
+
+#appMessage_msg_text .close:focus
+{
+    outline: none;
+}
+
 #appMessage_msg_text
 {
 /*  margin: 0 5px;
@@ -9080,7 +9086,7 @@ body.page-fade-only-init > .page-container {
   background-position: 5px 5px;*/
 
     background-repeat: no-repeat;
-    background-position: 10px 10px;
+    background-position: 15px 4px;
     border-width: 2px;
     margin: 0 2px;
     min-height: 30px;

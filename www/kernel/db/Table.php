@@ -100,14 +100,12 @@ class Table extends SQLBuilder
         }
     function getFields($table=null)
         {
-        global $appConfig;
-        
         if(empty($table))
             {
             $table = $this->tableName;
             }
 
-        if(\Cache::isCached('dbTableFields', $table) && !$appConfig['debug.enabled'])
+        if(\Cache::isCached('dbTableFields', $table) && !\App::$config['debug.enabled'])
           {
           return \Cache::getCached('dbTableFields', $table);
           }

@@ -1,7 +1,7 @@
 <?php
 namespace app\modules\articles\models;
 
-class articleCategory extends \app\db\ActiveRecord\Model
+class ArticleCategory extends \app\db\ActiveRecord\Model
   {
   public static $tableName = 'article_category';
   

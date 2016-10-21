@@ -10,36 +10,34 @@ class viewTpl extends Smarty
   **/
   function viewTpl()
     {
-    global $appConfig;
-
     //???????? ??????????? ??????
     //$this->Smarty();
     
     //????????? ???? ?????????? ???????????
-    $this->caching_type = $appConfig['coretpl.caching_type'];
-    $this->use_sub_dirs = $appConfig['coretpl.use_sub_dirs'];
-    $this->cache_lifetime = $appConfig['coretpl.cache_lifetime'];
-    if($appConfig['debug.enabled'])
+    $this->caching_type = \App::$config['coretpl.caching_type'];
+    $this->use_sub_dirs = \App::$config['coretpl.use_sub_dirs'];
+    $this->cache_lifetime = \App::$config['coretpl.cache_lifetime'];
+    if(\App::$config['debug.enabled'])
         { 
-        //$this->debugging = $appConfig['debug.enabled'];
+        //$this->debugging = \App::$config['debug.enabled'];
         $this->setCaching(Smarty::CACHING_LIFETIME_CURRENT);
-        $this->force_compile = true;//$appConfig['coretpl.force_compile'];
+        $this->force_compile = true;//\App::$config['coretpl.force_compile'];
         }
     else 
         {
         $this->setCaching(Smarty::CACHING_LIFETIME_CURRENT);
-        $this->setCacheLifetime($appConfig['coretpl.cache_lifetime']);
-        $this->setCompileCheck($appConfig['coretpl.force_compile']);    
+        $this->setCacheLifetime(\App::$config['coretpl.cache_lifetime']);
+        $this->setCompileCheck(\App::$config['coretpl.force_compile']);    
         }
     
-    //$this->compile_check = $appConfig['coretpl.compile_check'];
+    //$this->compile_check = \App::$config['coretpl.compile_check'];
     $this->template_dir = '';
     $this->config_dir='';
     $this->cache_dir = 'cache/content';
     $this->compile_dir = 'cache/templates';
-    $this->_file_perms  = $appConfig['default.file.perms'];
-    $this->_dir_perms = $appConfig['default.dir.perms'];
-    $this->cache_lifetime =  $appConfig['coretpl.cache_lifetime'];
+    $this->_file_perms  = \App::$config['default.file.perms'];
+    $this->_dir_perms = \App::$config['default.dir.perms'];
+    $this->cache_lifetime =  \App::$config['coretpl.cache_lifetime'];
 
     //????????????? ???????? ???????????
 //    if ($coreConfig['Var.caching']=='xcache')

@@ -58,8 +58,7 @@ class SQLBuilder {
     
     final private function setConfig()
         {
-        global $appConfig;
-        $this->config = & $appConfig;
+        $this->config = & \App::$config;
         }
         
     private function connect() 
@@ -570,8 +569,6 @@ class SQLBuilder {
         
     public function executeQuery($sql = null, $params=[], $fetchType='object')
         {
-        global $appConfig;
-  
         $mysqlResult = null;
       
         if(!$sql) {
@@ -582,12 +579,12 @@ class SQLBuilder {
         $sql = $this->prepareSQL($sql);
         
      
-        if($appConfig['debug.enabled'])
+        if(\App::$config['debug.enabled'])
             {
             \Debuger::start();
             $mysqlResult = $this->mysqli->query($sql);
             \Debuger::end();
-            \Debuger::logMySQL($sql, $mysqlResult);
+            \Debuger::logMySQL($sql, $mysqlResult, $this->className);
             }
         else
             {

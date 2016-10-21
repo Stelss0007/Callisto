@@ -11,7 +11,7 @@
  */
 function smarty_function_appSassOutput($params, &$smarty)
   {
-  global $sassLoaded, $appConfig, $mod_controller, $cssLoadedHasModScript;
+  global $sassLoaded, $mod_controller, $cssLoadedHasModScript;
   
   if(empty($sassLoaded))
     return true;

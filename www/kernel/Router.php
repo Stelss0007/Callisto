@@ -214,15 +214,16 @@ class Router
       $segments = explode('/', trim($fullURL['path'], '/'));
       // Первый сегмент — модуль.
       $mod = array_shift($segments);
-      if($mod == 'admin')
+      //if($mod == 'admin')
+      if($mod == \App::$config['admin.path'])
         {
         $type = 'admin';
         $mod = array_shift($segments);
         
         if(empty($mod))
           {
-          header("HTTP/1.1 302 Found");
-          header("Location: /admin/main");
+          header('HTTP/1.1 302 Found');
+          header('Location: /'.\App::$config['admin.path'].'/main');
           exit;
           }
         }

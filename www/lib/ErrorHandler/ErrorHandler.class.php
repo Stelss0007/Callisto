@@ -195,9 +195,9 @@ class ErrorHandler
     
   function showErrors()
     {
-    global $appConfig;
-    if(empty($appConfig['debug.enabled']))
+    if(empty(\App::$config['debug.enabled']))
       {
+      ob_start();
       header('HTTP/1.1 404 Page Not Found');
       echo 'Page Not Found!';
       die();
@@ -415,9 +415,7 @@ class ErrorHandler
     
   function showWarnings()
     {
-    global $appConfig;
-  
-    if(empty($appConfig['debug.enabled']))
+    if(empty(\App::$config['debug.enabled']))
       return true;
     
     $debug = Debuger::getInstance();

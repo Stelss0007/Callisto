@@ -11,7 +11,7 @@ class Comments extends \app\db\ActiveRecord\Model
         ],
   ];
   
-  function comment_list($full=false, $filter = array(), $limit = false, $sort = '')
+  function commentList($full=false, $filter = array(), $limit = false, $sort = '')
     {
     $where = '';
     if($filter)
@@ -70,12 +70,12 @@ class Comments extends \app\db\ActiveRecord\Model
     return $result;
     }
   
-  function comment_create($data)
+  function commentСreate($data)
     {
     return $this->insert($this->table, $data);
     }
     
-  function comment_update($data, $id)
+  function commentUpdate($data, $id)
     {
     if(!is_numeric($id))
       return false;

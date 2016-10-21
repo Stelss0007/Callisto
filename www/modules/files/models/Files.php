@@ -11,7 +11,7 @@
  *
  * @author stelss007
  */
-class files extends Model
+class Files extends Model
   {
   
   }

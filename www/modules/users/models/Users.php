@@ -1,10 +1,5 @@
 <?php
 namespace app\modules\users\models;
-/** 
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- * @Table('111') 
- */
 //class users extends Model
 class Users extends \app\db\ActiveRecord\Model
   {
@@ -48,15 +43,15 @@ class Users extends \app\db\ActiveRecord\Model
     if(!is_numeric($id))
       return false;
 
-    $user =  $this->find($id);
+    $user =  self::find($id);
     return $user;
     }
      
-  function logIn($login, $pass)
+  public static function logIn($login, $pass)
     {
     $pass = md5($pass);
    
-    $user = $this->findOne(['login'=>$login, 'pass'=>$pass, 'active'=>1]);
+    $user = self::findOne(['login'=>$login, 'pass'=>$pass, 'active'=>1]);
     
     if(empty($user))
       return false;
@@ -65,24 +60,24 @@ class Users extends \app\db\ActiveRecord\Model
     return true;
     }
     
-  function logOut()
+  public static function logOut()
     {
     $userSession = \app\lib\UserSession\UserSession::getInstance();
     $userSession->userLogOut();
     }
     
-  function isLogin()
+  public static function isLogin()
     {
     $userSession = \app\lib\UserSession\UserSession::getInstance();
     return $userSession->isLogin();
     }
     
-  function userId()
+  public static function userId()
     {
     $userSession = \app\lib\UserSession\UserSession::getInstance();
     return $userSession->userId();
     }
-  function userGid()
+  public static function userGid()
     {
     $userSession = \app\lib\UserSession\UserSession::getInstance();  
     return $userSession->userGid();

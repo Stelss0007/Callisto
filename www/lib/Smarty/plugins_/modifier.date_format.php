@@ -32,10 +32,9 @@ function smarty_modifier_date_format($string, $format = '', $default_date = '')
 {
     if($string == 0)
       return;
-    
-    global $appConfig;
+
     if(empty($format))
-      $format = $appConfig['date_format'];
+      $format = \App::$config['date_format'];
     
     if ($string != '') {
         $timestamp = smarty_make_timestamp($string);

@@ -51,7 +51,7 @@ class Debuger
     self::$workTime = self::$endTime - self::$startTime;
     }
     
-    public static function logMySQL($sgl, $result)
+    public static function logMySQL($sgl, $result, $className = 'Unknown')
         {
         if(!self::debugMode())
             return;
@@ -60,7 +60,8 @@ class Debuger
         $debug->mysql[] = [
                             'query'=>  trim(preg_replace('!\s+!', ' ', $sgl)), 
                             'exec_time'=>self::$workTime, 
-                            'result_count' => (!is_bool($result)) ? mysqli_num_rows($result) : 0
+                            'result_count' => (!is_bool($result)) ? mysqli_num_rows($result) : 0,
+                            'class' => $className,
                         ];
         }
         
@@ -102,8 +103,7 @@ class Debuger
 
   function debug($name, $var = null, $type = LOG)
     {
-    global $appConfig;
-    if(empty($appConfig['debug.enabled']))
+    if(empty(\App::$config['debug.enabled']))
       return;
 
     echo '<script type="text/javascript">'.NL;
@@ -174,8 +174,7 @@ class Debuger
     
   function debugAdd($name, $var = null, $type = LOG)
     {
-    global $appConfig;
-    if(empty($appConfig['debug.enabled']))
+    if(empty(\App::$config['debug.enabled']))
       return;
 
     

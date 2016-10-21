@@ -65,8 +65,7 @@ class Model extends DBConnector
     
   final function setConfig()
     {
-    global $appConfig;
-    $this->config = & $appConfig;
+    $this->config = & \App::$config;
     }
   //////////////////////////////////////////////////////////////////////////////  
   function getObject($guid=0)

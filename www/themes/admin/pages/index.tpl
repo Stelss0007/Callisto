@@ -100,21 +100,21 @@
                         </form>
                     </li>
                     
-                    <li><a class="ajax-link" href="/admin/main"><i class="icon-home"></i><span class="hidden-tablet"> {#theme_menu_dashboard#}</span></a></li>
-                    <li><a class="ajax-link" href="/admin/configuration/main"><i class="icon-cog"></i><span class="hidden-tablet"> {#theme_menu_configuration#}</span></a></li>
-                    <li><a class="ajax-link" href="/admin/groups"><i class="icon-users"></i><span class="hidden-tablet"> {#theme_menu_groups#}</span></a></li>
-                    <li><a class="ajax-link" href="/admin/users/users_list"><i class="icon-user"></i><span class="hidden-tablet"> {#theme_menu_users#}</span></a></li>
-                    <li><a class="ajax-link" href="/admin/permissions"><i class="icon-key"></i><span class="hidden-tablet"> {#theme_menu_permissions#}</span></a></li>
-                    <li><a class="ajax-link" href="/admin/menu/menu_list/0"><i class="icon-list"></i><span class="hidden-tablet"> {#theme_menu_menu#}</span></a></li>
-                    <li><a class="ajax-link" href="/admin/modules"><i class="icon-database"></i><span class="hidden-tablet"> {#theme_menu_modules#}</span></a></li>
-                    <li><a class="ajax-link" href="/admin/blocks"><i class="icon-layout"></i><span class="hidden-tablet"> {#theme_menu_blocks#}</span></a></li>
-                    <li><a class="ajax-link" href="/admin/theme"><i class="icon-brush"></i><span class="hidden-tablet"> {#theme_menu_themes#}</span></a></li>
-                    <li><a class="ajax-link" href="/admin/files"><i class="icon-folder"></i><span class="hidden-tablet"> {#theme_menu_files#}</span></a></li>
-                    <li><a class="ajax-link" href="/admin/articles"><i class="icon-doc-text"></i><span class="hidden-tablet"> {#theme_menu_articles#}</span></a></li>
-                    <li><a class="ajax-link" href="/admin/help/icons"><i class="icon-info"></i><span class="hidden-tablet"> {#theme_menu_icons#}</span></a></li>
+                    <li><a class="ajax-link" href="/{$appConfig['admin.path']}/main"><i class="icon-home"></i><span class="hidden-tablet"> {#theme_menu_dashboard#}</span></a></li>
+                    <li><a class="ajax-link" href="/{$appConfig['admin.path']}/configuration/main"><i class="icon-cog"></i><span class="hidden-tablet"> {#theme_menu_configuration#}</span></a></li>
+                    <li><a class="ajax-link" href="/{$appConfig['admin.path']}/groups"><i class="icon-users"></i><span class="hidden-tablet"> {#theme_menu_groups#}</span></a></li>
+                    <li><a class="ajax-link" href="/{$appConfig['admin.path']}/users/users_list"><i class="icon-user"></i><span class="hidden-tablet"> {#theme_menu_users#}</span></a></li>
+                    <li><a class="ajax-link" href="/{$appConfig['admin.path']}/permissions"><i class="icon-key"></i><span class="hidden-tablet"> {#theme_menu_permissions#}</span></a></li>
+                    <li><a class="ajax-link" href="/{$appConfig['admin.path']}/menu/menu_list/0"><i class="icon-list"></i><span class="hidden-tablet"> {#theme_menu_menu#}</span></a></li>
+                    <li><a class="ajax-link" href="/{$appConfig['admin.path']}/modules"><i class="icon-database"></i><span class="hidden-tablet"> {#theme_menu_modules#}</span></a></li>
+                    <li><a class="ajax-link" href="/{$appConfig['admin.path']}/blocks"><i class="icon-layout"></i><span class="hidden-tablet"> {#theme_menu_blocks#}</span></a></li>
+                    <li><a class="ajax-link" href="/{$appConfig['admin.path']}/theme"><i class="icon-brush"></i><span class="hidden-tablet"> {#theme_menu_themes#}</span></a></li>
+                    <li><a class="ajax-link" href="/{$appConfig['admin.path']}/files"><i class="icon-folder"></i><span class="hidden-tablet"> {#theme_menu_files#}</span></a></li>
+                    <li><a class="ajax-link" href="/{$appConfig['admin.path']}/articles"><i class="icon-doc-text"></i><span class="hidden-tablet"> {#theme_menu_articles#}</span></a></li>
+                    <li><a class="ajax-link" href="/{$appConfig['admin.path']}/help/icons"><i class="icon-info"></i><span class="hidden-tablet"> {#theme_menu_icons#}</span></a></li>
 
 
-                    <li><a class="ajax-link" href="/admin/users/login"><i class="icon-logout"></i><span class="hidden-tablet"> {#theme_menu_logout#}</span></a></li>
+                    <li><a class="ajax-link" href="/{$config['admin.path']}/users/login"><i class="icon-logout"></i><span class="hidden-tablet"> {#theme_menu_logout#}</span></a></li>
                 </ul>
 
             </div>	

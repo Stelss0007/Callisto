@@ -5,13 +5,13 @@
  * @version  1.0
  * @param array
  * @param Smarty
- * $debug_age       - Время жизни кеш файла в режиме отладки (4с)
- * $age             - Время жизни кеш файла в режиме не отладки (3600с)
+ * $debug_age       - пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ (4пїЅ)
+ * $age             - пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ (3600пїЅ)
  * @return string
  */
 function smarty_function_appCssOutput($params, &$smarty)
   {
-  global $cssLoaded, $appConfig, $mod_controller, $cssLoadedHasModScript;
+  global $cssLoaded, $mod_controller, $cssLoadedHasModScript;
   $modname          = $mod_controller->getModName();
   $action           = $mod_controller->getActionName();
   $params['input']  = $cssLoaded;
@@ -24,7 +24,7 @@ function smarty_function_appCssOutput($params, &$smarty)
     $params['output'] = "/public/cache/main.css";
     }
 
-  if($appConfig['debug.enabled'])
+  if(\App::$config['debug.enabled'])
     {
     if(isset($params['debug_age']) && !empty($params['debug_age']))
       {
@@ -95,12 +95,12 @@ function smarty_function_appCssOutput($params, &$smarty)
           foreach($filelist as $file)
             {
             fputs($fh, PHP_EOL . PHP_EOL . "/* " . $file['name'] . " @ " . date("c", $file['time']) . " */" . PHP_EOL . PHP_EOL);
-            //Получаем содержимое файла исходника и пишем файл кеша
+            //пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
             $buf = file_get_contents(APP_DIRECTORY . $file['name']);
-            //А теперь поменяем все пути с относительных на абсолютные
+            //пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
             $uri_path = dirname($file['name']);
             $buf = preg_replace('/(:?\s*url\s*\()[\'"\s]*([^\/\'"].*)[\'"\s]*\)/isU', '$1' . ($uri_path == '/' ? '/' : $uri_path . '/') . '$2)', $buf);
-            //Сохраним результат в файл кеша
+            //пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
             fputs($fh, $buf);
             }
           flock($fh, LOCK_UN);

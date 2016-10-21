@@ -7,14 +7,14 @@ $errors = ErrorHandler::getInstance();
 date_default_timezone_set('America/New_York');
 define('APP_DIRECTORY', dirname(__FILE__));
 
-include 'kernel/globals.php';
-include 'kernel/config.php';
-include 'kernel/appObject.php';
+include 'kernel/Globals.php';
+include 'kernel/App.php';
+include 'kernel/AppObject.php';
 include 'kernel/Request.php';
 include 'kernel/core.php';
-include 'kernel/router.php';
-include 'kernel/controller.php';
-include 'kernel/model.php';
+include 'kernel/Router.php';
+include 'kernel/Controller.php';
+include 'kernel/Model.php';
 
 include 'kernel/Validator.php';
 include 'kernel/db/SQLBuilder.php';
@@ -23,26 +23,7 @@ include 'kernel/db/Table.php';
 include 'kernel/db/Structure.php';
 include 'kernel/Cache.php';
 
-spl_autoload_register(function ($class) {
-    $class = explode('\\', $class);
-
-    if(!isset($class[0]) || $class[0] != 'app') {
-        return;
-    }
-    unset($class[0]);
-
-    if($class[1] == 'lib') {
-        $class = implode('/', $class);
-        $class = $class.'.class.php';
-        echo $class; 
-        exit;
-        include $class;
-        return true;
-    }
-    
-    $class = implode('/', $class);    
-    include $class.'.php';
-});
+App::init();
 
 $router = new Router();
 $router->run();

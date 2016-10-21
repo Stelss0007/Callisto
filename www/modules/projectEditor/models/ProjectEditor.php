@@ -4,20 +4,21 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
+namespace app\modules\projectEditor\models;
 
-class projectEditor extends Model
+class ProjectEditor
   {
 
-  function php_file_tree($directory, $return_link, $extensions = array())
+  public static function php_file_tree($directory, $return_link, $extensions = array())
     {
     // Generates a valid XHTML list of all directories, sub-directories, and files in $directory
     // Remove trailing slash
     if (substr($directory, -1) == "/") $directory = substr($directory, 0, strlen($directory) - 1);
-    $code .= $this->php_file_tree_dir($directory, $return_link, $extensions);
+    $code .= self::php_file_tree_dir($directory, $return_link, $extensions);
     return $code;
     }
 
-  function php_file_tree_dir($directory, $return_link, $extensions = array(), $first_call = true)
+  public static function php_file_tree_dir($directory, $return_link, $extensions = array(), $first_call = true)
     {
     // Recursive function called by php_file_tree() to list directories/files
     // Get and sort directories/files
@@ -62,7 +63,7 @@ class projectEditor extends Model
             // Directory
             $short_directory = str_replace(APP_DIRECTORY, '', $directory);
             $php_file_tree .= "<li class=\"pft-directory file-tree-$this_file hasmenu-dir\" data-src='$short_directory/$this_file'><a href=\"#\" class=''>".htmlspecialchars($this_file)."</a>";
-            $php_file_tree .= $this->php_file_tree_dir("$directory/$this_file", $return_link, $extensions, false);
+            $php_file_tree .= self::php_file_tree_dir("$directory/$this_file", $return_link, $extensions, false);
             $php_file_tree .= "</li>";
             }
           else

@@ -19,10 +19,10 @@ class AppObject
   public    $config = null;
   public    $theme;
   public    $session;
-  protected $libs = array();
-  public    $models = array();
+  protected $libs = [];
+  public static $models = [];
   protected $modname;
-  public    $pagination = array();
+  public    $pagination = [];
   
  
   final public function GetCallingMethodName($position = null, $with_args = false)
@@ -49,9 +49,10 @@ class AppObject
   //////////////////////////////////////////////////////////////////////////////
   ////////////////////////////   MODELS     ////////////////////////////////////
   //////////////////////////////////////////////////////////////////////////////
+ /*  
   final public function usesModel($modulename=null, $autocreate=true)
     {
-
+    return;
     switch ($modulename) {
         case 'Users':
         case 'Groups':
@@ -95,6 +96,7 @@ class AppObject
     
   final public function usesModule($modulename=null, $autocreate=true)
     {
+    return;
     $models = appUsesModule($modulename);
 
     if($autocreate)
@@ -132,6 +134,13 @@ class AppObject
       }
     return true;
     }
+  * 
+  */
+    
+  final public static function addModelList($namespace, $realPath)
+  {
+      self::$models[] = $namespace." ({$realPath}.php)";
+  }
     
   final public function arrayToModel(&$model, $array)
     {

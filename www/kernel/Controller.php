@@ -41,7 +41,7 @@ abstract class Controller extends AppObject
                           'right' =>array(),
                           'bottom'=>array()
                           );
-  public $models= array();
+  //public $models= array();
   protected $libs = array();
   protected $tpls = array();
   
@@ -70,7 +70,7 @@ abstract class Controller extends AppObject
     
     $this->setConfig();
     
-    if($this->config['gzip'])
+    if(\App::$config['gzip'])
       {
       ob_start();
       ob_implicit_flush(0);
@@ -107,7 +107,7 @@ abstract class Controller extends AppObject
     $this->moduleDir = 'modules/'.$this->modname.'/';
     
     require(KERNEL_DIR.'debuger.php');
-    if($this->config['debug.enabled'] && !appIsAjax() && $this->type != 'api')
+    if(\App::$config['debug.enabled'] && !appIsAjax() && $this->type != 'api')
       {
       $this->debuger = & Debuger::getInstance();
       $this->debuger->startRenderPage();
@@ -117,7 +117,7 @@ abstract class Controller extends AppObject
     $this->sessinInit();
     //?????????????? ?????? ???????? ??????
     //$this->usesModel();
-    $this->usesModule($mod);
+    //$this->usesModule($mod);
 
     //?????? ????????? ????? ?????????????
     $this->smarty = new viewTpl();
@@ -129,7 +129,7 @@ abstract class Controller extends AppObject
     //$this->current_theme = 'blog_theme1';
     
     //Установим язык
-    $this->setLang($this->config['lang']);
+    $this->setLang(\App::$config['lang']);
     $this->loadLang();
     
     $this->loadModuleLang($this->modname);
@@ -158,7 +158,7 @@ abstract class Controller extends AppObject
     
   function __destruct()
     {
-    if($this->config['debug.enabled'] && !appIsAjax() && $this->type != 'api')
+    if(\App::$config['debug.enabled'] && !appIsAjax() && $this->type != 'api')
       {
         
 //      $DB = DBConnector::getInstance();
@@ -199,9 +199,9 @@ abstract class Controller extends AppObject
             $debuger->debugAdd($value, null, INFO);
         $debuger->debugAddEndGroup();
         //
-        $debuger->debugAddCreateGroup("Uses Models (".sizeof($this->models).")");
-        if($this->models)
-          foreach($this->models as $value)
+        $debuger->debugAddCreateGroup("Uses Models (".sizeof(AppObject::$models).")");
+        if(AppObject::$models)
+          foreach(AppObject::$models as $value)
             $debuger->debugAdd($value, null, INFO);
         $debuger->debugAddEndGroup();
         //
@@ -249,7 +249,7 @@ abstract class Controller extends AppObject
       $debuger->render();  
       }
       
-    if($this->config['gzip'])
+    if(\App::$config['gzip'])
       {
       appGzippedOutput();
       }
@@ -319,7 +319,7 @@ abstract class Controller extends AppObject
     
     $this->objectName = $this->objectName.'::permission::'.appGetAccessName($this->permissionLavel);
     
-    $this->smarty->assign('config', $this->config);
+    $this->smarty->assign('config', \App::$config);
     
     //Подключим джаваскрипты
     appJsLoad('kernel', 'jQuery');
@@ -381,22 +381,21 @@ abstract class Controller extends AppObject
     
   final function setConfig()
     {
-    global $appConfig;
-    $this->config = &$appConfig;
+    $this->assign('appConfig', \App::$config);
     }
   
   final function getConfig($var)
     {
-    return (isset($this->config[$var])) ? $this->config[$var] : false;
+    return (isset(\App::$config[$var])) ? \App::$config[$var] : false;
     }
     
   final function getModConfig($modname='main', $var='')
     {
     //appDebugExit($this->config);
     if(empty($var))
-      return (isset($this->config[$modname])) ? $this->config[$modname] : array();
+      return (isset(\App::$config[$modname])) ? \App::$config[$modname] : array();
     
-    return (isset($this->config[$modname][$var])) ? $this->config[$modname][$var] : false;
+    return (isset(\App::$config[$modname][$var])) ? \App::$config[$modname][$var] : false;
     }
   
   final function setModConfig()
@@ -405,7 +404,7 @@ abstract class Controller extends AppObject
     $db_conf = \app\modules\configuration\models\Configuration::getModConfiguration('main');
     if(!empty($db_conf))
       {
-      $this->config = array_merge($this->config, $db_conf);
+      \App::$config = array_merge(\App::$config, $db_conf);
       }
     unset($db_conf);
     }
@@ -564,7 +563,7 @@ abstract class Controller extends AppObject
 //        $this->statistic->setLog();
         return false;
         }
-    
+ 
     $this->viewPage();
     }
     
@@ -576,7 +575,7 @@ abstract class Controller extends AppObject
     echo $this->smarty->fetch($tplDir, $objectName);
     
     //$this->__destruct();
-    if(!$this->config['debug.enabled']) 
+    if(!\App::$config['debug.enabled']) 
         {
         $this->__destruct();
         }
@@ -652,7 +651,7 @@ abstract class Controller extends AppObject
 //    $this->usesModel('statistic');
 //    $this->statistic->setLog();
     
-    if(!$this->config['debug.enabled']) 
+    if(!\App::$config['debug.enabled']) 
         {
         $this->__destruct();
         }
@@ -1105,7 +1104,7 @@ abstract class Controller extends AppObject
         }
       }
     
-    if($this->config['Message.type']=='js')
+    if(\App::$config['Message.type']=='js')
       {
       if($message)
         {
@@ -1608,7 +1607,8 @@ abstract class Controller extends AppObject
     if(empty($id))
       $this->errors->setError("ID of object is missing!");
     
-    $model_name = $this->modname;
+    $modelName = $this->modname;
+
     $class = "\\app\\modules\\{$modelName}\\models\\".ucfirst($modelName);
     
     $object = $class::find($id);

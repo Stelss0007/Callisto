@@ -39,7 +39,6 @@ class Block extends AppObject
 
   function __construct($blockInfo) 
     {
-    global $appConfig;
     $this->root_dir = APP_DIRECTORY.'/';
     foreach($blockInfo as $key=>$value)
       {
@@ -63,7 +62,7 @@ class Block extends AppObject
     $this->smarty->assign($blockInfo);
     
     //Установим язык
-    $this->setLang($appConfig['lang']);
+    $this->setLang(\App::$config['lang']);
     }
     /************************** Блоки  *******************************/
   //Соберем все блоки и приготовим к отображению по своим местам

@@ -11,7 +11,7 @@
  */
 function smarty_function_appLessOutput($params, &$smarty)
   {
-  global $lessLoaded, $appConfig, $mod_controller, $cssLoadedHasModScript;
+  global $lessLoaded, $mod_controller, $cssLoadedHasModScript;
   
   if(empty($lessLoaded))
     return true;

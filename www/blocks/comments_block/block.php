@@ -7,7 +7,7 @@ class comments_block extends Block
     {
     //$this->viewCached();
     $config = unserialize(stripcslashes($blockinfo->content));
-    $this->usesModel('comments');
+    //$this->usesModel('comments');
     //appDebugExit($blockinfo); 
     $this->assign('module_object', $blockinfo->module_object);
     $this->assign('module_name', $blockinfo->module_name);
@@ -26,7 +26,7 @@ class comments_block extends Block
     
   function modify(&$blockinfo)
     {
-    $this->usesModel('comments');
+    //$this->usesModel('comments');
     //$this->assign('toolbar', $this->getBlockContent('toolbar', array()));
     //$this->menutypes_list = array (1=>'Всегда развернуто',2=>'Разварачиваюшееся');
     return $this->view();

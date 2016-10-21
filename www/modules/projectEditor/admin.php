@@ -1,16 +1,18 @@
 <?php
+use app\modules\projectEditor\models\ProjectEditor;
+
 class AdminController extends Controller
   {
   public $defaultAction = 'ViewEditor';
 
   function actionGetFileTree()
     {
-    echo $this->projectEditor->php_file_tree(APP_DIRECTORY, '/projectEditor/list_file/?file=[link]');
+    echo ProjectEditor::php_file_tree(APP_DIRECTORY, '/projectEditor/list_file/?file=[link]');
     }
   function actionViewEditor()
     {
-    //$this->phpTree = $this->projectEditor->php_file_tree(APP_DIRECTORY, "?module=projectEditor&action=listFile&file=[link]");
-    $this->phpTree = $this->projectEditor->php_file_tree(APP_DIRECTORY, '/projectEditor/list_file/?file=[link]');
+    //$this->phpTree = ProjectEditor::php_file_tree(APP_DIRECTORY, "?module=projectEditor&action=listFile&file=[link]");
+    $this->phpTree = ProjectEditor::php_file_tree(APP_DIRECTORY, '/projectEditor/list_file/?file=[link]');
     $this->view();
     }
   function actionListFile()
