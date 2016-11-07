@@ -1,7 +1,8 @@
 <?php
 //phpinfo();exit;
+require 'vendor/autoload.php';
 include 'kernel/Exceptions.php';
-include 'lib/ErrorHandler/ErrorHandler.class.php';
+include 'kernel/ErrorHandler.php';
 $errors = ErrorHandler::getInstance();
 
 date_default_timezone_set('America/New_York');
@@ -68,7 +69,7 @@ $router->run();
 //class Test extends \app\db\ActiveRecord\Model
 //{
 //    static $validators = [
-//        ['description', 'date'=>'Y/m/d', 'min'=>10]
+//        'description' => ['date'=>'Y/m/d', 'min'=>10]
 //    ];
 //
 //    static $relations = [

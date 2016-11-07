@@ -9,6 +9,7 @@ class ErrorHandler
   var $warning_array = array();
   var $user_error_array = array();
   var $backTrace = [];
+  var $log = [];
   
 
   public static function getInstance()
@@ -195,6 +196,8 @@ class ErrorHandler
     
   function showErrors()
     {
+    $this->log = array_slice(debug_backtrace(), 3);
+    
     if(empty(\App::$config['debug.enabled']))
       {
       ob_start();
@@ -318,7 +321,7 @@ class ErrorHandler
                 <table width="100%" id="trace-table">
                 <?php
                 //Trace error
-                if($this->error_array[0]['trace']):
+                if($this->error_array && $this->error_array[0]['trace']):
                     $currentTraceFile = '';
                     foreach($this->error_array[0]['trace'] as $key => $traceValue):
                         $currentTraceFile = (isset($traceValue['file'])) ? $traceValue['file'] : $currentTraceFile;
@@ -393,13 +396,16 @@ class ErrorHandler
                 </table>
             </td>
         <tr>
-        
         <?php //echo  $handler->renderCallStackItem($exception->getFile(), $exception->getLine(), null, null, [], 1) ?>
         <?php /*for ($i = 0, $trace = $exception->getTrace(), $length = count($trace); $i < $length; ++$i): ?>
                 <?php echo  $handler->renderCallStackItem(@$trace[$i]['file'] ?: null, @$trace[$i]['line'] ?: null,
                     @$trace[$i]['class'] ?: null, @$trace[$i]['function'] ?: null, $trace[$i]['args'], $i + 2) ?>
         <?php endfor;*/ ?>
       </table>
+      <?php 
+      $this->showTraceLog();
+      //var_dump($this->log); 
+      ?>
       <hr>
       <div class="global-vars">
           <pre><span class="global-var">$_POST</span> = <?php print_r($_POST)?></pre>
@@ -413,12 +419,31 @@ class ErrorHandler
     die();
     }
     
+  function showTraceLog(){
+      echo '<h2>Debug Log</h2>';
+      echo '<table style="width: 100%;">';
+      echo '<thead><tr style="background-color: red; color: #fff;" class="thead"><td>File</td><td>Line</td><td>Function</td></tr></thead>';
+      foreach($this->log as $key=>$log){
+          echo '<tr>';
+          echo "<td>{$log['file']}</td>";
+          echo "<td>{$log['line']}</td>";
+          echo "<td>";
+          echo (isset($log['class']) && $log['class']) ? $log['class'].$log['type'] : '';
+          echo "{$log['function']}()</td>";
+          echo '<tr>';
+      }
+      echo '</table>';
+  }  
   function showWarnings()
     {
     if(empty(\App::$config['debug.enabled']))
       return true;
+   
+    if(!class_exists('\Debuger')){
+        return;
+    }
     
-    $debug = Debuger::getInstance();
+    $debug = \Debuger::getInstance();
     
     foreach($this->warning_array as $verror)
       {

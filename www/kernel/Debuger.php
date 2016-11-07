@@ -262,7 +262,7 @@ class Debuger
     
   function render()
     {
-    $this->renderMySQL();
+    //$this->renderMySQL();
     
     echo '<script type="text/javascript">'.NL;
     echo $this->debug_private_messages;

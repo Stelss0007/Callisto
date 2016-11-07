@@ -8,6 +8,27 @@ class IndexController extends Controller
   
   public function actionArticleList()
     {
+    /*
+    $testArray = [
+        'firstName' => 'ru',
+        'secondName' => 'rus',
+        'birthday' => '2016-10-20',
+        'cardNumber' => '5211537422805189',
+    ];  
+    
+    $validationRules = [
+        'firstName'=> ['max'=>40, 'min'=>3, 'required'],
+        'secondName'=> 'required',
+        'birthday'=> ['required', 'date'=>'Y-m-d'],
+        'cardNumber' => ['creditCard'],
+    ];
+    
+    $validator  = \Validator::make($testArray, $validationRules);  
+    appDebug($validator->hasError());  
+    appDebug($validator->getErrors());  
+    appDebug($validator->getFirstError('firstName')); 
+     */
+      
     $browsein[] = ['url'=>"/", 'displayname'=>$this->t('dashboard')];
     $browsein[] = ['url'=>'/articles', 'displayname' => $this->t('articles_header')]; 
     $this->assign('module_browsein', $browsein);
@@ -31,7 +52,7 @@ class IndexController extends Controller
     $this->article_category_list = $category_filter_list;
     $this->article_user_list     = $user_filter_list;
     $this->article_status_list   = $status_filter_list;
-    
+  
     $this->assign($this->getInput('filter', []));
     
     $this->viewPage();
