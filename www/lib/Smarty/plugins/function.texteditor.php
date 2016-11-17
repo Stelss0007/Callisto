@@ -18,8 +18,9 @@ function smarty_function_texteditor($params, &$smarty)
   
   $config = & $smarty->getTemplateVars('config');
   
-  $lang = substr($config['lang'], 0, 2);
+  $lang = substr(\App::$config['lang'], 0, 2);
   
+  if (empty ($type)) $type='basic';
   if (empty ($name)) $name='texteditor_'.$bbeditor_num;
   if (empty ($id)) $id='texteditor_'.$bbeditor_num;
   if (empty ($class)) $class='texteditor_class';
@@ -29,17 +30,102 @@ function smarty_function_texteditor($params, &$smarty)
   appJsLoad('kernel', 'tinymce');
 //  appCssLoad('kernel', 'default','jsBBCode');
   
-  echo "<textarea id='$id' name='$name' class='$class' style='height:{$height}px;width:{$width};'>" . htmlspecialchars($text, ENT_QUOTES) . "</textarea>";
+  echo "<textarea id='$id' name='$name' class='$class texteditor' style='height:{$height}px;width:{$width};'>" . htmlspecialchars($text, ENT_QUOTES) . "</textarea>";
+  
+  
+  $tinyMCETypes['classic'] = '       
+tinymce.init({
+  selector: "textarea#'.$id.'",
+  height: 500,
+  plugins: [
+    "advlist autolink autosave link image lists charmap print preview hr anchor pagebreak spellchecker imagetools",
+    "searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking",
+    "table contextmenu directionality emoticons template textcolor paste fullpage textcolor colorpicker textpattern"
+  ],
+
+  toolbar1: "newdocument fullpage | bold italic underline strikethrough | alignleft aligncenter alignright alignjustify | styleselect formatselect fontselect fontsizeselect",
+  toolbar2: "cut copy paste | searchreplace | bullist numlist | outdent indent blockquote | undo redo | link unlink anchor image media code | insertdatetime preview | forecolor backcolor",
+  toolbar3: "table | hr removeformat | subscript superscript | charmap emoticons | print fullscreen | ltr rtl | spellchecker | visualchars visualblocks nonbreaking template pagebreak restoredraft",
+
+  menubar: false,
+  toolbar_items_size: "small",
+
+  style_formats: [{
+    title: "Bold text",
+    inline: "b"
+  }, {
+    title: "Red text",
+    inline: "span",
+    styles: {
+      color: "#ff0000"
+    }
+  }, {
+    title: "Red header",
+    block: "h1",
+    styles: {
+      color: "#ff0000"
+    }
+  }, {
+    title: "Example 1",
+    inline: "span",
+    classes: "example1"
+  }, {
+    title: "Example 2",
+    inline: "span",
+    classes: "example2"
+  }, {
+    title: "Table styles"
+  }, {
+    title: "Table row 1",
+    selector: "tr",
+    classes: "tablerow1"
+  }],
+
+  templates: [{
+    title: "Test template 1",
+    content: "Test 1"
+  }, {
+    title: "Test template 2",
+    content: "Test 2"
+  }],
+  content_css: [
+    "/public/js/tinymce/skins/lightgray/codepen.min.css"
+  ]
+});';
+  
+  
+$tinyMCETypes['basic'] = '  
+tinymce.init({
+  selector: "textarea#'.$id.'",
+  file_browser_callback: elFinderBrowser,
+  height: 500,
+  plugins: [
+    "advlist autolink lists link image charmap print preview anchor imagetools",
+    "searchreplace visualblocks code fullscreen",
+    "insertdatetime media table contextmenu paste code"
+  ],
+  toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image",
+  content_css: "//www.tinymce.com/css/codepen.min.css"
+});
+
+';
+
+$tinyMCETypes['bbcode'] = '
+tinymce.init({
+  selector: "textarea#'.$id.'",  // change this value according to your HTML
+  plugins: "bbcode"
+});
+';
+  
+
+$initScript = (isset($tinyMCETypes[$type])) ? $tinyMCETypes[$type] : $tinyMCETypes['basic'];
+
   echo '<script>
       if(typeof tinyMCE == "undefined") 
         {
-//        $.getScript("/public/js/tinymce/tinymce.js", function() {
-//        
-//        });
-        
         $.ajax({
             async: false,
-            url: "/public/js/tinymce/tinymce.js",
+            url: "//cdn.tinymce.com/4/tinymce.min.js",
             dataType: "script"
         });
         }
@@ -47,71 +133,29 @@ function smarty_function_texteditor($params, &$smarty)
 
         
     $(document).ready(function(){
-            var tinyMCEPreInit = {
-            suffix: "",
-            base: "/public/js/tinymce/",
-            query: ""
-        };
-        tinyMCE.baseURL="/public/js/tinymce/";
-        
-        tinyMCE.init({
-            language: "'.$lang.'",
-            relative_urls : true,
-            relative_urls : "/public/js/tinymce/",
-            remove_script_host : false,
-            convert_urls : true,
-            // General options
-            mode : "exact",
-        
-        force_br_newlines : false,
-        convert_newlines_to_brs : true,
-        remove_linebreaks : false,    
-        
-        elements : "'.$id.'",
-        theme : "advanced",
-        //resize: false,
-        autoresize_min_height: 400,
-        autoresize_max_height: 400,
-        
-        plugins : "autolink,lists,spellchecker,pagebreak,style,layer,table,save,advhr,advimage,advlink,emotions,iespell,inlinepopups,insertdatetime,preview,media,searchreplace,print,contextmenu,paste,directionality,fullscreen,noneditable,visualchars,nonbreaking,xhtmlxtras,template",
-
-        // Theme options
-        theme_advanced_buttons1 : "save,newdocument,|,bold,italic,underline,strikethrough,|,justifyleft,justifycenter,justifyright,justifyfull,|,styleselect,formatselect,fontselect,fontsizeselect",
-        theme_advanced_buttons2 : "cut,copy,paste,pastetext,pasteword,|,search,replace,|,bullist,numlist,|,outdent,indent,blockquote,|,undo,redo,|,link,unlink,anchor,image,cleanup,help,code,|,insertdate,inserttime,preview,|,forecolor,backcolor",
-        theme_advanced_buttons3 : "tablecontrols,|,hr,removeformat,visualaid,|,sub,sup,|,charmap,emotions,iespell,media,advhr,|,print,|,ltr,rtl,|,fullscreen",
-        theme_advanced_buttons4 : "insertlayer,moveforward,movebackward,absolute,|,styleprops,spellchecker,|,cite,abbr,acronym,del,ins,attribs,|,visualchars,nonbreaking,template,blockquote,pagebreak,|,insertfile,insertimage",
-        theme_advanced_toolbar_location : "top",
-        theme_advanced_toolbar_align : "left",
-        theme_advanced_statusbar_location : "bottom",
-        theme_advanced_resizing : false,
-
-        // Drop lists for link/image/media/template dialogs
-        template_external_list_url : "/js/template_list.js",
-        external_link_list_url : "/js/link_list.js",
-        external_image_list_url : "/js/image_list.js",
-        media_external_list_url : "/js/media_list.js",
-        
-        file_browser_callback : "elFinderBrowser" 
-
-});
-
-});
+        if(typeof(tinymce) != "undefined") 
+        {
+            '.$initScript.'
+        }
+    });
 
 if(typeof (window.elFinderBrowser) != "function") {
   function elFinderBrowser (field_name, url, type, win) {
     var elfinder_url = "/admin/files/jsplugin";    // use an absolute path!
     tinyMCE.activeEditor.windowManager.open({
       file: elfinder_url,
-      title: "",
+      title: "Select Image",
       width: 900,  
       height: 450,
       resizable: "yes",
       inline: "yes",    // This parameter only has an effect if you use the inlinepopups plugin!
       popup_css: false, // Disable TinyMCE default popup CSS
       close_previous: "no"
-    }, {
-      window: win,
-      input: field_name
+    }, 
+    {
+      setUrl: function (url) {
+        win.document.getElementById(field_name).value = url;
+      }
     });
     return false;
   }

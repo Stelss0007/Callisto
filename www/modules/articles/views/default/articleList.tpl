@@ -4,11 +4,11 @@
 {foreach from=$articles_list item=article}
   {cycle name="articles" values="even, odd" assign="class" print=false}
   <div class="article-list-item">
-    <b>
+    <h2 class="article-title">
       <a href="/articles/view/{$article->id}">
         {$article->article_title|escape}
       </a>
-    </b>
+    </h2>
     <div class="article-info">
       <div>
         <b>{#sys_added#}:</b> {$article->article_add_time|date_format}

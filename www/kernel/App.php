@@ -1,6 +1,7 @@
 <?php
 class App {
     public static $config = [];
+    public static $global = [];
     
     private static function initAutoloader()
     {

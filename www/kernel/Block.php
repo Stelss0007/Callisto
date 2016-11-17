@@ -293,13 +293,14 @@ class Block extends AppObject
     {
     $block = Blocks::find($id);
     if($this->vars['attributes']) {
-        $this->vars['attributes']['content'] = '';
+        //$this->vars['attributes']['content'] = '';
         $block->content = serialize($this->vars['attributes']);
     } else {
         $this->vars['content'] = '';
         $block->content = serialize($this->vars);
     }
-        
+    
+    //appDebugExit($block);
     $block->save();
     }
 

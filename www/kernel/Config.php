@@ -1,5 +1,6 @@
 <?php
 return [
+    'bootstrap.enabled' => true,
     'admin.path' => 'admin',
     //Настройки отладки
     'debug.enabled' => true,

@@ -24,3 +24,8 @@ and open the template in the editor.
   margin-top: 10px;
 }
 
+
+h2.article-title {
+    text-align: left;
+    font-size: 16px;
+}

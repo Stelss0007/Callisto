@@ -71,13 +71,14 @@ blockquote cite {
 	border-bottom: 1px solid #aaa;
 }
 div { min-height: 1.25em; }
-h1, h2, h3, h4, h5, h6 { padding: 0; margin: 0; }
+//h1, h2, h3, h4, h5, h6 { padding: 0; margin: 0; }
 
 
 /*Messages*/
 #appMessage_conteiner
 {
   position: fixed;
+  top: 0px;
   width: 100%;
   display: none;
   z-index: 10000;
@@ -243,5 +244,9 @@ table.dataTable tfoot th
 }
 
 .app-block-template {
+    display: none;
+}
+
+#modal-box .madal-body .box-header {
     display: none;
 }

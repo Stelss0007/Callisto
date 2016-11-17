@@ -37,7 +37,7 @@ function smarty_function_pagination($params, &$smarty)
   if(!isset($paging_element_count))   $paging_element_count = 7;
   
 
-  $url = appCurPageURL();
+  $url = appCurrentPageURL();
   $url = appUpdateUrlQuery($url, array('page' => ''));
 
   $paging_element_count--;

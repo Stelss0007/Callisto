@@ -37,7 +37,7 @@ function smarty_function_pagination($params, &$smarty)
   if(!isset($paging_element_count))   $paging_element_count = 7;
   
 
-  $url = appCurPageURL();
+  $url = appCurrentPageURL();
   $url = appUpdateUrlQuery($url, array('page' => ''));
 
   $paging_element_count--;
@@ -48,7 +48,7 @@ function smarty_function_pagination($params, &$smarty)
     }
 
 
-  $result = '<div class="pagination">';
+  $result = '<div class="pagination" style="width: 100%;">';
   
   if($paging_show_text && ($page_total > 1)) 
     {

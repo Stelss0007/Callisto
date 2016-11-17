@@ -53,7 +53,7 @@ class SQLBuilder {
         
     function __destruct() 
         {
-        $this->mysqli->close();
+        //$this->mysqli->close();
         }
     
     final private function setConfig()

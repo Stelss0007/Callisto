@@ -15,7 +15,7 @@ function smarty_function_appJsOutput($params, &$smarty)
   $modname          = $mod_controller->getModName();
   $action           = $mod_controller->getActionName();
   $params['input']  = $jsLoaded;
-  
+ 
   if(isset($jsLoadedHasModScript) && !empty($jsLoadedHasModScript))
     {
     $params['output'] = "/public/cache/$modname.$action.main.js";

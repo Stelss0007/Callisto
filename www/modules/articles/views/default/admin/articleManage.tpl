@@ -1,4 +1,4 @@
-{appJsLoad modname='kernel' scriptname='tinymce'} 
+ 
 <form action="/admin/articles/article_manage" method="post" class="form-horizontal" enctype="multipart/form-data">
     <input type="hidden" name='id' value="{$id}">
     <div class="row-fluid">

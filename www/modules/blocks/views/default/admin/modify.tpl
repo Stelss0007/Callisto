@@ -12,7 +12,6 @@
       </div>
       <div class="box-content">
         
-        <fieldset>
            {* <legend>Manage form</legend>*}
             <br><br>
              <div class="form-group">
@@ -68,15 +67,16 @@
               
             {$block_config_result}
              
-            <div class="form-actions col-sm-8">
-              <button type="submit" class="btn btn-primary" name="submit" value="submit">{#sys_save#}</button>
-              &nbsp;
-              <button type="submit" class="btn btn-primary" name="submit_exit" value="submit_exit">{#sys_save_exit#}</button>
-              &nbsp;
-              <button type="reset" class="btn">Cancel</button>
+            <div class='row'>
+                <div class="col-sm-12">
+                  <button type="submit" class="btn btn-primary" name="submit" value="submit">{#sys_save#}</button>
+                  &nbsp;
+                  <button type="submit" class="btn btn-primary" name="submit_exit" value="submit_exit">{#sys_save_exit#}</button>
+                  &nbsp;
+                  <button type="reset" class="btn">Cancel</button>
+                </div>
             </div>
         
-        </fieldset>
       </div>
     </div><!--/span-->
 

@@ -26,7 +26,7 @@ function smarty_function_texteditor($params, &$smarty)
   if (empty ($width)) $width = '100%';
   if (empty ($height)) $height=425;
   
-  appJsLoad('kernel', 'tinymce');
+  //appJsLoad('kernel', 'tinymce');
 //  appCssLoad('kernel', 'default','jsBBCode');
   
   echo "<textarea id='$id' name='$name' class='$class' style='height:{$height}px;width:{$width};'>" . htmlspecialchars($text, ENT_QUOTES) . "</textarea>";

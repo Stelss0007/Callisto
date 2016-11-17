@@ -10,9 +10,13 @@
  * @return string
  */
 function smarty_function_appCssLoad($params, &$smarty)
-	{
-	$smarty->appCssLoad($params['modname'], $params['scriptname'], $params['dir']);
-	}
+    {
+    if(!isset($params['modname'])) {$params['modname'] = '';}
+    if(!isset($params['scriptname'])) {$params['scriptname'] = 'main';}
+    if(!isset($params['dir'])) {$params['dir'] = '';}
+    
+    $smarty->appCssLoad($params['modname'], $params['scriptname'], $params['dir']);
+    }
 
 
 ?>

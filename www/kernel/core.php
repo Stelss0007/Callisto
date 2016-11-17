@@ -61,11 +61,8 @@ function appIsAjax()
      strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') {
     return true;
     }
-    
-  global $routerVars;
 
-
-  if($routerVars['module'] == 'files' && $routerVars['action'] == 'get_list' || ($_SERVER['REQUEST_URI']=='/admin/files/get_list') || $routerVars['type'] == 'api')
+  if(\App::$global['route.module'] == 'files' && \App::$global['route.action'] == 'get_list' || ($_SERVER['REQUEST_URI']=='/admin/files/get_list') || \App::$global['route.type'] == 'api')
     {
     return true;
     }
@@ -337,11 +334,14 @@ function appConvertUrlQuery($query)
   $queryParts = explode('&', $query); 
 
   $params = array(); 
-  foreach ($queryParts as $param) { 
-      $item = explode('=', $param); 
-      $params[$item[0]] = $item[1]; 
-  } 
-
+  if($queryParts) {
+    foreach ($queryParts as $param) { 
+        $item = explode('=', $param); 
+        if($item && $item[0]) {
+            $params[$item[0]] = (isset($item[1])) ? $item[1] : null; 
+        }
+    } 
+  }
   return $params; 
   } 
   
@@ -355,14 +355,14 @@ function appUpdateUrlQuery($query, $fields)
     {
     $current_fields[$key] = $value;
     }
-  $curr_url_params = parse_url(appCurPageURL());
+  $curr_url_params = parse_url(appCurrentPageURL());
   return $curr_url_params['scheme'].'://'.$curr_url_params['host'].$curr_url_params['path'].'?'.appBuildHttpQuery($current_fields);
   } 
 
-function appCurPageURL() 
+function appCurrentPageURL() 
   {
   $pageURL = 'http';
-  if ($_SERVER["HTTPS"] == "on") {$pageURL .= "s";}
+  if (isset($_SERVER["HTTPS"]) && $_SERVER["HTTPS"] == "on") {$pageURL .= "s";}
   $pageURL .= "://";
   if ($_SERVER["SERVER_PORT"] != "80") {
    $pageURL .= $_SERVER["SERVER_NAME"].":".$_SERVER["SERVER_PORT"].$_SERVER["REQUEST_URI"];
@@ -1131,7 +1131,7 @@ function appVarSetCached($component, $cacheKey, $value=null, $ttl=null)
   \App::$config[$cacheKey] = $value;
 
   //В зависимости от типа сохраняем кеш в внешнее хранилище
-  if ($appConfig['Var.caching'] == 'disk')
+  if (\App::$config['Var.caching'] == 'disk')
     {
     $cacheKey_crc = (string)abs (crc32 ($cacheKey));
     $dir_way = './cache/vars/' . $component . '/'. $cacheKey_crc[0].'/'.$cacheKey_crc[1].'/';

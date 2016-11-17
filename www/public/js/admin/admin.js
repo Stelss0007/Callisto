@@ -2,6 +2,7 @@ $(document).ready(function(){
   sortable();
 
   $('body').append('<div id="dialog-box" title="&nbsp;"></div>');
+  $('body').append('<div id="modal-box" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog"><div class="modal-dialog modal-lg" role="document"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button><div class="title"></div></div><div class="madal-body"></div></div></div></div>');
   
   var dialog = $('#dialog-box').dialog({
                   autoOpen: false,
@@ -71,7 +72,7 @@ $(document).ready(function(){
                   var blockContainer = ui.item.find('.app-block-admin-conteiner');
                   var blockContent   = blockContainer.find('.app-block-content');
                   var blockTitle     = blockContainer.find('.app-block-name');
-                  
+          
                   blockContent = blockContent.is('input') ? blockContent.val() : blockContent.html();
                   blockTitle   = blockTitle.is('input') ? blockTitle.val() : blockTitle.html();
                   
@@ -99,7 +100,7 @@ $(document).ready(function(){
                     }
                   
                   blockContainer.html(newTemplate.html());
-                  
+          
                   ui.item.attr('data-weight', positionNew);
                   //make ajax call
               }
@@ -112,11 +113,34 @@ $(document).ready(function(){
      $.ajax($(this).attr('href'), {
         cache: false,
          beforeSend: function(){
-            $('#dialog-box').html('<div style="margin: 20px auto; text-align: center;"><img id="imgcode" src="/public/images/system/preloader/preloader1.gif"></div>');
-            dialog.dialog('open');
+            //$('#dialog-box').html('<div style="margin: 20px auto; text-align: center;"><img id="imgcode" src="/public/images/system/preloader/preloader1.gif"></div>');
+            //dialog.dialog('open');
+            $('#modal-box').modal('show');
+            
         },
         success: function(html){
-          $('#dialog-box').html(html);
+         // $('#dialog-box').html(html);
+         
+            var header = $(html).find('.box-header h2');
+            var headerText = header.html();
+            $(html).find('.box-header').remove();
+         
+            $('#modal-box .title').html(headerText);
+            $('#modal-box .madal-body').html(html);
+     
+            if(typeof(tinymce) == "undefined") 
+            {
+                $.ajax({
+                    async: false,
+                    url: "/public/js/tinymce/tinymce.js",
+                    dataType: "script"
+                }).done(function(){
+                    initTinyMCE();
+                });
+            } else {
+                initTinyMCE();
+            }
+
         }
      });
      
@@ -146,12 +170,26 @@ function loadPlugins()
   {
   if(typeof tinyMCE == "undefined") 
     {
-      $.getScript('/public/js/tinymce/tinymce.js', function() {
+      $.getScript('//cdn.tinymce.com/4/tinymce.min.js', function() {
       tinyMCE.init();
       });
     }
   
   }
+  
+function initTinyMCE() {
+    tinymce.init({
+                selector: ".texteditor",
+                height: 200,
+                plugins: [
+                  "advlist autolink lists link image charmap print preview anchor imagetools",
+                  "searchreplace visualblocks code fullscreen",
+                  "insertdatetime media table contextmenu paste code"
+                ],
+                toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image",
+                content_css: "//www.tinymce.com/css/codepen.min.css"
+            });
+}
 
 
 var Cookies = function() {

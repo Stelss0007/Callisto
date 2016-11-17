@@ -68,8 +68,6 @@ abstract class Controller extends AppObject
     // Складываем секунды и миллисекунды
     $this->startDebugTime =$current_time[1] + $current_time[0];
     
-    $this->setConfig();
-    
     if(\App::$config['gzip'])
       {
       ob_start();
@@ -135,9 +133,11 @@ abstract class Controller extends AppObject
     $this->loadModuleLang($this->modname);
     
     //$this->loadModVars('kernel');
-    
+   
     $this->setModConfig();
     $this->setTplUserInfo();
+    
+    $this->setConfig();
     
     //$this->object_name = $this->getObjectName();
 
@@ -163,7 +163,7 @@ abstract class Controller extends AppObject
         
 //      $DB = DBConnector::getInstance();
 //      $DB->disconnect();
-              
+           
       $current_time = microtime();
       $current_time = explode(" ",$current_time);
       $end_debug_time = $current_time[1] + $current_time[0];
@@ -318,8 +318,8 @@ abstract class Controller extends AppObject
       }
     
     $this->objectName = $this->objectName.'::permission::'.appGetAccessName($this->permissionLavel);
-    
-    $this->smarty->assign('config', \App::$config);
+      
+    //$this->smarty->assign('config', \App::$config);
     
     //Подключим джаваскрипты
     appJsLoad('kernel', 'jQuery');
@@ -328,23 +328,34 @@ abstract class Controller extends AppObject
     if($this->isAdmin())
       {
       appJsLoad('kernel', 'jQueryUI');
-      appJsLoad('kernel', 'admin');
       
       appCssLoad('kernel', 'bootstrap');
-      if($this->getViewType() != 'admin') 
-        {
-        appCssLoad('kernel', 'admin-theme');
-        }
+      appJsLoad('kernel', 'bootstrap');
+      
+      appJsLoad('kernel', 'admin');
+      
+//      if($this->getViewType() != 'admin') 
+//        {
+//        appCssLoad('kernel', 'admin-theme');
+//        }
       }
+    else {
+        if(\App::$config['bootstrap.enabled']) {
+            appCssLoad('kernel', 'bootstrap');
+            appJsLoad('kernel', 'bootstrap');
+        }
+        
+    }
     
     //Подключим стили
-    //Стили ядра
-    //appCssLoad('kernel', 'bootstrap');
     appCssLoad('kernel'); 
     appCssLoad('kernel', 'jQueryUI'); 
      
-    //Без аргументов подключится стиль текущей темы
-    appCssLoad();
+     if($this->getViewType() != 'admin') 
+        {  
+        //Без аргументов подключится стиль текущей темы
+        appCssLoad();
+        }
     
     return call_user_method_array('action'.$actionName, $this, $this->inputVars);
     }
@@ -400,13 +411,19 @@ abstract class Controller extends AppObject
   
   final function setModConfig()
     {
-    
-    $db_conf = \app\modules\configuration\models\Configuration::getModConfiguration('main');
-    if(!empty($db_conf))
+    $dbConf = \app\modules\configuration\models\Configuration::getModConfiguration('main');
+    if(!empty($dbConf))
       {
-      \App::$config = array_merge(\App::$config, $db_conf);
+      \App::$config = array_merge(\App::$config, $dbConf);
+      $this->assign($dbConf);
+      
+      //Set defaults for module info
+      $this->assign('module_meta_description', $dbConf['site_seo_description']);
+      $this->assign('module_meta_keywords', $dbConf['site_seo_keywords']);
+      $this->assign('module_meta_robots', $dbConf['site_seo_robots']);
+      $this->assign('module_page_title', '');
       }
-    unset($db_conf);
+    unset($dbConf);
     }
     
   /**

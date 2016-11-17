@@ -10,6 +10,10 @@ class Router
   function __construct($routesPath = 'config-router.php')
     {
     // Получаем конфигурацию из файла.
+    \App::$global['route.module'] = '';  
+    \App::$global['route.type'] = '';  
+    \App::$global['route.action'] = '';  
+    
     $this->includeRoutes();
     }
 
@@ -73,12 +77,12 @@ class Router
       
       if($matches)
         {
-        if($matches['controller'])
+        if(isset($matches['controller']) && $matches['controller'])
           {
           $mod = $matches['controller'];
           unset($matches['controller']);
           }
-        if($matches['action'])
+        if(isset($matches['action']) && $matches['action'])
           {
           $action = $matches['action'];
           unset($matches['action']);
@@ -164,7 +168,7 @@ class Router
 
   function run()
     {
-    global $routerVars;
+    $type = '';
     
     $this->runModuleRoutes();
     
@@ -242,7 +246,8 @@ class Router
       $parameters = $segments;
       }
       
-   $routerVars['type'] = $type; 
+
+    \App::$global['route.type'] = $type;
 
     if($type === 'admin')
       {
@@ -284,8 +289,8 @@ class Router
     $mod_controller = $module;
     
 
-    $routerVars['module'] = $mod; 
-    $routerVars['action'] = $action; 
+    \App::$global['route.module'] = $mod;
+    \App::$global['route.action'] = $action;
     
     $module->inputVars = array_merge($parameters, $module->inputVars);
     

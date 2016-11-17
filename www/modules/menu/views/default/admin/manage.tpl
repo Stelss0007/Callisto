@@ -14,7 +14,6 @@
       </div>
       <div class="box-content">
         
-        <fieldset>
            {* <legend>Manage form</legend>*}
             <br><br>
              <div class="form-group">
@@ -119,8 +118,6 @@
               <button type="submit" class="btn btn-primary" name="submit" value="submit">{#sys_save#}</button>
               <button type="reset" class="btn">Cancel</button>
             </div>
-        
-        </fieldset>
       </div>
     </div><!--/span-->
 

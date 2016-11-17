@@ -177,17 +177,20 @@ em { color: #fff; font-weight: 400 }
 	background: url(../images/divider.png) no-repeat center top;
 }
 
-.sidebar_box { clear: both; border-bottom: 1px solid #52493f }
+.sidebar_box { clear: both; border-bottom: 1px solid #52493f;}
 
 .sidebar_box .sb_title { 
-	width: 218px; 
-	height: 30px; 
-	padding: 15px 30px; 
-	border-bottom: 1px solid #52493f;
-	background: url(../images/templatemo_sidebar_title.jpg) top center no-repeat;
+    width: 100%;
+    height: 40px;
+    padding: 10px 30px;
+    border-bottom: 1px solid #52493f;
+    background: url(../images/templatemo_sidebar_title.jpg) top center no-repeat;
+    font-size: 14px;
+    font-weight: bold;
 }
 
-.sidebar_box .sb_content { padding: 30px }
+.sidebar_box .sb_content { padding: 30px; color: #909090; }
+.sidebar_box .sb_content p { color: #909090; }
 
 a.ads_125 {
 	display: block;

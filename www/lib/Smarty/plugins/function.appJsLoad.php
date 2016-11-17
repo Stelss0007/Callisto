@@ -11,6 +11,10 @@
  */
 function smarty_function_appJsLoad($params, &$smarty)
 	{
+        if(!isset($params['modname'])) {$params['modname'] = 'kernel';}
+        if(!isset($params['scriptname'])) {$params['scriptname'] = 'main';}
+        if(!isset($params['$realscriptname'])) {$params['$realscriptname'] = '';}
+    
 	$smarty->appJsLoad($params['modname'], $params['scriptname']);
 	}
 

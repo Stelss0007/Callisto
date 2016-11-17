@@ -114,7 +114,7 @@
                     <li><a class="ajax-link" href="/{$appConfig['admin.path']}/help/icons"><i class="icon-info"></i><span class="hidden-tablet"> {#theme_menu_icons#}</span></a></li>
 
 
-                    <li><a class="ajax-link" href="/{$config['admin.path']}/users/login"><i class="icon-logout"></i><span class="hidden-tablet"> {#theme_menu_logout#}</span></a></li>
+                    <li><a class="ajax-link" href="/{$appConfig['admin.path']}/users/login"><i class="icon-logout"></i><span class="hidden-tablet"> {#theme_menu_logout#}</span></a></li>
                 </ul>
 
             </div>	
@@ -159,8 +159,8 @@
                      sys_confirm_delete = "{#sys_confirm_delete#}",
                      sys_confirm_group_delete = "{#sys_confirm_group_delete#}"
                      ;
-             var date_format = "{$config.date_format_js}",
-                     time_format = "{$config.time_format_js}"
+             var date_format = "{$appConfig.date_format_js}",
+                     time_format = "{$appConfig.time_format_js}"
                      ;
          </script>
      {*     
