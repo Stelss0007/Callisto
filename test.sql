@@ -1,20 +1,20 @@
 -- phpMyAdmin SQL Dump
--- version 3.5.7
+-- version 4.4.15.3
 -- http://www.phpmyadmin.net
 --
--- Хост: localhost
--- Время создания: Ноя 19 2015 г., 18:02
--- Версия сервера: 5.5.11
--- Версия PHP: 5.4.34
+-- Хост: localhost:3306
+-- Время создания: Дек 07 2016 г., 12:55
+-- Версия сервера: 5.5.11-log
+-- Версия PHP: 5.6.21
 
-SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
+/*!40101 SET NAMES utf8mb4 */;
 
 --
 -- База данных: `test`
@@ -27,45 +27,42 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE IF NOT EXISTS `article` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `article_title` varchar(250) DEFAULT '',
   `article_description` text,
-  `article_add_time` int(11) DEFAULT '0',
+  `article_add_time` int(11) unsigned NOT NULL DEFAULT '0' COMMENT 'Test',
   `article_start_time` int(11) DEFAULT '0',
   `article_end_time` int(11) DEFAULT '0',
-  `article_active` tinyint(1) DEFAULT '0',
+  `active` tinyint(1) DEFAULT '0',
   `article_meta_description` text,
   `article_meta_keywords` text,
   `article_user_id` int(11) DEFAULT NULL,
-  `article_category_id` int(11) DEFAULT NULL,
+  `article_category_id` int(11) unsigned DEFAULT NULL,
   `article_user_alias` varchar(200) DEFAULT '',
-  `article_image` text,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=81 ;
+  `article_image` text
+) ENGINE=InnoDB AUTO_INCREMENT=82 DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `article`
 --
 
-INSERT INTO `article` (`id`, `article_title`, `article_description`, `article_add_time`, `article_start_time`, `article_end_time`, `article_active`, `article_meta_description`, `article_meta_keywords`, `article_user_id`, `article_category_id`, `article_user_alias`, `article_image`) VALUES
-(1, 'First Article', '<p style="font-size: 11px; line-height: 14px; margin: 0px 0px 14px; padding: 0px; color: #000000; font-family: Arial,Helvetica,sans; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px;"><br class="Apple-interchange-newline" /><img style="float: left; margin: 10px;" src="http://images.unian.net/photos/2014_05/1401098289-6750.jpg" alt="" width="557" height="343" />Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.</p>\r\n<p style="text-align: justify; font-size: 11px; line-height: 14px; margin: 0px 0px 14px; padding: 0px; color: #000000; font-family: Arial, Helvetica, sans; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;">The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.</p>\r\n<p style="text-align: justify; font-size: 11px; line-height: 14px; margin: 0px 0px 14px; padding: 0px; color: #000000; font-family: Arial, Helvetica, sans; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;">&nbsp;</p>\r\n<p style="text-align: justify; font-size: 11px; line-height: 14px; margin: 0px 0px 14px; padding: 0px; color: #000000; font-family: Arial, Helvetica, sans; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;"><br class="Apple-interchange-newline" />Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.</p>\r\n<p style="text-align: justify; font-size: 11px; line-height: 14px; margin: 0px 0px 14px; padding: 0px; color: #000000; font-family: Arial, Helvetica, sans; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;">The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.</p>\r\n<p style="text-align: justify; font-size: 11px; line-height: 14px; margin: 0px 0px 14px; padding: 0px; color: #000000; font-family: Arial, Helvetica, sans; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;"><br class="Apple-interchange-newline" />Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.</p>\r\n<p style="text-align: justify; font-size: 11px; line-height: 14px; margin: 0px 0px 14px; padding: 0px; color: #000000; font-family: Arial, Helvetica, sans; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;">The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.</p>\r\n<p style="text-align: justify; font-size: 11px; line-height: 14px; margin: 0px 0px 14px; padding: 0px; color: #000000; font-family: Arial, Helvetica, sans; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;"><br class="Apple-interchange-newline" />Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.</p>\r\n<p style="text-align: justify; font-size: 11px; line-height: 14px; margin: 0px 0px 14px; padding: 0px; color: #000000; font-family: Arial, Helvetica, sans; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;">The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.</p>\r\n<p style="text-align: justify; font-size: 11px; line-height: 14px; margin: 0px 0px 14px; padding: 0px; color: #000000; font-family: Arial, Helvetica, sans; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;"><br class="Apple-interchange-newline" />Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.</p>\r\n<p style="text-align: justify; font-size: 11px; line-height: 14px; margin: 0px 0px 14px; padding: 0px; color: #000000; font-family: Arial, Helvetica, sans; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;">The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.</p>', 1394139600, 1395694800, 0, 1, 'r ewrt ert erwt er', 't ewrt erwt ewrt erw', 0, 3, '', ''),
-(7, 'Test Article', '<p style="text-align: justify; font-size: 11px; line-height: 14px; margin: 0px 0px 14px; padding: 0px; color: #000000; font-family: Arial, Helvetica, sans; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;"><br class="Apple-interchange-newline" />Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.</p>\r\n<p style="text-align: justify; font-size: 11px; line-height: 14px; margin: 0px 0px 14px; padding: 0px; color: #000000; font-family: Arial, Helvetica, sans; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;">The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.</p>\r\n<p style="text-align: justify; font-size: 11px; line-height: 14px; margin: 0px 0px 14px; padding: 0px; color: #000000; font-family: Arial, Helvetica, sans; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;"><br class="Apple-interchange-newline" />Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.</p>\r\n<p style="text-align: justify; font-size: 11px; line-height: 14px; margin: 0px 0px 14px; padding: 0px; color: #000000; font-family: Arial, Helvetica, sans; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;">The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.</p>\r\n<p style="text-align: justify; font-size: 11px; line-height: 14px; margin: 0px 0px 14px; padding: 0px; color: #000000; font-family: Arial, Helvetica, sans; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;"><br class="Apple-interchange-newline" />Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.</p>\r\n<p style="text-align: justify; font-size: 11px; line-height: 14px; margin: 0px 0px 14px; padding: 0px; color: #000000; font-family: Arial, Helvetica, sans; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;">The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.</p>\r\n<p style="text-align: justify; font-size: 11px; line-height: 14px; margin: 0px 0px 14px; padding: 0px; color: #000000; font-family: Arial, Helvetica, sans; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;"><br class="Apple-interchange-newline" />Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.</p>\r\n<p style="text-align: justify; font-size: 11px; line-height: 14px; margin: 0px 0px 14px; padding: 0px; color: #000000; font-family: Arial, Helvetica, sans; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;">The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.</p>\r\n<p style="text-align: justify; font-size: 11px; line-height: 14px; margin: 0px 0px 14px; padding: 0px; color: #000000; font-family: Arial, Helvetica, sans; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;"><br class="Apple-interchange-newline" />Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.</p>\r\n<p style="text-align: justify; font-size: 11px; line-height: 14px; margin: 0px 0px 14px; padding: 0px; color: #000000; font-family: Arial, Helvetica, sans; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;">The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.</p>\r\n<p style="text-align: justify; font-size: 11px; line-height: 14px; margin: 0px 0px 14px; padding: 0px; color: #000000; font-family: Arial, Helvetica, sans; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;"><br class="Apple-interchange-newline" />Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.</p>\r\n<p style="text-align: justify; font-size: 11px; line-height: 14px; margin: 0px 0px 14px; padding: 0px; color: #000000; font-family: Arial, Helvetica, sans; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;">The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.</p>\r\n<p style="text-align: justify; font-size: 11px; line-height: 14px; margin: 0px 0px 14px; padding: 0px; color: #000000; font-family: Arial, Helvetica, sans; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;"><br class="Apple-interchange-newline" />Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.</p>\r\n<p style="text-align: justify; font-size: 11px; line-height: 14px; margin: 0px 0px 14px; padding: 0px; color: #000000; font-family: Arial, Helvetica, sans; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;">The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.</p>\r\n<p style="text-align: justify; font-size: 11px; line-height: 14px; margin: 0px 0px 14px; padding: 0px; color: #000000; font-family: Arial, Helvetica, sans; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;"><br class="Apple-interchange-newline" />Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.</p>\r\n<p style="text-align: justify; font-size: 11px; line-height: 14px; margin: 0px 0px 14px; padding: 0px; color: #000000; font-family: Arial, Helvetica, sans; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;">The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.</p>', 1396209600, 1396209600, 0, 1, '', '', 3, 3, '', 'a:4:{s:8:"original";s:41:"images/articles/7/0/00000007/00000007.jpg";i:640;s:46:"images/articles/7/0/00000007/00000007_w640.jpg";i:320;s:46:"images/articles/7/0/00000007/00000007_w320.jpg";i:100;s:46:"images/articles/7/0/00000007/00000007_w100.jpg";}'),
-(8, '22222', '<p style="text-align: justify; font-size: 11px; line-height: 14px; margin: 0px 0px 14px; padding: 0px; color: #000000; font-family: Arial, Helvetica, sans; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;"><br class="Apple-interchange-newline" />Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.</p>\r\n<p style="text-align: justify; font-size: 11px; line-height: 14px; margin: 0px 0px 14px; padding: 0px; color: #000000; font-family: Arial, Helvetica, sans; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;">The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.</p>\r\n<p style="text-align: justify; font-size: 11px; line-height: 14px; margin: 0px 0px 14px; padding: 0px; color: #000000; font-family: Arial, Helvetica, sans; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;"><br class="Apple-interchange-newline" />Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.</p>\r\n<p style="text-align: justify; font-size: 11px; line-height: 14px; margin: 0px 0px 14px; padding: 0px; color: #000000; font-family: Arial, Helvetica, sans; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;">The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.</p>\r\n<p style="text-align: justify; font-size: 11px; line-height: 14px; margin: 0px 0px 14px; padding: 0px; color: #000000; font-family: Arial, Helvetica, sans; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;"><br class="Apple-interchange-newline" />Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.</p>\r\n<p style="text-align: justify; font-size: 11px; line-height: 14px; margin: 0px 0px 14px; padding: 0px; color: #000000; font-family: Arial, Helvetica, sans; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;">The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.</p>\r\n<p style="text-align: justify; font-size: 11px; line-height: 14px; margin: 0px 0px 14px; padding: 0px; color: #000000; font-family: Arial, Helvetica, sans; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;"><br class="Apple-interchange-newline" />Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.</p>\r\n<p style="text-align: justify; font-size: 11px; line-height: 14px; margin: 0px 0px 14px; padding: 0px; color: #000000; font-family: Arial, Helvetica, sans; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;">The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.</p>\r\n<p style="text-align: justify; font-size: 11px; line-height: 14px; margin: 0px 0px 14px; padding: 0px; color: #000000; font-family: Arial, Helvetica, sans; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;"><br class="Apple-interchange-newline" />Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.</p>\r\n<p style="text-align: justify; font-size: 11px; line-height: 14px; margin: 0px 0px 14px; padding: 0px; color: #000000; font-family: Arial, Helvetica, sans; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;">The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.</p>\r\n<p style="text-align: justify; font-size: 11px; line-height: 14px; margin: 0px 0px 14px; padding: 0px; color: #000000; font-family: Arial, Helvetica, sans; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;"><br class="Apple-interchange-newline" />Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.</p>\r\n<p style="text-align: justify; font-size: 11px; line-height: 14px; margin: 0px 0px 14px; padding: 0px; color: #000000; font-family: Arial, Helvetica, sans; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;">The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.</p>', 1396209600, 1396209600, 0, 0, '', '', 3, 1, '', ''),
-(9, 'yrtyrty', '<p style="text-align: justify; font-size: 11px; line-height: 14px; margin: 0px 0px 14px; padding: 0px; color: #000000; font-family: Arial, Helvetica, sans; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;"><br class="Apple-interchange-newline" />Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.</p>\r\n<p style="text-align: justify; font-size: 11px; line-height: 14px; margin: 0px 0px 14px; padding: 0px; color: #000000; font-family: Arial, Helvetica, sans; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;">The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.</p>', 1396209600, 1396209600, 0, 1, '', '', 3, 1, '', ''),
-(10, '222222', '<p>333333</p>', 1396213200, 1396213200, 0, 1, '', '', 3, 2, '', ''),
-(11, '88888', '<p style="text-align: justify; font-size: 11px; line-height: 14px; margin: 0px 0px 14px; padding: 0px; color: #000000; font-family: Arial, Helvetica, sans; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;"><br class="Apple-interchange-newline" />Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.</p>\r\n<p style="text-align: justify; font-size: 11px; line-height: 14px; margin: 0px 0px 14px; padding: 0px; color: #000000; font-family: Arial, Helvetica, sans; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;">The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.</p>\r\n<p style="text-align: justify; font-size: 11px; line-height: 14px; margin: 0px 0px 14px; padding: 0px; color: #000000; font-family: Arial, Helvetica, sans; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;"><br class="Apple-interchange-newline" />Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.</p>\r\n<p style="text-align: justify; font-size: 11px; line-height: 14px; margin: 0px 0px 14px; padding: 0px; color: #000000; font-family: Arial, Helvetica, sans; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;">The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.</p>\r\n<p style="text-align: justify; font-size: 11px; line-height: 14px; margin: 0px 0px 14px; padding: 0px; color: #000000; font-family: Arial, Helvetica, sans; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;"><br class="Apple-interchange-newline" />Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.</p>\r\n<p style="text-align: justify; font-size: 11px; line-height: 14px; margin: 0px 0px 14px; padding: 0px; color: #000000; font-family: Arial, Helvetica, sans; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;">The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.</p>', 1396209600, 1396209600, 0, 1, '', '', 3, 1, '', ''),
-(12, 'hjgjgf', 'jghjghj gh gf', 1396213200, 1396213200, 0, 1, '', '', 3, 1, '', ''),
-(13, 'hjgjgf', 'jghjghj gh gf', 1396213200, 1396213200, 0, 1, '', '', 3, 1, '', ''),
-(15, 'gdfg df gdf', '<p>&nbsp;gdfg df gdf g</p>', 1396213200, 1396213200, 0, 1, '', '', 3, 1, '', ''),
-(16, '99999', '88888', 1396213200, 1396213200, 0, 1, '', '', 3, 1, '', ''),
-(17, '99999', '88888', 1396213200, 1396213200, 0, 1, '', '', 3, 1, '', ''),
-(18, '99999', '88888', 1396213200, 1396213200, 0, 1, '', '', 3, 1, '', ''),
-(19, '4444444444', '<p>1111111111</p>', 1396213200, 1396213200, 0, 1, '', '', 3, 1, '', ''),
-(20, '54321', '<p style="font-style: normal; font-variant: normal; font-weight: normal; font-size: 14px; line-height: normal; font-family: Arial, Verdana, sans-serif; letter-spacing: normal; color: #000000; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: #ffffff;">Всем советую &mdash; создавайте новое имя файла при его загрузке на сервер, не сохраняйте его под тем именем, под которым он был загружен. Максимум &mdash; сохранить расширение и в специальном поле таблицы &mdash; старое имя. Это убережет вас от проблем с пробелами и русскими символами в именах файлов. Все это реализовано в данном примере.</p>\r\n<p style="font-style: normal; font-variant: normal; font-weight: normal; font-size: 14px; line-height: normal; font-family: Arial, Verdana, sans-serif; letter-spacing: normal; color: #000000; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: #ffffff;">Затем загружаем все содержимое файла во временную переменную и пересохраняем из переменной в нужную папку. Почему так, а не через стандартную функцию языка move_uploaded_file? Да потому что со стандартной функцией бывают проблемы на некоторых хостингах, где php запущен в режиме CGI или FastCGI &mdash; файл перемещается с правами веб-сервера и у процесса PHP нет к нему прав доступа. А если файл загрузить и пересохранить эта проблема отпадает, но этот способ накладывает дополнительные требования на объем памяти, выделяемый для php. Здесь, файл сохраняется в папку /app/webroot/img/.</p>', 1396296000, 1396296000, 0, 1, '', '', 3, 1, '', 'a:4:{s:8:"original";s:41:"images/articles/0/2/00000020/00000020.jpg";i:640;s:46:"images/articles/0/2/00000020/00000020_w640.jpg";i:320;s:46:"images/articles/0/2/00000020/00000020_w320.jpg";i:100;s:46:"images/articles/0/2/00000020/00000020_w100.jpg";}');
-INSERT INTO `article` (`id`, `article_title`, `article_description`, `article_add_time`, `article_start_time`, `article_end_time`, `article_active`, `article_meta_description`, `article_meta_keywords`, `article_user_id`, `article_category_id`, `article_user_alias`, `article_image`) VALUES
-(21, 'My new article', '<p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.</p>\r\n<p style="text-align: justify; font-size: 11px; line-height: 14px; margin: 0px 0px 14px; padding: 0px; color: #000000; font-family: Arial, Helvetica, sans; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;">The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.</p>\r\n<p style="text-align: justify; font-size: 11px; line-height: 14px; margin: 0px 0px 14px; padding: 0px; color: #000000; font-family: Arial, Helvetica, sans; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;"><br class="Apple-interchange-newline" />Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.</p>\r\n<p style="text-align: justify; font-size: 11px; line-height: 14px; margin: 0px 0px 14px; padding: 0px; color: #000000; font-family: Arial, Helvetica, sans; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;"><a href="../../../public/files/docs/1%20copy%201.jpg"><img src="../../../public/files/docs/svadebnyj-tort-poshagovoe-prigotovlenie.jpg" alt="" width="289" height="218" /></a></p>', 0, 0, 0, 0, '', '', 3, 2, '', 'a:4:{s:8:"original";s:41:"images/articles/1/2/00000021/00000021.jpg";i:640;s:46:"images/articles/1/2/00000021/00000021_w640.jpg";i:320;s:46:"images/articles/1/2/00000021/00000021_w320.jpg";i:100;s:46:"images/articles/1/2/00000021/00000021_w100.jpg";}'),
-(22, 'testtttt t', '<h2>В Генеральном штабе Вооруженных сил отмечают, что могут мобилизовать военнообязанных женщин в возрасте от 20 до 50 лет, призыв женщин возможен при необходимости и наличии соответствующих должностей.</h2>\r\n<div class="photo_block "><img style="float: left; margin: 10px;" title="/ mil.gov.ua" src="http://images.unian.net/photos/2014_10/1413028776-6708-jenschinyi-mediki.jpg" alt="/ mil.gov.ua" width="368" height="215" />\r\n<div class="subscribe_photo_text">Во время мобилизации могут быть призваны женщины / mil.gov.ua</div>\r\n</div>\r\n<p>Как передает корреспондент УНИАН, об этом сегодня во время брифинга сообщил и.о. представителя Генштаба Вооруженных сил Владислав Селезнев.</p>\r\n<p>&laquo;<a href="http://www.unian.ua/society/1038037-mobilizatsiya-2015-yak-provodjayut-do-viyska-ukrajinskih-cholovikiv-foto-video.html" target="_blank">Во время мобилизации&nbsp;</a>могут быть призваны на военную службу, военнообязанные женщины такого возраста: для лиц офицерского состава - от 20 до 50 лет, для других военнообязанных женщин - от 20 до 40 лет&raquo;, - напомнил он.</p>\r\n<p>Селезнев также отметил, что призыву на военную службу во время мобилизации подлежат военнообязанные женщины, которые являются гражданками Украины, которые, в первую очередь, изъявили желание проходить военную службу и состоящие на учете в военных комиссариатах, признанные военно-врачебными комиссиями такими, которые являются пригодными для прохождения военной службы по состоянию здоровья, проходившие военную службу и получившие соответствующие военно-учетные специальности, а также те, которые не проходили военную службу, но, согласно полученного образования или специальности, получили соответствующие военно-учетные специальности.</p>\r\n<p><span class="read_also"><span><span>ЧИТАЙТЕ ТАКЖЕ</span><a href="http://www.unian.ua/society/1038173-u-genshtabi-zayavili-scho-mobilizatsiya-viyskovozobovyazanih-jinok-vidbudetsya-na-dobrovilniy-osnovi.html" target="_blank">В Генштабе заявили, что мобилизация военнообязанных женщин состоится на добровольной основе</a></span></span></p>\r\n<p>Он также отметил, что большинство женщин, призванных во время мобилизации, будут проходить военную службу на медицинских должностях, а также в подразделениях связи и логистики.</p>\r\n<p>Селезнев добавил, что в 2014 году на службу в ВСУ в связи с частичной мобилизацией было призвано около 100 военнообязанных женщин.</p>\r\n<p>Как сообщал УНИАН, первая волна нынешней мобилизации в ряды ВСУ&nbsp;<a href="http://www.unian.ua/society/1033954-v-ukrajini-ofitsiyno-rozpochalasya-chastkova-mobilizatsiya.html" target="_blank">началась 20 января</a>&nbsp;и продолжится 90 дней, мобилизации подлежит более 60 тысяч человек.<span id="ctrlcopy"><br />Подробности читайте на УНИАН:<a href="http://www.unian.net/politics/1040065-v-genshtabe-zayavili-chto-pri-neobhodimosti-mogut-mobilizovat-jenschin-ot-20-let.html">http://www.unian.net/politics/1040065-v-genshtabe-zayavili-chto-pri-neobhodimosti-mogut-mobilizovat-jenschin-ot-20-let.html</a></span></p>', 0, 0, 0, 1, '', '', 3, 1, '', ''),
-(80, '2222', NULL, 0, 0, 0, 0, NULL, NULL, NULL, NULL, '', NULL);
+INSERT INTO `article` (`id`, `article_title`, `article_description`, `article_add_time`, `article_start_time`, `article_end_time`, `active`, `article_meta_description`, `article_meta_keywords`, `article_user_id`, `article_category_id`, `article_user_alias`, `article_image`) VALUES
+(1, 'First Article', '<p style="font-size: 11px; line-height: 14px; margin: 0px 0px 14px; padding: 0px; color: #000000; font-family: Arial,Helvetica,sans; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px;"><br class="Apple-interchange-newline" /><img style="float: left; margin: 10px;" src="http://images.unian.net/photos/2014_05/1401098289-6750.jpg" alt="" width="557" height="343" />Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.</p>\r\n<p style="text-align: justify; font-size: 11px; line-height: 14px; margin: 0px 0px 14px; padding: 0px; color: #000000; font-family: Arial, Helvetica, sans; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;">The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.</p>\r\n<p style="text-align: justify; font-size: 11px; line-height: 14px; margin: 0px 0px 14px; padding: 0px; color: #000000; font-family: Arial, Helvetica, sans; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;">&nbsp;</p>\r\n<p style="text-align: justify; font-size: 11px; line-height: 14px; margin: 0px 0px 14px; padding: 0px; color: #000000; font-family: Arial, Helvetica, sans; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;"><br class="Apple-interchange-newline" />Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.</p>\r\n<p style="text-align: justify; font-size: 11px; line-height: 14px; margin: 0px 0px 14px; padding: 0px; color: #000000; font-family: Arial, Helvetica, sans; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;">The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.</p>\r\n<p style="text-align: justify; font-size: 11px; line-height: 14px; margin: 0px 0px 14px; padding: 0px; color: #000000; font-family: Arial, Helvetica, sans; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;"><br class="Apple-interchange-newline" />Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.</p>\r\n<p style="text-align: justify; font-size: 11px; line-height: 14px; margin: 0px 0px 14px; padding: 0px; color: #000000; font-family: Arial, Helvetica, sans; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;">The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.</p>\r\n<p style="text-align: justify; font-size: 11px; line-height: 14px; margin: 0px 0px 14px; padding: 0px; color: #000000; font-family: Arial, Helvetica, sans; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;"><br class="Apple-interchange-newline" />Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.</p>\r\n<p style="text-align: justify; font-size: 11px; line-height: 14px; margin: 0px 0px 14px; padding: 0px; color: #000000; font-family: Arial, Helvetica, sans; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;">The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.</p>\r\n<p style="text-align: justify; font-size: 11px; line-height: 14px; margin: 0px 0px 14px; padding: 0px; color: #000000; font-family: Arial, Helvetica, sans; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;"><br class="Apple-interchange-newline" />Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.</p>\r\n<p style="text-align: justify; font-size: 11px; line-height: 14px; margin: 0px 0px 14px; padding: 0px; color: #000000; font-family: Arial, Helvetica, sans; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;">The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.</p>', 1394139600, 1395694800, 0, 1, 'r ewrt ert erwt er', 't ewrt erwt ewrt erw', 1, 3, '', ''),
+(7, 'ActiveRecord Ruby on Rails', '<h4 class="header">В PHP 5.3 появился ActiveRecord аналогичный Ruby on Rails</h4>\r\n<div id="ya_direct_top">&nbsp;<a class="externalLink " title="Переход по внешней ссылке" href="http://www.google.com/search?q=php+activerecord" target="_blank" rel="nofollow">Поиски решения</a> активной записи в php были изнурительны до того момента, как один из источников в google не предложил вариант ActiveRecord аналогичный Ruby on Rails. Читатель заметит, что вышеупомянутые результаты слишком устаревшие и большая часть из них мало общего с действенностью.</div>\r\n<div class="body">\r\n<p>В конце концов, PHP получит более надежный способ активной записи аналогичный способу применяемому в RoR. И, к счастью, это время настало! Спасибо PHP 5. 3 и его новым полезным функциям: схлопыванию, позднему статистическому связыванию и пространству имен.</p>\r\n<p>Я со своим другом Каеном, внесли улучшения в раннюю версию на базе ORM, которую он написал до появления PHP 5. 3. Мы создали ActiveRecord вдохновленные Ruby on Rails и попытались сохранить его возможности, насколько это было возможно. Нашей основной целью в этом проекте &ndash; дать возможность PHP-разработчикам создавать крупные проекты с большей гибкостью.</p>\r\n<p>Мы также надеемся что использование данного продукта подтолкнет PHP сообщество к дальнейшему осознанию всех замечательных преимуществ Ruby on Rails. Ладно , хватит крутиться вокруг да около, давайте перейдем к самому интересному!</p>\r\n<h5>Обзор ActiveRecord</h5>\r\n<p>Позвольте мне согласиться с тем фактом, что мы пытались сохранить сходство между нашим детящем и ActiveRecord на базе Ruby on rails, чтобы избежать головной боли и повысить работоспособность программиста. Сохраняя это сходство, мы постарались воссоздать многие функции. Вот список этих функций:</p>\r\n</div>', 1396209600, 1396209600, 1459371600, 1, '', '', 1, 1, '', 'a:4:{s:8:"original";s:41:"images/articles/7/0/00000007/00000007.jpg";i:640;s:46:"images/articles/7/0/00000007/00000007_w640.jpg";i:320;s:46:"images/articles/7/0/00000007/00000007_w320.jpg";i:100;s:46:"images/articles/7/0/00000007/00000007_w100.jpg";}'),
+(10, '222222', '<p>333333</p>', 1396213200, 1396213200, 0, 1, '', '', 1, 2, '', ''),
+(11, '88888', '<p style="text-align: justify; font-size: 11px; line-height: 14px; margin: 0px 0px 14px; padding: 0px; color: #000000; font-family: Arial, Helvetica, sans; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;"><br class="Apple-interchange-newline" />Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.</p>\r\n<p style="text-align: justify; font-size: 11px; line-height: 14px; margin: 0px 0px 14px; padding: 0px; color: #000000; font-family: Arial, Helvetica, sans; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;">The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.</p>\r\n<p style="text-align: justify; font-size: 11px; line-height: 14px; margin: 0px 0px 14px; padding: 0px; color: #000000; font-family: Arial, Helvetica, sans; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;"><br class="Apple-interchange-newline" />Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.</p>\r\n<p style="text-align: justify; font-size: 11px; line-height: 14px; margin: 0px 0px 14px; padding: 0px; color: #000000; font-family: Arial, Helvetica, sans; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;">The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.</p>\r\n<p style="text-align: justify; font-size: 11px; line-height: 14px; margin: 0px 0px 14px; padding: 0px; color: #000000; font-family: Arial, Helvetica, sans; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;"><br class="Apple-interchange-newline" />Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.</p>\r\n<p style="text-align: justify; font-size: 11px; line-height: 14px; margin: 0px 0px 14px; padding: 0px; color: #000000; font-family: Arial, Helvetica, sans; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;">The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.</p>', 1396209600, 1396209600, 0, 1, '', '', 1, 1, '', ''),
+(12, 'hjgjgf', 'jghjghj gh gf', 1396213200, 1396213200, 0, 1, '', '', 1, 1, '', ''),
+(13, 'hjgjgf', 'jghjghj gh gf', 1396213200, 1396213200, 0, 1, '', '', 1, 1, '', ''),
+(15, 'gdfg df gdf', '<p>&nbsp;gdfg df gdf g</p>', 1396213200, 1396213200, 0, 1, '', '', 1, 1, '', ''),
+(16, '99999', '88888', 1396213200, 1396213200, 0, 1, '', '', 1, 1, '', ''),
+(17, '99999', '88888', 1396213200, 1396213200, 0, 1, '', '', 1, 1, '', ''),
+(18, '99999', '88888', 1396213200, 1396213200, 0, 1, '', '', 1, 1, '', ''),
+(19, '4444444444', '<p>1111111111</p>', 1396213200, 1396213200, 0, 1, '', '', 1, 1, '', ''),
+(20, '54321', '<p style="font-style: normal; font-variant: normal; font-weight: normal; font-size: 14px; line-height: normal; font-family: Arial, Verdana, sans-serif; letter-spacing: normal; color: #000000; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: #ffffff;">Всем советую &mdash; создавайте новое имя файла при его загрузке на сервер, не сохраняйте его под тем именем, под которым он был загружен. Максимум &mdash; сохранить расширение и в специальном поле таблицы &mdash; старое имя. Это убережет вас от проблем с пробелами и русскими символами в именах файлов. Все это реализовано в данном примере.</p>\r\n<p style="font-style: normal; font-variant: normal; font-weight: normal; font-size: 14px; line-height: normal; font-family: Arial, Verdana, sans-serif; letter-spacing: normal; color: #000000; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: #ffffff;">Затем загружаем все содержимое файла во временную переменную и пересохраняем из переменной в нужную папку. Почему так, а не через стандартную функцию языка move_uploaded_file? Да потому что со стандартной функцией бывают проблемы на некоторых хостингах, где php запущен в режиме CGI или FastCGI &mdash; файл перемещается с правами веб-сервера и у процесса PHP нет к нему прав доступа. А если файл загрузить и пересохранить эта проблема отпадает, но этот способ накладывает дополнительные требования на объем памяти, выделяемый для php. Здесь, файл сохраняется в папку /app/webroot/img/.</p>', 1396296000, 1396296000, 0, 1, '', '', 1, 1, '', 'a:4:{s:8:"original";s:41:"images/articles/0/2/00000020/00000020.jpg";i:640;s:46:"images/articles/0/2/00000020/00000020_w640.jpg";i:320;s:46:"images/articles/0/2/00000020/00000020_w320.jpg";i:100;s:46:"images/articles/0/2/00000020/00000020_w100.jpg";}'),
+(21, 'My new article', '<p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.</p>\r\n<p style="text-align: justify; font-size: 11px; line-height: 14px; margin: 0px 0px 14px; padding: 0px; color: #000000; font-family: Arial, Helvetica, sans; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;">The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.</p>\r\n<p style="text-align: justify; font-size: 11px; line-height: 14px; margin: 0px 0px 14px; padding: 0px; color: #000000; font-family: Arial, Helvetica, sans; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;"><br class="Apple-interchange-newline" />Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.</p>\r\n<p style="text-align: justify; font-size: 11px; line-height: 14px; margin: 0px 0px 14px; padding: 0px; color: #000000; font-family: Arial, Helvetica, sans; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;"><a href="../../../public/files/docs/1%20copy%201.jpg"><img src="../../../public/files/docs/svadebnyj-tort-poshagovoe-prigotovlenie.jpg" alt="" width="289" height="218" /></a></p>', 0, 0, 0, 0, '', '', 1, 2, '', 'a:4:{s:8:"original";s:41:"images/articles/1/2/00000021/00000021.jpg";i:640;s:46:"images/articles/1/2/00000021/00000021_w640.jpg";i:320;s:46:"images/articles/1/2/00000021/00000021_w320.jpg";i:100;s:46:"images/articles/1/2/00000021/00000021_w100.jpg";}'),
+(22, 'testtttt t', '<h2>В Генеральном штабе Вооруженных сил отмечают, что могут мобилизовать военнообязанных женщин в возрасте от 20 до 50 лет, призыв женщин возможен при необходимости и наличии соответствующих должностей.</h2>\r\n<div class="photo_block "><img style="float: left; margin: 10px;" title="/ mil.gov.ua" src="http://images.unian.net/photos/2014_10/1413028776-6708-jenschinyi-mediki.jpg" alt="/ mil.gov.ua" width="368" height="215" />\r\n<div class="subscribe_photo_text">Во время мобилизации могут быть призваны женщины / mil.gov.ua</div>\r\n</div>\r\n<p>Как передает корреспондент УНИАН, об этом сегодня во время брифинга сообщил и.о. представителя Генштаба Вооруженных сил Владислав Селезнев.</p>\r\n<p>&laquo;<a href="http://www.unian.ua/society/1038037-mobilizatsiya-2015-yak-provodjayut-do-viyska-ukrajinskih-cholovikiv-foto-video.html" target="_blank">Во время мобилизации&nbsp;</a>могут быть призваны на военную службу, военнообязанные женщины такого возраста: для лиц офицерского состава - от 20 до 50 лет, для других военнообязанных женщин - от 20 до 40 лет&raquo;, - напомнил он.</p>\r\n<p>Селезнев также отметил, что призыву на военную службу во время мобилизации подлежат военнообязанные женщины, которые являются гражданками Украины, которые, в первую очередь, изъявили желание проходить военную службу и состоящие на учете в военных комиссариатах, признанные военно-врачебными комиссиями такими, которые являются пригодными для прохождения военной службы по состоянию здоровья, проходившие военную службу и получившие соответствующие военно-учетные специальности, а также те, которые не проходили военную службу, но, согласно полученного образования или специальности, получили соответствующие военно-учетные специальности.</p>\r\n<p><span class="read_also"><span><span>ЧИТАЙТЕ ТАКЖЕ</span><a href="http://www.unian.ua/society/1038173-u-genshtabi-zayavili-scho-mobilizatsiya-viyskovozobovyazanih-jinok-vidbudetsya-na-dobrovilniy-osnovi.html" target="_blank">В Генштабе заявили, что мобилизация военнообязанных женщин состоится на добровольной основе</a></span></span></p>\r\n<p>Он также отметил, что большинство женщин, призванных во время мобилизации, будут проходить военную службу на медицинских должностях, а также в подразделениях связи и логистики.</p>\r\n<p>Селезнев добавил, что в 2014 году на службу в ВСУ в связи с частичной мобилизацией было призвано около 100 военнообязанных женщин.</p>\r\n<p>Как сообщал УНИАН, первая волна нынешней мобилизации в ряды ВСУ&nbsp;<a href="http://www.unian.ua/society/1033954-v-ukrajini-ofitsiyno-rozpochalasya-chastkova-mobilizatsiya.html" target="_blank">началась 20 января</a>&nbsp;и продолжится 90 дней, мобилизации подлежит более 60 тысяч человек.<span id="ctrlcopy"><br />Подробности читайте на УНИАН:<a href="http://www.unian.net/politics/1040065-v-genshtabe-zayavili-chto-pri-neobhodimosti-mogut-mobilizovat-jenschin-ot-20-let.html">http://www.unian.net/politics/1040065-v-genshtabe-zayavili-chto-pri-neobhodimosti-mogut-mobilizovat-jenschin-ot-20-let.html</a></span></p>', 0, 0, 0, 1, '', '', 1, 1, '', ''),
+(80, '2222', NULL, 0, 0, 0, 0, NULL, NULL, NULL, NULL, '', NULL),
+(81, 'Test Hello', '<p><img src="../../public/files/docs/0OsZSPwYvKM.jpg" alt="" width="1200" height="800" /></p>\r\n<p>Hello</p>', 0, 0, 0, 1, NULL, NULL, 1, 2, '', NULL);
 
 -- --------------------------------------------------------
 
@@ -74,15 +71,13 @@ INSERT INTO `article` (`id`, `article_title`, `article_description`, `article_ad
 --
 
 CREATE TABLE IF NOT EXISTS `article_category` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `id` int(11) unsigned NOT NULL,
   `article_category_title` varchar(300) NOT NULL,
   `article_category_description` text NOT NULL,
   `article_category_active` tinyint(1) NOT NULL,
   `article_category_meta_description` text NOT NULL,
-  `article_category_meta_keywords` text NOT NULL,
-  UNIQUE KEY `id` (`id`),
-  KEY `id_2` (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+  `article_category_meta_keywords` text NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `article_category`
@@ -100,7 +95,7 @@ INSERT INTO `article_category` (`id`, `article_category_title`, `article_categor
 --
 
 CREATE TABLE IF NOT EXISTS `block` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `weight` int(1) NOT NULL DEFAULT '0',
   `name` varchar(60) NOT NULL DEFAULT '',
   `displayname` varchar(60) NOT NULL DEFAULT '',
@@ -110,27 +105,21 @@ CREATE TABLE IF NOT EXISTS `block` (
   `active` tinyint(1) NOT NULL DEFAULT '0',
   `lang` varchar(5) NOT NULL DEFAULT '',
   `css_class` varchar(40) DEFAULT NULL,
-  `theme_id` int(11) DEFAULT '2',
-  PRIMARY KEY (`id`),
-  KEY `weight` (`weight`),
-  KEY `block_position` (`position`),
-  KEY `block_active` (`active`),
-  KEY `block_lang` (`lang`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=79 ;
+  `theme_id` int(11) DEFAULT '2'
+) ENGINE=MyISAM AUTO_INCREMENT=93 DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `block`
 --
 
 INSERT INTO `block` (`id`, `weight`, `name`, `displayname`, `pattern`, `content`, `position`, `active`, `lang`, `css_class`, `theme_id`) VALUES
-(37, 1, 'menu_block', 'Menu', '.*', NULL, 't', 0, '', NULL, 2),
-(32, 3, 'menu_block', 'Menu', '.*', 'a:5:{s:2:"id";s:2:"32";s:12:"block_weight";s:1:"2";s:9:"menu_type";s:1:"1";s:9:"parent_id";s:2:"95";s:8:"theme_id";s:1:"2";}', 'r', 1, '', '', 2),
-(71, 2, 'admin_top_block', 'Admin Top Block', '.*::admin::.*', NULL, 't', 1, '', '', 2),
-(70, 1, 'comments_block', 'Коментарии', '.*', 'a:14:{s:2:"id";s:2:"70";s:6:"weight";s:1:"1";s:4:"name";s:14:"comments_block";s:11:"displayname";s:20:"Коментарии";s:7:"pattern";s:2:".*";s:7:"content";s:0:"";s:8:"position";s:1:"b";s:6:"active";s:1:"1";s:4:"lang";s:0:"";s:9:"css_class";s:0:"";s:8:"theme_id";s:1:"2";s:3:"ref";s:28:"http://callisto/admin/blocks";s:7:"toolbar";s:0:"";s:6:"submit";s:6:"submit";}', 'b', 1, '', '', 2),
-(61, 2, 'menu_block', 'Menu', '.*', 'a:15:{s:2:"id";s:2:"61";s:6:"weight";s:1:"1";s:4:"name";s:10:"menu_block";s:11:"displayname";s:4:"Menu";s:7:"pattern";s:2:".*";s:7:"content";s:0:"";s:8:"position";s:1:"l";s:6:"active";s:1:"1";s:4:"lang";s:0:"";s:9:"css_class";s:0:"";s:8:"theme_id";s:1:"2";s:3:"ref";s:38:"http://callisto/admin/blocks/modify/61";s:9:"menu_type";s:1:"1";s:9:"parent_id";s:3:"102";s:6:"submit";s:6:"submit";}', 'l', 1, '', '', 2),
-(76, 1, 'anekdot_block', 'Анекдоты', '.*', '', 'l', 1, '', '', 2),
-(78, 3, 'menu_block', 'Menu', '.*', '', 'l', 1, '', '', 2),
-(67, 1, 'anekdot_block', 'Анекдоты', '.*', '', 'r', 1, '', '', 2);
+(86, 2, 'anekdot_block', 'Анекдот дня', '.*', '', 'undefined', 1, '', '', 2),
+(71, 1, 'admin_top_block', 'Admin Top Block', '.*::admin::.*', NULL, 't', 1, '', '', 2),
+(70, 1, 'comments_block', 'Коментарии', 'articles::user::view::.*', 'a:14:{s:2:"id";s:2:"70";s:6:"weight";s:1:"1";s:4:"name";s:14:"comments_block";s:11:"displayname";s:20:"Коментарии";s:7:"pattern";s:24:"articles::user::view::.*";s:7:"content";s:0:"";s:8:"position";s:1:"b";s:6:"active";s:1:"1";s:4:"lang";s:0:"";s:9:"css_class";s:0:"";s:8:"theme_id";s:1:"2";s:3:"ref";s:43:"http://callisto.rus.visual/articles/view/20";s:7:"toolbar";s:0:"";s:11:"submit_exit";s:11:"submit_exit";}', 'b', 1, '', '', 2),
+(61, 2, 'menu_block', 'Menu', '.*', 'a:15:{s:2:"id";s:2:"61";s:6:"weight";s:1:"1";s:4:"name";s:10:"menu_block";s:11:"displayname";s:4:"Menu";s:7:"pattern";s:2:".*";s:7:"content";s:1178:"a:15:{s:2:"id";s:2:"61";s:6:"weight";s:1:"1";s:4:"name";s:10:"menu_block";s:11:"displayname";s:4:"Menu";s:7:"pattern";s:2:".*";s:7:"content";s:785:"a:15:{s:2:"id";s:2:"61";s:6:"weight";s:1:"1";s:4:"name";s:10:"menu_block";s:11:"displayname";s:4:"Menu";s:7:"pattern";s:2:".*";s:7:"content";s:392:"a:15:{s:2:"id";s:2:"61";s:6:"weight";s:1:"1";s:4:"name";s:10:"menu_block";s:11:"displayname";s:4:"Menu";s:7:"pattern";s:2:".*";s:7:"content";s:0:"";s:8:"position";s:1:"l";s:6:"active";s:1:"1";s:4:"lang";s:0:"";s:9:"css_class";s:0:"";s:8:"theme_id";s:1:"2";s:3:"ref";s:43:"http://callisto.rus.visual/articles/view/20";s:9:"menu_type";s:1:"1";s:9:"parent_id";s:1:"1";s:6:"submit";s:6:"submit";}";s:8:"position";s:1:"l";s:6:"active";s:1:"1";s:4:"lang";s:0:"";s:9:"css_class";s:0:"";s:8:"theme_id";s:1:"2";s:3:"ref";s:42:"http://callisto.rus.visual/articles/view/7";s:9:"menu_type";s:1:"1";s:9:"parent_id";s:1:"3";s:6:"submit";s:6:"submit";}";s:8:"position";s:1:"l";s:6:"active";s:1:"1";s:4:"lang";s:0:"";s:9:"css_class";s:0:"";s:8:"theme_id";s:1:"2";s:3:"ref";s:42:"http://callisto.rus.visual/articles/view/7";s:9:"menu_type";s:1:"1";s:9:"parent_id";s:1:"0";s:6:"submit";s:6:"submit";}";s:8:"position";s:1:"l";s:6:"active";s:1:"1";s:4:"lang";s:0:"";s:9:"css_class";s:0:"";s:8:"theme_id";s:1:"2";s:3:"ref";s:42:"http://callisto.rus.visual/articles/view/7";s:9:"menu_type";s:1:"1";s:9:"parent_id";s:1:"1";s:6:"submit";s:6:"submit";}', 'l', 1, '', '', 2),
+(90, 2, 'html_block', 'HTML block', '.*', 'a:13:{s:2:"id";s:2:"90";s:6:"weight";s:1:"3";s:4:"name";s:10:"html_block";s:11:"displayname";s:10:"HTML block";s:7:"pattern";s:2:".*";s:7:"content";s:177:"<p><iframe src="//www.youtube.com/embed/3BVGXBjkMMc" width="100%" height="215" frameborder="0" allowfullscreen="allowfullscreen"></iframe></p>\r\n<p>&nbsp;</p>\r\n<p>Hello World</p>";s:8:"position";s:1:"l";s:6:"active";s:1:"1";s:4:"lang";s:0:"";s:9:"css_class";s:8:"34525243";s:8:"theme_id";s:1:"2";s:3:"ref";s:39:"http://callisto.rus.visual/admin/blocks";s:6:"submit";s:6:"submit";}', 'r', 1, '', '34525243', 2),
+(91, 1, 'search_block', 'Search Blog', '.*', 'a:13:{s:2:"id";s:2:"91";s:6:"weight";s:1:"3";s:4:"name";s:12:"search_block";s:11:"displayname";s:11:"Search Blog";s:7:"pattern";s:2:".*";s:7:"content";s:0:"";s:8:"position";s:1:"l";s:6:"active";s:1:"1";s:4:"lang";s:0:"";s:9:"css_class";s:0:"";s:8:"theme_id";s:1:"2";s:3:"ref";s:42:"http://callisto.rus.visual/articles/view/7";s:6:"submit";s:6:"submit";}', 'l', 1, '', '', 2),
+(92, 3, 'html_block', 'Side Widget Well', '.*', 'a:13:{s:2:"id";s:2:"92";s:6:"weight";s:1:"4";s:4:"name";s:10:"html_block";s:11:"displayname";s:16:"Side Widget Well";s:7:"pattern";s:2:".*";s:7:"content";s:170:"<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore, perspiciatis adipisci accusamus laudantium odit aliquam repellat tempore quos aspernatur vero.</p>";s:8:"position";s:1:"l";s:6:"active";s:1:"1";s:4:"lang";s:0:"";s:9:"css_class";s:0:"";s:8:"theme_id";s:1:"2";s:3:"ref";s:40:"http://callisto.rus.visual/admin/blocks/";s:6:"submit";s:6:"submit";}', 'l', 1, '', '', 2);
 
 -- --------------------------------------------------------
 
@@ -139,16 +128,13 @@ INSERT INTO `block` (`id`, `weight`, `name`, `displayname`, `pattern`, `content`
 --
 
 CREATE TABLE IF NOT EXISTS `cities` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `id` int(11) unsigned NOT NULL,
   `country_id` int(11) DEFAULT NULL,
   `name_ru` varchar(200) DEFAULT NULL,
   `name_en` varchar(200) DEFAULT NULL,
   `description_ru` text,
-  `description_en` text,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `id` (`id`),
-  KEY `country_id` (`country_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+  `description_en` text
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `cities`
@@ -164,7 +150,7 @@ INSERT INTO `cities` (`id`, `country_id`, `name_ru`, `name_en`, `description_ru`
 --
 
 CREATE TABLE IF NOT EXISTS `comment` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `comment_addtime` int(10) unsigned NOT NULL,
   `comment_modtime` int(10) unsigned NOT NULL,
   `comment_active` int(10) unsigned NOT NULL,
@@ -173,14 +159,8 @@ CREATE TABLE IF NOT EXISTS `comment` (
   `comment_module` varchar(100) NOT NULL,
   `comment_key_a` int(11) NOT NULL,
   `comment_key_b` int(11) NOT NULL,
-  `comment_module_object` varchar(255) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `coment_key_a` (`comment_key_a`),
-  KEY `coment_key_b` (`comment_key_b`),
-  KEY `coment_user_id` (`comment_user_id`),
-  FULLTEXT KEY `comment_module` (`comment_module`),
-  FULLTEXT KEY `comment_module_object` (`comment_module_object`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=64 ;
+  `comment_module_object` varchar(255) NOT NULL
+) ENGINE=MyISAM AUTO_INCREMENT=74 DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `comment`
@@ -238,18 +218,27 @@ INSERT INTO `comment` (`id`, `comment_addtime`, `comment_modtime`, `comment_acti
 (49, 1404202117, 1404202117, 0, '', -1, 'articles', 0, 0, 'articles::user::view::21'),
 (50, 1404203057, 1404203057, 0, '[b]ываываыв ыва вы аыв [/b]', -1, 'articles', 0, 0, 'articles::user::view::21'),
 (51, 1408630650, 1408630650, 0, 'fdgfdfgdsf', 3, 'articles', 0, 0, 'articles::user::view::21'),
-(52, 1410860706, 1410860706, 0, ':angel:retter terw terw er', 3, 'articles', 0, 0, 'articles::user::view::21::permission::ACCESS_ADMIN'),
-(53, 1423044319, 1423044319, 0, 'retret ret re er twet ew trew', 3, 'articles', 0, 0, 'articles::user::view::0:1::ACCESS_LEVEL_0::permission::ACCESS_ADMIN'),
-(54, 1423044341, 1423044341, 0, 'retertewr er ert retw', 3, 'articles', 0, 0, 'articles::user::view::0:1::ACCESS_LEVEL_0::permission::ACCESS_ADMIN'),
-(55, 1423491203, 1423491203, 0, 'fdsafads  3213 3 12`3 `13', 3, 'articles', 0, 0, 'articles::user::view::0:1::ACCESS_LEVEL_0::permission::ACCESS_ADMIN'),
-(56, 1423491203, 1423491203, 0, 'fdsafads  3213 3 12`3 `13', 3, 'articles', 0, 0, 'articles::user::view::0:1::ACCESS_LEVEL_0::permission::ACCESS_ADMIN'),
-(57, 1423491373, 1423491373, 0, 'gg fg dfg dfsg', 3, 'articles', 0, 0, 'articles::user::view::0:7::ACCESS_LEVEL_0::permission::ACCESS_ADMIN'),
-(58, 1423491409, 1423491409, 0, '[sup]ewrwer[/sup][sub]rwerweqrw[/sub][b][sub]rqwerwqr  rwer wer [/sub][sup]erererer[/sup][sub]rerre[/sub][/b]\r\n[b][sub]ererqrw[/sub]rwerwqrrwerwq[/b]', 3, 'articles', 0, 0, 'articles::user::view::0:7::ACCESS_LEVEL_0::permission::ACCESS_ADMIN'),
-(59, 1427800264, 1427800264, 0, 'sdafdsafasd', 3, 'articles', 0, 0, 'articles::user::view::0:22::ACCESS_LEVEL_0::permission::ACCESS_ADMIN'),
-(60, 1434380170, 1434380170, 0, 'Gfvdf', 3, 'articles', 0, 0, 'articles::user::view::0:7::ACCESS_LEVEL_0::permission::ACCESS_ADMIN'),
-(61, 1434380248, 1434380248, 0, 'test body', 3, 'articles', 0, 0, 'articles::user::view::0:20::ACCESS_LEVEL_0::permission::ACCESS_ADMIN'),
-(62, 1436192930, 1436192930, 0, 'dsfdsfs', -1, 'articles', 0, 0, 'articles::user::view::0:1::ACCESS_LEVEL_0::permission::ACCESS_ADMIN'),
-(63, 1440490701, 1440490701, 0, 'wqeqweqwe', 3, 'articles', 0, 0, 'articles::user::articleList::ACCESS_LEVEL_0::permission::ACCESS_ADMIN');
+(52, 1410860706, 1410860706, 0, ':angel:retter terw terw er', 3, 'articles', 0, 0, 'articles::user::view::21'),
+(53, 1423044319, 1423044319, 0, 'retret ret re er twet ew trew', 3, 'articles', 0, 0, 'articles::user::view::0:1'),
+(54, 1423044341, 1423044341, 0, 'retertewr er ert retw', 3, 'articles', 0, 0, 'articles::user::view::0:1'),
+(55, 1423491203, 1423491203, 0, 'fdsafads  3213 3 12`3 `13', 3, 'articles', 0, 0, 'articles::user::view::0:1'),
+(56, 1423491203, 1423491203, 0, 'fdsafads  3213 3 12`3 `13', 3, 'articles', 0, 0, 'articles::user::view::0:1'),
+(57, 1423491373, 1423491373, 0, 'gg fg dfg dfsg', 3, 'articles', 0, 0, 'articles::user::view::0:7'),
+(58, 1423491409, 1423491409, 0, '[sup]ewrwer[/sup][sub]rwerweqrw[/sub][b][sub]rqwerwqr  rwer wer [/sub][sup]erererer[/sup][sub]rerre[/sub][/b]\r\n[b][sub]ererqrw[/sub]rwerwqrrwerwq[/b]', 3, 'articles', 0, 0, 'articles::user::view::0:7'),
+(59, 1427800264, 1427800264, 0, 'sdafdsafasd', 3, 'articles', 0, 0, 'articles::user::view::0:22'),
+(60, 1434380170, 1434380170, 0, 'Gfvdf', 3, 'articles', 0, 0, 'articles::user::view::0:7'),
+(61, 1434380248, 1434380248, 0, 'test body', 3, 'articles', 0, 0, 'articles::user::view::0:20'),
+(62, 1436192930, 1436192930, 0, 'dsfdsfs', -1, 'articles', 0, 0, 'articles::user::view::0:1'),
+(63, 1440490701, 1440490701, 0, 'wqeqweqwe', 3, 'articles', 0, 0, 'articles::user::articleList'),
+(65, 1448287761, 1448287761, 0, 'tryrtyrtyryr', 3, 'articles', 0, 0, ''),
+(66, 1448288874, 1448288874, 0, 'dsf s sd fsd fds ', 3, 'articles', 0, 0, 'articles::user::view::0:22'),
+(67, 1459253325, 1459253325, 0, 'werwerw', 1, 'articles', 0, 0, 'articles::user::view::0:7'),
+(68, 1459253342, 1459253342, 0, 'ffffffff', 1, 'articles', 0, 0, 'articles::user::view::0:7'),
+(69, 1459519397, 1459519397, 0, 'dsafsdaf sdf dsf asd[s]sd fsd fsdaf asd [/s][size=6][s] fsdf sdf as f[/s] dsafsda fsd[color=#cc99ff]dfssdafasd[/color][/size]', 1, 'articles', 0, 0, 'articles::user::view::0:8'),
+(70, 1472823740, 1472823740, 0, '435435234', 1, 'articles', 0, 0, 'articles::user::view::0:81'),
+(71, 1477053346, 1477053346, 0, '', 1, 'articles', 0, 0, 'articles::user::view::0:8'),
+(72, 1477053385, 1477053385, 0, 'qewrwerqw', 1, 'articles', 0, 0, 'articles::user::view::0:8'),
+(73, 1478790119, 1478790119, 0, '23423423', 1, 'articles', 0, 0, 'articles::user::view::0:20');
 
 -- --------------------------------------------------------
 
@@ -258,18 +247,17 @@ INSERT INTO `comment` (`id`, `comment_addtime`, `comment_modtime`, `comment_acti
 --
 
 CREATE TABLE IF NOT EXISTS `configuration` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `module` varchar(100) NOT NULL,
-  `params` text NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
+  `id` int(11) unsigned NOT NULL,
+  `module` varchar(200) DEFAULT NULL,
+  `params` text
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `configuration`
 --
 
 INSERT INTO `configuration` (`id`, `module`, `params`) VALUES
-(3, 'main', 'a:22:{s:9:"site_name";s:6:"rewerw";s:11:"site_slogan";s:4:"wrer";s:16:"site_description";s:8:"ewrwerew";s:11:"site_footer";s:5:"wrwer";s:10:"site_email";s:6:"werwer";s:15:"site_dateformat";s:5:"Y-m-d";s:15:"site_timeformat";s:5:"g:i a";s:20:"site_offline_message";s:130:"Сайт закрыт на техническое обслуживание.<br /> Пожалуйста, зайдите позже.";s:16:"site_list_lenght";s:1:"5";s:18:"user_default_group";s:15:"noindex, follow";s:16:"user_new_confirm";s:17:"noindex, nofollow";s:20:"site_seo_description";s:8:"trteytry";s:17:"site_seo_keywords";s:7:"tryerty";s:15:"site_seo_robots";s:15:"index, nofollow";s:15:"site_email_type";s:4:"smtp";s:15:"site_email_from";s:20:"stelss1986@gmail.com";s:17:"site_email_sender";s:5:"Admin";s:22:"site_email_smtp_server";s:14:"smtp.gmail.com";s:13:"site_smtp_sec";s:3:"ssl";s:20:"site_email_smtp_port";s:3:"465";s:20:"site_email_smtp_user";s:20:"stelss1986@gmail.com";s:24:"site_email_smtp_password";s:10:"ruslan1986";}');
+(1, 'main', 'a:22:{s:9:"site_name";s:15:"Callisto Site 1";s:11:"site_slogan";s:14:"My Site Slogan";s:16:"site_description";s:19:"My Site Description";s:11:"site_footer";s:14:"My Site Footer";s:10:"site_email";s:22:"admin@callisctocms.com";s:15:"site_dateformat";s:5:"Y-m-d";s:15:"site_timeformat";s:5:"g:i a";s:20:"site_offline_message";s:36:"This site is temporarily unavailable";s:16:"site_list_lenght";s:1:"5";s:18:"user_default_group";s:15:"noindex, follow";s:16:"user_new_confirm";s:17:"noindex, nofollow";s:20:"site_seo_description";s:15:"SEO Description";s:17:"site_seo_keywords";s:12:"SEO Keywords";s:15:"site_seo_robots";s:15:"index, nofollow";s:15:"site_email_type";s:4:"smtp";s:15:"site_email_from";s:22:"admin@callisctocms.com";s:17:"site_email_sender";s:5:"Admin";s:22:"site_email_smtp_server";s:14:"smtp.gmail.com";s:13:"site_smtp_sec";s:3:"ssl";s:20:"site_email_smtp_port";s:3:"465";s:20:"site_email_smtp_user";s:22:"admin@callisctocms.com";s:24:"site_email_smtp_password";s:16:"passwordforemail";}');
 
 -- --------------------------------------------------------
 
@@ -278,7 +266,7 @@ INSERT INTO `configuration` (`id`, `module`, `params`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `countries` (
-  `id` int(5) NOT NULL AUTO_INCREMENT,
+  `id` int(5) NOT NULL,
   `code` char(2) NOT NULL DEFAULT '',
   `name_en` varchar(45) NOT NULL DEFAULT '',
   `name_ru` varchar(45) NOT NULL DEFAULT '',
@@ -299,9 +287,8 @@ CREATE TABLE IF NOT EXISTS `countries` (
   `description_en` text,
   `active` tinyint(1) unsigned NOT NULL DEFAULT '1',
   `created_at` int(11) unsigned DEFAULT NULL,
-  `updated_at` int(11) unsigned DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=253 ;
+  `updated_at` int(11) unsigned DEFAULT NULL
+) ENGINE=MyISAM AUTO_INCREMENT=253 DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `countries`
@@ -537,11 +524,11 @@ INSERT INTO `countries` (`id`, `code`, `name_en`, `name_ru`, `currency_code`, `p
 (227, 'TV', 'Tuvalu', 'Tuvalu', 'AUD', '10472', '798', '-5.641972', '-10.801169', '179.863281', '176.064865', 'Funafuti', 'Funafuti', 'OC', '26.0', 'tvl,en,sm,gil', 2110297, NULL, NULL, 1, NULL, NULL),
 (228, 'TW', 'Taiwan', 'Taiwan', 'TWD', '22894384', '158', '25.3002899036181', '21.896606934717', '122.006739823315', '119.534691', 'Taipei', 'Taipei', 'AS', '35980.0', 'zh-TW,zh,nan,hak', 1668284, NULL, NULL, 1, NULL, NULL),
 (229, 'TZ', 'Tanzania', 'Tanzania', 'TZS', '41892895', '834', '-0.990736', '-11.745696', '40.443222', '29.327168', 'Dodoma', 'Dodoma', 'AF', '945087.0', 'sw-TZ,en,ar', 149590, NULL, NULL, 1, NULL, NULL),
-(230, 'UA', 'Ukraine', 'Украина', 'UAH', '45415596', '804', '52.369362', '44.390415', '40.20739', '22.128889', 'Киев', 'Kyiv', 'EU', '603700.0', 'uk,ru-UA,rom,pl,hu', 690791, '', '', 1, 1435665653, 1435665653);
-INSERT INTO `countries` (`id`, `code`, `name_en`, `name_ru`, `currency_code`, `population`, `iso_numeric`, `north`, `south`, `east`, `west`, `capital_ru`, `capital_en`, `continent`, `areaInSqKm`, `languages`, `geonameId`, `description_ru`, `description_en`, `active`, `created_at`, `updated_at`) VALUES
+(230, 'UA', 'Ukraine', 'Украина', 'UAH', '45415596', '804', '52.369362', '44.390415', '40.20739', '22.128889', 'Киев', 'Kyiv', 'EU', '603700.0', 'uk,ru-UA,rom,pl,hu', 690791, '', '', 1, 1435665653, 1435665653),
 (231, 'UG', 'Uganda', 'Uganda', 'UGX', '33398682', '800', '4.214427', '-1.48405', '35.036049', '29.573252', 'Kampala', 'Kampala', 'AF', '236040.0', 'en-UG,lg,sw,ar', 226074, NULL, NULL, 1, NULL, NULL),
 (232, 'UM', 'U.S. Minor Outlying Islands', 'U.S. Minor Outlying Islands', 'USD', '0', '581', '28.219814', '-0.389006', '166.654526', '-177.392029', '', '', 'OC', '0.0', 'en-UM', 5854968, NULL, NULL, 1, NULL, NULL),
-(233, 'US', 'United States', 'United States', 'USD', '310232863', '840', '49.388611', '24.544245', '-66.954811', '-124.733253', 'Washington', 'Washington', 'NA', '9629091.0', 'en-US,es-US,haw,fr', 6252001, NULL, NULL, 1, NULL, NULL),
+(233, 'US', 'United States', 'United States', 'USD', '310232863', '840', '49.388611', '24.544245', '-66.954811', '-124.733253', 'Washington', 'Washington', 'NA', '9629091.0', 'en-US,es-US,haw,fr', 6252001, NULL, NULL, 1, NULL, NULL);
+INSERT INTO `countries` (`id`, `code`, `name_en`, `name_ru`, `currency_code`, `population`, `iso_numeric`, `north`, `south`, `east`, `west`, `capital_ru`, `capital_en`, `continent`, `areaInSqKm`, `languages`, `geonameId`, `description_ru`, `description_en`, `active`, `created_at`, `updated_at`) VALUES
 (234, 'UY', 'Uruguay', 'Uruguay', 'UYU', '3477000', '858', '-30.082224', '-34.980816', '-53.073933', '-58.442722', 'Montevideo', 'Montevideo', 'SA', '176220.0', 'es-UY', 3439705, NULL, NULL, 1, NULL, NULL),
 (235, 'UZ', 'Uzbekistan', 'Uzbekistan', 'UZS', '27865738', '860', '45.575001', '37.184444', '73.132278', '55.996639', 'Tashkent', 'Tashkent', 'AS', '447400.0', 'uz,ru,tg', 1512440, NULL, NULL, 1, NULL, NULL),
 (236, 'VA', 'Vatican City', 'Vatican City', 'EUR', '921', '336', '41.90743830885576', '41.90027960306854', '12.45837546629481', '12.44570678169205', 'Vatican', 'Vatican', 'EU', '0.44', 'la,it,fr', 3164670, NULL, NULL, 1, NULL, NULL),
@@ -567,22 +554,20 @@ INSERT INTO `countries` (`id`, `code`, `name_en`, `name_ru`, `currency_code`, `p
 --
 
 CREATE TABLE IF NOT EXISTS `group` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `group_displayname` varchar(60) NOT NULL,
-  `group_description` varchar(255) NOT NULL DEFAULT '',
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=63 ;
+  `id` int(11) NOT NULL,
+  `name` varchar(60) DEFAULT NULL,
+  `description` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `group`
 --
 
-INSERT INTO `group` (`id`, `group_displayname`, `group_description`) VALUES
-(2, 'Зарегистрированные', 'Зарегистрированные пользователи'),
-(1, 'Администраторы', 'Администраторы сайта'),
+INSERT INTO `group` (`id`, `name`, `description`) VALUES
 (-1, 'Незарегистрированные', 'Незарегистрированные либо не авторизированные пользователи'),
-(3, 'Модераторы', 'Модераторы Сайта'),
-(4, 'Партнеры', 'Партнеры');
+(1, 'Администраторы', 'Администраторы сайта'),
+(2, 'Зарегистрированные', 'Зарегистрированные пользователи'),
+(3, 'Модераторы', 'Модераторы сайта');
 
 -- --------------------------------------------------------
 
@@ -591,59 +576,22 @@ INSERT INTO `group` (`id`, `group_displayname`, `group_description`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `group_permission` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `id` int(11) unsigned NOT NULL,
   `gid` int(11) DEFAULT NULL,
   `weight` int(11) unsigned DEFAULT NULL,
   `level` smallint(6) unsigned DEFAULT NULL,
   `pattern` varchar(250) DEFAULT NULL,
-  `description` varchar(300) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `id` (`id`),
-  KEY `weight` (`weight`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=25 ;
+  `description` varchar(300) DEFAULT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `group_permission`
 --
 
 INSERT INTO `group_permission` (`id`, `gid`, `weight`, `level`, `pattern`, `description`) VALUES
-(1, 1, 2, 70, '.*', '545'),
-(3, -1, 3, 70, '.*::view_mod', '22222'),
-(4, -1, 4, 70, 'test::user::view_list1::*.', '234'),
-(5, -1, 5, 70, 'test::user::view_list::*.', '234'),
-(6, 2, 7, 60, '.*::view_mod5', 'HiHi'),
-(24, 2, 10, 0, 'tryrtyrtyrt443434', NULL),
-(10, 1, 8, 50, '.*::view_mod', 'gdfgdfsgdg'),
-(12, -1, 9, 20, '.*', 'dfgdfgd'),
-(18, -1, 1, 0, '.*::admin::.*', '?????? ??? ???? ??????????????????? ????????????? ??????');
-
--- --------------------------------------------------------
-
---
--- Структура таблицы `helper`
---
-
-CREATE TABLE IF NOT EXISTS `helper` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `object_type` int(11) unsigned DEFAULT NULL,
-  `helper_typer` int(11) unsigned NOT NULL,
-  `helper_value` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `id` (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
---
--- Структура таблицы `helper_type`
---
-
-CREATE TABLE IF NOT EXISTS `helper_type` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `helper_type` varchar(255) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `id` (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+(1, 1, NULL, 70, '.*', 'Права для администраторов системы. Разрешено все'),
+(2, -1, NULL, 0, '.*::admin::.*', 'Запещаем неавторизированым пользователям доступ к админке'),
+(3, -1, NULL, 20, '.*', 'Незарегистрированые/Неавторзированые пользователи могут просматривать всю информацию');
 
 -- --------------------------------------------------------
 
@@ -657,10 +605,7 @@ CREATE TABLE IF NOT EXISTS `ip2location` (
   `country_code` char(2) COLLATE utf8_bin DEFAULT NULL,
   `country_name` varchar(64) COLLATE utf8_bin DEFAULT NULL,
   `region_name` varchar(128) COLLATE utf8_bin DEFAULT NULL,
-  `city_name` varchar(128) COLLATE utf8_bin DEFAULT NULL,
-  KEY `idx_ip_from` (`ip_from`),
-  KEY `idx_ip_to` (`ip_to`),
-  KEY `idx_ip_from_to` (`ip_from`,`ip_to`)
+  `city_name` varchar(128) COLLATE utf8_bin DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- --------------------------------------------------------
@@ -670,44 +615,26 @@ CREATE TABLE IF NOT EXISTS `ip2location` (
 --
 
 CREATE TABLE IF NOT EXISTS `menu` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `weight` int(4) NOT NULL DEFAULT '0',
-  `menu_parent_id` int(11) NOT NULL DEFAULT '0',
-  `menu_item_type` tinyint(1) NOT NULL DEFAULT '3',
-  `menu_subitem_counter` int(11) NOT NULL DEFAULT '0',
-  `menu_title` varchar(60) NOT NULL,
-  `menu_description` text,
+  `id` int(11) unsigned NOT NULL,
+  `weight` int(11) DEFAULT '0',
+  `menu_parent_id` int(11) DEFAULT '0',
+  `menu_item_type` tinyint(1) DEFAULT '3',
+  `menu_subitem_counter` int(11) DEFAULT '0',
+  `menu_title` varchar(60) DEFAULT NULL,
+  `menu_description` varchar(300) DEFAULT NULL,
   `menu_content` text,
-  `menu_active` tinyint(1) NOT NULL DEFAULT '0',
   `menu_path` text,
-  PRIMARY KEY (`id`),
-  KEY `parent_id` (`menu_parent_id`),
-  KEY `weight` (`weight`),
-  KEY `item_type` (`menu_item_type`),
-  KEY `active` (`menu_active`),
-  FULLTEXT KEY `path` (`menu_path`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=110 ;
+  `menu_active` tinyint(1) DEFAULT '0'
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `menu`
 --
 
-INSERT INTO `menu` (`id`, `weight`, `menu_parent_id`, `menu_item_type`, `menu_subitem_counter`, `menu_title`, `menu_description`, `menu_content`, `menu_active`, `menu_path`) VALUES
-(92, 3, 89, 3, 0, 'Groups', NULL, '/groups/', 0, '0::89'),
-(93, 4, 89, 3, 0, 'Permissions', NULL, '/permissions/', 0, '0::89'),
-(94, 1, 89, 3, 0, 'Menu', NULL, '/menu/', 0, '0::89'),
-(96, 1, 95, 3, 0, 'Test 1', NULL, '/users/', 0, '0::95'),
-(97, 2, 95, 3, 0, 'Test  2', NULL, '', 0, '0::95'),
-(98, 3, 0, 3, 0, 'Test  2', '', '', 0, '0'),
-(100, 6, 89, 3, 0, 'Темы', 'Модуль для выбора темы сайта', '/theme/', 0, '0::89'),
-(102, 6, 102, 3, 4, 'Tест', '', '', 0, '0::102'),
-(89, 1, 0, 3, 7, 'Administration', '', '', 0, '0'),
-(90, 5, 89, 3, 0, 'Blocks', NULL, '/blocks/', 0, '0::89'),
-(91, 2, 89, 3, 0, 'Users', NULL, '/users/', 0, '0::89'),
-(104, 2, 102, 3, 0, 'Статьи', NULL, '/articles/', 1, '0::102'),
-(105, 3, 102, 3, 0, 'Статьи 2', NULL, '/articles/', 1, '0::102'),
-(106, 1, 102, 3, 0, 'Главная', 'Главная страница', '/', 1, '0::102'),
-(108, 2, 0, 3, 0, 'Тест 1111', '', '', 0, '0');
+INSERT INTO `menu` (`id`, `weight`, `menu_parent_id`, `menu_item_type`, `menu_subitem_counter`, `menu_title`, `menu_description`, `menu_content`, `menu_path`, `menu_active`) VALUES
+(1, 1, 0, 3, 2, 'Test Frontend Menu', 'Test Frontend Menu Description', '', '0::1', 1),
+(2, 2, 1, 3, 0, 'Главня Страница', 'Главня Страница Описание', '/', '0::1::2', 1),
+(3, 1, 1, 3, 0, 'Статьи', 'Страница Статьи Описание', '/articles', '0::1::3', 1);
 
 -- --------------------------------------------------------
 
@@ -716,13 +643,11 @@ INSERT INTO `menu` (`id`, `weight`, `menu_parent_id`, `menu_item_type`, `menu_su
 --
 
 CREATE TABLE IF NOT EXISTS `modules` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `module_name` int(11) NOT NULL,
   `module_description` int(11) NOT NULL,
-  `active` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `id` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `active` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -731,15 +656,11 @@ CREATE TABLE IF NOT EXISTS `modules` (
 --
 
 CREATE TABLE IF NOT EXISTS `mod_config` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `id` int(11) unsigned NOT NULL,
   `mod_config_mod_name` varchar(50) DEFAULT NULL,
   `mod_config_key` varchar(100) DEFAULT NULL,
-  `mod_config_value` text,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `id` (`id`),
-  KEY `mod_config_mod_name` (`mod_config_mod_name`,`mod_config_key`),
-  KEY `mod_config_mod_name_1` (`mod_config_mod_name`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=12 ;
+  `mod_config_value` text
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `mod_config`
@@ -763,19 +684,13 @@ INSERT INTO `mod_config` (`id`, `mod_config_mod_name`, `mod_config_key`, `mod_co
 --
 
 CREATE TABLE IF NOT EXISTS `object` (
-  `guid` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `guid` int(11) unsigned NOT NULL,
   `type` int(11) unsigned DEFAULT NULL,
   `owner_id` int(11) unsigned NOT NULL DEFAULT '0',
   `time_create` int(11) unsigned DEFAULT NULL,
   `time_update` int(11) unsigned DEFAULT NULL,
-  `active` enum('0','1') DEFAULT NULL,
-  PRIMARY KEY (`guid`),
-  UNIQUE KEY `guid` (`guid`),
-  KEY `type` (`type`),
-  KEY `time_create` (`time_create`),
-  KEY `time_update` (`time_update`),
-  KEY `owner_id` (`owner_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7146 ;
+  `active` enum('0','1') DEFAULT NULL
+) ENGINE=MyISAM AUTO_INCREMENT=7146 DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `object`
@@ -7939,11 +7854,9 @@ INSERT INTO `object` (`guid`, `type`, `owner_id`, `time_create`, `time_update`, 
 --
 
 CREATE TABLE IF NOT EXISTS `object_field` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `field` varchar(200) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `field` (`field`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=41 ;
+  `id` int(11) unsigned NOT NULL,
+  `field` varchar(200) NOT NULL
+) ENGINE=MyISAM AUTO_INCREMENT=41 DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `object_field`
@@ -7997,11 +7910,9 @@ INSERT INTO `object_field` (`id`, `field`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `object_type` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `type` varchar(200) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `type` (`type`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
+  `id` int(11) unsigned NOT NULL,
+  `type` varchar(200) DEFAULT NULL
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `object_type`
@@ -8022,10 +7933,7 @@ INSERT INTO `object_type` (`id`, `type`) VALUES
 CREATE TABLE IF NOT EXISTS `object_value` (
   `guid` int(11) DEFAULT NULL,
   `field_id` int(11) DEFAULT NULL,
-  `value` text,
-  KEY `guid` (`guid`),
-  KEY `field_id` (`field_id`),
-  KEY `value` (`value`(40))
+  `value` text
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
@@ -43877,11 +43785,38 @@ INSERT INTO `object_value` (`guid`, `field_id`, `value`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Структура таблицы `output_cache`
+--
+
+CREATE TABLE IF NOT EXISTS `output_cache` (
+  `id` char(40) NOT NULL COMMENT 'sha1 hash',
+  `name` varchar(250) NOT NULL,
+  `cache_id` varchar(250) DEFAULT NULL,
+  `compile_id` varchar(250) DEFAULT NULL,
+  `modified` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `content` longtext NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Дамп данных таблицы `output_cache`
+--
+
+INSERT INTO `output_cache` (`id`, `name`, `cache_id`, `compile_id`, `modified`, `content`) VALUES
+('05a4d5a6f8f1d4d032714c6eb1606cd440deb6f5', 'D:\\www\\callisto\\www/modules/articles/views/default/articleList.tpl', 'articles|user|articleList|ACCESS_LEVEL_70', NULL, '2016-01-13 08:17:26', '<?php\n/*%%SmartyHeaderCode:2445556960816a9e0a7_12638268%%*/\nif(!defined(''SMARTY_DIR'')) exit(''no direct access allowed'');\n$_valid = $_smarty_tpl->decodeProperties(array (\n  ''file_dependency'' => \n  array (\n    ''1633d260b2984e35f3c11259259be641f1b0fc34'' => \n    array (\n      0 => ''D:\\\\www\\\\callisto\\\\www\\\\modules\\\\articles\\\\views\\\\default\\\\articleList.tpl'',\n      1 => 1448289047,\n      2 => ''file'',\n    ),\n  ),\n  ''nocache_hash'' => ''2445556960816a9e0a7_12638268'',\n  ''tpl_function'' => \n  array (\n  ),\n  ''variables'' => \n  array (\n    ''articles_list'' => 0,\n    ''article'' => 0,\n    ''article_user_list'' => 0,\n    ''article_category_list'' => 0,\n  ),\n  ''has_nocache_code'' => false,\n  ''version'' => ''3.1.27'',\n  ''unifunc'' => ''content_56960816af9fa3_89674527'',\n  ''cache_lifetime'' => 10800,\n),true);\n/*/%%SmartyHeaderCode%%*/\nif ($_valid && !is_callable(''content_56960816af9fa3_89674527'')) {\nfunction content_56960816af9fa3_89674527 ($_smarty_tpl) {\n?>\n<div class="article-list"><div class="article-list-item"><b><a href="/articles/view/22">testtttt t</a></b><div class="article-info"><div><b>Ð”Ð¾Ð±Ð°Ð²Ð»ÐµÐ½Ð¾:</b> Jan 13, 2016</div><div><b>ÐÐ²Ñ‚Ð¾Ñ€:</b> <a href="/articles/user/3"></a></div><div><b>ÐšÐ°Ñ‚ÐµÐ³Ð¾Ñ€Ð¸Ñ:</b> <a href="/articles/category/1">Category 1</a></div></div><div class="article-description"> Ð’ Ð“ÐµÐ½ÐµÑ€Ð°Ð»ÑŒÐ½Ð¾Ð¼ ÑˆÑ‚Ð°Ð±Ðµ Ð’Ð¾Ð¾Ñ€ÑƒÐ¶ÐµÐ½Ð½Ñ‹Ñ… ÑÐ¸Ð» Ð¾Ñ‚Ð¼ÐµÑ‡Ð°ÑŽÑ‚, Ñ‡Ñ‚Ð¾ Ð¼Ð¾Ð³ÑƒÑ‚ Ð¼Ð¾Ð±Ð¸Ð»Ð¸Ð·Ð¾Ð²Ð°Ñ‚ÑŒ Ð²Ð¾ÐµÐ½Ð½Ð¾Ð¾Ð±ÑÐ·Ð°Ð½Ð½Ñ‹Ñ… Ð¶ÐµÐ½Ñ‰Ð¸Ð½ Ð² Ð²Ð¾Ð·Ñ€Ð°ÑÑ‚Ðµ Ð¾Ñ‚ 20 Ð´Ð¾ 50 Ð»ÐµÑ‚, Ð¿Ñ€Ð¸Ð·Ñ‹Ð² Ð¶ÐµÐ½Ñ‰Ð¸Ð½ Ð²Ð¾Ð·Ð¼Ð¾Ð¶ÐµÐ½ Ð¿Ñ€Ð¸ Ð½ÐµÐ¾Ð±Ñ…Ð¾Ð´Ð¸Ð¼Ð¾ÑÑ‚Ð¸ Ð¸ Ð½Ð°Ð»Ð¸Ñ‡Ð¸Ð¸ ÑÐ¾Ð¾Ñ‚Ð²ÐµÑ‚ÑÑ‚Ð²ÑƒÑŽÑ‰Ð¸Ñ… Ð´Ð¾Ð»Ð¶Ð½Ð¾ÑÑ‚ÐµÐ¹. \r\n  \r\n Ð’Ð¾ Ð²Ñ€ÐµÐ¼Ñ Ð¼Ð¾Ð±Ð¸Ð»Ð¸Ð·Ð°Ñ†Ð¸Ð¸ Ð¼Ð¾Ð³ÑƒÑ‚ Ð±Ñ‹Ñ‚ÑŒ Ð¿Ñ€Ð¸Ð·Ð²Ð°Ð½Ñ‹ Ð¶ÐµÐ½Ñ‰Ð¸Ð½Ñ‹ / mil.gov.ua \r\n \r\n ÐšÐ°Ðº Ð¿ÐµÑ€ÐµÐ´Ð°ÐµÑ‚ ÐºÐ¾Ñ€Ñ€ÐµÑÐ¿Ð¾Ð½Ð´ÐµÐ½Ñ‚ Ð£ÐÐ˜ÐÐ, Ð¾Ð± ÑÑ‚Ð¾Ð¼ ÑÐµÐ³Ð¾Ð´Ð½Ñ Ð²Ð¾ Ð²Ñ€ÐµÐ¼Ñ Ð±Ñ€Ð¸Ñ„Ð¸Ð½Ð³Ð° ÑÐ¾Ð¾Ð±Ñ‰Ð¸Ð» Ð¸.Ð¾. Ð¿Ñ€ÐµÐ´ÑÑ‚Ð°Ð²Ð¸Ñ‚ÐµÐ»Ñ Ð“ÐµÐ½ÑˆÑ‚Ð°Ð±Ð° Ð’Ð¾Ð¾Ñ€ÑƒÐ¶ÐµÐ½Ð½Ñ‹Ñ… ÑÐ¸Ð» Ð’Ð»Ð°Ð´Ð¸ÑÐ»Ð°Ð² Ð¡ÐµÐ»ÐµÐ·Ð½ÐµÐ². \r\n &laquo; Ð’Ð¾ Ð²Ñ€ÐµÐ¼Ñ Ð¼Ð¾Ð±Ð¸Ð»Ð¸Ð·Ð°Ñ†Ð¸Ð¸&nbsp; Ð¼Ð¾</div><div class="clear"></div></div><div class="article-list-item"><b><a href="/articles/view/1">First Article</a></b><div class="article-info"><div><b>Ð”Ð¾Ð±Ð°Ð²Ð»ÐµÐ½Ð¾:</b> Mar  7, 2014</div><div><b>ÐÐ²Ñ‚Ð¾Ñ€:</b> <a href="/articles/user/0">ÐÐµ Ð¸Ð·Ð²ÐµÑÑ‚Ð½Ð¾</a></div><div><b>ÐšÐ°Ñ‚ÐµÐ³Ð¾Ñ€Ð¸Ñ:</b> <a href="/articles/category/3">Category 3</a></div></div><div class="article-description">   Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32. \r\n The standard chunk of Lorem Ip</div><div class="clear"></div></div><div class="article-list-item"><b><a href="/articles/view/7">Test Article</a></b><div class="article-info"><div><b>Ð”Ð¾Ð±Ð°Ð²Ð»ÐµÐ½Ð¾:</b> Mar 31, 2014</div><div><b>ÐÐ²Ñ‚Ð¾Ñ€:</b> <a href="/articles/user/3"></a></div><div><b>ÐšÐ°Ñ‚ÐµÐ³Ð¾Ñ€Ð¸Ñ:</b> <a href="/articles/category/3">Category 3</a></div></div><div class="article-description">  Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32. \r\n The standard chunk of Lorem Ips</div><div class="clear"></div></div><div class="article-list-item"><b><a href="/articles/view/9">yrtyrty</a></b><div class="article-info"><div><b>Ð”Ð¾Ð±Ð°Ð²Ð»ÐµÐ½Ð¾:</b> Mar 31, 2014</div><div><b>ÐÐ²Ñ‚Ð¾Ñ€:</b> <a href="/articles/user/3"></a></div><div><b>ÐšÐ°Ñ‚ÐµÐ³Ð¾Ñ€Ð¸Ñ:</b> <a href="/articles/category/1">Category 1</a></div></div><div class="article-description">  Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32. \r\n The standard chunk of Lorem Ips</div><div class="clear"></div></div><div class="article-list-item"><b><a href="/articles/view/11">88888</a></b><div class="article-info"><div><b>Ð”Ð¾Ð±Ð°Ð²Ð»ÐµÐ½Ð¾:</b> Mar 31, 2014</div><div><b>ÐÐ²Ñ‚Ð¾Ñ€:</b> <a href="/articles/user/3"></a></div><div><b>ÐšÐ°Ñ‚ÐµÐ³Ð¾Ñ€Ð¸Ñ:</b> <a href="/articles/category/1">Category 1</a></div></div><div class="article-description">  Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32. \r\n The standard chunk of Lorem Ips</div><div class="clear"></div></div><div class="article-list-item"><b><a href="/articles/view/10">222222</a></b><div class="article-info"><div><b>Ð”Ð¾Ð±Ð°Ð²Ð»ÐµÐ½Ð¾:</b> Mar 31, 2014</div><div><b>ÐÐ²Ñ‚Ð¾Ñ€:</b> <a href="/articles/user/3"></a></div><div><b>ÐšÐ°Ñ‚ÐµÐ³Ð¾Ñ€Ð¸Ñ:</b> <a href="/articles/category/2">Category 2</a></div></div><div class="article-description"> 333333 </div><div class="clear"></div></div><div class="article-list-item"><b><a href="/articles/view/12">hjgjgf</a></b><div class="article-info"><div><b>Ð”Ð¾Ð±Ð°Ð²Ð»ÐµÐ½Ð¾:</b> Mar 31, 2014</div><div><b>ÐÐ²Ñ‚Ð¾Ñ€:</b> <a href="/articles/user/3"></a></div><div><b>ÐšÐ°Ñ‚ÐµÐ³Ð¾Ñ€Ð¸Ñ:</b> <a href="/articles/category/1">Category 1</a></div></div><div class="article-description">jghjghj gh gf</div><div class="clear"></div></div><div class="article-list-item"><b><a href="/articles/view/13">hjgjgf</a></b><div class="article-info"><div><b>Ð”Ð¾Ð±Ð°Ð²Ð»ÐµÐ½Ð¾:</b> Mar 31, 2014</div><div><b>ÐÐ²Ñ‚Ð¾Ñ€:</b> <a href="/articles/user/3"></a></div><div><b>ÐšÐ°Ñ‚ÐµÐ³Ð¾Ñ€Ð¸Ñ:</b> <a href="/articles/category/1">Category 1</a></div></div><div class="article-description">jghjghj gh gf</div><div class="clear"></div></div><div class="article-list-item"><b><a href="/articles/view/15">gdfg df gdf</a></b><div class="article-info"><div><b>Ð”Ð¾Ð±Ð°Ð²Ð»ÐµÐ½Ð¾:</b> Mar 31, 2014</div><div><b>ÐÐ²Ñ‚Ð¾Ñ€:</b> <a href="/articles/user/3"></a></div><div><b>ÐšÐ°Ñ‚ÐµÐ³Ð¾Ñ€Ð¸Ñ:</b> <a href="/articles/category/1">Category 1</a></div></div><div class="article-description"> &nbsp;gdfg df gdf g </div><div class="clear"></div></div><div class="article-list-item"><b><a href="/articles/view/16">99999</a></b><div class="article-info"><div><b>Ð”Ð¾Ð±Ð°Ð²Ð»ÐµÐ½Ð¾:</b> Mar 31, 2014</div><div><b>ÐÐ²Ñ‚Ð¾Ñ€:</b> <a href="/articles/user/3"></a></div><div><b>ÐšÐ°Ñ‚ÐµÐ³Ð¾Ñ€Ð¸Ñ:</b> <a href="/articles/category/1">Category 1</a></div></div><div class="article-description">88888</div><div class="clear"></div></div></div><div><div class="pagination"><div class=''pagination-info''><b>Ð¡Ñ‚Ñ€Ð°Ð½Ð¸Ñ†Ð°: (1/2) </b></div><ul class=''pagination-items pagination''><li class=''disabled''><a href=''#''>Â«ÐŸÐµÑ€Ð²Ð°Ñ</a></li><li class=''disabled''><a href=''#''>Â«</a></li><li class=''active''><a href=''#''>1</a></li><li><a href=''http://callisto/articles?page=2''>2</a></li><li><a href=''http://callisto/articles?page=2''>Â»</a></li><li><a href=''http://callisto/articles?page=2''>ÐŸÐ¾ÑÐ»ÐµÐ´Ð½ÑÑÂ»</a></li></ul><div class=''clear''></div></div></div>\n<?php }\n}\n?>'),
+('2c953fc2d63e0ecd7358cbccdc5d1b9a9e1e0bfd', 'D:\\www\\callisto\\www/blocks/comments_block/themes/default/display.tpl', 'comments_block|display|', NULL, '2016-01-13 08:17:29', '<?php\n/*%%SmartyHeaderCode:3145356960819a6eb98_37940251%%*/\nif(!defined(''SMARTY_DIR'')) exit(''no direct access allowed'');\n$_valid = $_smarty_tpl->decodeProperties(array (\n  ''file_dependency'' => \n  array (\n    ''8f0d73864fbd91689c021ecf83d8fb39df9177fe'' => \n    array (\n      0 => ''D:\\\\www\\\\callisto\\\\www\\\\blocks\\\\comments_block\\\\themes\\\\default\\\\display.tpl'',\n      1 => 1448286898,\n      2 => ''file'',\n    ),\n  ),\n  ''nocache_hash'' => ''3145356960819a6eb98_37940251'',\n  ''tpl_function'' => \n  array (\n  ),\n  ''variables'' => \n  array (\n    ''commentList'' => 0,\n    ''comment'' => 0,\n    ''module_object'' => 0,\n    ''module_name'' => 0,\n    ''toolbar'' => 0,\n  ),\n  ''has_nocache_code'' => false,\n  ''version'' => ''3.1.27'',\n  ''unifunc'' => ''content_56960819ae9ca6_90899412'',\n  ''cache_lifetime'' => 10800,\n),true);\n/*/%%SmartyHeaderCode%%*/\nif ($_valid && !is_callable(''content_56960819ae9ca6_90899412'')) {\nfunction content_56960819ae9ca6_90899412 ($_smarty_tpl) {\n?>\n<div class="comments"><div class=''comment_59 comment''><a name=''comment_59''></a><div class="comment_user_info"><a target="_blank" href="/user/Ð Ð¾Ð¼Ð°Ð½103/"><img width="90" alt="" src="/public/images/avatars/noavatar.png" class="img-rounded img-responsive center-block"></a><br><a href=''/users/''></a></div><div class="comment_body"><div class="comment_title">Ð”Ð¾Ð±Ð°Ð²Ð»ÐµÐ½Ð¾ 31.03.2015 Ð² 14:11</div>sdafdsafasd</div><div class="clear"></div></div><div class=''comment_66 comment''><a name=''comment_66''></a><div class="comment_user_info"><a target="_blank" href="/user/Ð Ð¾Ð¼Ð°Ð½103/"><img width="90" alt="" src="/public/images/avatars/noavatar.png" class="img-rounded img-responsive center-block"></a><br><a href=''/users/''></a></div><div class="comment_body"><div class="comment_title">Ð”Ð¾Ð±Ð°Ð²Ð»ÐµÐ½Ð¾ 23.11.2015 Ð² 17:27</div>dsf s sd fsd fdsÂ </div><div class="clear"></div></div></div><h3>Ð”Ð¾Ð±Ð°Ð²Ð¸Ñ‚ÑŒ ÐºÐ¾Ð¼ÐµÐ½Ñ‚Ð°Ñ€Ð¸Ð¹</h3><div class="comment_add_block" style="width: 100%; position: relative;"><form action="/comments/comment_add" method="post"><input type="hidden" name="comment_module_object" value="articles::user::view::0:22"><input type="hidden" name="comment_module" value="articles"><div class="comment_field"><label class="comment_label">Ð˜Ð¼Ñ:</label><input type="text" name="user_name" value="" required="true" ></div><div class="comment_field"><label class="comment_label">E-Mail:</label><input type="email" name="user_email" value="" required="true" email></div><textarea id=''bbcode_field_1'' name=''comment_text'' class=''bbcode_class'' style=''height:25px;width:600px;''></textarea><script>\r\n        $(function() {\r\n          $(''#bbcode_field_1'').sceditor({\r\n              plugins: ''bbcode'',\r\n              toolbar: ''bold,italic,underline,strike,subscript,superscript|font,size,color,removeformat|code,quote|image,email,link,unlink|emoticon,date,time'',\r\n              locale: ''ru'',\r\n              style: ''/public/css/jsBBCode/default.css''\r\n              });\r\n            });\r\n        </script><div class="comment_field"><input type="submit" name="comment_submit" value="ÐžÑ‚Ð¿Ñ€Ð°Ð²Ð¸Ñ‚ÑŒ"></div><br><br></form></div><?php }\n}\n?>'),
+('72be4230e46865e6df56aece32a51890430c9ea8', 'D:\\www\\callisto\\www/modules/main/views/default/index.tpl', 'main|user|index|ACCESS_LEVEL_70', NULL, '2016-01-13 08:15:32', '<?php\n/*%%SmartyHeaderCode:4180569516f3804715_29414084%%*/\nif(!defined(''SMARTY_DIR'')) exit(''no direct access allowed'');\n$_valid = $_smarty_tpl->decodeProperties(array (\n  ''file_dependency'' => \n  array (\n    ''2bef0539eec24c813e133e14a0c3bff28cfc2584'' => \n    array (\n      0 => ''D:\\\\www\\\\callisto\\\\www\\\\modules\\\\main\\\\views\\\\default\\\\index.tpl'',\n      1 => 1402906871,\n      2 => ''file'',\n    ),\n  ),\n  ''nocache_hash'' => ''4180569516f3804715_29414084'',\n  ''tpl_function'' => \n  array (\n  ),\n  ''version'' => ''3.1.27'',\n  ''unifunc'' => ''content_569607a4db46b8_28705811'',\n  ''has_nocache_code'' => false,\n  ''cache_lifetime'' => 10800,\n),true);\n/*/%%SmartyHeaderCode%%*/\nif ($_valid && !is_callable(''content_569607a4db46b8_28705811'')) {\nfunction content_569607a4db46b8_28705811 ($_smarty_tpl) {\n?>\nHello World<?php }\n}\n?>'),
+('930939eeae9b4e3d436f97c844588c7469d6fd10', 'D:\\www\\callisto\\www/themes/green/blocks/menu_block/display.tpl', 'menu_block|display|', NULL, '2016-01-13 08:17:29', '<?php\n/*%%SmartyHeaderCode:2209856960819b6db66_31839267%%*/\nif(!defined(''SMARTY_DIR'')) exit(''no direct access allowed'');\n$_valid = $_smarty_tpl->decodeProperties(array (\n  ''file_dependency'' => \n  array (\n    ''54261128511e933f8cb47e1985c00bca3651baa3'' => \n    array (\n      0 => ''D:\\\\www\\\\callisto\\\\www\\\\themes\\\\green\\\\blocks\\\\menu_block\\\\display.tpl'',\n      1 => 1447942664,\n      2 => ''file'',\n    ),\n  ),\n  ''nocache_hash'' => ''2209856960819b6db66_31839267'',\n  ''tpl_function'' => \n  array (\n  ),\n  ''variables'' => \n  array (\n    ''menu_list'' => 0,\n    ''menu'' => 0,\n  ),\n  ''has_nocache_code'' => false,\n  ''version'' => ''3.1.27'',\n  ''unifunc'' => ''content_56960819b985d6_25475010'',\n  ''cache_lifetime'' => 10800,\n),true);\n/*/%%SmartyHeaderCode%%*/\nif ($_valid && !is_callable(''content_56960819b985d6_25475010'')) {\nfunction content_56960819b985d6_25475010 ($_smarty_tpl) {\n?>\n<a class="usermnuline" href="/">Ð“Ð»Ð°Ð²Ð½Ñ Ð¡Ñ‚Ñ€Ð°Ð½Ð¸Ñ†Ð°</a><a class="usermnuline" href="/articles">Ð¡Ñ‚Ð°Ñ‚ÑŒÐ¸</a><?php }\n}\n?>'),
+('9ac060195be817c93b86a8c2a0e8bd5df0743720', 'D:\\www\\callisto\\www/modules/articles/views/default/view.tpl', 'articles|user|view|0:22|ACCESS_LEVEL_70', NULL, '2016-01-13 08:17:29', '<?php\n/*%%SmartyHeaderCode:2793956960819bbe500_71227353%%*/\nif(!defined(''SMARTY_DIR'')) exit(''no direct access allowed'');\n$_valid = $_smarty_tpl->decodeProperties(array (\n  ''file_dependency'' => \n  array (\n    ''4361d03590a8b43875a3883d0fbf8de732c93dc0'' => \n    array (\n      0 => ''D:\\\\www\\\\callisto\\\\www\\\\modules\\\\articles\\\\views\\\\default\\\\view.tpl'',\n      1 => 1418634507,\n      2 => ''file'',\n    ),\n  ),\n  ''nocache_hash'' => ''2793956960819bbe500_71227353'',\n  ''tpl_function'' => \n  array (\n  ),\n  ''variables'' => \n  array (\n    ''article'' => 0,\n    ''article_user_list'' => 0,\n    ''article_category_list'' => 0,\n  ),\n  ''has_nocache_code'' => false,\n  ''version'' => ''3.1.27'',\n  ''unifunc'' => ''content_56960819bf9523_74763822'',\n  ''cache_lifetime'' => 10800,\n),true);\n/*/%%SmartyHeaderCode%%*/\nif ($_valid && !is_callable(''content_56960819bf9523_74763822'')) {\nfunction content_56960819bf9523_74763822 ($_smarty_tpl) {\n?>\n\n\n<div class="article-list">\n\n  <div class="article-list-item">\n    <div class="clearfix">\n      <b>\n        <a href="/articles/view/22">\n          testtttt t\n        </a>\n      </b>\n    </div>\n    <div class="article-info">\n      <div>\n        <b>Ð”Ð¾Ð±Ð°Ð²Ð»ÐµÐ½Ð¾:</b> Jan 13, 2016\n      </div>\n      <div>\n        <b>ÐÐ²Ñ‚Ð¾Ñ€:</b> <a href="/articles/user/3"></a>\n      </div>\n      <div>\n        <b>ÐšÐ°Ñ‚ÐµÐ³Ð¾Ñ€Ð¸Ñ:</b> <a href="/articles/category/1">Category 1</a>\n      </div>\n    </div>\n    <div class="article-description">\n        <h2>Ð’ Ð“ÐµÐ½ÐµÑ€Ð°Ð»ÑŒÐ½Ð¾Ð¼ ÑˆÑ‚Ð°Ð±Ðµ Ð’Ð¾Ð¾Ñ€ÑƒÐ¶ÐµÐ½Ð½Ñ‹Ñ… ÑÐ¸Ð» Ð¾Ñ‚Ð¼ÐµÑ‡Ð°ÑŽÑ‚, Ñ‡Ñ‚Ð¾ Ð¼Ð¾Ð³ÑƒÑ‚ Ð¼Ð¾Ð±Ð¸Ð»Ð¸Ð·Ð¾Ð²Ð°Ñ‚ÑŒ Ð²Ð¾ÐµÐ½Ð½Ð¾Ð¾Ð±ÑÐ·Ð°Ð½Ð½Ñ‹Ñ… Ð¶ÐµÐ½Ñ‰Ð¸Ð½ Ð² Ð²Ð¾Ð·Ñ€Ð°ÑÑ‚Ðµ Ð¾Ñ‚ 20 Ð´Ð¾ 50 Ð»ÐµÑ‚, Ð¿Ñ€Ð¸Ð·Ñ‹Ð² Ð¶ÐµÐ½Ñ‰Ð¸Ð½ Ð²Ð¾Ð·Ð¼Ð¾Ð¶ÐµÐ½ Ð¿Ñ€Ð¸ Ð½ÐµÐ¾Ð±Ñ…Ð¾Ð´Ð¸Ð¼Ð¾ÑÑ‚Ð¸ Ð¸ Ð½Ð°Ð»Ð¸Ñ‡Ð¸Ð¸ ÑÐ¾Ð¾Ñ‚Ð²ÐµÑ‚ÑÑ‚Ð²ÑƒÑŽÑ‰Ð¸Ñ… Ð´Ð¾Ð»Ð¶Ð½Ð¾ÑÑ‚ÐµÐ¹.</h2>\r\n<div class="photo_block "><img style="float: left; margin: 10px;" title="/ mil.gov.ua" src="http://images.unian.net/photos/2014_10/1413028776-6708-jenschinyi-mediki.jpg" alt="/ mil.gov.ua" width="368" height="215" />\r\n<div class="subscribe_photo_text">Ð’Ð¾ Ð²Ñ€ÐµÐ¼Ñ Ð¼Ð¾Ð±Ð¸Ð»Ð¸Ð·Ð°Ñ†Ð¸Ð¸ Ð¼Ð¾Ð³ÑƒÑ‚ Ð±Ñ‹Ñ‚ÑŒ Ð¿Ñ€Ð¸Ð·Ð²Ð°Ð½Ñ‹ Ð¶ÐµÐ½Ñ‰Ð¸Ð½Ñ‹ / mil.gov.ua</div>\r\n</div>\r\n<p>ÐšÐ°Ðº Ð¿ÐµÑ€ÐµÐ´Ð°ÐµÑ‚ ÐºÐ¾Ñ€Ñ€ÐµÑÐ¿Ð¾Ð½Ð´ÐµÐ½Ñ‚ Ð£ÐÐ˜ÐÐ, Ð¾Ð± ÑÑ‚Ð¾Ð¼ ÑÐµÐ³Ð¾Ð´Ð½Ñ Ð²Ð¾ Ð²Ñ€ÐµÐ¼Ñ Ð±Ñ€Ð¸Ñ„Ð¸Ð½Ð³Ð° ÑÐ¾Ð¾Ð±Ñ‰Ð¸Ð» Ð¸.Ð¾. Ð¿Ñ€ÐµÐ´ÑÑ‚Ð°Ð²Ð¸Ñ‚ÐµÐ»Ñ Ð“ÐµÐ½ÑˆÑ‚Ð°Ð±Ð° Ð’Ð¾Ð¾Ñ€ÑƒÐ¶ÐµÐ½Ð½Ñ‹Ñ… ÑÐ¸Ð» Ð’Ð»Ð°Ð´Ð¸ÑÐ»Ð°Ð² Ð¡ÐµÐ»ÐµÐ·Ð½ÐµÐ².</p>\r\n<p>&laquo;<a href="http://www.unian.ua/society/1038037-mobilizatsiya-2015-yak-provodjayut-do-viyska-ukrajinskih-cholovikiv-foto-video.html" target="_blank">Ð’Ð¾ Ð²Ñ€ÐµÐ¼Ñ Ð¼Ð¾Ð±Ð¸Ð»Ð¸Ð·Ð°Ñ†Ð¸Ð¸&nbsp;</a>Ð¼Ð¾Ð³ÑƒÑ‚ Ð±Ñ‹Ñ‚ÑŒ Ð¿Ñ€Ð¸Ð·Ð²Ð°Ð½Ñ‹ Ð½Ð° Ð²Ð¾ÐµÐ½Ð½ÑƒÑŽ ÑÐ»ÑƒÐ¶Ð±Ñƒ, Ð²Ð¾ÐµÐ½Ð½Ð¾Ð¾Ð±ÑÐ·Ð°Ð½Ð½Ñ‹Ðµ Ð¶ÐµÐ½Ñ‰Ð¸Ð½Ñ‹ Ñ‚Ð°ÐºÐ¾Ð³Ð¾ Ð²Ð¾Ð·Ñ€Ð°ÑÑ‚Ð°: Ð´Ð»Ñ Ð»Ð¸Ñ† Ð¾Ñ„Ð¸Ñ†ÐµÑ€ÑÐºÐ¾Ð³Ð¾ ÑÐ¾ÑÑ‚Ð°Ð²Ð° - Ð¾Ñ‚ 20 Ð´Ð¾ 50 Ð»ÐµÑ‚, Ð´Ð»Ñ Ð´Ñ€ÑƒÐ³Ð¸Ñ… Ð²Ð¾ÐµÐ½Ð½Ð¾Ð¾Ð±ÑÐ·Ð°Ð½Ð½Ñ‹Ñ… Ð¶ÐµÐ½Ñ‰Ð¸Ð½ - Ð¾Ñ‚ 20 Ð´Ð¾ 40 Ð»ÐµÑ‚&raquo;, - Ð½Ð°Ð¿Ð¾Ð¼Ð½Ð¸Ð» Ð¾Ð½.</p>\r\n<p>Ð¡ÐµÐ»ÐµÐ·Ð½ÐµÐ² Ñ‚Ð°ÐºÐ¶Ðµ Ð¾Ñ‚Ð¼ÐµÑ‚Ð¸Ð», Ñ‡Ñ‚Ð¾ Ð¿Ñ€Ð¸Ð·Ñ‹Ð²Ñƒ Ð½Ð° Ð²Ð¾ÐµÐ½Ð½ÑƒÑŽ ÑÐ»ÑƒÐ¶Ð±Ñƒ Ð²Ð¾ Ð²Ñ€ÐµÐ¼Ñ Ð¼Ð¾Ð±Ð¸Ð»Ð¸Ð·Ð°Ñ†Ð¸Ð¸ Ð¿Ð¾Ð´Ð»ÐµÐ¶Ð°Ñ‚ Ð²Ð¾ÐµÐ½Ð½Ð¾Ð¾Ð±ÑÐ·Ð°Ð½Ð½Ñ‹Ðµ Ð¶ÐµÐ½Ñ‰Ð¸Ð½Ñ‹, ÐºÐ¾Ñ‚Ð¾Ñ€Ñ‹Ðµ ÑÐ²Ð»ÑÑŽÑ‚ÑÑ Ð³Ñ€Ð°Ð¶Ð´Ð°Ð½ÐºÐ°Ð¼Ð¸ Ð£ÐºÑ€Ð°Ð¸Ð½Ñ‹, ÐºÐ¾Ñ‚Ð¾Ñ€Ñ‹Ðµ, Ð² Ð¿ÐµÑ€Ð²ÑƒÑŽ Ð¾Ñ‡ÐµÑ€ÐµÐ´ÑŒ, Ð¸Ð·ÑŠÑÐ²Ð¸Ð»Ð¸ Ð¶ÐµÐ»Ð°Ð½Ð¸Ðµ Ð¿Ñ€Ð¾Ñ…Ð¾Ð´Ð¸Ñ‚ÑŒ Ð²Ð¾ÐµÐ½Ð½ÑƒÑŽ ÑÐ»ÑƒÐ¶Ð±Ñƒ Ð¸ ÑÐ¾ÑÑ‚Ð¾ÑÑ‰Ð¸Ðµ Ð½Ð° ÑƒÑ‡ÐµÑ‚Ðµ Ð² Ð²Ð¾ÐµÐ½Ð½Ñ‹Ñ… ÐºÐ¾Ð¼Ð¸ÑÑÐ°Ñ€Ð¸Ð°Ñ‚Ð°Ñ…, Ð¿Ñ€Ð¸Ð·Ð½Ð°Ð½Ð½Ñ‹Ðµ Ð²Ð¾ÐµÐ½Ð½Ð¾-Ð²Ñ€Ð°Ñ‡ÐµÐ±Ð½Ñ‹Ð¼Ð¸ ÐºÐ¾Ð¼Ð¸ÑÑÐ¸ÑÐ¼Ð¸ Ñ‚Ð°ÐºÐ¸Ð¼Ð¸, ÐºÐ¾Ñ‚Ð¾Ñ€Ñ‹Ðµ ÑÐ²Ð»ÑÑŽÑ‚ÑÑ Ð¿Ñ€Ð¸Ð³Ð¾Ð´Ð½Ñ‹Ð¼Ð¸ Ð´Ð»Ñ Ð¿Ñ€Ð¾Ñ…Ð¾Ð¶Ð´ÐµÐ½Ð¸Ñ Ð²Ð¾ÐµÐ½Ð½Ð¾Ð¹ ÑÐ»ÑƒÐ¶Ð±Ñ‹ Ð¿Ð¾ ÑÐ¾ÑÑ‚Ð¾ÑÐ½Ð¸ÑŽ Ð·Ð´Ð¾Ñ€Ð¾Ð²ÑŒÑ, Ð¿Ñ€Ð¾Ñ…Ð¾Ð´Ð¸Ð²ÑˆÐ¸Ðµ Ð²Ð¾ÐµÐ½Ð½ÑƒÑŽ ÑÐ»ÑƒÐ¶Ð±Ñƒ Ð¸ Ð¿Ð¾Ð»ÑƒÑ‡Ð¸Ð²ÑˆÐ¸Ðµ ÑÐ¾Ð¾Ñ‚Ð²ÐµÑ‚ÑÑ‚Ð²ÑƒÑŽÑ‰Ð¸Ðµ Ð²Ð¾ÐµÐ½Ð½Ð¾-ÑƒÑ‡ÐµÑ‚Ð½Ñ‹Ðµ ÑÐ¿ÐµÑ†Ð¸Ð°Ð»ÑŒÐ½Ð¾ÑÑ‚Ð¸, Ð° Ñ‚Ð°ÐºÐ¶Ðµ Ñ‚Ðµ, ÐºÐ¾Ñ‚Ð¾Ñ€Ñ‹Ðµ Ð½Ðµ Ð¿Ñ€Ð¾Ñ…Ð¾Ð´Ð¸Ð»Ð¸ Ð²Ð¾ÐµÐ½Ð½ÑƒÑŽ ÑÐ»ÑƒÐ¶Ð±Ñƒ, Ð½Ð¾, ÑÐ¾Ð³Ð»Ð°ÑÐ½Ð¾ Ð¿Ð¾Ð»ÑƒÑ‡ÐµÐ½Ð½Ð¾Ð³Ð¾ Ð¾Ð±Ñ€Ð°Ð·Ð¾Ð²Ð°Ð½Ð¸Ñ Ð¸Ð»Ð¸ ÑÐ¿ÐµÑ†Ð¸Ð°Ð»ÑŒÐ½Ð¾ÑÑ‚Ð¸, Ð¿Ð¾Ð»ÑƒÑ‡Ð¸Ð»Ð¸ ÑÐ¾Ð¾Ñ‚Ð²ÐµÑ‚ÑÑ‚Ð²ÑƒÑŽÑ‰Ð¸Ðµ Ð²Ð¾ÐµÐ½Ð½Ð¾-ÑƒÑ‡ÐµÑ‚Ð½Ñ‹Ðµ ÑÐ¿ÐµÑ†Ð¸Ð°Ð»ÑŒÐ½Ð¾ÑÑ‚Ð¸.</p>\r\n<p><span class="read_also"><span><span>Ð§Ð˜Ð¢ÐÐ™Ð¢Ð• Ð¢ÐÐšÐ–Ð•</span><a href="http://www.unian.ua/society/1038173-u-genshtabi-zayavili-scho-mobilizatsiya-viyskovozobovyazanih-jinok-vidbudetsya-na-dobrovilniy-osnovi.html" target="_blank">Ð’ Ð“ÐµÐ½ÑˆÑ‚Ð°Ð±Ðµ Ð·Ð°ÑÐ²Ð¸Ð»Ð¸, Ñ‡Ñ‚Ð¾ Ð¼Ð¾Ð±Ð¸Ð»Ð¸Ð·Ð°Ñ†Ð¸Ñ Ð²Ð¾ÐµÐ½Ð½Ð¾Ð¾Ð±ÑÐ·Ð°Ð½Ð½Ñ‹Ñ… Ð¶ÐµÐ½Ñ‰Ð¸Ð½ ÑÐ¾ÑÑ‚Ð¾Ð¸Ñ‚ÑÑ Ð½Ð° Ð´Ð¾Ð±Ñ€Ð¾Ð²Ð¾Ð»ÑŒÐ½Ð¾Ð¹ Ð¾ÑÐ½Ð¾Ð²Ðµ</a></span></span></p>\r\n<p>ÐžÐ½ Ñ‚Ð°ÐºÐ¶Ðµ Ð¾Ñ‚Ð¼ÐµÑ‚Ð¸Ð», Ñ‡Ñ‚Ð¾ Ð±Ð¾Ð»ÑŒÑˆÐ¸Ð½ÑÑ‚Ð²Ð¾ Ð¶ÐµÐ½Ñ‰Ð¸Ð½, Ð¿Ñ€Ð¸Ð·Ð²Ð°Ð½Ð½Ñ‹Ñ… Ð²Ð¾ Ð²Ñ€ÐµÐ¼Ñ Ð¼Ð¾Ð±Ð¸Ð»Ð¸Ð·Ð°Ñ†Ð¸Ð¸, Ð±ÑƒÐ´ÑƒÑ‚ Ð¿Ñ€Ð¾Ñ…Ð¾Ð´Ð¸Ñ‚ÑŒ Ð²Ð¾ÐµÐ½Ð½ÑƒÑŽ ÑÐ»ÑƒÐ¶Ð±Ñƒ Ð½Ð° Ð¼ÐµÐ´Ð¸Ñ†Ð¸Ð½ÑÐºÐ¸Ñ… Ð´Ð¾Ð»Ð¶Ð½Ð¾ÑÑ‚ÑÑ…, Ð° Ñ‚Ð°ÐºÐ¶Ðµ Ð² Ð¿Ð¾Ð´Ñ€Ð°Ð·Ð´ÐµÐ»ÐµÐ½Ð¸ÑÑ… ÑÐ²ÑÐ·Ð¸ Ð¸ Ð»Ð¾Ð³Ð¸ÑÑ‚Ð¸ÐºÐ¸.</p>\r\n<p>Ð¡ÐµÐ»ÐµÐ·Ð½ÐµÐ² Ð´Ð¾Ð±Ð°Ð²Ð¸Ð», Ñ‡Ñ‚Ð¾ Ð² 2014 Ð³Ð¾Ð´Ñƒ Ð½Ð° ÑÐ»ÑƒÐ¶Ð±Ñƒ Ð² Ð’Ð¡Ð£ Ð² ÑÐ²ÑÐ·Ð¸ Ñ Ñ‡Ð°ÑÑ‚Ð¸Ñ‡Ð½Ð¾Ð¹ Ð¼Ð¾Ð±Ð¸Ð»Ð¸Ð·Ð°Ñ†Ð¸ÐµÐ¹ Ð±Ñ‹Ð»Ð¾ Ð¿Ñ€Ð¸Ð·Ð²Ð°Ð½Ð¾ Ð¾ÐºÐ¾Ð»Ð¾ 100 Ð²Ð¾ÐµÐ½Ð½Ð¾Ð¾Ð±ÑÐ·Ð°Ð½Ð½Ñ‹Ñ… Ð¶ÐµÐ½Ñ‰Ð¸Ð½.</p>\r\n<p>ÐšÐ°Ðº ÑÐ¾Ð¾Ð±Ñ‰Ð°Ð» Ð£ÐÐ˜ÐÐ, Ð¿ÐµÑ€Ð²Ð°Ñ Ð²Ð¾Ð»Ð½Ð° Ð½Ñ‹Ð½ÐµÑˆÐ½ÐµÐ¹ Ð¼Ð¾Ð±Ð¸Ð»Ð¸Ð·Ð°Ñ†Ð¸Ð¸ Ð² Ñ€ÑÐ´Ñ‹ Ð’Ð¡Ð£&nbsp;<a href="http://www.unian.ua/society/1033954-v-ukrajini-ofitsiyno-rozpochalasya-chastkova-mobilizatsiya.html" target="_blank">Ð½Ð°Ñ‡Ð°Ð»Ð°ÑÑŒ 20 ÑÐ½Ð²Ð°Ñ€Ñ</a>&nbsp;Ð¸ Ð¿Ñ€Ð¾Ð´Ð¾Ð»Ð¶Ð¸Ñ‚ÑÑ 90 Ð´Ð½ÐµÐ¹, Ð¼Ð¾Ð±Ð¸Ð»Ð¸Ð·Ð°Ñ†Ð¸Ð¸ Ð¿Ð¾Ð´Ð»ÐµÐ¶Ð¸Ñ‚ Ð±Ð¾Ð»ÐµÐµ 60 Ñ‚Ñ‹ÑÑÑ‡ Ñ‡ÐµÐ»Ð¾Ð²ÐµÐº.<span id="ctrlcopy"><br />ÐŸÐ¾Ð´Ñ€Ð¾Ð±Ð½Ð¾ÑÑ‚Ð¸ Ñ‡Ð¸Ñ‚Ð°Ð¹Ñ‚Ðµ Ð½Ð° Ð£ÐÐ˜ÐÐ:<a href="http://www.unian.net/politics/1040065-v-genshtabe-zayavili-chto-pri-neobhodimosti-mogut-mobilizovat-jenschin-ot-20-let.html">http://www.unian.net/politics/1040065-v-genshtabe-zayavili-chto-pri-neobhodimosti-mogut-mobilizovat-jenschin-ot-20-let.html</a></span></p> \n    </div>\n  </div> \n</div>\n<?php }\n}\n?>'),
+('a47f9c4fa6e7bf8921cae0105ef9cea8b33f79a0', 'D:\\www\\callisto\\www/modules/articles/views/default/view.tpl', 'articles|user|view|0:1|ACCESS_LEVEL_70', NULL, '2016-01-13 08:15:36', '<?php\n/*%%SmartyHeaderCode:1039656960768779959_68483792%%*/\nif(!defined(''SMARTY_DIR'')) exit(''no direct access allowed'');\n$_valid = $_smarty_tpl->decodeProperties(array (\n  ''file_dependency'' => \n  array (\n    ''4361d03590a8b43875a3883d0fbf8de732c93dc0'' => \n    array (\n      0 => ''D:\\\\www\\\\callisto\\\\www\\\\modules\\\\articles\\\\views\\\\default\\\\view.tpl'',\n      1 => 1418634507,\n      2 => ''file'',\n    ),\n  ),\n  ''nocache_hash'' => ''1039656960768779959_68483792'',\n  ''tpl_function'' => \n  array (\n  ),\n  ''version'' => ''3.1.27'',\n  ''unifunc'' => ''content_569607a83f0e92_94280429'',\n  ''has_nocache_code'' => false,\n  ''cache_lifetime'' => 10800,\n),true);\n/*/%%SmartyHeaderCode%%*/\nif ($_valid && !is_callable(''content_569607a83f0e92_94280429'')) {\nfunction content_569607a83f0e92_94280429 ($_smarty_tpl) {\n?>\n\n\n<div class="article-list">\n\n  <div class="article-list-item">\n    <div class="clearfix">\n      <b>\n        <a href="/articles/view/1">\n          First Article\n        </a>\n      </b>\n    </div>\n    <div class="article-info">\n      <div>\n        <b>Ð”Ð¾Ð±Ð°Ð²Ð»ÐµÐ½Ð¾:</b> Mar  7, 2014\n      </div>\n      <div>\n        <b>ÐÐ²Ñ‚Ð¾Ñ€:</b> <a href="/articles/user/0">ÐÐµ Ð¸Ð·Ð²ÐµÑÑ‚Ð½Ð¾</a>\n      </div>\n      <div>\n        <b>ÐšÐ°Ñ‚ÐµÐ³Ð¾Ñ€Ð¸Ñ:</b> <a href="/articles/category/3">Category 3</a>\n      </div>\n    </div>\n    <div class="article-description">\n        <p style="font-size: 11px; line-height: 14px; margin: 0px 0px 14px; padding: 0px; color: #000000; font-family: Arial,Helvetica,sans; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; text-indent: 0px; text-transform: none; white-space: normal; word-spacing: 0px;"><br class="Apple-interchange-newline" /><img style="float: left; margin: 10px;" src="http://images.unian.net/photos/2014_05/1401098289-6750.jpg" alt="" width="557" height="343" />Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.</p>\r\n<p style="text-align: justify; font-size: 11px; line-height: 14px; margin: 0px 0px 14px; padding: 0px; color: #000000; font-family: Arial, Helvetica, sans; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;">The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.</p>\r\n<p style="text-align: justify; font-size: 11px; line-height: 14px; margin: 0px 0px 14px; padding: 0px; color: #000000; font-family: Arial, Helvetica, sans; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;">&nbsp;</p>\r\n<p style="text-align: justify; font-size: 11px; line-height: 14px; margin: 0px 0px 14px; padding: 0px; color: #000000; font-family: Arial, Helvetica, sans; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;"><br class="Apple-interchange-newline" />Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.</p>\r\n<p style="text-align: justify; font-size: 11px; line-height: 14px; margin: 0px 0px 14px; padding: 0px; color: #000000; font-family: Arial, Helvetica, sans; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;">The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.</p>\r\n<p style="text-align: justify; font-size: 11px; line-height: 14px; margin: 0px 0px 14px; padding: 0px; color: #000000; font-family: Arial, Helvetica, sans; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;"><br class="Apple-interchange-newline" />Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.</p>\r\n<p style="text-align: justify; font-size: 11px; line-height: 14px; margin: 0px 0px 14px; padding: 0px; color: #000000; font-family: Arial, Helvetica, sans; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;">The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.</p>\r\n<p style="text-align: justify; font-size: 11px; line-height: 14px; margin: 0px 0px 14px; padding: 0px; color: #000000; font-family: Arial, Helvetica, sans; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;"><br class="Apple-interchange-newline" />Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.</p>\r\n<p style="text-align: justify; font-size: 11px; line-height: 14px; margin: 0px 0px 14px; padding: 0px; color: #000000; font-family: Arial, Helvetica, sans; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;">The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.</p>\r\n<p style="text-align: justify; font-size: 11px; line-height: 14px; margin: 0px 0px 14px; padding: 0px; color: #000000; font-family: Arial, Helvetica, sans; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;"><br class="Apple-interchange-newline" />Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.</p>\r\n<p style="text-align: justify; font-size: 11px; line-height: 14px; margin: 0px 0px 14px; padding: 0px; color: #000000; font-family: Arial, Helvetica, sans; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-stroke-width: 0px;">The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.</p> \n    </div>\n  </div> \n</div>\n<?php }\n}\n?>');
+
+-- --------------------------------------------------------
+
+--
 -- Структура таблицы `photos`
 --
 
 CREATE TABLE IF NOT EXISTS `photos` (
-  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `id` bigint(20) unsigned NOT NULL,
   `module` varchar(20) DEFAULT NULL,
   `module_key_a` int(11) unsigned DEFAULT NULL,
   `module_key_b` int(11) unsigned DEFAULT NULL,
@@ -43890,10 +43825,8 @@ CREATE TABLE IF NOT EXISTS `photos` (
   `description` varchar(255) DEFAULT NULL,
   `lat` decimal(18,15) DEFAULT NULL,
   `lng` decimal(18,15) DEFAULT NULL,
-  `active` tinyint(1) unsigned DEFAULT '1',
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `id` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  `active` tinyint(1) unsigned DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -43902,7 +43835,7 @@ CREATE TABLE IF NOT EXISTS `photos` (
 --
 
 CREATE TABLE IF NOT EXISTS `places` (
-  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `id` bigint(20) unsigned NOT NULL,
   `place_type_id` int(11) unsigned DEFAULT NULL,
   `country_id` int(11) unsigned DEFAULT NULL,
   `city_id` int(11) unsigned DEFAULT NULL,
@@ -43912,10 +43845,8 @@ CREATE TABLE IF NOT EXISTS `places` (
   `description_en` text,
   `lat` decimal(18,15) DEFAULT NULL,
   `lng` decimal(18,15) DEFAULT NULL,
-  `active` tinyint(1) unsigned DEFAULT '1',
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `id` (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+  `active` tinyint(1) unsigned DEFAULT '1'
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `places`
@@ -43931,7 +43862,7 @@ INSERT INTO `places` (`id`, `place_type_id`, `country_id`, `city_id`, `name_ru`,
 --
 
 CREATE TABLE IF NOT EXISTS `statistic` (
-  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `id` bigint(20) unsigned NOT NULL,
   `day` char(3) DEFAULT NULL,
   `dt` char(8) DEFAULT NULL,
   `tm` char(5) DEFAULT NULL,
@@ -43947,18 +43878,8 @@ CREATE TABLE IF NOT EXISTS `statistic` (
   `robot` varchar(60) DEFAULT NULL,
   `country` varchar(200) DEFAULT NULL,
   `region` varchar(200) DEFAULT NULL,
-  `city` varchar(200) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `id` (`id`),
-  KEY `timestamp` (`timestamp`),
-  KEY `ip` (`ip`),
-  KEY `lang` (`lang`),
-  KEY `refer` (`refer`(255)),
-  KEY `req` (`req`(255)),
-  KEY `user` (`user`(255)),
-  KEY `host` (`host`),
-  KEY `userhash` (`userhash`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7405 ;
+  `city` varchar(200) DEFAULT NULL
+) ENGINE=MyISAM AUTO_INCREMENT=8299 DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `statistic`
@@ -51169,112 +51090,906 @@ INSERT INTO `statistic` (`id`, `day`, `dt`, `tm`, `refer`, `ip`, `proxy`, `host`
 (7401, 'Thu', '20151119', '17:42', 'http://callisto/admin/permissions', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/admin/permissions/manage', 1447944162, '55222c78d8a5f', '', '', '', ''),
 (7402, 'Thu', '20151119', '17:42', 'http://callisto/admin/permissions/manage', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/admin/permissions/permissions_list', 1447944171, '55222c78d8a5f', '', '', '', ''),
 (7403, 'Thu', '20151119', '17:42', 'http://callisto/admin/permissions/permissions_list', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/admin/permissions/manage/24', 1447944174, '55222c78d8a5f', '', '', '', ''),
-(7404, 'Thu', '20151119', '17:42', 'http://callisto/admin/permissions/manage/24', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/admin/permissions/permissions_list', 1447944179, '55222c78d8a5f', '', '', '', '');
-
--- --------------------------------------------------------
-
---
--- Структура таблицы `test`
---
-
-CREATE TABLE IF NOT EXISTS `test` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(20) DEFAULT NULL,
-  `description` text,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=16 ;
-
---
--- Дамп данных таблицы `test`
---
-
-INSERT INTO `test` (`id`, `name`, `description`) VALUES
-(1, '11111', '22222'),
-(2, '2222', '2010/10/10'),
-(14, '1111', 'Updated 2');
-
--- --------------------------------------------------------
-
---
--- Структура таблицы `test2`
---
-
-CREATE TABLE IF NOT EXISTS `test2` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `test_id` int(11) unsigned DEFAULT NULL,
-  `name` text,
-  `descroption` text,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `id` (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
-
---
--- Дамп данных таблицы `test2`
---
-
-INSERT INTO `test2` (`id`, `test_id`, `name`, `descroption`) VALUES
-(1, 1, '1111', '111111111'),
-(2, 1, '222', '222222'),
-(3, 2, '333', '33333'),
-(4, 2, '444', '444');
-
--- --------------------------------------------------------
-
---
--- Структура таблицы `test3`
---
-
-CREATE TABLE IF NOT EXISTS `test3` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `test2_id` int(11) unsigned DEFAULT NULL,
-  `name` text,
-  `descroption` text,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `id` (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
-
---
--- Дамп данных таблицы `test3`
---
-
-INSERT INTO `test3` (`id`, `test2_id`, `name`, `descroption`) VALUES
-(1, 1, '1111', '111111111'),
-(2, 1, '222', '222222'),
-(3, 2, '333', '33333'),
-(4, 2, '444', '444');
-
--- --------------------------------------------------------
-
---
--- Структура таблицы `test_task`
---
-
-CREATE TABLE IF NOT EXISTS `test_task` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `field_1` varchar(100) DEFAULT NULL,
-  `field_2` varchar(100) DEFAULT NULL,
-  `field_3` varchar(100) DEFAULT NULL,
-  `field_4` varchar(100) DEFAULT NULL,
-  `field_5` int(11) DEFAULT NULL,
-  `field_6` varchar(20) DEFAULT NULL,
-  `update_time` int(11) unsigned DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `id` (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=9 ;
-
---
--- Дамп данных таблицы `test_task`
---
-
-INSERT INTO `test_task` (`id`, `field_1`, `field_2`, `field_3`, `field_4`, `field_5`, `field_6`, `update_time`) VALUES
-(1, '32432dfgf34534 6576576', '234hgjghfdgdf111', '546sdfsd43534tyu', '2342342jghfjgjtyu', NULL, NULL, 1383724411),
-(2, 'hello world Ð¿Ð¿Ð¿Ð¿Ð¿Ð¿ Ð¿Ð²Ð¿Ð²Ð°Ð¿Ð² hjk 453454fhgfgh', '3123123 gggggÑ€Ñ€Ñ€Ñ€Ñ€ 23223  32', 'ytuty56756ertgfhfgfghfhggh46t erwter', '332Ð²Ð²  yrtyer', 4, '2', 1383746645),
-(3, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(4, 'ytr', NULL, NULL, NULL, NULL, NULL, 1383737839),
-(5, NULL, 'ryr', NULL, NULL, NULL, NULL, 1383737840),
-(6, 'ytryrtytr', NULL, NULL, NULL, NULL, NULL, 1383738077),
-(7, NULL, NULL, NULL, NULL, NULL, NULL, 1383738091),
-(8, NULL, NULL, NULL, NULL, NULL, NULL, 1383738093);
+(7404, 'Thu', '20151119', '17:42', 'http://callisto/admin/permissions/manage/24', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/admin/permissions/permissions_list', 1447944179, '55222c78d8a5f', '', '', '', ''),
+(7405, 'Fri', '20151120', '09:44', 'http://callisto/articles', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles/view/7', 1448001890, '55222c78d8a5f', '', '', '', ''),
+(7406, 'Fri', '20151120', '09:44', 'http://callisto/admin/permissions/manage/24', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/admin/permissions/permissions_list', 1448001898, '55222c78d8a5f', '', '', '', ''),
+(7407, 'Mon', '20151123', '09:36', 'http://callisto/admin/permissions/manage/24', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/admin/permissions/permissions_list', 1448260601, '55222c78d8a5f', '', '', '', ''),
+(7408, 'Mon', '20151123', '09:36', 'http://callisto/articles', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles/view/7', 1448260613, '55222c78d8a5f', '', '', '', ''),
+(7409, 'Mon', '20151123', '15:45', 'http://callisto/admin/permissions/permissions_list', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/admin/configuration/main', 1448282742, '55222c78d8a5f', '', '', '', ''),
+(7410, 'Mon', '20151123', '15:45', 'http://callisto/admin/permissions/permissions_list', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/admin/configuration/main', 1448282743, '55222c78d8a5f', '', '', '', ''),
+(7411, 'Mon', '20151123', '15:50', 'http://callisto/admin/configuration/main', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/admin/configuration/main', 1448283039, '55222c78d8a5f', '', '', '', ''),
+(7412, 'Mon', '20151123', '15:50', 'http://callisto/admin/configuration/main', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/admin/groups', 1448283041, '55222c78d8a5f', '', '', '', ''),
+(7413, 'Mon', '20151123', '15:50', 'http://callisto/admin/groups', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/admin/users/users_list', 1448283043, '55222c78d8a5f', '', '', '', ''),
+(7414, 'Mon', '20151123', '15:50', 'http://callisto/admin/users/users_list', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/admin/permissions', 1448283045, '55222c78d8a5f', '', '', '', ''),
+(7415, 'Mon', '20151123', '15:50', 'http://callisto/admin/permissions', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/admin/permissions', 1448283051, '55222c78d8a5f', '', '', '', ''),
+(7416, 'Mon', '20151123', '15:50', 'http://callisto/admin/permissions', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/admin/permissions', 1448283053, '55222c78d8a5f', '', '', '', ''),
+(7417, 'Mon', '20151123', '15:50', 'http://callisto/admin/permissions', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/admin/permissions', 1448283058, '55222c78d8a5f', '', '', '', ''),
+(7418, 'Mon', '20151123', '15:51', 'http://callisto/admin/permissions', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/admin/permissions', 1448283061, '55222c78d8a5f', '', '', '', ''),
+(7419, 'Mon', '20151123', '15:51', 'http://callisto/admin/permissions', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/admin/permissions', 1448283101, '55222c78d8a5f', '', '', '', ''),
+(7420, 'Mon', '20151123', '15:51', 'http://callisto/admin/permissions', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/admin/users/users_list', 1448283103, '55222c78d8a5f', '', '', '', ''),
+(7421, 'Mon', '20151123', '15:51', 'http://callisto/admin/users/users_list', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/admin/users/manage/3', 1448283107, '55222c78d8a5f', '', '', '', ''),
+(7422, 'Mon', '20151123', '15:51', 'http://callisto/admin/users/manage/3', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/admin/users/users_list', 1448283111, '55222c78d8a5f', '', '', '', ''),
+(7423, 'Mon', '20151123', '15:51', 'http://callisto/admin/users/users_list', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/admin/main', 1448283114, '55222c78d8a5f', '', '', '', ''),
+(7424, 'Mon', '20151123', '15:51', 'http://callisto/admin/main', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/admin/theme', 1448283117, '55222c78d8a5f', '', '', '', ''),
+(7425, 'Mon', '20151123', '15:52', 'http://callisto/admin/main', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/admin/theme', 1448283151, '55222c78d8a5f', '', '', '', ''),
+(7426, 'Mon', '20151123', '15:52', 'http://callisto/admin/theme', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/admin/modules', 1448283169, '55222c78d8a5f', '', '', '', ''),
+(7427, 'Mon', '20151123', '15:52', 'http://callisto/admin/modules', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/admin/theme', 1448283174, '55222c78d8a5f', '', '', '', ''),
+(7428, 'Mon', '20151123', '15:54', 'http://callisto/admin/theme', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/admin/theme', 1448283296, '55222c78d8a5f', '', '', '', ''),
+(7429, 'Mon', '20151123', '15:54', 'http://callisto/articles', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles/view/7', 1448283299, '55222c78d8a5f', '', '', '', ''),
+(7430, 'Mon', '20151123', '15:55', 'http://callisto/articles/view/7', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/', 1448283303, '55222c78d8a5f', '', '', '', ''),
+(7431, 'Mon', '20151123', '15:55', 'http://callisto/', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles/', 1448283306, '55222c78d8a5f', '', '', '', ''),
+(7432, 'Mon', '20151123', '16:02', 'http://callisto/admin/theme', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/admin/main', 1448283776, '55222c78d8a5f', '', '', '', ''),
+(7433, 'Mon', '20151123', '16:03', 'http://callisto/admin/main', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/admin/main', 1448283781, '55222c78d8a5f', '', '', '', ''),
+(7434, 'Mon', '20151123', '16:03', 'http://callisto/admin/main', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/admin/main', 1448283786, '55222c78d8a5f', '', '', '', ''),
+(7435, 'Mon', '20151123', '16:04', 'http://callisto/admin/main', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/admin/blocks', 1448283863, '55222c78d8a5f', '', '', '', ''),
+(7436, 'Mon', '20151123', '16:04', 'http://callisto/admin/blocks', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/admin/users/users_list', 1448283868, '55222c78d8a5f', '', '', '', ''),
+(7437, 'Mon', '20151123', '16:04', 'http://callisto/admin/users/users_list', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/admin/users/login', 1448283874, '55222c78d8a5f', '', '', '', ''),
+(7438, 'Mon', '20151123', '16:04', 'http://callisto/admin/users/login', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/admin/main', 1448283879, '55222c78d8a5f', '', '', '', ''),
+(7439, 'Mon', '20151123', '16:05', 'http://callisto/admin/main', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/admin/menu/menu_list/0', 1448283906, '55222c78d8a5f', '', '', '', ''),
+(7440, 'Mon', '20151123', '16:21', 'http://callisto/admin/main', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/admin/menu/menu_list/0', 1448284888, '55222c78d8a5f', '', '', '', ''),
+(7441, 'Mon', '20151123', '16:21', 'http://callisto/articles/view/7', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/', 1448284891, '55222c78d8a5f', '', '', '', ''),
+(7442, 'Mon', '20151123', '16:21', 'http://callisto/', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles/', 1448284896, '55222c78d8a5f', '', '', '', ''),
+(7443, 'Mon', '20151123', '16:21', 'http://callisto/articles/', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles/view/22', 1448284900, '55222c78d8a5f', '', '', '', ''),
+(7444, 'Mon', '20151123', '16:21', 'http://callisto/articles/view/22', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles/view/22', 1448284912, '55222c78d8a5f', '', '', '', ''),
+(7445, 'Mon', '20151123', '16:21', 'http://callisto/articles/view/22', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles/view/22', 1448284914, '55222c78d8a5f', '', '', '', ''),
+(7446, 'Mon', '20151123', '16:21', 'http://callisto/', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles/', 1448284918, '55222c78d8a5f', '', '', '', ''),
+(7447, 'Mon', '20151123', '16:22', 'http://callisto/articles/', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles/view/1', 1448284921, '55222c78d8a5f', '', '', '', ''),
+(7448, 'Mon', '20151123', '16:54', 'http://callisto/articles/', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles/view/1', 1448286866, '55222c78d8a5f', '', '', '', ''),
+(7449, 'Mon', '20151123', '16:54', 'http://callisto/articles/', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles/view/1', 1448286884, '55222c78d8a5f', '', '', '', ''),
+(7450, 'Mon', '20151123', '16:54', 'http://callisto/articles/', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles/view/1', 1448286899, '55222c78d8a5f', '', '', '', ''),
+(7451, 'Mon', '20151123', '16:55', 'http://callisto/articles/', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles/view/1', 1448286913, '55222c78d8a5f', '', '', '', ''),
+(7452, 'Mon', '20151123', '16:57', 'http://callisto/articles/', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles/view/1', 1448287025, '55222c78d8a5f', '', '', '', ''),
+(7453, 'Mon', '20151123', '16:58', 'http://callisto/admin/users/login', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/admin/main', 1448287087, '55222c78d8a5f', '', '', '', ''),
+(7454, 'Mon', '20151123', '17:00', 'http://callisto/articles/', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles/view/1', 1448287217, '55222c78d8a5f', '', '', '', ''),
+(7455, 'Mon', '20151123', '17:00', 'http://callisto/articles/view/1', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/', 1448287222, '55222c78d8a5f', '', '', '', ''),
+(7456, 'Mon', '20151123', '17:00', 'http://callisto/', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles/', 1448287225, '55222c78d8a5f', '', '', '', ''),
+(7457, 'Mon', '20151123', '17:05', 'http://callisto/admin/main', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/admin/theme', 1448287514, '55222c78d8a5f', '', '', '', ''),
+(7458, 'Mon', '20151123', '17:05', 'http://callisto/admin/theme', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/admin/theme', 1448287518, '55222c78d8a5f', '', '', '', ''),
+(7459, 'Mon', '20151123', '17:05', 'http://callisto/', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles/', 1448287522, '55222c78d8a5f', '', '', '', ''),
+(7460, 'Mon', '20151123', '17:05', 'http://callisto/articles/', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles/view/22', 1448287528, '55222c78d8a5f', '', '', '', ''),
+(7461, 'Mon', '20151123', '17:08', 'http://callisto/articles/view/22', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles/view/22', 1448287716, '55222c78d8a5f', '', '', '', ''),
+(7462, 'Mon', '20151123', '17:09', 'http://callisto/articles/view/22', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles/view/22', 1448287762, '55222c78d8a5f', '', '', '', ''),
+(7463, 'Mon', '20151123', '17:11', 'http://callisto/articles/view/22', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles/view/22', 1448287884, '55222c78d8a5f', '', '', '', ''),
+(7464, 'Mon', '20151123', '17:18', 'http://callisto/articles/view/22', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles/view/22', 1448288314, '55222c78d8a5f', '', '', '', ''),
+(7465, 'Mon', '20151123', '17:24', 'http://callisto/articles/view/22', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles/view/22', 1448288695, '55222c78d8a5f', '', '', '', ''),
+(7466, 'Mon', '20151123', '17:27', 'http://callisto/articles/view/22', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles/view/22', 1448288838, '55222c78d8a5f', '', '', '', ''),
+(7467, 'Mon', '20151123', '17:27', 'http://callisto/articles/view/22', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles/view/22', 1448288875, '55222c78d8a5f', '', '', '', ''),
+(7468, 'Mon', '20151123', '17:28', 'http://callisto/articles/view/22', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles', 1448288930, '55222c78d8a5f', '', '', '', ''),
+(7469, 'Mon', '20151123', '17:29', 'http://callisto/articles', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles?page=2', 1448288943, '55222c78d8a5f', '', '', '', ''),
+(7470, 'Mon', '20151123', '17:30', 'http://callisto/articles?page=2', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles?page=1', 1448289021, '55222c78d8a5f', '', '', '', ''),
+(7471, 'Mon', '20151123', '17:30', 'http://callisto/articles?page=2', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles?page=1', 1448289048, '55222c78d8a5f', '', '', '', ''),
+(7472, 'Mon', '20151123', '17:32', 'http://callisto/articles?page=2', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles?page=1', 1448289150, '55222c78d8a5f', '', '', '', ''),
+(7473, 'Mon', '20151123', '17:32', 'http://callisto/articles?page=2', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles?page=1', 1448289171, '55222c78d8a5f', '', '', '', ''),
+(7474, 'Mon', '20151123', '17:33', 'http://callisto/articles?page=1', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles/view/22', 1448289185, '55222c78d8a5f', '', '', '', ''),
+(7475, 'Mon', '20151123', '17:33', 'http://callisto/admin/theme', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/admin/blocks', 1448289196, '55222c78d8a5f', '', '', '', ''),
+(7476, 'Mon', '20151123', '17:33', 'http://callisto/admin/blocks', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/admin/blocks/modify/70', 1448289231, '55222c78d8a5f', '', '', '', ''),
+(7477, 'Mon', '20151123', '17:33', 'http://callisto/admin/blocks/modify/70', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/admin/blocks', 1448289239, '55222c78d8a5f', '', '', '', ''),
+(7478, 'Mon', '20151123', '17:34', 'http://callisto/articles?page=1', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles/view/22', 1448289245, '55222c78d8a5f', '', '', '', ''),
+(7479, 'Mon', '20151123', '17:34', 'http://callisto/articles/view/22', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles', 1448289250, '55222c78d8a5f', '', '', '', ''),
+(7480, 'Mon', '20151123', '17:34', 'http://callisto/articles', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles?page=2', 1448289258, '55222c78d8a5f', '', '', '', ''),
+(7481, 'Mon', '20151123', '17:34', 'http://callisto/articles?page=2', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles?page=1', 1448289261, '55222c78d8a5f', '', '', '', ''),
+(7482, 'Mon', '20151123', '17:34', 'http://callisto/articles?page=1', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles/view/22', 1448289263, '55222c78d8a5f', '', '', '', ''),
+(7483, 'Mon', '20151123', '17:34', 'http://callisto/admin/blocks', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/admin/blocks/install/b', 1448289299, '55222c78d8a5f', '', '', '', ''),
+(7484, 'Mon', '20151123', '17:35', 'http://callisto/admin/blocks/install/b', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/admin/blocks', 1448289302, '55222c78d8a5f', '', '', '', ''),
+(7485, 'Mon', '20151123', '17:35', 'http://callisto/admin/blocks', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/admin/blocks', 1448289328, '55222c78d8a5f', '', '', '', ''),
+(7486, 'Mon', '20151123', '17:35', 'http://callisto/articles?page=1', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles/view/22', 1448289341, '55222c78d8a5f', '', '', '', ''),
+(7487, 'Mon', '20151123', '17:37', 'http://callisto/admin/blocks', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/admin/blocks', 1448289477, '55222c78d8a5f', '', '', '', ''),
+(7488, 'Mon', '20151123', '17:38', 'http://callisto/admin/blocks', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/admin/blocks', 1448289488, '55222c78d8a5f', '', '', '', ''),
+(7489, 'Mon', '20151123', '17:38', 'http://callisto/articles?page=1', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles/view/22', 1448289497, '55222c78d8a5f', '', '', '', ''),
+(7490, 'Mon', '20151123', '17:38', 'http://callisto/articles?page=1', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles/view/22', 1448289517, '55222c78d8a5f', '', '', '', ''),
+(7491, 'Mon', '20151123', '18:17', 'http://callisto/articles?page=1', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles/view/22', 1448291835, '55222c78d8a5f', '', '', '', ''),
+(7492, 'Mon', '20151123', '18:18', 'http://callisto/articles?page=1', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles/view/22', 1448291926, '55222c78d8a5f', '', '', '', ''),
+(7493, 'Mon', '20151123', '18:19', 'http://callisto/articles?page=1', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles/view/22', 1448291961, '55222c78d8a5f', '', '', '', ''),
+(7494, 'Mon', '20151123', '18:20', 'http://callisto/articles?page=1', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles/view/22', 1448292010, '55222c78d8a5f', '', '', '', ''),
+(7495, 'Mon', '20151123', '18:20', 'http://callisto/articles?page=1', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles/view/22', 1448292023, '55222c78d8a5f', '', '', '', ''),
+(7496, 'Mon', '20151123', '18:20', 'http://callisto/articles?page=1', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles/view/22', 1448292031, '55222c78d8a5f', '', '', '', ''),
+(7497, 'Mon', '20151123', '18:21', 'http://callisto/articles?page=1', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles/view/22', 1448292071, '55222c78d8a5f', '', '', '', ''),
+(7498, 'Mon', '20151123', '18:22', 'http://callisto/articles?page=1', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles/view/22', 1448292169, '55222c78d8a5f', '', '', '', ''),
+(7499, 'Mon', '20151123', '18:27', 'http://callisto/articles?page=1', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles/view/22', 1448292465, '55222c78d8a5f', '', '', '', ''),
+(7500, 'Mon', '20151123', '18:34', 'http://callisto/articles?page=1', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles/view/22', 1448292873, '55222c78d8a5f', '', '', '', ''),
+(7501, 'Mon', '20151123', '18:34', 'http://callisto/articles?page=1', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles/view/22', 1448292884, '55222c78d8a5f', '', '', '', ''),
+(7502, 'Mon', '20151123', '18:36', 'http://callisto/articles?page=1', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles/view/22', 1448293015, '55222c78d8a5f', '', '', '', ''),
+(7503, 'Mon', '20151123', '18:54', 'http://callisto/articles?page=1', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles/view/22', 1448294067, '55222c78d8a5f', '', '', '', ''),
+(7504, 'Mon', '20151123', '18:54', 'http://callisto/articles?page=1', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles/view/22', 1448294084, '55222c78d8a5f', '', '', '', ''),
+(7505, 'Mon', '20151123', '18:55', 'http://callisto/articles?page=1', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles/view/22', 1448294114, '55222c78d8a5f', '', '', '', ''),
+(7506, 'Mon', '20151123', '18:55', 'http://callisto/articles?page=1', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles/view/22', 1448294140, '55222c78d8a5f', '', '', '', ''),
+(7507, 'Mon', '20151123', '18:56', 'http://callisto/articles?page=1', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles/view/22', 1448294200, '55222c78d8a5f', '', '', '', ''),
+(7508, 'Mon', '20151123', '18:57', 'http://callisto/articles?page=1', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles/view/22', 1448294278, '55222c78d8a5f', '', '', '', ''),
+(7509, 'Mon', '20151123', '18:58', 'http://callisto/articles?page=1', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles/view/22', 1448294304, '55222c78d8a5f', '', '', '', ''),
+(7510, 'Mon', '20151123', '18:58', 'http://callisto/articles?page=1', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles/view/22', 1448294327, '55222c78d8a5f', '', '', '', ''),
+(7511, 'Mon', '20151123', '18:59', 'http://callisto/articles?page=1', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles/view/22', 1448294349, '55222c78d8a5f', '', '', '', ''),
+(7512, 'Mon', '20151123', '19:00', 'http://callisto/articles?page=1', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles/view/22', 1448294425, '55222c78d8a5f', '', '', '', ''),
+(7513, 'Mon', '20151123', '19:04', 'http://callisto/articles?page=1', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles/view/22', 1448294648, '55222c78d8a5f', '', '', '', ''),
+(7514, 'Mon', '20151123', '19:04', 'http://callisto/articles?page=1', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles/view/22', 1448294660, '55222c78d8a5f', '', '', '', ''),
+(7515, 'Mon', '20151123', '19:07', 'http://callisto/articles?page=1', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles/view/22', 1448294866, '55222c78d8a5f', '', '', '', ''),
+(7516, 'Mon', '20151123', '19:09', 'http://callisto/articles?page=1', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles/view/22', 1448294974, '55222c78d8a5f', '', '', '', ''),
+(7517, 'Mon', '20151123', '19:10', 'http://callisto/articles?page=1', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles/view/22', 1448295039, '55222c78d8a5f', '', '', '', ''),
+(7518, 'Mon', '20151123', '19:10', 'http://callisto/articles?page=1', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles/view/22', 1448295046, '55222c78d8a5f', '', '', '', ''),
+(7519, 'Mon', '20151123', '19:12', 'http://callisto/articles?page=1', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles/view/22', 1448295170, '55222c78d8a5f', '', '', '', ''),
+(7520, 'Mon', '20151123', '19:13', 'http://callisto/articles?page=1', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles/view/22', 1448295199, '55222c78d8a5f', '', '', '', ''),
+(7521, 'Mon', '20151123', '19:14', 'http://callisto/articles?page=1', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles/view/22', 1448295277, '55222c78d8a5f', '', '', '', ''),
+(7522, 'Tue', '20151124', '09:28', 'http://callisto/articles?page=1', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles/view/22', 1448346528, '55222c78d8a5f', '', '', '', ''),
+(7523, 'Tue', '20151124', '09:28', 'http://callisto/admin/blocks', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/admin/blocks', 1448346530, '55222c78d8a5f', '', '', '', ''),
+(7524, 'Tue', '20151124', '10:30', 'http://callisto/articles?page=1', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles/view/22', 1448350226, '55222c78d8a5f', '', '', '', '');
+INSERT INTO `statistic` (`id`, `day`, `dt`, `tm`, `refer`, `ip`, `proxy`, `host`, `lang`, `user`, `req`, `timestamp`, `userhash`, `robot`, `country`, `region`, `city`) VALUES
+(7525, 'Tue', '20151124', '10:33', 'http://callisto/articles?page=1', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles/view/22', 1448350405, '55222c78d8a5f', '', '', '', ''),
+(7526, 'Tue', '20151124', '10:34', 'http://callisto/articles?page=1', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles/view/22', 1448350442, '55222c78d8a5f', '', '', '', ''),
+(7527, 'Tue', '20151124', '10:39', 'http://callisto/articles?page=1', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles/view/22', 1448350752, '55222c78d8a5f', '', '', '', ''),
+(7528, 'Tue', '20151124', '10:41', 'http://callisto/articles?page=1', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles/view/22', 1448350916, '55222c78d8a5f', '', '', '', ''),
+(7529, 'Tue', '20151124', '10:45', 'http://callisto/articles?page=1', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles/view/22', 1448351134, '55222c78d8a5f', '', '', '', ''),
+(7530, 'Tue', '20151124', '11:20', 'http://callisto/articles?page=1', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles/view/22', 1448353231, '55222c78d8a5f', '', '', '', ''),
+(7531, 'Tue', '20151124', '13:08', 'http://callisto/articles?page=1', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles/view/22', 1448359685, '55222c78d8a5f', '', '', '', ''),
+(7532, 'Tue', '20151124', '13:09', 'http://callisto/articles?page=1', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles/view/22', 1448359742, '55222c78d8a5f', '', '', '', ''),
+(7533, 'Tue', '20151124', '13:09', 'http://callisto/articles?page=1', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles/view/22', 1448359747, '55222c78d8a5f', '', '', '', ''),
+(7534, 'Tue', '20151124', '13:10', 'http://callisto/articles?page=1', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles/view/22', 1448359840, '55222c78d8a5f', '', '', '', ''),
+(7535, 'Tue', '20151124', '13:10', 'http://callisto/articles?page=1', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles/view/22', 1448359850, '55222c78d8a5f', '', '', '', ''),
+(7536, 'Tue', '20151124', '13:11', 'http://callisto/articles?page=1', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles/view/22', 1448359887, '55222c78d8a5f', '', '', '', ''),
+(7537, 'Tue', '20151124', '13:11', 'http://callisto/articles?page=1', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles/view/22', 1448359897, '55222c78d8a5f', '', '', '', ''),
+(7538, 'Tue', '20151124', '13:11', 'http://callisto/articles?page=1', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles/view/22', 1448359908, '55222c78d8a5f', '', '', '', ''),
+(7539, 'Tue', '20151124', '13:17', 'http://callisto/articles?page=1', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles/view/22', 1448360229, '55222c78d8a5f', '', '', '', ''),
+(7540, 'Tue', '20151124', '13:17', 'http://callisto/articles?page=1', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles/view/22', 1448360246, '55222c78d8a5f', '', '', '', ''),
+(7541, 'Tue', '20151124', '13:17', 'http://callisto/articles?page=1', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles/view/22', 1448360251, '55222c78d8a5f', '', '', '', ''),
+(7542, 'Tue', '20151124', '13:17', 'http://callisto/articles?page=1', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles/view/22', 1448360270, '55222c78d8a5f', '', '', '', ''),
+(7543, 'Tue', '20151124', '13:18', 'http://callisto/articles?page=1', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles/view/22', 1448360292, '55222c78d8a5f', '', '', '', ''),
+(7544, 'Tue', '20151124', '13:19', 'http://callisto/articles?page=1', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles/view/22', 1448360372, '55222c78d8a5f', '', '', '', ''),
+(7545, 'Tue', '20151124', '13:21', 'http://callisto/articles?page=1', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles/view/22', 1448360510, '55222c78d8a5f', '', '', '', ''),
+(7546, 'Wed', '20151125', '09:47', 'http://callisto/articles?page=1', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles/view/22', 1448434022, '55222c78d8a5f', '', '', '', ''),
+(7547, 'Wed', '20151125', '09:47', 'http://callisto/admin/blocks', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/admin/blocks', 1448434024, '55222c78d8a5f', '', '', '', ''),
+(7548, 'Wed', '20151125', '12:31', NULL, '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/', 1448443890, '56557ff2b3d2f', '', '', '', ''),
+(7549, 'Wed', '20151125', '17:26', NULL, '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/', 1448461578, '5655c50a93e50', '', '', '', ''),
+(7550, 'Wed', '20151125', '17:26', 'http://callisto/articles?page=1', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles/view/22', 1448461609, '55222c78d8a5f', '', '', '', ''),
+(7551, 'Wed', '20151125', '17:26', 'http://callisto/admin/blocks', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/admin/blocks', 1448461613, '55222c78d8a5f', '', '', '', ''),
+(7552, 'Thu', '20151126', '09:45', 'http://callisto/articles?page=1', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles/view/22', 1448520342, '55222c78d8a5f', '', '', '', ''),
+(7553, 'Thu', '20151126', '09:45', 'http://callisto/admin/blocks', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/admin/blocks', 1448520344, '55222c78d8a5f', '', '', '', ''),
+(7554, 'Thu', '20151126', '18:01', 'http://callisto/articles/view/22', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles', 1448550067, '55222c78d8a5f', '', '', '', ''),
+(7555, 'Thu', '20151126', '18:01', 'http://callisto/articles', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles/view/22', 1448550069, '55222c78d8a5f', '', '', '', ''),
+(7556, 'Thu', '20151126', '18:01', 'http://callisto/articles', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles/view/22', 1448550076, '55222c78d8a5f', '', '', '', ''),
+(7557, 'Thu', '20151126', '18:03', 'http://callisto/articles/view/22', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles', 1448550193, '55222c78d8a5f', '', '', '', ''),
+(7558, 'Thu', '20151126', '18:03', 'http://callisto/articles', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles?page=2', 1448550198, '55222c78d8a5f', '', '', '', ''),
+(7559, 'Thu', '20151126', '18:03', 'http://callisto/articles?page=2', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles?page=1', 1448550203, '55222c78d8a5f', '', '', '', ''),
+(7560, 'Thu', '20151126', '18:03', 'http://callisto/articles?page=1', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles/view/22', 1448550223, '55222c78d8a5f', '', '', '', ''),
+(7561, 'Thu', '20151126', '18:08', 'http://callisto/articles?page=1', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles/view/22', 1448550525, '55222c78d8a5f', '', '', '', ''),
+(7562, 'Thu', '20151126', '18:09', 'http://callisto/articles?page=1', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles/view/22', 1448550547, '55222c78d8a5f', '', '', '', ''),
+(7563, 'Thu', '20151126', '18:10', 'http://callisto/articles?page=1', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles/view/22', 1448550601, '55222c78d8a5f', '', '', '', ''),
+(7564, 'Thu', '20151126', '18:11', 'http://callisto/articles?page=1', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles/view/22', 1448550712, '55222c78d8a5f', '', '', '', ''),
+(7565, 'Thu', '20151126', '18:13', 'http://callisto/articles?page=1', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles/view/22', 1448550784, '55222c78d8a5f', '', '', '', ''),
+(7566, 'Thu', '20151126', '18:13', 'http://callisto/articles?page=1', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles/view/22', 1448550839, '55222c78d8a5f', '', '', '', ''),
+(7567, 'Thu', '20151126', '18:14', 'http://callisto/articles/view/22', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles', 1448550894, '55222c78d8a5f', '', '', '', ''),
+(7568, 'Thu', '20151126', '18:16', 'http://callisto/articles/view/22', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles', 1448550974, '55222c78d8a5f', '', '', '', ''),
+(7569, 'Fri', '20151127', '09:52', 'http://callisto/articles/view/22', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles', 1448607129, '55222c78d8a5f', '', '', '', ''),
+(7570, 'Fri', '20151127', '09:52', 'http://callisto/admin/blocks', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/admin/blocks', 1448607131, '55222c78d8a5f', '', '', '', ''),
+(7571, 'Fri', '20151127', '15:07', 'http://callisto/admin/blocks', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/admin/configuration/main', 1448626035, '55222c78d8a5f', '', '', '', ''),
+(7572, 'Fri', '20151127', '15:07', 'http://callisto/admin/blocks', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/admin/configuration/main', 1448626036, '55222c78d8a5f', '', '', '', ''),
+(7573, 'Fri', '20151127', '15:07', 'http://callisto/admin/configuration/main', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/admin/groups', 1448626039, '55222c78d8a5f', '', '', '', ''),
+(7574, 'Fri', '20151127', '15:07', 'http://callisto/admin/groups', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/admin/users/users_list', 1448626041, '55222c78d8a5f', '', '', '', ''),
+(7575, 'Fri', '20151127', '15:07', 'http://callisto/admin/users/users_list', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/admin/permissions', 1448626044, '55222c78d8a5f', '', '', '', ''),
+(7576, 'Fri', '20151127', '15:07', 'http://callisto/admin/permissions', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/admin/menu/menu_list/0', 1448626046, '55222c78d8a5f', '', '', '', ''),
+(7577, 'Fri', '20151127', '15:07', 'http://callisto/admin/menu/menu_list/0', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/admin/modules', 1448626049, '55222c78d8a5f', '', '', '', ''),
+(7578, 'Fri', '20151127', '15:07', 'http://callisto/admin/modules', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/admin/modules', 1448626070, '55222c78d8a5f', '', '', '', ''),
+(7579, 'Fri', '20151127', '15:07', 'http://callisto/admin/modules', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/admin/menu/menu_list/0', 1448626072, '55222c78d8a5f', '', '', '', ''),
+(7580, 'Fri', '20151127', '15:07', 'http://callisto/admin/menu/menu_list/0', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/admin/theme', 1448626074, '55222c78d8a5f', '', '', '', ''),
+(7581, 'Fri', '20151127', '15:08', 'http://callisto/admin/theme', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/admin/menu/menu_list/0', 1448626085, '55222c78d8a5f', '', '', '', ''),
+(7582, 'Fri', '20151127', '15:08', 'http://callisto/admin/menu/menu_list/0', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/admin/main', 1448626088, '55222c78d8a5f', '', '', '', ''),
+(7583, 'Fri', '20151127', '15:08', 'http://callisto/admin/main', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/admin/configuration/main', 1448626093, '55222c78d8a5f', '', '', '', ''),
+(7584, 'Fri', '20151127', '15:09', 'http://callisto/articles/view/22', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles', 1448626146, '55222c78d8a5f', '', '', '', ''),
+(7585, 'Fri', '20151127', '15:09', 'http://callisto/articles/view/22', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles', 1448626151, '55222c78d8a5f', '', '', '', ''),
+(7586, 'Fri', '20151127', '18:12', 'http://callisto/admin/main', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/admin/configuration/main', 1448637125, '55222c78d8a5f', '', '', '', ''),
+(7587, 'Mon', '20151130', '09:54', 'http://callisto/admin/main', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/admin/configuration/main', 1448866466, '55222c78d8a5f', '', '', '', ''),
+(7588, 'Mon', '20151130', '09:54', 'http://callisto/articles/view/22', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles', 1448866468, '55222c78d8a5f', '', '', '', ''),
+(7589, 'Mon', '20151130', '12:55', 'http://callisto/articles/view/22', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles', 1448877337, '55222c78d8a5f', '', '', '', ''),
+(7590, 'Mon', '20151130', '13:07', 'http://callisto/articles/view/22', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles', 1448878070, '55222c78d8a5f', '', '', '', ''),
+(7591, 'Mon', '20151130', '13:12', 'http://callisto/articles/view/22', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles', 1448878325, '55222c78d8a5f', '', '', '', ''),
+(7592, 'Mon', '20151130', '13:12', 'http://callisto/articles/view/22', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles', 1448878343, '55222c78d8a5f', '', '', '', ''),
+(7593, 'Mon', '20151130', '13:13', 'http://callisto/articles/view/22', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles', 1448878419, '55222c78d8a5f', '', '', '', ''),
+(7594, 'Mon', '20151130', '13:16', 'http://callisto/articles/view/22', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles', 1448878570, '55222c78d8a5f', '', '', '', ''),
+(7595, 'Mon', '20151130', '13:18', 'http://callisto/articles/view/22', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles', 1448878710, '55222c78d8a5f', '', '', '', ''),
+(7596, 'Mon', '20151130', '13:24', 'http://callisto/articles/view/22', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles', 1448879065, '55222c78d8a5f', '', '', '', ''),
+(7597, 'Mon', '20151130', '13:25', 'http://callisto/articles/view/22', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles', 1448879155, '55222c78d8a5f', '', '', '', ''),
+(7598, 'Mon', '20151130', '13:36', 'http://callisto/articles/view/22', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles', 1448879779, '55222c78d8a5f', '', '', '', ''),
+(7599, 'Mon', '20151130', '13:40', 'http://callisto/articles/view/22', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles', 1448880031, '55222c78d8a5f', '', '', '', ''),
+(7600, 'Mon', '20151130', '13:40', 'http://callisto/articles/view/22', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles', 1448880041, '55222c78d8a5f', '', '', '', ''),
+(7601, 'Mon', '20151130', '13:40', 'http://callisto/articles/view/22', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles', 1448880053, '55222c78d8a5f', '', '', '', ''),
+(7602, 'Mon', '20151130', '13:41', 'http://callisto/articles/view/22', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles', 1448880066, '55222c78d8a5f', '', '', '', ''),
+(7603, 'Mon', '20151130', '13:41', 'http://callisto/articles/view/22', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles', 1448880088, '55222c78d8a5f', '', '', '', ''),
+(7604, 'Mon', '20151130', '13:42', 'http://callisto/articles/view/22', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles', 1448880162, '55222c78d8a5f', '', '', '', ''),
+(7605, 'Mon', '20151130', '13:49', 'http://callisto/articles/view/22', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles', 1448880557, '55222c78d8a5f', '', '', '', ''),
+(7606, 'Mon', '20151130', '13:53', 'http://callisto/admin/configuration/main', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/admin/theme', 1448880802, '55222c78d8a5f', '', '', '', ''),
+(7607, 'Mon', '20151130', '13:53', 'http://callisto/admin/theme', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/admin/theme', 1448880807, '55222c78d8a5f', '', '', '', ''),
+(7608, 'Mon', '20151130', '13:53', 'http://callisto/articles/view/22', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles', 1448880811, '55222c78d8a5f', '', '', '', ''),
+(7609, 'Mon', '20151130', '13:55', 'http://callisto/articles/view/22', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles', 1448880945, '55222c78d8a5f', '', '', '', ''),
+(7610, 'Mon', '20151130', '13:56', 'http://callisto/admin/theme', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/admin/theme', 1448880966, '55222c78d8a5f', '', '', '', ''),
+(7611, 'Mon', '20151130', '13:56', 'http://callisto/articles/view/22', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles', 1448880970, '55222c78d8a5f', '', '', '', ''),
+(7612, 'Mon', '20151130', '13:56', 'http://callisto/articles/view/22', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles', 1448880984, '55222c78d8a5f', '', '', '', ''),
+(7613, 'Mon', '20151130', '13:56', 'http://callisto/admin/theme', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/admin/theme', 1448880991, '55222c78d8a5f', '', '', '', ''),
+(7614, 'Mon', '20151130', '13:56', 'http://callisto/articles/view/22', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles', 1448880995, '55222c78d8a5f', '', '', '', ''),
+(7615, 'Mon', '20151130', '13:56', 'http://callisto/articles/view/22', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles', 1448881012, '55222c78d8a5f', '', '', '', ''),
+(7616, 'Mon', '20151130', '13:57', 'http://callisto/articles/view/22', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles', 1448881057, '55222c78d8a5f', '', '', '', ''),
+(7617, 'Mon', '20151130', '13:57', 'http://callisto/articles/view/22', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles', 1448881072, '55222c78d8a5f', '', '', '', ''),
+(7618, 'Mon', '20151130', '13:59', 'http://callisto/articles', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles?page=2', 1448881196, '55222c78d8a5f', '', '', '', ''),
+(7619, 'Mon', '20151130', '14:00', 'http://callisto/articles?page=2', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles?page=1', 1448881200, '55222c78d8a5f', '', '', '', ''),
+(7620, 'Mon', '20151130', '14:00', 'http://callisto/admin/theme', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/admin/theme', 1448881221, '55222c78d8a5f', '', '', '', ''),
+(7621, 'Mon', '20151130', '14:00', 'http://callisto/articles?page=2', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles?page=1', 1448881226, '55222c78d8a5f', '', '', '', ''),
+(7622, 'Mon', '20151130', '17:02', 'http://callisto/articles?page=2', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles?page=1', 1448892147, '55222c78d8a5f', '', '', '', ''),
+(7623, 'Mon', '20151130', '17:08', 'http://callisto/articles?page=2', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles?page=1', 1448892530, '55222c78d8a5f', '', '', '', ''),
+(7624, 'Mon', '20151130', '17:14', 'http://callisto/articles?page=2', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles?page=1', 1448892879, '55222c78d8a5f', '', '', '', ''),
+(7625, 'Mon', '20151130', '17:15', 'http://callisto/articles?page=2', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles?page=1', 1448892929, '55222c78d8a5f', '', '', '', ''),
+(7626, 'Mon', '20151130', '17:18', 'http://callisto/articles?page=2', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles?page=1', 1448893138, '55222c78d8a5f', '', '', '', ''),
+(7627, 'Mon', '20151130', '17:30', 'http://callisto/articles?page=2', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles?page=1', 1448893824, '55222c78d8a5f', '', '', '', ''),
+(7628, 'Mon', '20151130', '17:39', 'http://callisto/articles?page=2', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles?page=1', 1448894386, '55222c78d8a5f', '', '', '', ''),
+(7629, 'Mon', '20151130', '17:40', 'http://callisto/articles?page=2', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles?page=1', 1448894434, '55222c78d8a5f', '', '', '', ''),
+(7630, 'Mon', '20151130', '17:42', 'http://callisto/articles?page=2', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles?page=1', 1448894527, '55222c78d8a5f', '', '', '', ''),
+(7631, 'Mon', '20151130', '17:42', 'http://callisto/articles?page=2', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles?page=1', 1448894545, '55222c78d8a5f', '', '', '', ''),
+(7632, 'Mon', '20151130', '18:00', 'http://callisto/articles?page=2', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles?page=1', 1448895648, '55222c78d8a5f', '', '', '', ''),
+(7633, 'Mon', '20151130', '18:01', 'http://callisto/articles?page=2', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles?page=1', 1448895685, '55222c78d8a5f', '', '', '', ''),
+(7634, 'Mon', '20151130', '18:02', 'http://callisto/articles?page=2', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles?page=1', 1448895728, '55222c78d8a5f', '', '', '', ''),
+(7635, 'Mon', '20151130', '18:02', 'http://callisto/articles?page=2', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles?page=1', 1448895736, '55222c78d8a5f', '', '', '', ''),
+(7636, 'Mon', '20151130', '18:03', 'http://callisto/articles?page=2', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles?page=1', 1448895799, '55222c78d8a5f', '', '', '', ''),
+(7637, 'Mon', '20151130', '18:03', 'http://callisto/articles?page=2', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles?page=1', 1448895820, '55222c78d8a5f', '', '', '', ''),
+(7638, 'Mon', '20151130', '18:04', 'http://callisto/articles?page=2', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles?page=1', 1448895840, '55222c78d8a5f', '', '', '', ''),
+(7639, 'Mon', '20151130', '18:07', 'http://callisto/articles?page=2', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles?page=1', 1448896033, '55222c78d8a5f', '', '', '', ''),
+(7640, 'Mon', '20151130', '18:07', 'http://callisto/articles?page=2', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles?page=1', 1448896053, '55222c78d8a5f', '', '', '', ''),
+(7641, 'Mon', '20151130', '18:08', 'http://callisto/articles?page=2', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles?page=1', 1448896132, '55222c78d8a5f', '', '', '', ''),
+(7642, 'Mon', '20151130', '18:09', 'http://callisto/articles?page=2', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles?page=1', 1448896150, '55222c78d8a5f', '', '', '', ''),
+(7643, 'Mon', '20151130', '18:09', 'http://callisto/articles?page=2', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles?page=1', 1448896157, '55222c78d8a5f', '', '', '', ''),
+(7644, 'Mon', '20151130', '18:09', 'http://callisto/articles?page=2', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles?page=1', 1448896169, '55222c78d8a5f', '', '', '', ''),
+(7645, 'Mon', '20151130', '18:10', 'http://callisto/articles?page=2', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles?page=1', 1448896214, '55222c78d8a5f', '', '', '', ''),
+(7646, 'Mon', '20151130', '18:11', 'http://callisto/articles?page=2', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles?page=1', 1448896263, '55222c78d8a5f', '', '', '', ''),
+(7647, 'Mon', '20151130', '18:11', 'http://callisto/articles?page=2', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles?page=1', 1448896318, '55222c78d8a5f', '', '', '', ''),
+(7648, 'Mon', '20151130', '18:12', 'http://callisto/articles?page=2', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles?page=1', 1448896331, '55222c78d8a5f', '', '', '', ''),
+(7649, 'Mon', '20151130', '18:13', 'http://callisto/articles?page=2', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles?page=1', 1448896386, '55222c78d8a5f', '', '', '', ''),
+(7650, 'Mon', '20151130', '18:13', 'http://callisto/articles?page=1', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles?page=1', 1448896417, '55222c78d8a5f', '', '', '', ''),
+(7651, 'Mon', '20151130', '18:13', 'http://callisto/articles?page=1', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles?page=1', 1448896422, '55222c78d8a5f', '', '', '', ''),
+(7652, 'Mon', '20151130', '18:13', 'http://callisto/articles?page=1', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/', 1448896428, '55222c78d8a5f', '', '', '', ''),
+(7653, 'Tue', '20151201', '10:01', 'http://callisto/articles?page=1', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/', 1448953306, '55222c78d8a5f', '', '', '', ''),
+(7654, 'Tue', '20151201', '10:01', 'http://callisto/admin/theme', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/admin/theme', 1448953308, '55222c78d8a5f', '', '', '', ''),
+(7655, 'Tue', '20151201', '10:41', NULL, '192.168.1.23', NULL, '192.168.1.23', '', 'DavClnt', '/', 1448955683, '565d4f2382060', '', '', '', ''),
+(7656, 'Tue', '20151201', '10:41', NULL, '192.168.1.23', NULL, '192.168.1.23', '', 'Microsoft-WebDAV-MiniRedir/6.3.9600', '/', 1448955689, '565d4f29bcab7', '', '', '', ''),
+(7657, 'Tue', '20151201', '10:41', NULL, '192.168.1.23', NULL, '192.168.1.23', '', 'Microsoft-WebDAV-MiniRedir/6.3.9600', '/', 1448955693, '565d4f2d00d4c', '', '', '', ''),
+(7658, 'Tue', '20151201', '11:08', NULL, '192.168.1.32', NULL, '192.168.1.32', 'uk', 'Mozilla/5.0 (Linux; Android 5.0.2; Lenovo A6000 Build/LRX22G) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.76 Mobile Safari/537.36', '/', 1448957305, '565d5579f0df1', '', '', '', ''),
+(7659, 'Tue', '20151201', '11:08', NULL, '192.168.1.32', NULL, '192.168.1.32', 'uk', 'Mozilla/5.0 (Linux; Android 5.0.2; Lenovo A6000 Build/LRX22G) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.76 Mobile Safari/537.36', '/', 1448957310, '565d5579f0df1', '', '', '', ''),
+(7660, 'Tue', '20151201', '12:29', 'http://callisto/articles?page=1', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/', 1448962163, '55222c78d8a5f', '', '', '', ''),
+(7661, 'Tue', '20151201', '12:29', 'http://callisto/articles?page=1', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/', 1448962172, '55222c78d8a5f', '', '', '', ''),
+(7662, 'Tue', '20151201', '12:30', 'http://callisto/articles?page=1', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/', 1448962209, '55222c78d8a5f', '', '', '', ''),
+(7663, 'Tue', '20151201', '12:30', 'http://callisto/articles?page=1', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/', 1448962219, '55222c78d8a5f', '', '', '', ''),
+(7664, 'Tue', '20151201', '12:31', 'http://callisto/articles?page=1', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/', 1448962280, '55222c78d8a5f', '', '', '', ''),
+(7665, 'Tue', '20151201', '12:31', 'http://callisto/articles?page=1', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/', 1448962285, '55222c78d8a5f', '', '', '', ''),
+(7666, 'Tue', '20151201', '12:31', 'http://callisto/articles?page=1', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/', 1448962291, '55222c78d8a5f', '', '', '', ''),
+(7667, 'Tue', '20151201', '12:31', 'http://callisto/articles?page=1', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/', 1448962299, '55222c78d8a5f', '', '', '', ''),
+(7668, 'Tue', '20151201', '12:31', 'http://callisto/articles?page=1', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/', 1448962307, '55222c78d8a5f', '', '', '', ''),
+(7669, 'Tue', '20151201', '12:32', 'http://callisto/articles?page=1', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/', 1448962320, '55222c78d8a5f', '', '', '', ''),
+(7670, 'Tue', '20151201', '12:32', 'http://callisto/articles?page=1', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/', 1448962325, '55222c78d8a5f', '', '', '', ''),
+(7671, 'Wed', '20151202', '10:02', 'http://callisto/articles?page=1', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/', 1449039736, '55222c78d8a5f', '', '', '', ''),
+(7672, 'Wed', '20151202', '10:02', 'http://callisto/admin/theme', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/admin/theme', 1449039737, '55222c78d8a5f', '', '', '', ''),
+(7673, 'Thu', '20151203', '09:57', 'http://callisto/admin/theme', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/admin/theme', 1449125863, '55222c78d8a5f', '', '', '', ''),
+(7674, 'Thu', '20151203', '09:57', 'http://callisto/articles?page=1', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/', 1449125871, '55222c78d8a5f', '', '', '', ''),
+(7675, 'Thu', '20151203', '16:34', NULL, '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/', 1449149646, '55222c78d8a5f', '', '', '', ''),
+(7676, 'Thu', '20151203', '16:34', NULL, '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/', 1449149648, '55222c78d8a5f', '', '', '', ''),
+(7677, 'Thu', '20151203', '16:34', NULL, '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/', 1449149649, '55222c78d8a5f', '', '', '', ''),
+(7678, 'Thu', '20151203', '16:34', 'http://callisto/', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles/', 1449149652, '55222c78d8a5f', '', '', '', ''),
+(7679, 'Thu', '20151203', '16:34', 'http://callisto/articles/', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles/view/22', 1449149656, '55222c78d8a5f', '', '', '', ''),
+(7680, 'Thu', '20151203', '16:34', 'http://callisto/articles/view/22', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36', '/articles', 1449149659, '55222c78d8a5f', '', '', '', ''),
+(7681, 'Fri', '20151204', '09:56', 'http://callisto/articles/view/22', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.73 Safari/537.36', '/articles', 1449212202, '55222c78d8a5f', '', '', '', ''),
+(7682, 'Fri', '20151204', '09:56', 'http://callisto/admin/theme', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.73 Safari/537.36', '/admin/theme', 1449212203, '55222c78d8a5f', '', '', '', ''),
+(7683, 'Mon', '20151207', '09:42', 'http://callisto/articles/view/22', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.73 Safari/537.36', '/articles', 1449470526, '55222c78d8a5f', '', '', '', ''),
+(7684, 'Mon', '20151207', '09:42', 'http://callisto/admin/theme', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.73 Safari/537.36', '/admin/theme', 1449470527, '55222c78d8a5f', '', '', '', ''),
+(7685, 'Mon', '20151207', '10:32', 'http://callisto/articles/view/22', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.73 Safari/537.36', '/articles', 1449473571, '55222c78d8a5f', '', '', '', ''),
+(7686, 'Mon', '20151207', '10:33', 'http://callisto/admin/theme', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.73 Safari/537.36', '/admin/theme', 1449473591, '55222c78d8a5f', '', '', '', ''),
+(7687, 'Tue', '20151208', '09:59', 'http://callisto/articles/view/22', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.73 Safari/537.36', '/articles', 1449557962, '55222c78d8a5f', '', '', '', ''),
+(7688, 'Tue', '20151208', '09:59', 'http://callisto/admin/theme', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.73 Safari/537.36', '/admin/theme', 1449557969, '55222c78d8a5f', '', '', '', ''),
+(7689, 'Tue', '20151208', '12:36', 'http://callisto/articles/view/22', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.73 Safari/537.36', '/articles', 1449567408, '55222c78d8a5f', '', '', '', ''),
+(7690, 'Tue', '20151208', '12:37', 'http://callisto/admin/theme', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.73 Safari/537.36', '/admin/theme', 1449567430, '55222c78d8a5f', '', '', '', ''),
+(7691, 'Wed', '20151209', '09:52', 'http://callisto/articles/view/22', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.73 Safari/537.36', '/articles', 1449643977, '55222c78d8a5f', '', '', '', ''),
+(7692, 'Wed', '20151209', '09:53', 'http://callisto/admin/theme', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.73 Safari/537.36', '/admin/theme', 1449643985, '55222c78d8a5f', '', '', '', ''),
+(7693, 'Wed', '20151209', '12:01', NULL, '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.73 Safari/537.36', '/?XDEBUG_SESSION_START=netbeans-xdebug', 1449651671, '55222c78d8a5f', '', '', '', ''),
+(7694, 'Wed', '20151209', '12:03', NULL, '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.73 Safari/537.36', '/?XDEBUG_SESSION_START=netbeans-xdebug', 1449651832, '55222c78d8a5f', '', '', '', ''),
+(7695, 'Wed', '20151209', '12:20', NULL, '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.73 Safari/537.36', '/?XDEBUG_SESSION_START=netbeans-xdebug', 1449652837, '55222c78d8a5f', '', '', '', ''),
+(7696, 'Wed', '20151209', '12:21', NULL, '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.73 Safari/537.36', '/?XDEBUG_SESSION_START=netbeans-xdebug', 1449652874, '55222c78d8a5f', '', '', '', ''),
+(7697, 'Wed', '20151209', '12:21', NULL, '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.73 Safari/537.36', '/?XDEBUG_SESSION_START=netbeans-xdebug', 1449652879, '55222c78d8a5f', '', '', '', ''),
+(7698, 'Wed', '20151209', '12:26', NULL, '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.73 Safari/537.36', '/?XDEBUG_SESSION_START=netbeans-xdebug', 1449653204, '55222c78d8a5f', '', '', '', ''),
+(7699, 'Thu', '20151210', '09:56', 'http://callisto/articles/view/22', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.73 Safari/537.36', '/articles', 1449730589, '55222c78d8a5f', '', '', '', ''),
+(7700, 'Thu', '20151210', '09:56', 'http://callisto/admin/theme', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.73 Safari/537.36', '/admin/theme', 1449730591, '55222c78d8a5f', '', '', '', ''),
+(7701, 'Fri', '20151211', '10:00', 'http://callisto/articles/view/22', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.80 Safari/537.36', '/articles', 1449817210, '55222c78d8a5f', '', '', '', ''),
+(7702, 'Fri', '20151211', '10:00', 'http://callisto/admin/theme', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.80 Safari/537.36', '/admin/theme', 1449817211, '55222c78d8a5f', '', '', '', ''),
+(7703, 'Fri', '20151211', '16:13', 'http://callisto/admin/theme', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.80 Safari/537.36', '/admin/theme', 1449839634, '55222c78d8a5f', '', '', '', '');
+INSERT INTO `statistic` (`id`, `day`, `dt`, `tm`, `refer`, `ip`, `proxy`, `host`, `lang`, `user`, `req`, `timestamp`, `userhash`, `robot`, `country`, `region`, `city`) VALUES
+(7704, 'Fri', '20151211', '16:13', 'http://callisto/admin/theme', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.80 Safari/537.36', '/admin/configuration/main', 1449839639, '55222c78d8a5f', '', '', '', ''),
+(7705, 'Mon', '20151214', '09:55', 'http://callisto/articles/view/22', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.80 Safari/537.36', '/articles', 1450076142, '55222c78d8a5f', '', '', '', ''),
+(7706, 'Mon', '20151214', '09:55', 'http://callisto/admin/theme', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.80 Safari/537.36', '/admin/configuration/main', 1450076143, '55222c78d8a5f', '', '', '', ''),
+(7707, 'Mon', '20151214', '11:34', 'http://callisto/articles/view/22', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.80 Safari/537.36', '/articles', 1450082041, '55222c78d8a5f', '', '', '', ''),
+(7708, 'Tue', '20151215', '09:55', NULL, '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.80 Safari/537.36', '/articles', 1450162503, '55222c78d8a5f', '', '', '', ''),
+(7709, 'Tue', '20151215', '09:55', 'http://callisto/admin/theme', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.80 Safari/537.36', '/admin/configuration/main', 1450162504, '55222c78d8a5f', '', '', '', ''),
+(7710, 'Wed', '20151216', '10:09', 'http://callisto/admin/theme', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.80 Safari/537.36', '/admin/configuration/main', 1450249746, '55222c78d8a5f', '', '', '', ''),
+(7711, 'Wed', '20151216', '10:09', NULL, '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.80 Safari/537.36', '/articles', 1450249750, '55222c78d8a5f', '', '', '', ''),
+(7712, 'Thu', '20151217', '09:45', NULL, '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.80 Safari/537.36', '/articles', 1450334726, '55222c78d8a5f', '', '', '', ''),
+(7713, 'Thu', '20151217', '09:45', 'http://callisto/admin/theme', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.80 Safari/537.36', '/admin/configuration/main', 1450334727, '55222c78d8a5f', '', '', '', ''),
+(7714, 'Thu', '20151217', '19:29', NULL, '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.80 Safari/537.36', '/articles', 1450369744, '55222c78d8a5f', '', '', '', ''),
+(7715, 'Thu', '20151217', '19:29', 'http://callisto/admin/theme', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.80 Safari/537.36', '/admin/configuration/main', 1450369745, '55222c78d8a5f', '', '', '', ''),
+(7716, 'Fri', '20151218', '10:02', NULL, '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/articles', 1450422124, '55222c78d8a5f', '', '', '', ''),
+(7717, 'Fri', '20151218', '10:02', 'http://callisto/admin/theme', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/configuration/main', 1450422126, '55222c78d8a5f', '', '', '', ''),
+(7718, 'Fri', '20151218', '19:15', 'http://callisto/admin/theme', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/configuration/main', 1450455300, '55222c78d8a5f', '', '', '', ''),
+(7719, 'Fri', '20151218', '19:15', NULL, '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/articles', 1450455301, '55222c78d8a5f', '', '', '', ''),
+(7720, 'Tue', '20151222', '12:15', NULL, '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/articles', 1450775728, '55222c78d8a5f', '', '', '', ''),
+(7721, 'Tue', '20151222', '12:15', 'http://callisto/admin/theme', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/configuration/main', 1450775730, '55222c78d8a5f', '', '', '', ''),
+(7722, 'Wed', '20151223', '09:55', 'http://callisto/admin/theme', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/configuration/main', 1450853743, '55222c78d8a5f', '', '', '', ''),
+(7723, 'Wed', '20151223', '09:55', NULL, '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/articles', 1450853759, '55222c78d8a5f', '', '', '', ''),
+(7724, 'Thu', '20151224', '10:08', NULL, '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/articles', 1450940924, '55222c78d8a5f', '', '', '', ''),
+(7725, 'Thu', '20151224', '10:08', 'http://callisto/admin/theme', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/configuration/main', 1450940925, '55222c78d8a5f', '', '', '', ''),
+(7726, 'Thu', '20151224', '15:30', 'http://callisto/admin/configuration/main', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/users/users_list', 1450960229, '55222c78d8a5f', '', '', '', ''),
+(7727, 'Thu', '20151224', '15:30', 'http://callisto/admin/users/users_list', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/groups', 1450960232, '55222c78d8a5f', '', '', '', ''),
+(7728, 'Thu', '20151224', '15:30', 'http://callisto/admin/groups', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/users/users_list', 1450960234, '55222c78d8a5f', '', '', '', ''),
+(7729, 'Thu', '20151224', '15:30', 'http://callisto/admin/users/users_list', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/permissions', 1450960235, '55222c78d8a5f', '', '', '', ''),
+(7730, 'Thu', '20151224', '15:30', 'http://callisto/admin/permissions', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/menu/menu_list/0', 1450960238, '55222c78d8a5f', '', '', '', ''),
+(7731, 'Thu', '20151224', '15:30', 'http://callisto/admin/menu/menu_list/0', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/modules', 1450960240, '55222c78d8a5f', '', '', '', ''),
+(7732, 'Thu', '20151224', '15:30', 'http://callisto/admin/modules', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/blocks', 1450960243, '55222c78d8a5f', '', '', '', ''),
+(7733, 'Thu', '20151224', '15:30', 'http://callisto/admin/blocks', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/theme', 1450960247, '55222c78d8a5f', '', '', '', ''),
+(7734, 'Thu', '20151224', '15:30', 'http://callisto/admin/theme', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/articles', 1450960250, '55222c78d8a5f', '', '', '', ''),
+(7735, 'Thu', '20151224', '15:31', 'http://callisto/admin/theme', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/articles', 1450960270, '55222c78d8a5f', '', '', '', ''),
+(7736, 'Fri', '20151225', '10:10', 'http://callisto/admin/theme', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/articles', 1451027443, '55222c78d8a5f', '', '', '', ''),
+(7737, 'Fri', '20151225', '10:10', NULL, '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/articles', 1451027444, '55222c78d8a5f', '', '', '', ''),
+(7738, 'Mon', '20151228', '10:07', 'http://callisto/admin/theme', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/articles', 1451286424, '55222c78d8a5f', '', '', '', ''),
+(7739, 'Mon', '20151228', '10:07', NULL, '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/articles', 1451286425, '55222c78d8a5f', '', '', '', ''),
+(7740, 'Tue', '20151229', '11:25', 'http://callisto/admin/theme', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/articles', 1451377523, '55222c78d8a5f', '', '', '', ''),
+(7741, 'Tue', '20151229', '11:25', NULL, '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/articles', 1451377524, '55222c78d8a5f', '', '', '', ''),
+(7742, 'Tue', '20151229', '18:08', 'http://callisto/admin/articles', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/groups', 1451401725, '55222c78d8a5f', '', '', '', ''),
+(7743, 'Tue', '20151229', '18:08', 'http://callisto/admin/groups', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/users/users_list', 1451401727, '55222c78d8a5f', '', '', '', ''),
+(7744, 'Tue', '20151229', '18:08', 'http://callisto/admin/users/users_list', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/modules', 1451401731, '55222c78d8a5f', '', '', '', ''),
+(7745, 'Tue', '20151229', '18:08', 'http://callisto/admin/modules', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/blocks', 1451401737, '55222c78d8a5f', '', '', '', ''),
+(7746, 'Tue', '20151229', '18:09', 'http://callisto/admin/blocks', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/theme', 1451401741, '55222c78d8a5f', '', '', '', ''),
+(7747, 'Tue', '20151229', '18:09', 'http://callisto/admin/theme', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/articles', 1451401744, '55222c78d8a5f', '', '', '', ''),
+(7748, 'Tue', '20151229', '18:09', 'http://callisto/admin/articles', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/configuration/main', 1451401746, '55222c78d8a5f', '', '', '', ''),
+(7749, 'Tue', '20151229', '18:09', 'http://callisto/admin/configuration/main', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/groups', 1451401748, '55222c78d8a5f', '', '', '', ''),
+(7750, 'Tue', '20151229', '18:09', 'http://callisto/admin/groups', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/users/users_list', 1451401750, '55222c78d8a5f', '', '', '', ''),
+(7751, 'Tue', '20151229', '18:09', 'http://callisto/admin/users/users_list', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/permissions', 1451401751, '55222c78d8a5f', '', '', '', ''),
+(7752, 'Tue', '20151229', '18:09', 'http://callisto/admin/permissions', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/menu/menu_list/0', 1451401752, '55222c78d8a5f', '', '', '', ''),
+(7753, 'Tue', '20151229', '18:09', 'http://callisto/admin/menu/menu_list/0', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/modules', 1451401754, '55222c78d8a5f', '', '', '', ''),
+(7754, 'Tue', '20151229', '18:10', NULL, '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/articles', 1451401818, '55222c78d8a5f', '', '', '', ''),
+(7755, 'Tue', '20151229', '18:10', 'http://callisto/articles', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/articles/view/22', 1451401821, '55222c78d8a5f', '', '', '', ''),
+(7756, 'Tue', '20151229', '18:10', 'http://callisto/articles/view/22', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/articles', 1451401823, '55222c78d8a5f', '', '', '', ''),
+(7757, 'Tue', '20151229', '18:10', 'http://callisto/articles', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/articles/view/22', 1451401826, '55222c78d8a5f', '', '', '', ''),
+(7758, 'Tue', '20151229', '18:10', 'http://callisto/articles/view/22', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/articles', 1451401829, '55222c78d8a5f', '', '', '', ''),
+(7759, 'Tue', '20151229', '18:10', 'http://callisto/admin/modules', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/permissions', 1451401837, '55222c78d8a5f', '', '', '', ''),
+(7760, 'Tue', '20151229', '18:14', 'http://callisto/admin/modules', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/permissions', 1451402076, '55222c78d8a5f', '', '', '', ''),
+(7761, 'Tue', '20151229', '18:17', 'http://callisto/admin/permissions', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/users/login', 1451402268, '55222c78d8a5f', '', '', '', ''),
+(7762, 'Tue', '20151229', '18:18', 'http://callisto/admin/users/login', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/main', 1451402280, '55222c78d8a5f', '', '', '', ''),
+(7763, 'Tue', '20151229', '18:18', 'http://callisto/admin/main', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/users/login', 1451402291, '55222c78d8a5f', '', '', '', ''),
+(7764, 'Tue', '20151229', '18:19', 'http://callisto/admin/users/login', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/main', 1451402353, '55222c78d8a5f', '', '', '', ''),
+(7765, 'Tue', '20151229', '18:20', 'http://callisto/admin/main', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/modules', 1451402440, '55222c78d8a5f', '', '', '', ''),
+(7766, 'Tue', '20151229', '18:20', 'http://callisto/admin/main', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/modules', 1451402445, '55222c78d8a5f', '', '', '', ''),
+(7767, 'Tue', '20151229', '18:22', 'http://callisto/admin/main', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/modules', 1451402545, '55222c78d8a5f', '', '', '', ''),
+(7768, 'Tue', '20151229', '18:22', 'http://callisto/admin/modules', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/blocks', 1451402551, '55222c78d8a5f', '', '', '', ''),
+(7769, 'Tue', '20151229', '18:22', 'http://callisto/admin/main', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/modules', 1451402558, '55222c78d8a5f', '', '', '', ''),
+(7770, 'Tue', '20151229', '18:22', 'http://callisto/admin/modules', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/modules/info/articles', 1451402563, '55222c78d8a5f', '', '', '', ''),
+(7771, 'Tue', '20151229', '18:22', 'http://callisto/admin/main', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/modules', 1451402572, '55222c78d8a5f', '', '', '', ''),
+(7772, 'Tue', '20151229', '18:26', 'http://callisto/admin/main', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/modules', 1451402785, '55222c78d8a5f', '', '', '', ''),
+(7773, 'Tue', '20151229', '18:28', 'http://callisto/admin/main', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/modules', 1451402901, '55222c78d8a5f', '', '', '', ''),
+(7774, 'Tue', '20151229', '18:28', 'http://callisto/admin/main', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/modules', 1451402903, '55222c78d8a5f', '', '', '', ''),
+(7775, 'Tue', '20151229', '18:28', 'http://callisto/admin/main', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/modules', 1451402926, '55222c78d8a5f', '', '', '', ''),
+(7776, 'Tue', '20151229', '18:28', 'http://callisto/admin/main', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/modules', 1451402927, '55222c78d8a5f', '', '', '', ''),
+(7777, 'Tue', '20151229', '18:30', 'http://callisto/admin/modules', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/modules/create', 1451403029, '55222c78d8a5f', '', '', '', ''),
+(7778, 'Tue', '20151229', '18:30', 'http://callisto/admin/main', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/modules', 1451403037, '55222c78d8a5f', '', '', '', ''),
+(7779, 'Tue', '20151229', '18:30', 'http://callisto/admin/modules', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/modules/create', 1451403039, '55222c78d8a5f', '', '', '', ''),
+(7780, 'Tue', '20151229', '18:31', 'http://callisto/admin/modules', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/modules/create', 1451403077, '55222c78d8a5f', '', '', '', ''),
+(7781, 'Tue', '20151229', '18:34', 'http://callisto/admin/modules', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/modules/create', 1451403250, '55222c78d8a5f', '', '', '', ''),
+(7782, 'Tue', '20151229', '18:34', 'http://callisto/admin/modules/create', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/modules/create?submit=&group_displayname=&group_description=', 1451403255, '55222c78d8a5f', '', '', '', ''),
+(7783, 'Tue', '20151229', '18:34', 'http://callisto/admin/modules/create', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/modules/create?submit=&group_displayname=&group_description=', 1451403256, '55222c78d8a5f', '', '', '', ''),
+(7784, 'Tue', '20151229', '18:34', 'http://callisto/admin/modules/create', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/modules/create?submit=&group_displayname=&group_description=', 1451403256, '55222c78d8a5f', '', '', '', ''),
+(7785, 'Tue', '20151229', '18:34', 'http://callisto/admin/modules/create', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/modules/create?submit=&group_displayname=&group_description=', 1451403257, '55222c78d8a5f', '', '', '', ''),
+(7786, 'Tue', '20151229', '18:34', 'http://callisto/admin/modules/create', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/modules/create?submit=&group_displayname=&group_description=', 1451403281, '55222c78d8a5f', '', '', '', ''),
+(7787, 'Tue', '20151229', '18:34', 'http://callisto/admin/modules/create?submit=&group_displayname=&group_description=', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/modules/create?submit=&group_displayname=&group_description=', 1451403284, '55222c78d8a5f', '', '', '', ''),
+(7788, 'Tue', '20151229', '18:37', 'http://callisto/admin/modules/create?submit=&group_displayname=&group_description=', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/menu/menu_list/0', 1451403456, '55222c78d8a5f', '', '', '', ''),
+(7789, 'Tue', '20151229', '18:37', 'http://callisto/admin/menu/menu_list/0', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/modules', 1451403458, '55222c78d8a5f', '', '', '', ''),
+(7790, 'Tue', '20151229', '18:39', 'http://callisto/admin/menu/menu_list/0', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/modules', 1451403588, '55222c78d8a5f', '', '', '', ''),
+(7791, 'Tue', '20151229', '18:39', 'http://callisto/admin/modules', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/modules/create', 1451403597, '55222c78d8a5f', '', '', '', ''),
+(7792, 'Tue', '20151229', '18:41', 'http://callisto/admin/modules', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/modules/create', 1451403691, '55222c78d8a5f', '', '', '', ''),
+(7793, 'Tue', '20151229', '18:41', 'http://callisto/admin/modules', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/modules/create', 1451403705, '55222c78d8a5f', '', '', '', ''),
+(7794, 'Tue', '20151229', '18:42', 'http://callisto/admin/modules', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/modules/create', 1451403751, '55222c78d8a5f', '', '', '', ''),
+(7795, 'Tue', '20151229', '18:43', 'http://callisto/admin/modules', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/modules/create', 1451403793, '55222c78d8a5f', '', '', '', ''),
+(7796, 'Tue', '20151229', '18:43', 'http://callisto/admin/modules', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/modules/create', 1451403814, '55222c78d8a5f', '', '', '', ''),
+(7797, 'Tue', '20151229', '18:50', 'http://callisto/admin/modules', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/modules/create', 1451404220, '55222c78d8a5f', '', '', '', ''),
+(7798, 'Tue', '20151229', '18:50', 'http://callisto/admin/modules/create', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/users/users_list', 1451404229, '55222c78d8a5f', '', '', '', ''),
+(7799, 'Tue', '20151229', '18:50', 'http://callisto/admin/users/users_list', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/users/manage', 1451404231, '55222c78d8a5f', '', '', '', ''),
+(7800, 'Tue', '20151229', '18:51', 'http://callisto/admin/modules/create', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/users/users_list', 1451404309, '55222c78d8a5f', '', '', '', ''),
+(7801, 'Tue', '20151229', '18:51', 'http://callisto/admin/users/users_list', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/modules', 1451404311, '55222c78d8a5f', '', '', '', ''),
+(7802, 'Tue', '20151229', '18:51', 'http://callisto/admin/modules', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/modules/create', 1451404313, '55222c78d8a5f', '', '', '', ''),
+(7803, 'Tue', '20151229', '18:52', 'http://callisto/admin/modules', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/modules/create', 1451404344, '55222c78d8a5f', '', '', '', ''),
+(7804, 'Wed', '20151230', '09:52', 'http://callisto/admin/modules', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/modules/create', 1451458368, '55222c78d8a5f', '', '', '', ''),
+(7805, 'Wed', '20151230', '09:52', 'http://callisto/articles/view/22', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/articles', 1451458369, '55222c78d8a5f', '', '', '', ''),
+(7806, 'Wed', '20151230', '15:14', 'http://callisto/admin/modules', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/modules/create', 1451477674, '55222c78d8a5f', '', '', '', ''),
+(7807, 'Wed', '20151230', '15:14', 'http://callisto/admin/modules/create', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/modules', 1451477682, '55222c78d8a5f', '', '', '', ''),
+(7808, 'Wed', '20151230', '15:14', 'http://callisto/admin/modules', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/modules/info/configuration', 1451477691, '55222c78d8a5f', '', '', '', ''),
+(7809, 'Wed', '20151230', '15:15', 'http://callisto/admin/modules', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/modules/create', 1451477716, '55222c78d8a5f', '', '', '', ''),
+(7810, 'Wed', '20151230', '15:15', 'http://callisto/admin/modules', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/modules/create', 1451477738, '55222c78d8a5f', '', '', '', ''),
+(7811, 'Wed', '20151230', '15:16', 'http://callisto/admin/modules', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/modules/create', 1451477795, '55222c78d8a5f', '', '', '', ''),
+(7812, 'Wed', '20151230', '15:16', 'http://callisto/admin/modules', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/modules/create', 1451477811, '55222c78d8a5f', '', '', '', ''),
+(7813, 'Wed', '20151230', '15:18', 'http://callisto/admin/modules', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/modules/create', 1451477880, '55222c78d8a5f', '', '', '', ''),
+(7814, 'Wed', '20151230', '15:20', 'http://callisto/admin/modules', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/modules/create', 1451478014, '55222c78d8a5f', '', '', '', ''),
+(7815, 'Wed', '20151230', '15:22', 'http://callisto/admin/modules', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/modules/create', 1451478141, '55222c78d8a5f', '', '', '', ''),
+(7816, 'Wed', '20151230', '15:22', 'http://callisto/admin/modules', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/modules/create', 1451478168, '55222c78d8a5f', '', '', '', ''),
+(7817, 'Wed', '20151230', '15:23', 'http://callisto/admin/modules', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/modules/create', 1451478185, '55222c78d8a5f', '', '', '', ''),
+(7818, 'Wed', '20151230', '15:23', 'http://callisto/admin/modules', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/modules/create', 1451478198, '55222c78d8a5f', '', '', '', ''),
+(7819, 'Wed', '20151230', '15:24', 'http://callisto/admin/modules', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/modules/create', 1451478242, '55222c78d8a5f', '', '', '', ''),
+(7820, 'Wed', '20151230', '15:25', 'http://callisto/admin/modules', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/modules/create', 1451478348, '55222c78d8a5f', '', '', '', ''),
+(7821, 'Wed', '20151230', '15:26', 'http://callisto/admin/modules', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/modules/create', 1451478376, '55222c78d8a5f', '', '', '', ''),
+(7822, 'Mon', '20160104', '10:02', 'http://callisto/admin/modules', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/modules/create', 1451890955, '55222c78d8a5f', '', '', '', ''),
+(7823, 'Mon', '20160104', '10:02', 'http://callisto/admin/modules', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/modules/info/configuration', 1451890956, '55222c78d8a5f', '', '', '', ''),
+(7824, 'Mon', '20160104', '10:02', 'http://callisto/articles/view/22', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/articles', 1451890958, '55222c78d8a5f', '', '', '', ''),
+(7825, 'Mon', '20160104', '12:31', 'http://callisto/admin/modules/info/configuration', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/modules/', 1451899879, '55222c78d8a5f', '', '', '', ''),
+(7826, 'Mon', '20160104', '12:32', 'http://callisto/admin/modules/info/configuration', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/modules/', 1451899930, '55222c78d8a5f', '', '', '', ''),
+(7827, 'Mon', '20160104', '16:14', 'http://callisto/articles/view/22', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/articles', 1451913290, '55222c78d8a5f', '', '', '', ''),
+(7828, 'Mon', '20160104', '16:19', 'http://callisto/articles/view/22', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/articles', 1451913557, '55222c78d8a5f', '', '', '', ''),
+(7829, 'Mon', '20160104', '16:19', 'http://callisto/articles/view/22', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/articles', 1451913559, '55222c78d8a5f', '', '', '', ''),
+(7830, 'Mon', '20160104', '16:19', 'http://callisto/articles/view/22', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/articles', 1451913560, '55222c78d8a5f', '', '', '', ''),
+(7831, 'Mon', '20160104', '16:19', 'http://callisto/articles', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/articles/view/22', 1451913562, '55222c78d8a5f', '', '', '', ''),
+(7832, 'Mon', '20160104', '16:19', 'http://callisto/articles/view/22', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/articles', 1451913564, '55222c78d8a5f', '', '', '', ''),
+(7833, 'Tue', '20160105', '10:03', 'http://callisto/articles/view/22', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/articles', 1451977389, '55222c78d8a5f', '', '', '', ''),
+(7834, 'Tue', '20160105', '10:03', 'http://callisto/admin/modules', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/modules/create', 1451977391, '55222c78d8a5f', '', '', '', ''),
+(7835, 'Tue', '20160105', '10:55', 'http://callisto/articles/view/22', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/articles', 1451980529, '55222c78d8a5f', '', '', '', ''),
+(7836, 'Tue', '20160105', '10:55', 'http://callisto/admin/modules', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/modules/create', 1451980530, '55222c78d8a5f', '', '', '', ''),
+(7837, 'Tue', '20160105', '17:12', 'http://callisto/articles/view/22', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/articles', 1452003141, '55222c78d8a5f', '', '', '', ''),
+(7838, 'Tue', '20160105', '17:12', 'http://callisto/admin/modules/info/configuration', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/modules/', 1452003150, '55222c78d8a5f', '', '', '', ''),
+(7839, 'Tue', '20160105', '17:12', 'http://callisto/admin/modules/', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/modules/', 1452003155, '55222c78d8a5f', '', '', '', ''),
+(7840, 'Tue', '20160105', '17:12', 'http://callisto/admin/modules/', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/modules/', 1452003159, '55222c78d8a5f', '', '', '', ''),
+(7841, 'Tue', '20160105', '17:12', 'http://callisto/admin/modules/', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/users/login', 1452003162, '55222c78d8a5f', '', '', '', ''),
+(7842, 'Tue', '20160105', '17:12', 'http://callisto/admin/users/login', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/users/login', 1452003165, '55222c78d8a5f', '', '', '', ''),
+(7843, 'Tue', '20160105', '17:12', 'http://callisto/admin/users/login', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/main', 1452003179, '55222c78d8a5f', '', '', '', ''),
+(7844, 'Tue', '20160105', '17:13', 'http://callisto/admin/main', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/configuration/main', 1452003194, '55222c78d8a5f', '', '', '', ''),
+(7845, 'Tue', '20160105', '17:13', 'http://callisto/admin/configuration/main', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/groups', 1452003196, '55222c78d8a5f', '', '', '', ''),
+(7846, 'Tue', '20160105', '17:13', 'http://callisto/admin/groups', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/users/users_list', 1452003198, '55222c78d8a5f', '', '', '', ''),
+(7847, 'Tue', '20160105', '17:13', 'http://callisto/admin/users/users_list', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/permissions', 1452003200, '55222c78d8a5f', '', '', '', ''),
+(7848, 'Tue', '20160105', '17:13', 'http://callisto/admin/permissions', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/menu/menu_list/0', 1452003202, '55222c78d8a5f', '', '', '', ''),
+(7849, 'Tue', '20160105', '17:13', 'http://callisto/admin/menu/menu_list/0', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/modules', 1452003205, '55222c78d8a5f', '', '', '', ''),
+(7850, 'Tue', '20160105', '17:13', 'http://callisto/admin/modules', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/blocks', 1452003207, '55222c78d8a5f', '', '', '', ''),
+(7851, 'Tue', '20160105', '17:15', 'http://callisto/admin/modules', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/blocks', 1452003307, '55222c78d8a5f', '', '', '', ''),
+(7852, 'Tue', '20160105', '17:17', 'http://callisto/admin/modules/create', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/modules', 1452003420, '55222c78d8a5f', '', '', '', ''),
+(7853, 'Tue', '20160105', '17:19', 'http://callisto/admin/modules/create', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/modules', 1452003579, '55222c78d8a5f', '', '', '', ''),
+(7854, 'Tue', '20160105', '17:20', 'http://callisto/admin/modules/create', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/modules', 1452003603, '55222c78d8a5f', '', '', '', ''),
+(7855, 'Tue', '20160105', '17:20', 'http://callisto/admin/modules', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/modules', 1452003609, '55222c78d8a5f', '', '', '', ''),
+(7856, 'Tue', '20160105', '17:20', 'http://callisto/admin/modules', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/modules', 1452003658, '55222c78d8a5f', '', '', '', ''),
+(7857, 'Tue', '20160105', '17:21', 'http://callisto/admin/modules', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/modules', 1452003664, '55222c78d8a5f', '', '', '', ''),
+(7858, 'Tue', '20160105', '17:21', 'http://callisto/admin/modules', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/modules/create', 1452003699, '55222c78d8a5f', '', '', '', ''),
+(7859, 'Tue', '20160105', '17:21', 'http://callisto/admin/modules', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/modules', 1452003703, '55222c78d8a5f', '', '', '', ''),
+(7860, 'Tue', '20160105', '18:10', 'http://callisto/admin/modules', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/groups', 1452006642, '55222c78d8a5f', '', '', '', ''),
+(7861, 'Tue', '20160105', '18:10', 'http://callisto/admin/groups', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/modules', 1452006647, '55222c78d8a5f', '', '', '', ''),
+(7862, 'Tue', '20160105', '18:10', 'http://callisto/admin/modules', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/modules', 1452006653, '55222c78d8a5f', '', '', '', ''),
+(7863, 'Tue', '20160105', '18:11', 'http://callisto/admin/modules', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/modules/info/themes', 1452006664, '55222c78d8a5f', '', '', '', ''),
+(7864, 'Tue', '20160105', '18:11', 'http://callisto/admin/modules', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/modules', 1452006667, '55222c78d8a5f', '', '', '', ''),
+(7865, 'Tue', '20160105', '18:11', 'http://callisto/admin/modules', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/modules/info/users', 1452006670, '55222c78d8a5f', '', '', '', ''),
+(7866, 'Tue', '20160105', '18:11', 'http://callisto/admin/modules', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/modules', 1452006678, '55222c78d8a5f', '', '', '', ''),
+(7867, 'Tue', '20160105', '18:11', 'http://callisto/admin/modules', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/users/users_list', 1452006683, '55222c78d8a5f', '', '', '', ''),
+(7868, 'Tue', '20160105', '18:11', 'http://callisto/admin/users/users_list', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/users/manage/1', 1452006693, '55222c78d8a5f', '', '', '', ''),
+(7869, 'Tue', '20160105', '18:11', 'http://callisto/admin/modules', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/users/users_list', 1452006699, '55222c78d8a5f', '', '', '', ''),
+(7870, 'Tue', '20160105', '18:11', 'http://callisto/admin/users/users_list', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/permissions', 1452006710, '55222c78d8a5f', '', '', '', ''),
+(7871, 'Tue', '20160105', '18:12', 'http://callisto/admin/permissions', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/permissions', 1452006753, '55222c78d8a5f', '', '', '', ''),
+(7872, 'Tue', '20160105', '18:12', 'http://callisto/admin/permissions', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/theme', 1452006775, '55222c78d8a5f', '', '', '', ''),
+(7873, 'Tue', '20160105', '18:13', 'http://callisto/admin/theme', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/theme', 1452006780, '55222c78d8a5f', '', '', '', ''),
+(7874, 'Tue', '20160105', '18:13', 'http://callisto/articles/view/22', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/articles', 1452006782, '55222c78d8a5f', '', '', '', ''),
+(7875, 'Tue', '20160105', '18:13', 'http://callisto/admin/theme', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/theme', 1452006791, '55222c78d8a5f', '', '', '', ''),
+(7876, 'Tue', '20160105', '18:13', 'http://callisto/articles/view/22', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/articles', 1452006795, '55222c78d8a5f', '', '', '', ''),
+(7877, 'Tue', '20160105', '18:13', 'http://callisto/admin/theme', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/articles', 1452006805, '55222c78d8a5f', '', '', '', '');
+INSERT INTO `statistic` (`id`, `day`, `dt`, `tm`, `refer`, `ip`, `proxy`, `host`, `lang`, `user`, `req`, `timestamp`, `userhash`, `robot`, `country`, `region`, `city`) VALUES
+(7878, 'Tue', '20160105', '18:13', 'http://callisto/admin/articles', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/articles?page=2', 1452006809, '55222c78d8a5f', '', '', '', ''),
+(7879, 'Tue', '20160105', '18:13', 'http://callisto/admin/articles?page=2', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/articles?page=1', 1452006812, '55222c78d8a5f', '', '', '', ''),
+(7880, 'Tue', '20160105', '18:17', 'http://callisto/admin/articles?page=1', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/groups', 1452007074, '55222c78d8a5f', '', '', '', ''),
+(7881, 'Tue', '20160105', '18:20', 'http://callisto/admin/groups', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/main', 1452007258, '55222c78d8a5f', '', '', '', ''),
+(7882, 'Tue', '20160105', '18:22', 'http://callisto/admin/main', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/modules', 1452007337, '55222c78d8a5f', '', '', '', ''),
+(7883, 'Tue', '20160105', '18:22', 'http://callisto/admin/modules', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/modules', 1452007343, '55222c78d8a5f', '', '', '', ''),
+(7884, 'Tue', '20160105', '18:48', 'http://callisto/admin/modules', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/modules', 1452008896, '55222c78d8a5f', '', '', '', ''),
+(7885, 'Tue', '20160105', '18:48', 'http://callisto/admin/modules', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/modules', 1452008937, '55222c78d8a5f', '', '', '', ''),
+(7886, 'Tue', '20160105', '18:49', 'http://callisto/admin/modules', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/modules', 1452008942, '55222c78d8a5f', '', '', '', ''),
+(7887, 'Tue', '20160105', '18:49', 'http://callisto/admin/modules', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/users/users_list', 1452008981, '55222c78d8a5f', '', '', '', ''),
+(7888, 'Wed', '20160106', '10:11', 'http://callisto/admin/modules', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/users/users_list', 1452064298, '55222c78d8a5f', '', '', '', ''),
+(7889, 'Wed', '20160106', '10:11', 'http://callisto/articles/view/22', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/articles', 1452064302, '55222c78d8a5f', '', '', '', ''),
+(7890, 'Wed', '20160106', '12:04', 'http://callisto/admin/users/users_list', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/permissions', 1452071078, '55222c78d8a5f', '', '', '', ''),
+(7891, 'Wed', '20160106', '12:04', 'http://callisto/admin/users/users_list', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/menu/menu_list/0', 1452071079, '55222c78d8a5f', '', '', '', ''),
+(7892, 'Wed', '20160106', '12:04', 'http://callisto/admin/menu/menu_list/0', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/menu/menu_list/89', 1452071089, '55222c78d8a5f', '', '', '', ''),
+(7893, 'Wed', '20160106', '12:04', 'http://callisto/admin/menu/menu_list/89', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/menu', 1452071093, '55222c78d8a5f', '', '', '', ''),
+(7894, 'Wed', '20160106', '12:40', 'http://callisto/admin/menu/menu_list/89', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/menu', 1452073252, '55222c78d8a5f', '', '', '', ''),
+(7895, 'Wed', '20160106', '12:40', 'http://callisto/admin/menu', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/groups', 1452073255, '55222c78d8a5f', '', '', '', ''),
+(7896, 'Wed', '20160106', '12:41', 'http://callisto/admin/groups', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/main', 1452073275, '55222c78d8a5f', '', '', '', ''),
+(7897, 'Wed', '20160106', '12:41', 'http://callisto/admin/main', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/main', 1452073278, '55222c78d8a5f', '', '', '', ''),
+(7898, 'Wed', '20160106', '12:46', 'http://callisto/admin/main', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/modules', 1452073594, '55222c78d8a5f', '', '', '', ''),
+(7899, 'Wed', '20160106', '12:48', 'http://callisto/admin/modules', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/modules', 1452073693, '55222c78d8a5f', '', '', '', ''),
+(7900, 'Wed', '20160106', '12:58', 'http://callisto/admin/modules', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/modules', 1452074327, '55222c78d8a5f', '', '', '', ''),
+(7901, 'Wed', '20160106', '13:06', 'http://callisto/admin/modules', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/groups', 1452074819, '55222c78d8a5f', '', '', '', ''),
+(7902, 'Wed', '20160106', '13:07', 'http://callisto/admin/groups', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/groups/manage/2', 1452074826, '55222c78d8a5f', '', '', '', ''),
+(7903, 'Wed', '20160106', '13:07', 'http://callisto/admin/groups/manage/2', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/groups', 1452074834, '55222c78d8a5f', '', '', '', ''),
+(7904, 'Wed', '20160106', '13:16', 'http://callisto/admin/groups', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/modules', 1452075410, '55222c78d8a5f', '', '', '', ''),
+(7905, 'Wed', '20160106', '13:17', 'http://callisto/admin/modules', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/modules', 1452075448, '55222c78d8a5f', '', '', '', ''),
+(7906, 'Wed', '20160106', '13:17', 'http://callisto/admin/modules', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/groups', 1452075472, '55222c78d8a5f', '', '', '', ''),
+(7907, 'Wed', '20160106', '13:18', 'http://callisto/admin/modules', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/groups', 1452075514, '55222c78d8a5f', '', '', '', ''),
+(7908, 'Wed', '20160106', '13:33', 'http://callisto/admin/groups', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/permissions', 1452076418, '55222c78d8a5f', '', '', '', ''),
+(7909, 'Wed', '20160106', '13:33', 'http://callisto/admin/permissions', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/permissions', 1452076439, '55222c78d8a5f', '', '', '', ''),
+(7910, 'Wed', '20160106', '13:34', 'http://callisto/admin/permissions', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/permissions', 1452076468, '55222c78d8a5f', '', '', '', ''),
+(7911, 'Wed', '20160106', '13:35', 'http://callisto/admin/permissions', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/permissions', 1452076503, '55222c78d8a5f', '', '', '', ''),
+(7912, 'Wed', '20160106', '13:35', 'http://callisto/admin/permissions', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/permissions', 1452076507, '55222c78d8a5f', '', '', '', ''),
+(7913, 'Wed', '20160106', '13:35', 'http://callisto/admin/permissions', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/permissions', 1452076513, '55222c78d8a5f', '', '', '', ''),
+(7914, 'Wed', '20160106', '13:35', 'http://callisto/admin/permissions', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/permissions', 1452076519, '55222c78d8a5f', '', '', '', ''),
+(7915, 'Wed', '20160106', '13:36', 'http://callisto/admin/permissions', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/permissions', 1452076563, '55222c78d8a5f', '', '', '', ''),
+(7916, 'Wed', '20160106', '13:36', 'http://callisto/admin/permissions', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/permissions', 1452076567, '55222c78d8a5f', '', '', '', ''),
+(7917, 'Wed', '20160106', '13:36', 'http://callisto/admin/permissions', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/permissions', 1452076572, '55222c78d8a5f', '', '', '', ''),
+(7918, 'Wed', '20160106', '13:36', 'http://callisto/admin/permissions', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/permissions/manage/1', 1452076610, '55222c78d8a5f', '', '', '', ''),
+(7919, 'Wed', '20160106', '13:37', 'http://callisto/admin/permissions/manage/1', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/permissions/permissions_list', 1452076640, '55222c78d8a5f', '', '', '', ''),
+(7920, 'Wed', '20160106', '13:37', 'http://callisto/admin/permissions/permissions_list', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/permissions/manage/18', 1452076645, '55222c78d8a5f', '', '', '', ''),
+(7921, 'Wed', '20160106', '13:38', 'http://callisto/admin/permissions/manage/18', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/permissions/permissions_list', 1452076693, '55222c78d8a5f', '', '', '', ''),
+(7922, 'Wed', '20160106', '13:38', 'http://callisto/admin/permissions/permissions_list', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/permissions/manage/12', 1452076700, '55222c78d8a5f', '', '', '', ''),
+(7923, 'Wed', '20160106', '13:39', 'http://callisto/admin/permissions/manage/12', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/permissions/permissions_list', 1452076741, '55222c78d8a5f', '', '', '', ''),
+(7924, 'Wed', '20160106', '13:39', 'http://callisto/admin/permissions/permissions_list', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/permissions/manage', 1452076762, '55222c78d8a5f', '', '', '', ''),
+(7925, 'Wed', '20160106', '13:39', 'http://callisto/admin/permissions/manage', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/permissions/permissions_list', 1452076767, '55222c78d8a5f', '', '', '', ''),
+(7926, 'Wed', '20160106', '13:39', 'http://callisto/admin/permissions/permissions_list', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/permissions/manage', 1452076771, '55222c78d8a5f', '', '', '', ''),
+(7927, 'Wed', '20160106', '13:39', 'http://callisto/admin/permissions/manage', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/permissions/permissions_list', 1452076774, '55222c78d8a5f', '', '', '', ''),
+(7928, 'Wed', '20160106', '13:39', 'http://callisto/admin/permissions/permissions_list', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/permissions/permissions_list', 1452076781, '55222c78d8a5f', '', '', '', ''),
+(7929, 'Wed', '20160106', '13:43', 'http://callisto/admin/permissions/permissions_list', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/permissions/permissions_list', 1452077019, '55222c78d8a5f', '', '', '', ''),
+(7930, 'Wed', '20160106', '13:43', 'http://callisto/admin/permissions/permissions_list', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/permissions/permissions_list', 1452077028, '55222c78d8a5f', '', '', '', ''),
+(7931, 'Wed', '20160106', '13:43', 'http://callisto/admin/permissions/permissions_list', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/permissions/permissions_list', 1452077030, '55222c78d8a5f', '', '', '', ''),
+(7932, 'Wed', '20160106', '13:47', 'http://callisto/admin/permissions/permissions_list', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/permissions/permissions_list', 1452077278, '55222c78d8a5f', '', '', '', ''),
+(7933, 'Wed', '20160106', '13:48', 'http://callisto/admin/permissions/permissions_list', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/modules', 1452077286, '55222c78d8a5f', '', '', '', ''),
+(7934, 'Wed', '20160106', '13:48', 'http://callisto/admin/permissions/permissions_list', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/modules', 1452077328, '55222c78d8a5f', '', '', '', ''),
+(7935, 'Wed', '20160106', '13:50', 'http://callisto/admin/modules', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/modules', 1452077412, '55222c78d8a5f', '', '', '', ''),
+(7936, 'Wed', '20160106', '13:50', 'http://callisto/admin/modules', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/modules', 1452077430, '55222c78d8a5f', '', '', '', ''),
+(7937, 'Wed', '20160106', '13:51', 'http://callisto/admin/modules', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/modules', 1452077479, '55222c78d8a5f', '', '', '', ''),
+(7938, 'Wed', '20160106', '13:51', 'http://callisto/admin/modules', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/modules', 1452077506, '55222c78d8a5f', '', '', '', ''),
+(7939, 'Wed', '20160106', '13:51', 'http://callisto/admin/modules', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/modules', 1452077508, '55222c78d8a5f', '', '', '', ''),
+(7940, 'Wed', '20160106', '13:52', 'http://callisto/admin/modules', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/modules', 1452077523, '55222c78d8a5f', '', '', '', ''),
+(7941, 'Wed', '20160106', '13:52', 'http://callisto/admin/modules', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/modules', 1452077533, '55222c78d8a5f', '', '', '', ''),
+(7942, 'Wed', '20160106', '13:52', 'http://callisto/admin/modules', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/permissions', 1452077538, '55222c78d8a5f', '', '', '', ''),
+(7943, 'Wed', '20160106', '13:58', 'http://callisto/admin/permissions', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/configuration/main', 1452077936, '55222c78d8a5f', '', '', '', ''),
+(7944, 'Wed', '20160106', '14:00', 'http://callisto/admin/configuration/main', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/groups', 1452078005, '55222c78d8a5f', '', '', '', ''),
+(7945, 'Wed', '20160106', '14:00', 'http://callisto/admin/groups', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/users/users_list', 1452078008, '55222c78d8a5f', '', '', '', ''),
+(7946, 'Wed', '20160106', '14:00', 'http://callisto/admin/users/users_list', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/permissions', 1452078010, '55222c78d8a5f', '', '', '', ''),
+(7947, 'Wed', '20160106', '15:45', 'http://callisto/admin/permissions', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/main', 1452084343, '55222c78d8a5f', '', '', '', ''),
+(7948, 'Wed', '20160106', '15:49', 'http://callisto/admin/permissions', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/main', 1452084598, '55222c78d8a5f', '', '', '', ''),
+(7949, 'Wed', '20160106', '16:01', 'http://callisto/admin/permissions', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/main', 1452085286, '55222c78d8a5f', '', '', '', ''),
+(7950, 'Wed', '20160106', '16:01', 'http://callisto/admin/main', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/configuration/main', 1452085291, '55222c78d8a5f', '', '', '', ''),
+(7951, 'Wed', '20160106', '16:01', 'http://callisto/admin/main', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/configuration/main', 1452085302, '55222c78d8a5f', '', '', '', ''),
+(7952, 'Wed', '20160106', '16:02', 'http://callisto/admin/main', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/configuration/main', 1452085364, '55222c78d8a5f', '', '', '', ''),
+(7953, 'Wed', '20160106', '16:05', 'http://callisto/admin/main', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/configuration/main', 1452085532, '55222c78d8a5f', '', '', '', ''),
+(7954, 'Wed', '20160106', '16:06', 'http://callisto/admin/main', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/configuration/main', 1452085566, '55222c78d8a5f', '', '', '', ''),
+(7955, 'Wed', '20160106', '16:06', 'http://callisto/admin/configuration/main', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/configuration/main', 1452085572, '55222c78d8a5f', '', '', '', ''),
+(7956, 'Wed', '20160106', '16:06', 'http://callisto/admin/configuration/main', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/main', 1452085575, '55222c78d8a5f', '', '', '', ''),
+(7957, 'Wed', '20160106', '16:06', 'http://callisto/admin/main', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/groups', 1452085585, '55222c78d8a5f', '', '', '', ''),
+(7958, 'Wed', '20160106', '16:06', 'http://callisto/admin/groups', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/permissions', 1452085591, '55222c78d8a5f', '', '', '', ''),
+(7959, 'Wed', '20160106', '16:06', 'http://callisto/admin/permissions', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/menu/menu_list/0', 1452085594, '55222c78d8a5f', '', '', '', ''),
+(7960, 'Wed', '20160106', '16:06', 'http://callisto/admin/menu/menu_list/0', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/users/users_list', 1452085596, '55222c78d8a5f', '', '', '', ''),
+(7961, 'Wed', '20160106', '16:06', 'http://callisto/admin/users/users_list', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/groups', 1452085598, '55222c78d8a5f', '', '', '', ''),
+(7962, 'Wed', '20160106', '16:06', 'http://callisto/admin/groups', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/blocks', 1452085605, '55222c78d8a5f', '', '', '', ''),
+(7963, 'Wed', '20160106', '16:06', 'http://callisto/admin/blocks', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/articles', 1452085609, '55222c78d8a5f', '', '', '', ''),
+(7964, 'Wed', '20160106', '16:06', 'http://callisto/admin/articles', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/permissions', 1452085613, '55222c78d8a5f', '', '', '', ''),
+(7965, 'Wed', '20160106', '16:07', 'http://callisto/admin/permissions', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/theme', 1452085620, '55222c78d8a5f', '', '', '', ''),
+(7966, 'Wed', '20160106', '16:07', 'http://callisto/admin/theme', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/groups', 1452085623, '55222c78d8a5f', '', '', '', ''),
+(7967, 'Wed', '20160106', '16:07', 'http://callisto/admin/groups', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/main', 1452085628, '55222c78d8a5f', '', '', '', ''),
+(7968, 'Wed', '20160106', '16:07', 'http://callisto/admin/main', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/configuration/main', 1452085631, '55222c78d8a5f', '', '', '', ''),
+(7969, 'Wed', '20160106', '16:07', 'http://callisto/admin/configuration/main', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/groups', 1452085635, '55222c78d8a5f', '', '', '', ''),
+(7970, 'Wed', '20160106', '16:07', 'http://callisto/admin/groups', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/users/users_list', 1452085637, '55222c78d8a5f', '', '', '', ''),
+(7971, 'Wed', '20160106', '16:07', 'http://callisto/admin/users/users_list', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/help/icons', 1452085639, '55222c78d8a5f', '', '', '', ''),
+(7972, 'Wed', '20160106', '16:09', 'http://callisto/admin/help/icons', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/main', 1452085762, '55222c78d8a5f', '', '', '', ''),
+(7973, 'Wed', '20160106', '16:09', 'http://callisto/admin/main', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/groups', 1452085786, '55222c78d8a5f', '', '', '', ''),
+(7974, 'Wed', '20160106', '16:09', 'http://callisto/admin/groups', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/configuration/main', 1452085788, '55222c78d8a5f', '', '', '', ''),
+(7975, 'Wed', '20160106', '16:09', 'http://callisto/admin/configuration/main', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/main', 1452085791, '55222c78d8a5f', '', '', '', ''),
+(7976, 'Wed', '20160106', '16:09', 'http://callisto/admin/main', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/main', 1452085797, '55222c78d8a5f', '', '', '', ''),
+(7977, 'Wed', '20160106', '16:10', 'http://callisto/admin/main', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/main', 1452085854, '55222c78d8a5f', '', '', '', ''),
+(7978, 'Wed', '20160106', '16:10', 'http://callisto/admin/main', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/configuration/main', 1452085857, '55222c78d8a5f', '', '', '', ''),
+(7979, 'Wed', '20160106', '16:11', 'http://callisto/admin/configuration/main', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/menu/menu_list/0', 1452085868, '55222c78d8a5f', '', '', '', ''),
+(7980, 'Wed', '20160106', '16:11', 'http://callisto/admin/menu/menu_list/0', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/modules', 1452085872, '55222c78d8a5f', '', '', '', ''),
+(7981, 'Wed', '20160106', '16:11', 'http://callisto/admin/modules', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/blocks', 1452085877, '55222c78d8a5f', '', '', '', ''),
+(7982, 'Wed', '20160106', '16:11', 'http://callisto/admin/blocks', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/groups', 1452085880, '55222c78d8a5f', '', '', '', ''),
+(7983, 'Wed', '20160106', '16:11', 'http://callisto/admin/groups', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/users/users_list', 1452085882, '55222c78d8a5f', '', '', '', ''),
+(7984, 'Wed', '20160106', '16:11', 'http://callisto/admin/users/users_list', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/menu/menu_list/0', 1452085883, '55222c78d8a5f', '', '', '', ''),
+(7985, 'Wed', '20160106', '16:11', 'http://callisto/admin/menu/menu_list/0', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/permissions', 1452085884, '55222c78d8a5f', '', '', '', ''),
+(7986, 'Wed', '20160106', '16:11', 'http://callisto/admin/permissions', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/users/users_list', 1452085886, '55222c78d8a5f', '', '', '', ''),
+(7987, 'Wed', '20160106', '16:11', 'http://callisto/admin/users/users_list', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/configuration/main', 1452085894, '55222c78d8a5f', '', '', '', ''),
+(7988, 'Wed', '20160106', '16:11', 'http://callisto/admin/configuration/main', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/permissions', 1452085897, '55222c78d8a5f', '', '', '', ''),
+(7989, 'Wed', '20160106', '16:11', 'http://callisto/admin/permissions', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/modules', 1452085902, '55222c78d8a5f', '', '', '', ''),
+(7990, 'Wed', '20160106', '16:12', 'http://callisto/admin/modules', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/groups', 1452085954, '55222c78d8a5f', '', '', '', ''),
+(7991, 'Wed', '20160106', '16:12', 'http://callisto/admin/groups', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/permissions', 1452085958, '55222c78d8a5f', '', '', '', ''),
+(7992, 'Wed', '20160106', '16:12', 'http://callisto/admin/permissions', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/menu/menu_list/0', 1452085959, '55222c78d8a5f', '', '', '', ''),
+(7993, 'Wed', '20160106', '16:14', 'http://callisto/admin/menu/menu_list/0', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/blocks', 1452086065, '55222c78d8a5f', '', '', '', ''),
+(7994, 'Wed', '20160106', '16:14', 'http://callisto/admin/blocks', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/articles', 1452086070, '55222c78d8a5f', '', '', '', ''),
+(7995, 'Wed', '20160106', '16:14', 'http://callisto/admin/articles', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/groups', 1452086072, '55222c78d8a5f', '', '', '', ''),
+(7996, 'Wed', '20160106', '16:14', 'http://callisto/admin/groups', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/configuration/main', 1452086075, '55222c78d8a5f', '', '', '', ''),
+(7997, 'Wed', '20160106', '16:14', 'http://callisto/admin/configuration/main', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/configuration/main', 1452086078, '55222c78d8a5f', '', '', '', ''),
+(7998, 'Wed', '20160106', '16:14', 'http://callisto/admin/configuration/main', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/groups', 1452086080, '55222c78d8a5f', '', '', '', ''),
+(7999, 'Wed', '20160106', '16:14', 'http://callisto/admin/groups', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/configuration/main', 1452086084, '55222c78d8a5f', '', '', '', ''),
+(8000, 'Wed', '20160106', '16:14', 'http://callisto/admin/configuration/main', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/groups', 1452086088, '55222c78d8a5f', '', '', '', ''),
+(8001, 'Wed', '20160106', '16:14', 'http://callisto/admin/groups', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/users/users_list', 1452086091, '55222c78d8a5f', '', '', '', ''),
+(8002, 'Wed', '20160106', '16:14', 'http://callisto/admin/users/users_list', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/permissions', 1452086094, '55222c78d8a5f', '', '', '', ''),
+(8003, 'Wed', '20160106', '16:16', 'http://callisto/admin/users/users_list', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/permissions', 1452086162, '55222c78d8a5f', '', '', '', ''),
+(8004, 'Wed', '20160106', '16:16', 'http://callisto/admin/permissions', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/configuration/main', 1452086165, '55222c78d8a5f', '', '', '', ''),
+(8005, 'Wed', '20160106', '16:16', 'http://callisto/admin/configuration/main', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/groups', 1452086168, '55222c78d8a5f', '', '', '', ''),
+(8006, 'Wed', '20160106', '16:16', 'http://callisto/admin/groups', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/configuration/main', 1452086170, '55222c78d8a5f', '', '', '', ''),
+(8007, 'Wed', '20160106', '16:16', 'http://callisto/admin/configuration/main', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/users/users_list', 1452086174, '55222c78d8a5f', '', '', '', ''),
+(8008, 'Wed', '20160106', '16:16', 'http://callisto/admin/users/users_list', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/permissions', 1452086176, '55222c78d8a5f', '', '', '', ''),
+(8009, 'Wed', '20160106', '16:16', 'http://callisto/admin/permissions', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/groups', 1452086179, '55222c78d8a5f', '', '', '', ''),
+(8010, 'Wed', '20160106', '16:16', 'http://callisto/admin/groups', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/configuration/main', 1452086181, '55222c78d8a5f', '', '', '', ''),
+(8011, 'Wed', '20160106', '16:16', 'http://callisto/admin/configuration/main', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/main', 1452086184, '55222c78d8a5f', '', '', '', ''),
+(8012, 'Wed', '20160106', '16:16', 'http://callisto/admin/main', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/configuration/main', 1452086188, '55222c78d8a5f', '', '', '', ''),
+(8013, 'Wed', '20160106', '16:16', 'http://callisto/admin/configuration/main', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/groups', 1452086190, '55222c78d8a5f', '', '', '', ''),
+(8014, 'Wed', '20160106', '16:16', 'http://callisto/admin/groups', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/configuration/main', 1452086195, '55222c78d8a5f', '', '', '', ''),
+(8015, 'Wed', '20160106', '16:16', 'http://callisto/admin/configuration/main', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/groups', 1452086197, '55222c78d8a5f', '', '', '', ''),
+(8016, 'Wed', '20160106', '16:16', 'http://callisto/admin/groups', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/permissions', 1452086199, '55222c78d8a5f', '', '', '', ''),
+(8017, 'Wed', '20160106', '16:16', 'http://callisto/admin/permissions', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/menu/menu_list/0', 1452086201, '55222c78d8a5f', '', '', '', ''),
+(8018, 'Wed', '20160106', '16:16', 'http://callisto/admin/menu/menu_list/0', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/modules', 1452086203, '55222c78d8a5f', '', '', '', ''),
+(8019, 'Wed', '20160106', '16:16', 'http://callisto/admin/modules', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/blocks', 1452086205, '55222c78d8a5f', '', '', '', ''),
+(8020, 'Wed', '20160106', '16:16', 'http://callisto/admin/blocks', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/configuration/main', 1452086208, '55222c78d8a5f', '', '', '', ''),
+(8021, 'Wed', '20160106', '16:16', 'http://callisto/admin/configuration/main', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/main', 1452086210, '55222c78d8a5f', '', '', '', ''),
+(8022, 'Wed', '20160106', '16:16', 'http://callisto/admin/main', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/groups', 1452086215, '55222c78d8a5f', '', '', '', ''),
+(8023, 'Wed', '20160106', '16:16', 'http://callisto/admin/groups', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/users/users_list', 1452086217, '55222c78d8a5f', '', '', '', ''),
+(8024, 'Wed', '20160106', '16:16', 'http://callisto/admin/users/users_list', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/permissions', 1452086219, '55222c78d8a5f', '', '', '', ''),
+(8025, 'Wed', '20160106', '16:17', 'http://callisto/admin/permissions', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/configuration/main', 1452086221, '55222c78d8a5f', '', '', '', ''),
+(8026, 'Wed', '20160106', '16:17', 'http://callisto/admin/configuration/main', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/configuration/main', 1452086239, '55222c78d8a5f', '', '', '', ''),
+(8027, 'Wed', '20160106', '16:17', 'http://callisto/admin/configuration/main', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/configuration/main', 1452086243, '55222c78d8a5f', '', '', '', ''),
+(8028, 'Wed', '20160106', '16:17', 'http://callisto/admin/configuration/main', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/users/users_list', 1452086245, '55222c78d8a5f', '', '', '', ''),
+(8029, 'Wed', '20160106', '16:17', 'http://callisto/admin/users/users_list', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/configuration/main', 1452086251, '55222c78d8a5f', '', '', '', ''),
+(8030, 'Wed', '20160106', '16:18', 'http://callisto/admin/configuration/main', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/users/users_list', 1452086280, '55222c78d8a5f', '', '', '', ''),
+(8031, 'Wed', '20160106', '16:18', 'http://callisto/admin/users/users_list', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/articles', 1452086284, '55222c78d8a5f', '', '', '', ''),
+(8032, 'Wed', '20160106', '16:18', 'http://callisto/admin/articles', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/permissions', 1452086287, '55222c78d8a5f', '', '', '', ''),
+(8033, 'Wed', '20160106', '16:18', 'http://callisto/admin/permissions', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/groups', 1452086289, '55222c78d8a5f', '', '', '', ''),
+(8034, 'Wed', '20160106', '16:18', 'http://callisto/admin/groups', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/configuration/main', 1452086291, '55222c78d8a5f', '', '', '', ''),
+(8035, 'Wed', '20160106', '16:18', 'http://callisto/admin/configuration/main', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/configuration/main', 1452086296, '55222c78d8a5f', '', '', '', ''),
+(8036, 'Wed', '20160106', '16:18', 'http://callisto/admin/configuration/main', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/configuration/main', 1452086297, '55222c78d8a5f', '', '', '', ''),
+(8037, 'Wed', '20160106', '16:18', 'http://callisto/admin/configuration/main', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/configuration/main', 1452086302, '55222c78d8a5f', '', '', '', ''),
+(8038, 'Wed', '20160106', '16:18', 'http://callisto/admin/configuration/main', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/main', 1452086305, '55222c78d8a5f', '', '', '', ''),
+(8039, 'Wed', '20160106', '16:18', 'http://callisto/admin/main', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/users/users_list', 1452086307, '55222c78d8a5f', '', '', '', ''),
+(8040, 'Wed', '20160106', '16:18', 'http://callisto/admin/users/users_list', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/permissions', 1452086309, '55222c78d8a5f', '', '', '', ''),
+(8041, 'Wed', '20160106', '16:18', 'http://callisto/admin/permissions', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/configuration/main', 1452086311, '55222c78d8a5f', '', '', '', ''),
+(8042, 'Wed', '20160106', '16:18', 'http://callisto/admin/configuration/main', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/menu/menu_list/0', 1452086313, '55222c78d8a5f', '', '', '', ''),
+(8043, 'Wed', '20160106', '16:18', 'http://callisto/admin/menu/menu_list/0', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/modules', 1452086315, '55222c78d8a5f', '', '', '', ''),
+(8044, 'Wed', '20160106', '16:18', 'http://callisto/admin/modules', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/blocks', 1452086316, '55222c78d8a5f', '', '', '', ''),
+(8045, 'Wed', '20160106', '16:18', 'http://callisto/admin/blocks', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/groups', 1452086319, '55222c78d8a5f', '', '', '', ''),
+(8046, 'Wed', '20160106', '16:18', 'http://callisto/admin/groups', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/configuration/main', 1452086324, '55222c78d8a5f', '', '', '', ''),
+(8047, 'Wed', '20160106', '16:18', 'http://callisto/admin/configuration/main', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/main', 1452086326, '55222c78d8a5f', '', '', '', ''),
+(8048, 'Wed', '20160106', '16:18', 'http://callisto/admin/main', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/users/users_list', 1452086329, '55222c78d8a5f', '', '', '', '');
+INSERT INTO `statistic` (`id`, `day`, `dt`, `tm`, `refer`, `ip`, `proxy`, `host`, `lang`, `user`, `req`, `timestamp`, `userhash`, `robot`, `country`, `region`, `city`) VALUES
+(8049, 'Wed', '20160106', '16:18', 'http://callisto/admin/users/users_list', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/configuration/main', 1452086331, '55222c78d8a5f', '', '', '', ''),
+(8050, 'Wed', '20160106', '16:18', 'http://callisto/admin/configuration/main', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/groups', 1452086335, '55222c78d8a5f', '', '', '', ''),
+(8051, 'Wed', '20160106', '16:18', 'http://callisto/admin/groups', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/permissions', 1452086339, '55222c78d8a5f', '', '', '', ''),
+(8052, 'Wed', '20160106', '16:19', 'http://callisto/admin/permissions', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/blocks', 1452086342, '55222c78d8a5f', '', '', '', ''),
+(8053, 'Wed', '20160106', '16:19', 'http://callisto/admin/blocks', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/main', 1452086345, '55222c78d8a5f', '', '', '', ''),
+(8054, 'Wed', '20160106', '16:19', 'http://callisto/admin/main', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/configuration/main', 1452086346, '55222c78d8a5f', '', '', '', ''),
+(8055, 'Wed', '20160106', '16:19', 'http://callisto/admin/configuration/main', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/groups', 1452086350, '55222c78d8a5f', '', '', '', ''),
+(8056, 'Wed', '20160106', '16:19', 'http://callisto/admin/groups', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/menu/menu_list/0', 1452086353, '55222c78d8a5f', '', '', '', ''),
+(8057, 'Wed', '20160106', '16:19', 'http://callisto/admin/menu/menu_list/0', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/modules', 1452086354, '55222c78d8a5f', '', '', '', ''),
+(8058, 'Wed', '20160106', '16:19', 'http://callisto/admin/modules', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/blocks', 1452086356, '55222c78d8a5f', '', '', '', ''),
+(8059, 'Wed', '20160106', '16:19', 'http://callisto/admin/blocks', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/main', 1452086358, '55222c78d8a5f', '', '', '', ''),
+(8060, 'Wed', '20160106', '16:19', 'http://callisto/admin/main', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/configuration/main', 1452086360, '55222c78d8a5f', '', '', '', ''),
+(8061, 'Wed', '20160106', '16:19', 'http://callisto/admin/configuration/main', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/permissions', 1452086364, '55222c78d8a5f', '', '', '', ''),
+(8062, 'Wed', '20160106', '16:19', 'http://callisto/admin/permissions', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/groups', 1452086384, '55222c78d8a5f', '', '', '', ''),
+(8063, 'Wed', '20160106', '16:19', 'http://callisto/admin/groups', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/main', 1452086395, '55222c78d8a5f', '', '', '', ''),
+(8064, 'Wed', '20160106', '16:19', 'http://callisto/admin/main', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/configuration/main', 1452086399, '55222c78d8a5f', '', '', '', ''),
+(8065, 'Wed', '20160106', '16:20', 'http://callisto/admin/main', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/configuration/main', 1452086401, '55222c78d8a5f', '', '', '', ''),
+(8066, 'Wed', '20160106', '16:20', 'http://callisto/admin/configuration/main', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/configuration/main', 1452086407, '55222c78d8a5f', '', '', '', ''),
+(8067, 'Wed', '20160106', '16:20', 'http://callisto/admin/configuration/main', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/main', 1452086409, '55222c78d8a5f', '', '', '', ''),
+(8068, 'Wed', '20160106', '16:20', 'http://callisto/admin/main', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/configuration/main', 1452086417, '55222c78d8a5f', '', '', '', ''),
+(8069, 'Wed', '20160106', '16:20', 'http://callisto/admin/configuration/main', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/users/users_list', 1452086430, '55222c78d8a5f', '', '', '', ''),
+(8070, 'Wed', '20160106', '16:20', 'http://callisto/admin/users/users_list', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/configuration/main', 1452086442, '55222c78d8a5f', '', '', '', ''),
+(8071, 'Wed', '20160106', '16:31', 'http://callisto/admin/configuration/main', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/configuration/main', 1452087067, '55222c78d8a5f', '', '', '', ''),
+(8072, 'Wed', '20160106', '16:31', 'http://callisto/admin/configuration/main', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/configuration/main', 1452087090, '55222c78d8a5f', '', '', '', ''),
+(8073, 'Wed', '20160106', '16:31', 'http://callisto/admin/configuration/main', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/main', 1452087093, '55222c78d8a5f', '', '', '', ''),
+(8074, 'Wed', '20160106', '16:31', 'http://callisto/admin/main', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/groups', 1452087095, '55222c78d8a5f', '', '', '', ''),
+(8075, 'Wed', '20160106', '16:31', 'http://callisto/admin/groups', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/users/users_list', 1452087097, '55222c78d8a5f', '', '', '', ''),
+(8076, 'Wed', '20160106', '16:31', 'http://callisto/admin/users/users_list', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/configuration/main', 1452087100, '55222c78d8a5f', '', '', '', ''),
+(8077, 'Wed', '20160106', '16:31', 'http://callisto/admin/configuration/main', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/menu/menu_list/0', 1452087116, '55222c78d8a5f', '', '', '', ''),
+(8078, 'Wed', '20160106', '16:31', 'http://callisto/admin/menu/menu_list/0', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/groups', 1452087118, '55222c78d8a5f', '', '', '', ''),
+(8079, 'Wed', '20160106', '16:32', 'http://callisto/admin/groups', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/users/users_list', 1452087120, '55222c78d8a5f', '', '', '', ''),
+(8080, 'Wed', '20160106', '16:32', 'http://callisto/admin/groups', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/users/users_list', 1452087179, '55222c78d8a5f', '', '', '', ''),
+(8081, 'Wed', '20160106', '16:33', 'http://callisto/admin/users/users_list', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/users/users_list', 1452087181, '55222c78d8a5f', '', '', '', ''),
+(8082, 'Wed', '20160106', '16:33', 'http://callisto/admin/users/users_list', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/groups', 1452087183, '55222c78d8a5f', '', '', '', ''),
+(8083, 'Wed', '20160106', '16:36', 'http://callisto/admin/groups', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/users/users_list', 1452087406, '55222c78d8a5f', '', '', '', ''),
+(8084, 'Wed', '20160106', '16:36', 'http://callisto/admin/users/users_list', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/groups', 1452087408, '55222c78d8a5f', '', '', '', ''),
+(8085, 'Wed', '20160106', '16:36', 'http://callisto/admin/groups', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/menu/menu_list/0', 1452087410, '55222c78d8a5f', '', '', '', ''),
+(8086, 'Wed', '20160106', '16:36', 'http://callisto/admin/menu/menu_list/0', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/groups', 1452087412, '55222c78d8a5f', '', '', '', ''),
+(8087, 'Wed', '20160106', '16:36', 'http://callisto/admin/groups', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/users/users_list', 1452087414, '55222c78d8a5f', '', '', '', ''),
+(8088, 'Wed', '20160106', '16:37', 'http://callisto/admin/groups', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/users/users_list', 1452087423, '55222c78d8a5f', '', '', '', ''),
+(8089, 'Wed', '20160106', '16:37', 'http://callisto/admin/users/users_list', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/main', 1452087425, '55222c78d8a5f', '', '', '', ''),
+(8090, 'Wed', '20160106', '16:37', 'http://callisto/admin/main', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/menu/menu_list/0', 1452087427, '55222c78d8a5f', '', '', '', ''),
+(8091, 'Wed', '20160106', '16:37', 'http://callisto/admin/main', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/menu/menu_list/0', 1452087442, '55222c78d8a5f', '', '', '', ''),
+(8092, 'Wed', '20160106', '16:37', 'http://callisto/admin/menu/menu_list/0', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/groups', 1452087444, '55222c78d8a5f', '', '', '', ''),
+(8093, 'Wed', '20160106', '16:37', 'http://callisto/admin/groups', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/configuration/main', 1452087446, '55222c78d8a5f', '', '', '', ''),
+(8094, 'Wed', '20160106', '16:37', 'http://callisto/admin/configuration/main', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/main', 1452087448, '55222c78d8a5f', '', '', '', ''),
+(8095, 'Wed', '20160106', '16:37', 'http://callisto/admin/main', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/menu/menu_list/0', 1452087451, '55222c78d8a5f', '', '', '', ''),
+(8096, 'Wed', '20160106', '16:37', 'http://callisto/admin/menu/menu_list/0', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/main', 1452087455, '55222c78d8a5f', '', '', '', ''),
+(8097, 'Wed', '20160106', '16:37', 'http://callisto/admin/main', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/configuration/main', 1452087464, '55222c78d8a5f', '', '', '', ''),
+(8098, 'Wed', '20160106', '16:37', 'http://callisto/admin/configuration/main', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/groups', 1452087467, '55222c78d8a5f', '', '', '', ''),
+(8099, 'Wed', '20160106', '16:37', 'http://callisto/admin/groups', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/users/users_list', 1452087469, '55222c78d8a5f', '', '', '', ''),
+(8100, 'Wed', '20160106', '16:37', 'http://callisto/admin/users/users_list', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/permissions', 1452087471, '55222c78d8a5f', '', '', '', ''),
+(8101, 'Wed', '20160106', '16:37', 'http://callisto/admin/permissions', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/menu/menu_list/0', 1452087473, '55222c78d8a5f', '', '', '', ''),
+(8102, 'Wed', '20160106', '16:37', 'http://callisto/admin/menu/menu_list/0', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/modules', 1452087474, '55222c78d8a5f', '', '', '', ''),
+(8103, 'Wed', '20160106', '16:37', 'http://callisto/admin/modules', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/blocks', 1452087476, '55222c78d8a5f', '', '', '', ''),
+(8104, 'Wed', '20160106', '16:37', 'http://callisto/admin/blocks', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/main', 1452087478, '55222c78d8a5f', '', '', '', ''),
+(8105, 'Wed', '20160106', '16:38', 'http://callisto/admin/main', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/modules', 1452087482, '55222c78d8a5f', '', '', '', ''),
+(8106, 'Wed', '20160106', '16:38', 'http://callisto/admin/modules', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/main', 1452087485, '55222c78d8a5f', '', '', '', ''),
+(8107, 'Wed', '20160106', '16:38', 'http://callisto/admin/main', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/main', 1452087527, '55222c78d8a5f', '', '', '', ''),
+(8108, 'Wed', '20160106', '16:38', 'http://callisto/admin/main', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/configuration/main', 1452087530, '55222c78d8a5f', '', '', '', ''),
+(8109, 'Wed', '20160106', '16:38', 'http://callisto/admin/configuration/main', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/modules', 1452087535, '55222c78d8a5f', '', '', '', ''),
+(8110, 'Wed', '20160106', '16:39', 'http://callisto/admin/modules', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/permissions', 1452087575, '55222c78d8a5f', '', '', '', ''),
+(8111, 'Wed', '20160106', '16:39', 'http://callisto/admin/permissions', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/users/users_list', 1452087577, '55222c78d8a5f', '', '', '', ''),
+(8112, 'Wed', '20160106', '16:39', 'http://callisto/admin/users/users_list', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/groups', 1452087586, '55222c78d8a5f', '', '', '', ''),
+(8113, 'Wed', '20160106', '16:39', 'http://callisto/admin/groups', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/main', 1452087599, '55222c78d8a5f', '', '', '', ''),
+(8114, 'Wed', '20160106', '16:40', 'http://callisto/admin/main', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/configuration/main', 1452087602, '55222c78d8a5f', '', '', '', ''),
+(8115, 'Wed', '20160106', '16:40', 'http://callisto/admin/configuration/main', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/users/users_list', 1452087611, '55222c78d8a5f', '', '', '', ''),
+(8116, 'Wed', '20160106', '16:40', 'http://callisto/admin/users/users_list', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/configuration/main', 1452087633, '55222c78d8a5f', '', '', '', ''),
+(8117, 'Wed', '20160106', '16:40', 'http://callisto/admin/configuration/main', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/groups', 1452087635, '55222c78d8a5f', '', '', '', ''),
+(8118, 'Wed', '20160106', '16:40', 'http://callisto/admin/groups', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/users/users_list', 1452087636, '55222c78d8a5f', '', '', '', ''),
+(8119, 'Wed', '20160106', '16:41', 'http://callisto/admin/users/users_list', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/configuration/main', 1452087662, '55222c78d8a5f', '', '', '', ''),
+(8120, 'Wed', '20160106', '16:41', 'http://callisto/admin/configuration/main', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/groups', 1452087666, '55222c78d8a5f', '', '', '', ''),
+(8121, 'Wed', '20160106', '16:41', 'http://callisto/admin/configuration/main', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/groups', 1452087698, '55222c78d8a5f', '', '', '', ''),
+(8122, 'Wed', '20160106', '16:41', 'http://callisto/admin/groups', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/configuration/main', 1452087701, '55222c78d8a5f', '', '', '', ''),
+(8123, 'Wed', '20160106', '16:41', 'http://callisto/admin/configuration/main', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/groups', 1452087703, '55222c78d8a5f', '', '', '', ''),
+(8124, 'Wed', '20160106', '16:41', 'http://callisto/admin/groups', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/users/users_list', 1452087708, '55222c78d8a5f', '', '', '', ''),
+(8125, 'Wed', '20160106', '16:41', 'http://callisto/admin/users/users_list', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/permissions', 1452087710, '55222c78d8a5f', '', '', '', ''),
+(8126, 'Wed', '20160106', '16:41', 'http://callisto/admin/permissions', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/menu/menu_list/0', 1452087713, '55222c78d8a5f', '', '', '', ''),
+(8127, 'Wed', '20160106', '16:41', 'http://callisto/admin/menu/menu_list/0', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/modules', 1452087716, '55222c78d8a5f', '', '', '', ''),
+(8128, 'Wed', '20160106', '16:41', 'http://callisto/admin/modules', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/articles', 1452087718, '55222c78d8a5f', '', '', '', ''),
+(8129, 'Wed', '20160106', '16:42', 'http://callisto/admin/articles', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/files', 1452087722, '55222c78d8a5f', '', '', '', ''),
+(8130, 'Wed', '20160106', '16:42', 'http://callisto/admin/files', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/configuration/main', 1452087750, '55222c78d8a5f', '', '', '', ''),
+(8131, 'Wed', '20160106', '16:42', 'http://callisto/admin/configuration/main', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/blocks', 1452087753, '55222c78d8a5f', '', '', '', ''),
+(8132, 'Wed', '20160106', '16:42', 'http://callisto/admin/blocks', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/modules', 1452087755, '55222c78d8a5f', '', '', '', ''),
+(8133, 'Wed', '20160106', '16:42', 'http://callisto/admin/modules', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/articles', 1452087758, '55222c78d8a5f', '', '', '', ''),
+(8134, 'Wed', '20160106', '16:42', 'http://callisto/admin/articles', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/files', 1452087760, '55222c78d8a5f', '', '', '', ''),
+(8135, 'Wed', '20160106', '16:42', 'http://callisto/admin/files', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/users/users_list', 1452087774, '55222c78d8a5f', '', '', '', ''),
+(8136, 'Wed', '20160106', '16:42', 'http://callisto/admin/users/users_list', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/groups', 1452087779, '55222c78d8a5f', '', '', '', ''),
+(8137, 'Wed', '20160106', '16:43', 'http://callisto/admin/groups', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/configuration/main', 1452087783, '55222c78d8a5f', '', '', '', ''),
+(8138, 'Wed', '20160106', '16:43', 'http://callisto/admin/configuration/main', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/main', 1452087785, '55222c78d8a5f', '', '', '', ''),
+(8139, 'Wed', '20160106', '16:43', 'http://callisto/admin/main', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/help/icons', 1452087790, '55222c78d8a5f', '', '', '', ''),
+(8140, 'Wed', '20160106', '16:43', 'http://callisto/admin/help/icons', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/articles', 1452087792, '55222c78d8a5f', '', '', '', ''),
+(8141, 'Wed', '20160106', '16:43', 'http://callisto/admin/articles', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/menu/menu_list/0', 1452087795, '55222c78d8a5f', '', '', '', ''),
+(8142, 'Wed', '20160106', '16:43', 'http://callisto/admin/menu/menu_list/0', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/permissions', 1452087797, '55222c78d8a5f', '', '', '', ''),
+(8143, 'Wed', '20160106', '16:43', 'http://callisto/admin/permissions', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/users/users_list', 1452087798, '55222c78d8a5f', '', '', '', ''),
+(8144, 'Wed', '20160106', '16:43', 'http://callisto/admin/users/users_list', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/groups', 1452087800, '55222c78d8a5f', '', '', '', ''),
+(8145, 'Wed', '20160106', '16:43', 'http://callisto/admin/groups', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/configuration/main', 1452087801, '55222c78d8a5f', '', '', '', ''),
+(8146, 'Wed', '20160106', '16:43', 'http://callisto/admin/configuration/main', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/blocks', 1452087803, '55222c78d8a5f', '', '', '', ''),
+(8147, 'Wed', '20160106', '16:43', 'http://callisto/admin/blocks', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/articles', 1452087804, '55222c78d8a5f', '', '', '', ''),
+(8148, 'Wed', '20160106', '16:43', 'http://callisto/admin/articles', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/articles?page=2', 1452087830, '55222c78d8a5f', '', '', '', ''),
+(8149, 'Wed', '20160106', '16:43', 'http://callisto/admin/articles?page=2', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/articles?page=1', 1452087834, '55222c78d8a5f', '', '', '', ''),
+(8150, 'Wed', '20160106', '16:43', 'http://callisto/admin/articles?page=1', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/articles?page=2', 1452087836, '55222c78d8a5f', '', '', '', ''),
+(8151, 'Wed', '20160106', '16:43', 'http://callisto/admin/articles?page=2', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/articles?page=1', 1452087839, '55222c78d8a5f', '', '', '', ''),
+(8152, 'Wed', '20160106', '16:44', 'http://callisto/admin/articles?page=1', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/articles?page=2', 1452087842, '55222c78d8a5f', '', '', '', ''),
+(8153, 'Wed', '20160106', '16:44', 'http://callisto/admin/articles?page=2', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/main', 1452087846, '55222c78d8a5f', '', '', '', ''),
+(8154, 'Wed', '20160106', '16:45', 'http://callisto/admin/articles?page=2', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/main', 1452087931, '55222c78d8a5f', '', '', '', ''),
+(8155, 'Wed', '20160106', '16:45', 'http://callisto/admin/main', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/users/users_list', 1452087958, '55222c78d8a5f', '', '', '', ''),
+(8156, 'Wed', '20160106', '16:45', 'http://callisto/admin/users/users_list', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/groups', 1452087959, '55222c78d8a5f', '', '', '', ''),
+(8157, 'Wed', '20160106', '16:46', 'http://callisto/admin/groups', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/configuration/main', 1452087976, '55222c78d8a5f', '', '', '', ''),
+(8158, 'Wed', '20160106', '16:46', 'http://callisto/admin/configuration/main', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/permissions', 1452087979, '55222c78d8a5f', '', '', '', ''),
+(8159, 'Wed', '20160106', '16:46', 'http://callisto/admin/permissions', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/modules', 1452087984, '55222c78d8a5f', '', '', '', ''),
+(8160, 'Wed', '20160106', '16:46', 'http://callisto/admin/modules', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/users/users_list', 1452087987, '55222c78d8a5f', '', '', '', ''),
+(8161, 'Wed', '20160106', '16:46', 'http://callisto/admin/users/users_list', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/groups', 1452087989, '55222c78d8a5f', '', '', '', ''),
+(8162, 'Wed', '20160106', '16:46', 'http://callisto/admin/groups', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/configuration/main', 1452087990, '55222c78d8a5f', '', '', '', ''),
+(8163, 'Wed', '20160106', '16:46', 'http://callisto/admin/configuration/main', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/main', 1452087992, '55222c78d8a5f', '', '', '', ''),
+(8164, 'Wed', '20160106', '16:46', 'http://callisto/admin/main', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/articles', 1452088018, '55222c78d8a5f', '', '', '', ''),
+(8165, 'Wed', '20160106', '16:47', 'http://callisto/admin/articles', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/main', 1452088032, '55222c78d8a5f', '', '', '', ''),
+(8166, 'Wed', '20160106', '16:47', 'http://callisto/admin/main', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/configuration/main', 1452088033, '55222c78d8a5f', '', '', '', ''),
+(8167, 'Wed', '20160106', '16:58', 'http://callisto/admin/configuration/main', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/users/users_list', 1452088706, '55222c78d8a5f', '', '', '', ''),
+(8168, 'Wed', '20160106', '16:58', 'http://callisto/admin/configuration/main', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/users/users_list', 1452088732, '55222c78d8a5f', '', '', '', ''),
+(8169, 'Wed', '20160106', '16:59', 'http://callisto/admin/users/users_list', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/configuration/main', 1452088752, '55222c78d8a5f', '', '', '', ''),
+(8170, 'Wed', '20160106', '16:59', 'http://callisto/admin/configuration/main', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/groups', 1452088754, '55222c78d8a5f', '', '', '', ''),
+(8171, 'Wed', '20160106', '16:59', 'http://callisto/admin/groups', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/users/users_list', 1452088756, '55222c78d8a5f', '', '', '', ''),
+(8172, 'Wed', '20160106', '16:59', 'http://callisto/admin/users/users_list', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/permissions', 1452088757, '55222c78d8a5f', '', '', '', ''),
+(8173, 'Wed', '20160106', '16:59', 'http://callisto/admin/permissions', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/menu/menu_list/0', 1452088759, '55222c78d8a5f', '', '', '', ''),
+(8174, 'Wed', '20160106', '16:59', 'http://callisto/admin/menu/menu_list/0', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/modules', 1452088760, '55222c78d8a5f', '', '', '', ''),
+(8175, 'Wed', '20160106', '16:59', 'http://callisto/admin/modules', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/blocks', 1452088762, '55222c78d8a5f', '', '', '', ''),
+(8176, 'Wed', '20160106', '16:59', 'http://callisto/admin/blocks', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/theme', 1452088764, '55222c78d8a5f', '', '', '', ''),
+(8177, 'Wed', '20160106', '16:59', 'http://callisto/admin/theme', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/files', 1452088766, '55222c78d8a5f', '', '', '', ''),
+(8178, 'Wed', '20160106', '17:05', 'http://callisto/admin/files', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/users/users_list', 1452089120, '55222c78d8a5f', '', '', '', ''),
+(8179, 'Wed', '20160106', '17:05', 'http://callisto/admin/users/users_list', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/configuration/main', 1452089122, '55222c78d8a5f', '', '', '', ''),
+(8180, 'Wed', '20160106', '17:05', 'http://callisto/admin/configuration/main', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/main', 1452089124, '55222c78d8a5f', '', '', '', ''),
+(8181, 'Wed', '20160106', '17:05', 'http://callisto/admin/main', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/configuration/main', 1452089127, '55222c78d8a5f', '', '', '', ''),
+(8182, 'Wed', '20160106', '17:07', 'http://callisto/admin/configuration/main', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/permissions', 1452089228, '55222c78d8a5f', '', '', '', ''),
+(8183, 'Wed', '20160106', '17:07', 'http://callisto/admin/permissions', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/users/users_list', 1452089230, '55222c78d8a5f', '', '', '', ''),
+(8184, 'Wed', '20160106', '17:07', 'http://callisto/admin/users/users_list', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/groups', 1452089232, '55222c78d8a5f', '', '', '', ''),
+(8185, 'Wed', '20160106', '17:07', 'http://callisto/admin/groups', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/configuration/main', 1452089234, '55222c78d8a5f', '', '', '', ''),
+(8186, 'Wed', '20160106', '17:07', 'http://callisto/admin/configuration/main', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/groups', 1452089236, '55222c78d8a5f', '', '', '', ''),
+(8187, 'Wed', '20160106', '17:07', 'http://callisto/admin/groups', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/users/users_list', 1452089238, '55222c78d8a5f', '', '', '', ''),
+(8188, 'Wed', '20160106', '17:07', 'http://callisto/admin/users/users_list', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/permissions', 1452089239, '55222c78d8a5f', '', '', '', ''),
+(8189, 'Wed', '20160106', '17:07', 'http://callisto/admin/permissions', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/modules', 1452089269, '55222c78d8a5f', '', '', '', ''),
+(8190, 'Wed', '20160106', '17:07', 'http://callisto/admin/modules', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/menu/menu_list/0', 1452089270, '55222c78d8a5f', '', '', '', ''),
+(8191, 'Wed', '20160106', '17:13', 'http://callisto/admin/modules', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/menu/menu_list/0', 1452089607, '55222c78d8a5f', '', '', '', ''),
+(8192, 'Wed', '20160106', '17:20', 'http://callisto/admin/menu/menu_list/0', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/configuration/main', 1452090008, '55222c78d8a5f', '', '', '', ''),
+(8193, 'Wed', '20160106', '17:20', 'http://callisto/admin/configuration/main', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/menu/menu_list/0', 1452090015, '55222c78d8a5f', '', '', '', ''),
+(8194, 'Wed', '20160106', '17:20', 'http://callisto/admin/menu/menu_list/0', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/modules', 1452090018, '55222c78d8a5f', '', '', '', ''),
+(8195, 'Wed', '20160106', '17:20', 'http://callisto/admin/modules', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/modules', 1452090026, '55222c78d8a5f', '', '', '', ''),
+(8196, 'Wed', '20160106', '17:20', 'http://callisto/admin/modules', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/configuration/main', 1452090031, '55222c78d8a5f', '', '', '', ''),
+(8197, 'Wed', '20160106', '17:33', 'http://callisto/admin/configuration/main', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/configuration/main', 1452090818, '55222c78d8a5f', '', '', '', ''),
+(8198, 'Wed', '20160106', '17:33', 'http://callisto/admin/configuration/main', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/groups', 1452090820, '55222c78d8a5f', '', '', '', ''),
+(8199, 'Wed', '20160106', '17:33', 'http://callisto/admin/groups', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/users/users_list', 1452090822, '55222c78d8a5f', '', '', '', ''),
+(8200, 'Wed', '20160106', '17:33', 'http://callisto/admin/users/users_list', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/permissions', 1452090823, '55222c78d8a5f', '', '', '', ''),
+(8201, 'Wed', '20160106', '17:33', 'http://callisto/admin/permissions', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/menu/menu_list/0', 1452090825, '55222c78d8a5f', '', '', '', ''),
+(8202, 'Wed', '20160106', '17:58', 'http://callisto/admin/menu/menu_list/0', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/menu/menu_list/0', 1452092318, '55222c78d8a5f', '', '', '', ''),
+(8203, 'Wed', '20160106', '17:58', 'http://callisto/admin/menu/menu_list/0', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/modules', 1452092320, '55222c78d8a5f', '', '', '', ''),
+(8204, 'Wed', '20160106', '17:58', 'http://callisto/admin/modules', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/modules', 1452092330, '55222c78d8a5f', '', '', '', ''),
+(8205, 'Wed', '20160106', '17:58', 'http://callisto/admin/modules', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/menu/menu_list/0', 1452092335, '55222c78d8a5f', '', '', '', ''),
+(8206, 'Wed', '20160106', '17:58', 'http://callisto/admin/menu/menu_list/0', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/menu/menu_list/1', 1452092339, '55222c78d8a5f', '', '', '', ''),
+(8207, 'Wed', '20160106', '17:59', 'http://callisto/articles/view/22', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/articles', 1452092347, '55222c78d8a5f', '', '', '', ''),
+(8208, 'Wed', '20160106', '17:59', 'http://callisto/admin/menu/menu_list/1', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/blocks', 1452092368, '55222c78d8a5f', '', '', '', ''),
+(8209, 'Wed', '20160106', '17:59', 'http://callisto/admin/menu/menu_list/1', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/blocks', 1452092384, '55222c78d8a5f', '', '', '', ''),
+(8210, 'Wed', '20160106', '18:00', 'http://callisto/admin/menu/menu_list/1', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/blocks', 1452092434, '55222c78d8a5f', '', '', '', ''),
+(8211, 'Wed', '20160106', '18:00', 'http://callisto/admin/blocks', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/permissions', 1452092448, '55222c78d8a5f', '', '', '', ''),
+(8212, 'Wed', '20160106', '18:00', 'http://callisto/admin/permissions', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/users/users_list', 1452092452, '55222c78d8a5f', '', '', '', ''),
+(8213, 'Wed', '20160106', '18:00', 'http://callisto/admin/users/users_list', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/groups', 1452092455, '55222c78d8a5f', '', '', '', ''),
+(8214, 'Wed', '20160106', '18:00', 'http://callisto/admin/groups', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/configuration/main', 1452092457, '55222c78d8a5f', '', '', '', ''),
+(8215, 'Wed', '20160106', '18:00', 'http://callisto/admin/configuration/main', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/groups', 1452092459, '55222c78d8a5f', '', '', '', ''),
+(8216, 'Wed', '20160106', '18:01', 'http://callisto/admin/groups', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/users/users_list', 1452092461, '55222c78d8a5f', '', '', '', ''),
+(8217, 'Mon', '20160111', '10:13', 'http://callisto/admin/groups', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/users/users_list', 1452496432, '55222c78d8a5f', '', '', '', ''),
+(8218, 'Mon', '20160111', '10:13', 'http://callisto/articles/view/22', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/articles', 1452496437, '55222c78d8a5f', '', '', '', ''),
+(8219, 'Mon', '20160111', '11:19', 'http://callisto/admin/groups', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/users/users_list', 1452500347, '55222c78d8a5f', '', '', '', ''),
+(8220, 'Mon', '20160111', '11:19', 'http://callisto/articles/view/22', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/articles', 1452500349, '55222c78d8a5f', '', '', '', '');
+INSERT INTO `statistic` (`id`, `day`, `dt`, `tm`, `refer`, `ip`, `proxy`, `host`, `lang`, `user`, `req`, `timestamp`, `userhash`, `robot`, `country`, `region`, `city`) VALUES
+(8221, 'Mon', '20160111', '12:22', 'http://callisto/articles', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/articles/view/22', 1452504137, '55222c78d8a5f', '', '', '', ''),
+(8222, 'Mon', '20160111', '12:22', 'http://callisto/articles/view/22', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/articles', 1452504145, '55222c78d8a5f', '', '', '', ''),
+(8223, 'Mon', '20160111', '12:23', 'http://callisto/articles', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/', 1452504227, '55222c78d8a5f', '', '', '', ''),
+(8224, 'Mon', '20160111', '12:23', 'http://callisto/articles', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/', 1452504231, '55222c78d8a5f', '', '', '', ''),
+(8225, 'Mon', '20160111', '12:24', NULL, '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/articles', 1452504241, '55222c78d8a5f', '', '', '', ''),
+(8226, 'Mon', '20160111', '12:58', 'http://callisto/admin/users/users_list', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/menu/menu_list/0', 1452506324, '55222c78d8a5f', '', '', '', ''),
+(8227, 'Mon', '20160111', '12:58', 'http://callisto/admin/menu/menu_list/0', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/menu/menu_list/0', 1452506329, '55222c78d8a5f', '', '', '', ''),
+(8228, 'Mon', '20160111', '12:58', 'http://callisto/admin/menu/menu_list/0', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/menu/menu_list/1', 1452506332, '55222c78d8a5f', '', '', '', ''),
+(8229, 'Mon', '20160111', '12:59', 'http://callisto/admin/menu/menu_list/1', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/articles', 1452506341, '55222c78d8a5f', '', '', '', ''),
+(8230, 'Mon', '20160111', '12:59', 'http://callisto/articles', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/articles/view/1', 1452506344, '55222c78d8a5f', '', '', '', ''),
+(8231, 'Mon', '20160111', '12:59', 'http://callisto/articles/view/1', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/articles', 1452506347, '55222c78d8a5f', '', '', '', ''),
+(8232, 'Mon', '20160111', '12:59', 'http://callisto/articles', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/articles', 1452506376, '55222c78d8a5f', '', '', '', ''),
+(8233, 'Mon', '20160111', '12:59', 'http://callisto/articles', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/', 1452506381, '55222c78d8a5f', '', '', '', ''),
+(8234, 'Mon', '20160111', '12:59', 'http://callisto/', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/', 1452506383, '55222c78d8a5f', '', '', '', ''),
+(8235, 'Mon', '20160111', '12:59', 'http://callisto/', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/', 1452506388, '55222c78d8a5f', '', '', '', ''),
+(8236, 'Mon', '20160111', '13:00', 'http://callisto/', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/', 1452506413, '55222c78d8a5f', '', '', '', ''),
+(8237, 'Mon', '20160111', '13:00', 'http://callisto/', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/', 1452506417, '55222c78d8a5f', '', '', '', ''),
+(8238, 'Mon', '20160111', '13:00', NULL, '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/main', 1452506433, '55222c78d8a5f', '', '', '', ''),
+(8239, 'Mon', '20160111', '13:00', 'http://callisto/admin/main', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/permissions', 1452506437, '55222c78d8a5f', '', '', '', ''),
+(8240, 'Mon', '20160111', '13:00', 'http://callisto/admin/permissions', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/menu/menu_list/0', 1452506439, '55222c78d8a5f', '', '', '', ''),
+(8241, 'Mon', '20160111', '13:00', 'http://callisto/admin/menu/menu_list/0', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/menu/menu_list/1', 1452506442, '55222c78d8a5f', '', '', '', ''),
+(8242, 'Mon', '20160111', '13:00', 'http://callisto/admin/menu/menu_list/1', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/blocks', 1452506452, '55222c78d8a5f', '', '', '', ''),
+(8243, 'Mon', '20160111', '13:14', 'http://callisto/admin/blocks', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/blocks', 1452507293, '55222c78d8a5f', '', '', '', ''),
+(8244, 'Mon', '20160111', '13:14', 'http://callisto/admin/blocks', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/blocks', 1452507295, '55222c78d8a5f', '', '', '', ''),
+(8245, 'Mon', '20160111', '13:15', 'http://callisto/admin/blocks', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/blocks', 1452507304, '55222c78d8a5f', '', '', '', ''),
+(8246, 'Mon', '20160111', '13:15', 'http://callisto/admin/blocks', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/blocks', 1452507307, '55222c78d8a5f', '', '', '', ''),
+(8247, 'Mon', '20160111', '13:15', 'http://callisto/admin/blocks', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/blocks', 1452507312, '55222c78d8a5f', '', '', '', ''),
+(8248, 'Mon', '20160111', '13:15', 'http://callisto/admin/blocks', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/blocks', 1452507315, '55222c78d8a5f', '', '', '', ''),
+(8249, 'Mon', '20160111', '13:15', 'http://callisto/admin/blocks', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/blocks', 1452507321, '55222c78d8a5f', '', '', '', ''),
+(8250, 'Mon', '20160111', '13:15', 'http://callisto/admin/blocks', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/blocks', 1452507324, '55222c78d8a5f', '', '', '', ''),
+(8251, 'Mon', '20160111', '13:15', 'http://callisto/admin/blocks', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/blocks', 1452507333, '55222c78d8a5f', '', '', '', ''),
+(8252, 'Mon', '20160111', '13:15', 'http://callisto/admin/blocks', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/blocks', 1452507347, '55222c78d8a5f', '', '', '', ''),
+(8253, 'Mon', '20160111', '13:16', 'http://callisto/admin/blocks', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/blocks/modify/71', 1452507380, '55222c78d8a5f', '', '', '', ''),
+(8254, 'Mon', '20160111', '13:16', 'http://callisto/admin/blocks', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/blocks', 1452507383, '55222c78d8a5f', '', '', '', ''),
+(8255, 'Mon', '20160111', '15:44', 'http://callisto/admin/blocks', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/blocks/modify/61', 1452516290, '55222c78d8a5f', '', '', '', ''),
+(8256, 'Mon', '20160111', '15:45', 'http://callisto/admin/blocks/modify/61', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/blocks/modify/61', 1452516302, '55222c78d8a5f', '', '', '', ''),
+(8257, 'Mon', '20160111', '15:45', 'http://callisto/admin/blocks/modify/61', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/main', 1452516307, '55222c78d8a5f', '', '', '', ''),
+(8258, 'Mon', '20160111', '15:45', NULL, '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/', 1452516311, '55222c78d8a5f', '', '', '', ''),
+(8259, 'Mon', '20160111', '15:45', 'http://callisto/', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/', 1452516313, '55222c78d8a5f', '', '', '', ''),
+(8260, 'Mon', '20160111', '15:45', 'http://callisto/', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/', 1452516316, '55222c78d8a5f', '', '', '', ''),
+(8261, 'Mon', '20160111', '15:45', 'http://callisto/', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/articles', 1452516317, '55222c78d8a5f', '', '', '', ''),
+(8262, 'Mon', '20160111', '15:45', 'http://callisto/articles', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/', 1452516318, '55222c78d8a5f', '', '', '', ''),
+(8263, 'Mon', '20160111', '15:45', 'http://callisto/', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/articles', 1452516319, '55222c78d8a5f', '', '', '', ''),
+(8264, 'Mon', '20160111', '15:45', 'http://callisto/articles', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/', 1452516320, '55222c78d8a5f', '', '', '', ''),
+(8265, 'Mon', '20160111', '15:45', 'http://callisto/', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/articles', 1452516321, '55222c78d8a5f', '', '', '', ''),
+(8266, 'Mon', '20160111', '15:45', 'http://callisto/articles', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/', 1452516322, '55222c78d8a5f', '', '', '', ''),
+(8267, 'Mon', '20160111', '15:45', 'http://callisto/', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/articles', 1452516323, '55222c78d8a5f', '', '', '', ''),
+(8268, 'Mon', '20160111', '15:45', 'http://callisto/articles', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/articles/view/22', 1452516326, '55222c78d8a5f', '', '', '', ''),
+(8269, 'Mon', '20160111', '15:45', 'http://callisto/articles/view/22', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/articles', 1452516328, '55222c78d8a5f', '', '', '', ''),
+(8270, 'Mon', '20160111', '15:45', 'http://callisto/articles', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/articles/view/22', 1452516330, '55222c78d8a5f', '', '', '', ''),
+(8271, 'Mon', '20160111', '15:45', 'http://callisto/articles/view/22', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/articles', 1452516335, '55222c78d8a5f', '', '', '', ''),
+(8272, 'Mon', '20160111', '15:45', 'http://callisto/articles', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/articles/view/22', 1452516337, '55222c78d8a5f', '', '', '', ''),
+(8273, 'Mon', '20160111', '15:46', 'http://callisto/articles/view/22', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/articles', 1452516374, '55222c78d8a5f', '', '', '', ''),
+(8274, 'Mon', '20160111', '15:46', 'http://callisto/articles', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/', 1452516376, '55222c78d8a5f', '', '', '', ''),
+(8275, 'Mon', '20160111', '15:46', 'http://callisto/', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/', 1452516377, '55222c78d8a5f', '', '', '', ''),
+(8276, 'Mon', '20160111', '15:46', 'http://callisto/', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/articles', 1452516377, '55222c78d8a5f', '', '', '', ''),
+(8277, 'Mon', '20160111', '15:46', 'http://callisto/articles', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/', 1452516378, '55222c78d8a5f', '', '', '', ''),
+(8278, 'Mon', '20160111', '15:46', 'http://callisto/', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/articles', 1452516379, '55222c78d8a5f', '', '', '', ''),
+(8279, 'Mon', '20160111', '15:46', 'http://callisto/articles', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/articles', 1452516383, '55222c78d8a5f', '', '', '', ''),
+(8280, 'Mon', '20160111', '15:46', 'http://callisto/articles', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/', 1452516384, '55222c78d8a5f', '', '', '', ''),
+(8281, 'Mon', '20160111', '15:46', 'http://callisto/', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/articles', 1452516385, '55222c78d8a5f', '', '', '', ''),
+(8282, 'Tue', '20160112', '10:06', 'http://callisto/', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/articles', 1452582399, '55222c78d8a5f', '', '', '', ''),
+(8283, 'Tue', '20160112', '10:06', 'http://callisto/admin/blocks/modify/61', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/admin/blocks/modify/61', 1452582399, '55222c78d8a5f', '', '', '', ''),
+(8284, 'Tue', '20160112', '18:08', 'http://callisto/articles', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/', 1452611316, '55222c78d8a5f', '', '', '', ''),
+(8285, 'Tue', '20160112', '18:08', 'http://callisto/', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/articles', 1452611323, '55222c78d8a5f', '', '', '', ''),
+(8286, 'Tue', '20160112', '18:09', 'http://callisto/articles', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/articles/view/1', 1452611351, '55222c78d8a5f', '', '', '', ''),
+(8287, 'Tue', '20160112', '18:09', 'http://callisto/articles/view/1', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/articles', 1452611361, '55222c78d8a5f', '', '', '', ''),
+(8288, 'Tue', '20160112', '18:09', 'http://callisto/articles', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/articles/view/22', 1452611363, '55222c78d8a5f', '', '', '', ''),
+(8289, 'Tue', '20160112', '18:09', 'http://callisto/articles/view/22', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/articles', 1452611366, '55222c78d8a5f', '', '', '', ''),
+(8290, 'Tue', '20160112', '18:09', 'http://callisto/articles', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/articles/view/22', 1452611367, '55222c78d8a5f', '', '', '', ''),
+(8291, 'Tue', '20160112', '18:09', 'http://callisto/articles/view/22', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/articles', 1452611378, '55222c78d8a5f', '', '', '', ''),
+(8292, 'Tue', '20160112', '18:09', 'http://callisto/articles', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/articles/view/22', 1452611380, '55222c78d8a5f', '', '', '', ''),
+(8293, 'Tue', '20160112', '18:09', 'http://callisto/articles/view/22', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/articles', 1452611399, '55222c78d8a5f', '', '', '', ''),
+(8294, 'Tue', '20160112', '18:12', 'http://callisto/articles', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/articles/view/22', 1452611572, '55222c78d8a5f', '', '', '', ''),
+(8295, 'Tue', '20160112', '18:18', 'http://callisto/articles/view/22', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/articles', 1452611905, '55222c78d8a5f', '', '', '', ''),
+(8296, 'Tue', '20160112', '18:18', 'http://callisto/articles', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/articles/view/22', 1452611907, '55222c78d8a5f', '', '', '', ''),
+(8297, 'Tue', '20160112', '18:18', 'http://callisto/articles/view/22', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/articles', 1452611925, '55222c78d8a5f', '', '', '', ''),
+(8298, 'Tue', '20160112', '18:18', 'http://callisto/articles', '127.0.0.1', NULL, '127.0.0.1', 'ru', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36', '/articles/view/22', 1452611928, '55222c78d8a5f', '', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -51283,45 +51998,25 @@ INSERT INTO `test_task` (`id`, `field_1`, `field_2`, `field_3`, `field_4`, `fiel
 --
 
 CREATE TABLE IF NOT EXISTS `theme` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `id` int(11) unsigned NOT NULL,
   `theme_name` varchar(100) DEFAULT NULL,
   `theme_description` varchar(200) DEFAULT NULL,
   `active` tinyint(4) DEFAULT '0',
   `theme_last_update` int(11) unsigned DEFAULT NULL,
   `theme_title` varchar(100) DEFAULT NULL,
   `theme_version` varchar(20) DEFAULT NULL,
-  `theme_author` varchar(60) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `id` (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=57 ;
+  `theme_author` varchar(60) DEFAULT NULL
+) ENGINE=MyISAM AUTO_INCREMENT=59 DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `theme`
 --
 
 INSERT INTO `theme` (`id`, `theme_name`, `theme_description`, `active`, `theme_last_update`, `theme_title`, `theme_version`, `theme_author`) VALUES
-(47, 'blog_theme', 'Blog Theme', 0, 1396334203, 'Blog Theme', '1.0.0.1', 'Ruslan Atamas'),
-(17, 'green', 'Green Theme', 1, 1384270019, 'Green', '1.0.0.1', 'Ruslan Atamas'),
-(55, 'blue', 'Blue Theme', 0, 1444401786, 'Blue', '1.0.0.1', 'Ruslan Atamas'),
-(56, 'bootstrap', 'Bootstarp Theme', 0, 1444401939, 'Bootstarp', '1.0.0.1', 'Ruslan Atamas');
-
--- --------------------------------------------------------
-
---
--- Структура таблицы `tttt`
---
-
-CREATE TABLE IF NOT EXISTS `tttt` (
-  `id` int(11) DEFAULT NULL,
-  `name` varchar(20) DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
---
--- Дамп данных таблицы `tttt`
---
-
-INSERT INTO `tttt` (`id`, `name`) VALUES
-(5, 'gfdgdgdfg');
+(47, 'blog_theme', 'Blog Theme', 1, 1396334203, 'Blog Theme', '1.0.0.1', 'Ruslan Atamas'),
+(17, 'green', 'Green Theme', 0, 1384270019, 'Green', '1.0.0.1', 'Ruslan Atamas'),
+(58, 'blue', 'Blue Theme', 0, 1475163200, 'Blue', '1.0.0.1', 'Ruslan Atamas'),
+(57, 'bootstrap', 'Bootstarp Theme', 0, 1455010444, 'Bootstarp', '1.0.0.1', 'Ruslan Atamas');
 
 -- --------------------------------------------------------
 
@@ -51330,30 +52025,401 @@ INSERT INTO `tttt` (`id`, `name`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `user` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `id` int(11) unsigned NOT NULL,
   `gid` int(11) unsigned NOT NULL,
   `login` varchar(20) DEFAULT NULL,
   `pass` varchar(40) DEFAULT NULL,
-  `active` enum('0','1') NOT NULL DEFAULT '0',
+  `active` enum('1','0') NOT NULL DEFAULT '0',
   `addtime` int(11) unsigned DEFAULT NULL,
   `last_visit` int(11) unsigned DEFAULT NULL,
   `mail` varchar(40) DEFAULT NULL,
-  `displayname` varchar(50) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `id` (`id`),
-  KEY `pass` (`pass`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=24 ;
+  `displayname` varchar(50) DEFAULT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `user`
 --
 
 INSERT INTO `user` (`id`, `gid`, `login`, `pass`, `active`, `addtime`, `last_visit`, `mail`, `displayname`) VALUES
-(3, 1, 'www', '96e79218965eb72c92a549dd5a330112', '1', 1320340312, 1320340312, 'stelss007@rambler.ru', 'wew'),
-(4, 2, 'aaa', '698d51a19d8a121ce581499d7b701668', '1', 1322259668, 1322259668, 'stelss@rambler.ru', NULL),
-(8, 2, '2222', '934b535800b1cba8f96a5d72f72f1611', '1', 1322345001, 1322345001, 'sss@dddd.ru', '3333'),
-(9, 2, '000111', 'c6f057b86584942e415435ffb1fa93d4', '1', 1322398476, 1322398476, '222@fff.ru', 'Ruslan');
+(1, 1, 'admin', '21232f297a57a5a743894a0e4a801fc3', '1', 1452077411, 0, 'stelss1986@gmail.com', 'Administrator');
 
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `user_bank_info`
+--
+
+CREATE TABLE IF NOT EXISTS `user_bank_info` (
+  `id` int(11) unsigned NOT NULL,
+  `user_id` int(11) unsigned NOT NULL,
+  `pin` varchar(32) DEFAULT NULL,
+  `phone` varchar(16) DEFAULT NULL,
+  `mime` varchar(16) DEFAULT NULL,
+  `email` varchar(160) DEFAULT NULL,
+  `first_name` varchar(60) DEFAULT NULL,
+  `last_name` varchar(60) DEFAULT NULL,
+  `middle_name` varchar(60) DEFAULT NULL,
+  `displayname` varchar(50) DEFAULT NULL,
+  `postal` varchar(20) DEFAULT NULL,
+  `country` varchar(3) DEFAULT NULL,
+  `city` varchar(100) DEFAULT NULL,
+  `address` varchar(300) DEFAULT NULL,
+  `active` enum('1','0') NOT NULL DEFAULT '0',
+  `addtime` int(11) unsigned DEFAULT NULL,
+  `balance` int(11) unsigned DEFAULT '0'
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+--
+-- Дамп данных таблицы `user_bank_info`
+--
+
+INSERT INTO `user_bank_info` (`id`, `user_id`, `pin`, `phone`, `mime`, `email`, `first_name`, `last_name`, `middle_name`, `displayname`, `postal`, `country`, `city`, `address`, `active`, `addtime`, `balance`) VALUES
+(1, 1, '96e79218965eb72c92a549dd5a330112', '0978803826', '1212122121', 'stelss1986@gmail.com', 'Ruslan', 'Atamas', NULL, 'Rus', '18000', 'UA', 'Cherkassy', 'Street 16', '1', NULL, 500);
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `user_bank_transaction`
+--
+
+CREATE TABLE IF NOT EXISTS `user_bank_transaction` (
+  `id` int(11) unsigned NOT NULL,
+  `sender_id` int(11) unsigned NOT NULL,
+  `recipient_id` int(11) unsigned NOT NULL,
+  `transaction_id` int(11) unsigned NOT NULL,
+  `addtime` int(11) unsigned NOT NULL,
+  `type` enum('0','1','2') NOT NULL DEFAULT '0',
+  `summ` int(11) unsigned NOT NULL,
+  `status` enum('pending','success','canceled') NOT NULL DEFAULT 'pending'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Индексы сохранённых таблиц
+--
+
+--
+-- Индексы таблицы `article`
+--
+ALTER TABLE `article`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `id` (`id`);
+
+--
+-- Индексы таблицы `article_category`
+--
+ALTER TABLE `article_category`
+  ADD UNIQUE KEY `id` (`id`),
+  ADD KEY `id_2` (`id`);
+
+--
+-- Индексы таблицы `block`
+--
+ALTER TABLE `block`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `weight` (`weight`),
+  ADD KEY `block_position` (`position`),
+  ADD KEY `block_active` (`active`),
+  ADD KEY `block_lang` (`lang`);
+
+--
+-- Индексы таблицы `cities`
+--
+ALTER TABLE `cities`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `id` (`id`),
+  ADD KEY `country_id` (`country_id`);
+
+--
+-- Индексы таблицы `comment`
+--
+ALTER TABLE `comment`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `coment_key_a` (`comment_key_a`),
+  ADD KEY `coment_key_b` (`comment_key_b`),
+  ADD KEY `coment_user_id` (`comment_user_id`),
+  ADD FULLTEXT KEY `comment_module` (`comment_module`);
+ALTER TABLE `comment`
+  ADD FULLTEXT KEY `comment_module_object` (`comment_module_object`);
+
+--
+-- Индексы таблицы `configuration`
+--
+ALTER TABLE `configuration`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Индексы таблицы `countries`
+--
+ALTER TABLE `countries`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Индексы таблицы `group`
+--
+ALTER TABLE `group`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Индексы таблицы `group_permission`
+--
+ALTER TABLE `group_permission`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `weight` (`weight`);
+
+--
+-- Индексы таблицы `ip2location`
+--
+ALTER TABLE `ip2location`
+  ADD KEY `idx_ip_from` (`ip_from`),
+  ADD KEY `idx_ip_to` (`ip_to`),
+  ADD KEY `idx_ip_from_to` (`ip_from`,`ip_to`);
+
+--
+-- Индексы таблицы `menu`
+--
+ALTER TABLE `menu`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `menu_parent_id` (`menu_parent_id`),
+  ADD KEY `weight` (`weight`),
+  ADD KEY `menu_item_type` (`menu_item_type`),
+  ADD KEY `menu_active` (`menu_active`),
+  ADD FULLTEXT KEY `menu_path` (`menu_path`);
+
+--
+-- Индексы таблицы `modules`
+--
+ALTER TABLE `modules`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `id` (`id`);
+
+--
+-- Индексы таблицы `mod_config`
+--
+ALTER TABLE `mod_config`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `id` (`id`),
+  ADD KEY `mod_config_mod_name` (`mod_config_mod_name`,`mod_config_key`),
+  ADD KEY `mod_config_mod_name_1` (`mod_config_mod_name`);
+
+--
+-- Индексы таблицы `object`
+--
+ALTER TABLE `object`
+  ADD PRIMARY KEY (`guid`),
+  ADD UNIQUE KEY `guid` (`guid`),
+  ADD KEY `type` (`type`),
+  ADD KEY `time_create` (`time_create`),
+  ADD KEY `time_update` (`time_update`),
+  ADD KEY `owner_id` (`owner_id`);
+
+--
+-- Индексы таблицы `object_field`
+--
+ALTER TABLE `object_field`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `field` (`field`);
+
+--
+-- Индексы таблицы `object_type`
+--
+ALTER TABLE `object_type`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `type` (`type`);
+
+--
+-- Индексы таблицы `object_value`
+--
+ALTER TABLE `object_value`
+  ADD KEY `guid` (`guid`),
+  ADD KEY `field_id` (`field_id`),
+  ADD KEY `value` (`value`(40));
+
+--
+-- Индексы таблицы `output_cache`
+--
+ALTER TABLE `output_cache`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `name` (`name`),
+  ADD KEY `cache_id` (`cache_id`),
+  ADD KEY `compile_id` (`compile_id`),
+  ADD KEY `modified` (`modified`);
+
+--
+-- Индексы таблицы `photos`
+--
+ALTER TABLE `photos`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `id` (`id`);
+
+--
+-- Индексы таблицы `places`
+--
+ALTER TABLE `places`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `id` (`id`);
+
+--
+-- Индексы таблицы `statistic`
+--
+ALTER TABLE `statistic`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `id` (`id`),
+  ADD KEY `timestamp` (`timestamp`),
+  ADD KEY `ip` (`ip`),
+  ADD KEY `lang` (`lang`),
+  ADD KEY `refer` (`refer`(255)),
+  ADD KEY `req` (`req`(255)),
+  ADD KEY `user` (`user`(255)),
+  ADD KEY `host` (`host`),
+  ADD KEY `userhash` (`userhash`);
+
+--
+-- Индексы таблицы `theme`
+--
+ALTER TABLE `theme`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `id` (`id`);
+
+--
+-- Индексы таблицы `user`
+--
+ALTER TABLE `user`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `pass` (`pass`),
+  ADD KEY `login` (`login`),
+  ADD KEY `login_pass` (`login`,`pass`);
+
+--
+-- Индексы таблицы `user_bank_info`
+--
+ALTER TABLE `user_bank_info`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `user_id` (`user_id`),
+  ADD KEY `pin` (`pin`),
+  ADD KEY `phone` (`phone`),
+  ADD KEY `email` (`email`),
+  ADD KEY `phone_pin` (`phone`,`pin`);
+
+--
+-- Индексы таблицы `user_bank_transaction`
+--
+ALTER TABLE `user_bank_transaction`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT для сохранённых таблиц
+--
+
+--
+-- AUTO_INCREMENT для таблицы `article`
+--
+ALTER TABLE `article`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=82;
+--
+-- AUTO_INCREMENT для таблицы `article_category`
+--
+ALTER TABLE `article_category`
+  MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT для таблицы `block`
+--
+ALTER TABLE `block`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=93;
+--
+-- AUTO_INCREMENT для таблицы `cities`
+--
+ALTER TABLE `cities`
+  MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT для таблицы `comment`
+--
+ALTER TABLE `comment`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=74;
+--
+-- AUTO_INCREMENT для таблицы `configuration`
+--
+ALTER TABLE `configuration`
+  MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT для таблицы `countries`
+--
+ALTER TABLE `countries`
+  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=253;
+--
+-- AUTO_INCREMENT для таблицы `group`
+--
+ALTER TABLE `group`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT для таблицы `group_permission`
+--
+ALTER TABLE `group_permission`
+  MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT для таблицы `menu`
+--
+ALTER TABLE `menu`
+  MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT для таблицы `modules`
+--
+ALTER TABLE `modules`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT для таблицы `mod_config`
+--
+ALTER TABLE `mod_config`
+  MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=12;
+--
+-- AUTO_INCREMENT для таблицы `object`
+--
+ALTER TABLE `object`
+  MODIFY `guid` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7146;
+--
+-- AUTO_INCREMENT для таблицы `object_field`
+--
+ALTER TABLE `object_field`
+  MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=41;
+--
+-- AUTO_INCREMENT для таблицы `object_type`
+--
+ALTER TABLE `object_type`
+  MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
+--
+-- AUTO_INCREMENT для таблицы `photos`
+--
+ALTER TABLE `photos`
+  MODIFY `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT для таблицы `places`
+--
+ALTER TABLE `places`
+  MODIFY `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT для таблицы `statistic`
+--
+ALTER TABLE `statistic`
+  MODIFY `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8299;
+--
+-- AUTO_INCREMENT для таблицы `theme`
+--
+ALTER TABLE `theme`
+  MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=59;
+--
+-- AUTO_INCREMENT для таблицы `user`
+--
+ALTER TABLE `user`
+  MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT для таблицы `user_bank_info`
+--
+ALTER TABLE `user_bank_info`
+  MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT для таблицы `user_bank_transaction`
+--
+ALTER TABLE `user_bank_transaction`
+  MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
