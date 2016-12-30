@@ -51,23 +51,23 @@
               {cycle name="groups" values="even,odd" assign="class" print=false}
               <tr class='{$class}'>
                 <th>
-                  <input type="checkbox" name="entities[]" class="td_entities" value="{$group.id}">
+                  <input type="checkbox" name="entities[]" class="td_entities" value="{$group->id}">
                 </th>
                 <td>
-                  {$group.id}
+                  {$group->id}
                 </td>
                 <td>
-                  {$group.group_displayname}
+                  {$group->name}
                 </td>
 
                 <td>
-                  {$group.group_description}
+                  {$group->description}
                 </td>
 
                 <td style="text-align: center;">
                   <div class="btn-group">
-                    <a href='/admin/groups/manage/{$group.id}' title="{#sys_edit#}" class="btn btn-icon btn-edit"><i class="icon-edit"></i></a>
-                    <a href='/admin/groups/delete/{$group.id}' title="{#sys_delete#}" class="btn btn-icon btn-delete"><i class="icon-trash"></i></a>
+                    <a href='/admin/groups/manage/{$group->id}' title="{#sys_edit#}" class="btn btn-icon btn-edit"><i class="icon-edit"></i></a>
+                    <a href='/admin/groups/delete/{$group->id}' title="{#sys_delete#}" class="btn btn-icon btn-delete"><i class="icon-trash"></i></a>
                   </div>
                 </td>
               </tr>

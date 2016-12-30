@@ -3,7 +3,7 @@ class IndexController extends Controller
   {
   function actionIndex()
     {
-    $this->redirect('theme/theme_list');
+    $this->redirect('/admin/theme');
     }
   }
 

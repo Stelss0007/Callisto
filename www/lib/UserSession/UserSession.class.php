@@ -3,7 +3,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
+namespace app\lib\UserSession;
 /**
  * Description of UserSession
  *
@@ -51,7 +51,6 @@ class UserSession
     if(!isset($_SESSION))
       {
       session_start();
-      
       }
     }
   
@@ -86,14 +85,18 @@ class UserSession
 
    /**
     * Create session / Authorize user 
-    * @param array $array array('login(user_name)', 'id(user_id)', 'gid(user group id)')
+    * @param array $user array('login(user_name)', 'id(user_id)', 'gid(user group id)')
     * @return boolean 
     */ 
-   function userLogin($array)
+   function userLogin($user)
     {
-    $this->user_name = $_SESSION['user'] = $array['login'];
-    $this->user_id = $_SESSION['user_id'] = $array['id'];
-    $this->user_gid = $_SESSION['user_gid'] = $array['gid'];
+    $this->user_name =  $user->login;
+    $this->user_id = $user->id;
+    $this->user_gid = $user->gid;
+    
+    $this->setVar('user_name', $this->user_name);
+    $this->setVar('user_id', $this->user_id);
+    $this->setVar('user_gid', $this->user_gid);
     return true;
     }
 
@@ -124,7 +127,7 @@ class UserSession
    */
   function setVar($var, $value)
     {
-    $_SESSION[$var] = $value;
+    $_SESSION[$var] = json_encode($value);
     return true;
     }
 
@@ -136,7 +139,16 @@ class UserSession
    */
   function getVar($var, $default = false)
     {
-    return isset($_SESSION[$var]) ? $_SESSION[$var] : $default;
+    if(isset($_SESSION[$var]))
+        {
+        $data = json_decode($_SESSION[$var]);
+        if(is_object($data) && isset($data->attributes))
+            {
+            $data = $data->attributes;
+            }
+        return  $data;
+        }
+    return $default;
     }
 
   /**
@@ -157,7 +169,7 @@ class UserSession
   function userId()
     {
     if(!empty($_SESSION['user_id']))
-      return $_SESSION['user_id'];
+      return $this->getVar('user_id');
     return -1;
     }
     
@@ -168,7 +180,7 @@ class UserSession
   function userName()
     {
     if(!empty($_SESSION['user']))
-      return $_SESSION['user'];
+      return $this->getVar('user');
     return 'Unknown';
     }
 
@@ -179,7 +191,7 @@ class UserSession
   function userGid()
     {
     if(!empty($_SESSION['user_gid']))
-      return $_SESSION['user_gid'];
+      return $this->getVar('user_gid');
     return -1;
     }
 }

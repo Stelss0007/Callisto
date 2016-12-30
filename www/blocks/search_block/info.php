@@ -1,15 +1,14 @@
 <?php
-$info['block_name'] = 'search_block';
-$info['block_type'] = 'block';
-$info['block_displayname'] = 'Поиск';
-$info['block_version'] = '0.91';
-$info['block_description'] = 'Поиск по сайту';
-$info['block_credits'] = '';
-$info['block_changelog'] = '';
-$info['block_license'] = '';
-$info['block_official'] = 1;
-$info['block_author'] = '';
-$info['block_contact'] = '';
-$info['block_refresh'] = false;
-$info['block_language'] = '';
-?>
+$info['name'] = 'search_block';
+$info['type'] = 'block';
+$info['displayname'] = 'Search block';
+$info['version'] = '0.1.0';
+$info['description'] = 'Блок поиска';
+$info['credits'] = '';
+$info['changelog'] = '';
+$info['license'] = '';
+$info['official'] = 1;
+$info['author'] = '';
+$info['contact'] = '';
+$info['refresh'] = 0;
+$info['language'] = '';

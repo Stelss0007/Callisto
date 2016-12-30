@@ -1,4 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <title>{$module_page_title}</title>
@@ -67,35 +67,39 @@
               </span>
                 {$module_content}
                 
+                <div data-block-list-position="center">
                 {if $blocks.center}
                   {foreach item=block from=$blocks.center}
                     {theme_block block=$block} 
                       <div class="sidebar_box">
-                        <h3>
-                          {$block.block_displayname|escape}
+                        <h3 class="app-block-name">
+                          {$block.displayname|escape}
                         </h3>
-                        <div class="">
-                            {$block.block_content}
+                        <div class="app-block-content">
+                            {$block.content}
                         </div>
                        </div>
                     {/theme_block} 
                   {/foreach}
                 {/if}
-                  
+                </div>
+                
+                <div data-block-list-position="bottom">
                 {if $blocks.bottom}
                   {foreach item=block from=$blocks.bottom}
                     {theme_block block=$block} 
                       <div class="sidebar_box">
-                        <h3>
-                          {$block.block_displayname|escape}
+                        <h3 class="app-block-name">
+                          {$block.displayname|escape}
                         </h3>
-                        <div class="">
-                            {$block.block_content}
+                        <div class="app-block-content">
+                            {$block.content}
                         </div>
                       </div>
                     {/theme_block} 
                   {/foreach}
                 {/if}
+                </div>
             </div> <!-- end of content -->
             
             <div id="templatemo_content_bottom"></div>
@@ -105,39 +109,59 @@
 
             <div class="sidebar_box_wrapper">
               
-            {* Р›РµРІР°СЏ С‡Р°СЃС‚СЊ *}
+            <div data-block-list-position="left">
+              <!-- Block Template --> 
+              <div class="app-block-template">
+                    <div class="sidebar_box">
+                        <div class="sb_title app-block-name">
+                        </div>
+                        <div class="sb_content app-block-content">
+                        </div>
+                    </div>
+              </div>
+              <!-- Block Template End -->  
               {if $blocks.left}
                 {foreach item=block from=$blocks.left}
                   {theme_block block=$block} 
                     <div class="sidebar_box">
-                      <div class="sb_title">
-                        {$block.block_displayname|escape}
+                      <div class="sb_title app-block-name">
+                        {$block.displayname|escape}
                       </div>
-                      <div class="sb_content">
-                          {$block.block_content}
+                      <div class="sb_content app-block-content">
+                          {$block.content}
                       </div>
                     </div>
                   {/theme_block} 
                 {/foreach}
               {/if}
-            {* End Р»РµРІР°СЏ С‡Р°СЃС‚СЊ*}
+            </div>
             
-            {* РџСЂР°РІР°СЏ С‡Р°СЃС‚СЊ *}
+            <div data-block-list-position="right">
+              <!-- Block Template --> 
+              <div class="app-block-template">
+                    <div class="sidebar_box">
+                        <div class="sb_title app-block-name">
+                        </div>
+                        <div class="sb_content app-block-content">
+                        </div>
+                    </div>
+              </div>
+              <!-- Block Template End -->    
               {if $blocks.right}
                 {foreach item=block from=$blocks.right}
                  {theme_block block=$block} 
                     <div class="sidebar_box">
-                      <div class="sb_title">
-                        {$block.block_displayname|escape}
+                      <div class="sb_title app-block-name">
+                        {$block.displayname|escape}
                       </div>
-                      <div class="sb_content">
-                          {$block.block_content}
+                      <div class="sb_content app-block-content">
+                          {$block.content}
                       </div>
                     </div>
                  {/theme_block} 
                 {/foreach}
               {/if}
-            {* End РїСЂР°РІР°СЏ С‡Р°СЃС‚СЊ*}
+            </div>
             
             
             <div class="templatemo_cleaner"></div>            

@@ -49,37 +49,37 @@
               {cycle name="permsls" values="even,odd" assign="class" print=false}
               <tr class='{$class}'>
                 <th>
-                  <input type="checkbox" name="entities[]" class="td_entities" value="{$permission.id}">
+                  <input type="checkbox" name="entities[]" class="td_entities" value="{$permission->id}">
                 </th>
                 <td>
-                  {$group[$permission.group_permission_gid]}
+                  {$group[$permission->gid]}
                 </td>
                 <td>
                   {#permissions_element#}
                 </td>
                 <td>
-                  {$permission.group_permission_pattern}
+                  {$permission->pattern}
                 </td>
                 <td>
-                  {$levels[$permission.group_permission_level]}
+                  {$levels[$permission->level]}
                 </td>
                 <td style="text-align: center;">
                   <div class="btn-group">
                     {if !$smarty.foreach.permission_.first}
-                      <a href="/admin/permissions/weight_up/{$permission.group_permission_weight}" class="btn btn-icon btn-up" title="{#sys_up#}"><i class="icon-arrow-up"></i></a>
+                      <a href="/admin/permissions/weight_up/{$permission->id}" class="btn btn-icon btn-up" title="{#sys_up#}"><i class="icon-arrow-up"></i></a>
                       {/if}
                       {if !$smarty.foreach.permission_.first && !$smarty.foreach.permission_.last}
 
                     {/if}
                     {if !$smarty.foreach.permission_.last}
-                      <a href="/admin/permissions/weight_down/{$permission.group_permission_weight}" class="btn btn-icon btn-down"  title="{#sys_down#}"><i class="icon-arrow-down"></i></a>
+                      <a href="/admin/permissions/weight_down/{$permission->id}" class="btn btn-icon btn-down"  title="{#sys_down#}"><i class="icon-arrow-down"></i></a>
                       {/if}
                   </div>
                 </td>
                 <td>
                   <div class="btn-group">
-                    <a href='/admin/permissions/manage/{$permission.id}' class="btn btn-icon btn-edit" title="{#sys_edit#}"><i class="icon-edit"></i></a>
-                    <a href='/admin/permissions/delete/{$permission.id}' class="btn btn-icon btn-delete" title="{#sys_delete#}" onclick="return confirm('{#sys_confirm_delete#}');"><i class="icon-trash"></i></a>
+                    <a href='/admin/permissions/manage/{$permission->id}' class="btn btn-icon btn-edit" title="{#sys_edit#}"><i class="icon-edit"></i></a>
+                    <a href='/admin/permissions/delete/{$permission->id}' class="btn btn-icon btn-delete" title="{#sys_delete#}"><i class="icon-trash"></i></a>
                   </div>
                 </td>
               </tr>

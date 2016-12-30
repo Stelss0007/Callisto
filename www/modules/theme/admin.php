@@ -1,4 +1,6 @@
 <?php
+use app\modules\theme\models\Theme; 
+
 class AdminController extends Controller
   {
   public $defaultAction = 'theme_list';
@@ -7,15 +9,14 @@ class AdminController extends Controller
     {
     $this->getAccess(ACCESS_ADMIN);
     
-    $browsein = array();
-    $browsein[] = array ('url'=>'/admin/theme',
-                        'displayname'=>'Темы');
+    $browsein = [];
+    $browsein[] = ['url'=>'/admin/main',
+                        'displayname'=>'Главное меню'];
+    $browsein[] = ['url'=>'/admin/theme', 'displayname'=>'Темы'];
     
-    $this->module_browsein = $browsein;
-    
-    //appDebug($this->theme->with('user')->with('block')->getList());exit;
-    
-    $this->assign('themes_list_all', $this->theme->getList());
+    $this->assign('module_browsein',$browsein);
+    $this->assign('themes_list_all', Theme::findAll());
+  
     $this->viewPage();
     }
 
@@ -25,17 +26,15 @@ class AdminController extends Controller
     
     //==================Все Темы=============================
     //Взяли список с диска
-
-    
-    $this->themes_list_all = $this->theme->fileSystemListActual();
+    $this->assign(themes_list_all, Theme::fileSystemListActual());
         
-    $browsein = array();
-    $browsein[] = array ('url'=>'/admin/theme',
-                        'displayname'=>'Темы');
-    $browsein[] = array ('url'=>'/admin/theme/install',
-                        'displayname'=>'Установка темы');
+    $browsein = [
+                    ['url'=>'/admin/main', 'displayname'=>'Главное меню'],
+                    ['url'=>'/admin/theme', 'displayname'=>'Темы'],
+                    ['url'=>'/admin/theme/install', 'displayname'=>'Установка темы']
+                ];
     
-    $this->module_browsein = $browsein;
+    $this->assign('module_browsein', $browsein);
     
     $this->viewPage();
     }
@@ -49,7 +48,7 @@ class AdminController extends Controller
       die ('Тема отсутствует!');
 
     // Found
-    $info = array();
+    $info = [];
     $info['version']      = '0';
     $info['description']  = '';
     
@@ -62,18 +61,19 @@ class AdminController extends Controller
     $info['theme_version']      = $info['version'];
     $info['theme_last_update']  = time();
 
-   
-    $this->arrayToModel($this->theme, $info);
-     
-    $id = $this->theme->save();
+    $theme = new Theme();
+    $theme->setAttributesByArray($info);
+    $theme->save();
     
     $this->showMessage('Элемент добавлен', '/admin/theme');
     }
+    
   function actionActivate($id)
     {
     $this->getAccess(ACCESS_ADMIN);
     
-    $this->theme->activate($id);
+    Theme::activate($id);
+    
     $this->showMessage($this->t('theme_activated'), '/admin/theme');
     }
     
@@ -81,14 +81,10 @@ class AdminController extends Controller
     {
     $this->getAccess(ACCESS_ADMIN);
     
-    $this->theme->delete($id);
-    $this->showMessage($this->t('theme_deleted'), '/admin/theme');
-    }
-  function actionGetActive()
-    {
-    $this->getAccess(ACCESS_ADMIN);
+    $theme = Theme::find($id);
+    $theme->delete();
     
-    appDebug($this->theme->getActive());
+    $this->showMessage($this->t('theme_deleted'), '/admin/theme');
     }
 
   }

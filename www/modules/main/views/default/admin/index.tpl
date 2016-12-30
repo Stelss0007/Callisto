@@ -388,4 +388,4 @@
 <script src="/themes/admin/js/raphael-min.js"></script>
 <script src="/themes/admin/js/morris.min.js"></script>
 <script src="/themes/admin/js/toastr.js"></script>
-{appJsLoad modname=main}
+<script src="/modules/main/js/main.js"></script>

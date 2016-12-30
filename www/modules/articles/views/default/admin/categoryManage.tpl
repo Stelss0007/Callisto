@@ -1,27 +1,27 @@
 {appJsLoad modname='kernel' scriptname='tinymce'}    
-<form action="/admin/articles/category_manage" method="post" class="">
+<form action="/admin/articles/category_manage" method="post" class="form-horizontal">
   <input type="hidden" name='id' value="{$id}">
   <div class="row-fluid">
     <div class="box span12">
       <div class="box-header well" data-original-title>
         <h2><i class="icon-edit"></i>  Менеджер категорий статей</h2>
-        <div class="box-icon">
-        </div>
       </div>
+        
       <div class="box-content">
-
-        <fieldset>
           {* <legend>Manage form</legend>*}
-          <br>
-          <div class="control-group">
-            <span class="control-label">{#sys_title#}</span>&nbsp;
-            <input type="text" name='article_category_title' value='{$article_category_title}' style="width: 90%;">
+          <div class="form-group">
+            <label class="col-sm-1 control-label">
+                {#sys_title#}
+            </label>
+            <div class="controls col-sm-11">
+                <input type="text" name='article_category_title' value='{$article_category_title}' class="form-control">
+            </div>
           </div>
 
-          <div class="box-content">
+          <div class="">
             <ul id="myTab" class="nav nav-tabs">
-              <li class="active"><a href="#info">Статья</a></li>
-              <li><a href="#messages">SEO</a></li>
+              <li class="active"><a href="#info" aria-controls="profile" role="tab" data-toggle="tab">Категория</a></li>
+              <li><a href="#seo" aria-controls="profile" role="tab" data-toggle="tab">SEO</a></li>
             </ul>
 
             <div class="tab-content" id="myTabContent">
@@ -30,7 +30,7 @@
                   {texteditor name=article_category_description text=$article_category_description}
                 </div>
 
-                <div class="span2 form-vertical">
+                <div class="span2">
                   <div class="control-group">
                     <label class="control-label" for="date01">Состояние: </label>
                     <div class="controls">
@@ -49,7 +49,7 @@
                 </div>
               </div>
           
-              <div id="messages" class="tab-pane">
+              <div id="seo" class="tab-pane row-fluid">
                 <div class="control-group">
                   <label class="control-label" for="date01">Мета-тег Description: </label>
                   <div class="controls">
@@ -72,8 +72,6 @@
             <button type="submit" class="btn btn-primary" name="submit" value="submit">{#sys_save#}</button>
             <button type="reset" class="btn">Cancel</button>
           </div>
-
-        </fieldset>
       </div>
     </div><!--/span-->
 

@@ -16,7 +16,6 @@
 
         <fieldset>
           {$config_body}
-
           <div class="form-actions">
             <button value="submit" name="submit" class="btn btn-primary" type="submit">{#sys_save#}</button>
             <button class="btn" type="reset">{#sys_cancel#}</button>

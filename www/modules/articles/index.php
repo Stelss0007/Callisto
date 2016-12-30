@@ -1,35 +1,49 @@
 <?php
+use app\modules\articles\models\Articles;
+use app\modules\articles\models\ArticleCategory;
+
 class IndexController extends Controller
   {
   public $defaultAction = 'article_list';
   
   public function actionArticleList()
     {
+    /*
+    $testArray = [
+        'firstName' => 'ru',
+        'secondName' => 'rus',
+        'birthday' => '2016-10-20',
+        'cardNumber' => '5211537422805189',
+    ];  
     
-    //appCanEdit();
+    $validationRules = [
+        'firstName'=> ['max'=>40, 'min'=>3, 'required'],
+        'secondName'=> 'required',
+        'birthday'=> ['required', 'date'=>'Y-m-d'],
+        'cardNumber' => ['creditCard'],
+    ];
     
-    //Send Email
-    //$this->sendEmailTemplate(array('stelss1986@gmail.com'), 'Test Subject', 'main');
-    //appDebugExit($this->getAccessLevel());
-    
-    $browsein[] =array('url'=>"/", 'displayname'=>$this->t('dashboard'));
-    $browsein[] =array('url'=>'/articles', 'displayname'=>'Articles'); 
+    $validator  = \Validator::make($testArray, $validationRules);  
+    appDebug($validator->hasError());  
+    appDebug($validator->getErrors());  
+    appDebug($validator->getFirstError('firstName')); 
+     */
+      
+    $browsein[] = ['url'=>"/", 'displayname'=>$this->t('dashboard')];
+    $browsein[] = ['url'=>'/articles', 'displayname' => $this->t('articles_header')]; 
     $this->assign('module_browsein', $browsein);
 
     $this->viewCachedPage();
-    
-    $this->usesModel('articleCategory');
-    $this->usesModel('users');
-    
-    $this->articles_list = $this->articles->articleList(true, array('article_active'=>1));
+   
+    $this->articles_list = Articles::getList(true, ['active'=>1]);
     //$this->paginate($this->articles);
-    
+  
     //Подготовим фильтры
     $category_filter_list[0] = $this->t('sys_unknown');
-    $category_filter_list    = $category_filter_list + $this->articleCategory->category_list(false);
+    $category_filter_list    = $category_filter_list + ArticleCategory::getList(false);
     
     $user_filter_list[0] = $this->t('sys_unknown');
-    $user_filter_list    = $user_filter_list + $this->users->user_list(false);
+    $user_filter_list    = $user_filter_list + app\modules\users\models\Users::getList(false);
  
     $status_filter_list['-1']   = $this->t('all_status');
     $status_filter_list['1']    = $this->t('sys_active');
@@ -38,40 +52,30 @@ class IndexController extends Controller
     $this->article_category_list = $category_filter_list;
     $this->article_user_list     = $user_filter_list;
     $this->article_status_list   = $status_filter_list;
-    
-    $this->assign($this->getInput('filter', array()));
-    //\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+  
+    $this->assign($this->getInput('filter', []));
     
     $this->viewPage();
     }
     
   public function actionUser($user_id)
     {
-    
-    //appCanEdit();
-    
-    //Send Email
-    //$this->sendEmailTemplate(array('stelss1986@gmail.com'), 'Test Subject', 'main');
-    //appDebugExit($this->getAccessLevel());
-    
-    $browsein[] =array('url'=>"/", 'displayname'=>$this->t('dashboard'));
-    $browsein[] =array('url'=>'/articles', 'displayname'=>'Articles'); 
+    $browsein[] = ['url'=>"/", 'displayname'=>$this->t('dashboard')];
+    $browsein[] = ['url'=>'/articles', 'displayname'=>$this->t('articles_header')]; 
     $this->assign('module_browsein', $browsein);
 
     $this->viewCachedPage();
+
     
-    $this->usesModel('articleCategory');
-    $this->usesModel('users');
-    
-    $this->articles_list = $this->articles->articleList(true, array('article_active' => 1, 'article_user_id' => $user_id));
+    $this->articles_list = Articles::getList(true, ['active' => 1, 'article_user_id' => $user_id]);
     //$this->paginate($this->articles);
     
     //Подготовим фильтры
     $category_filter_list[0] = $this->t('sys_unknown');
-    $category_filter_list    = $category_filter_list + $this->articleCategory->category_list(false);
+    $category_filter_list    = $category_filter_list + ArticleCategory::getList(false);
     
     $user_filter_list[0] = $this->t('sys_unknown');
-    $user_filter_list    = $user_filter_list + $this->users->user_list(false);
+    $user_filter_list    = $user_filter_list + app\modules\users\models\Users::getList(false);
  
     $status_filter_list['-1']   = $this->t('all_status');
     $status_filter_list['1']    = $this->t('sys_active');
@@ -81,7 +85,7 @@ class IndexController extends Controller
     $this->article_user_list     = $user_filter_list;
     $this->article_status_list   = $status_filter_list;
     
-    $this->assign($this->getInput('filter', array()));
+    $this->assign($this->getInput('filter', []));
     //\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
     
     $this->viewPage();
@@ -96,8 +100,8 @@ class IndexController extends Controller
     //$this->sendEmailTemplate(array('stelss1986@gmail.com'), 'Test Subject', 'main');
     //appDebugExit($this->getAccessLevel());
     
-    $browsein[] =array('url'=>"/", 'displayname'=>$this->t('dashboard'));
-    $browsein[] =array('url'=>'/articles', 'displayname'=>'Articles'); 
+    $browsein[] = ['url'=>"/", 'displayname' => $this->t('dashboard')];
+    $browsein[] = ['url'=>'/articles', 'displayname' => $this->t('articles_header')]; 
     $this->assign('module_browsein', $browsein);
 
     $this->viewCachedPage();
@@ -105,15 +109,15 @@ class IndexController extends Controller
     $this->usesModel('articleCategory');
     $this->usesModel('users');
     
-    $this->articles_list = $this->articles->articleList(true, array('article_active' => 1, 'article_category_id' => $categoryId));
+    $this->articles_list = $this->articles->articleList(true, ['article' => 1, 'article_category_id' => $categoryId]);
     //$this->paginate($this->articles);
     
     //Подготовим фильтры
     $category_filter_list[0] = $this->t('sys_unknown');
-    $category_filter_list    = $category_filter_list + $this->articleCategory->category_list(false);
+    $category_filter_list    = $category_filter_list + $this->articleCategory->categoryList(false);
     
     $user_filter_list[0] = $this->t('sys_unknown');
-    $user_filter_list    = $user_filter_list + $this->users->user_list(false);
+    $user_filter_list    = $user_filter_list + $this->users->userList(false);
  
     $status_filter_list['-1']   = $this->t('all_status');
     $status_filter_list['1']    = $this->t('sys_active');
@@ -123,7 +127,7 @@ class IndexController extends Controller
     $this->article_user_list     = $user_filter_list;
     $this->article_status_list   = $status_filter_list;
     
-    $this->assign($this->getInput('filter', array()));
+    $this->assign($this->getInput('filter', []));
     //\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
     
     $this->viewPage();
@@ -131,27 +135,23 @@ class IndexController extends Controller
     
   public function actionView($id)
     {
-    $browsein[] =array('url'=>"/", 'displayname'=>$this->t('dashboard'));
-    $browsein[] =array('url'=>'/articles', 'displayname'=>'Articles'); 
-    //$browsein[] =array('url'=>'/articles', 'displayname'=>$article['article_title']); 
-    $browsein[] =array('url'=>'/articles', 'displayname'=>'Просмотр'); 
+    $browsein[] = ['url'=>"/", 'displayname' => $this->t('dashboard')];
+    $browsein[] = ['url'=>'/articles', 'displayname' => $this->t('articles_header')]; 
+    $browsein[] = ['url'=>'/articles', 'displayname' => $this->t('sys_view')]; 
     
     $this->assign('module_browsein', $browsein);
     $this->viewCachedPage();
     
-    $this->usesModel('articleCategory');
-    $this->usesModel('users');
-    
-    $article = $this->articles->getById($id);
-    $this->article = $article;
+     
+    $this->article = Articles::find($id);
     //$this->paginate($this->articles);
     
     //Подготовим фильтры
     $category_filter_list[0] = $this->t('sys_unknown');
-    $category_filter_list    = $category_filter_list + $this->articleCategory->category_list(false);
+    $category_filter_list    = $category_filter_list + ArticleCategory::getList(false);
     
     $user_filter_list[0] = $this->t('sys_unknown');
-    $user_filter_list    = $user_filter_list + $this->users->user_list(false);
+    $user_filter_list    = $user_filter_list + app\modules\users\models\Users::getList(false);
  
     $status_filter_list['-1']   = $this->t('all_status');
     $status_filter_list['1']    = $this->t('sys_active');

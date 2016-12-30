@@ -25,14 +25,14 @@ function progresEnd()
   }
 function saveProject()
   {
-  $.post('/projectEditor/saveProject', {openTabs: openTabs}, function(data) {
+  $.post('/admin/projectEditor/saveProject', {openTabs: openTabs}, function(data) {
     //console.log('ok');
     });
   }
 
 function getFileTree()
   {
-  $.post('/projectEditor/get_file_tree', {}, function(data) {
+  $.post('/admin/projectEditor/get_file_tree', {}, function(data) {
       $('#fileTree').html(data);
       fileTreeinit();
       fileTreeOpen();
@@ -45,7 +45,7 @@ function doCMDRequest(cmd, dataCMD, ui)
   {
   progresStart();
   
-  $.post('/projectEditor/' + cmd, dataCMD, function(data) {
+  $.post('/admin/projectEditor/' + cmd, dataCMD, function(data) {
       dialog.dialog( "close" );
       if(data == 'OK')
         {
@@ -156,7 +156,7 @@ function doCMD(ui)
 function openProject()
   {
   var openDir = [];
-  $.post('/projectEditor/openProject', {openTabs: openTabs}, function(data) {
+  $.post('/admin/projectEditor/openProject', {openTabs: openTabs}, function(data) {
     
     $.each(data, function( index, path ) {
       var pathArr = path.replace('.', '_').split('/'); 
@@ -229,7 +229,7 @@ function setCodeStyle(mime, element)
   {
   progresStart();
   var fileSrc   = $('#tabs .ui-tabs-active .ui-icon-close').attr('data-file-src');
-  $.post('/projectEditor/saveFile', {fileSrc: fileSrc, fileSource: text}, function(data) {
+  $.post('/admin/projectEditor/saveFile', {fileSrc: fileSrc, fileSource: text}, function(data) {
     console.log('ok');
   });
   

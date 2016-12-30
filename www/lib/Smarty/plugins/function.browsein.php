@@ -20,17 +20,17 @@ if (!isset ($delimiter))
 
 //��������� ������
 $result='';
-for ($i=0; $i<count($date); $i++)
+for ($i=0; $i<count($data); $i++)
   {
-  if(!isset($date[$i]))
+  if(!isset($data[$i]))
     continue;
   
-  $item=$date[$i];
-  if ((($i+1) < count($date)))
+  $item=$data[$i];
+  if ((($i+1) < count($data)))
     {
     if (isset($a_attr) && $a_attr)//��������� � ��������������� ���������� href
       {
-      if (($i+1) != count($date)) //���� �� ��������� ������� �����������
+      if (($i+1) != count($data)) //���� �� ��������� ������� �����������
         {
         $result.="<a $a_attr href=\"$item[url]\">{$item['displayname']}</a>$delimiter";
         }
@@ -41,7 +41,7 @@ for ($i=0; $i<count($date); $i++)
       }
       else//��������� ��� �������������� ��������� href
         {
-        if (($i+1) != count($date)) //���� �� ��������� ������� �����������
+        if (($i+1) != count($data)) //���� �� ��������� ������� �����������
           {
           $result.="<a href=\"$item[url]\">{$item['displayname']}</a>$delimiter";
           }
@@ -56,7 +56,7 @@ for ($i=0; $i<count($date); $i++)
       $result.= isset($item['displayname']) ? $item['displayname'] : '';
       };
   };
-
+  
 return $result;
 }
 

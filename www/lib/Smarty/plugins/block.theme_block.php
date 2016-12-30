@@ -6,27 +6,31 @@
  * $width, $height
  * Generete block temlate if admin add additionl info for administration block
  */
-function smarty_block_theme_block($params, $content,  &$smarty)
-  {
-  extract ($params);
-  
-  //if (empty ($name)) $name='bbcode_field_'.$bbeditor_num;
-   
-  //Сделаем обертку блоку, если это админ знач добавим блок оберку
-  $userInfo = $smarty->get_template_vars('currentUserInfo');
-  
-  if(!$userInfo['isAdmin'])
+function smarty_block_theme_block($params, $content, $smarty, &$repeat)
     {
-    return $content;
-    }
-  return '<div class="block-item-admin-panel" data-position="'.$block['block_position'].'" data-weight="'.$block['block_weight'].'" data-id="'.$block['id'].'">'
-          .'<div class="block-toolbar">'
-            .'<a href="/admin/blocks/modify/'.$block['id'].'" class="block-edit" data-id="'.$block['id'].'"><span class="icon-cog"></span></a>'
-            .'<a href="/admin/blocks/delete/'.$block['id'].'" class="block-delete" data-id="'.$block['id'].'"><span class="icon-trash"></span></a>'
-          .'</div>'
-         .$content
-         .'</div>'
-         ;
-  }
+    
+  // only output on the closing tag
+    if(!$repeat)
+        {  
+        extract ($params);
 
-?>
+        $userInfo = $smarty->getTemplateVars('currentUserInfo');
+
+        if(!$userInfo['isAdmin'])
+          {
+          return $content;
+          }
+        $contentAdmin = '<div class="block-item-admin-panel" data-position="'.$block['position'].'" data-weight="'.$block['weight'].'" data-id="'.$block['id'].'">'
+                .'<div class="block-toolbar">'
+                  .'<a href="/admin/blocks/modify/'.$block['id'].'" class="block-edit" data-id="'.$block['id'].'"><span class="icon-cog"></span></a>'
+                  .'<a href="/admin/blocks/delete/'.$block['id'].'" class="block-delete" data-id="'.$block['id'].'"><span class="icon-trash"></span></a>'
+               .'</div>'
+               .'<div class="app-block-admin-conteiner">'
+               .$content
+               .'</div>'
+               .'</div>'
+               ;
+        return $contentAdmin;
+        }
+    }
+

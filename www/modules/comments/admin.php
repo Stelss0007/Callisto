@@ -1,7 +1,7 @@
 <?php
 class AdminController extends Controller
   {
-  public $defaultAction = 'article_list';
+  public $defaultAction = 'comment_list';
   
   function actionCommentList()
     {
@@ -16,10 +16,10 @@ class AdminController extends Controller
     
     //Подготовим фильтры
     $category_filter_list[0] = $this->t('all_category');
-    $category_filter_list    = $category_filter_list + $this->articleCategory->category_list(false);
+    $category_filter_list    = $category_filter_list + $this->articleCategory->categoryList(false);
     
     $user_filter_list[0] = $this->t('all_user');
-    $user_filter_list    = $user_filter_list + $this->users->user_list(false);
+    $user_filter_list    = $user_filter_list + $this->users->userList(false);
  
     $status_filter_list['-1']   = $this->t('all_status');
     $status_filter_list['1']    = $this->t('sys_active');
@@ -44,8 +44,8 @@ class AdminController extends Controller
   function actionCommentManage($id=0)
     {
     $this->getAccess(ACCESS_ADD);
-    $data = $this->input_vars;
-    $this->article_category_list = $this->articleCategory->category_list(false);
+    $data = $this->inputVars;
+    $this->article_category_list = $this->articleCategory->categoryList(false);
     //appDebug($data);exit;
     if($data['submit'])
       {
@@ -115,18 +115,18 @@ class AdminController extends Controller
   function actionCategoryManage($id=0)
     {
     $this->getAccess(ACCESS_ADD);
-    $data = $this->input_vars;
+    $data = $this->inputVars;
     //appDebug($data);exit;
     $this->usesModel('articleCategory');
     if($data['submit'])
       {
       if($id)
         {
-        $this->articleCategory->category_update($data, $id);
+        $this->articleCategory->categoryUpdate($data, $id);
         }
       else
         {
-        $this->articleCategory->category_create($data);
+        $this->articleCategory->categoryСreate($data);
         }
         
       $this->deleteCache();
@@ -157,7 +157,7 @@ class AdminController extends Controller
   function actionCategoryGroupOperation()
     {
     $this->getAccess(ACCESS_ADMIN);
-    $data = $this->input_vars;
+    $data = $this->inputVars;
     
     $model_name = 'articleCategory';
     
@@ -204,7 +204,7 @@ class AdminController extends Controller
     $sIndexColumn = "id";
     
     $this->usesModel('articleCategory');
-    $article_category_list = $this->articleCategory->category_list(false);
+    $article_category_list = $this->articleCategory->categoryList(false);
     
     $conditions = array(
                         'join'   => "LEFT JOIN {$this->articles->getModelTable('users')} u ON (u.id=t.article_user_id)",

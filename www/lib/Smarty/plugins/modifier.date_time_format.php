@@ -8,7 +8,7 @@
 /**
  * Include the {@link shared.make_timestamp.php} plugin
  */
-require_once $smarty->_get_plugin_filepath('shared', 'make_timestamp');
+require_once(SMARTY_PLUGINS_DIR . 'shared.make_timestamp.php');
 /**
  * Smarty date_format modifier plugin
  *
@@ -32,10 +32,9 @@ function smarty_modifier_date_time_format($string, $format = '', $default_date =
 {
     if($string == 0)
       return;
-    
-    global $appConfig;
+
     if(empty($format))
-      $format = $appConfig['date_time_format'];
+      $format = \App::$config['date_time_format'];
     
     if ($string != '') {
         $timestamp = smarty_make_timestamp($string);

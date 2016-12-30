@@ -5,17 +5,17 @@
  * @version  1.0
  * @param array
  * @param Smarty
- * $debug_age       - Время жизни кеш файла в режиме отладки (4с)
- * $age             - Время жизни кеш файла в режиме не отладки (3600с)
+ * $debug_age       - пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ (4пїЅ)
+ * $age             - пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ (3600пїЅ)
  * @return string
  */
 function smarty_function_appJsOutput($params, &$smarty)
   {
-  global $jsLoaded, $appConfig, $mod_controller, $jsLoadedHasModScript;
+  global $jsLoaded, $mod_controller, $jsLoadedHasModScript;
   $modname          = $mod_controller->getModName();
   $action           = $mod_controller->getActionName();
   $params['input']  = $jsLoaded;
-  
+ 
   if(isset($jsLoadedHasModScript) && !empty($jsLoadedHasModScript))
     {
     $params['output'] = "/public/cache/$modname.$action.main.js";
@@ -26,7 +26,7 @@ function smarty_function_appJsOutput($params, &$smarty)
     }
  
 
-  if($appConfig['debug.enabled'])
+  if(\App::$config['debug.enabled'])
     {
     if(isset($params['debug_age']) && !empty($params['debug_age']))
       {

@@ -25,10 +25,10 @@
                 {array_append name='flat_itemslist' key='0' value='Корень'}
 
                 {foreach item=item from=$items_list}
-                  {array_append name='flat_itemslist' key=$item.id value=$item.menu_title|escape|tree:$item.level}
+                  {array_append name='flat_itemslist' key=$item->id value=$item->menu_title|escape|tree:$item->level}
                 {/foreach}
 
-                <select name=menu_parent_id  data-rel="chosen" class="form-control">
+                <select name=menu_parent_id  data-rel="chosen" class="form-control selectpicker">
                   {html_options options=$flat_itemslist selected=$menu_parent_id }
                 </select>
               </div>

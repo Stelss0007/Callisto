@@ -2776,6 +2776,7 @@ input[type="button"].btn-block {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
+  overflow: hidden;
 }
 .page-container .sidebar-menu.fixed {
   position: fixed;
@@ -3241,7 +3242,7 @@ input[type="button"].btn-block {
   position: relative;
   float: left;
   width: 100%;
-  padding: 20px;
+  padding: 20px 20px 40px;
   z-index: 2;
   background: #ffffff;
   -webkit-box-sizing: border-box;
@@ -5163,9 +5164,12 @@ canvas + .knob {
   background-clip: padding-box;
 }
 footer.main {
-  margin-top: 15px;
-  padding-top: 15px;
   border-top: 1px solid #ebebeb;
+  padding: 10px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
 }
 footer.main:before,
 footer.main:after {
@@ -9060,6 +9064,12 @@ body.page-fade-only-init > .page-container {
     right: 2px;
     top: -4px;
 }
+
+#appMessage_msg_text .close:focus
+{
+    outline: none;
+}
+
 #appMessage_msg_text
 {
 /*  margin: 0 5px;
@@ -9076,7 +9086,7 @@ body.page-fade-only-init > .page-container {
   background-position: 5px 5px;*/
 
     background-repeat: no-repeat;
-    background-position: 10px 10px;
+    background-position: 15px 4px;
     border-width: 2px;
     margin: 0 2px;
     min-height: 30px;

@@ -435,9 +435,9 @@ div.sceditor-group {
 .sceditor-button {
   float: left;
   cursor: pointer;
-  padding: 3px 5px;
-  width: 16px;
-  height: 20px;
+  padding: 5px 5px;
+  width: 30px;
+  height: 30px;
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
   border-radius: 3px;

@@ -8,7 +8,7 @@ class IndexController extends Controller
   
   function actionLogin()
     {
-    $data = $this->input_vars;
+    $data = $this->inputVars;
     if($data['submit'])
       {
       $login = $this->users->logIn($data['login'], $data['pass']);

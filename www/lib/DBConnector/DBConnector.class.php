@@ -101,8 +101,6 @@ class DBConnector extends AppObject
  
   function query()
     {
-    global $appConfig;
-
     $args = func_get_args();
     $template = array_shift($args);
     foreach ($args as $key => $value)
@@ -122,7 +120,7 @@ class DBConnector extends AppObject
       $valid_sql = $template;
       }
     
-    if(!empty($appConfig['debug.enabled']))
+    if(!empty(\App::$config['debug.enabled']))
       {
       // Считываем текущее время
       $current_time = microtime();
@@ -135,7 +133,7 @@ class DBConnector extends AppObject
     $result = mysql_query($valid_sql);
     
     
-    if(!empty($appConfig['debug.enabled']))
+    if(!empty(\App::$config['debug.enabled']))
       {
         
       if(mysql_error())
@@ -274,9 +272,7 @@ class DBConnector extends AppObject
 
   function getFields($table)
     {
-    global $appConfig;
-
-    if(appVarIsCached('dbTableFields', $table) && !$appConfig['debug.enabled'])
+    if(appVarIsCached('dbTableFields', $table) && !\App::$config['debug.enabled'])
       {
       return appVarGetCached('dbTableFields', $table);
       }

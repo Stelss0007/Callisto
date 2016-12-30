@@ -7,13 +7,13 @@
     <div class="box-content">
       <div class="btn-group-" style="float: right;">
         <form method="GET" class="app-filter">
-          <select name="filter[article_category_id]" class="form-control inline"  data-rel="chosen">
+          <select name="filter[article_category_id]" class="form-control inline selectpicker">
             {html_options options=$article_category_list selected=$article_category_id}
           </select>
-          <select name="filter[article_user_id]" class="form-control inline" data-rel="chosen">
+          <select name="filter[article_user_id]" class="form-control inline selectpicker" >
             {html_options options=$article_user_list selected=$article_user_id}
           </select>
-          <select name="filter[article_active]" class="form-control inline" data-rel="chosen">
+          <select name="filter[article_active]" class="form-control inline selectpicker">
             {html_options options=$article_status_list selected=$article_active}
           </select>
         </form>
@@ -79,42 +79,42 @@
               {cycle name="articles" values="even, odd" assign="class" print=false}
               <tr class='{$class}'>
                 <th>
-                  <input type="checkbox" name="entities[]" class="td_entities" value="{$article.id}">
+                  <input type="checkbox" name="entities[]" class="td_entities" value="{$article->id}">
                 </th>
                 <td>
-                  {$article.id}
+                  {$article->id}
                 </td>
                 <td>
-                  {$article.article_title|escape}
+                  {$article->article_title|escape}
                 </td>
                 <td>
-                  {$article_category_list[$article.article_category_id]}
+                  {$article_category_list[$article->article_category_id]}
                 </td>
                 <td>
-                  <a href="#{$article.article_user_id}">
-                  {$article.login} 
+                  <a href="#{$article->article_user_id}">
+                  {$article->user->login} 
                   </a>
                 </td>
                 <td>
-                  {if $article.article_active == 1}
+                  {if $article->active == 1}
                     {#sys_yes#}
                   {else}
                     {#sys_no#}
                   {/if}
                 </td>
                 <td>
-                  {$article.article_add_time|date_format}
+                  {$article->article_add_time|date_format}
                 </td>
 
                 <td style="text-align: center;">
                   <div class="btn-group">
-                    {if $article.article_active}
-                      <a href='/admin/articles/activation/{$article.id}' onclick="return confirm('{#sys_confirm_deactivate#}')" title='{#sys_disabled#}' class="btn btn-icon btn-pause"><i class="icon-pause"></i></a>
+                    {if $article->active}
+                      <a href='/admin/articles/activation/{$article->id}' onclick="return confirm('{#sys_confirm_deactivate#}')" title='{#sys_disabled#}' class="btn btn-icon btn-pause"><i class="icon-pause"></i></a>
                     {else}
-                      <a href='/admin/articles/activation/{$article.id}' onclick="return confirm('{#sys_confirm_activate#}')" title='{#sys_enabled#}' class="btn btn-icon btn-play"><i class="icon-play"></i></a>
+                      <a href='/admin/articles/activation/{$article->id}' onclick="return confirm('{#sys_confirm_activate#}')" title='{#sys_enabled#}' class="btn btn-icon btn-play"><i class="icon-play"></i></a>
                     {/if}
-                    <a href='/admin/articles/article_manage/{$article.id}' title="{#sys_edit#}" class="btn btn-icon btn-edit"><i class="icon-edit"></i></a>
-                    <a href='/admin/articles/delete/{$article.id}' title="{#sys_delete#}" class="btn btn-icon btn-delete"><i class="icon-trash"></i></a>
+                    <a href='/admin/articles/article_manage/{$article->id}' title="{#sys_edit#}" class="btn btn-icon btn-edit"><i class="icon-edit"></i></a>
+                    <a href='/admin/articles/delete/{$article->id}' title="{#sys_delete#}" class="btn btn-icon btn-delete"><i class="icon-trash"></i></a>
                   </div>
                 </td>
               </tr>

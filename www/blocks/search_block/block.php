@@ -1,35 +1,26 @@
 <?php
-
-function search_block_display($blockinfo)
+class search_block extends Block
   {
-  //Прелюдие как у всех модулей
-  $sysObject = 'search_block::display'.$blockinfo['id'];
-
-  //Проверка на доступ
-  if (!sysSecAuthAction($sysObject, ACCESS_READ))
+  function display(&$blockinfo)
     {
-    return true;
+    $content = unserialize($blockinfo->content);
+    $content = $content['content'];
+    $this->assign('content', $content);
+    return $this->view();
     }
-
-  $sysModTpl = sysTplWay ($sysObject);
-  $sysTpl = new sysTpl;
-  $sysTpl->caching = -1;
-
-  //Прверка в кеше
-  if($sysTpl->is_cached($sysModTpl,$sysObject))
+    
+  function modify(&$blockinfo)
     {
-    //Возвращаем результат
-    $result['block_content'] =& $sysTpl->fetch($sysModTpl,$sysObject);
-    return $result;
-    };
-
-  //Рендеринг
-  $sysTpl->assign('blockinfo', $blockinfo);
-
-  //ВЫводим содержание блока
-  $result['block_content'] =& $sysTpl->fetch($sysModTpl, $sysObject, $poll_stoped);
-  return $result;
+    $content = unserialize($blockinfo->content);
+    $content = $content['content'];
+    $this->assign('content', $content);
+    
+    return $this->view();
+    }
+    
+  function update(&$blockinfo)
+    {
+    $this->setBlockContent('content', $this->input_vars['content']);
+    $this->save($blockinfo->id);
+    }
   }
-
-
-?>

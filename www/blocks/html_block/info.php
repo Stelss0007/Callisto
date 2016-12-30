@@ -1,15 +1,14 @@
 <?php
-$info['block_name'] = 'html_block';
-$info['block_type'] = 'block';
-$info['block_displayname'] = 'HTML block';
-$info['block_version'] = '0.1.0';
-$info['block_description'] = 'Блок вставка произвольного html кода';
-$info['block_credits'] = '';
-$info['block_changelog'] = '';
-$info['block_license'] = '';
-$info['block_official'] = 1;
-$info['block_author'] = '';
-$info['block_contact'] = '';
-$info['block_refresh'] = 0;
-$info['block_language'] = '';
-?>
+$info['name'] = 'html_block';
+$info['type'] = 'block';
+$info['displayname'] = 'HTML block';
+$info['version'] = '0.1.0';
+$info['description'] = 'Блок вставка произвольного html кода';
+$info['credits'] = '';
+$info['changelog'] = '';
+$info['license'] = '';
+$info['official'] = 1;
+$info['author'] = '';
+$info['contact'] = '';
+$info['refresh'] = 0;
+$info['language'] = '';

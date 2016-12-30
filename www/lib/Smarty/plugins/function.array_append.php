@@ -1,5 +1,5 @@
 <?php
-//Присоединение элимента к массиву
+//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 //name 
 //key
 //value
@@ -7,7 +7,7 @@ function smarty_function_array_append($params, &$smarty)
 {
 extract($params);
 
-$arraydate = $smarty->get_template_vars($name);
+$arraydate = $smarty->getTemplateVars($name);
 
 if (!is_array($arraydate))
   {

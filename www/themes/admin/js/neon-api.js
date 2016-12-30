@@ -236,14 +236,18 @@ function hide_sidebar_menu(with_animation)
 function toggle_sidebar_menu(with_animation)
 {
 	var open = public_vars.$pageContainer.hasClass(public_vars.sidebarCollapseClass);
-	
+	var cookies = new Cookies();
+        
 	if(open)
 	{
+                cookies.set('sidebar-collapsed', '0');
 		show_sidebar_menu(with_animation);
 	}
 	else
 	{
+                cookies.set('sidebar-collapsed', '1');
 		hide_sidebar_menu(with_animation);
+                
 	}
 }
 

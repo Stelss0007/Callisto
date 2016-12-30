@@ -19,9 +19,14 @@
   {literal}
     <style type="text/css">
       html, body {
-        background: #eee !important;	
+        background-color: #eee !important;	
         width: 100%;
         max-width: 100%;
+      }
+      
+      body {
+          background-image: url(/themes/admin/img/background.jpg);
+          background-size: cover;
       }
 
       #appMessage_conteiner {
@@ -29,8 +34,8 @@
       }
       
       .wrapper {	
-        margin-top: 80px;
-        margin-bottom: 80px;
+        top: 100px;
+        position: relative;
       }
 
       .form-signin {
@@ -40,7 +45,7 @@
         background-color: #fff;
         border: 1px solid rgba(0,0,0,0.1);
         border-radius: 20px;
-        box-shadow: 8px 8px 8px #DEDEDE;
+        box-shadow: 0px 0px 16px #DEDEDE;
         position: relative;
       }
       

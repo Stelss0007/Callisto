@@ -1,4 +1,6 @@
 <?php
+use app\modules\menu\models\Menu;
+
 class AdminController extends Controller
   {
   public $defaultAction = 'menu_list';
@@ -6,34 +8,23 @@ class AdminController extends Controller
   function actionMenuList($parent_id = 0)
     {
     $this->getAccess(ACCESS_ADMIN);
-//    error_reporting(E_ERROR | E_WARNING | E_PARSE | E_NOTICE);
-//    
-//    $array[1] = 1000000;
-//    echo $array['1'];
-//    
-//    $array[name] = ' hello ';
-//    echo $array['name'];
-//    
-//    $array['second_name'] = ' world ';
-//    echo $array[second_name];
-//
-//    exit;
     
-    $menu = $this->menu->getById($parent_id);
+    $menu = Menu::find($parent_id); //$this->menu->getById($parent_id);
     
-    if(empty($menu['menu_path'])) {
-        $menu['menu_path'] = [];
+    if(empty($menu->menu_path)) {
+        $menu->menu_path = 0;
     }
     
-    $browsein[] =array('url'=>"/admin/main", 'displayname'=>$this->t('dashboard'));
-    $browsein = array_merge($browsein, $this->menu->parent_browsein($menu['menu_path']));
+    $browsein[] = ['url'=>"/admin/main", 'displayname'=>$this->t('dashboard')];
+    $browsein[] = ['url'=>"/admin/menu", 'displayname'=>$this->t('menu_header')];
+    $browsein = array_merge($browsein, Menu::parentBrowsein($menu->menu_path));
     if($parent_id > 0)
       {
-      $browsein[] =array('url'=>'', 'displayname'=>$menu['menu_title']);
+      $browsein[] =['url'=>'', 'displayname'=>$menu->menu_title];
       }
  
     $this->assign('parent_id', $parent_id);
-    $this->assign('menus', $this->menu->menu_list($parent_id));
+    $this->assign('menus',  Menu::menuList($parent_id));
     $this->assign('module_browsein', $browsein);
     
     $this->viewPage();
@@ -44,7 +35,7 @@ class AdminController extends Controller
     $this->getAccess(ACCESS_ADMIN);
     
     $this->assign('parent_id', 0);
-    $this->assign('menus', $this->menu->tree_items(0));
+    $this->assign('menus', Menu::treeItems(0));
     $this->assign('module_browsein', $browsein);
     
     $this->viewPage();
@@ -56,17 +47,17 @@ class AdminController extends Controller
     
     $this->setReferer();
     
-    $menu = $this->menu->getById($id);
+    $menu = Menu::find($id);
     $browsein[] =array('url'=>"/admin/main", 'displayname'=>$this->t('dashboard'));
-    $browsein = array_merge($browsein, $this->menu->parent_browsein($menu['menu_path']));
-    $browsein[] =array('url'=>"/admin/menu/menu_list/{$menu['id']}", 'displayname'=>$menu['menu_title']);
+    $browsein = array_merge($browsein, Menu::parentBrowsein($menu->menu_path));
+    $browsein[] =array('url'=>"/admin/menu/menu_list/{$menu->id}", 'displayname'=>$menu->menu_title);
     $browsein[] =array('url'=>'', 'displayname'=>'Edit');
  
-    $this->assign('items_list', $this->menu->tree_items(0));
+    $this->assign('items_list', Menu::treeItems(0));
     $this->assign('menu_parent_id', $id);
     $this->assign('module_browsein', $browsein);
 
-    $this->assign($menu);
+    $this->assign('menu', $menu);
        
     $this->viewPage();
     }
@@ -77,9 +68,9 @@ class AdminController extends Controller
     
     $this->setReferer();
   
-    $menu = $this->menu->getById($id);
+    $menu = Menu::find($id);
     $browsein[] =array('url'=>"/admin/main", 'displayname'=>$this->t('dashboard'));
-    $browsein = array_merge($browsein, $this->menu->parent_browsein($menu['menu_path']));
+    $browsein = array_merge($browsein, Menu::parentBrowsein($menu['menu_path']));
     if($id > 0)
       {
       $browsein[] =array('url'=>"/admin/menu/menu_list/{$menu['id']}", 'displayname'=>$menu['menu_title']);
@@ -87,7 +78,7 @@ class AdminController extends Controller
       
     $browsein[] =array('url'=>'', 'displayname'=>'Add');
  
-    $this->assign('items_list', $this->menu->tree_items(0));
+    $this->assign('items_list', Menu::treeItems(0));
     $this->assign('menu_parent_id', $id);
     $this->assign('module_browsein', $browsein);
     
@@ -98,19 +89,19 @@ class AdminController extends Controller
     {
     $this->getAccess(ACCESS_ADMIN);
     
-    $data = $this->input_vars;
+    $data = $this->inputVars;
 
     if($data['submit'])
       {
       $data['menu_content'] = $data["menu_content{$data['menu_item_type']}"];
       if($id)
         {
-        $this->menu->menuUpdate($data, $id);
+        Menu::menuUpdate($data, $id);
         $this->showMessage('Элемент меню успешно изменен!');
         }
       else
         {
-        $this->menu->menuCreate($data);
+        Menu::menuCreate($data);
         $this->showMessage('Элемент меню успешно добавлен!');
         }
       }
@@ -124,43 +115,47 @@ class AdminController extends Controller
     if(empty($id))
       $this->errors->setError("ID of menu is missing!");
     
-    if($this->menu->hasSubitemById($id))
+    if(Menu::hasSubitemById($id))
       {
       $this->showMessage('Элемент меню не может быть удален! Есть дочерние элементы.');
       }
     
-    $this->menu->menu_delete($id);
+    Menu::menuDelete($id);
     $this->showMessage('Элемент меню успешно удален!');
     $this->redirect();
     }
    
-   function actionWeightUp($weight, $menu_parent_id)
+   function actionWeightUp($id, $menu_parent_id)
     {
     $this->getAccess(ACCESS_ADMIN);
-    $this->menu->weightUp($weight, "menu_parent_id = '$menu_parent_id'");
+    $menu = Menu::find($id);
+    $menu->weightUp(['menu_parent_id' => $menu_parent_id]);
     $this->redirect();
     }
     
-  function actionWeightDown($weight, $menu_parent_id)
+  function actionWeightDown($id, $menu_parent_id)
     {
     $this->getAccess(ACCESS_ADMIN);
-    $this->menu->weightDown($weight, "menu_parent_id = '$menu_parent_id'");
+    $menu = Menu::find($id);
+    $menu->weightDown(['menu_parent_id' => $menu_parent_id]);
     $this->redirect();
     }
     
   function actionActive($id)
     {
     $this->getAccess(ACCESS_ADMIN);
-    $this->menu->block_active = '1';
-    $this->menu->save($id);
+    $menu = Menu::find($id);
+    $menu->menu_active = '1';
+    $menu->save();
     $this->redirect();
     }
     
   function actionDeactive($id)
     {
     $this->getAccess(ACCESS_ADMIN);
-    $this->menu->block_active = '0';
-    $this->menu->save($id);
+    $menu = Menu::find($id);
+    $menu->menu_active = '0';
+    $menu->save();
     $this->redirect();
     }
   }

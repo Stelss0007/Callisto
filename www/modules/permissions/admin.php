@@ -1,4 +1,5 @@
 <?php
+use app\modules\permissions\models\Permissions;
 class AdminController extends Controller
   {
   var $defaultAction = 'permissions_list';
@@ -7,12 +8,9 @@ class AdminController extends Controller
     {
     $this->getAccess(ACCESS_ADMIN);
     
-    $this->usesModel('groups');
-    
-    $this->group_permission = $this->permissions->groupPermissionsList();
-    $this->levels = $this->permissions->permissionLevel();
-   
-    $this->assign('group', $this->groups->group_list());
+    $this->assign('group_permission', Permissions::groupPermissionsList());
+    $this->assign('levels', Permissions::permissionLevel());
+    $this->assign('group', app\modules\groups\models\Groups::groupList());
     
     $browsein[] =array('url'=>"/admin/main", 'displayname'=>$this->t('dashboard'));
     $browsein[] =array('url'=>'', 'displayname'=>'Permissions');
@@ -25,34 +23,37 @@ class AdminController extends Controller
     {
     $this->getAccess(ACCESS_ADMIN);
     
-    $data = $this->input_vars;
+    $data = $this->inputVars;
     //print_r($data);exit;
     if($data['submit'])
       {
       if($id)
         {
-        $this->permissions->groupPermissionsUpdate($data, $id);
+         $permission = Permissions::find($id);
         }
       else
         {
-        $this->permissions->groupPermissionsCreate($data);
+        $permission = new Permissions;
         }
+        
+      $permission->setAttributesByArray($data);
+      $permission->save();
+      
       $this->redirect('/admin/permissions/permissions_list');
       }
     ////////////////////////////////////////////////////////////////////////////
-    
-    $this->usesModel('groups');
-    $this->assign('groups', $this->groups->group_list());
+
+    $this->assign('groups', \app\modules\groups\models\Groups::groupList());
     
     $browsein[] =array('url'=>"/admin/main", 'displayname'=>$this->t('dashboard'));
     $browsein[] =array('url'=>'/admin/permissions', 'displayname'=>'Permissions');  
   
-    $this->levels = $this->permissions->permissionLevel();
-    $permission = $this->permissions->groupPermission($id);
+    $this->assign('levels', Permissions::permissionLevel());
+    $permission = Permissions::groupPermission($id);
     
     if($permission)
       {
-      $this->assign($permission);
+      $this->assign('permission', $permission);
       $browsein[] =array('url'=>'', 'displayname'=>'Edit');
       }
     else
@@ -72,23 +73,29 @@ class AdminController extends Controller
     if(empty($id))
       $this->errors->setError("ID of Permission is missing!");
     
-    $this->permissions->groupPermissionDelete($id);
+    $permission = Permissions::find($id);
+    $permission->delete();
+    
     $this->redirect();
     }
       
-  function actionWeightUp($weight)
+  function actionWeightUp($id)
     {  
     $this->getAccess(ACCESS_ADMIN);
     
-    $this->permissions->weightUp($weight);
+    $permission = Permissions::find($id);
+    $permission->weightUp();
+    
     $this->redirect();
     }
     
-  function actionWeightDown($weight)
+  function actionWeightDown($id)
     { 
     $this->getAccess(ACCESS_ADMIN);
     
-    $this->permissions->weightDown($weight);
+    $permission = Permissions::find($id);
+    $permission->weightDown();
+    
     $this->redirect();
     }
   }

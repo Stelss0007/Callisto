@@ -23,21 +23,21 @@
 function smarty_function_pagination($params, &$smarty)
   {
   extract($params);
-  extract($smarty->get_template_vars('pagination'));
+  extract($smarty->getTemplateVars('pagination'));
   
   //Default values
   if(!isset($paging_show_text))       $paging_show_text = 1;
   if(!isset($paging_show_last_first)) $paging_show_last_first = 1;
   if(!isset($paging_show_number))     $paging_show_number = 1;
-  if(!isset($paging_text))            $paging_text = $smarty->get_config_vars('sys_pagination_text');   // -> "Страницы: (%%page%%/%%page_total%%)";
-  if(!isset($paging_first))           $paging_first = $smarty->get_config_vars('sys_pagination_first'); // -> "Первая";
-  if(!isset($paging_last))            $paging_last = $smarty->get_config_vars('sys_pagination_last');   // -> "Последняя";
-  if(!isset($paging_prev))            $paging_prev = $smarty->get_config_vars('sys_pagination_prev');   // -> "«";
-  if(!isset($paging_next))            $paging_next = $smarty->get_config_vars('sys_pagination_next');   // -> "»";
+  if(!isset($paging_text))            $paging_text = $smarty->getConfigVars('sys_pagination_text');   // -> "Страницы: (%%page%%/%%page_total%%)";
+  if(!isset($paging_first))           $paging_first = $smarty->getConfigVars('sys_pagination_first'); // -> "Первая";
+  if(!isset($paging_last))            $paging_last = $smarty->getConfigVars('sys_pagination_last');   // -> "Последняя";
+  if(!isset($paging_prev))            $paging_prev = $smarty->getConfigVars('sys_pagination_prev');   // -> "«";
+  if(!isset($paging_next))            $paging_next = $smarty->getConfigVars('sys_pagination_next');   // -> "»";
   if(!isset($paging_element_count))   $paging_element_count = 7;
   
 
-  $url = appCurPageURL();
+  $url = appCurrentPageURL();
   $url = appUpdateUrlQuery($url, array('page' => ''));
 
   $paging_element_count--;
@@ -48,12 +48,12 @@ function smarty_function_pagination($params, &$smarty)
     }
 
 
-  $result = '<div class="pagination">';
+  $result = '<div class="pagination" style="width: 100%;">';
   
   if($paging_show_text && ($page_total > 1)) 
     {
     //$result .= "<div class='pagination-info'><b>Страницы: ({$page}/{$page_total}) </b></div>";
-    $result .= "<div class='pagination-info'><b>".  appStrReplaceTemplate($paging_text, $smarty->get_template_vars('pagination'))." </b></div>";
+    $result .= "<div class='pagination-info'><b>".  appStrReplaceTemplate($paging_text, $smarty->getTemplateVars('pagination'))." </b></div>";
     }
     
   $result .= "<ul class='pagination-items pagination'>";

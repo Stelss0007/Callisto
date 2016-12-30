@@ -14,7 +14,6 @@
       </div>
       <div class="box-content">
         
-        <fieldset>
            {* <legend>Manage form</legend>*}
             <br><br>
              <div class="form-group">
@@ -28,7 +27,7 @@
                   {array_append name='flat_itemslist' key=$item.id value=$item.menu_title|escape|tree:$item.level}
                 {/foreach}
 
-                <select name=menu_parent_id  data-rel="chosen" class="form-control">
+                <select name=menu_parent_id  data-rel="chosen" class="form-control selectpicker">
                   {html_options options=$flat_itemslist selected=$menu_parent_id }
                 </select>
               </div>
@@ -119,8 +118,6 @@
               <button type="submit" class="btn btn-primary" name="submit" value="submit">{#sys_save#}</button>
               <button type="reset" class="btn">Cancel</button>
             </div>
-        
-        </fieldset>
       </div>
     </div><!--/span-->
 

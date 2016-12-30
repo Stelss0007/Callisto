@@ -16,7 +16,7 @@
           <thead>
             <tr>
               <th style="width: 30px;"></th>
-              <th style="width: 25px;">
+              <th style="width: 40px;">
                 <input type="checkbox" name="entities[]" class="td_entiies_group" value="">
               </th>
               <th>
@@ -44,40 +44,40 @@
               {cycle name="permsls" values="even,odd" assign="class" print=false}
               <tr class='{$class}'>
                 <td>
-                  {if $theme.active != '1'}
-                    <a href='/admin/theme/activate/{$theme.id}' class="btn-icon btn-star-o" title="{#sys_activate#}"><i class="icon-star-empty"></i></a>
+                  {if $theme->active != '1'}
+                    <a href='/admin/theme/activate/{$theme->id}' class="btn-icon btn-star-o theme-activation-star" title="{#sys_activate#}"><i class="icon-star-empty"></i></a>
                     {else}
-                    <span class="btn-icon icon-star" style="color: #E57C00; text-shadow: 1px 1px 1px #ccc;"></span>
+                    <span class="btn-icon icon-star theme-activation-star" style="color: #E57C00; text-shadow: 1px 1px 1px #ccc;"></span>
                   {/if}
                   &nbsp;
                 </td>
-                <th>
-                  <input type="checkbox" name="entities[]" class="td_entities" value="{$theme.id}">
-                </th>
                 <td>
-                  {$theme.theme_title}&nbsp;
+                  <input type="checkbox" name="entities[]" class="td_entities" value="{$theme->id}">
                 </td>
                 <td>
-                  {$theme.theme_description}&nbsp;
+                  {$theme->theme_title}&nbsp;
                 </td>
                 <td>
-                  {$theme.theme_author}&nbsp;
+                  {$theme->theme_description}&nbsp;
                 </td>
                 <td>
-                  {$theme.theme_name}&nbsp;
+                  {$theme->theme_author}&nbsp;
+                </td>
+                <td>
+                  {$theme->theme_name}&nbsp;
                 </td>
                 <td style="text-align: center;">
-                  {$theme.theme_version}&nbsp;
+                  {$theme->theme_version}&nbsp;
                 </td>
                 <td>
                   <div class="btn-group">
-                    {if $theme.active != '1'}
-                      <a href='/admin/theme/activate/{$theme.id}' class="btn btn-icon btn-star-o" title="{#sys_activate#}"><i class="icon-play"></i></a>
+                    {if $theme->active != '1'}
+                      <a href='/admin/theme/activate/{$theme->id}' class="btn btn-icon btn-star-o" title="{#sys_activate#}"><i class="icon-play"></i></a>
                       {else}
                       <span class="btn-icon btn-star" style="color: #E57C00; text-shadow: 1px 1px 1px #ccc;"></span>
                     {/if}
-                    {if $theme.active != '1'}
-                      <a href='/admin/theme/delete/{$theme.id}' title='{#user_delete#}' onclick="return confirm('{#sys_delete#}?')" class="btn btn-icon btn-delete"><i class="icon-trash"></i></a>
+                    {if $theme->active != '1'}
+                      <a href='/admin/theme/delete/{$theme->id}' title='{#user_delete#}' onclick="return confirm('{#sys_delete#}?')" class="btn btn-icon btn-delete"><i class="icon-trash"></i></a>
                       {/if}
                   </div>
                 </td>

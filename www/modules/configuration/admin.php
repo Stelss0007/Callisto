@@ -1,4 +1,6 @@
 <?php
+use app\modules\configuration\models\Configuration;
+
 class AdminController extends Controller
   {
   public $defaultAction = 'config_edit';
@@ -7,7 +9,7 @@ class AdminController extends Controller
     {
     $this->getAccess(ACCESS_ADMIN);
     
-    $config_view = $this->root_dir.'modules/'.$module.'/views/default/admin/config.tpl';
+    $config_view = $this->rootDir.'modules/'.$module.'/views/default/admin/config.tpl';
     $ObjectName = $module.'::views::default::admin::config';
     if(!file_exists($config_view))
       {
@@ -29,12 +31,11 @@ class AdminController extends Controller
     $dateformat_list['d.m.y'] = date("d.m.y", time());
     $dateformat_list['d M Y'] = date("d M Y", time());
     $dateformat_list['d F Y'] = date("d F Y", time());
-    
+ 
     $this->smarty->assign('site_timeformat_list', $timeformat_list);
     $this->smarty->assign('site_dateformat_list', $dateformat_list);
-    
     $this->assign('module_name', $module);
-    $this->smarty->assign('modconfig', $this->configuration->getModConfigurationAll());   
+    $this->smarty->assign('modconfig', Configuration::getModConfigurationAll());   
     $this->assign('config_body', $this->smarty->fetch($config_view, $ObjectName));
     
     $browsein   = array();
@@ -53,7 +54,7 @@ class AdminController extends Controller
     //appDebug($params);exit;
     foreach($params as $module => $values)
       {
-      $this->configuration->saveConfiguration($module, $values);
+      Configuration::saveConfiguration($module, $values);
       }
       
     $this->showMessage($this->t('sys_saved'));

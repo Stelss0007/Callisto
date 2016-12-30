@@ -36,7 +36,7 @@ function showAppMessage(message)
   {
   if($('#appMessage_').html() || message)
     {
-    var close_btn = '<a href="#" data-dismiss="alert" class="close" type="button">x</a>'; 
+    var close_btn = '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>'; 
     if(message) 
       {
       $('#appMessage_msg_text').html(message + close_btn).attr('class', 'alert alert-'+$('#appMessageType').val());
@@ -45,8 +45,9 @@ function showAppMessage(message)
       {
       $('#appMessage_msg_text').html($('#appMessageText').val()+close_btn).attr('class', 'alert alert-'+$('#appMessageType').val());
       }
-    
-    $('#appMessage_conteiner').stop().fadeIn(400, function(){$(this).show().delay(5000).fadeOut(400, function(){$(this).hide()});});
+    //$('#appMessage_conteiner').show();
+    $('#appMessage_conteiner').show().delay(5000).fadeOut(400, function(){$('#appMessage_conteiner').hide()});
+    //$('#appMessage_conteiner').stop().fadeIn(400, function(){$('#appMessage_conteiner').show().delay(5000).fadeOut(400, function(){$('#appMessage_conteiner').hide()});});
     //$('#appMessage_conteiner').stop().fadeIn(400).show().delay(5000).stop().animate({"opacity": "0"}, "slow", function(){$(this).hide()});
     //$('#appMessage_conteiner').stop().show().animate({"opacity": "1"}, "fast").delay(3000).stop();
     
@@ -60,7 +61,9 @@ function showAppMessage(message)
   }
 
 $('document').ready(function(){
-  $('body').prepend("<div id='appMessage_conteiner'><div class='alert alert-success' id='appMessage_msg_text'></div></div>");
+  if (!$("#appMessage_conteiner").length) {
+    $('body').prepend("<div id='appMessage_conteiner'><div class='alert alert-warning alert-dismissible' role='alert' id='appMessage_msg_text'></div></div>");
+  }
   $('#appMessage_msg_text, #appMessage_msg_text .close').on('click', function() {
      $('#appMessage_conteiner').stop().fadeOut("fast");
      //$('#appMessage_conteiner').stop().animate({"opacity": "0"}, "fast");

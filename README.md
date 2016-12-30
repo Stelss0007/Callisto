@@ -1,4 +1,0 @@
-Callisto
-========
-
-Callisto CMS

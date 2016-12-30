@@ -1,4 +1,6 @@
 <?php
+use app\modules\comments\models\Comments;
+
 class IndexController extends Controller
   {
   public $defaultAction = 'article_list';
@@ -15,10 +17,10 @@ class IndexController extends Controller
     
     //Подготовим фильтры
     $category_filter_list[0] = $this->t('sys_unknown');
-    $category_filter_list    = $category_filter_list + $this->articleCategory->category_list(false);
+    $category_filter_list    = $category_filter_list + $this->articleCategory->categoryList(false);
     
     $user_filter_list[0] = $this->t('sys_unknown');
-    $user_filter_list    = $user_filter_list + $this->users->user_list(false);
+    $user_filter_list    = $user_filter_list + $this->users->userList(false);
  
     $status_filter_list['-1']   = $this->t('all_status');
     $status_filter_list['1']    = $this->t('sys_active');
@@ -42,14 +44,14 @@ class IndexController extends Controller
     
   public function actionCommentAdd()
     {
-    $data = $this->input_vars; 
-    $this->arrayToModel($this->comments, $data);
+    $data = $this->inputVars; 
+
+    $comment = new Comments($data);
+    $comment->comment_user_id = $this->session->userId();
+    $comment->comment_addtime = time();
+    $comment->comment_modtime = time();
     
-    $this->comments->comment_user_id = $this->session->userId();
-    $this->comments->comment_addtime = time();
-    $this->comments->comment_modtime = time();
-    
-    $id = $this->comments->save();
+    $id = $comment->save();
     
     $this->showMessage($this->t('comments_added'), $this->referer.'#comment_'.$id);
     }

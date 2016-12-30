@@ -1,5 +1,5 @@
 <?php
-
+use app\modules\users\models\Users;
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
@@ -18,15 +18,16 @@ class AdminController extends Controller
     
     $this->redirect('/admin/users/users_list');
     }
+    
   function actionUsersList()
     {
     $this->getAccess(ACCESS_ADMIN);
     
-    $this->usesModel('groups');
- 
-    $this->groups_list = $this->groups->group_list(false);
-    $this->users_list = $this->users->user_list(true);
-    
+    //$this->usesModel('groups');
+    //print_r(app\modules\users\models\users::findAll()); exit;
+    $this->groups_list = app\modules\groups\models\Groups::groupList(false);
+    $this->users_list = Users::getList(true);
+ //print_r(app\modules\groups\models\Groups::groupList(false));exit;   
     $browsein[] =array('url'=>"/admin/main", 'displayname'=>$this->t('dashboard'));
     $browsein[] =array('url'=>'', 'displayname'=>'Users');
     
@@ -38,22 +39,33 @@ class AdminController extends Controller
   function actionManage($id=0)
     {
     $this->getAccess(ACCESS_ADD);
-    $data = $this->input_vars;
+    $data = $this->inputVars;
     
     if($data['submit'])
       {
       if($id)
         {
+        $user = Users::find($id);
         if(empty($data['pass']))
-          unset($data['pass']);
-
-        $this->users->user_update($data, $id);
+            {
+            unset($data['pass']);
+            }
+        else
+            {
+            $data['pass'] = md5($data['pass']);
+            }
+        
         }
       else
         {
-        $this->users->user_create($data);
+        $data['pass'] = md5($data['pass']);
+        
+        $user = new Users();
         }
-   
+        
+      $user->setAttributesByArray($data);
+      $user->save();
+        
       $this->redirect('/admin/users/users_list');
       }
     ////////////////////////////////////////////////////////////////////////////
@@ -62,19 +74,19 @@ class AdminController extends Controller
     $browsein[] =array('url'=>'/admin/users', 'displayname'=>'Users');  
    
     
-    $user = $this->users->user($id);
+    $user = Users::find($id);
+
     if($user)
       {
-      $this->vars = $user;
+      $this->assign('user', $user);
       $browsein[] =array('url'=>'', 'displayname'=>'Edit');  
       }
     else
       {
       $browsein[] =array('url'=>'', 'displayname'=>'Add');  
       }
-      
-    $this->usesModel('groups');
-    $this->groups_list = $this->groups->group_list();
+
+    $this->groups_list = app\modules\groups\models\Groups::groupList();
     
     $this->assign('module_browsein', $browsein);
      
@@ -88,7 +100,9 @@ class AdminController extends Controller
     if(empty($id))
       $this->errors->setError("ID of user is missing!");
     
-    $this->users->user_delete($id);
+    $user = Users::find($id);
+    $user->delete();
+    
     $this->redirect();
     }
     
@@ -99,7 +113,8 @@ class AdminController extends Controller
     if(empty($id))
       $this->errors->setError("ID of user is missing!");
     
-    $this->users->user_activation($id);
+    Users::activation($id);
+    
     $this->redirect();
     }
     
@@ -107,10 +122,11 @@ class AdminController extends Controller
   function actionLogin()
     {
     //$this->getAccess(ACCESS_READ);
-    $data = $this->input_vars;
+    $data = $this->inputVars;
     if($data['submit'])
       {
-      $login = $this->users->logIn($data['login'], $data['pass']);
+      $user = new Users();  
+      $login = $user->logIn($data['login'], $data['pass']);
      
       if(empty($login))
         {
@@ -121,7 +137,7 @@ class AdminController extends Controller
       $this->redirect('/admin/main');
       }
       
-    if($this->users->isLogin())
+    if(Users::isLogin())
       {
       $this->isLogin = true;
       }
@@ -134,15 +150,9 @@ class AdminController extends Controller
     
   function actionLogout()
     {
-    $this->users->logOut();
+    Users::logOut();
     $this->showMessage($this->t('login_success'));
     $this->redirect();
-    }
-      
-  function actionTest()
-    {
-    $element = $this->users->getByIdOrderByuser_Displayname("'1', '3'");
-    print_r($element);
     }
   }
 
