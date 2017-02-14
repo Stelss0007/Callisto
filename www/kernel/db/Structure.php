@@ -45,32 +45,32 @@ class Structure  {
         
     ];
     private static $fieldProperties = [
-                                    'type'      => 'INTEGER',
-                                    'size'      => '11',
-                                    'notNull'   => false,
-                                    'unsigned'  => true,
-                                    'default'   => 'NULL',
-                                    'comment'   => '',
-                                    'decimals'  => '3',
-                                    'values'    => [],
-                                    'autoincrement' => false,
-                                    'unique' => false,
-                                    'primary' => false
-                                ];
+        'type'      => 'INTEGER',
+        'size'      => '11',
+        'notNull'   => false,
+        'unsigned'  => true,
+        'default'   => 'NULL',
+        'comment'   => '',
+        'decimals'  => '3',
+        'values'    => [],
+        'autoincrement' => false,
+        'unique' => false,
+        'primary' => false,s
+    ];
     
     private static $defaultID = ['id' => [
-                                    'type' => 'INTEGER',
-                                    'size' => '11',
-                                    'notNull' => false,
-                                    'unsigned' => true,
-                                    'default' => 'NULL',
-                                    'comment' => '',
-                                    'autoincrement' => true,
-                                    'unique' => true,
-                                    'primary' => true,
-                                    'autoincrement' => true,
-                                ]
-                        ];
+            'type' => 'INTEGER',
+            'size' => '11',
+            'notNull' => false,
+            'unsigned' => true,
+            'default' => 'NULL',
+            'comment' => '',
+            'autoincrement' => true,
+            'unique' => true,
+            'primary' => true,
+            'autoincrement' => true,
+        ],
+    ];
     
     private static function prepareField($fieldName, $fieldOptions = [])
         {
@@ -78,6 +78,7 @@ class Structure  {
             {
             throw new Exception('Unknown field type for field "'.$fieldName.'"');
             }
+            
         if(!isset(self::$fieldTypes[$fieldOptions['type']]))
             {
             throw new Exception('Unknown field type "'.$fieldOptions['type'].'" for field "'.$fieldName.'"');

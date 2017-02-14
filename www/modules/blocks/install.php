@@ -39,16 +39,6 @@ class Install
         Structure::createIndex($this->tableName, 'position');
         Structure::createIndex($this->tableName, 'active');
         Structure::createIndex($this->tableName, 'lang');
-
-        
-        //Fill default data to DB table
-        $data = [
-            ['id'=>'1', 'weight'=>'1', 'menu_parent_id'=>'0', 'menu_item_type'=>'3', 'menu_subitem_counter'=>'2', 'menu_title'=>'Test Frontend Menu', 'menu_description'=>'Test Frontend Menu Description', 'menu_content'=>'', 'menu_active'=>'1', 'menu_path'=>'0::1'],
-            ['id'=>'2', 'weight'=>'1', 'menu_parent_id'=>'1', 'menu_item_type'=>'3', 'menu_subitem_counter'=>'0', 'menu_title'=>'Главня Страница', 'menu_description'=>'Главня Страница Описание', 'menu_content'=>'/', 'menu_active'=>'1', 'menu_path'=>'0::1::2'],
-            ['id'=>'3', 'weight'=>'2', 'menu_parent_id'=>'1', 'menu_item_type'=>'3', 'menu_subitem_counter'=>'0', 'menu_title'=>'Статьи', 'menu_description'=>'Страница Статьи Описание', 'menu_content'=>'/articles', 'menu_active'=>'1', 'menu_path'=>'0::1::3'],
-        ];
-        
-        Structure::fillData($this->tableName, $data);
         
         return true;
         }
