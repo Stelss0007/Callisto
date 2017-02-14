@@ -23,7 +23,7 @@ return [
     'DB.UserName' => 'root',
 
     // Пароль пользователя базы данных
-    'DB.Password' => 'root32pass',
+    'DB.Password' => '',
     //'DB.Password' => '',
 
     // Сервер базы данных

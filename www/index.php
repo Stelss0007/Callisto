@@ -13,12 +13,7 @@ include 'kernel/App.php';
 include 'kernel/AppObject.php';
 include 'kernel/Request.php';
 include 'kernel/core.php';
-<<<<<<< HEAD
-include 'kernel/Request.php';
-include 'kernel/router.php';
-include 'kernel/controller.php';
-include 'kernel/model.php';
-=======
+
 include 'kernel/Router.php';
 include 'kernel/Controller.php';
 include 'kernel/Model.php';
@@ -31,7 +26,6 @@ include 'kernel/db/Structure.php';
 include 'kernel/Cache.php';
 
 App::init();
->>>>>>> 9e76b217da374a55662c6680c3bb2a7752cc1d31
 
 $router = new Router();
 $router->run();

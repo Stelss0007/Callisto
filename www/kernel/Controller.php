@@ -11,17 +11,17 @@ abstract class Controller extends AppObject
   protected $moduleDir;
   public    $rootDir;
   public    $currentTheme;
-  protected $vars = array();
+  protected $vars = [];
   protected $modname;
   protected $objectName;
   protected $type;
   protected $action;
-  public    $inputVars = array();
-  protected $inputVarsClear = array();
+  public    $inputVars = [];
+  protected $inputVarsClear = [];
   private   $lang;
   private   $langDefault = 'rus';
   public    $config = null;
-  private   $modVars = array();
+  private   $modVars = [];
   public    $controllerName = 'IndexController';
   
   public    $permissionLavel = 0;
@@ -35,15 +35,15 @@ abstract class Controller extends AppObject
   protected $page = 'index';
   
   protected $block = array(
-                          'top'   =>array(),
-                          'left'  =>array(),
-                          'center'=>array(),
-                          'right' =>array(),
-                          'bottom'=>array()
+                          'top'   =>[],
+                          'left'  =>[],
+                          'center'=>[],
+                          'right' =>[],
+                          'bottom'=>[]
                           );
-  //public $models= array();
-  protected $libs = array();
-  protected $tpls = array();
+  //public $models= [];
+  protected $libs = [];
+  protected $tpls = [];
   
   // FILES 
   public $inputFiles; 
@@ -95,16 +95,16 @@ abstract class Controller extends AppObject
     appUsesLib('UserSession');
     
     define('KERNEL_DIR',APP_DIRECTORY.'/kernel/');
-    require(KERNEL_DIR.'block.php');
-    require(KERNEL_DIR.'view.php');
+    require(KERNEL_DIR.'Block.php');
+    require(KERNEL_DIR.'View.php');
 
     $this->type = 'user';
 
-    $this->modname = $mod;//strtolower(get_class($this));
+    $this->modname = $mod;
 
     $this->moduleDir = 'modules/'.$this->modname.'/';
     
-    require(KERNEL_DIR.'debuger.php');
+    require(KERNEL_DIR.'Debuger.php');
     if(\App::$config['debug.enabled'] && !appIsAjax() && $this->type != 'api')
       {
       $this->debuger = & Debuger::getInstance();
@@ -145,12 +145,13 @@ abstract class Controller extends AppObject
     $this->inputVars = $_REQUEST;
     $this->referer = (isset($_SERVER['HTTP_REFERER'])) ? $_SERVER['HTTP_REFERER'] : '/';
     //?????? ??? ?????? ? ???????? ???????
-    unset ($this->inputVars['module']);
-    unset ($this->inputVars['action']);
-    unset ($this->inputVars['type']);
-    //unset ($this->input_vars['submit']);
-    unset ($this->inputVars['PHPSESSID']);
-    
+    unset (
+        $this->inputVars['module'],
+        $this->inputVars['action'],
+        $this->inputVars['type'],
+        $this->inputVars['PHPSESSID']
+    );
+
     $this->getCurrentURL();
     
     $this->displayMessage();
@@ -174,7 +175,7 @@ abstract class Controller extends AppObject
       
       $debuger->endRenderPage();
       
-      $mysql_querys = array();
+      $mysql_querys = [];
       $mysql_query_count = 0;
       $mysql_query_time = 0;
       foreach($debuger->mysql as $key=>$value)
@@ -280,6 +281,7 @@ abstract class Controller extends AppObject
     elseif(is_object($varName)) 
       {
       $this->vars[get_class($varName)] = $varName;
+      //$this->vars[{$varName}::class] = $varName;
       }
     else
       {
@@ -290,7 +292,7 @@ abstract class Controller extends AppObject
     
   final public function action($actionName)
     {
-    if(empty($actionName) || $actionName == 'index')
+    if(empty($actionName) || $actionName === 'index')
       {
       if(!empty($this->defaultAction))
         {
@@ -312,7 +314,7 @@ abstract class Controller extends AppObject
     $this->objectName = $this->getObjectName();
     $this->permissionLavel = $GLOBALS['permissionLavel'] = $this->getPermissionLavel($this->objectName);
     
-    if($this->type == 'admin')
+    if($this->type === 'admin')
       {
       $this->smarty->force_compile = true;
       }
@@ -328,16 +330,9 @@ abstract class Controller extends AppObject
     if($this->isAdmin())
       {
       appJsLoad('kernel', 'jQueryUI');
-      
       appCssLoad('kernel', 'bootstrap');
       appJsLoad('kernel', 'bootstrap');
-      
       appJsLoad('kernel', 'admin');
-      
-//      if($this->getViewType() != 'admin') 
-//        {
-//        appCssLoad('kernel', 'admin-theme');
-//        }
       }
     else {
         if(\App::$config['bootstrap.enabled']) {
@@ -351,7 +346,7 @@ abstract class Controller extends AppObject
     appCssLoad('kernel'); 
     appCssLoad('kernel', 'jQueryUI'); 
      
-     if($this->getViewType() != 'admin') 
+     if($this->getViewType() !== 'admin')
         {  
         //Без аргументов подключится стиль текущей темы
         appCssLoad();
@@ -404,7 +399,7 @@ abstract class Controller extends AppObject
     {
     //appDebugExit($this->config);
     if(empty($var))
-      return (isset(\App::$config[$modname])) ? \App::$config[$modname] : array();
+      return (isset(\App::$config[$modname])) ? \App::$config[$modname] : [];
     
     return (isset(\App::$config[$modname][$var])) ? \App::$config[$modname][$var] : false;
     }
@@ -432,10 +427,11 @@ abstract class Controller extends AppObject
    */
   final function isAdmin()
     {
-    if($this->session->userGid() == 1)
+    if ($this->session->userGid() === 1)
       {
       return true;
       }
+
     return false;
     }
     
@@ -455,7 +451,7 @@ abstract class Controller extends AppObject
   
   /**
    * Получение входящих параметров ($_REQUEST)
-   * @param string $var
+   * @param mixed $var
    * @param mixed $default
    * @return mixed
    */
@@ -463,7 +459,7 @@ abstract class Controller extends AppObject
     {
     if(is_array($var))
       {
-      $array_result = array();
+      $array_result = [];
       foreach($var as $key => $valueKey)
         {
         if(is_array($valueKey))
@@ -516,7 +512,7 @@ abstract class Controller extends AppObject
   /**
    * Постраничка
    * @param object $model
-   * @return type
+   * @return mixed
    */
   final public function paginate($pagination=false)
     {
@@ -1121,7 +1117,7 @@ abstract class Controller extends AppObject
         }
       }
     
-    if(\App::$config['Message.type']=='js')
+    if(\App::$config['Message.type'] === 'js')
       {
       if($message)
         {
@@ -1149,8 +1145,6 @@ abstract class Controller extends AppObject
       $this->smarty->assign('message', $message);
       $this->smarty->assign('time', $time);
       //Смотрим че у нас в сесии (Какая тема)
-      //$themename = sysUserTheme ();
-      //$sysTpl->display("themes/test/messages/normal.tpl");
       $this->smarty->display("themes/green/messages/normal.tpl");
       exit;
       }
@@ -1162,13 +1156,11 @@ abstract class Controller extends AppObject
   //////////////////////////////////////////////////////////////////////////////
   final public function getPostData()
     {
-//    define('VALIDATOR_DIR',APP_DIRECTORY.'/lib/validateForm/');
-//    require(VALIDATOR_DIR.'validateForm.class.php');
     appUsesLib('validateForm');
    
     $form = new validateForm($_POST);
 
-    $resarray = array();
+    $resarray = [];
     $func_args = func_get_args();
     foreach ($func_args as $var)
       {
@@ -1251,9 +1243,7 @@ abstract class Controller extends AppObject
     //Если нет правил для валидации знач возвращаем TRUE (Валидация прошла)
     if(empty($validateRules))
       return true;
-    
-//    define('VALIDATOR_DIR',APP_DIRECTORY.'/lib/validateForm/');
-//    require(VALIDATOR_DIR.'validateForm.class.php');
+
     appUsesLib('validateForm');
    
     $form = new validateForm($validateData);
@@ -1333,7 +1323,7 @@ abstract class Controller extends AppObject
  
     if(!empty($type))
       {
-      $temp = array();
+      $temp = [];
       foreach($result as $value)
         {
         if($value['type'] == $type)
@@ -1456,7 +1446,7 @@ abstract class Controller extends AppObject
     
     $img = new Image();
     
-    $result_files = array();
+    $result_files = [];
     $result_files['original'] = $dst;
     
     foreach($this->imageSize as $value)
@@ -1503,7 +1493,7 @@ abstract class Controller extends AppObject
 //      {
 //      $this->loadModVars($mod);
 //      }
-//    return isset($this->mod_vars[$mod]) ? $this->mod_vars[$mod] : array();
+//    return isset($this->mod_vars[$mod]) ? $this->mod_vars[$mod] : [];
 //    }
 //    
 //  final public function getModVar($mod='', $key='')
@@ -1579,18 +1569,26 @@ abstract class Controller extends AppObject
     echo "</pre>";
     die();
     }
-    
-    
-    
+
+
+ /**
+  * @param $moduleName
+  * @return \app\db\ActiveRecord\Model
+  */
+  public function getDefaultModelForModule($moduleName)
+  {
+      /** @var \app\db\ActiveRecord\Model $class */
+      $class = "\\app\\modules\\{$moduleName}\\models\\".ucfirst($moduleName);
+
+      return $class;
+  }
     
     
   public function actionGroupOperation()
     {
     $data = $this->inputVars;
-    
-    $modelName = $this->modname;
-    
-    $class = "\\app\\modules\\{$modelName}\\models\\".ucfirst($modelName);
+
+    $class = $this->getDefaultModelForModule($this->modname);
     
     switch($data['action_name'])
       {
@@ -1623,10 +1621,8 @@ abstract class Controller extends AppObject
     {
     if(empty($id))
       $this->errors->setError("ID of object is missing!");
-    
-    $modelName = $this->modname;
 
-    $class = "\\app\\modules\\{$modelName}\\models\\".ucfirst($modelName);
+    $class = $this->getDefaultModelForModule($this->modname);
     
     $object = $class::find($id);
     $object->delete($id);
@@ -1639,9 +1635,8 @@ abstract class Controller extends AppObject
     {
     if(empty($id))
       $this->errors->setError("ID of user is missing!");
-    
-    $modelName = $this->modname;
-    $class = "\\app\\modules\\{$modelName}\\models\\".ucfirst($modelName);
+
+    $class = $this->getDefaultModelForModule($this->modname);
   
     $object = $class::find($id);
     $object->activation($id);
@@ -1649,7 +1644,7 @@ abstract class Controller extends AppObject
     $this->redirect();
     }
     
-  public function sendEmail($to, $subject='', $body='', $files=array())
+  public function sendEmail($to, $subject='', $body='', $files=[])
     {
     $html = true;
 
@@ -1760,7 +1755,7 @@ abstract class Controller extends AppObject
       }
     }
     
-  public function sendEmailTemplate($to, $subject='', $template='main', $variables=array(), $files=array())
+  public function sendEmailTemplate($to, $subject='', $template='main', $variables=[], $files=[])
     {
     $smartyTpl = new viewTpl();
     $smartyTpl->assign($variables);

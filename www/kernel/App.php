@@ -34,7 +34,7 @@ class App {
     public static function init() 
     {
         self::initAutoloader();
-        self::$config = include 'kernel/config.php';
+        self::$config = include 'kernel/Config.php';
     }
 }
 
