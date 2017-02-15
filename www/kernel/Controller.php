@@ -368,9 +368,13 @@ abstract class Controller extends AppObject
     {
     return preg_replace("/[\_,\-](.)/e", "strtoupper('\\1')", $string);
     }
-  final public function setTheme()
+  final public function setTheme($theme = null)
     {
-    $this->currentTheme = \app\modules\theme\models\Theme::getActiveName();
+        if ($theme) {
+            $this->currentTheme = $theme;
+        } else {
+            $this->currentTheme = \app\modules\theme\models\Theme::getActiveName();
+        }
     }
   final public function getThemeName()
     {

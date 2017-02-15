@@ -59,8 +59,7 @@
                 <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
                 <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
-        {appJsOutput}
-    </head>
+     </head>
     
     <body class="page-body" style="min-height: 100%">
         <div class="page-container body-hide_ {if $smarty.cookies['sidebar-collapsed'] eq 1}sidebar-collapsed{/if}" style="min-height: 100%;"><!-- add class "sidebar-collapsed" to close sidebar by default, "chat-visible" to make chat appear always -->	
@@ -152,8 +151,8 @@
              var language = "{$lang}";
              var
                      sys_confirm_group_delete = "{#sys_confirm_group_delete#}",
-                     sys_confirm_group_activate = "11{#sys_confirm_group_activate#}",
-                     sys_confirm_group_deactivate = "111{#sys_confirm_group_deactivate#}",
+                     sys_confirm_group_activate = "{#sys_confirm_group_activate#}",
+                     sys_confirm_group_deactivate = "{#sys_confirm_group_deactivate#}",
                      sys_confirm_group_install = "{#sys_confirm_group_install#}",
                      sys_confirm_group_not_selected = "{#sys_confirm_group_not_selected#}",
                      sys_confirm_delete = "{#sys_confirm_delete#}",

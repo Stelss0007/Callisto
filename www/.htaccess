@@ -25,6 +25,7 @@ RewriteCond    %{REQUEST_URI}        !^/modules/(.*)/css
 RewriteCond    %{REQUEST_URI}        !^/modules/(.*)/img
 RewriteCond    %{REQUEST_URI}        !^editor.php
 RewriteCond    %{REQUEST_URI}        !^editor_2.php
+
 #Все остальное куда бы пользователь не полез - перенаправляется на наш файл redirect.php
 RewriteRule     ^(.*)$            index.php [PT]
 #Запрещаем доступ к файлам .ini и .cfg
