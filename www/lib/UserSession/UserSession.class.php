@@ -15,20 +15,20 @@ class UserSession
    * object
    * @var object 
    */
-  static $instance;
-  var $prefix = '';
+  private static $instance;
+  private $prefix = '';
   
   /**
    * current user name
    * @var string 
    */
-  var $user_name = '';
+  private $user_name = '';
   /**
    * current user id
    * @var integer 
    */
-  var $user_id = -1;
-  var $user_gid = null;
+  private $user_id = -1;
+  private $user_gid = null;
 
   /**
    * Redeclsrated object
@@ -46,7 +46,7 @@ class UserSession
   /**
    * Constructor 
    */ 
-  function __construct()
+  public function __construct()
     {
     if(!isset($_SESSION))
       {
@@ -59,7 +59,7 @@ class UserSession
    * @param string $path src to session path
    * @return boolean
    */  
-  function setPath($path = false)
+  public function setPath($path = false)
     {
     session_save_path($path);
     ini_set('session.gc_probability', 1);
@@ -71,7 +71,7 @@ class UserSession
    * User is Logedin?
    * @return boolean 
    */  
-  function isLogin()
+  public function isLogin()
     {
     if (isset($_SESSION['user']))
       {
@@ -88,7 +88,7 @@ class UserSession
     * @param array $user array('login(user_name)', 'id(user_id)', 'gid(user group id)')
     * @return boolean 
     */ 
-   function userLogin($user)
+   public function userLogin($user)
     {
     $this->user_name =  $user->login;
     $this->user_id = $user->id;
@@ -104,7 +104,7 @@ class UserSession
    * User logoun / destroy session
    * @return boolean 
    */
-  function userLogOut()
+  public function userLogOut()
     {
     unset ($_SESSION['user']);
     unset ($_SESSION['user_id']);
@@ -125,7 +125,7 @@ class UserSession
    * @param mixed $value
    * @return boolean 
    */
-  function setVar($var, $value)
+  public function setVar($var, $value)
     {
     $_SESSION[$var] = json_encode($value);
     return true;
@@ -137,7 +137,7 @@ class UserSession
    * @param mixed $default var value
    * @return type 
    */
-  function getVar($var, $default = false)
+  public function getVar($var, $default = false)
     {
     if(isset($_SESSION[$var]))
         {
@@ -156,7 +156,7 @@ class UserSession
    * @param string $var
    * @return boolean 
    */
-  function delVar($var)
+  public function delVar($var)
     {
     unset($_SESSION[$var]);
     return true;
@@ -166,7 +166,7 @@ class UserSession
    * Get curent user ID
    * @return integer 
    */
-  function userId()
+  public function userId()
     {
     if(!empty($_SESSION['user_id']))
       return $this->getVar('user_id');
@@ -177,7 +177,7 @@ class UserSession
    * Get curent user Name (login)
    * @return integer 
    */
-  function userName()
+  public function userName()
     {
     if(!empty($_SESSION['user']))
       return $this->getVar('user');
@@ -188,10 +188,10 @@ class UserSession
    * Get curent user group ID (if user non authorized then return -1)
    * @return integer 
    */
-  function userGid()
+  public function userGid()
     {
     if(!empty($_SESSION['user_gid']))
-      return $this->getVar('user_gid');
+      return (int) $this->getVar('user_gid');
     return -1;
     }
 }

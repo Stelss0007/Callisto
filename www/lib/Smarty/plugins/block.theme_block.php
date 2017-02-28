@@ -20,7 +20,7 @@ function smarty_block_theme_block($params, $content, $smarty, &$repeat)
           {
           return $content;
           }
-        $contentAdmin = '<div class="block-item-admin-panel" data-position="'.$block['position'].'" data-weight="'.$block['weight'].'" data-id="'.$block['id'].'">'
+        $contentAdmin = '<div class="block-item-admin-panel" data-position="' . $block['position'].'" data-weight="' . $block['weight'].'" data-id="'.$block['id'].'">'
                 .'<div class="block-toolbar">'
                   .'<a href="/admin/blocks/modify/'.$block['id'].'" class="block-edit" data-id="'.$block['id'].'"><span class="icon-cog"></span></a>'
                   .'<a href="/admin/blocks/delete/'.$block['id'].'" class="block-delete" data-id="'.$block['id'].'"><span class="icon-trash"></span></a>'

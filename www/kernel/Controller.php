@@ -54,9 +54,12 @@ abstract class Controller extends AppObject
                             array('width'=>'320', 'height'=>'150'),
                             array('width'=>'100', 'height'=>'100')
                             );
-  
-  
-  function __construct($mod)
+
+
+    /**
+     * @param $mod
+     */
+  public function __construct($mod)
     {
     date_default_timezone_set('Europe/Moscow');
     //APP_DIRECTORY = dirname(__FILE__);
@@ -156,8 +159,11 @@ abstract class Controller extends AppObject
     
     $this->displayMessage();
     }
-    
-  function __destruct()
+
+    /**
+     *
+     */
+  public function __destruct()
     {
     if(\App::$config['debug.enabled'] && !appIsAjax() && $this->type != 'api')
       {
@@ -429,7 +435,7 @@ abstract class Controller extends AppObject
    * Проверка пренадлежности пользователя к групе "Администраторы"
    * @return boolean
    */
-  final function isAdmin()
+  final public function isAdmin()
     {
     if ($this->session->userGid() === 1)
       {
@@ -443,12 +449,13 @@ abstract class Controller extends AppObject
    * Определение информации о пользователе
    * @return \Controller
    */  
-  final function setTplUserInfo()
+  final private function setTplUserInfo()
     {
     $currentUserInfo['currentUserInfo']['id']   = $this->session->userId();
     $currentUserInfo['currentUserInfo']['name'] = $this->session->userName();
     $currentUserInfo['currentUserInfo']['gid']  = $this->session->userGid();
     $currentUserInfo['currentUserInfo']['isAdmin']  = $this->isAdmin();
+
     $this->assign($currentUserInfo);
     return $this;
     }
