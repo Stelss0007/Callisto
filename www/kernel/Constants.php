@@ -1,9 +1,6 @@
 <?php
 define('DS', DIRECTORY_SEPARATOR );
 
-/**
- * ????????? ???????
- */
 define('MODULE_STATE_NA', 0);
 define('MODULE_STATE_UNINITIALISED', 10);
 define('MODULE_STATE_INACTIVE', 20);
@@ -11,9 +8,7 @@ define('MODULE_STATE_ACTIVE', 30);
 define('MODULE_STATE_MISSING', 40);
 define('MODULE_STATE_UPGRADED', 50);
 
-/**
- * ?????? ???????
- */
+
 define('ACCESS_INVALID', -1);
 define('ACCESS_NONE', 0);
 define('ACCESS_OVERVIEW', 10);
@@ -24,9 +19,7 @@ define('ACCESS_EDIT', 50);
 define('ACCESS_DELETE', 60);
 define('ACCESS_ADMIN', 70);
 
-/**
- * ???? ?????????????? ????????
- */
+
 define('BAD_PARAM', 1);
 define('DATABASE_ERROR', 2);
 define('ID_NOT_EXIST', 3);

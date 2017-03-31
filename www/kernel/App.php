@@ -15,17 +15,17 @@ class App {
             }
             unset($class[0]);
 
-            if($class[1] == 'lib') {
+            if($class[1] === 'lib') {
                 $class = implode('/', $class);
                 $class = $class.'.class.php';
                 echo $class; 
                 exit;
-                include $class;
+                include_once $class;
                 return true;
             }
 
-            $class = implode('/', $class);    
-            include $class.'.php';
+            $class = implode('/', $class);
+            include_once $class.'.php';
             AppObject::addModelList($namespace, $class);
         });
     }
@@ -34,7 +34,7 @@ class App {
     public static function init() 
     {
         self::initAutoloader();
-        self::$config = include './kernel/Config.php';
+        self::$config = require APP_DIRECTORY.'/kernel/Config.php';
         
         if (self::$config['locale.lc_all']) {
             setlocale(LC_ALL, self::$config['locale.lc_all']);
@@ -56,7 +56,7 @@ class App {
     /**
      * Возвращает спиисок языков в системе
      * 
-     * @return type
+     * @return array
      */
     public static function getLangList()
     {
@@ -65,7 +65,7 @@ class App {
         $handle = opendir('lang');
         while ($f = readdir($handle))
           {
-          if ($f != '.' && $f != '..' && $f != 'CVS' && !ereg("[.]",$f))
+          if ($f !== '.' && $f !== '..' && $f !== 'CVS' && !ereg("[.]",$f))
             {
             //$LangList[$f] = $alllang[$f];
             $langList[$f] = $f;

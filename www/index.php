@@ -1,29 +1,30 @@
 <?php
+define('APP_DIRECTORY', __DIR__);
+
 //phpinfo();exit;
-require 'vendor/autoload.php';
-include 'kernel/Exceptions.php';
-include 'kernel/ErrorHandler.php';
+include_once __DIR__.'/vendor/autoload.php';
+include_once __DIR__.'/kernel/Exceptions.php';
+include_once __DIR__.'/kernel/ErrorHandler.php';
 $errors = ErrorHandler::getInstance();
 
 date_default_timezone_set('America/New_York');
-define('APP_DIRECTORY', dirname(__FILE__));
 
-include 'kernel/Globals.php';
-include 'kernel/App.php';
-include 'kernel/AppObject.php';
-include 'kernel/Request.php';
-include 'kernel/core.php';
+include_once __DIR__.'/kernel/Globals.php';
+include_once __DIR__.'/kernel/App.php';
+include_once __DIR__.'/kernel/AppObject.php';
+include_once __DIR__.'/kernel/Request.php';
+include_once __DIR__.'/kernel/core.php';
 
-include 'kernel/Router.php';
-include 'kernel/Controller.php';
-include 'kernel/Model.php';
+include_once __DIR__.'/kernel/Router.php';
+include_once __DIR__.'/kernel/Controller.php';
+include_once __DIR__.'/kernel/Model.php';
 
-include 'kernel/Validator.php';
-include 'kernel/db/SQLBuilder.php';
-include 'kernel/db/Model.php';
-include 'kernel/db/Table.php';
-include 'kernel/db/Structure.php';
-include 'kernel/Cache.php';
+include_once __DIR__.'/kernel/Validator.php';
+include_once __DIR__.'/kernel/db/SQLBuilder.php';
+include_once __DIR__.'/kernel/db/Model.php';
+include_once __DIR__.'/kernel/db/Table.php';
+include_once __DIR__.'/kernel/db/Structure.php';
+include_once __DIR__.'/kernel/Cache.php';
 
 App::init();
 
