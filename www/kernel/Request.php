@@ -11,35 +11,42 @@
  *
  * @author Ruslan
  */
-class Request {
-    
-    public static function getMethod() {
+class Request
+{
+
+    public static function getMethod()
+    {
         return $_SERVER['REQUEST_METHOD'];
     }
 
-    public static function getPostParam($field = false) {
-        if(!$fields) return null;
-        
-        if(isset($_POST[$field])) {
+    public static function getPostParam($field = false)
+    {
+        if (!$fields) {
+            return null;
+        }
+
+        if (isset($_POST[$field])) {
             return $_POST[$field];
         }
-         
+
     }
-    public static function getPostParams($fields = false){
-        if(!$fields){
+
+    public static function getPostParams($fields = false)
+    {
+        if (!$fields) {
             return $_POST;
         }
-        
-        if(!is_array($fields)) {
+
+        if (!is_array($fields)) {
             return self::getPostParam($fields);
         }
-        
+
         $result = [];
-        
-        foreach($fields as $field) {
+
+        foreach ($fields as $field) {
             $result[$field] = self::getPostParam($field);
         }
-        
+
         return $result;
     }
 }
