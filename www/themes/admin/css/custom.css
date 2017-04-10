@@ -5,28 +5,9 @@
 */
 
 html, body {
-/*  position: relative;*/
   height:100%;
 }
 
-/*
-a:focus,
-button:focus,
-input:focus
-{ 
-    outline: none; 
-}
-:focus, :active {
-    outline: 0;
-    border: 0;
-}
-button::-moz-focus-inner {
-  border: 0;
-}
-
-:focus {outline:none;}
-::-moz-focus-inner {border:0;}
-*/
 
 .btn {
     font-size: 14px;
@@ -38,7 +19,6 @@ button::-moz-focus-inner {
 }
 
 .table .btn {
-/*    border: 1px solid #e1e1e1;*/
     line-height: 16px;
     height: 30px;
     min-width: 30px;
@@ -68,7 +48,6 @@ button::-moz-focus-inner {
 
 .page-container {
     position: relative;
-/*    height: 100%;*/
     min-height: 100%;
 }
 
@@ -187,3 +166,5 @@ a, a:hover, a:active, a:focus {
 .theme-activation-star {
     font-size: 16px;
 }
+
+

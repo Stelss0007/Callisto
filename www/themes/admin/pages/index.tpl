@@ -174,7 +174,7 @@
 {*
 <script src="/themes/admin/js/jquery-ui/js/jquery-ui-1.10.3.minimal.min.js"></script>
 *}
-      <script src="/themes/admin/js/bootstrap.js"></script>
+      {*<script src="/themes/admin/js/bootstrap.js"></script>*}
       <script src="/themes/admin/js/resizeable.js"></script>
 {*      
 <script src="/themes/admin/js/joinable.js"></script>

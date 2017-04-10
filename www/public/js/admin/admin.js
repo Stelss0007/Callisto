@@ -3,16 +3,16 @@ $(document).ready(function(){
 
   $('body').append('<div id="dialog-box" title="&nbsp;"></div>');
   $('body').append('<div id="modal-box" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog"><div class="modal-dialog modal-lg" role="document"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button><div class="title"></div></div><div class="madal-body"></div></div></div></div>');
-  
+
   var dialog = $('#dialog-box').dialog({
                   autoOpen: false,
                   position: { my: "center top", at: "center top"},
                   width: 750,
                   modal: true
                 });
-                
+
    var lastSortableReady = '';
-   
+
    var blockPositionsKey = [];
    blockPositionsKey['left']    = 'l';
    blockPositionsKey['right']   = 'r';
@@ -20,7 +20,7 @@ $(document).ready(function(){
    blockPositionsKey['bottom']  = 'b';
    blockPositionsKey['center']  = 'c';
 
-    
+
   //admin blocks sortable
   function sortable() {
     //$(".block-item-admin-panel").parent()
@@ -48,13 +48,13 @@ $(document).ready(function(){
                   var id = ui.item.attr('data-id');
                   var newPosition = ui.item.parent().attr('data-block-list-position');
                   var newPositionKey = blockPositionsKey[newPosition];
-                  
+
                   if(lastSortableReady === id+'/'+positionOld+'/'+positionNew+'/'+newPositionKey) {
                       return true;
                   }
-                  
+
                   lastSortableReady = id+'/'+positionOld+'/'+positionNew+'/'+newPositionKey;
-                  
+
                   $.ajax('/admin/blocks/weightSet/'+id+'/'+positionOld+'/'+positionNew+'/'+newPositionKey, {
                       cache: false,
                       success: function(html){
@@ -72,63 +72,63 @@ $(document).ready(function(){
                   var blockContainer = ui.item.find('.app-block-admin-conteiner');
                   var blockContent   = blockContainer.find('.app-block-content');
                   var blockTitle     = blockContainer.find('.app-block-name');
-          
+
                   blockContent = blockContent.is('input') ? blockContent.val() : blockContent.html();
                   blockTitle   = blockTitle.is('input') ? blockTitle.val() : blockTitle.html();
-                  
+
                   var newTemplate =  ui.item.parent().find('.app-block-template').clone();
-                  
+
                   var templateBlockTitle = newTemplate.find('.app-block-name');
                   var templateBlockContent = newTemplate.find('.app-block-content');
-                  
+
                   if(templateBlockTitle.is('input'))
                     {
-                    templateBlockTitle.val(blockTitle); 
+                    templateBlockTitle.val(blockTitle);
                     }
                   else
                     {
-                    templateBlockTitle.html(blockTitle); 
+                    templateBlockTitle.html(blockTitle);
                     }
-                    
+
                   if(templateBlockContent.is('input'))
                     {
-                    templateBlockContent.val(blockContent); 
+                    templateBlockContent.val(blockContent);
                     }
                   else
                     {
-                    templateBlockContent.html(blockContent); 
+                    templateBlockContent.html(blockContent);
                     }
-                  
+
                   blockContainer.html(newTemplate.html());
-          
+
                   ui.item.attr('data-weight', positionNew);
                   //make ajax call
               }
       });
   }
 
-   
+
    $('.block-edit').click(function(){
-     
+
      $.ajax($(this).attr('href'), {
         cache: false,
          beforeSend: function(){
             //$('#dialog-box').html('<div style="margin: 20px auto; text-align: center;"><img id="imgcode" src="/public/images/system/preloader/preloader1.gif"></div>');
             //dialog.dialog('open');
             $('#modal-box').modal('show');
-            
+
         },
         success: function(html){
          // $('#dialog-box').html(html);
-         
+
             var header = $(html).find('.box-header h2');
             var headerText = header.html();
             $(html).find('.box-header').remove();
-         
+
             $('#modal-box .title').html(headerText);
             $('#modal-box .madal-body').html(html);
-     
-            if(typeof(tinymce) == "undefined") 
+
+            if(typeof(tinymce) == "undefined")
             {
                 $.ajax({
                     async: false,
@@ -143,14 +143,14 @@ $(document).ready(function(){
 
         }
      });
-     
+
      return false;
    });
-   
+
    $('.block-delete').click(function(){
      return confirm(message.app_confirm_delete);
    });
-   
+
    $(window).keypress(function(event) {
       if ((event.which == 115 && event.ctrlKey))
         {
@@ -168,15 +168,15 @@ $(document).ready(function(){
 
 function loadPlugins()
   {
-  if(typeof tinyMCE == "undefined") 
+  if(typeof tinyMCE == "undefined")
     {
       $.getScript('//cdn.tinymce.com/4/tinymce.min.js', function() {
       tinyMCE.init();
       });
     }
-  
+
   }
-  
+
 function initTinyMCE() {
     tinymce.init({
                 selector: ".texteditor",
@@ -193,19 +193,19 @@ function initTinyMCE() {
 
 
 var Cookies = function() {
-    
+
     this.get = function(cookieName) {
         var results = document.cookie.match ( '(^|;) ?' + cookieName + '=([^;]*)(;|$)' );
- 
+
         if ( results )
           return ( unescape ( results[2] ) );
         else
           return null;
     };
-    
+
     this.set = function(name, value, expYear, expMonth, expDay, path, domain, secure){
         var cookie_string = name + "=" + escape ( value );
- 
+
         if (expYear){
             var expires = new Date ( expYear, expMonth, expDay );
             cookie_string += "; expires=" + expires.toGMTString();
@@ -224,7 +224,7 @@ var Cookies = function() {
 
         document.cookie = cookie_string;
     };
-    
+
     this.delete = function(cookieName){
         var cookieDate = new Date ( );  // Текущая дата и время
         cookieDate.setTime ( cookieDate.getTime() - 1 );

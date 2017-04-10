@@ -1,4 +1,4 @@
-/* 
+/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -6,11 +6,11 @@
 ;(function ($, window, undefined) {
   $(document).ready(function(){
       $('#myTab').tab();
-      
+
       $(".switch").bootstrapSwitch({
             size: 'mini'
         });
-      
+
       //group checkbox
       $(".td_entiies_group").on('click', function(){
         if($(this).attr('checked') == 'checked') {
@@ -24,18 +24,18 @@
           $(this).closest('table').find("tr").toggleClass("highlight", this.checked);
         }
       });
-      
+
       $(":checkbox").change(function() {
             $(this).closest("tr").toggleClass("highlight", this.checked);
        });
-      
+
       //list panel
       $(".btn-toolbar a").on('click', function(event){
         var $this = $(this),
           confirm_result = false,
           message = '',
           selected_item_count = $('.td_entities:checked').length
-        ; 
+        ;
 
         if($this.hasClass('disabled'))
             {
@@ -100,14 +100,14 @@
       $('.app-filter select').on('change', function(){
         $(this).closest('form').submit();
       });
-      
+
       //hide/show body contrnt (opacity)
 //      window.onbeforeunload = function(){
 //        $('.page-container').removeClass('body-show').addClass('body-hide');
 //      };
       $('.page-container').removeClass('body-hide').addClass('body-show');
-  }); 
-  
+  });
+
 })(jQuery, window);
 
 

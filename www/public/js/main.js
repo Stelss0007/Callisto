@@ -3,7 +3,7 @@
 /*
  * Autosave form function
  * Example:
- * 
+ *
  * //Автосохраняемся, после окончания ввода
  *   $('#modify_diary input, #modify_diary textarea').autoSave(function($element){
  *     $.post("/memorials/modify_diary_autosave", $( "#modify_diary" ).serialize());
@@ -13,7 +13,7 @@
 //(function($) {
 //    $.fn.autoSave = function(callback, ms) {
 //        return this.each(function() {
-//            var timer = 0, 
+//            var timer = 0,
 //                $this = $(this),
 //                delay = ms || 1000;
 //            $this.keyup(function() {
@@ -36,8 +36,8 @@ function showAppMessage(message)
   {
   if($('#appMessage_').html() || message)
     {
-    var close_btn = '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>'; 
-    if(message) 
+    var close_btn = '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>';
+    if(message)
       {
       $('#appMessage_msg_text').html(message + close_btn).attr('class', 'alert alert-'+$('#appMessageType').val());
       }
@@ -50,14 +50,14 @@ function showAppMessage(message)
     //$('#appMessage_conteiner').stop().fadeIn(400, function(){$('#appMessage_conteiner').show().delay(5000).fadeOut(400, function(){$('#appMessage_conteiner').hide()});});
     //$('#appMessage_conteiner').stop().fadeIn(400).show().delay(5000).stop().animate({"opacity": "0"}, "slow", function(){$(this).hide()});
     //$('#appMessage_conteiner').stop().show().animate({"opacity": "1"}, "fast").delay(3000).stop();
-    
+
     $('#appMessage_msg_text').on('click', function() {
         $('#appMessage_conteiner').stop().fadeOut("fast", function(){$(this).hide()});
         //$('#appMessage_conteiner').stop().animate({"opacity": "0"}, "fast", function(){$(this).hide()});
      });
     //$('#appMessage_').remove();
     }
-  
+
   }
 
 $('document').ready(function(){
@@ -70,35 +70,35 @@ $('document').ready(function(){
      return false;
   });
   showAppMessage();
-  
-  
+
+
     //file manager
     if(jQuery().elfinder) {
         var screenHeight = $(window).height();
         var contentHeight = $('.main-content').height();
-        
+
         var delta = contentHeight ;
 
         var fileManagerHeight = screenHeight - delta - 40;
-        
+
         var elf = $('.file-manager').elfinder({
             url : '/admin/files/get_list',  // connector URL (REQUIRED),
             lang : 'ru',
             height: fileManagerHeight
         }).elfinder('instance');
-      
+
 //        $(window).resize(function(){
 //            var screenHeight = $(window).height();
 //
 //            var fileManagerHeight = screenHeight - delta - 40;
-//            
+//
 //            if( elf.options.height != fileManagerHeight ){
 //                  elf.resize('auto', fileManagerHeight);
 //            }
 //         });
     }
-    
-    
+
+
     $(window).scroll(function () {
         if ($(this).scrollTop() > 100) {
             $('.scrollup').fadeIn();
@@ -117,11 +117,11 @@ $('document').ready(function(){
 
 
 // $(window).ready(function(){
-//    var hasChanged =1;  
+//    var hasChanged =1;
 //    $(window).bind("beforeunload",function(event) {
 //        if(hasChanged) return "You have unsaved changes";
 //    });
-//    
+//
 //    window.onblur = function () {document.title='документ неактивен'}
 //    window.onunload = function () {return "1111";}
 // });
