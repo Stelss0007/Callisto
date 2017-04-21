@@ -182,6 +182,7 @@
    </table>
    <div class="empty"></div>
 </div>
+
 <div id="footer">
       <div id="wrap">
         <div class="copyrate">
