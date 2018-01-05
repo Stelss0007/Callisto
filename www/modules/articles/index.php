@@ -36,7 +36,7 @@ class IndexController extends Controller
     $this->viewCachedPage();
    
     $this->articles_list = Articles::getList(true, ['active'=>1]);
-    //$this->paginate($this->articles);
+    //var_dump($this->articles_list);
   
     //Подготовим фильтры
     $category_filter_list[0] = $this->t('sys_unknown');
@@ -132,35 +132,38 @@ class IndexController extends Controller
     
     $this->viewPage();
     }
-    
-  public function actionView($id)
-    {
-    $browsein[] = ['url'=>"/", 'displayname' => $this->t('dashboard')];
-    $browsein[] = ['url'=>'/articles', 'displayname' => $this->t('articles_header')]; 
-    $browsein[] = ['url'=>'/articles', 'displayname' => $this->t('sys_view')]; 
-    
-    $this->assign('module_browsein', $browsein);
-    $this->viewCachedPage();
-    
-     
-    $this->article = Articles::find($id);
-    //$this->paginate($this->articles);
-    
-    //Подготовим фильтры
-    $category_filter_list[0] = $this->t('sys_unknown');
-    $category_filter_list    = $category_filter_list + ArticleCategory::getList(false);
-    
-    $user_filter_list[0] = $this->t('sys_unknown');
-    $user_filter_list    = $user_filter_list + app\modules\users\models\Users::getList(false);
- 
-    $status_filter_list['-1']   = $this->t('all_status');
-    $status_filter_list['1']    = $this->t('sys_active');
-    $status_filter_list['0']    = $this->t('sys_no_active');
-        
-    $this->article_category_list = $category_filter_list;
-    $this->article_user_list     = $user_filter_list;
-    $this->article_status_list   = $status_filter_list;
 
-    $this->viewPage();
+    /**
+     * @param Articles $article
+     */
+    public function actionView(Articles $article)
+    {
+        $browsein[] = ['url' => '/', 'displayname' => $this->t('dashboard')];
+        $browsein[] = ['url' => '/articles', 'displayname' => $this->t('articles_header')];
+        $browsein[] = ['url' => '/articles', 'displayname' => $this->t('sys_view')];
+
+        $this->assign('module_browsein', $browsein);
+        $this->viewCachedPage();
+
+
+        $this->article = $article;
+        //$this->paginate($this->articles);
+
+        //Подготовим фильтры
+        $category_filter_list[0] = $this->t('sys_unknown');
+        $category_filter_list    = $category_filter_list + ArticleCategory::getList(false);
+
+        $user_filter_list[0] = $this->t('sys_unknown');
+        $user_filter_list    = $user_filter_list + app\modules\users\models\Users::getList(false);
+
+        $status_filter_list['-1']   = $this->t('all_status');
+        $status_filter_list['1']    = $this->t('sys_active');
+        $status_filter_list['0']    = $this->t('sys_no_active');
+
+        $this->article_category_list = $category_filter_list;
+        $this->article_user_list     = $user_filter_list;
+        $this->article_status_list   = $status_filter_list;
+
+        $this->viewPage();
     }
-  }
+}

@@ -2,12 +2,21 @@
 
 class Router
 {
-
-    // Хранит конфигурацию маршрутов.
+    /**
+     * Хранит конфигурацию маршрутов.
+     *
+     * @var array
+     */
     private static $routes = [];
 
+    /**
+     * @var string
+     */
     private $fileExt = '';
 
+    /**
+     * @param string $routesPath
+     */
     public function __construct($routesPath = 'config-router.php')
     {
         // Получаем конфигурацию из файла.
@@ -23,9 +32,9 @@ class Router
         $dir_handler = opendir('modules');
         while ($dir = readdir($dir_handler)) {
             if ((is_dir("modules/$dir")) &&
-                ($dir != '.') &&
-                ($dir != '..') &&
-                ($dir != 'CVS') &&
+                ($dir !== '.') &&
+                ($dir !== '..') &&
+                ($dir !== 'CVS') &&
                 (file_exists("modules/$dir/router.php"))
             ) {
                 include_once("modules/$dir/router.php");
@@ -41,13 +50,13 @@ class Router
 
     public function runModuleRoutes()
     {
-        $fullURL = parse_url($_SERVER["REQUEST_URI"]);
+        $fullURL = parse_url($_SERVER['REQUEST_URI']);
 
         foreach (self::$routes as $route) {
             $mod = $route[1]['controller'];
             $action = $route[1]['action'];
             $type = $route[1]['type'];
-            $pattern = str_replace("/", "\/", $route[0]);
+            $pattern = str_replace('/', '\/', $route[0]);
             $route_vars = [];
             $parameters = [];
 
@@ -84,7 +93,7 @@ class Router
                     $parameters[$var] = $matches[$var];
                 }
 
-                if ($type == 'admin') {
+                if ($type === 'admin') {
                     if (!file_exists("modules/$mod/admin.php")) {
                         trigger_error(
                             "Module '" . $mod . "' or module controller 'AdminController' not exist",
@@ -112,14 +121,7 @@ class Router
                 $mod_controller = $module;
 
                 $module->inputVars = array_merge($parameters, $module->inputVars);
-
-//        if(empty($_REQUEST['type']))
-//          $module->type = 'user';
-//        else  
-//          $module->type = ($_REQUEST['type'] == 'user' || $_REQUEST['type'] == 'admin'  || $_REQUEST['type'] == 'ajax') ? $_REQUEST['type'] : 'user';
-
                 $module->action($action);
-
                 exit;
             }
         }
@@ -133,7 +135,7 @@ class Router
             $pageURL .= "s";
         }
         $pageURL .= "://";
-        if ($_SERVER["SERVER_PORT"] != "80") {
+        if ($_SERVER["SERVER_PORT"] !== "80") {
             $pageURL .= $_SERVER["SERVER_NAME"] . ":" . $_SERVER["SERVER_PORT"] . $_SERVER["REQUEST_URI"];
         } else {
             $pageURL .= $_SERVER["SERVER_NAME"] . $_SERVER["REQUEST_URI"];

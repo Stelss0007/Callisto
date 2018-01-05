@@ -2,13 +2,16 @@
 
 namespace app\modules\articles\models;
 
-class Articles extends \app\db\ActiveRecord\Model {
+use app\db\ActiveRecord\Model;
+use app\modules\users\models\Users;
+
+class Articles extends Model {
     
     public static $tableName = 'article';
      
     public static $relations = [
            'hasOne' => [
-                'user' => ['app\modules\users\models\Users', 'id', 'article_user_id'],
+                'user' => [Users::class, 'id', 'article_user_id'],
             ],
     ];
 

@@ -1,124 +1,180 @@
 <?php
 
+use app\modules\permissions\models\Permissions;
+use app\db\ActiveRecord\Model;
+
 abstract class Controller extends AppObject
 {
-    private $message = '';
+    /**
+     * @var int
+     */
+    private $startDebugTime;
 
-    private $startDebugTime = 0;
-
+    /**
+     * @var string
+     */
     public $defaultAction = '';
 
-    protected $errors;
-
+    /**
+     * @var
+     */
     protected $registry;
 
+    /**
+     * @var ViewTpl
+     */
     protected $smarty;
 
+    /**
+     * @var string
+     */
     protected $moduleDir;
 
+    /**
+     * @var string
+     */
     public $rootDir;
 
+    /**
+     * @var string
+     */
     public $currentTheme;
 
+    /**
+     * @var array
+     */
     protected $vars = [];
 
-    protected $modname;
-
+    /**
+     * @var string
+     */
     protected $objectName;
 
-    protected $type;
+    /**
+     * @var string
+     */
+    public $type;
 
+    /**
+     * @var string
+     */
     protected $action;
 
+    /**
+     * @var array
+     */
     public $inputVars = [];
 
+    /**
+     * @var array
+     */
     protected $inputVarsClear = [];
 
+    /**
+     * @var string
+     */
     private $lang;
 
+    /**
+     * @var string
+     */
     private $langDefault = 'rus';
 
-    public $config = null;
-
-    private $modVars = [];
-
+    /**
+     * @var string
+     */
     public $controllerName = 'IndexController';
 
+    /**
+     * @var int
+     */
     public $permissionLavel = 0;
 
+    /**
+     * @var
+     */
     public $URL;
 
+    /**
+     * @var
+     */
     public $prevURL;
 
+    /**
+     * @var string
+     */
     public $referer;
 
+    /**
+     * @var string
+     */
     protected $lib;
 
+    /**
+     * @var string
+     */
     protected $page = 'index';
 
-    protected $block = [
-        'top' => [],
-        'left' => [],
-        'center' => [],
-        'right' => [],
-        'bottom' => [],
-    ];
+    /**
+     * @var array
+     */
+    protected $block;
 
-    //public $models= [];
-    protected $libs = [];
-
+    /**
+     * @var array
+     */
     protected $tpls = [];
 
-    // FILES
+    /**
+     * @var array
+     */
     public $inputFiles;
 
+    /**
+     * @var array
+     */
     public $inputImages;
 
-    public $imageSize = [
-        ['width' => '640', 'height' => '480'],
-        ['width' => '320', 'height' => '150'],
-        ['width' => '100', 'height' => '100'],
-    ];
-
+    /**
+     * @var array
+     */
+    public $imageSize;
 
     /**
      * @param $mod
      */
     public function __construct($mod)
     {
+        $this->block = [
+            'top' => [],
+            'left' => [],
+            'center' => [],
+            'right' => [],
+            'bottom' => [],
+        ];
+
+        $this->imageSize = [
+            ['width' => '640', 'height' => '480'],
+            ['width' => '320', 'height' => '150'],
+            ['width' => '100', 'height' => '100'],
+        ];
+
         date_default_timezone_set('Europe/Moscow');
-        //APP_DIRECTORY = dirname(__FILE__);
-        //print_r('wwww');exit;
-        //$this->start_debug_time = time();
-        $current_time = microtime();
-        // Отделяем секунды от миллисекунд
-        $current_time = explode(" ", $current_time);
-        // Складываем секунды и миллисекунды
-        $this->startDebugTime = $current_time[1] + $current_time[0];
+        $currentTime = microtime();
+        $currentTime = explode(' ', $currentTime);
+        $this->startDebugTime = $currentTime[1] + $currentTime[0];
 
         if (\App::$config['gzip']) {
             ob_start();
             ob_implicit_flush(0);
         }
 
-        //$coreConfig['debug.enabled']-Статус дебагера;
         //Init Errors
         $this->errors =& ErrorHandler::getInstance();
-
         $this->rootDir = APP_DIRECTORY . '/';
 
         define('LIB_DIR', APP_DIRECTORY . '/lib/');
-
-        //define('DB_DIR',APP_DIRECTORY.'/lib/DBConnector/');
-        //require(DB_DIR.'DBConnector.class.php');
         appUsesLib('DBConnector');
-
-        //define('SMARTY_DIR',APP_DIRECTORY.'/lib/Smarty/');
-        //require(SMARTY_DIR.'Smarty.class.php');
-        //appUsesLib('Smarty');
-
-        //define('SESSION_DIR',APP_DIRECTORY.'/lib/UserSession/');
-        //require(SESSION_DIR.'UserSession.class.php');
         appUsesLib('UserSession');
 
         define('KERNEL_DIR', APP_DIRECTORY . '/kernel/');
@@ -132,45 +188,26 @@ abstract class Controller extends AppObject
         $this->moduleDir = 'modules/' . $this->modname . '/';
 
         require(KERNEL_DIR . 'Debuger.php');
-        if (\App::$config['debug.enabled'] && !appIsAjax() && $this->type != 'api') {
-            $this->debuger = &Debuger::getInstance();
-            $this->debuger->startRenderPage();
+        if ($this->type !== 'api' && \App::$config['debug.enabled'] && !appIsAjax()) {
+            $debugger = &Debuger::getInstance();
+            $debugger->startRenderPage();
         }
 
         //Session init
         $this->sessinInit();
-        //?????????????? ?????? ???????? ??????
-        //$this->usesModel();
-        //$this->usesModule($mod);
-
-        //?????? ????????? ????? ?????????????
         $this->smarty = new ViewTpl();
-//    $this->smarty->register_block('dynamic', 'smarty_block_dynamic', false);
-        //$this->smarty->registerPlugin('dynamic', 'smarty_block_dynamic', false);
-        //??????? ???? ???????????
-//    $this->current_theme = 'green';
         $this->setTheme();
-        //$this->current_theme = 'blog_theme1';
 
-        //Установим язык
+        //SetUp language
         $this->setLang(\App::$config['lang']);
         $this->loadLang();
-
         $this->loadModuleLang($this->modname);
-
-        //$this->loadModVars('kernel');
-
         $this->setModConfig();
         $this->setTplUserInfo();
-
         $this->setConfig();
-
-        //$this->object_name = $this->getObjectName();
-
-        //??????? ??? ????????? ? ??????? ?????????? ? ???????? input_vars
         $this->inputVars = $_REQUEST;
         $this->referer = (isset($_SERVER['HTTP_REFERER'])) ? $_SERVER['HTTP_REFERER'] : '/';
-        //?????? ??? ?????? ? ???????? ???????
+
         unset (
             $this->inputVars['module'],
             $this->inputVars['action'],
@@ -179,7 +216,6 @@ abstract class Controller extends AppObject
         );
 
         $this->getCurrentURL();
-
         $this->displayMessage();
     }
 
@@ -188,97 +224,95 @@ abstract class Controller extends AppObject
      */
     public function __destruct()
     {
-        if (\App::$config['debug.enabled'] && !appIsAjax() && $this->type != 'api') {
+        if ( $this->type !== 'api' && \App::$config['debug.enabled'] && !appIsAjax()) {
+            $currentTime = microtime();
+            $currentTime = explode(' ', $currentTime);
+            $endDebugTime = $currentTime[1] + $currentTime[0];
 
-//      $DB = DBConnector::getInstance();
-//      $DB->disconnect();
+            $debug_time = $endDebugTime - $this->startDebugTime;
 
-            $current_time = microtime();
-            $current_time = explode(" ", $current_time);
-            $end_debug_time = $current_time[1] + $current_time[0];
+            $debugger = Debuger::getInstance();
+            $debugger->endRenderPage();
 
-            $debug_time = $end_debug_time - $this->startDebugTime;
-
-            $debuger = Debuger::getInstance();
-
-            $debuger->endRenderPage();
-
-            $mysql_querys = [];
-            $mysql_query_count = 0;
-            $mysql_query_time = 0;
-            foreach ($debuger->mysql as $key => $value) {
-                $key_sufix = $key + 1;
-                $mysql_querys['query_' . $key_sufix] = $value;
-                $mysql_query_count++;
-                $mysql_query_time += $value['exec_time'];
+            $mysqlQueries = [];
+            $mysqlQueryCount = 0;
+            $mysqlQueryTime = 0;
+            foreach ($debugger->mysql as $key => $value) {
+                $keySuffix = $key + 1;
+                $mysqlQueries['query_' . $keySuffix] = $value;
+                $mysqlQueryCount++;
+                $mysqlQueryTime += $value['exec_time'];
             }
 
-            $debuger->debugAdd("PHP Execute Time (" . $debug_time . " sec)", '');
+            $debugger->debugAdd('PHP Execute Time (' . $debug_time . ' sec)', '');
+            $debugger->debugAddCreateGroup('Callisto Debug Detail');
+            $debugger->debugAdd('Controller: ' . $this->modname, null, INFO);
+            $debugger->debugAdd('Action: ' . $this->action, null, INFO);
+            $debugger->debugAdd('Object Name: ' . $this->objectName, null, INFO);
+            $debugger->debugAdd('Theme: ' . $this->currentTheme, null, INFO);
 
-            $debuger->debugAddCreateGroup("Callisto Debug Detail");
-            $debuger->debugAdd('Controller: ' . $this->modname, null, INFO);
-            $debuger->debugAdd('Action: ' . $this->action, null, INFO);
-            $debuger->debugAdd('Object Name: ' . $this->objectName, null, INFO);
-            $debuger->debugAdd('Theme: ' . $this->currentTheme, null, INFO);
-            //
-            $debuger->debugAddCreateGroup("Uses Tpls (" . sizeof($this->tpls) . ")");
+            $debugger->debugAddCreateGroup('Uses Tpls (' . count($this->tpls) . ')');
             if ($this->tpls) {
                 foreach ($this->tpls as $value) {
-                    $debuger->debugAdd($value, null, INFO);
+                    $debugger->debugAdd($value, null, INFO);
                 }
             }
-            $debuger->debugAddEndGroup();
-            //
-            $debuger->debugAddCreateGroup("Uses Models (" . sizeof(AppObject::$models) . ")");
+            
+            $debugger->debugAddEndGroup();
+
+            $debugger->debugAddCreateGroup('Uses Models (' . count(AppObject::$models) . ')');
             if (AppObject::$models) {
                 foreach (AppObject::$models as $value) {
-                    $debuger->debugAdd($value, null, INFO);
+                    $debugger->debugAdd($value, null, INFO);
                 }
             }
-            $debuger->debugAddEndGroup();
-            //
-            $debuger->debugAddCreateGroup("Uses Libs (" . sizeof($this->libs) . ")");
+            
+            $debugger->debugAddEndGroup();
+
+            $debugger->debugAddCreateGroup('Uses Libs (' . count($this->libs) . ')');
             if ($this->libs) {
                 foreach ($this->libs as $value) {
-                    $debuger->debugAdd($value, null, WARN);
+                    $debugger->debugAdd($value, null, WARN);
                 }
             } else {
-                $debuger->debugAdd('Libraries Are Not Used', null, INFO);
+                $debugger->debugAdd('Libraries Are Not Used', null, INFO);
             }
-            $debuger->debugAddEndGroup();
+            
+            $debugger->debugAddEndGroup();
+
+            
+            $debugger->debugAddEndGroup();
+
+            $debugger->debugAddCreateGroup("MySQL ($mysqlQueryCount) $mysqlQueryTime sec");
+            $debugger->debugAddDir($mysqlQueries);
+            $debugger->debugAddEndGroup();
+
+            $debugger->debugAddCreateGroup('Input Vars (' . count($this->inputVars) . ')');
+            $debugger->debugAddDir($this->inputVars);
+            $debugger->debugAddEndGroup();
+
+            $debugger->debugAddCreateGroup('Template Vars (' . count($this->vars) . ')');
+            $debugger->debugAddDir($this->vars);
+            $debugger->debugAddEndGroup();
+
+            $debugger->debugAddCreateGroup('Session (' . count($_SESSION) . ')');
+            $debugger->debugAddDir($_SESSION);
+            $debugger->debugAddEndGroup();
+
             //
-            $debuger->debugAddEndGroup();
-
-            $debuger->debugAddCreateGroup("MySQL ($mysql_query_count) $mysql_query_time sec");
-            $debuger->debugAddDir($mysql_querys);
-            $debuger->debugAddEndGroup();
-
-            $debuger->debugAddCreateGroup("Input Vars (" . sizeof($this->inputVars) . ")");
-            $debuger->debugAddDir($this->inputVars);
-            $debuger->debugAddEndGroup();
-
-            $debuger->debugAddCreateGroup("Template Vars (" . sizeof($this->vars) . ")");
-            $debuger->debugAddDir($this->vars);
-            $debuger->debugAddEndGroup();
-
-            $debuger->debugAddCreateGroup("Session (" . sizeof($_SESSION) . ")");
-            $debuger->debugAddDir($_SESSION);
-            $debuger->debugAddEndGroup();
-
-            //
-            $debuger->debugAddCreateGroup("PHP WARNINGS (" . sizeof($debuger->warnings) . ")");
-            foreach ($debuger->warnings as $key => $value) {
-                $debuger->debugAdd($value, null, WARN);;
+            $debugger->debugAddCreateGroup('PHP WARNINGS (' . count($debugger->warnings) . ')');
+            foreach ($debugger->warnings as $key => $value) {
+                $debugger->debugAdd($value, null, WARN);;
             }
-            $debuger->debugAddEndGroup();
+            $debugger->debugAddEndGroup();
 
-            $debuger->debugAddCreateGroup("PHP NOTICES (" . sizeof($debuger->notices) . ")");
-            foreach ($debuger->notices as $key => $value) {
-                $debuger->debugAdd($value, null, INFO);
+            $debugger->debugAddCreateGroup('PHP NOTICES (' . count($debugger->notices) . ')');
+            foreach ($debugger->notices as $key => $value) {
+                $debugger->debugAdd($value, null, INFO);
             }
-            $debuger->debugAddEndGroup();
+            $debugger->debugAddEndGroup();
 
-            $debuger->render();
+            $debugger->render();
         }
 
         if (\App::$config['gzip']) {
@@ -287,7 +321,12 @@ abstract class Controller extends AppObject
         exit;
     }
 
-    function __set($name, $value)
+    /**
+     * @param $name
+     * @param $value
+     * @return bool
+     */
+    public function __set($name, $value)
     {
         if (property_exists($this, $name)) {
             $this->$name = $value;
@@ -299,29 +338,51 @@ abstract class Controller extends AppObject
         return true;
     }
 
-    final function assign($varName = null, $varValue = '')
+    /**
+     * @param $name
+     */
+    public function __isset($name)
+    {
+
+    }
+
+    /**
+     * @param $name
+     */
+    public function __get($name)
+    {
+
+    }
+
+    /**
+     * @param null|array|Object $varName
+     * @param string $varValue
+     */
+    final public function assign($varName = null, $varValue = '')
     {
         if (empty($varName)) {
-            return true;
+            return;
         }
         if (is_array($varName)) {
             $this->vars = array_merge($this->vars, $varName);
         } elseif (is_object($varName)) {
             $this->vars[get_class($varName)] = $varName;
-            //$this->vars[{$varName}::class] = $varName;
         } else {
             $this->vars[$varName] = $varValue;
         }
-
     }
 
+    /**
+     * @param $actionName
+     * @return mixed
+     */
     final public function action($actionName)
     {
         if (empty($actionName) || $actionName === 'index') {
-            if (!empty($this->defaultAction)) {
-                $actionName = $this->defaultAction;
-            } else {
+            if (empty($this->defaultAction)) {
                 $actionName = 'index';
+            } else {
+                $actionName = $this->defaultAction;
             }
         }
 
@@ -343,8 +404,6 @@ abstract class Controller extends AppObject
         }
 
         $this->objectName = $this->objectName . '::permission::' . appGetAccessName($this->permissionLavel);
-
-        //$this->smarty->assign('config', \App::$config);
 
         //Подключим джаваскрипты
         appJsLoad('kernel', 'jQuery');
@@ -371,25 +430,56 @@ abstract class Controller extends AppObject
             //Без аргументов подключится стиль текущей темы
             appCssLoad();
         }
+        $reflectionMethod = new \ReflectionMethod(get_class($this), 'action' . $actionName);
+        $reflectionMethodParamethers = $reflectionMethod->getParameters();
 
-        return call_user_method_array('action' . $actionName, $this, $this->inputVars);
+        $actionParams = [];
+        $this->inputVars;
+        foreach ($reflectionMethodParamethers as $key => $param) {
+            $name = $param->getName();
+            $class = $param->getClass();
+
+            if (!$class) {
+                continue;
+            }
+
+            if ($class->isSubclassOf(Model::class)) {
+                $this->inputVars[$key] = call_user_func([$class->getName(), 'find'], $this->inputVars[$key]);
+            }
+
+        }
+        $this->inputVars;
+        return call_user_func_array([$this, 'action' . $actionName], $this->inputVars);
     }
 
+    /**
+     * @param string $type
+     */
     final public function setViewType($type = 'user')
     {
         $this->type = $type;
     }
 
+    /**
+     * @return string
+     */
     final public function getViewType()
     {
         return $this->type;
     }
 
+    /**
+     * @param $string
+     * @return string
+     */
     final private function urlToCamelCase($string)
     {
-        return preg_replace("/[\_,\-](.)/e", "strtoupper('\\1')", $string);
+        return lcfirst(str_replace(' ', '', ucwords(str_replace(['_', '-'], ' ', $string))));
     }
 
+    /**
+     * @param null|string $theme
+     */
     final public function setTheme($theme = null)
     {
         if ($theme) {
@@ -399,42 +489,65 @@ abstract class Controller extends AppObject
         }
     }
 
+    /**
+     * @return string
+     */
     final public function getThemeName()
     {
         return $this->currentTheme;
     }
 
+    /**
+     * @return string
+     */
     final public function getModName()
     {
         return $this->modname;
     }
 
+    /**
+     * @return string
+     */
     final public function getActionName()
     {
         return $this->action;
     }
 
-    final function setConfig()
+    /**
+     *
+     */
+    final private function setConfig()
     {
         $this->assign('appConfig', \App::$config);
     }
 
-    final function getConfig($var)
+    /**
+     * @param $var
+     * @return bool
+     */
+    final public function getConfig($var)
     {
-        return (isset(\App::$config[$var])) ? \App::$config[$var] : false;
+        return isset(\App::$config[$var]) ? \App::$config[$var] : false;
     }
 
-    final function getModConfig($modname = 'main', $var = '')
+    /**
+     * @param string $modName
+     * @param string $var
+     * @return array|bool
+     */
+    final public function getModConfig($modName = 'main', $var = '')
     {
-        //appDebugExit($this->config);
         if (empty($var)) {
-            return (isset(\App::$config[$modname])) ? \App::$config[$modname] : [];
+            return isset(\App::$config[$modName]) ? \App::$config[$modName] : [];
         }
 
-        return (isset(\App::$config[$modname][$var])) ? \App::$config[$modname][$var] : false;
+        return isset(\App::$config[$modName][$var]) ? \App::$config[$modName][$var] : false;
     }
 
-    final function setModConfig()
+    /**
+     *
+     */
+    final private function setModConfig()
     {
         $dbConf = \app\modules\configuration\models\Configuration::getModConfiguration('main');
         if (!empty($dbConf)) {
@@ -456,11 +569,7 @@ abstract class Controller extends AppObject
      */
     final public function isAdmin()
     {
-        if ($this->session->userGid() === 1) {
-            return true;
-        }
-
-        return false;
+        return $this->session->userGid() === 1;
     }
 
     /**
@@ -481,17 +590,16 @@ abstract class Controller extends AppObject
 
     /**
      * Получение входящих параметров ($_REQUEST)
-     * @param mixed $var
+     * @param array|string $var
      * @param mixed $default
      * @return mixed
      */
-    final function getInput($var, $default = null)
+    final public function getInput($var, $default = null)
     {
         if (is_array($var)) {
             $array_result = [];
             foreach ($var as $key => $valueKey) {
                 if (is_array($valueKey)) {
-                    $currentKey = key($valueKey);
                     $array_result[$key] = $valueKey;
                     continue;
                 }
@@ -512,13 +620,13 @@ abstract class Controller extends AppObject
             }
 
             return $array_result;
-        } else {
-            if (empty($var)) {
-                return $this->inputVars;
-            }
-
-            return isset($this->inputVars[$var]) ? $this->inputVars[$var] : $default;
         }
+
+        if (empty($var)) {
+            return $this->inputVars;
+        }
+
+        return isset($this->inputVars[$var]) ? $this->inputVars[$var] : $default;
     }
 
     //////////////////////////////////////////////////////////////////////////////
@@ -526,22 +634,18 @@ abstract class Controller extends AppObject
     //////////////////////////////////////////////////////////////////////////////
 
     /**
-     * Постраничка
-     * @param object $model
-     * @return mixed
+     * @param Object|null $pagination
      */
-    final public function paginate($pagination = false)
+    final public function paginate($pagination = null)
     {
         if (empty($pagination)) {
             return;
         }
 
-        //appDebug($model->pagination);exit;
         $this->assign('pagination', $pagination);
     }
 
     /**
-     * Проверка существует ли кеш страниці
      * @return bool
      */
     final public function isCached()
@@ -549,31 +653,34 @@ abstract class Controller extends AppObject
         $tplDir = $this->tplFileName();
         $objectName = $this->getTplObjectName();
 
-//    return $this->smarty->is_cached($tplDir, $objectName);
         return $this->smarty->isCached($tplDir, $objectName);
     }
 
-    final public function deleteCache($objectName = false)
+    /**
+     * @param string|null $objectName
+     * @return bool|int
+     */
+    final public function deleteCache($objectName = null)
     {
-        //$tplDir = $this->tplFileName();
-
-        if (empty($objectName)) {
+        if (!$objectName) {
             $objectName = $this->modname . '|' . $this->type;
         }
 
-        if (empty($objectName)) {
-            return;
-        }
+//        if (!$objectName) {
+//            return false;
+//        }
 
         return $this->smarty->clearCache(null, $objectName);
     }
 
+    /**
+     * @return bool
+     */
     final public function viewCached()
     {
         $tplDir = $this->tplFileName();
         $objectName = $this->getTplObjectName();
 
-//    if(!$this->smarty->is_cached($tplDir, $objectName))
         if (!$this->smarty->isCached($tplDir, $objectName)) {
             return false;
         }
@@ -582,21 +689,26 @@ abstract class Controller extends AppObject
         exit;
     }
 
+    /**
+     * @return bool
+     */
     final public function viewCachedPage()
     {
         $tplDir = $this->tplFileName();
         $objectName = $this->getTplObjectName();
 
-//    if(!$this->smarty->is_cached($tplDir, $objectName))
         if (!$this->smarty->isCached($tplDir, $objectName)) {
-//        $this->usesModel('statistic');
-//        $this->statistic->setLog();
             return false;
         }
 
         $this->viewPage();
+
+        return true;
     }
 
+    /**
+     *
+     */
     final public function view()
     {
         $tplDir = $this->tplFileName();
@@ -604,7 +716,6 @@ abstract class Controller extends AppObject
         $objectName = $this->getTplObjectName();
         echo $this->smarty->fetch($tplDir, $objectName);
 
-        //$this->__destruct();
         if (!\App::$config['debug.enabled']) {
             $this->__destruct();
         }
@@ -625,6 +736,9 @@ abstract class Controller extends AppObject
         return '';
     }
 
+    /**
+     *
+     */
     final public function viewJSON()
     {
         $obj = $this->vars;
@@ -632,6 +746,9 @@ abstract class Controller extends AppObject
         echo json_encode($obj);
     }
 
+    /**
+     * @param null $page_template
+     */
     final public function viewPage($page_template = null)
     {
         if ($page_template) {
@@ -649,32 +766,25 @@ abstract class Controller extends AppObject
         if (appIsAjax()) {
             echo $modContent;
             exit;
-        } else {
-            if ($this->type == 'admin') {
-                $pageTplFile = $this->rootDir . 'themes/admin/pages/' . $this->page . '.tpl';
-                $this->tpls[] = '(Main Template)themes/admin/pages/' . $this->page . '.tpl';
-
-                $this->loadThemeLang('admin');
-
-                $ObjectThemeName = 'themes|admin|pages|' . $this->page;
-            } else {
-                $pageTplFile = $this->rootDir . "themes/" . $this->currentTheme . '/pages/' . $this->page . '.tpl';
-                $this->tpls[] = '(Main Template)' . "themes/" . $this->currentTheme . '/pages/' . $this->page . '.tpl';
-
-                $this->loadThemeLang($this->currentTheme);
-
-                $ObjectThemeName = 'themes|' . $this->currentTheme . '|pages|' . $this->page . '';
-            }
-
-            $this->smarty->assign('module_content', $modContent);
-
-            $this->smarty->caching = false;
-            echo $this->smarty->fetch($pageTplFile);
         }
 
-        //Uncomment if statistic was finished
-//    $this->usesModel('statistic');
-//    $this->statistic->setLog();
+        if ($this->type === 'admin') {
+            $pageTplFile = $this->rootDir . 'themes/admin/pages/' . $this->page . '.tpl';
+            $this->tpls[] = '(Main Template)themes/admin/pages/' . $this->page . '.tpl';
+
+            $this->loadThemeLang('admin');
+        } else {
+            $pageTplFile = $this->rootDir . 'themes/' . $this->currentTheme . '/pages/' . $this->page . '.tpl';
+            $this->tpls[] = '(Main Template)' . 'themes/' . $this->currentTheme . '/pages/' . $this->page . '.tpl';
+
+            $this->loadThemeLang($this->currentTheme);
+        }
+
+        $this->smarty->assign('module_content', $modContent);
+
+        $this->smarty->caching = false;
+        echo $this->smarty->fetch($pageTplFile);
+
 
         if (!\App::$config['debug.enabled']) {
             $this->__destruct();
@@ -682,66 +792,77 @@ abstract class Controller extends AppObject
 
     }
 
-
+    /**
+     * @param bool $debug
+     * @return string
+     */
     final public function tplFileName($debug = false)
     {
         $view_file_name = $this->action;
-        if ($this->type == 'admin') {
+        if ($this->type === 'admin') {
             if (file_exists($this->rootDir . $this->moduleDir . 'views/default/admin/' . $view_file_name . '.tpl')) {
                 $this->smarty->assign('viewDir', $this->rootDir . $this->moduleDir . 'views/default/admin/');
                 $this->tpls[] = '(Original Module TPL) ' . $this->moduleDir . 'themes/default/admin/' . $view_file_name . '.tpl';
 
                 return $this->rootDir . $this->moduleDir . 'views/default/admin/' . $view_file_name . '.tpl';
-            } elseif (!empty($debug)) {
+            }
+            if (!empty($debug)) {
                 $this->tpls[] = '(TPL file is not exist!) ' . $this->moduleDir . 'views/default/admin/' . $view_file_name . '.tpl';
 
                 return 'TPL file is not exist! ' . $this->rootDir . $this->moduleDir . 'views/default/admin/' . $view_file_name . '.tpl <br> You most created tpl file <b>"' . $view_file_name . '.tpl"</b> for module <b>' . $this->modname . '</b><br>';
-            } else {
-                $this->tpls[] = '(TPL file is not exist!) ' . $this->moduleDir . 'views/default/admin/' . $view_file_name . '.tpl';
-                echo 'TPL file is not exist! ' . $this->rootDir . $this->moduleDir . 'views/default/admin/' . $view_file_name . '.tpl <br> You most created tpl file <b>"' . $view_file_name . '.tpl"</b> for module <b>' . $this->modname . '</b><br>';
-                echo "Values for TPL:<br>";
-                echo "<pre>";
-                print_r($this->vars);
-                echo "</pre>";
-                die();
             }
-        } else {
-            if (file_exists(
-                $this->rootDir . 'themes/' . $this->currentTheme . '/' . $this->moduleDir . $view_file_name . '.tpl'
-            )) {
-                $this->smarty->assign(
-                    'viewDir',
-                    $this->rootDir . 'themes/' . $this->currentTheme . '/' . $this->moduleDir
-                );
-                $this->tpls[] = '(Overridden by Theme) ' . 'themes/' . $this->currentTheme . '/' . $this->moduleDir . $view_file_name . '.tpl';
 
-                return $this->rootDir . 'themes/' . $this->currentTheme . '/' . $this->moduleDir . $view_file_name . '.tpl';
-            } elseif (file_exists($this->rootDir . $this->moduleDir . 'views/default/' . $view_file_name . '.tpl')) {
-                $this->smarty->assign('viewDir', $this->rootDir . $this->moduleDir . 'views/default/');
-                $this->tpls[] = '(Original Module TPL) ' . $this->moduleDir . 'themes/default/' . $view_file_name . '.tpl';
+            $this->tpls[] = '(TPL file is not exist!) ' . $this->moduleDir . 'views/default/admin/' . $view_file_name . '.tpl';
+            echo 'TPL file is not exist! ' . $this->rootDir . $this->moduleDir . 'views/default/admin/' . $view_file_name . '.tpl <br> You most created tpl file <b>"' . $view_file_name . '.tpl"</b> for module <b>' . $this->modname . '</b><br>';
+            echo 'Values for TPL:<br>';
+            echo '<pre>';
+            var_dump($this->vars);
+            echo '</pre>';
+            die();
 
-                return $this->rootDir . $this->moduleDir . 'views/default/' . $view_file_name . '.tpl';
-            } elseif (!empty($debug)) {
-                $this->tpls[] = '(TPL file is not exist!) ' . $this->moduleDir . 'views/default/' . $view_file_name . '.tpl';
-
-                return 'TPL file is not exist! ' . $this->rootDir . $this->moduleDir . 'views/default/' . $view_file_name . '.tpl <br> You most created tpl file <b>"' . $view_file_name . '.tpl"</b> for module <b>' . $this->modname . '</b><br>';
-            } else {
-                $this->tpls[] = '(TPL file is not exist!) ' . $this->moduleDir . 'views/default/' . $view_file_name . '.tpl';
-                echo 'TPL file is not exist! ' . $this->rootDir . $this->moduleDir . 'views/default/' . $view_file_name . '.tpl <br> You most created tpl file <b>"' . $view_file_name . '.tpl"</b> for module <b>' . $this->modname . '</b><br>';
-                echo "Values for TPL:<br>";
-                echo "<pre>";
-                print_r($this->vars);
-                echo "</pre>";
-                die();
-            }
         }
 
+        if (file_exists(
+            $this->rootDir . 'themes/' . $this->currentTheme . '/' . $this->moduleDir . $view_file_name . '.tpl'
+        )) {
+            $this->smarty->assign(
+                'viewDir',
+                $this->rootDir . 'themes/' . $this->currentTheme . '/' . $this->moduleDir
+            );
+            $this->tpls[] = '(Overridden by Theme) ' . 'themes/' . $this->currentTheme . '/' . $this->moduleDir . $view_file_name . '.tpl';
+
+            return $this->rootDir . 'themes/' . $this->currentTheme . '/' . $this->moduleDir . $view_file_name . '.tpl';
+        }
+
+        if (file_exists($this->rootDir . $this->moduleDir . 'views/default/' . $view_file_name . '.tpl')) {
+            $this->smarty->assign('viewDir', $this->rootDir . $this->moduleDir . 'views/default/');
+            $this->tpls[] = '(Original Module TPL) ' . $this->moduleDir . 'themes/default/' . $view_file_name . '.tpl';
+
+            return $this->rootDir . $this->moduleDir . 'views/default/' . $view_file_name . '.tpl';
+        }
+
+        if (!empty($debug)) {
+            $this->tpls[] = '(TPL file is not exist!) ' . $this->moduleDir . 'views/default/' . $view_file_name . '.tpl';
+
+            return 'TPL file is not exist! ' . $this->rootDir . $this->moduleDir . 'views/default/' . $view_file_name . '.tpl <br> You most created tpl file <b>"' . $view_file_name . '.tpl"</b> for module <b>' . $this->modname . '</b><br>';
+        }
+
+        $this->tpls[] = '(TPL file is not exist!) ' . $this->moduleDir . 'views/default/' . $view_file_name . '.tpl';
+        echo 'TPL file is not exist! ' . $this->rootDir . $this->moduleDir . 'views/default/' . $view_file_name . '.tpl <br> You most created tpl file <b>"' . $view_file_name . '.tpl"</b> for module <b>' . $this->modname . '</b><br>';
+        echo 'Values for TPL:<br>';
+        echo '<pre>';
+        var_dump($this->vars);
+        echo '</pre>';
+        die();
     }
 
+    /**
+     * @param bool $realObjectName
+     * @return string
+     */
     final public function getObjectName($realObjectName = false)
     {
-        //$url_result = $this->GetCallingMethodName(3, true);
-        $action = $this->action;//$url_result['function'];
+        $action = $this->action;
         $args = '';
         foreach ($this->inputVars as $key => $value) {
             $args .= '::' . $key . ':' . $value;
@@ -756,8 +877,7 @@ abstract class Controller extends AppObject
 
     final public function getTplObjectName()
     {
-        //$url_result = $this->GetCallingMethodName(3, true);
-        $action = $this->action;//$url_result['function'];
+        $action = $this->action;
         $args = '';
         if ($this->inputVars) {
             foreach ($this->inputVars as $key => $value) {
@@ -771,28 +891,38 @@ abstract class Controller extends AppObject
 
     //////////////////////////////////////////////////////////////////////////////
     ///////////////////////////// Languages //////////////////////////////////////
-    function setLang($lang = 'rus')
+    /**
+     * @param string $lang
+     */
+    public function setLang($lang = 'rus')
     {
         $this->lang = $lang;
         $this->assign('lang', $lang);
     }
 
-    function loadLang()
+    /**
+     * @return bool
+     */
+    private function loadLang()
     {
         if (file_exists("lang/$this->lang/lang.conf")) {
             $this->smarty->configLoad("lang/$this->lang/lang.conf");
-        } elseif (($this->lang != $this->langDefault) && file_exists("lang/$this->langDefault/lang.conf")) {
+        } elseif (($this->lang !== $this->langDefault) && file_exists("lang/$this->langDefault/lang.conf")) {
             $this->smarty->configLoad("lang/$this->langDefault/lang.conf");
         }
 
         return true;
     }
 
-    function loadBlockLang($blockName)
+    /**
+     * @param string $blockName
+     * @return bool
+     */
+    public function loadBlockLang($blockName)
     {
         if (file_exists("blocks/$blockName/lang/$this->lang/lang.conf")) {
             $this->smarty->configLoad("blocks/$blockName/lang/$this->lang/lang.conf");
-        } elseif (($this->lang != $this->langDefault) && file_exists(
+        } elseif (($this->lang !== $this->langDefault) && file_exists(
                 "blocks/$blockName/lang/$this->langDefault/lang.conf"
             )
         ) {
@@ -802,11 +932,15 @@ abstract class Controller extends AppObject
         return true;
     }
 
-    function loadThemeLang($themeName)
+    /**
+     * @param string $themeName
+     * @return bool
+     */
+    private function loadThemeLang($themeName)
     {
         if (file_exists("themes/$themeName/lang/$this->lang/lang.conf")) {
             $this->smarty->configLoad("themes/$themeName/lang/$this->lang/lang.conf");
-        } elseif (($this->lang != $this->langDefault) && file_exists(
+        } elseif (($this->lang !== $this->langDefault) && file_exists(
                 "themes/$themeName/lang/$this->langDefault/lang.conf"
             )
         ) {
@@ -816,11 +950,15 @@ abstract class Controller extends AppObject
         return true;
     }
 
-    function loadModuleLang($moduleName)
+    /**
+     * @param string $moduleName
+     * @return bool
+     */
+    private function loadModuleLang($moduleName)
     {
         if (file_exists("modules/$moduleName/lang/$this->lang/lang.conf")) {
             $this->smarty->configLoad("modules/$moduleName/lang/$this->lang/lang.conf");
-        } elseif (($this->lang != $this->langDefault) && file_exists(
+        } elseif (($this->lang !== $this->langDefault) && file_exists(
                 "modules/$moduleName/lang/$this->langDefault/lang.conf"
             )
         ) {
@@ -833,22 +971,30 @@ abstract class Controller extends AppObject
     //////////////////////////////////////////////////////////////////////////////
     ////////////////////////////   ACCESS     ////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////
-    final private function getPermissionLavel($object = false)
+
+    /**
+     * @param string|null $object
+     * @return int
+     */
+    final private function getPermissionLavel($object = null)
     {
-        if (empty($object)) {
+        if (!$object) {
             $object = $this->getObjectName();
         }
 
-        //$this->usesModel('permissions');
-        return $this->permissionLavel = app\modules\permissions\models\Permissions::objectGetPermsLevel($object);
+        return $this->permissionLavel = Permissions::objectGetPermsLevel($object);
     }
 
+    /**
+     * @param int $access_type
+     * @param bool $admin
+     * @return bool
+     */
     final public function getAccess($access_type = ACCESS_READ, $admin = true)
     {
         $object = $this->getObjectName();
 
-        //$this->usesModel('permissions');
-        if (app\modules\permissions\models\Permissions::getAccess($object, $access_type) == true) {
+        if (Permissions::getAccess($object, $access_type) === true) {
             return true;
         }
 
@@ -857,10 +1003,14 @@ abstract class Controller extends AppObject
         return false;
     }
 
-    final public function notAccess($access_type = ACCESS_READ, $admin = false)
+    /**
+     * @param int $accessType
+     * @param bool $admin
+     */
+    final public function notAccess($accessType = ACCESS_READ, $admin = false)
     {
-        $logedin = $this->session->isLogin();
-        if (empty($logedin)) {
+        $loggedIn = $this->session->isLogin();
+        if (empty($loggedIn)) {
             if ($admin) {
                 $this->showMessage($this->t('page_not_access_most_login'), '/admin/users/login');
             } else {
@@ -881,32 +1031,27 @@ abstract class Controller extends AppObject
         exit;
     }
 
-
-//  final public function GetCallingMethodName($position = null, $with_args = false)
-//    {
-//    $e = new Exception();
-//    $trace = $e->getTrace();
-//    
-//    $position = ($position) ? $position : (sizeof($trace)-1);
-//    if(empty($with_args))
-//      return $trace[$position]['function'];
-//    
-//    return array('function'=>$trace[$position]['function'], 'args' => $trace[$position]['args']);
-//    print_r($trace);
-//    }
-
     //////////////////////////////////////////////////////////////////////////////
     ////////////////////////////   URLS       ////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////
-    function setReferer($url)
+
+    /**
+     * @param string|null $url
+     */
+    public function setRefferer($url = null)
     {
-        if (empty($url)) {
+        if (!$url) {
             $url = $_SERVER['HTTP_REFERER'];
         }
+
         $this->session->setVar('app_referer', $url);
     }
 
-    function getReferer($url = '/')
+    /**
+     * @param string $url
+     * @return \app\lib\UserSession\type|string
+     */
+    public function getRefferer($url = '/')
     {
         $url_ = $this->session->getVar('app_referer');
         if (!empty($url_)) {
@@ -916,9 +1061,12 @@ abstract class Controller extends AppObject
         return $url;
     }
 
-    function getCurrentURL()
+    /**
+     * @return string
+     */
+    public function getCurrentURL()
     {
-        if (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') {
+        if (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') {
             $proto = 'https://';
         } else {
             $proto = 'http://';
@@ -932,7 +1080,10 @@ abstract class Controller extends AppObject
         return $proto . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
     }
 
-    function getBaseURI()
+    /**
+     * @return array|false|mixed|string
+     */
+    public function getBaseURI()
     {
         // Start of with REQUEST_URI
         if (isset($_SERVER['REQUEST_URI'])) {
@@ -966,14 +1117,18 @@ abstract class Controller extends AppObject
         return $path;
     }
 
-    function getBaseURL($with_path = true)
+    /**
+     * @param bool $with_path
+     * @return string
+     */
+    public function getBaseURL($with_path = true)
     {
         if (empty($_SERVER['HTTP_HOST'])) {
             $server = getenv('HTTP_HOST');
         } else {
             $server = $_SERVER['HTTP_HOST'];
         }
-        if (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') {
+        if (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') {
             $proto = 'https://';
         } else {
             $proto = 'http://';
@@ -984,7 +1139,7 @@ abstract class Controller extends AppObject
         }
 
 
-        return "$proto$server$path";
+        return $proto . $server . $path;
     }
 
 

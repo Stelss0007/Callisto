@@ -265,7 +265,7 @@ class Block extends AppObject
 
     final public function viewCached()
     {
-        $method = $this->GetCallingMethodName(2);
+        $method = $this->getCallingMethodName(2);
         $tpl_dir = $this->tplFileName($method);
 
 //    if(!$this->smarty->is_cached($tpl_dir, $ObjectName))
@@ -281,7 +281,7 @@ class Block extends AppObject
 
     final public function view()
     {
-        $method = $this->GetCallingMethodName(2);
+        $method = $this->getCallingMethodName(2);
         $tpl_dir = $this->tplFileName($method);
         $this->allVarToTpl();
         $ObjectName = $this->block_object = $this->name . '|' . $method . '|' . $this->id;

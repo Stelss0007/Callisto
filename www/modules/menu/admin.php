@@ -45,7 +45,7 @@ class AdminController extends Controller
     {
     $this->getAccess(ACCESS_ADMIN);
     
-    $this->setReferer();
+    $this->setRefferer();
     
     $menu = Menu::find($id);
     $browsein[] =array('url'=>"/admin/main", 'displayname'=>$this->t('dashboard'));
@@ -66,7 +66,7 @@ class AdminController extends Controller
     {
     $this->getAccess(ACCESS_ADMIN);
     
-    $this->setReferer();
+    $this->setRefferer();
   
     $menu = Menu::find($id);
     $browsein[] =array('url'=>"/admin/main", 'displayname'=>$this->t('dashboard'));
@@ -105,7 +105,7 @@ class AdminController extends Controller
         $this->showMessage('Элемент меню успешно добавлен!');
         }
       }
-    $this->redirect($this->getReferer('/admin/menu/menu_list'));
+    $this->redirect($this->getRefferer('/admin/menu/menu_list'));
     }
     
   function actionDelete($id=0)

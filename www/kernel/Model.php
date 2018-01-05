@@ -1,6 +1,6 @@
 <?php
 
-class Model extends DBConnector
+class Model_ extends DBConnector
 {
     public $type = '';
 

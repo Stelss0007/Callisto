@@ -1,4 +1,7 @@
 <?php
+ini_set('display_errors', '1');
+error_reporting(E_ALL);
+
 define('APP_DIRECTORY', __DIR__);
 
 //phpinfo();exit;
@@ -21,6 +24,7 @@ include_once __DIR__.'/kernel/Model.php';
 
 include_once __DIR__.'/kernel/Validator.php';
 include_once __DIR__.'/kernel/db/SQLBuilder.php';
+include_once __DIR__.'/kernel/db/ModelInterface.php';
 include_once __DIR__.'/kernel/db/Model.php';
 include_once __DIR__.'/kernel/db/Table.php';
 include_once __DIR__.'/kernel/db/Structure.php';
@@ -30,12 +34,6 @@ App::init();
 
 $router = new Router();
 $router->run();
-
-
-//    ini_set('display_errors',"1");
-//    error_reporting(E_ALL);
-
-
 
 //$query = new SQLBuilder();
 //$result = $query->from('article')

@@ -4,6 +4,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
+use app\lib\UserSession\UserSession;
 
 /**
  * Description of appObject
@@ -12,33 +13,58 @@
  */
 class AppObject
 {
-    private $message = '';
+    /**
+     * @var string
+     */
+    protected $message = '';
 
-    private $errors;
+    /**
+     * @var
+     */
+    protected $errors;
 
-    //private   $module_dir;
-    //private   $vars = array();
+    /**
+     * @var array
+     */
     public $config = null;
 
+    /**
+     * @var string
+     */
     public $theme;
 
+    /**
+     * @var UserSession
+     */
     public $session;
 
+    /**
+     * @var array
+     */
     protected $libs = [];
 
+    /**
+     * @var array
+     */
     public static $models = [];
 
+    /**
+     * @var string
+     */
     protected $modname;
 
+    /**
+     * @var array
+     */
     public $pagination = [];
 
 
-    final public function GetCallingMethodName($position = null, $with_args = false)
+    final public function getCallingMethodName($position = 0, $with_args = false)
     {
         $e = new Exception();
         $trace = $e->getTrace();
 
-        $position = ($position) ? $position : (sizeof($trace) - 1);
+        $position = $position ? $position : (count($trace) - 1);
         if (empty($with_args)) {
             return $trace[$position]['function'];
         }

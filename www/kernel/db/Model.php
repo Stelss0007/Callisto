@@ -13,7 +13,7 @@
  */
 namespace app\db\ActiveRecord;
 
-class Model 
+class Model implements ModelInterface
     {
     static $tableName = null;
     static $primaryKey = 'id';
